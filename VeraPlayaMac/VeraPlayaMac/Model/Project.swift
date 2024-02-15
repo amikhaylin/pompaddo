@@ -15,6 +15,12 @@ class Project {
     var note: String = ""
     var parent: Project?
     
+    @Relationship(deleteRule: .cascade)
+    var statuses: [Status] = []
+    
+    @Relationship(deleteRule: .cascade)
+    var tasks: [Todo] = []
+    
     init(name: String, note: String, parent: Project? = nil) {
         self.name = name
         self.note = note
