@@ -16,6 +16,8 @@
 		4D95FE442B7B6BF600C8918D /* VeraPlayaMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE432B7B6BF600C8918D /* VeraPlayaMacUITests.swift */; };
 		4D95FE462B7B6BF600C8918D /* VeraPlayaMacUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE452B7B6BF600C8918D /* VeraPlayaMacUITestsLaunchTests.swift */; };
 		4D95FE542B7B6C3000C8918D /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		4D95FE432B7B6BF600C8918D /* VeraPlayaMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeraPlayaMacUITests.swift; sourceTree = "<group>"; };
 		4D95FE452B7B6BF600C8918D /* VeraPlayaMacUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeraPlayaMacUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4D95FE532B7B6C3000C8918D /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		4DBDC7EC2B7CB4EC0063F522 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +80,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D736B132B7D1383000C0BFD /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
+			);
+			path = Activities;
+			sourceTree = "<group>";
+		};
 		4D95FE192B7B6BF300C8918D = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +111,9 @@
 		4D95FE242B7B6BF300C8918D /* VeraPlayaMac */ = {
 			isa = PBXGroup;
 			children = (
+				4D736B132B7D1383000C0BFD /* Activities */,
 				4D95FE522B7B6C1300C8918D /* Model */,
 				4D95FE252B7B6BF300C8918D /* VeraPlayaMacApp.swift */,
-				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
-				4D95FE292B7B6BF300C8918D /* Item.swift */,
 				4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */,
 				4D95FE302B7B6BF600C8918D /* VeraPlayaMac.entitlements */,
 				4D95FE2D2B7B6BF600C8918D /* Preview Content */,
@@ -138,7 +149,10 @@
 		4D95FE522B7B6C1300C8918D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4D95FE292B7B6BF300C8918D /* Item.swift */,
 				4D95FE532B7B6C3000C8918D /* Project.swift */,
+				4DBDC7EE2B7CBE450063F522 /* Todo.swift */,
+				4DBDC7EC2B7CB4EC0063F522 /* Status.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -274,6 +288,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
+				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
+				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
 				4D95FE2A2B7B6BF300C8918D /* Item.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
