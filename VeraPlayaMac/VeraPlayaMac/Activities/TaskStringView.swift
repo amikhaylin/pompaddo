@@ -26,7 +26,7 @@ struct TaskStringView: View {
             }
         }
         if let subtasks = task.subtasks, subtasks.count > 0 {
-            TasksListView(parentTask: task)
+            TasksListView(tasks: subtasks)
         }
     }
 }
