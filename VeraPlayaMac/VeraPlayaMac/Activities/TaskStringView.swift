@@ -10,6 +10,7 @@ import SwiftData
 
 struct TaskStringView: View {
     @Bindable var task: Todo
+    @State private var expandSubtask = false
     
     var body: some View {
         HStack {
@@ -24,8 +25,16 @@ struct TaskStringView: View {
             } else {
                 Text("No project")
             }
+            if let subtasks = task.subtasks, subtasks.count > 0 {
+                Button {
+                    expandSubtask.toggle()
+                } label: {
+                    Image(systemName: expandSubtask ? "arrowtriangle.down" : "arrowtriangle.right")
+                }.buttonStyle(.plain)
+            }
+
         }
-        if let subtasks = task.subtasks, subtasks.count > 0 {
+        if let subtasks = task.subtasks, subtasks.count > 0 && expandSubtask {
             TasksListView(tasks: subtasks)
         }
     }

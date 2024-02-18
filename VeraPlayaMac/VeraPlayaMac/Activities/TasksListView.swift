@@ -9,9 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct TasksListView: View {
-//    @Query(filter: #Predicate { task in
-//        task.project == nil && task.parentTask == nil
-//    }, sort: [SortDescriptor(\Todo.dueDate)]) 
     var tasks: [Todo]
     
     var body: some View {
@@ -21,14 +18,6 @@ struct TasksListView: View {
             }
         }
     }
-    
-//    init(parentTask: Todo? = nil) {
-//        if let parentTask = parentTask {
-//            _tasks = Query(filter: #Predicate<Todo> { task in
-//                task.parentTask == parentTask
-//            }, sort: [SortDescriptor(\Todo.dueDate)])
-//        }
-//    }
 }
 
 #Preview {

@@ -17,8 +17,8 @@ class Project {
     @Relationship(deleteRule: .cascade)
     var statuses: [Status] = []
     
-//    @Relationship(deleteRule: .cascade)
-//    var tasks: [Todo] = []
+    @Relationship(deleteRule: .cascade)
+    var tasks: [Todo] = []
     
     init(name: String, note: String = "") {
         self.name = name

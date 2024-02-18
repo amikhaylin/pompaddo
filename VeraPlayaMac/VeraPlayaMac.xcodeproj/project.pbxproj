@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D58CCC82B80CF6500925560 /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D58CCC72B80CF6500925560 /* InboxView.swift */; };
+		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
 		4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
 		4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskStringView.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		4D58CCC72B80CF6500925560 /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
+		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4D7C13C42B7E06F70093595D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		4D7C13C62B7E0DE70093595D /* TaskStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStringView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				4D7C13C12B7E03500093595D /* TasksListView.swift */,
 				4D7C13C62B7E0DE70093595D /* TaskStringView.swift */,
 				4D58CCC72B80CF6500925560 /* InboxView.swift */,
+				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
 				4D95FE2A2B7B6BF300C8918D /* Item.swift in Sources */,
+				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4D58CCC82B80CF6500925560 /* InboxView.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,

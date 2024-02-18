@@ -11,9 +11,26 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
+    
+    @State private var expandSubtask = false
 
     var body: some View {
         NavigationSplitView {
+            NavigationLink {
+                Text("DDDDD")
+                Button {
+                    expandSubtask.toggle()
+                } label: {
+                    Image(systemName: expandSubtask ? "arrowtriangle.down" : "arrowtriangle.right")
+                }.buttonStyle(.plain)
+            } label: {
+                HStack {
+                    Image(systemName: "tray.fill")
+                    Text("Inbox")
+                }
+            }
+
+            
             List {
                 ForEach(items) { item in
                     NavigationLink {
@@ -26,6 +43,14 @@ struct ContentView: View {
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
             .toolbar {
+                ToolbarItem {
+                    Button {
+                        
+                    } label: {
+                        Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
+                    }
+
+                }
                 ToolbarItem {
                     Button(action: addItem) {
                         Label("Add Item", systemImage: "plus")
