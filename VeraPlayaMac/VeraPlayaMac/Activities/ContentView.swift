@@ -12,17 +12,12 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     
-    @State private var expandSubtask = false
+    @State private var path = NavigationPath()
 
     var body: some View {
         NavigationSplitView {
             NavigationLink {
-                Text("DDDDD")
-                Button {
-                    expandSubtask.toggle()
-                } label: {
-                    Image(systemName: expandSubtask ? "arrowtriangle.down" : "arrowtriangle.right")
-                }.buttonStyle(.plain)
+                InboxView()
             } label: {
                 HStack {
                     Image(systemName: "tray.fill")
@@ -45,7 +40,9 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        
+                        let task = Todo(name: "")
+                        modelContext.insert(task)
+                        path.append(task)
                     } label: {
                         Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
                     }
