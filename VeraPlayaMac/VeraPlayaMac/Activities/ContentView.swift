@@ -9,10 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+//    @Environment(\.openWindow) private var openWindow
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     
     @State private var path = NavigationPath()
+    @State private var newTaskIsShowing = false
 
     var body: some View {
         NavigationSplitView {
@@ -40,9 +42,12 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        let task = Todo(name: "")
-                        modelContext.insert(task)
-                        path.append(task)
+                        newTaskIsShowing.toggle()
+//                        openWindow(id: "newtask")
+//                        let task = Todo(name: "")
+//                        modelContext.insert(task)
+//                        path.append(task)
+//                        openWindow(id: "NewTask", value: task)
                     } label: {
                         Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
                     }
@@ -53,6 +58,10 @@ struct ContentView: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+            }
+            .sheet(isPresented: $newTaskIsShowing) {
+                // TODO: here we show new task sheet
+                NewTaskView(isVisible: self.$newTaskIsShowing)
             }
         } detail: {
             Text("Select an item")

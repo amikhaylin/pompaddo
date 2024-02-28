@@ -30,5 +30,10 @@ struct VeraPlayaMacApp: App {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
+        
+//        Window("New task", id: "newtask") {
+//            NewTaskView()
+//        }
+//        .modelContainer(sharedModelContainer)
     }
 }
