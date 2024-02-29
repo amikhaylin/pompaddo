@@ -8,6 +8,13 @@
 import SwiftUI
 import SwiftData
 
+enum SideBarItem: String, Identifiable, CaseIterable {
+    var id: String { rawValue }
+    
+    case inbox
+    case today
+}
+
 struct ContentView: View {
 //    @Environment(\.openWindow) private var openWindow
     @Environment(\.modelContext) private var modelContext
@@ -15,39 +22,37 @@ struct ContentView: View {
     
     @State private var path = NavigationPath()
     @State private var newTaskIsShowing = false
+    @State var selectedSideBarItem: SideBarItem = .inbox
 
     var body: some View {
         NavigationSplitView {
-            NavigationLink {
-                InboxView()
-            } label: {
-                HStack {
-                    Image(systemName: "tray.fill")
-                    Text("Inbox")
-                }
-            }
-
-            
-            List {
-                ForEach(items) { item in
+            List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
+                switch item {
+                case .inbox:
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        InboxView()
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        HStack {
+                            Image(systemName: "tray.fill")
+                            Text("Inbox")
+                        }
+                    }
+                case .today:
+                    NavigationLink {
+                        InboxView()
+                    } label: {
+                        HStack {
+                            Image(systemName: "calendar")
+                            Text("Today")
+                        }
                     }
                 }
-                .onDelete(perform: deleteItems)
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
             .toolbar {
                 ToolbarItem {
                     Button {
                         newTaskIsShowing.toggle()
-//                        openWindow(id: "newtask")
-//                        let task = Todo(name: "")
-//                        modelContext.insert(task)
-//                        path.append(task)
-//                        openWindow(id: "NewTask", value: task)
                     } label: {
                         Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
                     }
