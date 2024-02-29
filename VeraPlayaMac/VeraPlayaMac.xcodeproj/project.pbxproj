@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D58CCC82B80CF6500925560 /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D58CCC72B80CF6500925560 /* InboxView.swift */; };
+		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
+		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
+		4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
+		4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskStringView.swift */; };
 		4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE252B7B6BF300C8918D /* VeraPlayaMacApp.swift */; };
 		4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE272B7B6BF300C8918D /* ContentView.swift */; };
 		4D95FE2A2B7B6BF300C8918D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE292B7B6BF300C8918D /* Item.swift */; };
@@ -18,6 +23,7 @@
 		4D95FE542B7B6C3000C8918D /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
 		4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D58CCC72B80CF6500925560 /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
+		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
+		4D7C13C42B7E06F70093595D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
+		4D7C13C62B7E0DE70093595D /* TaskStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStringView.swift; sourceTree = "<group>"; };
 		4D95FE222B7B6BF300C8918D /* VeraPlayaMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeraPlayaMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D95FE252B7B6BF300C8918D /* VeraPlayaMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeraPlayaMacApp.swift; sourceTree = "<group>"; };
 		4D95FE272B7B6BF300C8918D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +64,7 @@
 		4D95FE532B7B6C3000C8918D /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		4DBDC7EC2B7CB4EC0063F522 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,8 +96,21 @@
 			isa = PBXGroup;
 			children = (
 				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
+				4D7C13C12B7E03500093595D /* TasksListView.swift */,
+				4D7C13C62B7E0DE70093595D /* TaskStringView.swift */,
+				4D58CCC72B80CF6500925560 /* InboxView.swift */,
+				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
+				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
 			);
 			path = Activities;
+			sourceTree = "<group>";
+		};
+		4D7C13C32B7E06DE0093595D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4D7C13C42B7E06F70093595D /* Previewer.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		4D95FE192B7B6BF300C8918D = {
@@ -111,6 +136,7 @@
 		4D95FE242B7B6BF300C8918D /* VeraPlayaMac */ = {
 			isa = PBXGroup;
 			children = (
+				4D7C13C32B7E06DE0093595D /* Utils */,
 				4D736B132B7D1383000C0BFD /* Activities */,
 				4D95FE522B7B6C1300C8918D /* Model */,
 				4D95FE252B7B6BF300C8918D /* VeraPlayaMacApp.swift */,
@@ -287,10 +313,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */,
 				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
+				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
+				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
 				4D95FE2A2B7B6BF300C8918D /* Item.swift in Sources */,
+				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
+				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
+				4D58CCC82B80CF6500925560 /* InboxView.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
 			);

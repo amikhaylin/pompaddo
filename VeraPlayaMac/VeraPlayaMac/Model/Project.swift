@@ -13,7 +13,6 @@ class Project {
     var name: String = ""
     var reviewDate: Date = Date()
     var note: String = ""
-    var parent: Project?
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status] = []
@@ -21,9 +20,8 @@ class Project {
     @Relationship(deleteRule: .cascade)
     var tasks: [Todo] = []
     
-    init(name: String, note: String, parent: Project? = nil) {
+    init(name: String, note: String = "") {
         self.name = name
         self.note = note
-        self.parent = parent
     }
 }

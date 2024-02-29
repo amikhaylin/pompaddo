@@ -13,6 +13,8 @@ struct VeraPlayaMacApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
+            Todo.self,
+            Project.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -28,5 +30,10 @@ struct VeraPlayaMacApp: App {
             ContentView()
         }
         .modelContainer(sharedModelContainer)
+        
+//        Window("New task", id: "newtask") {
+//            NewTaskView()
+//        }
+//        .modelContainer(sharedModelContainer)
     }
 }
