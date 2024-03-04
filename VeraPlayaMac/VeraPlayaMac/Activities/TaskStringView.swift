@@ -11,6 +11,7 @@ import SwiftData
 struct TaskStringView: View {
     @Bindable var task: Todo
     @State private var expandSubtask = false
+    var selectedTask: Binding<Todo?>
     
     var body: some View {
         HStack {
@@ -35,17 +36,17 @@ struct TaskStringView: View {
 
         }
         if let subtasks = task.subtasks, subtasks.count > 0 && expandSubtask {
-            TasksListView(tasks: subtasks)
+            TasksListView(tasks: subtasks, selectedTask: selectedTask)
         }
     }
 }
 
-#Preview {
-    do {
-        let previewer = try Previewer()
-        
-        return TaskStringView(task: previewer.task)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
-}
+//#Preview {
+//    do {
+//        let previewer = try Previewer()
+//        
+//        return TaskStringView(task: previewer.task)
+//    } catch {
+//        return Text("Failed to create preview: \(error.localizedDescription)")
+//    }
+//}

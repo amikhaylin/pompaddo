@@ -18,20 +18,19 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
 //    @Environment(\.openWindow) private var openWindow
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
     
     @State private var path = NavigationPath()
     @State private var newTaskIsShowing = false
     @State var selectedSideBarItem: SideBarItem = .inbox
+    
+    @State private var selectedTask: Todo?
 
     var body: some View {
         NavigationSplitView {
             List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
                 switch item {
                 case .inbox:
-                    NavigationLink {
-                        InboxView()
-                    } label: {
+                    NavigationLink(value: item) {
                         HStack {
                             Image(systemName: "tray.fill")
                             Text("Inbox")
@@ -39,7 +38,7 @@ struct ContentView: View {
                     }
                 case .today:
                     NavigationLink {
-                        InboxView()
+                        InboxView(selectedTask: $selectedTask)
                     } label: {
                         HStack {
                             Image(systemName: "calendar")
@@ -58,18 +57,37 @@ struct ContentView: View {
                     }
 
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+//                ToolbarItem {
+//                    Button(action: addItem) {
+//                        Label("Add Item", systemImage: "plus")
+//                    }
+//                }
             }
             .sheet(isPresented: $newTaskIsShowing) {
                 // TODO: here we show new task sheet
                 NewTaskView(isVisible: self.$newTaskIsShowing)
             }
+        } content: {
+            switch selectedSideBarItem {
+            case .inbox:
+                InboxView(selectedTask: $selectedTask)
+            case .today:
+                InboxView(selectedTask: $selectedTask)
+            }
         } detail: {
-            Text("Select an item")
+            VStack {
+                if let selectedTask = selectedTask {
+                    EditTaskView(task: selectedTask)
+                    Spacer()
+                } else {
+                    Image(systemName: "list.bullet.clipboard")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .foregroundStyle(Color.gray)
+                }
+            }
+            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
         }
     }
 
@@ -77,14 +95,6 @@ struct ContentView: View {
         withAnimation {
             let newItem = Item(timestamp: Date())
             modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
         }
     }
 }
