@@ -35,6 +35,7 @@ struct EditTaskView: View {
                 }
             }
         }
+        .padding(10)
 
     }
 }
