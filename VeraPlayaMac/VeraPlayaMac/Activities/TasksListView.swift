@@ -43,15 +43,15 @@ struct TasksListView: View {
     }
 }
 
-//#Preview {
-//    do {
-//        let previewer = try Previewer()
-//        let tasks: [Todo] = [previewer.task]
-//        var selectedTask: Binding<Todo?>
-//        
-//        return TasksListView(tasks: tasks, selectedTask: selectedTask)
-//            .modelContainer(previewer.container)
-//    } catch {
-//        return Text("Failed to create preview: \(error.localizedDescription)")
-//    }
-//}
+#Preview {
+    do {
+        let previewer = try Previewer()
+        let tasks: [Todo] = [previewer.task]
+        @State var selectedTask: Todo?
+        
+        return TasksListView(tasks: tasks, selectedTask: $selectedTask)
+            .modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
+}

@@ -41,12 +41,14 @@ struct TaskStringView: View {
     }
 }
 
-//#Preview {
-//    do {
-//        let previewer = try Previewer()
-//        
-//        return TaskStringView(task: previewer.task)
-//    } catch {
-//        return Text("Failed to create preview: \(error.localizedDescription)")
-//    }
-//}
+#Preview {
+    do {
+        let previewer = try Previewer()
+        
+        @State var selectedTask: Todo?
+        
+        return TaskStringView(task: previewer.task, selectedTask: $selectedTask)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
+}

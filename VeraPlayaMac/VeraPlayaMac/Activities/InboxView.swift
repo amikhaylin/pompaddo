@@ -19,14 +19,14 @@ struct InboxView: View {
     }
 }
 
-//#Preview {
-//    do {
-//        let previewer = try Previewer()
-//        var selectedTask: Binding<Todo?>
-//        
-//        return InboxView(selectedTask: selectedTask)
-//            .modelContainer(previewer.container)
-//    } catch {
-//        return Text("Failed to create preview: \(error.localizedDescription)")
-//    }
-//}
+#Preview {
+    do {
+        let previewer = try Previewer()
+        @State var selectedTask: Todo?
+        
+        return InboxView(selectedTask: $selectedTask)
+            .modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
+}
