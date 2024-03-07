@@ -21,11 +21,16 @@ struct TaskStringView: View {
             .toggleStyle(.checkbox)
             
             Spacer()
+
             if let project = task.project {
                 Text("\(project.name)")
-            } else {
-                Text("No project")
             }
+            
+            if let dueDate = task.dueDate {
+                Text(dueDate, format: .dateTime.day().month().year())
+                    .foregroundStyle(Color.blue)
+            }
+            
             if let subtasks = task.subtasks, subtasks.count > 0 {
                 Button {
                     expandSubtask.toggle()

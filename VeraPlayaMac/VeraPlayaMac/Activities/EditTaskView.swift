@@ -22,21 +22,43 @@ struct EditTaskView: View {
                     HStack{
                         Image(systemName: "calendar.badge.plus")
 
-                        DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
+                        DatePicker("Due Date", 
+                                   selection: $dueDate,
+                                   displayedComponents: .date)
+                        .onChange(of: dueDate, { oldValue, newValue in
+                            task.dueDate = newValue
+                        })
                     }
                 } else {
                     Button {
                         withAnimation {
                             showingDatePicker.toggle()
+                            task.dueDate = dueDate
                         }
                     } label: {
-                        Label("Select due Date", systemImage: "calendar.badge.plus")
+                        Label("Set due Date", systemImage: "calendar.badge.plus")
                     }
                 }
             }
         }
         .padding(10)
+        .onChange(of: task) { oldValue, newValue in
+            setPicker()
+        }
+        .onAppear(perform: {
+            setPicker()
+        })
 
+    }
+    
+    func setPicker() {
+        if let date = task.dueDate {
+            dueDate = date
+            showingDatePicker = true
+        } else {
+            dueDate = Date.now
+            showingDatePicker = false
+        }
     }
 }
 
