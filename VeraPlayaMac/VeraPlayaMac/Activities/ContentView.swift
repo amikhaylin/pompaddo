@@ -37,9 +37,7 @@ struct ContentView: View {
                         }
                     }
                 case .today:
-                    NavigationLink {
-                        InboxView(selectedTask: $selectedTask)
-                    } label: {
+                    NavigationLink(value: item) {
                         HStack {
                             Image(systemName: "calendar")
                             Text("Today")
@@ -72,7 +70,7 @@ struct ContentView: View {
             case .inbox:
                 InboxView(selectedTask: $selectedTask)
             case .today:
-                InboxView(selectedTask: $selectedTask)
+                TodayView(selectedTask: $selectedTask)
             }
         } detail: {
             VStack {

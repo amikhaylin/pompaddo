@@ -10,7 +10,7 @@ import SwiftData
 
 struct EditTaskView: View {
     @Bindable var task: Todo
-    @State private var dueDate = Date.now
+    @State private var dueDate = Date()
     @State private var showingDatePicker = false
     
     var body: some View {
