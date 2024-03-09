@@ -33,7 +33,7 @@ struct EditTaskView: View {
                     Button {
                         withAnimation {
                             showingDatePicker.toggle()
-                            task.dueDate = dueDate
+                            task.dueDate = Calendar.current.startOfDay(for: dueDate)
                         }
                     } label: {
                         Label("Set due Date", systemImage: "calendar.badge.plus")

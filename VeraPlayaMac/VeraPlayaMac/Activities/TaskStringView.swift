@@ -27,8 +27,19 @@ struct TaskStringView: View {
             }
             
             if let dueDate = task.dueDate {
-                Text(dueDate, format: .dateTime.day().month().year())
-                    .foregroundStyle(Color.blue)
+                if Calendar.current.isDateInToday(dueDate) {
+                    Text("Today")
+                        .foregroundStyle(Color.blue)
+                } else if Calendar.current.isDateInTomorrow(dueDate) {
+                    Text("Tomorrow")
+                        .foregroundStyle(Color.blue)
+                } else if Calendar.current.isDateInYesterday(dueDate) {
+                    Text("Yesterday")
+                        .foregroundStyle(Color.red)
+                } else {
+                    Text(dueDate, format: .dateTime.day().month().year())
+                        .foregroundStyle(dueDate < Calendar.current.startOfDay(for: Date()) ? Color.red : Color.blue)
+                }
             }
             
             if let subtasks = task.subtasks, subtasks.count > 0 {
