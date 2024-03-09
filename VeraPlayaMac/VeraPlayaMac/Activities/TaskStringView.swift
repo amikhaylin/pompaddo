@@ -41,7 +41,7 @@ struct TaskStringView: View {
 
         }
         if let subtasks = task.subtasks, subtasks.count > 0 && expandSubtask {
-            TasksListView(tasks: subtasks, selectedTask: selectedTask)
+            SubtasksListView(tasks: subtasks, selectedTask: selectedTask)
         }
     }
 }

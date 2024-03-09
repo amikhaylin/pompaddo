@@ -13,14 +13,14 @@ struct TodayView: View {
     var selectedTask: Binding<Todo?>
     
     var body: some View {
-        TasksListView(tasks: tasks, selectedTask: selectedTask)
+        TasksListView(tasks: tasks, selectedTask: selectedTask, list: .today)
     }
     
     static func predicate() -> Predicate<Todo> {
-        let now = Date()
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
-                return date <= now
+                return date < tomorrow
             } else {
                 return false
             }
