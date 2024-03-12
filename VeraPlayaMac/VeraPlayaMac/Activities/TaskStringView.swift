@@ -30,6 +30,7 @@ struct TaskStringView: View {
                 if Calendar.current.isDateInToday(dueDate) {
                     Text("Today")
                         .foregroundStyle(Color.blue)
+                        .font(.caption)
                 } else if Calendar.current.isDateInTomorrow(dueDate) {
                     Text("Tomorrow")
                         .foregroundStyle(Color.blue)

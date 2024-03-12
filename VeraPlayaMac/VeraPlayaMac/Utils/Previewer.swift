@@ -21,7 +21,7 @@ struct Previewer {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         container = try ModelContainer(for: Schema([Todo.self, Project.self]), configurations: config)
         
-        task = Todo(name: "Make soup")
+        task = Todo(name: "Make soup", dueDate: Date())
         container.mainContext.insert(task)
 
         subtask = Todo(name: "Buy potatoes", parentTask: task)

@@ -17,6 +17,7 @@ struct EditTaskView: View {
         Form {
             Section {
                 TextField("Name", text: $task.name)
+                    .textFieldStyle(.roundedBorder)
                 
                 if showingDatePicker {
                     HStack{
