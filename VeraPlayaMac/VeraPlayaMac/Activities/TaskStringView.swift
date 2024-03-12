@@ -21,11 +21,28 @@ struct TaskStringView: View {
             .toggleStyle(.checkbox)
             
             Spacer()
+
             if let project = task.project {
                 Text("\(project.name)")
-            } else {
-                Text("No project")
             }
+            
+            if let dueDate = task.dueDate {
+                if Calendar.current.isDateInToday(dueDate) {
+                    Text("Today")
+                        .foregroundStyle(Color.blue)
+                        .font(.caption)
+                } else if Calendar.current.isDateInTomorrow(dueDate) {
+                    Text("Tomorrow")
+                        .foregroundStyle(Color.blue)
+                } else if Calendar.current.isDateInYesterday(dueDate) {
+                    Text("Yesterday")
+                        .foregroundStyle(Color.red)
+                } else {
+                    Text(dueDate, format: .dateTime.day().month().year())
+                        .foregroundStyle(dueDate < Calendar.current.startOfDay(for: Date()) ? Color.red : Color.blue)
+                }
+            }
+            
             if let subtasks = task.subtasks, subtasks.count > 0 {
                 Button {
                     expandSubtask.toggle()
@@ -36,7 +53,7 @@ struct TaskStringView: View {
 
         }
         if let subtasks = task.subtasks, subtasks.count > 0 && expandSubtask {
-            TasksListView(tasks: subtasks, selectedTask: selectedTask)
+            SubtasksListView(tasks: subtasks, selectedTask: selectedTask)
         }
     }
 }

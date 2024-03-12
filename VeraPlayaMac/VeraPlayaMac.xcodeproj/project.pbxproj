@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4D58CCC82B80CF6500925560 /* InboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D58CCC72B80CF6500925560 /* InboxView.swift */; };
+		4D5A7D692B99ED2B0058DF79 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5A7D682B99ED2B0058DF79 /* TodayView.swift */; };
 		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
+		4D732DF52B9C74800012ED0B /* SubtasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D732DF42B9C74800012ED0B /* SubtasksListView.swift */; };
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
 		4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
 		4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskStringView.swift */; };
@@ -45,7 +47,9 @@
 
 /* Begin PBXFileReference section */
 		4D58CCC72B80CF6500925560 /* InboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxView.swift; sourceTree = "<group>"; };
+		4D5A7D682B99ED2B0058DF79 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		4D732DF42B9C74800012ED0B /* SubtasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtasksListView.swift; sourceTree = "<group>"; };
 		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4D7C13C42B7E06F70093595D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		4D7C13C62B7E0DE70093595D /* TaskStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStringView.swift; sourceTree = "<group>"; };
@@ -92,12 +96,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D732DF12B9C6B810012ED0B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		4D736B132B7D1383000C0BFD /* Activities */ = {
 			isa = PBXGroup;
 			children = (
 				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
 				4D7C13C12B7E03500093595D /* TasksListView.swift */,
+				4D732DF42B9C74800012ED0B /* SubtasksListView.swift */,
 				4D7C13C62B7E0DE70093595D /* TaskStringView.swift */,
+				4D5A7D682B99ED2B0058DF79 /* TodayView.swift */,
 				4D58CCC72B80CF6500925560 /* InboxView.swift */,
 				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
 				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
@@ -136,6 +149,7 @@
 		4D95FE242B7B6BF300C8918D /* VeraPlayaMac */ = {
 			isa = PBXGroup;
 			children = (
+				4D732DF12B9C6B810012ED0B /* Extensions */,
 				4D7C13C32B7E06DE0093595D /* Utils */,
 				4D736B132B7D1383000C0BFD /* Activities */,
 				4D95FE522B7B6C1300C8918D /* Model */,
@@ -247,7 +261,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					4D95FE212B7B6BF300C8918D = {
 						CreatedOnToolsVersion = 15.2;
@@ -315,10 +329,12 @@
 			files = (
 				4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */,
 				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
+				4D732DF52B9C74800012ED0B /* SubtasksListView.swift in Sources */,
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
+				4D5A7D692B99ED2B0058DF79 /* TodayView.swift in Sources */,
 				4D95FE2A2B7B6BF300C8918D /* Item.swift in Sources */,
 				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
@@ -395,6 +411,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -458,6 +475,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -488,6 +506,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VeraPlayaMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -516,6 +535,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"VeraPlayaMac/Preview Content\"";
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -542,6 +562,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -561,6 +582,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -579,6 +601,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -596,6 +619,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;

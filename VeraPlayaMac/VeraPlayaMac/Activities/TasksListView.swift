@@ -1,5 +1,5 @@
 //
-//  InboxView.swift
+//  TasksListView.swift
 //  VeraPlayaMac
 //
 //  Created by Andrey Mikhaylin on 15.02.2024.
@@ -12,6 +12,8 @@ struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     var tasks: [Todo]
     var selectedTask: Binding<Todo?>
+    @State var list: SideBarItem
+    @State private var newTaskIsShowing = false
     
     var body: some View {
         List(tasks, id: \.self, selection: selectedTask) { task in
@@ -20,11 +22,23 @@ struct TasksListView: View {
         .toolbar {
             ToolbarItem {
                 Button {
+                    newTaskIsShowing.toggle()
+                } label: {
+                    Label("Add task to current list", systemImage: "plus")
+                }
+            }
+
+            ToolbarItem {
+                Button {
                     deleteTask(task: selectedTask.wrappedValue)
                 } label: {
                     Label("Delete task", systemImage: "trash")
                 }.disabled(selectedTask.wrappedValue == nil)
             }
+        }
+        .sheet(isPresented: $newTaskIsShowing) {
+            // TODO: here we show new task sheet
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list)
         }
     }
     
@@ -49,7 +63,7 @@ struct TasksListView: View {
         let tasks: [Todo] = [previewer.task]
         @State var selectedTask: Todo?
         
-        return TasksListView(tasks: tasks, selectedTask: $selectedTask)
+        return TasksListView(tasks: tasks, selectedTask: $selectedTask, list: .inbox)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

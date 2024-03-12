@@ -11,11 +11,12 @@ import SwiftData
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var isVisible: Bool
+    @State var list: SideBarItem
     @State private var taskName = ""
     
     var body: some View {
         VStack {
-            Text("Add task to inbox...")
+            Text("Add task to \(list)...")
                 .font(.headline)
             
             TextField("Task name", text: $taskName)
@@ -28,6 +29,10 @@ struct NewTaskView: View {
                 Button("OK") {
                     self.isVisible = false
                     let task = Todo(name: taskName)
+                    if list == .today {
+                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                    }
+
                     modelContext.insert(task)
                 }
             }
@@ -37,15 +42,15 @@ struct NewTaskView: View {
     }
 }
 
-//#Preview {
-//    do {
-//        let previewer = try Previewer()
-//        
-//        var isVisible = true
-//        
-//        return NewTaskView(isVisible: isVisible)
-//            .modelContainer(previewer.container)
-//    } catch {
-//        return Text("Failed to create preview: \(error.localizedDescription)")
-//    }
-//}
+#Preview {
+    do {
+        let previewer = try Previewer()
+        
+        @State var isVisible = true
+        
+        return NewTaskView(isVisible: $isVisible, list: .inbox)
+            .modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
+}

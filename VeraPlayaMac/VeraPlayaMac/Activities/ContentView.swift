@@ -37,9 +37,7 @@ struct ContentView: View {
                         }
                     }
                 case .today:
-                    NavigationLink {
-                        InboxView(selectedTask: $selectedTask)
-                    } label: {
+                    NavigationLink(value: item) {
                         HStack {
                             Image(systemName: "calendar")
                             Text("Today")
@@ -65,14 +63,14 @@ struct ContentView: View {
             }
             .sheet(isPresented: $newTaskIsShowing) {
                 // TODO: here we show new task sheet
-                NewTaskView(isVisible: self.$newTaskIsShowing)
+                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
             }
         } content: {
             switch selectedSideBarItem {
             case .inbox:
                 InboxView(selectedTask: $selectedTask)
             case .today:
-                InboxView(selectedTask: $selectedTask)
+                TodayView(selectedTask: $selectedTask)
             }
         } detail: {
             VStack {
@@ -88,13 +86,6 @@ struct ContentView: View {
                 }
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
         }
     }
 }
