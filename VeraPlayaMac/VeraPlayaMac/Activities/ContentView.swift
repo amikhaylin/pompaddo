@@ -16,7 +16,6 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 }
 
 struct ContentView: View {
-//    @Environment(\.openWindow) private var openWindow
     @Environment(\.modelContext) private var modelContext
     
     @State private var path = NavigationPath()
@@ -55,11 +54,6 @@ struct ContentView: View {
                     }
 
                 }
-//                ToolbarItem {
-//                    Button(action: addItem) {
-//                        Label("Add Item", systemImage: "plus")
-//                    }
-//                }
             }
             .sheet(isPresented: $newTaskIsShowing) {
                 // TODO: here we show new task sheet
@@ -85,12 +79,18 @@ struct ContentView: View {
                         .foregroundStyle(Color.gray)
                 }
             }
-            .navigationSplitViewColumnWidth(min: 180, ideal: 200)
+            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
         }
     }
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    do {
+        let previewer = try Previewer()
+        
+        return ContentView()
+            .modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }

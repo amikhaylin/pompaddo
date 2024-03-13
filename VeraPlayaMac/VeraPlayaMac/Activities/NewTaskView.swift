@@ -25,6 +25,7 @@ struct NewTaskView: View {
                 Button("Cancel") {
                     self.isVisible = false
                 }
+                .keyboardShortcut(.cancelAction)
                 Spacer()
                 Button("OK") {
                     self.isVisible = false
@@ -35,6 +36,7 @@ struct NewTaskView: View {
 
                     modelContext.insert(task)
                 }
+                .keyboardShortcut(.defaultAction)
             }
         }
         .frame(width: 400, height: 100)
