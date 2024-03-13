@@ -16,7 +16,6 @@
 		4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskStringView.swift */; };
 		4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE252B7B6BF300C8918D /* VeraPlayaMacApp.swift */; };
 		4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE272B7B6BF300C8918D /* ContentView.swift */; };
-		4D95FE2A2B7B6BF300C8918D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE292B7B6BF300C8918D /* Item.swift */; };
 		4D95FE2C2B7B6BF600C8918D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */; };
 		4D95FE2F2B7B6BF600C8918D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */; };
 		4D95FE3A2B7B6BF600C8918D /* VeraPlayaMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE392B7B6BF600C8918D /* VeraPlayaMacTests.swift */; };
@@ -56,7 +55,6 @@
 		4D95FE222B7B6BF300C8918D /* VeraPlayaMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VeraPlayaMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D95FE252B7B6BF300C8918D /* VeraPlayaMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeraPlayaMacApp.swift; sourceTree = "<group>"; };
 		4D95FE272B7B6BF300C8918D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4D95FE292B7B6BF300C8918D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		4D95FE302B7B6BF600C8918D /* VeraPlayaMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VeraPlayaMac.entitlements; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 		4D95FE522B7B6C1300C8918D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				4D95FE292B7B6BF300C8918D /* Item.swift */,
 				4D95FE532B7B6C3000C8918D /* Project.swift */,
 				4DBDC7EE2B7CBE450063F522 /* Todo.swift */,
 				4DBDC7EC2B7CB4EC0063F522 /* Status.swift */,
@@ -335,7 +332,6 @@
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
 				4D5A7D692B99ED2B0058DF79 /* TodayView.swift in Sources */,
-				4D95FE2A2B7B6BF300C8918D /* Item.swift in Sources */,
 				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
 				4D58CCC82B80CF6500925560 /* InboxView.swift in Sources */,

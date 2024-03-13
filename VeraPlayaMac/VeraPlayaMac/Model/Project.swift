@@ -12,6 +12,7 @@ import SwiftData
 class Project {
     var name: String = ""
     var reviewDate: Date = Date()
+    var reviewDaysCount: Int = 7
     var note: String = ""
     
     @Relationship(deleteRule: .cascade)
