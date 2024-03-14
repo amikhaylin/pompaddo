@@ -20,9 +20,14 @@ struct ContentView: View {
     
     @State private var path = NavigationPath()
     @State private var newTaskIsShowing = false
-    @State var selectedSideBarItem: SideBarItem = .inbox
+    @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
     @State private var selectedTask: Todo?
+    
+    @Query(filter: TasksQuery.predicate_inbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
+    @Query(filter: TasksQuery.predicate_today(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
+    
+    @State var badgeManager = BadgeManager()
 
     var body: some View {
         NavigationSplitView {
@@ -34,13 +39,16 @@ struct ContentView: View {
                             Image(systemName: "tray.fill")
                             Text("Inbox")
                         }
+                        .badge(tasksInbox.count)
                     }
+                    
                 case .today:
                     NavigationLink(value: item) {
                         HStack {
                             Image(systemName: "calendar")
                             Text("Today")
                         }
+                        .badge(tasksToday.count)
                     }
                 }
             }
@@ -62,9 +70,9 @@ struct ContentView: View {
         } content: {
             switch selectedSideBarItem {
             case .inbox:
-                InboxView(selectedTask: $selectedTask)
+                TasksListView(tasks: tasksInbox, selectedTask: $selectedTask, list: selectedSideBarItem)
             case .today:
-                TodayView(selectedTask: $selectedTask)
+                TasksListView(tasks: tasksToday, selectedTask: $selectedTask, list: selectedSideBarItem)
             }
         } detail: {
             VStack {
@@ -80,6 +88,12 @@ struct ContentView: View {
                 }
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
+        }
+        .onChange(of: tasksToday.count) { oldValue, newValue in
+            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
+        }
+        .onAppear {
+            tasksToday.count > 0 ? badgeManager.setBadge(number: tasksToday.count) : badgeManager.resetBadgeNumber()
         }
     }
 }

@@ -29,19 +29,13 @@ struct TaskStringView: View {
             }
             
             if let subtasksCount = task.subtasks?.count,
-                subtasksCount > 0,
-               let finished = task.subtasks?.filter( { $0.completed } ),
-               let unfinished = task.subtasks?.filter( { $0.completed == false }) {
-                let data = [(name: "Unfinished", value: unfinished.count),
-                            (name: "Finished", value: finished.count)]
-                
-                Chart (data, id: \.name) { name, value in
-                    SectorMark(angle: .value("Value", value),
-                               innerRadius: .ratio(0.6))
-                        .foregroundStyle(by: .value("Product category", name))
-                }
-                .chartLegend(.hidden)
-                .frame(width: 15, height: 15)
+               subtasksCount > 0,
+               let finished = task.subtasks?.filter( { $0.completed } ) {
+
+                CircularProgressView(progress: CGFloat(subtasksCount == finished.count ? 1.0 : 1.0 / Double(subtasksCount) * Double(finished.count)),
+                                     color: .gray,
+                                     lineWidth: 2)
+                    .frame(width: 15, height: 15)
                 
                 Text("\(subtasksCount == finished.count ? 100 : (100 / subtasksCount) * finished.count) %")
                     .foregroundStyle(Color.gray)
