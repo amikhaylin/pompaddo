@@ -12,23 +12,35 @@ struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     var tasks: [Todo]
     @Binding var selectedTask: Todo?
+    @State var selectedTasks: Set<Todo> = []
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
     
     var body: some View {
-        List(tasks, id: \.self, children: \.subtasks, selection: $selectedTask) { task in
-            TaskStringView(task: task, selectedTask: $selectedTask)
-                .contextMenu {
-                    Button {
-                        let subtask = Todo(name: "", parentTask: task)
-                        task.subtasks?.append(subtask)
-                        modelContext.insert(subtask)
-                        selectedTask = subtask
-                    } label: {
-                        Image(systemName: "plus")
-                        Text("Add subtask")
-                    }
+        List(tasks, id: \.self, children: \.subtasks, selection: $selectedTasks) { task in
+            Button {
+                if selectedTasks.contains(task) {
+                    selectedTasks.remove(task)
+                    selectedTask = nil
+                } else {
+                    selectedTasks.insert(task)
+                    selectedTask = task
                 }
+            } label: {
+                TaskStringView(task: task, selectedTask: $selectedTask)
+                    .contextMenu {
+                        Button {
+                            let subtask = Todo(name: "", parentTask: task)
+                            task.subtasks?.append(subtask)
+                            modelContext.insert(subtask)
+                            selectedTask = subtask
+                        } label: {
+                            Image(systemName: "plus")
+                            Text("Add subtask")
+                        }
+                    }
+            }
+            .buttonStyle(PlainButtonStyle())
         }
         .toolbar {
             ToolbarItem {
@@ -41,7 +53,7 @@ struct TasksListView: View {
             
             ToolbarItem {
                 Button {
-                    deleteTask(task: selectedTask)
+                    deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
                 }.disabled(selectedTask == nil)
@@ -58,10 +70,10 @@ struct TasksListView: View {
         }
     }
     
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteItems() {
         withAnimation {
-            for index in offsets {
-                modelContext.delete(tasks[index])
+            for task in selectedTasks {
+                modelContext.delete(task)
             }
         }
     }
