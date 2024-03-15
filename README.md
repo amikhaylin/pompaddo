@@ -1,9 +1,13 @@
 ![](AppIcon/128x128.png)
 # Vera Playa Project
 
-a task manager / made for myself by myself
+VeraPlayaProject is a task manager 
+made for myself by myself
 
-### Features in plan
+## macOS app
+![](mac.png)
+
+### Key features in plan
 
 * x Add task direct to Inbox
 * Projects review
