@@ -27,7 +27,7 @@ struct TasksListView: View {
                     selectedTask = task
                 }
             } label: {
-                TaskStringView(task: task, selectedTask: $selectedTask)
+                TaskStringView(task: task)
                     .contextMenu {
                         Button {
                             let subtask = Todo(name: "", parentTask: task)
