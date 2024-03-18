@@ -11,8 +11,8 @@ import SwiftData
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     var tasks: [Todo]
-    @Binding var selectedTask: Todo?
-    @State var selectedTasks: Set<Todo> = []
+
+    @Binding var selectedTasks: Set<Todo>
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
     
@@ -21,10 +21,8 @@ struct TasksListView: View {
             Button {
                 if selectedTasks.contains(task) {
                     selectedTasks.remove(task)
-                    selectedTask = nil
                 } else {
                     selectedTasks.insert(task)
-                    selectedTask = task
                 }
             } label: {
                 TaskStringView(task: task)
@@ -33,7 +31,6 @@ struct TasksListView: View {
                             let subtask = Todo(name: "", parentTask: task)
                             task.subtasks?.append(subtask)
                             modelContext.insert(subtask)
-                            selectedTask = subtask
                         } label: {
                             Image(systemName: "plus")
                             Text("Add subtask")
@@ -56,7 +53,7 @@ struct TasksListView: View {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
-                }.disabled(selectedTask == nil)
+                }.disabled(selectedTasks.count == 0)
             }
         }
     }
@@ -87,7 +84,6 @@ struct TasksListView: View {
 
             modelContext.insert(task)
             selectedTasks = []
-            selectedTask = task
             selectedTasks.insert(task)
         }
     }
@@ -97,9 +93,9 @@ struct TasksListView: View {
     do {
         let previewer = try Previewer()
         let tasks: [Todo] = [previewer.task]
-        @State var selectedTask: Todo?
+        @State var selectedTasks: Set<Todo> = []
         
-        return TasksListView(tasks: tasks, selectedTask: $selectedTask, list: .inbox)
+        return TasksListView(tasks: tasks, selectedTasks: $selectedTasks, list: .inbox)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
