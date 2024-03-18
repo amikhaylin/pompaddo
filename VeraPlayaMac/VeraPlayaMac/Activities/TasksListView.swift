@@ -86,7 +86,9 @@ struct TasksListView: View {
             }
 
             modelContext.insert(task)
+            selectedTasks = []
             selectedTask = task
+            selectedTasks.insert(task)
         }
     }
 }
