@@ -15,11 +15,11 @@ struct TaskStringView: View {
     
     var body: some View {
         HStack {
-            Toggle(isOn: $task.completed, label: {
-                Text(task.name)
-                    .foregroundStyle(task.completed ? Color.gray : Color.primary)
-            })
-            .toggleStyle(.checkbox)
+            Toggle(isOn: $task.completed) {}
+                .toggleStyle(.checkbox)
+            
+            Text(task.name)
+                .foregroundStyle(task.completed ? Color.gray : Color.primary)
             
             Spacer()
 
