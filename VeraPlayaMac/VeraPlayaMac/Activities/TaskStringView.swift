@@ -12,7 +12,6 @@ import Charts
 struct TaskStringView: View {
     @Bindable var task: Todo
     @State private var expandSubtask = false
-    var selectedTask: Binding<Todo?>
     
     var body: some View {
         HStack {
@@ -69,9 +68,7 @@ struct TaskStringView: View {
     do {
         let previewer = try Previewer()
         
-        @State var selectedTask: Todo?
-        
-        return TaskStringView(task: previewer.task, selectedTask: $selectedTask)
+        return TaskStringView(task: previewer.task)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

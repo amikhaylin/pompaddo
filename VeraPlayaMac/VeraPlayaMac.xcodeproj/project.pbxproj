@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
-		4D732DF52B9C74800012ED0B /* SubtasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D732DF42B9C74800012ED0B /* SubtasksListView.swift */; };
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
 		4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
 		4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskStringView.swift */; };
@@ -47,7 +46,6 @@
 
 /* Begin PBXFileReference section */
 		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
-		4D732DF42B9C74800012ED0B /* SubtasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtasksListView.swift; sourceTree = "<group>"; };
 		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4D7C13C42B7E06F70093595D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		4D7C13C62B7E0DE70093595D /* TaskStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStringView.swift; sourceTree = "<group>"; };
@@ -108,7 +106,6 @@
 			children = (
 				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
 				4D7C13C12B7E03500093595D /* TasksListView.swift */,
-				4D732DF42B9C74800012ED0B /* SubtasksListView.swift */,
 				4D7C13C62B7E0DE70093595D /* TaskStringView.swift */,
 				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
 				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
@@ -329,7 +326,6 @@
 			files = (
 				4D7C13C72B7E0DE70093595D /* TaskStringView.swift in Sources */,
 				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
-				4D732DF52B9C74800012ED0B /* SubtasksListView.swift in Sources */,
 				4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */,
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,

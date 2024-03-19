@@ -22,7 +22,7 @@ struct ContentView: View {
     @State private var newTaskIsShowing = false
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
-    @State private var selectedTask: Todo?
+    @State private var selectedTasks: Set<Todo> = []
     
     @Query(filter: TasksQuery.predicate_inbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
     @Query(filter: TasksQuery.predicate_today(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
@@ -70,13 +70,13 @@ struct ContentView: View {
         } content: {
             switch selectedSideBarItem {
             case .inbox:
-                TasksListView(tasks: tasksInbox, selectedTask: $selectedTask, list: selectedSideBarItem)
+                TasksListView(tasks: tasksInbox, selectedTasks: $selectedTasks, list: selectedSideBarItem)
             case .today:
-                TasksListView(tasks: tasksToday, selectedTask: $selectedTask, list: selectedSideBarItem)
+                TasksListView(tasks: tasksToday, selectedTasks: $selectedTasks, list: selectedSideBarItem)
             }
         } detail: {
             VStack {
-                if let selectedTask = selectedTask {
+                if let selectedTask = selectedTasks.first {
                     EditTaskView(task: selectedTask)
                     Spacer()
                 } else {
