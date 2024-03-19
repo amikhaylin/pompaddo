@@ -9,7 +9,7 @@ made for myself by myself
 
 ### Key features in plan
 
-* x Add task direct to Inbox
+* Add task direct to Inbox [Completed]
 * Projects review
 * Kanban view
 * Pomodoro timer
