@@ -40,6 +40,19 @@ struct EditTaskView: View {
                         Label("Set due Date", systemImage: "calendar.badge.plus")
                     }
                 }
+                
+                LabeledContent("Note") {
+                    TextEditor(text: $task.note)
+                        .background(Color.primary.colorInvert())
+                        .cornerRadius(5)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(.black, lineWidth: 1 / 3)
+                                .opacity(0.3)
+                        )
+                        .frame(height: 200)
+                }
+                .padding(.bottom, 10.0)
             }
         }
         .padding(10)
