@@ -26,6 +26,7 @@ struct ContentView: View {
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
     @State private var selectedTasks = Set<Todo>()
+    @State private var currentTask: Todo?
     
     @Query(filter: TasksQuery.predicate_inbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
     @Query(filter: TasksQuery.predicate_today(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
@@ -105,16 +106,29 @@ struct ContentView: View {
         } content: {
             switch selectedSideBarItem {
             case .inbox:
-                TasksListView(tasks: tasksInbox, selectedTasks: $selectedTasks, list: selectedSideBarItem)
+                TasksListView(tasks: tasksInbox, 
+                              selectedTasks: $selectedTasks,
+                              currentTask: $currentTask,
+                              list: selectedSideBarItem)
             case .today:
-                TasksListView(tasks: tasksToday, selectedTasks: $selectedTasks, list: selectedSideBarItem)
+                TasksListView(tasks: tasksToday, 
+                              selectedTasks: $selectedTasks,
+                              currentTask: $currentTask,
+                              list: selectedSideBarItem)
             case .tomorrow:
-                TasksListView(tasks: tasksTomorrow, selectedTasks: $selectedTasks, list: selectedSideBarItem)
+                TasksListView(tasks: tasksTomorrow, 
+                              selectedTasks: $selectedTasks,
+                              currentTask: $currentTask,
+                              list: selectedSideBarItem)
             }
         } detail: {
             VStack {
-                if let selectedTask = selectedTasks.first {
-                    EditTaskView(task: selectedTask)
+                if currentTask != nil || selectedTasks.count > 0 {
+                    if let currentTask = currentTask {
+                        EditTaskView(task: currentTask)
+                    } else if let selectedTask = selectedTasks.first {
+                        EditTaskView(task: selectedTask)
+                    }
                     Spacer()
                 } else {
                     Image(systemName: "list.bullet.clipboard")
