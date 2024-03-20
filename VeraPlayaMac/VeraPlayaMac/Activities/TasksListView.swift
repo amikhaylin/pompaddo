@@ -25,6 +25,9 @@ struct TasksListView: View {
                         let subtask = Todo(name: "", parentTask: task)
                         task.subtasks?.append(subtask)
                         modelContext.insert(subtask)
+                        
+                        selectedTasks = []
+                        selectedTasks.insert(subtask)
                     } label: {
                         Image(systemName: "plus")
                         Text("Add subtask")
@@ -70,8 +73,13 @@ struct TasksListView: View {
     private func addToCurrentList() {
         withAnimation {
             let task = Todo(name: "")
-            if list == .today {
+            switch list {
+            case .inbox:
+                task.project = nil
+            case .today:
                 task.dueDate = Calendar.current.startOfDay(for: Date())
+            case .tomorrow:
+                task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
             }
 
             modelContext.insert(task)

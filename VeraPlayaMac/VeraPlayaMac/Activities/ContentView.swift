@@ -15,6 +15,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     
     case inbox
     case today
+    case tomorrow
 }
 
 struct ContentView: View {
@@ -28,6 +29,7 @@ struct ContentView: View {
     
     @Query(filter: TasksQuery.predicate_inbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
     @Query(filter: TasksQuery.predicate_today(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
+    @Query(filter: TasksQuery.predicate_tomorrow(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTomorrow: [Todo]
     
     @State var badgeManager = BadgeManager()
 
@@ -43,6 +45,17 @@ struct ContentView: View {
                         }
                         .badge(tasksInbox.count)
                     }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.project = nil
+                            if let parentTask = task.parentTask,
+                               let index = parentTask.subtasks?.firstIndex(of: task)  {
+                                task.parentTask = nil
+                                parentTask.subtasks?.remove(at: index)
+                            }
+                        }
+                        return true
+                    }
                     
                 case .today:
                     NavigationLink(value: item) {
@@ -55,6 +68,20 @@ struct ContentView: View {
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.dueDate = Calendar.current.startOfDay(for: Date())
+                        }
+                        return true
+                    }
+                case .tomorrow:
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "sunrise")
+                            Text("Tomorrow")
+                        }
+                        .badge(tasksTomorrow.count)
+                    }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                         }
                         return true
                     }
@@ -81,6 +108,8 @@ struct ContentView: View {
                 TasksListView(tasks: tasksInbox, selectedTasks: $selectedTasks, list: selectedSideBarItem)
             case .today:
                 TasksListView(tasks: tasksToday, selectedTasks: $selectedTasks, list: selectedSideBarItem)
+            case .tomorrow:
+                TasksListView(tasks: tasksTomorrow, selectedTasks: $selectedTasks, list: selectedSideBarItem)
             }
         } detail: {
             VStack {
