@@ -16,6 +16,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case inbox
     case today
     case tomorrow
+    case projects
 }
 
 struct ContentView: View {
@@ -23,14 +24,18 @@ struct ContentView: View {
     
     @State private var path = NavigationPath()
     @State private var newTaskIsShowing = false
+    @State private var newProjectIsShowing = false
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
     @State private var selectedTasks = Set<Todo>()
     @State private var currentTask: Todo?
+    @State private var selectedProject: Project?
     
     @Query(filter: TasksQuery.predicate_inbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
     @Query(filter: TasksQuery.predicate_today(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
     @Query(filter: TasksQuery.predicate_tomorrow(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTomorrow: [Todo]
+    
+    @Query var projects: [Project]
     
     @State var badgeManager = BadgeManager()
 
@@ -86,6 +91,37 @@ struct ContentView: View {
                         }
                         return true
                     }
+                case .projects:
+                    Section {
+                        List(projects, id: \.self ,selection: $selectedProject) { project in
+
+                            
+                            NavigationLink(value: item) {
+                                Text(project.name)
+                                    .badge(project.tasks.count)
+                            }
+                            .dropDestination(for: Todo.self) { tasks, _ in
+                                for task in tasks {
+                                    task.project = project
+                                    project.tasks.append(task)
+                                }
+                                return true
+                            }
+                        }
+                        .listStyle(SidebarListStyle())
+                        .frame(height: 100)
+                    } header: {
+                        HStack {
+                            Text("Projects")
+                            Spacer()
+                            Button {
+                                newProjectIsShowing.toggle()
+                            } label: {
+                                Image(systemName: "plus")
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                    }
                 }
             }
             .navigationSplitViewColumnWidth(min: 180, ideal: 200)
@@ -100,13 +136,15 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
-                // TODO: here we show new task sheet
                 NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
+            }
+            .sheet(isPresented: $newProjectIsShowing) {
+                NewProjectView(isVisible: self.$newProjectIsShowing)
             }
         } content: {
             switch selectedSideBarItem {
             case .inbox:
-                TasksListView(tasks: tasksInbox, 
+                TasksListView(tasks: tasksInbox,
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
@@ -120,6 +158,8 @@ struct ContentView: View {
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
+            case .projects:
+                Text("Project list")
             }
         } detail: {
             VStack {

@@ -33,5 +33,8 @@ struct Previewer {
         
         projectTask = Todo(name: "Draw some sketches", project: project)
         container.mainContext.insert(projectTask)
+        
+        let anotherProject = Project(name: "👀 Another project")
+        container.mainContext.insert(anotherProject)
     }
 }
