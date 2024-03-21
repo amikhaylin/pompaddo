@@ -18,26 +18,18 @@ struct TasksListView: View {
     
     var body: some View {
         List(tasks, id: \.self, children: \.subtasks, selection: $selectedTasks) { task in
-            Button {
-                if selectedTasks.contains(task) {
-                    selectedTasks.remove(task)
-                } else {
-                    selectedTasks.insert(task)
-                }
-            } label: {
-                TaskStringView(task: task)
-                    .contextMenu {
-                        Button {
-                            let subtask = Todo(name: "", parentTask: task)
-                            task.subtasks?.append(subtask)
-                            modelContext.insert(subtask)
-                        } label: {
-                            Image(systemName: "plus")
-                            Text("Add subtask")
-                        }
+            TaskStringView(task: task)
+                .draggable(task)
+                .contextMenu {
+                    Button {
+                        let subtask = Todo(name: "", parentTask: task)
+                        task.subtasks?.append(subtask)
+                        modelContext.insert(subtask)
+                    } label: {
+                        Image(systemName: "plus")
+                        Text("Add subtask")
                     }
-            }
-            .buttonStyle(PlainButtonStyle())
+                }
         }
         .toolbar {
             ToolbarItem {
@@ -93,7 +85,7 @@ struct TasksListView: View {
     do {
         let previewer = try Previewer()
         let tasks: [Todo] = [previewer.task]
-        @State var selectedTasks: Set<Todo> = []
+        @State var selectedTasks = Set<Todo>()
         
         return TasksListView(tasks: tasks, selectedTasks: $selectedTasks, list: .inbox)
             .modelContainer(previewer.container)

@@ -27,6 +27,8 @@ struct VeraPlayaMacApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
+                                        modelContext: sharedModelContainer.mainContext)
         }
         .modelContainer(sharedModelContainer)
     }

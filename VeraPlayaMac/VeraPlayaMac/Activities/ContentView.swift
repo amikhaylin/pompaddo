@@ -8,6 +8,8 @@
 import SwiftUI
 import SwiftData
 
+import SwiftDataTransferrable
+
 enum SideBarItem: String, Identifiable, CaseIterable {
     var id: String { rawValue }
     
@@ -22,7 +24,7 @@ struct ContentView: View {
     @State private var newTaskIsShowing = false
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
-    @State private var selectedTasks: Set<Todo> = []
+    @State private var selectedTasks = Set<Todo>()
     
     @Query(filter: TasksQuery.predicate_inbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
     @Query(filter: TasksQuery.predicate_today(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
@@ -49,6 +51,12 @@ struct ContentView: View {
                             Text("Today")
                         }
                         .badge(tasksToday.count)
+                    }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.dueDate = Calendar.current.startOfDay(for: Date())
+                        }
+                        return true
                     }
                 }
             }
