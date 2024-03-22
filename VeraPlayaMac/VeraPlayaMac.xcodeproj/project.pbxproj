@@ -222,6 +222,7 @@
 				4D95FE1E2B7B6BF300C8918D /* Sources */,
 				4D95FE1F2B7B6BF300C8918D /* Frameworks */,
 				4D95FE202B7B6BF300C8918D /* Resources */,
+				4DBFA7562BAD72AB006232FE /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -342,6 +343,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4DBFA7562BAD72AB006232FE /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4D95FE1E2B7B6BF300C8918D /* Sources */ = {
@@ -533,6 +556,7 @@
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeraPlayaMac/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Vera Playa";
@@ -565,6 +589,7 @@
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeraPlayaMac/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Vera Playa";

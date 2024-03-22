@@ -55,7 +55,7 @@ struct ContentView: View {
                         for task in tasks {
                             task.project = nil
                             if let parentTask = task.parentTask,
-                               let index = parentTask.subtasks?.firstIndex(of: task)  {
+                               let index = parentTask.subtasks?.firstIndex(of: task) {
                                 task.parentTask = nil
                                 parentTask.subtasks?.remove(at: index)
                             }
@@ -93,9 +93,7 @@ struct ContentView: View {
                     }
                 case .projects:
                     Section {
-                        List(projects, id: \.self ,selection: $selectedProject) { project in
-
-                            
+                        List(projects, id: \.self, selection: $selectedProject) { project in
                             NavigationLink(value: item) {
                                 Text(project.name)
                                     .badge(project.tasks.count)
@@ -180,7 +178,7 @@ struct ContentView: View {
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
         }
-        .onChange(of: tasksToday.count) { oldValue, newValue in
+        .onChange(of: tasksToday.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
         }
         .onAppear {

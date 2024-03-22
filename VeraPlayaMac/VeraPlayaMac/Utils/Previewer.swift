@@ -28,13 +28,13 @@ struct Previewer {
         task.subtasks?.append(subtask)
         container.mainContext.insert(subtask)
         
-        project = Project(name: "Some project")
+        project = Project(name: "🦫 Some project")
         container.mainContext.insert(project)
         
         projectTask = Todo(name: "Draw some sketches", project: project)
         container.mainContext.insert(projectTask)
         
-        let anotherProject = Project(name: "👀 Another project")
+        let anotherProject = Project(name: "🦔 Another project")
         container.mainContext.insert(anotherProject)
     }
 }
