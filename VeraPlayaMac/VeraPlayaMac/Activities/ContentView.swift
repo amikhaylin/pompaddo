@@ -181,6 +181,10 @@ struct ContentView: View {
         .onChange(of: tasksToday.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
         }
+        .onChange(of: selectedSideBarItem, { _, _ in
+            selectedTasks = []
+            currentTask = nil
+        })
         .onAppear {
             tasksToday.count > 0 ? badgeManager.setBadge(number: tasksToday.count) : badgeManager.resetBadgeNumber()
         }
