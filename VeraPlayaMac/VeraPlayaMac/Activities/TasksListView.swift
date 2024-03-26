@@ -11,8 +11,8 @@ import SwiftData
 enum CommonTaskListSections: String, Identifiable, CaseIterable {
     var id: String { rawValue }
     
-    case todo
-    case completed
+    case todo = "To do"
+    case completed = "Completed"
 }
 
 struct TasksListView: View {
@@ -24,27 +24,33 @@ struct TasksListView: View {
     
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
+    @State private var groupsExpanded = true
     
     var body: some View {
         List(selection: $selectedTasks) {
-            OutlineGroup(tasks, id: \.self, children: \.subtasks) { task in
-                TaskStringView(task: task)
-                    .draggable(task)
-                    .contextMenu {
-                        Button {
-                            selectedTasks = []
-                            let subtask = Todo(name: "", parentTask: task)
-                            task.subtasks?.append(subtask)
-                            modelContext.insert(subtask)
-                            
-                            currentTask = subtask
-                        } label: {
-                            Image(systemName: "plus")
-                            Text("Add subtask")
-                        }
+            ForEach(CommonTaskListSections.allCases) { section in
+                DisclosureGroup(section.rawValue, isExpanded: $groupsExpanded) {
+                    OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
+                                 id: \.self,
+                                 children: \.subtasks) { task in
+                        TaskStringView(task: task)
+                            .draggable(task)
+                            .contextMenu {
+                                Button {
+                                    selectedTasks = []
+                                    let subtask = Todo(name: "", parentTask: task)
+                                    task.subtasks?.append(subtask)
+                                    modelContext.insert(subtask)
+                                    
+                                    currentTask = subtask
+                                } label: {
+                                    Image(systemName: "plus")
+                                    Text("Add subtask")
+                                }
+                            }
                     }
+                }
             }
-
         }
         .toolbar {
             ToolbarItem {
