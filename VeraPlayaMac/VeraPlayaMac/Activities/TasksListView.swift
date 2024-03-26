@@ -8,6 +8,13 @@
 import SwiftUI
 import SwiftData
 
+enum CommonTaskListSections: String, Identifiable, CaseIterable {
+    var id: String { rawValue }
+    
+    case todo
+    case completed
+}
+
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     var tasks: [Todo]
@@ -19,22 +26,25 @@ struct TasksListView: View {
     @State private var newTaskIsShowing = false
     
     var body: some View {
-        List(tasks, id: \.self, children: \.subtasks, selection: $selectedTasks) { task in
-            TaskStringView(task: task)
-                .draggable(task)
-                .contextMenu {
-                    Button {
-                        selectedTasks = []
-                        let subtask = Todo(name: "", parentTask: task)
-                        task.subtasks?.append(subtask)
-                        modelContext.insert(subtask)
-                        
-                        currentTask = subtask
-                    } label: {
-                        Image(systemName: "plus")
-                        Text("Add subtask")
+        List(selection: $selectedTasks) {
+            OutlineGroup(tasks, id: \.self, children: \.subtasks) { task in
+                TaskStringView(task: task)
+                    .draggable(task)
+                    .contextMenu {
+                        Button {
+                            selectedTasks = []
+                            let subtask = Todo(name: "", parentTask: task)
+                            task.subtasks?.append(subtask)
+                            modelContext.insert(subtask)
+                            
+                            currentTask = subtask
+                        } label: {
+                            Image(systemName: "plus")
+                            Text("Add subtask")
+                        }
                     }
-                }
+            }
+
         }
         .toolbar {
             ToolbarItem {
