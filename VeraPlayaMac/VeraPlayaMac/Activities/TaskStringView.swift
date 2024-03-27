@@ -17,6 +17,7 @@ struct TaskStringView: View {
         HStack {
             Toggle(isOn: $task.completed) {}
                 .toggleStyle(.checkbox)
+                .foregroundStyle(Color.gray)
             
             Text(task.name)
                 .foregroundStyle(task.completed ? Color.gray : Color.primary)
