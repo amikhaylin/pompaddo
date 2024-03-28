@@ -28,6 +28,7 @@
 		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
 		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
+		4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
 		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTasksListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
 				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
 				4DE238582BAC9C01009BCCCF /* NewProjectView.swift */,
+				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -380,6 +383,7 @@
 				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,
 				4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
+				4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */,
 				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
 				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,

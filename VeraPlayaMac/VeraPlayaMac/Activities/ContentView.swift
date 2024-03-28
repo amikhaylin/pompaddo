@@ -157,7 +157,13 @@ struct ContentView: View {
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .projects:
-                Text("Project list")
+                if let project = selectedProject {
+                    ProjectTasksListView(selectedTasks: $selectedTasks,
+                                         currentTask: $currentTask,
+                                         project: project)
+                } else {
+                    Text("Empty project")
+                }
             }
         } detail: {
             VStack {

@@ -8,6 +8,12 @@
 import SwiftUI
 import SwiftData
 
+enum DefaultProjectStatuses: String, CaseIterable {
+    case todo = "To do"
+    case progress = "In progress"
+    case completed = "Completed"
+}
+
 struct NewProjectView: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var isVisible: Bool
@@ -27,6 +33,15 @@ struct NewProjectView: View {
                     self.isVisible = false
                     let project = Project(name: projectName)
                     modelContext.insert(project)
+                    
+                    var order = 0
+                    for name in DefaultProjectStatuses.allCases {
+                        order += 1
+                        let status = Status(name: name.rawValue, order: order)
+                        modelContext.insert(status)
+                        project.statuses.append(status)
+                    }
+                    
                 }
                 .keyboardShortcut(.defaultAction)
             }
