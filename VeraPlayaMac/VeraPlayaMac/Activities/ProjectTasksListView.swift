@@ -40,6 +40,12 @@ struct ProjectTasksListView: View {
                             }
                     }
                 }
+                .dropDestination(for: Todo.self) { tasks, _ in
+                    for task in tasks {
+                        task.status = status
+                    }
+                    return true
+                }
             }
         }
         .toolbar {
@@ -73,7 +79,7 @@ struct ProjectTasksListView: View {
         withAnimation {
             selectedTasks = []
             let task = Todo(name: "",
-                            status: project.statuses.first,
+                            status: project.statuses.sorted(by: { $0.order < $1.order }).first,
                             project: project)
 
             modelContext.insert(task)

@@ -22,7 +22,6 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var path = NavigationPath()
     @State private var newTaskIsShowing = false
     @State private var newProjectIsShowing = false
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
@@ -92,32 +91,18 @@ struct ContentView: View {
                         return true
                     }
                 case .projects:
-                    Section {
-                        List(projects, id: \.self, selection: $selectedProject) { project in
-                            NavigationLink(value: item) {
-                                Text(project.name)
-                                    .badge(project.tasks.count)
-                            }
-                            .dropDestination(for: Todo.self) { tasks, _ in
-                                for task in tasks {
-                                    task.project = project
-                                    project.tasks.append(task)
-                                }
-                                return true
-                            }
-                        }
-                        .listStyle(SidebarListStyle())
-                        .frame(height: 100)
-                    } header: {
+                    NavigationLink(value: item) {
                         HStack {
+                            Image(systemName: "list.bullet")
                             Text("Projects")
                             Spacer()
                             Button {
                                 newProjectIsShowing.toggle()
                             } label: {
-                                Image(systemName: "plus")
+                                Image(systemName: "plus.circle")
                             }
                             .buttonStyle(PlainButtonStyle())
+
                         }
                     }
                 }
@@ -157,13 +142,8 @@ struct ContentView: View {
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .projects:
-                if let project = selectedProject {
-                    ProjectTasksListView(selectedTasks: $selectedTasks,
-                                         currentTask: $currentTask,
-                                         project: project)
-                } else {
-                    Text("Empty project")
-                }
+                ProjectsView(selectedTasks: $selectedTasks,
+                             currentTask: $currentTask)
             }
         } detail: {
             VStack {
