@@ -145,8 +145,6 @@ struct ContentView: View {
                         }
                     }
                     .listStyle(SidebarListStyle())
-                    Text("\(selectedSideBarItem)")
-                    Text("\(selectedProject?.name)")
                 }
                 .navigationSplitViewColumnWidth(min: 200, ideal: 200)
                 .toolbar {
@@ -184,9 +182,13 @@ struct ContentView: View {
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .projects:
-                ProjectTasksListView(selectedTasks: $selectedTasks,
-                                     currentTask: $currentTask,
-                                     project: $selectedProject)
+                if let project = selectedProject {
+                    ProjectTasksListView(selectedTasks: $selectedTasks,
+                                         currentTask: $currentTask,
+                                         project: project)
+                } else {
+                    Text("Select a project")
+                }
             }
         } detail: {
             VStack {
