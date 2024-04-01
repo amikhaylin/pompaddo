@@ -42,57 +42,68 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             GeometryReader { geometry in
-                List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
-                    switch item {
-                    case .inbox:
-                        NavigationLink(value: item) {
-                            HStack {
-                                Image(systemName: "tray.fill")
-                                Text("Inbox")
-                            }
-                            .badge(tasksInbox.count)
-                        }
-                        .dropDestination(for: Todo.self) { tasks, _ in
-                            for task in tasks {
-                                task.project = nil
-                                if let parentTask = task.parentTask,
-                                   let index = parentTask.subtasks?.firstIndex(of: task) {
-                                    task.parentTask = nil
-                                    parentTask.subtasks?.remove(at: index)
+                VStack {
+                    List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
+                        switch item {
+                        case .inbox:
+                            NavigationLink(value: item) {
+                                HStack {
+                                    Image(systemName: "tray.fill")
+                                    Text("Inbox")
                                 }
+                                .badge(tasksInbox.count)
                             }
-                            return true
-                        }
-                        
-                    case .today:
-                        NavigationLink(value: item) {
-                            HStack {
-                                Image(systemName: "calendar")
-                                Text("Today")
+                            .dropDestination(for: Todo.self) { tasks, _ in
+                                for task in tasks {
+                                    if let project = task.project, let index = project.tasks.firstIndex(of: task) {
+                                        task.project?.tasks.remove(at: index)
+                                        task.project = nil
+                                        task.status = nil
+                                    }
+                                    if let parentTask = task.parentTask,
+                                       let index = parentTask.subtasks?.firstIndex(of: task) {
+                                        task.parentTask = nil
+                                        parentTask.subtasks?.remove(at: index)
+                                    }
+                                }
+                                return true
                             }
-                            .badge(tasksToday.count)
-                        }
-                        .dropDestination(for: Todo.self) { tasks, _ in
-                            for task in tasks {
-                                task.dueDate = Calendar.current.startOfDay(for: Date())
+                            
+                        case .today:
+                            NavigationLink(value: item) {
+                                HStack {
+                                    Image(systemName: "calendar")
+                                    Text("Today")
+                                }
+                                .badge(tasksToday.count)
                             }
-                            return true
-                        }
-                    case .tomorrow:
-                        NavigationLink(value: item) {
-                            HStack {
-                                Image(systemName: "sunrise")
-                                Text("Tomorrow")
+                            .dropDestination(for: Todo.self) { tasks, _ in
+                                for task in tasks {
+                                    task.dueDate = Calendar.current.startOfDay(for: Date())
+                                }
+                                return true
                             }
-                            .badge(tasksTomorrow.count)
-                        }
-                        .dropDestination(for: Todo.self) { tasks, _ in
-                            for task in tasks {
-                                task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                        case .tomorrow:
+                            NavigationLink(value: item) {
+                                HStack {
+                                    Image(systemName: "sunrise")
+                                    Text("Tomorrow")
+                                }
+                                .badge(tasksTomorrow.count)
                             }
-                            return true
+                            .dropDestination(for: Todo.self) { tasks, _ in
+                                for task in tasks {
+                                    task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                                }
+                                return true
+                            }
+                        case .projects:
+                            EmptyView()
                         }
-                    case .projects:
+                    }
+                    .frame(height: 90)
+
+                    List {
                         DisclosureGroup(isExpanded: $projectsExpanded) {
                             List(projects, id: \.self, selection: $selectedProject) { project in
                                 NavigationLink(value: SideBarItem.projects) {
@@ -102,15 +113,22 @@ struct ContentView: View {
                                 .dropDestination(for: Todo.self) { tasks, _ in
                                     for task in tasks {
                                         task.project = project
+                                        task.status = project.statuses.sorted(by: { $0.order < $1.order }).first
                                         project.tasks.append(task)
                                     }
                                     return true
                                 }
+                                .contextMenu {
+                                    Button {
+                                        selectedTasks = []
+                                        modelContext.delete(project)
+                                    } label: {
+                                        Image(systemName: "trash")
+                                        Text("Delete project")
+                                    }
+                                }
                             }
                             .frame(height: geometry.size.height > 150 ? geometry.size.height - 150 : 200)
-                            .background(content: {
-                                Color.blue
-                            })
                             .listStyle(SidebarListStyle())
                         } label: {
                             HStack {
@@ -126,6 +144,9 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .listStyle(SidebarListStyle())
+                    Text("\(selectedSideBarItem)")
+                    Text("\(selectedProject?.name)")
                 }
                 .navigationSplitViewColumnWidth(min: 200, ideal: 200)
                 .toolbar {
@@ -153,26 +174,19 @@ struct ContentView: View {
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .today:
-                TasksListView(tasks: tasksToday, 
+                TasksListView(tasks: tasksToday,
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .tomorrow:
-                TasksListView(tasks: tasksTomorrow, 
+                TasksListView(tasks: tasksTomorrow,
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .projects:
-                if let project = selectedProject {
-                    ProjectTasksListView(selectedTasks: $selectedTasks,
-                                         currentTask: $currentTask,
-                                         project: project)
-                    .onChange(of: selectedProject) { oldValue, newValue in
-                        print("\(project.name)")
-                    }
-                } else {
-                    Text("Select a project")
-                }
+                ProjectTasksListView(selectedTasks: $selectedTasks,
+                                     currentTask: $currentTask,
+                                     project: $selectedProject)
             }
         } detail: {
             VStack {
@@ -196,10 +210,18 @@ struct ContentView: View {
         .onChange(of: tasksToday.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
         }
-        .onChange(of: selectedSideBarItem, { _, _ in
+        .onChange(of: selectedSideBarItem, { _, newValue in
             selectedTasks = []
             currentTask = nil
+            if newValue != .projects {
+                selectedProject = nil
+            }
         })
+        .onChange(of: selectedProject) { _, newValue in
+            if newValue != nil {
+                selectedSideBarItem = .projects
+            }
+        }
         .onAppear {
             tasksToday.count > 0 ? badgeManager.setBadge(number: tasksToday.count) : badgeManager.resetBadgeNumber()
         }

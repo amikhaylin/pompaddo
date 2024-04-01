@@ -26,6 +26,8 @@ struct TaskStringView: View {
 
             if let project = task.project {
                 Text("\(project.name)")
+                    .foregroundStyle(Color.gray)
+                    .font(.caption)
             }
             
             if let subtasksCount = task.subtasks?.count,
