@@ -25,7 +25,10 @@
 		4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */; };
 		4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
+		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
+		4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +71,10 @@
 		4D9FFAD32BA9C43600C5F5AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4DBDC7EC2B7CB4EC0063F522 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
+		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTasksListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,8 @@
 				4D7C13C62B7E0DE70093595D /* TaskStringView.swift */,
 				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
 				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
+				4DE238582BAC9C01009BCCCF /* NewProjectView.swift */,
+				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -123,6 +131,7 @@
 				4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */,
 				4D7C13C42B7E06F70093595D /* Previewer.swift */,
 				4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */,
+				4DE238562BAC9269009BCCCF /* Collapsible.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -216,6 +225,7 @@
 				4D95FE1E2B7B6BF300C8918D /* Sources */,
 				4D95FE1F2B7B6BF300C8918D /* Frameworks */,
 				4D95FE202B7B6BF300C8918D /* Resources */,
+				4DBFA7562BAD72AB006232FE /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -337,6 +347,28 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4DBFA7562BAD72AB006232FE /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4D95FE1E2B7B6BF300C8918D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -348,10 +380,13 @@
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
+				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,
 				4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
+				4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */,
 				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
+				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */,
 				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
@@ -525,6 +560,7 @@
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeraPlayaMac/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Vera Playa";
@@ -557,6 +593,7 @@
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VeraPlayaMac/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Vera Playa";

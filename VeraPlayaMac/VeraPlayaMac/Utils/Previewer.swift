@@ -28,10 +28,21 @@ struct Previewer {
         task.subtasks?.append(subtask)
         container.mainContext.insert(subtask)
         
-        project = Project(name: "Some project")
+        project = Project(name: "🦫 Some project")
         container.mainContext.insert(project)
         
-        projectTask = Todo(name: "Draw some sketches", project: project)
+        var order = 0
+        for name in DefaultProjectStatuses.allCases {
+            order += 1
+            let status = Status(name: name.rawValue, order: order)
+            container.mainContext.insert(status)
+            project.statuses.append(status)
+        }
+        
+        projectTask = Todo(name: "Draw some sketches", status: project.statuses.first, project: project)
         container.mainContext.insert(projectTask)
+        
+        let anotherProject = Project(name: "🦔 Another project")
+        container.mainContext.insert(anotherProject)
     }
 }

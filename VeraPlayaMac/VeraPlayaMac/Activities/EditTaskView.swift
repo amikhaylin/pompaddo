@@ -18,15 +18,16 @@ struct EditTaskView: View {
             Section {
                 TextField("Name", text: $task.name)
                     .textFieldStyle(.roundedBorder)
+                    .padding(.top, 10.0)
                 
                 if showingDatePicker {
-                    HStack{
+                    HStack {
                         Image(systemName: "calendar.badge.plus")
 
                         DatePicker("Due Date", 
                                    selection: $dueDate,
                                    displayedComponents: .date)
-                        .onChange(of: dueDate, { oldValue, newValue in
+                        .onChange(of: dueDate, { _, newValue in
                             task.dueDate = newValue
                         })
                     }
@@ -50,13 +51,14 @@ struct EditTaskView: View {
                                 .stroke(.black, lineWidth: 1 / 3)
                                 .opacity(0.3)
                         )
-                        .frame(height: 200)
+                        .frame(maxHeight: .infinity)
+                        .padding(.bottom, 10.0)
                 }
                 .padding(.bottom, 10.0)
             }
         }
         .padding(10)
-        .onChange(of: task) { oldValue, newValue in
+        .onChange(of: task) { _, _ in
             setPicker()
         }
         .onAppear(perform: {

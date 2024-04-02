@@ -17,6 +17,7 @@ struct TaskStringView: View {
         HStack {
             Toggle(isOn: $task.completed) {}
                 .toggleStyle(.checkbox)
+                .foregroundStyle(Color.gray)
             
             Text(task.name)
                 .foregroundStyle(task.completed ? Color.gray : Color.primary)
@@ -25,11 +26,13 @@ struct TaskStringView: View {
 
             if let project = task.project {
                 Text("\(project.name)")
+                    .foregroundStyle(Color.gray)
+                    .font(.caption)
             }
             
             if let subtasksCount = task.subtasks?.count,
                subtasksCount > 0,
-               let finished = task.subtasks?.filter( { $0.completed } ) {
+               let finished = task.subtasks?.filter({ $0.completed }) {
 
                 CircularProgressView(progress: CGFloat(subtasksCount == finished.count ? 1.0 : 1.0 / Double(subtasksCount) * Double(finished.count)),
                                      color: .gray,

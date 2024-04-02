@@ -1,36 +1,26 @@
 //
-//  TasksListView.swift
+//  ProjectTasksListView.swift
 //  VeraPlayaMac
 //
-//  Created by Andrey Mikhaylin on 15.02.2024.
+//  Created by Andrey Mikhaylin on 27.03.2024.
 //
 
 import SwiftUI
 import SwiftData
 
-enum CommonTaskListSections: String, Identifiable, CaseIterable {
-    var id: String { rawValue }
-    
-    case todo = "To do"
-    case completed = "Completed"
-}
-
-struct TasksListView: View {
+struct ProjectTasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    var tasks: [Todo]
-
     @Binding var selectedTasks: Set<Todo>
     @Binding var currentTask: Todo?
     
-    @State var list: SideBarItem
-    @State private var newTaskIsShowing = false
+    @Bindable var project: Project
     @State private var groupsExpanded = true
     
     var body: some View {
         List(selection: $selectedTasks) {
-            ForEach(CommonTaskListSections.allCases) { section in
-                DisclosureGroup(section.rawValue, isExpanded: $groupsExpanded) {
-                    OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
+            ForEach(project.statuses.sorted(by: { $0.order < $1.order })) { status in
+                DisclosureGroup(status.name, isExpanded: $groupsExpanded) {
+                    OutlineGroup(project.tasks.filter({ $0.status == status && $0.parentTask == nil }),
                                  id: \.self,
                                  children: \.subtasks) { task in
                         TaskStringView(task: task)
@@ -41,7 +31,7 @@ struct TasksListView: View {
                                     let subtask = Todo(name: "", parentTask: task)
                                     task.subtasks?.append(subtask)
                                     modelContext.insert(subtask)
-                                    
+
                                     currentTask = subtask
                                 } label: {
                                     Image(systemName: "plus")
@@ -50,12 +40,18 @@ struct TasksListView: View {
                             }
                     }
                 }
+                .dropDestination(for: Todo.self) { tasks, _ in
+                    for task in tasks {
+                        task.status = status
+                    }
+                    return true
+                }
             }
         }
         .toolbar {
             ToolbarItem {
                 Button {
-                    addToCurrentList()
+                    addTaskToProject()
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
@@ -71,15 +67,6 @@ struct TasksListView: View {
         }
     }
     
-    private func deleteTask(task: Todo?) {
-        if let task = task {
-            if let parentTask = task.parentTask, let index = parentTask.subtasks?.firstIndex(of: task) {
-                parentTask.subtasks?.remove(at: index)
-            }
-            modelContext.delete(task)
-        }
-    }
-    
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks {
@@ -88,21 +75,12 @@ struct TasksListView: View {
         }
     }
     
-    private func addToCurrentList() {
+    private func addTaskToProject() {
         withAnimation {
             selectedTasks = []
-            let task = Todo(name: "")
-            switch list {
-            case .inbox:
-                task.project = nil
-            case .today:
-                task.dueDate = Calendar.current.startOfDay(for: Date())
-            case .tomorrow:
-                task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-            case .projects:
-                break
-            }
-
+            let task = Todo(name: "",
+                            status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                            project: project)
             modelContext.insert(task)
             currentTask = task
         }
@@ -112,15 +90,12 @@ struct TasksListView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-        let tasks: [Todo] = [previewer.task]
         @State var selectedTasks = Set<Todo>()
         @State var currentTask: Todo?
         
-        return TasksListView(tasks: tasks, 
-                             selectedTasks: $selectedTasks,
-                             currentTask: $currentTask,
-                             list: .inbox)
-            .modelContainer(previewer.container)
+        return ProjectTasksListView(selectedTasks: $selectedTasks,
+                                    currentTask: $currentTask,
+                                    project: previewer.project)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

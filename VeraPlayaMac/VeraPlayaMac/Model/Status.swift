@@ -11,8 +11,10 @@ import SwiftData
 @Model
 class Status {
     var name: String = ""
+    var order: Int
     
-    init(name: String) {
+    init(name: String, order: Int) {
         self.name = name
+        self.order = order
     }
 }
