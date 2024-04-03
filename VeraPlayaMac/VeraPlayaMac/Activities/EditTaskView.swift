@@ -42,6 +42,17 @@ struct EditTaskView: View {
                     }
                 }
                 
+                HStack {
+                    TextField("Link", text: $task.link)
+                        .textContentType(.URL)
+                    if let url = URL(string: task.link) {
+                        Link(destination: url,
+                             label: {
+                            Image(systemName: "link")
+                        })
+                    }
+                }
+                
                 LabeledContent("Note") {
                     TextEditor(text: $task.note)
                         .background(Color.primary.colorInvert())
