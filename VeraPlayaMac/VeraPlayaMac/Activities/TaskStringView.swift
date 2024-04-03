@@ -24,6 +24,14 @@ struct TaskStringView: View {
             
             Spacer()
 
+            if !task.link.isEmpty {
+                if let url = URL(string: task.link) {
+                    Link(destination: url) {
+                        Image(systemName: "link.circle.fill")
+                    }
+                }
+            }
+            
             if let project = task.project {
                 Text("\(project.name)")
                     .foregroundStyle(Color.gray)

@@ -18,6 +18,7 @@ class Todo {
     var tomatoesCount: Int = 0
     var project: Project?
     var parentTask: Todo?
+    var link: String = ""
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -30,7 +31,8 @@ class Todo {
          tomatoesCount: Int = 0,
          project: Project? = nil,
          subtasks: [Todo]? = [Todo](),
-         parentTask: Todo? = nil) {
+         parentTask: Todo? = nil,
+         link: String = "") {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -40,5 +42,6 @@ class Todo {
         self.project = project
         self.subtasks = subtasks
         self.parentTask = parentTask
+        self.link = link
     }
 }

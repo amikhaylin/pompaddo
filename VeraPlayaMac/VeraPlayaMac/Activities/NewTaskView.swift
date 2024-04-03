@@ -13,6 +13,7 @@ struct NewTaskView: View {
     @Binding var isVisible: Bool
     @State var list: SideBarItem
     @State private var taskName = ""
+    @State private var link = ""
     
     var body: some View {
         VStack {
@@ -20,6 +21,9 @@ struct NewTaskView: View {
                 .font(.headline)
             
             TextField("Task name", text: $taskName)
+            
+            TextField("Link", text: $link)
+                .textContentType(.URL)
             
             HStack {
                 Button("Cancel") {
@@ -29,7 +33,7 @@ struct NewTaskView: View {
                 Spacer()
                 Button("OK") {
                     self.isVisible = false
-                    let task = Todo(name: taskName)
+                    let task = Todo(name: taskName, link: link)
                     if list == .today {
                         task.dueDate = Calendar.current.startOfDay(for: Date())
                     }
