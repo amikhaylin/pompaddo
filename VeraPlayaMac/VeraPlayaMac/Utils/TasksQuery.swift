@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct TasksQuery {
-    static func predicate_today() -> Predicate<Todo> {
+    static func predicateToday() -> Predicate<Todo> {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
@@ -20,7 +20,18 @@ struct TasksQuery {
         }
     }
     
-    static func predicate_tomorrow() -> Predicate<Todo> {
+    static func predicateTodayActive() -> Predicate<Todo> {
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
+        return #Predicate<Todo> { task in
+            if let date = task.dueDate {
+                return date < tomorrow && !task.completed
+            } else {
+                return false
+            }
+        }
+    }
+    
+    static func predicateTomorrow() -> Predicate<Todo> {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
         return #Predicate<Todo> { task in
@@ -32,7 +43,7 @@ struct TasksQuery {
         }
     }
     
-    static func predicate_inbox() -> Predicate<Todo> {
+    static func predicateInbox() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
             task.project == nil && task.parentTask == nil
         }
