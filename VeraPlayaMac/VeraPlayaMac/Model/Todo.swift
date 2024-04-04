@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-enum RepeationMode: String, Identifiable, CaseIterable {
+enum RepeationMode: String, Identifiable, CaseIterable, Codable {
     var id: String { rawValue }
     
     case none = "None"
@@ -27,7 +27,7 @@ class Todo {
     var project: Project?
     var parentTask: Todo?
     var link: String = ""
-    var repeation: RepeationMode = RepeationMode.none
+    var repeation: RepeationMode? = RepeationMode.none
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -42,7 +42,7 @@ class Todo {
          subtasks: [Todo]? = [Todo](),
          parentTask: Todo? = nil,
          link: String = "",
-         repeation: RepeationMode = RepeationMode.none) {
+         repeation: RepeationMode? = RepeationMode.none) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed

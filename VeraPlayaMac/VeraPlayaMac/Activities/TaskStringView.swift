@@ -18,6 +18,18 @@ struct TaskStringView: View {
             Toggle(isOn: $task.completed) {}
                 .toggleStyle(.checkbox)
                 .foregroundStyle(Color.gray)
+//                .onChange(of: task.completed) { _, newValue in
+//                    if newValue {
+//                        if let repeation = task.repeation {
+//                            switch repeation {
+//                            case .none:
+//                                break
+//                            case .daily:
+//                                
+//                            }
+//                        }
+//                    }
+//                }
             
             Text(task.name)
                 .foregroundStyle(task.completed ? Color.gray : Color.primary)
@@ -30,6 +42,11 @@ struct TaskStringView: View {
                         Image(systemName: "link.circle.fill")
                     }
                 }
+            }
+            
+            if let repeation = task.repeation, repeation != .none {
+                Image(systemName: "repeat.circle")
+                    .foregroundStyle(Color.gray)
             }
             
             if let project = task.project {
