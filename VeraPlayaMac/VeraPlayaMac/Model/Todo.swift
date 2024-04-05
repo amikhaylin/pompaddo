@@ -13,6 +13,7 @@ enum RepeationMode: String, Identifiable, CaseIterable, Codable {
     
     case none = "None"
     case daily = "Daily"
+    case weekly = "Weekly"
     case monthly = "Monthly"
     case yearly = "Yearly"
 }
@@ -95,6 +96,8 @@ extension Todo {
             break
         case .daily:
             newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .weekly:
+            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: dueDate))
         case .monthly:
             newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
         case .yearly:

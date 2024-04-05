@@ -6,7 +6,7 @@ made for myself by myself
 
 
 
-![Swift](https://img.shields.io/badge/swift-5.5-orange.svg?style=for-the-badge)
+![Swift](https://img.shields.io/badge/swift-5.10-orange.svg?style=for-the-badge)
 ![SwiftUI](https://img.shields.io/badge/use-SwiftUI-orange.svg?style=for-the-badge)
 ![SwiftData](https://img.shields.io/badge/use-SwiftData-orange?style=for-the-badge)
 ![Xcode](https://img.shields.io/badge/Xcode-15.3-blue.svg?style=for-the-badge)
