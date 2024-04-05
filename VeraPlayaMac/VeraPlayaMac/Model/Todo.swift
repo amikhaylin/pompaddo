@@ -14,6 +14,7 @@ enum RepeationMode: String, Identifiable, CaseIterable, Codable {
     case none = "None"
     case daily = "Daily"
     case monthly = "Monthly"
+    case yearly = "Yearly"
 }
 
 @Model
@@ -96,6 +97,8 @@ extension Todo {
             newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
         case .monthly:
             newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .yearly:
+            newTask.dueDate = Calendar.current.date(byAdding: .year, value: 1, to: Calendar.current.startOfDay(for: dueDate))
         }
         newTask.reconnect()
         
