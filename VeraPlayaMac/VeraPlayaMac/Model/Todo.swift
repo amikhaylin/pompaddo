@@ -8,6 +8,15 @@
 import Foundation
 import SwiftData
 
+enum RepeationMode: String, Identifiable, CaseIterable, Codable {
+    var id: String { rawValue }
+    
+    case none = "None"
+    case daily = "Daily"
+    case monthly = "Monthly"
+    case yearly = "Yearly"
+}
+
 @Model
 class Todo {
     var name: String = ""
@@ -19,6 +28,7 @@ class Todo {
     var project: Project?
     var parentTask: Todo?
     var link: String = ""
+    var repeation: RepeationMode? = RepeationMode.none
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -32,7 +42,8 @@ class Todo {
          project: Project? = nil,
          subtasks: [Todo]? = [Todo](),
          parentTask: Todo? = nil,
-         link: String = "") {
+         link: String = "",
+         repeation: RepeationMode? = RepeationMode.none) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -43,5 +54,54 @@ class Todo {
         self.subtasks = subtasks
         self.parentTask = parentTask
         self.link = link
+        self.repeation = repeation
+    }
+}
+
+extension Todo {
+    func copy() -> Todo {
+        let task = Todo(name: self.name,
+                        dueDate: self.dueDate,
+                        completed: self.completed,
+                        status: self.status,
+                        note: self.note,
+                        tomatoesCount: self.tomatoesCount,
+                        project: self.project,
+                        subtasks: self.subtasks,
+                        parentTask: self.parentTask,
+                        link: self.link,
+                        repeation: self.repeation)
+        return task
+    }
+    
+    func reconnect() {
+        if let project = self.project {
+            project.tasks.append(self)
+        }
+        if let parentTask = self.parentTask {
+            parentTask.subtasks?.append(self)
+        }
+    }
+    
+    func complete() -> Todo? {
+        self.completed = true
+        guard let repeation = self.repeation, let dueDate = self.dueDate else { return nil }
+        guard repeation != .none else { return nil }
+        
+        let newTask = self.copy()
+        newTask.completed = false
+        switch repeation {
+        case .none:
+            break
+        case .daily:
+            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .monthly:
+            newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .yearly:
+            newTask.dueDate = Calendar.current.date(byAdding: .year, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        }
+        newTask.reconnect()
+        
+        return newTask
     }
 }

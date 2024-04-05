@@ -42,6 +42,12 @@ struct EditTaskView: View {
                     }
                 }
                 
+                Picker("Repeat", selection: $task.repeation) {
+                    ForEach(RepeationMode.allCases, id: \.self) { mode in
+                        Text(mode.rawValue).tag(mode as RepeationMode?)
+                    }
+                }
+
                 HStack {
                     TextField("Link", text: $task.link)
                         .textContentType(.URL)

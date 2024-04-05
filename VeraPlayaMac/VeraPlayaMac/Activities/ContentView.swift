@@ -31,9 +31,10 @@ struct ContentView: View {
     @State private var selectedProject: Project?
     @AppStorage("projectsExpanded") var projectsExpanded = true
     
-    @Query(filter: TasksQuery.predicate_inbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
-    @Query(filter: TasksQuery.predicate_today(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
-    @Query(filter: TasksQuery.predicate_tomorrow(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTomorrow: [Todo]
+    @Query(filter: TasksQuery.predicateInbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
+    @Query(filter: TasksQuery.predicateToday(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
+    @Query(filter: TasksQuery.predicateTomorrow(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTomorrow: [Todo]
+    @Query(filter: TasksQuery.predicateTodayActive(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTodayActive: [Todo]
     
     @Query var projects: [Project]
     
@@ -209,7 +210,7 @@ struct ContentView: View {
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
         }
-        .onChange(of: tasksToday.count) { _, newValue in
+        .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
         }
         .onChange(of: selectedSideBarItem, { _, newValue in
