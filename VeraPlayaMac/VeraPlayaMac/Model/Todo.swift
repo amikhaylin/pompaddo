@@ -56,3 +56,49 @@ class Todo {
         self.repeation = repeation
     }
 }
+
+extension Todo {
+    func copy() -> Todo {
+        let task = Todo(name: self.name,
+                        dueDate: self.dueDate,
+                        completed: self.completed,
+                        status: self.status,
+                        note: self.note,
+                        tomatoesCount: self.tomatoesCount,
+                        project: self.project,
+                        subtasks: self.subtasks,
+                        parentTask: self.parentTask,
+                        link: self.link,
+                        repeation: self.repeation)
+        return task
+    }
+    
+    func reconnect() {
+        if let project = self.project {
+            project.tasks.append(self)
+        }
+        if let parentTask = self.parentTask {
+            parentTask.subtasks?.append(self)
+        }
+    }
+    
+    func complete() -> Todo? {
+        self.completed = true
+        guard let repeation = self.repeation, let dueDate = self.dueDate else { return nil }
+        guard repeation != .none else { return nil }
+        
+        let newTask = self.copy()
+        newTask.completed = false
+        switch repeation {
+        case .none:
+            break
+        case .daily:
+            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .monthly:
+            newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        }
+        newTask.reconnect()
+        
+        return newTask
+    }
+}

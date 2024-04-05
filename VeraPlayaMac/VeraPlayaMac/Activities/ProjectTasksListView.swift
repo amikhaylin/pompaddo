@@ -23,7 +23,7 @@ struct ProjectTasksListView: View {
                     OutlineGroup(project.tasks.filter({ $0.status == status && $0.parentTask == nil }),
                                  id: \.self,
                                  children: \.subtasks) { task in
-                        TaskStringView(task: task)
+                        TaskRowView(task: task, completed: task.completed)
                             .draggable(task)
                             .contextMenu {
                                 Button {

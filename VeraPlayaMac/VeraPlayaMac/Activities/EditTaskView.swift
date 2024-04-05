@@ -47,8 +47,7 @@ struct EditTaskView: View {
                         Text(mode.rawValue).tag(mode as RepeationMode?)
                     }
                 }
-                
-                
+
                 HStack {
                     TextField("Link", text: $task.link)
                         .textContentType(.URL)
