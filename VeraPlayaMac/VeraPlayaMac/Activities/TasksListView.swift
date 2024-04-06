@@ -59,8 +59,15 @@ struct TasksListView: View {
                                     currentTask = newTask
                                 } label: {
                                     Image(systemName: "doc.on.doc")
-                                    Text("Copy task")
+                                    Text("Dublicate task")
                                 }
+                                
+                                Button {
+                                    deleteItems()
+                                } label: {
+                                    Image(systemName: "trash")
+                                    Text("Delete task")
+                                }.disabled(selectedTasks.count == 0)
                             }
                     }
                 }
@@ -87,9 +94,7 @@ struct TasksListView: View {
     
     private func deleteTask(task: Todo?) {
         if let task = task {
-            if let parentTask = task.parentTask, let index = parentTask.subtasks?.firstIndex(of: task) {
-                parentTask.subtasks?.remove(at: index)
-            }
+            task.disconnect()
             modelContext.delete(task)
         }
     }
@@ -97,6 +102,7 @@ struct TasksListView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks {
+                task.disconnect()
                 modelContext.delete(task)
             }
         }

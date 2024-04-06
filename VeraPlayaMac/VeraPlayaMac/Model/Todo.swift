@@ -13,6 +13,7 @@ enum RepeationMode: String, Identifiable, CaseIterable, Codable {
     
     case none = "None"
     case daily = "Daily"
+    case weekly = "Weekly"
     case monthly = "Monthly"
     case yearly = "Yearly"
 }
@@ -83,6 +84,15 @@ extension Todo {
         }
     }
     
+    func disconnect() {
+        if let project = self.project, let index = project.tasks.firstIndex(of: self) {
+            project.tasks.remove(at: index)
+        }
+        if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
+            parentTask.subtasks?.remove(at: index)
+        }
+    }
+    
     func complete() -> Todo? {
         self.completed = true
         guard let repeation = self.repeation, let dueDate = self.dueDate else { return nil }
@@ -95,6 +105,8 @@ extension Todo {
             break
         case .daily:
             newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .weekly:
+            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: dueDate))
         case .monthly:
             newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
         case .yearly:
