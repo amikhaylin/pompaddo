@@ -37,6 +37,27 @@ struct ProjectTasksListView: View {
                                     Image(systemName: "plus")
                                     Text("Add subtask")
                                 }
+                                
+                                Button {
+                                    selectedTasks = []
+                                    let newTask = task.copy()
+                                    newTask.completed = false
+                                    newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                                    newTask.reconnect()
+                                    modelContext.insert(newTask)
+
+                                    currentTask = newTask
+                                } label: {
+                                    Image(systemName: "doc.on.doc")
+                                    Text("Dublicate task")
+                                }
+                                
+                                Button {
+                                    deleteItems()
+                                } label: {
+                                    Image(systemName: "trash")
+                                    Text("Delete task")
+                                }.disabled(selectedTasks.count == 0)
                             }
                     }
                 }
@@ -70,6 +91,7 @@ struct ProjectTasksListView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks {
+                task.disconnect()
                 modelContext.delete(task)
             }
         }

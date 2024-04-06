@@ -84,6 +84,15 @@ extension Todo {
         }
     }
     
+    func disconnect() {
+        if let project = self.project, let index = project.tasks.firstIndex(of: self) {
+            project.tasks.remove(at: index)
+        }
+        if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
+            parentTask.subtasks?.remove(at: index)
+        }
+    }
+    
     func complete() -> Todo? {
         self.completed = true
         guard let repeation = self.repeation, let dueDate = self.dueDate else { return nil }
