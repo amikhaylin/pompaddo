@@ -47,7 +47,45 @@ struct EditTaskView: View {
                         Text(mode.rawValue).tag(mode as RepeationMode?)
                     }
                 }
+                
+                Picker("Priority", selection: $task.priority) {
+                    ForEach(Priority.allCases, id: \.self) { priority in
+                        HStack {
+                            Image(systemName: "flag.fill")
+                                
+//                                    .foregroundStyle({
+//                                        switch priority {
+//                                        case .none:
+//                                            return Color.gray
+//                                        case.high:
+//                                            return Color.red
+//                                        case .medium:
+//                                            return Color.yellow
+//                                        case .low:
+//                                            return Color.blue
+//                                        }
+//                                    })
 
+                            //                        switch priority {
+                            //                        case .none:
+                            //                            Image(systemName: "flag.fill")
+                            //                                .foregroundStyle(Color.grey)
+                            //                        case.high:
+                            //                            Image(systemName: "flag.fill")
+                            //                                .foregroundStyle(Color.red)
+                            //                        case .medium:
+                            //                            Image(systemName: "flag.fill")
+                            //                                .foregroundStyle(Color.yellow)
+                            //                        case .low:
+                            //                            Image(systemName: "flag.fill")
+                            //                                .foregroundStyle(Color.blue)
+                            //                        }
+                            Text(priority.rawValue)
+                        }
+                        .tag(priority as Priority?)
+                    }
+                }
+                
                 HStack {
                     TextField("Link", text: $task.link)
                         .textContentType(.URL)

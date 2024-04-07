@@ -19,9 +19,14 @@ struct Previewer {
     
     init() throws {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        container = try ModelContainer(for: Schema([Todo.self, Project.self]), configurations: config)
+        container = try ModelContainer(for: Schema([Todo.self, Project.self]), 
+                                       configurations: config)
         
-        task = Todo(name: "Make soup", dueDate: Date(), link: "https://google.com", repeation: .daily)
+        task = Todo(name: "Make soup",
+                    dueDate: Date(),
+                    link: "https://google.com",
+                    repeation: .daily,
+                    priority: .medium)
         container.mainContext.insert(task)
 
         subtask = Todo(name: "Buy potatoes", parentTask: task)
@@ -39,7 +44,9 @@ struct Previewer {
             project.statuses.append(status)
         }
         
-        projectTask = Todo(name: "Draw some sketches", status: project.statuses.first, project: project)
+        projectTask = Todo(name: "Draw some sketches", 
+                           status: project.statuses.first,
+                           project: project)
         container.mainContext.insert(projectTask)
         
         let anotherProject = Project(name: "🦔 Another project")

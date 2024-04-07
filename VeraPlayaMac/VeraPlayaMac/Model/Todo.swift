@@ -18,6 +18,13 @@ enum RepeationMode: String, Identifiable, CaseIterable, Codable {
     case yearly = "Yearly"
 }
 
+enum Priority: String, CaseIterable, Codable {
+    case none = "None"
+    case high = "High"
+    case medium = "Medium"
+    case low = "Low"
+}
+
 @Model
 class Todo {
     var name: String = ""
@@ -30,6 +37,7 @@ class Todo {
     var parentTask: Todo?
     var link: String = ""
     var repeation: RepeationMode? = RepeationMode.none
+    var priority: Priority? = Priority.none
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -44,7 +52,8 @@ class Todo {
          subtasks: [Todo]? = [Todo](),
          parentTask: Todo? = nil,
          link: String = "",
-         repeation: RepeationMode? = RepeationMode.none) {
+         repeation: RepeationMode? = RepeationMode.none,
+         priority: Priority? = Priority.none) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -56,6 +65,7 @@ class Todo {
         self.parentTask = parentTask
         self.link = link
         self.repeation = repeation
+        self.priority = priority
     }
 }
 
