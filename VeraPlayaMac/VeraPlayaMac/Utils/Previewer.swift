@@ -26,7 +26,7 @@ struct Previewer {
                     dueDate: Date(),
                     link: "https://google.com",
                     repeation: .daily,
-                    priority: .medium)
+                    priority: 2)
         container.mainContext.insert(task)
 
         subtask = Todo(name: "Buy potatoes", parentTask: task)

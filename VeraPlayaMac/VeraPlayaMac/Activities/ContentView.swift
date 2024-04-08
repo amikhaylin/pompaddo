@@ -32,9 +32,9 @@ struct ContentView: View {
     @AppStorage("projectsExpanded") var projectsExpanded = true
     
     @Query(filter: TasksQuery.predicateInbox(), sort: TasksQuery.defaultTaskSortDescriptor()) var tasksInbox: [Todo]
-    @Query(filter: TasksQuery.predicateToday(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
-    @Query(filter: TasksQuery.predicateTomorrow(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTomorrow: [Todo]
-    @Query(filter: TasksQuery.predicateTodayActive(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTodayActive: [Todo]
+    @Query(filter: TasksQuery.predicateToday(), sort: TasksQuery.defaultTaskSortDescriptor()) var tasksToday: [Todo]
+    @Query(filter: TasksQuery.predicateTomorrow(), sort: TasksQuery.defaultTaskSortDescriptor()) var tasksTomorrow: [Todo]
+    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @Query var projects: [Project]
     
@@ -147,7 +147,6 @@ struct ContentView: View {
                     }
                     .listStyle(SidebarListStyle())
                 }
-                .navigationSplitViewColumnWidth(min: 200, ideal: 200)
                 .toolbar {
                     ToolbarItem {
                         Button {
@@ -165,6 +164,7 @@ struct ContentView: View {
                     NewProjectView(isVisible: self.$newProjectIsShowing)
                 }
             }
+            .navigationSplitViewColumnWidth(min: 200, ideal: 200)
         } content: {
             switch selectedSideBarItem {
             case .inbox:

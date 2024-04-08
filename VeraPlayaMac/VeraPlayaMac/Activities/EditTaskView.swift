@@ -49,21 +49,23 @@ struct EditTaskView: View {
                 }
                 
                 Picker("Priority", selection: $task.priority) {
-                    ForEach(Priority.allCases, id: \.self) { priority in
+                    ForEach(0...3, id: \.self) { priority in
                         HStack {
                             Image(systemName: "flag.fill")
                             switch priority {
-                            case .none:
+                            case 0:
                                 Text("None")
-                            case .high:
+                            case 3:
                                 Text("High")
-                            case .medium:
+                            case 2:
                                 Text("Medium")
-                            case .low:
+                            case 1:
                                 Text("Low")
+                            default:
+                                EmptyView()
                             }
                         }
-                        .tag(priority as Priority?)
+                        .tag(priority as Int)
                     }
                 }
                 

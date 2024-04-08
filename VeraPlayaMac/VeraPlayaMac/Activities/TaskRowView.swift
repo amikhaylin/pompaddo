@@ -31,17 +31,17 @@ struct TaskRowView: View {
                 .foregroundStyle(Color.gray)
             
             switch task.priority {
-            case .none:
-                EmptyView()
-            case .high:
-                Image(systemName: "flag.fill")
-                    .foregroundStyle(Color.red)
-            case .medium:
-                Image(systemName: "flag.fill")
-                    .foregroundStyle(Color.yellow)
-            case .low:
+            case 1:
                 Image(systemName: "flag.fill")
                     .foregroundStyle(Color.blue)
+            case 2:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.yellow)
+            case 3:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.red)
+            default:
+                EmptyView()
             }
             
             Text(task.name)
