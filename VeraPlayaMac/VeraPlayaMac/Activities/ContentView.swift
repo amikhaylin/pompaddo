@@ -31,7 +31,7 @@ struct ContentView: View {
     @State private var selectedProject: Project?
     @AppStorage("projectsExpanded") var projectsExpanded = true
     
-    @Query(filter: TasksQuery.predicateInbox(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksInbox: [Todo]
+    @Query(filter: TasksQuery.predicateInbox(), sort: TasksQuery.defaultTaskSortDescriptor()) var tasksInbox: [Todo]
     @Query(filter: TasksQuery.predicateToday(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksToday: [Todo]
     @Query(filter: TasksQuery.predicateTomorrow(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTomorrow: [Todo]
     @Query(filter: TasksQuery.predicateTodayActive(), sort: [SortDescriptor(\Todo.dueDate)]) var tasksTodayActive: [Todo]

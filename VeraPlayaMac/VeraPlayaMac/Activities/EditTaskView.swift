@@ -52,35 +52,16 @@ struct EditTaskView: View {
                     ForEach(Priority.allCases, id: \.self) { priority in
                         HStack {
                             Image(systemName: "flag.fill")
-                                
-//                                    .foregroundStyle({
-//                                        switch priority {
-//                                        case .none:
-//                                            return Color.gray
-//                                        case.high:
-//                                            return Color.red
-//                                        case .medium:
-//                                            return Color.yellow
-//                                        case .low:
-//                                            return Color.blue
-//                                        }
-//                                    })
-
-                            //                        switch priority {
-                            //                        case .none:
-                            //                            Image(systemName: "flag.fill")
-                            //                                .foregroundStyle(Color.grey)
-                            //                        case.high:
-                            //                            Image(systemName: "flag.fill")
-                            //                                .foregroundStyle(Color.red)
-                            //                        case .medium:
-                            //                            Image(systemName: "flag.fill")
-                            //                                .foregroundStyle(Color.yellow)
-                            //                        case .low:
-                            //                            Image(systemName: "flag.fill")
-                            //                                .foregroundStyle(Color.blue)
-                            //                        }
-                            Text(priority.rawValue)
+                            switch priority {
+                            case .none:
+                                Text("None")
+                            case .high:
+                                Text("High")
+                            case .medium:
+                                Text("Medium")
+                            case .low:
+                                Text("Low")
+                            }
                         }
                         .tag(priority as Priority?)
                     }

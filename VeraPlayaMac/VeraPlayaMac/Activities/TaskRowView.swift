@@ -30,6 +30,20 @@ struct TaskRowView: View {
                 .toggleStyle(.checkbox)
                 .foregroundStyle(Color.gray)
             
+            switch task.priority {
+            case .none:
+                EmptyView()
+            case .high:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.red)
+            case .medium:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.yellow)
+            case .low:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.blue)
+            }
+            
             Text(task.name)
                 .foregroundStyle(task.completed ? Color.gray : Color.primary)
             
@@ -65,7 +79,7 @@ struct TaskRowView: View {
             
             if let dueDate = task.dueDate {
                 HStack {
-                    if let repeation = task.repeation, repeation != .none {
+                    if task.repeation != .none {
                         Image(systemName: "repeat")
                             .foregroundStyle(Color.gray)
                     }
