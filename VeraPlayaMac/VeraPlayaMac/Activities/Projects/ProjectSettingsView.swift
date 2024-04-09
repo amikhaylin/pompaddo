@@ -42,9 +42,11 @@ struct ProjectSettingsView: View {
                  selection: $selectedStatus) { status in
                 StatusRowView(status: status,
                               project: project)
+                .tag(status as Status)
             }
             Spacer()
             Section {
+                TextField("Project name", text: $project.name)
                 HStack {
                     DatePicker("Review date", selection: $project.reviewDate)
                     
