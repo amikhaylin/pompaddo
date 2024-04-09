@@ -51,7 +51,6 @@ struct EditTaskView: View {
                 Picker("Priority", selection: $task.priority) {
                     ForEach(0...3, id: \.self) { priority in
                         HStack {
-                            Image(systemName: "flag.fill")
                             switch priority {
                             case 0:
                                 Text("None")
@@ -67,7 +66,7 @@ struct EditTaskView: View {
                         }
                         .tag(priority as Int)
                     }
-                }
+                }.pickerStyle(.segmented)
                 
                 HStack {
                     TextField("Link", text: $task.link)
