@@ -29,7 +29,8 @@ class Todo {
     var project: Project?
     var parentTask: Todo?
     var link: String = ""
-    var repeation: RepeationMode? = RepeationMode.none
+    var repeation: RepeationMode = RepeationMode.none
+    var priority: Int = 0
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -44,7 +45,8 @@ class Todo {
          subtasks: [Todo]? = [Todo](),
          parentTask: Todo? = nil,
          link: String = "",
-         repeation: RepeationMode? = RepeationMode.none) {
+         repeation: RepeationMode = RepeationMode.none,
+         priority: Int = 0) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -56,6 +58,7 @@ class Todo {
         self.parentTask = parentTask
         self.link = link
         self.repeation = repeation
+        self.priority = priority
     }
 }
 
@@ -95,7 +98,7 @@ extension Todo {
     
     func complete() -> Todo? {
         self.completed = true
-        guard let repeation = self.repeation, let dueDate = self.dueDate else { return nil }
+        guard let dueDate = self.dueDate else { return nil }
         guard repeation != .none else { return nil }
         
         let newTask = self.copy()

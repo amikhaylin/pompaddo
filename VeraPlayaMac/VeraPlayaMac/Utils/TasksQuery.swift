@@ -48,4 +48,8 @@ struct TasksQuery {
             task.project == nil && task.parentTask == nil
         }
     }
+    
+    static func defaultTaskSortDescriptor() -> [SortDescriptor<Todo>] {
+        return [SortDescriptor(\Todo.dueDate), SortDescriptor(\Todo.priority, order: .reverse)]
+    }
 }

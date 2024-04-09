@@ -47,7 +47,28 @@ struct EditTaskView: View {
                         Text(mode.rawValue).tag(mode as RepeationMode?)
                     }
                 }
-
+                
+                Picker("Priority", selection: $task.priority) {
+                    ForEach(0...3, id: \.self) { priority in
+                        HStack {
+                            Image(systemName: "flag.fill")
+                            switch priority {
+                            case 0:
+                                Text("None")
+                            case 3:
+                                Text("High")
+                            case 2:
+                                Text("Medium")
+                            case 1:
+                                Text("Low")
+                            default:
+                                EmptyView()
+                            }
+                        }
+                        .tag(priority as Int)
+                    }
+                }
+                
                 HStack {
                     TextField("Link", text: $task.link)
                         .textContentType(.URL)
