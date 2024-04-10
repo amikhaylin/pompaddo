@@ -15,6 +15,7 @@ struct ProjectTasksListView: View {
     
     @Bindable var project: Project
     @State private var groupsExpanded = true
+    @State private var showSettings = false
     
     var body: some View {
         List(selection: $selectedTasks) {
@@ -85,7 +86,19 @@ struct ProjectTasksListView: View {
                     Label("Delete task", systemImage: "trash")
                 }.disabled(selectedTasks.count == 0)
             }
+            
+            ToolbarItem {
+                Button {
+                    showSettings.toggle()
+                } label: {
+                    Label("Settings", systemImage: "gearshape")
+                }
+            }
         }
+        .sheet(isPresented: $showSettings, content: {
+            ProjectSettingsView(isVisible: self.$showSettings,
+                                project: self.project)
+        })
     }
     
     private func deleteItems() {
@@ -114,6 +127,7 @@ struct ProjectTasksListView: View {
         let previewer = try Previewer()
         @State var selectedTasks = Set<Todo>()
         @State var currentTask: Todo?
+        @State var project = previewer.project
         
         return ProjectTasksListView(selectedTasks: $selectedTasks,
                                     currentTask: $currentTask,
