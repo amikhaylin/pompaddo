@@ -14,7 +14,7 @@ class Project {
     var reviewDate: Date = Date()
     var reviewDaysCount: Int = 7
     var note: String = ""
-    var uid: String = UUID().uuidString
+    var projectViewMode: Int = 0
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status] = []

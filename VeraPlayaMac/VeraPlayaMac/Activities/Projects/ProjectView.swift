@@ -17,11 +17,9 @@ struct ProjectView: View {
     
     @State private var showSettings = false
     
-    @State private var projectViewMode = 0
-    
     var body: some View {
         Group {
-            if projectViewMode == 1 {
+            if project.projectViewMode == 1 {
                 KanbanView(project: project,
                            selectedTasks: $selectedTasks,
                            currentTask: $currentTask)
@@ -33,7 +31,7 @@ struct ProjectView: View {
         }
         .toolbar {
             ToolbarItem {
-                Picker("View Mode", selection: $projectViewMode) {
+                Picker("View Mode", selection: $project.projectViewMode) {
                     ForEach(0...1, id: \.self) { mode in
                         HStack {
                             switch mode {
