@@ -49,6 +49,14 @@ struct Previewer {
                            project: project)
         container.mainContext.insert(projectTask)
         
+        let projectTaskWithSubtask = Todo(name: "Make a project",
+                                          status: project.statuses.first,
+                                          project: project)
+        container.mainContext.insert(projectTaskWithSubtask)
+        let projectSubtask = Todo(name: "Start Xcode", parentTask: projectTaskWithSubtask)
+        projectTaskWithSubtask.subtasks?.append(projectSubtask)
+        container.mainContext.insert(projectSubtask)
+        
         let anotherProject = Project(name: "🦔 Another project")
         container.mainContext.insert(anotherProject)
     }
