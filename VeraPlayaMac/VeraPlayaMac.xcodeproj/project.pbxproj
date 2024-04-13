@@ -235,11 +235,10 @@
 		4DAA67B62BC52CBC0045CE22 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				4DCE05DE2BCA711B002C9566 /* Settings */,
 				4DCE05D52BC6F1D6002C9566 /* Kanban */,
 				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
 				4DE238582BAC9C01009BCCCF /* NewProjectView.swift */,
-				4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */,
-				4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */,
 				4DCE05DC2BC940B6002C9566 /* ProjectView.swift */,
 			);
 			path = Projects;
@@ -252,6 +251,15 @@
 				4DCE05DA2BC93624002C9566 /* KanbanTaskRowView.swift */,
 			);
 			path = Kanban;
+			sourceTree = "<group>";
+		};
+		4DCE05DE2BCA711B002C9566 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */,
+				4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

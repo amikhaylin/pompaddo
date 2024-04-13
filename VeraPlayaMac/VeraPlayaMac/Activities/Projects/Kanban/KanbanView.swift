@@ -69,6 +69,7 @@ struct KanbanView: View {
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.status = status
+                            task.completed = status.doCompletion
                         }
                         return true
                     }
