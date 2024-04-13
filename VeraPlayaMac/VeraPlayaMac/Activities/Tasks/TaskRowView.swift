@@ -1,5 +1,5 @@
 //
-//  TaskStringView.swift
+//  TaskRowView.swift
 //  VeraPlayaMac
 //
 //  Created by Andrey Mikhaylin on 15.02.2024.
