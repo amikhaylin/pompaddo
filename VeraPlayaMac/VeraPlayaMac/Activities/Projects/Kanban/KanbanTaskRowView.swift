@@ -17,7 +17,8 @@ struct KanbanTaskRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Toggle(isOn: $completed) {}
+                CheckBoxView(checked: $completed)
+                    .foregroundColor(.gray)
                     .onChange(of: completed, {
                         if completed {
                             print("run")
@@ -28,8 +29,6 @@ struct KanbanTaskRowView: View {
                             task.completed = completed
                         }
                     })
-                    .toggleStyle(.checkbox)
-                    .foregroundStyle(Color.gray)
                 
                 switch task.priority {
                 case 1:

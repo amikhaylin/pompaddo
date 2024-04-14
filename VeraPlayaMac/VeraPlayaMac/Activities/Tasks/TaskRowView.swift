@@ -16,7 +16,8 @@ struct TaskRowView: View {
     
     var body: some View {
         HStack {
-            Toggle(isOn: $completed) {}
+            CheckBoxView(checked: $completed)
+                .foregroundColor(.gray)
                 .onChange(of: completed, {
                     if completed {
                         print("run")
@@ -27,7 +28,6 @@ struct TaskRowView: View {
                         task.completed = completed
                     }
                 })
-                .toggleStyle(.checkbox)
             
             switch task.priority {
             case 1:
