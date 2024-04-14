@@ -35,6 +35,7 @@
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
 		4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */; };
 		4DF91FDF2BCBD460009A6DA8 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */; };
+		4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTasksListView.swift; sourceTree = "<group>"; };
 		4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckBoxView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,6 +233,7 @@
 				4D7C13C62B7E0DE70093595D /* TaskRowView.swift */,
 				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
 				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
+				4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -443,6 +446,7 @@
 				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */,
 				4DCE05D92BC9284A002C9566 /* KanbanView.swift in Sources */,
+				4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */,
 				4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */,
 				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,

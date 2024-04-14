@@ -21,7 +21,7 @@ made for myself by myself
 
 * Add task direct to Inbox [Completed]
 * Projects review
-* Kanban view
+* Kanban view [Completed]
 * Pomodoro timer
 * Repeating tasks
 * Location based contexts

@@ -17,18 +17,8 @@ struct KanbanTaskRowView: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                CheckBoxView(checked: $completed)
+                TaskCheckBoxView(task: task)
                     .foregroundColor(.gray)
-                    .onChange(of: completed, {
-                        if completed {
-                            print("run")
-                            if let newTask = task.complete() {
-                                modelContext.insert(newTask)
-                            }
-                        } else {
-                            task.completed = completed
-                        }
-                    })
                 
                 switch task.priority {
                 case 1:
