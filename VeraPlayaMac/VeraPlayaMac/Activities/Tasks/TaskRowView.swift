@@ -28,7 +28,6 @@ struct TaskRowView: View {
                     }
                 })
                 .toggleStyle(.checkbox)
-                .foregroundStyle(Color.gray)
             
             switch task.priority {
             case 1:
