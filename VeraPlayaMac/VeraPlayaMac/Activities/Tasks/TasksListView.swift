@@ -71,6 +71,12 @@ struct TasksListView: View {
                             }
                     }
                 }
+                .dropDestination(for: Todo.self) { tasks, _ in
+                    for task in tasks {
+                        task.completed = section == CommonTaskListSections.completed
+                    }
+                    return true
+                }
             }
         }
         .toolbar {

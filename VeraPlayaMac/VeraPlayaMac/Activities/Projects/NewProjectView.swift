@@ -37,7 +37,10 @@ struct NewProjectView: View {
                     var order = 0
                     for name in DefaultProjectStatuses.allCases {
                         order += 1
-                        let status = Status(name: name.rawValue, order: order)
+                        let doComplete = name == DefaultProjectStatuses.completed
+                        let status = Status(name: name.rawValue,
+                                            order: order,
+                                            doCompletion: doComplete)
                         modelContext.insert(status)
                         project.statuses.append(status)
                     }

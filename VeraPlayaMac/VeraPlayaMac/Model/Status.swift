@@ -12,9 +12,13 @@ import SwiftData
 class Status {
     var name: String = ""
     var order: Int
+    var doCompletion: Bool = false
     
-    init(name: String, order: Int) {
+    init(name: String,
+         order: Int,
+         doCompletion: Bool = false) {
         self.name = name
         self.order = order
+        self.doCompletion = doCompletion
     }
 }

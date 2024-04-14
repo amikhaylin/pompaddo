@@ -22,6 +22,8 @@ struct StatusRowView: View {
                         .tag(order)
                 }
             }
+            Toggle("Do Completion", isOn: $status.doCompletion)
+                .toggleStyle(.switch)
         }
     }
 }

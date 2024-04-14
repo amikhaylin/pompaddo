@@ -184,7 +184,7 @@ struct ContentView: View {
                               list: selectedSideBarItem)
             case .projects:
                 if let project = selectedProject {
-                    ProjectTasksListView(selectedTasks: $selectedTasks,
+                    ProjectView(selectedTasks: $selectedTasks,
                                          currentTask: $currentTask,
                                          project: project)
                 } else {

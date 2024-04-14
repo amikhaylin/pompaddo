@@ -39,7 +39,10 @@ struct Previewer {
         var order = 0
         for name in DefaultProjectStatuses.allCases {
             order += 1
-            let status = Status(name: name.rawValue, order: order)
+            let doComplete = name == DefaultProjectStatuses.completed
+            let status = Status(name: name.rawValue,
+                                order: order,
+                                doCompletion: doComplete)
             container.mainContext.insert(status)
             project.statuses.append(status)
         }
@@ -48,6 +51,14 @@ struct Previewer {
                            status: project.statuses.first,
                            project: project)
         container.mainContext.insert(projectTask)
+        
+        let projectTaskWithSubtask = Todo(name: "Make a project",
+                                          status: project.statuses.first,
+                                          project: project)
+        container.mainContext.insert(projectTaskWithSubtask)
+        let projectSubtask = Todo(name: "Start Xcode", parentTask: projectTaskWithSubtask)
+        projectTaskWithSubtask.subtasks?.append(projectSubtask)
+        container.mainContext.insert(projectSubtask)
         
         let anotherProject = Project(name: "🦔 Another project")
         container.mainContext.insert(anotherProject)

@@ -1,5 +1,5 @@
 //
-//  TaskStringView.swift
+//  TaskRowView.swift
 //  VeraPlayaMac
 //
 //  Created by Andrey Mikhaylin on 15.02.2024.
@@ -28,7 +28,6 @@ struct TaskRowView: View {
                     }
                 })
                 .toggleStyle(.checkbox)
-                .foregroundStyle(Color.gray)
             
             switch task.priority {
             case 1:

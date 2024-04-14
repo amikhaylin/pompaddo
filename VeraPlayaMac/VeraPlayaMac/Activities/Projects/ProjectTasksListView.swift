@@ -15,7 +15,6 @@ struct ProjectTasksListView: View {
     
     @Bindable var project: Project
     @State private var groupsExpanded = true
-    @State private var showSettings = false
     
     var body: some View {
         List(selection: $selectedTasks) {
@@ -65,40 +64,12 @@ struct ProjectTasksListView: View {
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
                         task.status = status
+                        task.completed = status.doCompletion
                     }
                     return true
                 }
             }
         }
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    addTaskToProject()
-                } label: {
-                    Label("Add task to current list", systemImage: "plus")
-                }
-            }
-            
-            ToolbarItem {
-                Button {
-                    deleteItems()
-                } label: {
-                    Label("Delete task", systemImage: "trash")
-                }.disabled(selectedTasks.count == 0)
-            }
-            
-            ToolbarItem {
-                Button {
-                    showSettings.toggle()
-                } label: {
-                    Label("Settings", systemImage: "gearshape")
-                }
-            }
-        }
-        .sheet(isPresented: $showSettings, content: {
-            ProjectSettingsView(isVisible: self.$showSettings,
-                                project: self.project)
-        })
     }
     
     private func deleteItems() {
@@ -107,17 +78,6 @@ struct ProjectTasksListView: View {
                 task.disconnect()
                 modelContext.delete(task)
             }
-        }
-    }
-    
-    private func addTaskToProject() {
-        withAnimation {
-            selectedTasks = []
-            let task = Todo(name: "",
-                            status: project.statuses.sorted(by: { $0.order < $1.order }).first,
-                            project: project)
-            modelContext.insert(task)
-            currentTask = task
         }
     }
 }

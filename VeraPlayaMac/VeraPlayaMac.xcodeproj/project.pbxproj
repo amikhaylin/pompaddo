@@ -27,6 +27,9 @@
 		4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */; };
 		4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4DCE05D92BC9284A002C9566 /* KanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* KanbanView.swift */; };
+		4DCE05DB2BC93624002C9566 /* KanbanTaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DA2BC93624002C9566 /* KanbanTaskRowView.swift */; };
+		4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DC2BC940B6002C9566 /* ProjectView.swift */; };
 		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
 		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
@@ -75,6 +78,9 @@
 		4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4DBDC7EC2B7CB4EC0063F522 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		4DCE05D82BC9284A002C9566 /* KanbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanbanView.swift; sourceTree = "<group>"; };
+		4DCE05DA2BC93624002C9566 /* KanbanTaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanbanTaskRowView.swift; sourceTree = "<group>"; };
+		4DCE05DC2BC940B6002C9566 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
 		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
@@ -229,12 +235,31 @@
 		4DAA67B62BC52CBC0045CE22 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				4DCE05DE2BCA711B002C9566 /* Settings */,
+				4DCE05D52BC6F1D6002C9566 /* Kanban */,
 				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
 				4DE238582BAC9C01009BCCCF /* NewProjectView.swift */,
+				4DCE05DC2BC940B6002C9566 /* ProjectView.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		4DCE05D52BC6F1D6002C9566 /* Kanban */ = {
+			isa = PBXGroup;
+			children = (
+				4DCE05D82BC9284A002C9566 /* KanbanView.swift */,
+				4DCE05DA2BC93624002C9566 /* KanbanTaskRowView.swift */,
+			);
+			path = Kanban;
+			sourceTree = "<group>";
+		};
+		4DCE05DE2BCA711B002C9566 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
 				4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */,
 				4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */,
 			);
-			path = Projects;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,6 +427,7 @@
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
+				4DCE05DB2BC93624002C9566 /* KanbanTaskRowView.swift in Sources */,
 				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
 				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
 				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,
@@ -412,6 +438,8 @@
 				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
 				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* VeraPlayaMacApp.swift in Sources */,
+				4DCE05D92BC9284A002C9566 /* KanbanView.swift in Sources */,
+				4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */,
 				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
 			);
