@@ -16,18 +16,8 @@ struct TaskRowView: View {
     
     var body: some View {
         HStack {
-            Toggle(isOn: $completed) {}
-                .onChange(of: completed, {
-                    if completed {
-                        print("run")
-                        if let newTask = task.complete() {
-                            modelContext.insert(newTask)
-                        }
-                    } else {
-                        task.completed = completed
-                    }
-                })
-                .toggleStyle(.checkbox)
+            TaskCheckBoxView(task: task)
+                .foregroundColor(.gray)
             
             switch task.priority {
             case 1:
