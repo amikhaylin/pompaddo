@@ -20,10 +20,10 @@ made for myself by myself
 ### Key features in plan
 
 * Add task direct to Inbox [Completed]
-* Projects review
+* Projects review [Completed]
 * Kanban view [Completed]
 * Pomodoro timer
-* Repeating tasks
+* Repeating tasks [Completed]
 * Location based contexts
 
 ### Version Log
