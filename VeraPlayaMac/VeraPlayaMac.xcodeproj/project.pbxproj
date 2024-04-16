@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */; };
 		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
 		4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */; };
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D1D9EAC2BCD334D00CFF31C /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */,
+				4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */,
+				4DE238562BAC9269009BCCCF /* Collapsible.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		4D1D9EB22BCD576F00CFF31C /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
 		4D732DF12B9C6B810012ED0B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,9 +160,6 @@
 				4D8422B42BA1F437000829E1 /* BadgeManager.swift */,
 				4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */,
 				4D7C13C42B7E06F70093595D /* Previewer.swift */,
-				4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */,
-				4DE238562BAC9269009BCCCF /* Collapsible.swift */,
-				4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -171,6 +188,7 @@
 		4D95FE242B7B6BF300C8918D /* VeraPlayaMac */ = {
 			isa = PBXGroup;
 			children = (
+				4D1D9EAC2BCD334D00CFF31C /* CustomViews */,
 				4D9FFAD32BA9C43600C5F5AE /* Info.plist */,
 				4D732DF12B9C6B810012ED0B /* Extensions */,
 				4D7C13C32B7E06DE0093595D /* Utils */,
@@ -241,6 +259,7 @@
 		4DAA67B62BC52CBC0045CE22 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				4D1D9EB22BCD576F00CFF31C /* Review */,
 				4DCE05DE2BCA711B002C9566 /* Settings */,
 				4DCE05D52BC6F1D6002C9566 /* Kanban */,
 				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
@@ -437,6 +456,7 @@
 				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
 				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
 				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,
+				4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */,
 				4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
 				4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */,

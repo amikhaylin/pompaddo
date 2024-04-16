@@ -16,6 +16,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case inbox
     case today
     case tomorrow
+    case review
     case projects
 }
 
@@ -49,7 +50,7 @@ struct ContentView: View {
                         case .inbox:
                             NavigationLink(value: item) {
                                 HStack {
-                                    Image(systemName: "tray.fill")
+                                    Image(systemName: "tray")
                                     Text("Inbox")
                                 }
                                 .badge(tasksInbox.count)
@@ -100,9 +101,26 @@ struct ContentView: View {
                             }
                         case .projects:
                             EmptyView()
+                        case .review:
+                            NavigationLink(value: item) {
+                                HStack {
+                                    Image(systemName: "cup.and.saucer")
+                                    Text("Review")
+                                }
+                                .badge(projects.filter({
+                                    let today = Date()
+                                    if let dateToReview = Calendar.current.date(byAdding: .day,
+                                                                                value: $0.reviewDaysCount,
+                                                                                to: $0.reviewDate) {
+                                        return dateToReview <= today
+                                    } else {
+                                        return false
+                                    }
+                                }).count)
+                            }
                         }
                     }
-                    .frame(height: 90)
+                    .frame(height: 120)
 
                     List {
                         DisclosureGroup(isExpanded: $projectsExpanded) {
@@ -190,6 +208,19 @@ struct ContentView: View {
                 } else {
                     Text("Select a project")
                 }
+            case .review:
+                ReviewProjectsView(projects: projects.filter({
+                    let today = Date()
+                    if let dateToReview = Calendar.current.date(byAdding: .day,
+                                                                value: $0.reviewDaysCount,
+                                                                to: $0.reviewDate) {
+                        return dateToReview <= today
+                    } else {
+                        return false
+                    }
+                }),
+                                  selectedTasks: $selectedTasks,
+                                  currentTask: $currentTask)
             }
         } detail: {
             VStack {

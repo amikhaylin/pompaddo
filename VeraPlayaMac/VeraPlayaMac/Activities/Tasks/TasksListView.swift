@@ -127,6 +127,8 @@ struct TasksListView: View {
                 task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
             case .projects:
                 break
+            case .review:
+                break
             }
 
             modelContext.insert(task)
