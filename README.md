@@ -17,14 +17,20 @@ made for myself by myself
 ## macOS app
 ![](mac.png)
 
-### Key features in plan
+### Key features
 
-* Add task direct to Inbox [Completed]
-* Projects review [Completed]
-* Kanban view [Completed]
+* Add task direct to Inbox
+* Projects review
+* Kanban view
+* Repeating tasks 
+
+### Roadmap
+
+* Notifications
 * Pomodoro timer
-* Repeating tasks [Completed]
 * Location based contexts
+* iOS / iPadOS implementation
+* watchOS implementation
 
 ### Version Log
 
