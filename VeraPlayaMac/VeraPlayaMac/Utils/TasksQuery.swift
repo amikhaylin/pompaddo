@@ -52,4 +52,16 @@ struct TasksQuery {
     static func defaultTaskSortDescriptor() -> [SortDescriptor<Todo>] {
         return [SortDescriptor(\Todo.dueDate), SortDescriptor(\Todo.priority, order: .reverse)]
     }
+    
+    static func defaultSorting(_ first: Todo, _ second: Todo) -> Bool {
+        if first.dueDate == nil && second.dueDate == nil {
+            return (first.priority > second.priority)
+        }
+        if first.dueDate == nil && second.dueDate != nil { return false }
+        if first.dueDate != nil && second.dueDate == nil { return true }
+        if first.dueDate! == second.dueDate! {
+            return (first.priority > second.priority)
+        }
+        return (first.dueDate! < second.dueDate!)
+    }
 }

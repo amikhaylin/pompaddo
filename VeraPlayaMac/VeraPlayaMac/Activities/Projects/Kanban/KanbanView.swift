@@ -22,7 +22,9 @@ struct KanbanView: View {
                     VStack {
                         Text(status.name)
                         List(selection: $selectedTasks) {
-                            OutlineGroup(project.tasks.filter({ $0.status == status && $0.parentTask == nil }),
+                            OutlineGroup(project.tasks
+                                            .filter({ $0.status == status && $0.parentTask == nil })
+                                            .sorted(by: TasksQuery.defaultSorting),
                                          id: \.self,
                                          children: \.subtasks) { task in
                                 KanbanTaskRowView(task: task, completed: task.completed)

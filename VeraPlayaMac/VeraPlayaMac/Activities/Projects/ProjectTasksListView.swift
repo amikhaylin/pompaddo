@@ -20,7 +20,9 @@ struct ProjectTasksListView: View {
         List(selection: $selectedTasks) {
             ForEach(project.statuses.sorted(by: { $0.order < $1.order })) { status in
                 DisclosureGroup(status.name, isExpanded: $groupsExpanded) {
-                    OutlineGroup(project.tasks.filter({ $0.status == status && $0.parentTask == nil }),
+                    OutlineGroup(project.tasks
+                                    .filter({ $0.status == status && $0.parentTask == nil })
+                                    .sorted(by: TasksQuery.defaultSorting),
                                  id: \.self,
                                  children: \.subtasks) { task in
                         TaskRowView(task: task, completed: task.completed)
