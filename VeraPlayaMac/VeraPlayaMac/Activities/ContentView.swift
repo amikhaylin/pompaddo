@@ -239,7 +239,7 @@ struct ContentView: View {
                         .foregroundStyle(Color.gray)
                 }
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
+            .navigationSplitViewColumnWidth(min: 270, ideal: 270, max: 350)
         }
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()

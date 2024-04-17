@@ -15,81 +15,81 @@ struct TaskRowView: View {
     @State private var completed: Bool
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                TaskCheckBoxView(task: task)
-                    .foregroundColor(.gray)
-                
-                switch task.priority {
-                case 1:
-                    Image(systemName: "flag.fill")
-                        .foregroundStyle(Color.blue)
-                case 2:
-                    Image(systemName: "flag.fill")
-                        .foregroundStyle(Color.yellow)
-                case 3:
-                    Image(systemName: "flag.fill")
-                        .foregroundStyle(Color.red)
-                default:
-                    EmptyView()
-                }
-                
-                Text(task.name)
-                    .foregroundStyle(task.completed ? Color.gray : Color.primary)
-                
-                Spacer()
-                
-                if !task.link.isEmpty {
-                    if let url = URL(string: task.link) {
-                        Link(destination: url) {
-                            Image(systemName: "link.circle.fill")
-                        }
+        HStack {
+            TaskCheckBoxView(task: task)
+                .foregroundColor(.gray)
+            
+            switch task.priority {
+            case 1:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.blue)
+            case 2:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.yellow)
+            case 3:
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(Color.red)
+            default:
+                EmptyView()
+            }
+            
+            Text(task.name)
+                .foregroundStyle(task.completed ? Color.gray : Color.primary)
+                .minimumScaleFactor(0.5)
+                .lineLimit(1)
+            
+            Spacer()
+            
+            if !task.link.isEmpty {
+                if let url = URL(string: task.link) {
+                    Link(destination: url) {
+                        Image(systemName: "link.circle.fill")
                     }
                 }
+            }
+            
+            if let project = task.project {
+                Text("\(project.name)")
+                    .foregroundStyle(Color.gray)
+                    .font(.caption)
+            }
+            
+            if let subtasksCount = task.subtasks?.count,
+               subtasksCount > 0,
+               let finished = task.subtasks?.filter({ $0.completed }) {
                 
-                if let project = task.project {
-                    Text("\(project.name)")
-                        .foregroundStyle(Color.gray)
-                        .font(.caption)
-                }
+                CircularProgressView(progress: CGFloat(subtasksCount == finished.count ? 1.0 : 1.0 / Double(subtasksCount) * Double(finished.count)),
+                                     color: .gray,
+                                     lineWidth: 2)
+                .frame(width: 15, height: 15)
                 
-                if let subtasksCount = task.subtasks?.count,
-                   subtasksCount > 0,
-                   let finished = task.subtasks?.filter({ $0.completed }) {
-                    
-                    CircularProgressView(progress: CGFloat(subtasksCount == finished.count ? 1.0 : 1.0 / Double(subtasksCount) * Double(finished.count)),
-                                         color: .gray,
-                                         lineWidth: 2)
-                    .frame(width: 15, height: 15)
-                    
-                    Text("\(subtasksCount == finished.count ? 100 : (100 / subtasksCount) * finished.count) %")
-                        .foregroundStyle(Color.gray)
-                        .font(.caption)
-                }
-                
-                if let dueDate = task.dueDate {
-                    HStack {
-                        if task.repeation != .none {
-                            Image(systemName: "repeat")
-                                .foregroundStyle(Color.gray)
-                        }
-                        if Calendar.current.isDateInToday(dueDate) {
-                            Text("Today")
-                                .foregroundStyle(Color.blue)
-                                .font(.caption)
-                        } else if Calendar.current.isDateInTomorrow(dueDate) {
-                            Text("Tomorrow")
-                                .foregroundStyle(Color.blue)
-                                .font(.caption)
-                        } else if Calendar.current.isDateInYesterday(dueDate) {
-                            Text("Yesterday")
-                                .foregroundStyle(Color.red)
-                                .font(.caption)
-                        } else {
-                            Text(dueDate, format: .dateTime.day().month().year())
-                                .foregroundStyle(dueDate < Calendar.current.startOfDay(for: Date()) ? Color.red : Color.blue)
-                                .font(.caption)
-                        }
+                Text("\(subtasksCount == finished.count ? 100 : (100 / subtasksCount) * finished.count) %")
+                    .foregroundStyle(Color.gray)
+                    .font(.caption)
+            }
+            
+            if let dueDate = task.dueDate {
+                HStack {
+                    if task.repeation != .none {
+                        Image(systemName: "repeat")
+                            .foregroundStyle(Color.gray)
+                    }
+                    if Calendar.current.isDateInToday(dueDate) {
+                        Text("Today")
+                            .foregroundStyle(Color.blue)
+                            .font(.caption)
+                    } else if Calendar.current.isDateInTomorrow(dueDate) {
+                        Text("Tomorrow")
+                            .foregroundStyle(Color.blue)
+                            .font(.caption)
+                    } else if Calendar.current.isDateInYesterday(dueDate) {
+                        Text("Yesterday")
+                            .foregroundStyle(Color.red)
+                            .font(.caption)
+                    } else {
+                        Text(dueDate, format: .dateTime.day().month().year())
+                            .foregroundStyle(dueDate < Calendar.current.startOfDay(for: Date()) ? Color.red : Color.blue)
+                            .font(.caption)
                     }
                 }
             }
