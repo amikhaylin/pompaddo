@@ -22,14 +22,31 @@ struct EditTaskView: View {
                 
                 if showingDatePicker {
                     HStack {
-                        Image(systemName: "calendar.badge.plus")
-
-                        DatePicker("Due Date", 
+                        DatePicker("Due Date",
                                    selection: $dueDate,
                                    displayedComponents: .date)
                         .onChange(of: dueDate, { _, newValue in
                             task.dueDate = newValue
                         })
+                        
+                        Button {
+                            task.dueDate = nil
+                            showingDatePicker = false
+                        } label: {
+                            Image(systemName: "clear")
+                        }
+                        
+                        Button {
+                            task.dueDate = Calendar.current.startOfDay(for: Date())
+                        } label: {
+                            Image(systemName: "calendar")
+                        }
+                        
+                        Button {
+                            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                        } label: {
+                            Image(systemName: "sunrise")
+                        }
                     }
                 } else {
                     Button {

@@ -32,9 +32,9 @@ struct ContentView: View {
     @State private var selectedProject: Project?
     @AppStorage("projectsExpanded") var projectsExpanded = true
     
-    @Query(filter: TasksQuery.predicateInbox(), sort: TasksQuery.defaultTaskSortDescriptor()) var tasksInbox: [Todo]
-    @Query(filter: TasksQuery.predicateToday(), sort: TasksQuery.defaultTaskSortDescriptor()) var tasksToday: [Todo]
-    @Query(filter: TasksQuery.predicateTomorrow(), sort: TasksQuery.defaultTaskSortDescriptor()) var tasksTomorrow: [Todo]
+    @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
+    @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
+    @Query(filter: TasksQuery.predicateTomorrow()) var tasksTomorrow: [Todo]
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @Query var projects: [Project]
@@ -186,17 +186,17 @@ struct ContentView: View {
         } content: {
             switch selectedSideBarItem {
             case .inbox:
-                TasksListView(tasks: tasksInbox,
+                TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .today:
-                TasksListView(tasks: tasksToday,
+                TasksListView(tasks: tasksToday.sorted(by: TasksQuery.defaultSorting),
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .tomorrow:
-                TasksListView(tasks: tasksTomorrow,
+                TasksListView(tasks: tasksTomorrow.sorted(by: TasksQuery.defaultSorting),
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
@@ -239,7 +239,7 @@ struct ContentView: View {
                         .foregroundStyle(Color.gray)
                 }
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 300)
+            .navigationSplitViewColumnWidth(min: 270, ideal: 270, max: 350)
         }
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()

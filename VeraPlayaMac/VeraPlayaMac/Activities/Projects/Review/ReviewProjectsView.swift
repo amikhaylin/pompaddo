@@ -41,7 +41,7 @@ struct ReviewProjectsView: View {
                 Text("Select a project")
             }
         }
-        .onChange(of: projects) { oldValue, newValue in
+        .onChange(of: projects) { _, _ in
             selectedProject = projects.first
         }
     }
