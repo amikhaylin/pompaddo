@@ -31,6 +31,7 @@ class Todo {
     var link: String = ""
     var repeation: RepeationMode = RepeationMode.none
     var priority: Int = 0
+    var uid: String = UUID().uuidString
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
