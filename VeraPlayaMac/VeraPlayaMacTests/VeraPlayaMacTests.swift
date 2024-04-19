@@ -6,31 +6,62 @@
 //
 
 import XCTest
+import SwiftData
 @testable import VeraPlayaMac
 
 final class VeraPlayaMacTests: XCTestCase {
-
+    var dataContainer: ModelContainer!
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        dataContainer = try ModelContainer(for: Schema([Todo.self, Project.self]),
+                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    @MainActor func fetchData<T: PersistentModel>(sort: [SortDescriptor<T>]? = nil) -> [T] {
+        do {
+            var descriptor = FetchDescriptor<T>()
+            if let sort = sort {
+                descriptor.sortBy = sort
+            }
+            var result: [T] = try dataContainer.mainContext.fetch(descriptor)
+            return result
+        } catch {
+            print("Fetch failed")
         }
+        return []
     }
 
+    @MainActor func testAddTaskToInbox() throws {
+        // MARK: Adding task to Inbox
+        let task = Todo(name: "Make soup",
+                        dueDate: Calendar.current.date(byAdding: .day, value: -1, to: Date()),
+                        link: "https://google.com",
+                        repeation: .daily,
+                        priority: 2)
+        dataContainer.mainContext.insert(task)
+        
+        var tasks: [Todo] = fetchData()
+        
+        XCTAssertEqual(tasks.count, 1, "There should be 1 task.")
+        
+        if let date = task.dueDate {
+            XCTAssertFalse(Calendar.current.isDateInToday(date), "There shouldn't due date be in today")
+        }
+        
+        if let newTask = task.complete() {
+            dataContainer.mainContext.insert(newTask)
+            if let date = newTask.dueDate {
+                XCTAssertTrue(Calendar.current.isDateInToday(date), "There should due date be in today")
+            }
+        }
+        
+        tasks = fetchData()
+        
+        XCTAssertEqual(tasks.count, 2, "There should be 2 task.")
+    }
 }

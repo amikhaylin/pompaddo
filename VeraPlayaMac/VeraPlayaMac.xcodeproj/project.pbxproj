@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */; };
+		4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4D1D9EB62BD152F700CFF31C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4D1D9EB72BD152FB00CFF31C /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4D1D9EB82BD1530000CFF31C /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
 		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
 		4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */; };
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
@@ -477,7 +481,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D1D9EB82BD1530000CFF31C /* TasksQuery.swift in Sources */,
 				4D95FE3A2B7B6BF600C8918D /* VeraPlayaMacTests.swift in Sources */,
+				4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */,
+				4D1D9EB62BD152F700CFF31C /* Project.swift in Sources */,
+				4D1D9EB72BD152FB00CFF31C /* Status.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
