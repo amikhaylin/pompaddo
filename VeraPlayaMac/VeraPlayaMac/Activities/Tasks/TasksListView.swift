@@ -98,18 +98,11 @@ struct TasksListView: View {
         }
     }
     
-    private func deleteTask(task: Todo?) {
-        if let task = task {
-            task.disconnect()
-            modelContext.delete(task)
-        }
-    }
-    
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks {
-                task.disconnect()
-                modelContext.delete(task)
+                TasksQuery.deleteTask(context: modelContext,
+                                      task: task)
             }
         }
     }

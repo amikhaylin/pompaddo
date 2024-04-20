@@ -141,13 +141,6 @@
 			path = Review;
 			sourceTree = "<group>";
 		};
-		4D732DF12B9C6B810012ED0B /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		4D736B132B7D1383000C0BFD /* Activities */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,7 +187,6 @@
 			children = (
 				4D1D9EAC2BCD334D00CFF31C /* CustomViews */,
 				4D9FFAD32BA9C43600C5F5AE /* Info.plist */,
-				4D732DF12B9C6B810012ED0B /* Extensions */,
 				4D7C13C32B7E06DE0093595D /* Utils */,
 				4D736B132B7D1383000C0BFD /* Activities */,
 				4D95FE522B7B6C1300C8918D /* Model */,

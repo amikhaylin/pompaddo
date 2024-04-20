@@ -64,4 +64,10 @@ struct TasksQuery {
         }
         return (first.dueDate! < second.dueDate!)
     }
+    
+    static func deleteTask(context: ModelContext, task: Todo) {
+        task.disconnect()
+        task.deleteSubtasks(context: context)
+        context.delete(task)
+    }
 }
