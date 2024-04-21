@@ -27,3 +27,17 @@ class Project {
         self.note = note
     }
 }
+
+extension Project {
+    // TODO: BE REMOVED WHEN `.cascade` is fixed
+    func deleteRelatives(context: ModelContext) {
+        for status in self.statuses {
+            context.delete(status)
+        }
+        
+        for task in self.tasks {
+            task.deleteSubtasks(context: context)
+            context.delete(task)
+        }
+    }
+}

@@ -40,6 +40,16 @@ final class VeraPlayaMacTests: XCTestCase {
         try? dataContainer.mainContext.delete(model: Todo.self)
         try? dataContainer.mainContext.save()
     }
+    
+    @MainActor func clearProjects() {
+        try? dataContainer.mainContext.delete(model: Project.self)
+        try? dataContainer.mainContext.save()
+    }
+    
+    @MainActor func clearStatuses() {
+        try? dataContainer.mainContext.delete(model: Status.self)
+        try? dataContainer.mainContext.save()
+    }
 
     @MainActor func testAddTaskToInbox() throws {
         clearTasks()
@@ -122,5 +132,39 @@ final class VeraPlayaMacTests: XCTestCase {
         }
         
         XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+    }
+    
+    @MainActor func testProjects() throws {
+        clearTasks()
+        var tasks: [Todo] = fetchData()
+        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        
+        clearProjects()
+        var projects: [Project] = fetchData()
+        XCTAssertEqual(projects.count, 0, "There should be 0 projects.")
+        
+        clearStatuses()
+        var statuses: [Status] = fetchData()
+        XCTAssertEqual(statuses.count, 0, "There should be 0 statuses.")
+        
+        let project = Project(name: "🦫 Some project")
+        dataContainer.mainContext.insert(project)
+        
+        var order = 0
+        for name in DefaultProjectStatuses.allCases {
+            order += 1
+            let doComplete = name == DefaultProjectStatuses.completed
+            let status = Status(name: name.rawValue,
+                                order: order,
+                                doCompletion: doComplete)
+            dataContainer.mainContext.insert(status)
+            project.statuses.append(status)
+        }
+        
+        projects = fetchData()
+        XCTAssertEqual(projects.count, 1, "There should be 1 project.")
+        
+        statuses = fetchData()
+        XCTAssertTrue(statuses.count == 3 && project.statuses.count == 3, "There should be 3 statuses")
     }
 }
