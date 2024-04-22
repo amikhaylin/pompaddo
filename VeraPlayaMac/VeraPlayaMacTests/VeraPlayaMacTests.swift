@@ -4,6 +4,7 @@
 //
 //  Created by Andrey Mikhaylin on 13.02.2024.
 //
+// swiftlint:disable function_body_length
 
 import XCTest
 import SwiftData
@@ -166,5 +167,49 @@ final class VeraPlayaMacTests: XCTestCase {
         
         statuses = fetchData()
         XCTAssertTrue(statuses.count == 3 && project.statuses.count == 3, "There should be 3 statuses")
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 0, "There should be 0 task")
+        XCTAssertEqual(project.tasks.count, 0, "There should be 0 task")
+        
+        // Add task to project
+        var task = Todo(name: "Some project task",
+                        status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                        project: project)
+        dataContainer.mainContext.insert(task)
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 1, "There should be 1 task")
+        XCTAssertEqual(project.tasks.count, 1, "There should be 1 task")
+        
+        // Delete task
+        TasksQuery.deleteTask(context: dataContainer.mainContext,
+                              task: task)
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 0, "There should be 0 task")
+        XCTAssertEqual(project.tasks.count, 0, "There should be 0 task")
+        
+        task = Todo(name: "Another project task",
+                        status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                        project: project)
+        dataContainer.mainContext.insert(task)
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 1, "There should be 1 task")
+        XCTAssertEqual(project.tasks.count, 1, "There should be 1 task")
+        
+        // Delete project with task
+        dataContainer.mainContext.delete(project)
+        
+        projects = fetchData()
+        XCTAssertEqual(projects.count, 0, "There should be 0 project.")
+        
+        statuses = fetchData()
+        XCTAssertEqual(statuses.count, 0, "There should be 0 statuses")
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 0, "There should be 0 task")
     }
 }
+// swiftlint:enable function_body_length
