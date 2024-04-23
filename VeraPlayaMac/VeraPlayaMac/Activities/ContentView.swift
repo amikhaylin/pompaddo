@@ -77,7 +77,7 @@ struct ContentView: View {
                                     Image(systemName: "calendar")
                                     Text("Today")
                                 }
-                                .badge(tasksToday.count)
+                                .badge(tasksToday.filter({ $0.completed == false}).count)
                             }
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
@@ -91,7 +91,7 @@ struct ContentView: View {
                                     Image(systemName: "sunrise")
                                     Text("Tomorrow")
                                 }
-                                .badge(tasksTomorrow.count)
+                                .badge(tasksTomorrow.filter({ $0.completed == false }).count)
                             }
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
@@ -127,7 +127,7 @@ struct ContentView: View {
                             List(projects, id: \.self, selection: $selectedProject) { project in
                                 NavigationLink(value: SideBarItem.projects) {
                                     Text(project.name)
-                                        .badge(project.tasks.count)
+                                        .badge(project.tasks.filter({ $0.completed == false }).count)
                                 }
                                 .dropDestination(for: Todo.self) { tasks, _ in
                                     for task in tasks {
