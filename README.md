@@ -31,6 +31,7 @@ made for myself by myself
 * Location based contexts
 * iOS / iPadOS implementation
 * watchOS implementation
+* Sync via iCloud
 
 ### Version Log
 

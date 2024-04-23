@@ -57,7 +57,7 @@ final class VeraPlayaMacTests: XCTestCase {
         var tasks: [Todo] = fetchData()
         XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
         
-        // MARK: Adding task to Inbox
+        // Adding task to Inbox
         let task = Todo(name: "Make soup",
                         dueDate: Calendar.current.date(byAdding: .day, value: -1, to: Date()),
                         link: "https://google.com",
@@ -71,7 +71,7 @@ final class VeraPlayaMacTests: XCTestCase {
             XCTAssertFalse(Calendar.current.isDateInToday(date), "There shouldn't due date be in today")
         }
         
-        // MARK: Repeating
+        // Repeating
         
         if let newTask = task.complete() {
             dataContainer.mainContext.insert(newTask)
@@ -105,7 +105,7 @@ final class VeraPlayaMacTests: XCTestCase {
 
         XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
         
-        // MARK: Delete subtask
+        // Delete subtask
         TasksQuery.deleteTask(context: dataContainer.mainContext,
                               task: subtask)
         
@@ -122,7 +122,7 @@ final class VeraPlayaMacTests: XCTestCase {
 
         XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
         
-        // MARK: Delete parent task
+        // Delete parent task
         TasksQuery.deleteTask(context: dataContainer.mainContext,
                               task: task)
         
@@ -200,6 +200,7 @@ final class VeraPlayaMacTests: XCTestCase {
         XCTAssertEqual(project.tasks.count, 1, "There should be 1 task")
         
         // Delete project with task
+        project.deleteRelatives(context: dataContainer.mainContext)
         dataContainer.mainContext.delete(project)
         
         projects = fetchData()

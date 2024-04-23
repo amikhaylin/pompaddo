@@ -140,6 +140,7 @@ struct ContentView: View {
                                 .contextMenu {
                                     Button {
                                         selectedTasks = []
+                                        project.deleteRelatives(context: modelContext)
                                         modelContext.delete(project)
                                     } label: {
                                         Image(systemName: "trash")
