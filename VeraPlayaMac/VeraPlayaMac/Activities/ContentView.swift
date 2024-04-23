@@ -192,12 +192,16 @@ struct ContentView: View {
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .today:
-                TasksListView(tasks: tasksToday.sorted(by: TasksQuery.defaultSorting),
+                TasksListView(tasks: tasksToday
+                                        .filter({ TasksQuery.checkToday(date: $0.completionDate) })
+                                        .sorted(by: TasksQuery.defaultSorting),
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .tomorrow:
-                TasksListView(tasks: tasksTomorrow.sorted(by: TasksQuery.defaultSorting),
+                TasksListView(tasks: tasksTomorrow
+                                        .filter({ $0.completionDate == nil })
+                                        .sorted(by: TasksQuery.defaultSorting),
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)

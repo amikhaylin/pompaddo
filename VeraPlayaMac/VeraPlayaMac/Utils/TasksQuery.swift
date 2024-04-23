@@ -9,6 +9,14 @@ import SwiftData
 import SwiftUI
 
 struct TasksQuery {
+    static func checkToday(date: Date?) -> Bool {
+        if let date = date {
+            return Calendar.current.isDateInToday(date)
+        } else {
+            return true
+        }
+    }
+    
     static func predicateToday() -> Predicate<Todo> {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         return #Predicate<Todo> { task in
