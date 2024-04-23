@@ -13,7 +13,8 @@ struct VeraPlayaMacApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Todo.self,
-            Project.self
+            Project.self,
+            Status.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

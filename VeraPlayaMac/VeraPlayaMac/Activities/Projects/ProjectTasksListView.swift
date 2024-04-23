@@ -77,8 +77,8 @@ struct ProjectTasksListView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks {
-                task.disconnect()
-                modelContext.delete(task)
+                TasksQuery.deleteTask(context: modelContext,
+                                      task: task)
             }
         }
     }
