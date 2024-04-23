@@ -24,7 +24,7 @@ struct TasksQuery {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
-                return date < tomorrow && !task.completed
+                return (date < tomorrow && !task.completed)
             } else {
                 return false
             }

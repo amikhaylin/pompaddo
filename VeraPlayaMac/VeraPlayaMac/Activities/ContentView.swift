@@ -258,7 +258,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            tasksToday.count > 0 ? badgeManager.setBadge(number: tasksToday.count) : badgeManager.resetBadgeNumber()
+            tasksToday.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }
