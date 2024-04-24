@@ -77,7 +77,7 @@ struct ContentView: View {
                                     Image(systemName: "calendar")
                                     Text("Today")
                                 }
-                                .badge(tasksToday.count)
+                                .badge(tasksToday.filter({ $0.completed == false}).count)
                             }
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
@@ -91,7 +91,7 @@ struct ContentView: View {
                                     Image(systemName: "sunrise")
                                     Text("Tomorrow")
                                 }
-                                .badge(tasksTomorrow.count)
+                                .badge(tasksTomorrow.filter({ $0.completed == false }).count)
                             }
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
@@ -120,14 +120,14 @@ struct ContentView: View {
                             }
                         }
                     }
-                    .frame(height: 120)
+                    .frame(height: 125)
 
                     List {
                         DisclosureGroup(isExpanded: $projectsExpanded) {
                             List(projects, id: \.self, selection: $selectedProject) { project in
                                 NavigationLink(value: SideBarItem.projects) {
                                     Text(project.name)
-                                        .badge(project.tasks.count)
+                                        .badge(project.tasks.filter({ $0.completed == false }).count)
                                 }
                                 .dropDestination(for: Todo.self) { tasks, _ in
                                     for task in tasks {
@@ -192,12 +192,16 @@ struct ContentView: View {
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .today:
-                TasksListView(tasks: tasksToday.sorted(by: TasksQuery.defaultSorting),
+                TasksListView(tasks: tasksToday
+                                        .filter({ TasksQuery.checkToday(date: $0.completionDate) })
+                                        .sorted(by: TasksQuery.defaultSorting),
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
             case .tomorrow:
-                TasksListView(tasks: tasksTomorrow.sorted(by: TasksQuery.defaultSorting),
+                TasksListView(tasks: tasksTomorrow
+                                        .filter({ $0.completionDate == nil })
+                                        .sorted(by: TasksQuery.defaultSorting),
                               selectedTasks: $selectedTasks,
                               currentTask: $currentTask,
                               list: selectedSideBarItem)
@@ -258,7 +262,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            tasksToday.count > 0 ? badgeManager.setBadge(number: tasksToday.count) : badgeManager.resetBadgeNumber()
+            tasksToday.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }

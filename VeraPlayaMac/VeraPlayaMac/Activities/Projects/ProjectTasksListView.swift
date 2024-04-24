@@ -25,7 +25,7 @@ struct ProjectTasksListView: View {
                                     .sorted(by: TasksQuery.defaultSorting),
                                  id: \.self,
                                  children: \.subtasks) { task in
-                        TaskRowView(task: task, completed: task.completed)
+                        TaskRowView(task: task, completed: task.completed, showingProject: false)
                             .draggable(task)
                             .contextMenu {
                                 Button {

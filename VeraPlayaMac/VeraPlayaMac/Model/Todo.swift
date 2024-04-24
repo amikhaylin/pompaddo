@@ -32,6 +32,7 @@ class Todo {
     var repeation: RepeationMode = RepeationMode.none
     var priority: Int = 0
     var uid: String = UUID().uuidString
+    var completionDate: Date?
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -47,7 +48,8 @@ class Todo {
          parentTask: Todo? = nil,
          link: String = "",
          repeation: RepeationMode = RepeationMode.none,
-         priority: Int = 0) {
+         priority: Int = 0,
+         completionDate: Date? = nil) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -60,6 +62,7 @@ class Todo {
         self.link = link
         self.repeation = repeation
         self.priority = priority
+        self.completionDate = completionDate
     }
 }
 
@@ -75,7 +78,8 @@ extension Todo {
                         subtasks: self.subtasks,
                         parentTask: self.parentTask,
                         link: self.link,
-                        repeation: self.repeation)
+                        repeation: self.repeation,
+                        completionDate: self.completionDate)
         return task
     }
     
@@ -99,11 +103,13 @@ extension Todo {
     
     func complete() -> Todo? {
         self.completed = true
+        self.completionDate = Date()
         guard let dueDate = self.dueDate else { return nil }
         guard repeation != .none else { return nil }
         
         let newTask = self.copy()
         newTask.completed = false
+        newTask.completionDate = nil
         switch repeation {
         case .none:
             break
@@ -119,6 +125,11 @@ extension Todo {
         newTask.reconnect()
         
         return newTask
+    }
+    
+    func reactivate() {
+        self.completed = false
+        self.completionDate = nil
     }
     
     // TODO: BE REMOVED WHEN `.cascade` is fixed

@@ -19,7 +19,7 @@ struct TaskCheckBoxView: View {
                     modelContext.insert(newTask)
                 }
             } else {
-                task.completed.toggle()
+                task.reactivate()
             }
         }, label: {
             if task.completed {

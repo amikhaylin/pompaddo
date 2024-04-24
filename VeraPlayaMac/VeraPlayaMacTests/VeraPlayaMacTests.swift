@@ -65,6 +65,8 @@ final class VeraPlayaMacTests: XCTestCase {
                         priority: 2)
         dataContainer.mainContext.insert(task)
         
+        tasks = fetchData()
+        
         XCTAssertEqual(tasks.count, 1, "There should be 1 task.")
         
         if let date = task.dueDate {
@@ -72,8 +74,16 @@ final class VeraPlayaMacTests: XCTestCase {
         }
         
         // Repeating
+        XCTAssertTrue(task.completionDate == nil, "Task shouldn't have any completion date")
         
         if let newTask = task.complete() {
+            XCTAssertTrue(task.completionDate != nil, "Task should have any completion date")
+            if let completionDate = task.completionDate {
+                XCTAssertTrue(Calendar.current.isDateInToday(completionDate), "There should completion date be in today")
+            }
+
+            XCTAssertTrue(newTask.completionDate == nil, "New Task shouldn't have any completion date")
+
             dataContainer.mainContext.insert(newTask)
             if let date = newTask.dueDate {
                 XCTAssertTrue(Calendar.current.isDateInToday(date), "There should due date be in today")
@@ -83,6 +93,31 @@ final class VeraPlayaMacTests: XCTestCase {
         tasks = fetchData()
         
         XCTAssertEqual(tasks.count, 2, "There should be 2 task.")
+    }
+    
+    @MainActor func testTaskCompletionAndReactivation() throws {
+        clearTasks()
+//        
+//        var tasks: [Todo] = fetchData()
+//        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        
+        // Adding task to Inbox
+        let task = Todo(name: "Make soup",
+                        dueDate: Calendar.current.date(byAdding: .day, value: -1, to: Date()))
+        dataContainer.mainContext.insert(task)
+        
+        XCTAssertTrue(!task.completed, "Task is not completed")
+        XCTAssertTrue(task.completionDate == nil, "Task hasn't completion date")
+        
+        _ = task.complete()
+        
+        XCTAssertTrue(task.completed, "Task is completed")
+        XCTAssertTrue(task.completionDate != nil, "Task has completion date")
+        
+        task.reactivate()
+        
+        XCTAssertTrue(!task.completed, "Task is not completed")
+        XCTAssertTrue(task.completionDate == nil, "Task hasn't completion date")
     }
     
     @MainActor func testAddAndDeleteSubtask() throws {
