@@ -13,6 +13,7 @@ struct TaskRowView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
     @State private var completed: Bool
+    var showingProject: Bool
     
     var body: some View {
         HStack {
@@ -48,12 +49,13 @@ struct TaskRowView: View {
                 }
             }
             
-            if let project = task.project {
-                Text("\(project.name)")
-                    .foregroundStyle(Color.gray)
-                    .font(.caption)
+            if showingProject {
+                if let project = task.project {
+                    Text("\(project.name)")
+                        .foregroundStyle(Color.gray)
+                        .font(.caption)
+                }
             }
-            
             if let subtasksCount = task.subtasks?.count,
                subtasksCount > 0,
                let finished = task.subtasks?.filter({ $0.completed }) {
@@ -96,9 +98,10 @@ struct TaskRowView: View {
         }
     }
     
-    init(task: Todo, completed: Bool) {
+    init(task: Todo, completed: Bool, showingProject: Bool = true) {
         self.task = task
         self.completed = completed
+        self.showingProject = showingProject
     }
 }
 
@@ -106,7 +109,7 @@ struct TaskRowView: View {
     do {
         let previewer = try Previewer()
         
-        return TaskRowView(task: previewer.task, completed: false)
+        return TaskRowView(task: previewer.task, completed: false, showingProject: true)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

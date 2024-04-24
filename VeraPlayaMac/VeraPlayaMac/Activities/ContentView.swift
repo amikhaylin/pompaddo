@@ -120,7 +120,7 @@ struct ContentView: View {
                             }
                         }
                     }
-                    .frame(height: 120)
+                    .frame(height: 125)
 
                     List {
                         DisclosureGroup(isExpanded: $projectsExpanded) {
