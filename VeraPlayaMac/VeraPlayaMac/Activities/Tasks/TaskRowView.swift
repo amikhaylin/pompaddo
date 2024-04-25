@@ -12,7 +12,6 @@ import Charts
 struct TaskRowView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
-    @State private var completed: Bool
     var showingProject: Bool
     
     var body: some View {
@@ -98,9 +97,8 @@ struct TaskRowView: View {
         }
     }
     
-    init(task: Todo, completed: Bool, showingProject: Bool = true) {
+    init(task: Todo, showingProject: Bool = true) {
         self.task = task
-        self.completed = completed
         self.showingProject = showingProject
     }
 }
@@ -109,7 +107,7 @@ struct TaskRowView: View {
     do {
         let previewer = try Previewer()
         
-        return TaskRowView(task: previewer.task, completed: false, showingProject: true)
+        return TaskRowView(task: previewer.task, showingProject: true)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

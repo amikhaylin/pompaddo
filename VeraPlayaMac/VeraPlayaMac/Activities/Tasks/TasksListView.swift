@@ -33,7 +33,7 @@ struct TasksListView: View {
                     OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
                                  id: \.self,
                                  children: \.subtasks) { task in
-                        TaskRowView(task: task, completed: task.completed)
+                        TaskRowView(task: task)
                             .draggable(task)
                             .contextMenu {
                                 Button {
@@ -50,11 +50,7 @@ struct TasksListView: View {
                                 
                                 Button {
                                     selectedTasks = []
-                                    let newTask = task.copy()
-                                    newTask.completed = false
-                                    newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                    newTask.reconnect()
-                                    modelContext.insert(newTask)
+                                    let newTask = task.copy(modelContext: modelContext)
 
                                     currentTask = newTask
                                 } label: {

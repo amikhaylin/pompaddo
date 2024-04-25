@@ -44,11 +44,7 @@ struct KanbanView: View {
                                         
                                         Button {
                                             selectedTasks = []
-                                            let newTask = task.copy()
-                                            newTask.completed = false
-                                            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                            newTask.reconnect()
-                                            modelContext.insert(newTask)
+                                            let newTask = task.copy(modelContext: modelContext)
                                             
                                             currentTask = newTask
                                         } label: {
@@ -70,8 +66,12 @@ struct KanbanView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
+                            if status.doCompletion {
+                                task.complete(modelContext: modelContext)
+                            } else {
+                                task.reactivate()
+                            }
                             task.status = status
-                            task.completed = status.doCompletion
                         }
                         return true
                     }

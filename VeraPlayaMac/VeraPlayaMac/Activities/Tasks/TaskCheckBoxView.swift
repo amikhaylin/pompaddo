@@ -15,9 +15,7 @@ struct TaskCheckBoxView: View {
     var body: some View {
         Button(action: {
             if !task.completed {
-                if let newTask = task.complete() {
-                    modelContext.insert(newTask)
-                }
+                task.complete(modelContext: modelContext)
             } else {
                 task.reactivate()
             }

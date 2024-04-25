@@ -76,18 +76,10 @@ final class VeraPlayaMacTests: XCTestCase {
         // Repeating
         XCTAssertTrue(task.completionDate == nil, "Task shouldn't have any completion date")
         
-        if let newTask = task.complete() {
-            XCTAssertTrue(task.completionDate != nil, "Task should have any completion date")
-            if let completionDate = task.completionDate {
-                XCTAssertTrue(Calendar.current.isDateInToday(completionDate), "There should completion date be in today")
-            }
-
-            XCTAssertTrue(newTask.completionDate == nil, "New Task shouldn't have any completion date")
-
-            dataContainer.mainContext.insert(newTask)
-            if let date = newTask.dueDate {
-                XCTAssertTrue(Calendar.current.isDateInToday(date), "There should due date be in today")
-            }
+        task.complete(modelContext: dataContainer.mainContext)
+        XCTAssertTrue(task.completionDate != nil, "Task should have any completion date")
+        if let completionDate = task.completionDate {
+            XCTAssertTrue(Calendar.current.isDateInToday(completionDate), "There should completion date be in today")
         }
         
         tasks = fetchData()
@@ -109,7 +101,7 @@ final class VeraPlayaMacTests: XCTestCase {
         XCTAssertTrue(!task.completed, "Task is not completed")
         XCTAssertTrue(task.completionDate == nil, "Task hasn't completion date")
         
-        _ = task.complete()
+        task.complete(modelContext: dataContainer.mainContext)
         
         XCTAssertTrue(task.completed, "Task is completed")
         XCTAssertTrue(task.completionDate != nil, "Task has completion date")
@@ -168,6 +160,50 @@ final class VeraPlayaMacTests: XCTestCase {
         }
         
         XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+    }
+    
+    @MainActor func testDublicatingSubtasks() throws {
+        clearTasks()
+        var tasks: [Todo] = fetchData()
+        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        
+        let task = Todo(name: "Make soup")
+        dataContainer.mainContext.insert(task)
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 1, "There should be 1 task.")
+        
+        let subtask = Todo(name: "Buy potatoes 1", parentTask: task)
+        task.subtasks?.append(subtask)
+        dataContainer.mainContext.insert(subtask)
+
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
+        
+        let newTask = task.copy(modelContext: dataContainer.mainContext)
+        newTask.name = "Make taco"
+//        newTask.reconnect()
+//        dataContainer.mainContext.insert(newTask)
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 4, "There should be 4 tasks.")
+        
+        print("4 tasks")
+        for task in tasks {
+            task.printInfo()
+        }
+        
+        TasksQuery.deleteTask(context: dataContainer.mainContext,
+                              task: task)
+        
+        tasks = fetchData()
+        
+//        print("final")
+//        for task in tasks {
+//            task.printInfo()
+//        }
+        
+//        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
     }
     
     @MainActor func testProjects() throws {

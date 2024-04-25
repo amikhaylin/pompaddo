@@ -25,7 +25,7 @@ struct ProjectTasksListView: View {
                                     .sorted(by: TasksQuery.defaultSorting),
                                  id: \.self,
                                  children: \.subtasks) { task in
-                        TaskRowView(task: task, completed: task.completed, showingProject: false)
+                        TaskRowView(task: task, showingProject: false)
                             .draggable(task)
                             .contextMenu {
                                 Button {
@@ -42,11 +42,7 @@ struct ProjectTasksListView: View {
                                 
                                 Button {
                                     selectedTasks = []
-                                    let newTask = task.copy()
-                                    newTask.completed = false
-                                    newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                    newTask.reconnect()
-                                    modelContext.insert(newTask)
+                                    let newTask = task.copy(modelContext: modelContext)
 
                                     currentTask = newTask
                                 } label: {
@@ -65,8 +61,12 @@ struct ProjectTasksListView: View {
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
+                        if status.doCompletion {
+                            task.complete(modelContext: modelContext)
+                        } else {
+                            task.reactivate()
+                        }
                         task.status = status
-                        task.completed = status.doCompletion
                     }
                     return true
                 }

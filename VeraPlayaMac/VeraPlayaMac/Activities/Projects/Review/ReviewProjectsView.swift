@@ -16,12 +16,18 @@ struct ReviewProjectsView: View {
     
     var body: some View {
         NavigationSplitView {
-            List(projects, id: \.self, selection: $selectedProject) { project in
-                Text(project.name)
-                    .badge(project.tasks.count)
+            Group {
+                if projects.count > 0 {
+                    List(projects, id: \.self, selection: $selectedProject) { project in
+                        Text(project.name)
+                            .badge(project.tasks.count)
+                    }
+                    .listStyle(SidebarListStyle())
+                    .padding(.top, 5)
+                } else {
+                    Text("No projects for review")
+                }
             }
-            .listStyle(SidebarListStyle())
-            .padding(.top, 5)
             .navigationSplitViewColumnWidth(min: 200, ideal: 200)
         } detail: {
             if let project = selectedProject {
