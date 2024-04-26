@@ -67,23 +67,6 @@ class Todo {
 }
 
 extension Todo {
-    // FIXME: Remove it
-//    func copy() -> Todo {
-//        let task = Todo(name: self.name,
-//                        dueDate: self.dueDate,
-//                        completed: self.completed,
-//                        status: self.status,
-//                        note: self.note,
-//                        tomatoesCount: self.tomatoesCount,
-//                        project: self.project,
-//                        subtasks: self.subtasks,
-//                        parentTask: self.parentTask,
-//                        link: self.link,
-//                        repeation: self.repeation,
-//                        completionDate: self.completionDate)
-//        return task
-//    }
-    
     func copy(modelContext: ModelContext) -> Todo {
         let task = Todo(name: self.name,
                         dueDate: self.dueDate,
@@ -95,6 +78,7 @@ extension Todo {
                         parentTask: self.parentTask,
                         link: self.link,
                         repeation: self.repeation,
+                        priority: self.priority,
                         completionDate: self.completionDate)
         if let subtasks = self.subtasks {
             for subtask in subtasks {
@@ -104,12 +88,10 @@ extension Todo {
                 modelContext.insert(newSubtask)
             }
         }
-        modelContext.insert(task)
-        task.reconnect()
         return task
     }
     
-    private func reconnect() {
+    func reconnect() {
         if let project = self.project {
             project.tasks.append(self)
         }
@@ -126,32 +108,6 @@ extension Todo {
             parentTask.subtasks?.remove(at: index)
         }
     }
-// FIXME: Remove it
-//    func complete() -> Todo? {
-//        self.completed = true
-//        self.completionDate = Date()
-//        guard let dueDate = self.dueDate else { return nil }
-//        guard repeation != .none else { return nil }
-//        
-//        let newTask = self.copy()
-//        newTask.completed = false
-//        newTask.completionDate = nil
-//        switch repeation {
-//        case .none:
-//            break
-//        case .daily:
-//            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
-//        case .weekly:
-//            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: dueDate))
-//        case .monthly:
-//            newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
-//        case .yearly:
-//            newTask.dueDate = Calendar.current.date(byAdding: .year, value: 1, to: Calendar.current.startOfDay(for: dueDate))
-//        }
-//        newTask.reconnect()
-//        
-//        return newTask
-//    }
     
     func complete(modelContext: ModelContext) {
         self.completed = true

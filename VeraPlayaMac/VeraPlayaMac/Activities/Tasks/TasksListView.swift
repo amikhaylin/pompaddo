@@ -35,6 +35,14 @@ struct TasksListView: View {
                                  children: \.subtasks) { task in
                         TaskRowView(task: task)
                             .draggable(task)
+                            .dropDestination(for: Todo.self) { tasks, _ in
+                                for dropTask in tasks where dropTask != task {
+                                    dropTask.disconnect()
+                                    dropTask.parentTask = task
+                                    dropTask.reconnect()
+                                }
+                                return true
+                            }
                             .contextMenu {
                                 Button {
                                     selectedTasks = []
@@ -51,6 +59,9 @@ struct TasksListView: View {
                                 Button {
                                     selectedTasks = []
                                     let newTask = task.copy(modelContext: modelContext)
+                                    
+                                    modelContext.insert(newTask)
+                                    newTask.reconnect()
 
                                     currentTask = newTask
                                 } label: {
@@ -59,11 +70,11 @@ struct TasksListView: View {
                                 }
                                 
                                 Button {
-                                    deleteItems()
+                                    deleteTask(task: task)
                                 } label: {
                                     Image(systemName: "trash")
                                     Text("Delete task")
-                                }.disabled(selectedTasks.count == 0)
+                                }
                             }
                     }
                 }
@@ -103,6 +114,13 @@ struct TasksListView: View {
         }
     }
     
+    private func deleteTask(task: Todo) {
+        withAnimation {
+            TasksQuery.deleteTask(context: modelContext,
+                                  task: task)
+        }
+    }
+
     private func addToCurrentList() {
         withAnimation {
             selectedTasks = []

@@ -18,17 +18,28 @@ struct KanbanView: View {
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
+                
                 ForEach(project.statuses.sorted(by: { $0.order < $1.order })) { status in
                     VStack {
                         Text(status.name)
                         List(selection: $selectedTasks) {
                             OutlineGroup(project.tasks
-                                            .filter({ $0.status == status && $0.parentTask == nil })
-                                            .sorted(by: TasksQuery.defaultSorting),
+                                .filter({ $0.status == status && $0.parentTask == nil })
+                                .sorted(by: TasksQuery.defaultSorting),
                                          id: \.self,
                                          children: \.subtasks) { task in
                                 KanbanTaskRowView(task: task, completed: task.completed)
                                     .draggable(task)
+                                    .dropDestination(for: Todo.self) { tasks, _ in
+                                        for dropTask in tasks where dropTask != task {
+                                            dropTask.disconnect()
+                                            dropTask.project = nil
+                                            dropTask.status = nil
+                                            dropTask.parentTask = task
+                                            dropTask.reconnect()
+                                        }
+                                        return true
+                                    }
                                     .contextMenu {
                                         Button {
                                             selectedTasks = []
@@ -45,6 +56,8 @@ struct KanbanView: View {
                                         Button {
                                             selectedTasks = []
                                             let newTask = task.copy(modelContext: modelContext)
+                                            modelContext.insert(newTask)
+                                            newTask.reconnect()
                                             
                                             currentTask = newTask
                                         } label: {
@@ -53,21 +66,23 @@ struct KanbanView: View {
                                         }
                                         
                                         Button {
-                                            deleteItems()
+                                            deleteTask(task: task)
                                         } label: {
                                             Image(systemName: "trash")
                                             Text("Delete task")
-                                        }.disabled(selectedTasks.count == 0)
+                                        }
                                     }
                             }
                         }
-                        .cornerRadius(10)
-                        .shadow(radius: 10)
+                        //                        .cornerRadius(10)
+                        //                        .shadow(radius: 10)
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             if status.doCompletion {
-                                task.complete(modelContext: modelContext)
+                                if !task.completed {
+                                    task.complete(modelContext: modelContext)
+                                }
                             } else {
                                 task.reactivate()
                             }
@@ -75,11 +90,18 @@ struct KanbanView: View {
                         }
                         return true
                     }
-                    .frame(minWidth: 200)
-                    .padding()
+                    .frame(minWidth: 200, idealWidth: 300)
+                    //                    .padding()
                     
                 }
             }
+        }
+    }
+    
+    private func deleteTask(task: Todo) {
+        withAnimation {
+            TasksQuery.deleteTask(context: modelContext,
+                                  task: task)
         }
     }
     

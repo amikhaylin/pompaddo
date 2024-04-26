@@ -182,8 +182,8 @@ final class VeraPlayaMacTests: XCTestCase {
         
         let newTask = task.copy(modelContext: dataContainer.mainContext)
         newTask.name = "Make taco"
-//        newTask.reconnect()
-//        dataContainer.mainContext.insert(newTask)
+        newTask.reconnect()
+        dataContainer.mainContext.insert(newTask)
         
         tasks = fetchData()
         XCTAssertEqual(tasks.count, 4, "There should be 4 tasks.")
@@ -203,7 +203,7 @@ final class VeraPlayaMacTests: XCTestCase {
 //            task.printInfo()
 //        }
         
-//        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
+        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
     }
     
     @MainActor func testProjects() throws {

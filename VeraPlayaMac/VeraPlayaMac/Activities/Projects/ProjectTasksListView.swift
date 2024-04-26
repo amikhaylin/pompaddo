@@ -27,6 +27,16 @@ struct ProjectTasksListView: View {
                                  children: \.subtasks) { task in
                         TaskRowView(task: task, showingProject: false)
                             .draggable(task)
+                            .dropDestination(for: Todo.self) { tasks, _ in
+                                for dropTask in tasks where dropTask != task {
+                                    dropTask.disconnect()
+                                    dropTask.project = nil
+                                    dropTask.status = nil
+                                    dropTask.parentTask = task
+                                    dropTask.reconnect()
+                                }
+                                return true
+                            }
                             .contextMenu {
                                 Button {
                                     selectedTasks = []
@@ -43,7 +53,9 @@ struct ProjectTasksListView: View {
                                 Button {
                                     selectedTasks = []
                                     let newTask = task.copy(modelContext: modelContext)
-
+                                    modelContext.insert(newTask)
+                                    newTask.reconnect()
+                                    
                                     currentTask = newTask
                                 } label: {
                                     Image(systemName: "doc.on.doc")
@@ -51,18 +63,20 @@ struct ProjectTasksListView: View {
                                 }
                                 
                                 Button {
-                                    deleteItems()
+                                    deleteTask(task: task)
                                 } label: {
                                     Image(systemName: "trash")
                                     Text("Delete task")
-                                }.disabled(selectedTasks.count == 0)
+                                }
                             }
                     }
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
                         if status.doCompletion {
-                            task.complete(modelContext: modelContext)
+                            if !task.completed {
+                                task.complete(modelContext: modelContext)
+                            }
                         } else {
                             task.reactivate()
                         }
@@ -71,6 +85,13 @@ struct ProjectTasksListView: View {
                     return true
                 }
             }
+        }
+    }
+    
+    private func deleteTask(task: Todo) {
+        withAnimation {
+            TasksQuery.deleteTask(context: modelContext,
+                                  task: task)
         }
     }
     
