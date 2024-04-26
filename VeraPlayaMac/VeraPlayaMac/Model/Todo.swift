@@ -67,7 +67,7 @@ class Todo {
 }
 
 extension Todo {
-    func copy() -> Todo {
+    func copy(modelContext: ModelContext) -> Todo {
         let task = Todo(name: self.name,
                         dueDate: self.dueDate,
                         completed: self.completed,
@@ -75,11 +75,19 @@ extension Todo {
                         note: self.note,
                         tomatoesCount: self.tomatoesCount,
                         project: self.project,
-                        subtasks: self.subtasks,
                         parentTask: self.parentTask,
                         link: self.link,
                         repeation: self.repeation,
+                        priority: self.priority,
                         completionDate: self.completionDate)
+        if let subtasks = self.subtasks {
+            for subtask in subtasks {
+                let newSubtask = subtask.copy(modelContext: modelContext)
+                newSubtask.parentTask = task
+                task.subtasks?.append(newSubtask)
+                modelContext.insert(newSubtask)
+            }
+        }
         return task
     }
     
@@ -101,13 +109,13 @@ extension Todo {
         }
     }
     
-    func complete() -> Todo? {
+    func complete(modelContext: ModelContext) {
         self.completed = true
         self.completionDate = Date()
-        guard let dueDate = self.dueDate else { return nil }
-        guard repeation != .none else { return nil }
+        guard let dueDate = self.dueDate else { return }
+        guard repeation != .none else { return }
         
-        let newTask = self.copy()
+        let newTask = self.copy(modelContext: modelContext)
         newTask.completed = false
         newTask.completionDate = nil
         switch repeation {
@@ -123,8 +131,7 @@ extension Todo {
             newTask.dueDate = Calendar.current.date(byAdding: .year, value: 1, to: Calendar.current.startOfDay(for: dueDate))
         }
         newTask.reconnect()
-        
-        return newTask
+        modelContext.insert(newTask)
     }
     
     func reactivate() {
@@ -136,9 +143,31 @@ extension Todo {
     func deleteSubtasks(context: ModelContext) {
         if let subtasks = self.subtasks {
             for task in subtasks {
+                print("deleting subtask")
+                task.printInfo()
                 task.deleteSubtasks(context: context)
                 context.delete(task)
             }
+        }
+    }
+    
+    func printInfo() {
+        let name = self.name
+        let uid = self.uid
+        print("Task name: \(name) - \(uid)")
+        
+        if let parentTask = self.parentTask {
+            let parentName = parentTask.name
+            let parentUID = parentTask.uid
+            print("parent: \(parentName) - \(parentUID)")
+        }
+        
+        if let subtasks = self.subtasks {
+            print("Subtasks begin")
+            for subtask in subtasks {
+                subtask.printInfo()
+            }
+            print("Subtasks end")
         }
     }
 }

@@ -33,8 +33,16 @@ struct TasksListView: View {
                     OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
                                  id: \.self,
                                  children: \.subtasks) { task in
-                        TaskRowView(task: task, completed: task.completed)
+                        TaskRowView(task: task)
                             .draggable(task)
+                            .dropDestination(for: Todo.self) { tasks, _ in
+                                for dropTask in tasks where dropTask != task {
+                                    dropTask.disconnect()
+                                    dropTask.parentTask = task
+                                    dropTask.reconnect()
+                                }
+                                return true
+                            }
                             .contextMenu {
                                 Button {
                                     selectedTasks = []
@@ -50,11 +58,10 @@ struct TasksListView: View {
                                 
                                 Button {
                                     selectedTasks = []
-                                    let newTask = task.copy()
-                                    newTask.completed = false
-                                    newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                    newTask.reconnect()
+                                    let newTask = task.copy(modelContext: modelContext)
+                                    
                                     modelContext.insert(newTask)
+                                    newTask.reconnect()
 
                                     currentTask = newTask
                                 } label: {
@@ -63,11 +70,11 @@ struct TasksListView: View {
                                 }
                                 
                                 Button {
-                                    deleteItems()
+                                    deleteTask(task: task)
                                 } label: {
                                     Image(systemName: "trash")
                                     Text("Delete task")
-                                }.disabled(selectedTasks.count == 0)
+                                }
                             }
                     }
                 }
@@ -107,6 +114,13 @@ struct TasksListView: View {
         }
     }
     
+    private func deleteTask(task: Todo) {
+        withAnimation {
+            TasksQuery.deleteTask(context: modelContext,
+                                  task: task)
+        }
+    }
+
     private func addToCurrentList() {
         withAnimation {
             selectedTasks = []
