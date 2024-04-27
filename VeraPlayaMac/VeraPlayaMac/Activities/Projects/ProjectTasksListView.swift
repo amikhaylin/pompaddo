@@ -96,6 +96,10 @@ struct ProjectTasksListView: View {
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
+                        task.disconnect()
+                        task.parentTask = nil
+                        task.reconnect()
+                        
                         if status.doCompletion {
                             if !task.completed {
                                 task.complete(modelContext: modelContext)

@@ -102,7 +102,18 @@ struct TasksListView: View {
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
-                        task.completed = section == CommonTaskListSections.completed
+                        task.disconnect()
+                        task.parentTask = nil
+                        task.reconnect()
+                        setDueDate(task: task)
+                        
+                        if section == CommonTaskListSections.completed {
+                            if !task.completed {
+                                task.complete(modelContext: modelContext)
+                            }
+                        } else {
+                            task.reactivate()
+                        }
                     }
                     return true
                 }
@@ -142,24 +153,28 @@ struct TasksListView: View {
                                   task: task)
         }
     }
+    
+    private func setDueDate(task: Todo) {
+        switch list {
+        case .inbox:
+            break
+        case .today:
+            task.dueDate = Calendar.current.startOfDay(for: Date())
+        case .tomorrow:
+            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+        case .projects:
+            break
+        case .review:
+            break
+        }
+    }
 
     private func addToCurrentList() {
         withAnimation {
             selectedTasks = []
             let task = Todo(name: "")
-            switch list {
-            case .inbox:
-                task.project = nil
-            case .today:
-                task.dueDate = Calendar.current.startOfDay(for: Date())
-            case .tomorrow:
-                task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-            case .projects:
-                break
-            case .review:
-                break
-            }
-
+            setDueDate(task: task)
+            
             modelContext.insert(task)
             currentTask = task
         }
