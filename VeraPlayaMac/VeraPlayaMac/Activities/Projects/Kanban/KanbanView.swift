@@ -42,6 +42,28 @@ struct KanbanView: View {
                                     }
                                     .contextMenu {
                                         Button {
+                                            task.dueDate = nil
+                                        } label: {
+                                            Image(systemName: "clear")
+                                            Text("Clear due date")
+                                        }
+                                        
+                                        Button {
+                                            task.dueDate = Calendar.current.startOfDay(for: Date())
+                                        } label: {
+                                            Image(systemName: "calendar")
+                                            Text("Today")
+                                        }
+                                        
+                                        Button {
+                                            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                                        } label: {
+                                            Image(systemName: "sunrise")
+                                            Text("Tomorrow")
+                                        }
+                                        Divider()
+                                        
+                                        Button {
                                             selectedTasks = []
                                             let subtask = Todo(name: "", parentTask: task)
                                             task.subtasks?.append(subtask)
@@ -52,6 +74,7 @@ struct KanbanView: View {
                                             Image(systemName: "plus")
                                             Text("Add subtask")
                                         }
+                                        Divider()
                                         
                                         Button {
                                             selectedTasks = []
