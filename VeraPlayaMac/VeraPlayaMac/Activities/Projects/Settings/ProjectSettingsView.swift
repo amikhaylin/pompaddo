@@ -24,6 +24,12 @@ struct ProjectSettingsView: View {
                                         order: project.statuses.count + 1)
                     project.statuses.append(status)
                     modelContext.insert(status)
+                    // if project has tasks and statuses count = 1 then connect all tasks to added status
+                    if project.statuses.count == 1 {
+                        for task in project.tasks {
+                            task.status = status
+                        }
+                    }
                 }, label: {
                     Image(systemName: "plus")
                 })
@@ -32,6 +38,15 @@ struct ProjectSettingsView: View {
                     if let status = selectedStatus, let index = project.statuses.firstIndex(of: status) {
                         project.statuses.remove(at: index)
                         modelContext.delete(status)
+                        
+                        // if status has tasks then move its to first status or nil
+                        for task in project.tasks.filter({ $0.status == status && $0.parentTask == nil }) {
+                            if let firstStatus = project.statuses.sorted(by: { $0.order < $1.order }).first {
+                                task.status = firstStatus
+                            } else {
+                                task.status = nil
+                            }
+                        }
                     }
                 }, label: {
                     Image(systemName: "trash")
