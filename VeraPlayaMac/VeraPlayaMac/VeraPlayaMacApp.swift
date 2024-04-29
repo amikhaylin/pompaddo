@@ -27,7 +27,7 @@ struct VeraPlayaMacApp: App {
         
         do {
             // This next line will create a new directory called Example in Application Support if one doesn't already exist, and will do nothing if one already exists, so we have a valid place to put our store
-            try fileManager.createDirectory (at: directoryURL, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(at: directoryURL, withIntermediateDirectories: true, attributes: nil)
         } catch {
             fatalError("Could not find/create Example folder in Application Support")
         }

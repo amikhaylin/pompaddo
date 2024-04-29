@@ -12,6 +12,7 @@ import Charts
 struct TaskRowView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
+    @State private var showingAlertSign = false
     var showingProject: Bool
     
     var body: some View {
@@ -94,6 +95,17 @@ struct TaskRowView: View {
                     }
                 }
             }
+            
+            if showingAlertSign {
+                        Image(systemName: "bell")
+                            .foregroundStyle(Color.gray)
+            }
+        }
+        .task {
+            showingAlertSign = await NotificationManager.checkTaskHasRequest(task: task)
+        }
+        .refreshable {
+            showingAlertSign = await NotificationManager.checkTaskHasRequest(task: task)
         }
     }
     

@@ -13,6 +13,9 @@ struct EditTaskView: View {
     @State private var dueDate = Date()
     @State private var showingDatePicker = false
     
+    @State private var alertDate = Date()
+    @State private var showingAlertDatePicker = false
+    
     var body: some View {
         Form {
             Section {
@@ -96,6 +99,38 @@ struct EditTaskView: View {
                     }
                 }
                 
+                if showingAlertDatePicker {
+                    HStack {
+                        DatePicker("Alert at",
+                                   selection: $alertDate)
+
+                        Button {
+                            NotificationManager.removeRequest(task: task)
+                            task.alertDate = alertDate
+                            NotificationManager.setNotification(task: task)
+                        } label: {
+                            Image(systemName: "checkmark.square")
+                        }
+                        
+                        Button {
+                            task.alertDate = nil
+                            NotificationManager.removeRequest(task: task)
+                            showingAlertDatePicker = false
+                        } label: {
+                            Image(systemName: "clear")
+                        }
+                    }
+                } else {
+                    Button {
+                        withAnimation {
+                            showingAlertDatePicker.toggle()
+                            alertDate = Date()
+                        }
+                    } label: {
+                        Label("Set Alert", systemImage: "bell")
+                    }
+                }
+                
                 LabeledContent("Note") {
                     TextEditor(text: $task.note)
                         .background(Color.primary.colorInvert())
@@ -118,7 +153,13 @@ struct EditTaskView: View {
         .onAppear(perform: {
             setPicker()
         })
-
+        .task {
+            let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
+            if task.alertDate != nil && !hasAlert {
+                task.alertDate = nil
+                showingAlertDatePicker = false
+            }
+        }
     }
     
     func setPicker() {
@@ -128,6 +169,14 @@ struct EditTaskView: View {
         } else {
             dueDate = Date.now
             showingDatePicker = false
+        }
+        
+        if let date = task.alertDate {
+            alertDate = date
+            showingAlertDatePicker = true
+        } else {
+            alertDate = Date()
+            showingAlertDatePicker = false
         }
     }
 }
