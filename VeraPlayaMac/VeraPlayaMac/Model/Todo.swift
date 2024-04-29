@@ -33,6 +33,7 @@ class Todo {
     var priority: Int = 0
     var uid: String = UUID().uuidString
     var completionDate: Date?
+    var alertDate: Date?
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -49,7 +50,8 @@ class Todo {
          link: String = "",
          repeation: RepeationMode = RepeationMode.none,
          priority: Int = 0,
-         completionDate: Date? = nil) {
+         completionDate: Date? = nil,
+         alertDate: Date? = nil) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -63,6 +65,7 @@ class Todo {
         self.repeation = repeation
         self.priority = priority
         self.completionDate = completionDate
+        self.alertDate = alertDate
     }
 }
 

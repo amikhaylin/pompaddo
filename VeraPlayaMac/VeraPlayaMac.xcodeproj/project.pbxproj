@@ -12,6 +12,7 @@
 		4D1D9EB62BD152F700CFF31C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
 		4D1D9EB72BD152FB00CFF31C /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
 		4D1D9EB82BD1530000CFF31C /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
+		4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8642BDF8B580026C2EA /* NotificationManager.swift */; };
 		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
 		4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */; };
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
@@ -62,6 +63,7 @@
 
 /* Begin PBXFileReference section */
 		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
+		4D59C8642BDF8B580026C2EA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				4D8422B42BA1F437000829E1 /* BadgeManager.swift */,
 				4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */,
 				4D7C13C42B7E06F70093595D /* Previewer.swift */,
+				4D59C8642BDF8B580026C2EA /* NotificationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
+				4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */,
 				4DCE05DB2BC93624002C9566 /* KanbanTaskRowView.swift in Sources */,
 				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
 				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
