@@ -25,7 +25,7 @@ struct ReviewProjectsView: View {
                     .listStyle(SidebarListStyle())
                     .padding(.top, 5)
                 } else {
-                    Text("No projects for review")
+                    Text("No projects to review")
                 }
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200)
