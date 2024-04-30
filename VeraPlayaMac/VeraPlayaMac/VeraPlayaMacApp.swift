@@ -45,6 +45,14 @@ struct VeraPlayaMacApp: App {
     }()
 
     var body: some Scene {
+        MenuBarExtra {
+            FocusTimerView()
+        } label: {
+            Image(systemName: "target")
+            Text("25:00")
+        }
+        .menuBarExtraStyle(.window)
+
         WindowGroup {
             ContentView()
                 .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
