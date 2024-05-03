@@ -107,7 +107,7 @@ struct EditTaskView: View {
                         Button {
                             NotificationManager.removeRequest(task: task)
                             task.alertDate = alertDate
-                            NotificationManager.setNotification(task: task)
+                            NotificationManager.setTaskNotification(task: task)
                         } label: {
                             Image(systemName: "checkmark.square")
                         }
