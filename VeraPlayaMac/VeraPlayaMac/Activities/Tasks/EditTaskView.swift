@@ -105,7 +105,7 @@ struct EditTaskView: View {
                                    selection: $alertDate)
 
                         Button {
-                            NotificationManager.removeRequest(task: task)
+                            NotificationManager.removeRequest(identifier: task.uid)
                             task.alertDate = alertDate
                             NotificationManager.setTaskNotification(task: task)
                         } label: {
@@ -114,7 +114,7 @@ struct EditTaskView: View {
                         
                         Button {
                             task.alertDate = nil
-                            NotificationManager.removeRequest(task: task)
+                            NotificationManager.removeRequest(identifier: task.uid)
                             showingAlertDatePicker = false
                         } label: {
                             Image(systemName: "clear")

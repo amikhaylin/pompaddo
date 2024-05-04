@@ -78,9 +78,9 @@ struct NotificationManager {
     }
     
     // TODO: remove old requests
-    static func removeRequest(task: Todo) {
+    static func removeRequest(identifier: String) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.removeAllDeliveredNotifications()
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [task.uid])
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
     }
 }

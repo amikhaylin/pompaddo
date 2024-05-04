@@ -108,17 +108,21 @@ class FocusTimer {
     }
     
     func skip() {
-        if self._mode == .work {
-            self._mode = .pause
+        if self.mode == .work {
+            self.mode = .pause
         } else {
-            self._mode = .work
+            self.mode = .work
         }
     }
   
     // MARK: private methods
     private func createTimer() {
-        // TODO: schedule notification
-//        PomodoroNotification.scheduleNotification(seconds: TimeInterval(secondsLeft), title: "Timer Done", body: "Your pomodoro timer is finished.")
+        // schedule notification
+        NotificationManager.removeRequest(identifier: "PomPadDo-Timer")
+        NotificationManager.setNotification(timeInterval: TimeInterval(secondsLeft),
+                                            identifier: "PomPadDo-Timer",
+                                            title: "PomPadDo Timer",
+                                            body: "Your focus timer is finished")
         // create timer
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.onTick()

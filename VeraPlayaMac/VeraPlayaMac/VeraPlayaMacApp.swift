@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct VeraPlayaMacApp: App {
+    @State private var timerCount: String = "25:00"
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Todo.self,
@@ -46,10 +48,10 @@ struct VeraPlayaMacApp: App {
 
     var body: some Scene {
         MenuBarExtra {
-            FocusTimerView()
+            FocusTimerView(timerCount: $timerCount)
+                .modelContainer(sharedModelContainer)
         } label: {
-            Image(systemName: "target")
-            Text("25:00")
+            Text("\(timerCount)")
         }
         .menuBarExtraStyle(.window)
 
