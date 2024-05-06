@@ -25,6 +25,7 @@ struct ContentView: View {
     
     @State private var newTaskIsShowing = false
     @State private var newProjectIsShowing = false
+    @State private var newProjectGroupShow = false
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
     @State private var selectedTasks = Set<Todo>()
@@ -161,6 +162,14 @@ struct ContentView: View {
                                     Image(systemName: "plus.circle")
                                 }
                                 .buttonStyle(PlainButtonStyle())
+                                
+                                Button {
+                                    newProjectGroupShow.toggle()
+                                } label: {
+                                    Image(systemName: "folder.circle")
+                                }
+                                .buttonStyle(PlainButtonStyle())
+
                             }
                         }
                     }
@@ -181,6 +190,9 @@ struct ContentView: View {
                 }
                 .sheet(isPresented: $newProjectIsShowing) {
                     NewProjectView(isVisible: self.$newProjectIsShowing)
+                }
+                .sheet(isPresented: $newProjectGroupShow) {
+                    NewProjectGroupView(isVisible: self.$newProjectGroupShow)
                 }
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200)

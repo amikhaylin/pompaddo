@@ -15,6 +15,7 @@ class Project {
     var reviewDaysCount: Int = 7
     var note: String = ""
     var projectViewMode: Int = 0
+    var group: ProjectGroup?
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status] = []
