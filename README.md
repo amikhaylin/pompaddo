@@ -1,7 +1,7 @@
 ![](AppIcon/128x128.png)
 # PomPadDo
 
-PomPadDo is a task manager / planner app <br>
+PomPadDo is a personal task manager / planner app <br>
 made to myself by myself
 
 
@@ -23,7 +23,7 @@ made to myself by myself
 - [x] Kanban view
 - [x] Repeating tasks 
 - [x] Notifications
-- [ ] Pomodoro timer
+- [x] Pomodoro timer
 - [ ] Location based contexts
 - [ ] iOS / iPadOS implementation
 - [ ] watchOS implementation

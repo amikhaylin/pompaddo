@@ -9,9 +9,13 @@ import SwiftUI
 import SwiftData
 
 struct FocusTimerView: View {
-    var timer = FocusTimer(workInSeconds: 1500, breakInSeconds: 300)
+    var timer = FocusTimer(workInSeconds: 1500,
+                           breakInSeconds: 300,
+                           longBreakInSeconds: 1200,
+                           workSessionsCount: 4)
     
     @Binding var timerCount: String
+    @Binding var focusMode: FocusTimerMode
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
@@ -46,6 +50,7 @@ struct FocusTimerView: View {
                         Button {
                             selectedTask = task
                             viewMode = 1
+                            timer.reset()
                             timer.start()
                         } label: {
                             Image(systemName: "play.fill")
@@ -62,7 +67,7 @@ struct FocusTimerView: View {
                     
                     ZStack {
                         CircularProgressView(progress: CGFloat(timer.fractionPassed),
-                                             color: .blue,
+                                             color: timer.mode == .work ? .red : .green,
                                              lineWidth: 5)
                         .frame(width: 200, height: 200)
                         
@@ -76,8 +81,9 @@ struct FocusTimerView: View {
                         }
                     }
                     
-                    if timer.state == .idle && timer.mode == .pause {
+                    if timer.state == .idle && (timer.mode == .pause || timer.mode == .longbreak) {
                         Button("Skip") {
+                            timer.reset()
                             timer.skip()
                         }
                     }
@@ -108,12 +114,20 @@ struct FocusTimerView: View {
                     
                     Spacer()
                 }
-                .onChange(of: timer.secondsLeft, { _, _ in
-                    timerCount = timer.secondsLeftString
-                })
 //                .padding()
             }
         }
+        .onChange(of: timer.secondsLeft, { _, _ in
+            timerCount = timer.secondsLeftString
+        })
+        .onChange(of: timer.mode, { _, _ in
+            focusMode = timer.mode
+        })
+        .onChange(of: timer.sessionsCounter, { oldValue, newValue in
+            if let task = selectedTask, newValue > oldValue {
+                task.tomatoesCount += 1
+            }
+        })
         .padding()
         .frame(width: 400, height: 400)
     }
@@ -123,8 +137,10 @@ struct FocusTimerView: View {
     do {
         let previewer = try Previewer()
         @State var timerString: String = "$$$$"
+        @State var focusMode: FocusTimerMode = .work
         
-        return FocusTimerView(timerCount: $timerString)
+        return FocusTimerView(timerCount: $timerString,
+                              focusMode: $focusMode)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

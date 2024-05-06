@@ -17,6 +17,7 @@ enum FocusTimerState: String {
 enum FocusTimerMode: String {
     case work
     case pause
+    case longbreak
 
     var title: String {
         switch self {
@@ -24,6 +25,8 @@ enum FocusTimerMode: String {
             return "work"
         case .pause:
             return "break"
+        case .longbreak:
+            return "long break"
         }
     }
 }
@@ -42,18 +45,26 @@ class FocusTimer {
 
     private var durationWork: TimeInterval
     private var durationBreak: TimeInterval
-
+    private var durationLongBreak: TimeInterval
+    private var workSessionsCount: Int
+    
     private(set) var secondsPassed: Int = 0
     private(set) var fractionPassed: Double = 0
     private var dateStarted: Date = Date.now
     private var secondsPassedBeforePause: Int = 0
+    private(set) var sessionsCounter: Int = 0
 
     private var timer: Timer?
 //    private var audio: PomodoroAudio = PomodoroAudio()
   
-    init(workInSeconds: TimeInterval, breakInSeconds: TimeInterval) {
+    init(workInSeconds: TimeInterval, 
+         breakInSeconds: TimeInterval,
+         longBreakInSeconds: TimeInterval,
+         workSessionsCount: Int) {
         self.durationWork = workInSeconds
         self.durationBreak = breakInSeconds
+        self.durationLongBreak = longBreakInSeconds
+        self.workSessionsCount = workSessionsCount
     }
   
     // MARK: Computed Properties
@@ -73,6 +84,8 @@ class FocusTimer {
     private var duration: TimeInterval {
         if mode == .work {
             return durationWork
+        } else if mode == .longbreak {
+            return durationLongBreak
         } else {
             return durationBreak
         }
@@ -109,10 +122,22 @@ class FocusTimer {
     
     func skip() {
         if self.mode == .work {
-            self.mode = .pause
+            if sessionsCounter < workSessionsCount {
+                self.mode = .pause
+                sessionsCounter += 1
+            } else {
+                self.mode = .longbreak
+                sessionsCounter = 0
+            }
         } else {
             self.mode = .work
         }
+    }
+    
+    func repeatTimer() {
+        skip()
+        secondsPassedBeforePause = 0
+        start()
     }
   
     // MARK: private methods
@@ -130,6 +155,7 @@ class FocusTimer {
     }
   
     private func killTimer() {
+        NotificationManager.removeRequest(identifier: "PomPadDo-Timer")
         timer?.invalidate()
         timer = nil
     }
@@ -145,9 +171,10 @@ class FocusTimer {
 //    _audio.play(.tick)
         // done? play sound, reset, switch (work->pause->work), reset timer
         if self.secondsLeft == 0 {
-            self.fractionPassed = 0
-            self.skip() // to switch mode
-            self.reset() // also resets timer
+//            self.fractionPassed = 0
+            self.repeatTimer()
+//            self.skip() // to switch mode
+//            self.reset() // also resets timer
 //        _audio.play(.done) // play ending sound
         }
     }

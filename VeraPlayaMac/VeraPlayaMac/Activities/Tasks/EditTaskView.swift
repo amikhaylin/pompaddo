@@ -131,6 +131,23 @@ struct EditTaskView: View {
                     }
                 }
                 
+                HStack {
+                    Text("Focused for ")
+                    Image(systemName: "target")
+                    Text("\(task.tomatoesCount)")
+                    Image(systemName: "stopwatch")
+                    Text("\(Int((task.tomatoesCount * 25) / 60))h\(Int((task.tomatoesCount * 25) % 60))m ")
+                }
+                
+                HStack {
+                    let totalFocused = task.getTotalFocus()
+                    Text("Total focused ")
+                    Image(systemName: "target")
+                    Text("\(totalFocused)")
+                    Image(systemName: "stopwatch")
+                    Text("\(Int((totalFocused * 25) / 60))h\(Int((totalFocused * 25) % 60))m ")
+                }
+                
                 LabeledContent("Note") {
                     TextEditor(text: $task.note)
                         .background(Color.primary.colorInvert())
