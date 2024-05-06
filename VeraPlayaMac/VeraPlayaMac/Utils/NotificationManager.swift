@@ -64,7 +64,7 @@ struct NotificationManager {
         }
     }
     
-    // TODO: check if task in requests
+    // check if task in requests
     static func checkTaskHasRequest(task: Todo) async -> Bool {
         if task.alertDate != nil {
             let notificationCenter = UNUserNotificationCenter.current()
@@ -77,7 +77,7 @@ struct NotificationManager {
         return false
     }
     
-    // TODO: remove old requests
+    // remove old requests
     static func removeRequest(identifier: String) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.removeAllDeliveredNotifications()

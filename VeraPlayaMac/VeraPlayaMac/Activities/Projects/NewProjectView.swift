@@ -12,6 +12,15 @@ enum DefaultProjectStatuses: String, CaseIterable {
     case todo = "To do"
     case progress = "In progress"
     case completed = "Completed"
+    
+    var competion: Bool {
+        switch self {
+        case .completed:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 struct NewProjectView: View {
@@ -37,10 +46,9 @@ struct NewProjectView: View {
                     var order = 0
                     for name in DefaultProjectStatuses.allCases {
                         order += 1
-                        let doComplete = name == DefaultProjectStatuses.completed
                         let status = Status(name: name.rawValue,
                                             order: order,
-                                            doCompletion: doComplete)
+                                            doCompletion: name.competion)
                         modelContext.insert(status)
                         project.statuses.append(status)
                     }
