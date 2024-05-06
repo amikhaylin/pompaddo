@@ -102,6 +102,7 @@ struct TasksListView: View {
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
+                        // FIXME: disconnect child task
                         task.disconnect()
                         task.parentTask = nil
                         task.reconnect()

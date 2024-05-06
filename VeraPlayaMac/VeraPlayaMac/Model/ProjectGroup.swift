@@ -11,7 +11,6 @@ import SwiftData
 @Model
 class ProjectGroup {
     var name: String = ""
-    var projects: [Project] = []
     
     init(name: String) {
         self.name = name

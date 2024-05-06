@@ -43,111 +43,114 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            GeometryReader { geometry in
-                VStack {
-                    List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
-                        switch item {
-                        case .inbox:
-                            NavigationLink(value: item) {
-                                HStack {
-                                    Image(systemName: "tray")
-                                    Text("Inbox")
-                                }
-                                .badge(tasksInbox.count)
+            VStack {
+                List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
+                    switch item {
+                    case .inbox:
+                        NavigationLink(value: item) {
+                            HStack {
+                                Image(systemName: "tray")
+                                Text("Inbox")
                             }
-                            .dropDestination(for: Todo.self) { tasks, _ in
-                                for task in tasks {
-                                    if let project = task.project, let index = project.tasks.firstIndex(of: task) {
-                                        task.project?.tasks.remove(at: index)
-                                        task.project = nil
-                                        task.status = nil
-                                    }
-                                    if let parentTask = task.parentTask,
-                                       let index = parentTask.subtasks?.firstIndex(of: task) {
-                                        task.parentTask = nil
-                                        parentTask.subtasks?.remove(at: index)
-                                    }
-                                }
-                                return true
-                            }
-                            
-                        case .today:
-                            NavigationLink(value: item) {
-                                HStack {
-                                    Image(systemName: "calendar")
-                                    Text("Today")
-                                }
-                                .badge(tasksToday.filter({ $0.completed == false}).count)
-                            }
-                            .dropDestination(for: Todo.self) { tasks, _ in
-                                for task in tasks {
-                                    task.dueDate = Calendar.current.startOfDay(for: Date())
-                                }
-                                return true
-                            }
-                        case .tomorrow:
-                            NavigationLink(value: item) {
-                                HStack {
-                                    Image(systemName: "sunrise")
-                                    Text("Tomorrow")
-                                }
-                                .badge(tasksTomorrow.filter({ $0.completed == false }).count)
-                            }
-                            .dropDestination(for: Todo.self) { tasks, _ in
-                                for task in tasks {
-                                    task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                }
-                                return true
-                            }
-                        case .projects:
-                            EmptyView()
-                        case .review:
-                            NavigationLink(value: item) {
-                                HStack {
-                                    Image(systemName: "cup.and.saucer")
-                                    Text("Review")
-                                }
-                                .badge(projects.filter({
-                                    let today = Date()
-                                    if let dateToReview = Calendar.current.date(byAdding: .day,
-                                                                                value: $0.reviewDaysCount,
-                                                                                to: $0.reviewDate) {
-                                        return dateToReview <= today
-                                    } else {
-                                        return false
-                                    }
-                                }).count)
-                            }
+                            .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
+                            .badge(tasksInbox.count)
                         }
-                    }
-                    .frame(height: 125)
-                    
-                    ProjectsListView(selectedProject: $selectedProject,
-                                     selectedTasks: $selectedTasks,
-                                     newProjectIsShowing: $newProjectIsShowing,
-                                     newProjectGroupShow: $newProjectGroupShow,
-                                     projects: projects,
-                                     geometry: geometry)
-                }
-                .toolbar {
-                    ToolbarItem {
-                        Button {
-                            newTaskIsShowing.toggle()
-                        } label: {
-                            Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
+                        .dropDestination(for: Todo.self) { tasks, _ in
+                            for task in tasks {
+                                if let project = task.project, let index = project.tasks.firstIndex(of: task) {
+                                    task.project?.tasks.remove(at: index)
+                                    task.project = nil
+                                    task.status = nil
+                                }
+                                if let parentTask = task.parentTask,
+                                   let index = parentTask.subtasks?.firstIndex(of: task) {
+                                    task.parentTask = nil
+                                    parentTask.subtasks?.remove(at: index)
+                                }
+                            }
+                            return true
                         }
                         
+                    case .today:
+                        NavigationLink(value: item) {
+                            HStack {
+                                Image(systemName: "calendar")
+                                Text("Today")
+                            }
+                            .foregroundStyle(Color(#colorLiteral(red: 0.9496305585, green: 0.5398437977, blue: 0.3298020959, alpha: 1)))
+                            .badge(tasksToday.filter({ $0.completed == false}).count)
+                        }
+                        .dropDestination(for: Todo.self) { tasks, _ in
+                            for task in tasks {
+                                task.dueDate = Calendar.current.startOfDay(for: Date())
+                            }
+                            return true
+                        }
+                    case .tomorrow:
+                        NavigationLink(value: item) {
+                            HStack {
+                                Image(systemName: "sunrise")
+                                Text("Tomorrow")
+                            }
+                            .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
+                            .badge(tasksTomorrow.filter({ $0.completed == false }).count)
+                        }
+                        .dropDestination(for: Todo.self) { tasks, _ in
+                            for task in tasks {
+                                task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                            }
+                            return true
+                        }
+                    case .projects:
+                        EmptyView()
+                    case .review:
+                        NavigationLink(value: item) {
+                            HStack {
+                                Image(systemName: "cup.and.saucer")
+                                Text("Review")
+                            }
+                            .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
+                            .badge(projects.filter({
+                                let today = Date()
+                                if let dateToReview = Calendar.current.date(byAdding: .day,
+                                                                            value: $0.reviewDaysCount,
+                                                                            to: $0.reviewDate) {
+                                    return dateToReview <= today
+                                } else {
+                                    return false
+                                }
+                            }).count)
+                        }
                     }
                 }
-                .sheet(isPresented: $newTaskIsShowing) {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
+                .frame(height: 125)
+                
+                Divider()
+                
+                ProjectsListView(selectedProject: $selectedProject,
+                                 selectedTasks: $selectedTasks,
+                                 newProjectIsShowing: $newProjectIsShowing,
+                                 newProjectGroupShow: $newProjectGroupShow,
+                                 projects: projects)
+            }
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        newTaskIsShowing.toggle()
+                    } label: {
+                        Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
+                    }
+                    
                 }
-                .sheet(isPresented: $newProjectIsShowing) {
-                    NewProjectView(isVisible: self.$newProjectIsShowing)
-                }
-                .sheet(isPresented: $newProjectGroupShow) {
-                    NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-                }
+            }
+            .sheet(isPresented: $newTaskIsShowing) {
+                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
+            }
+            .sheet(isPresented: $newProjectIsShowing) {
+                NewProjectView(isVisible: self.$newProjectIsShowing)
+            }
+            .sheet(isPresented: $newProjectGroupShow) {
+                NewProjectGroupView(isVisible: self.$newProjectGroupShow)
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200)
         } content: {
@@ -223,6 +226,7 @@ struct ContentView: View {
             }
         })
         .onChange(of: selectedProject) { _, newValue in
+            selectedTasks = []
             if newValue != nil {
                 selectedSideBarItem = .projects
             }
