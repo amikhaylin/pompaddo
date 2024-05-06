@@ -29,6 +29,8 @@ struct Previewer {
                     priority: 2)
         container.mainContext.insert(task)
 
+        task.tomatoesCount += 1
+        
         subtask = Todo(name: "Buy potatoes", parentTask: task)
         task.subtasks?.append(subtask)
         container.mainContext.insert(subtask)

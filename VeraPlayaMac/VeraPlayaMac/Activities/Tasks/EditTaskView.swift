@@ -105,16 +105,16 @@ struct EditTaskView: View {
                                    selection: $alertDate)
 
                         Button {
-                            NotificationManager.removeRequest(task: task)
+                            NotificationManager.removeRequest(identifier: task.uid)
                             task.alertDate = alertDate
-                            NotificationManager.setNotification(task: task)
+                            NotificationManager.setTaskNotification(task: task)
                         } label: {
                             Image(systemName: "checkmark.square")
                         }
                         
                         Button {
                             task.alertDate = nil
-                            NotificationManager.removeRequest(task: task)
+                            NotificationManager.removeRequest(identifier: task.uid)
                             showingAlertDatePicker = false
                         } label: {
                             Image(systemName: "clear")
@@ -129,6 +129,23 @@ struct EditTaskView: View {
                     } label: {
                         Label("Set Alert", systemImage: "bell")
                     }
+                }
+                
+                HStack {
+                    Text("Focused for ")
+                    Image(systemName: "target")
+                    Text("\(task.tomatoesCount)")
+                    Image(systemName: "stopwatch")
+                    Text("\(Int((task.tomatoesCount * 25) / 60))h\(Int((task.tomatoesCount * 25) % 60))m ")
+                }
+                
+                HStack {
+                    let totalFocused = task.getTotalFocus()
+                    Text("Total focused ")
+                    Image(systemName: "target")
+                    Text("\(totalFocused)")
+                    Image(systemName: "stopwatch")
+                    Text("\(Int((totalFocused * 25) / 60))h\(Int((totalFocused * 25) % 60))m ")
                 }
                 
                 LabeledContent("Note") {

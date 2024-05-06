@@ -154,6 +154,18 @@ extension Todo {
         }
     }
     
+    func getTotalFocus() -> Int {
+        var result: Int = self.tomatoesCount
+        
+        if let subtasks = self.subtasks {
+            for subtask in subtasks {
+                result += subtask.getTotalFocus()
+            }
+        }
+        
+        return result
+    }
+    
     func printInfo() {
         let name = self.name
         let uid = self.uid

@@ -15,34 +15,60 @@ extension Date {
 }
 
 struct NotificationManager {
-    static func setNotification(task: Todo) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { success, error in
-            if success {
-                // Set request
-                if let alertDate = task.alertDate, (alertDate - Date()) > 0 {
-                    let content = UNMutableNotificationContent()
-                    content.title = "PomPadDo"
-                    content.subtitle = task.name
-                    content.sound = UNNotificationSound.default
-                    
-                    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: (alertDate - Date()), repeats: false)
-                    
-                    let request = UNNotificationRequest(identifier: task.uid,
-                                                        content: content,
-                                                        trigger: trigger)
-                    
-                    UNUserNotificationCenter.current().add(request)
+    static func checkAuthorization(completion: @escaping (Bool) -> Void) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                completion(true)
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { allowed, error in
+                    if let error {
+                        print(error.localizedDescription)
+                    }
+                    completion(allowed)
                 }
-            } else if let error {
-                print(error.localizedDescription)
+            default:
+                completion(false)
             }
+        }
+    }
+    
+    static func setNotification(timeInterval: TimeInterval, identifier: String, title: String, body: String) {
+        checkAuthorization { authorized in
+            if authorized {
+                let notificationCenter = UNUserNotificationCenter.current()
+                let content = UNMutableNotificationContent()
+                content.title = title
+                content.body = body
+                content.sound = UNNotificationSound.default
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: identifier,
+                                                    content: content,
+                                                    trigger: trigger)
+                
+                notificationCenter.add(request)
+            }
+        }
+    }
+    
+    static func setTaskNotification(task: Todo) {
+        // Set request
+        if let alertDate = task.alertDate, (alertDate - Date()) > 0 {
+            setNotification(timeInterval: (alertDate - Date()),
+                            identifier: task.uid,
+                            title: "PomPadDo Task",
+                            body: task.name)
         }
     }
     
     // TODO: check if task in requests
     static func checkTaskHasRequest(task: Todo) async -> Bool {
         if task.alertDate != nil {
-            let requests = await UNUserNotificationCenter.current().pendingNotificationRequests()
+            let notificationCenter = UNUserNotificationCenter.current()
+            let requests = await notificationCenter.pendingNotificationRequests()
             
             for request in requests where request.identifier == task.uid {
                 return true
@@ -52,7 +78,9 @@ struct NotificationManager {
     }
     
     // TODO: remove old requests
-    static func removeRequest(task: Todo) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [task.uid])
+    static func removeRequest(identifier: String) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.removeAllDeliveredNotifications()
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
     }
 }

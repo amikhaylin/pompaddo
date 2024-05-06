@@ -1,8 +1,8 @@
 ![](AppIcon/128x128.png)
-# Vera Playa Project
+# PomPadDo
 
-VeraPlayaProject is a task manager 
-made for myself by myself
+PomPadDo is a personal task manager / planner app <br>
+made to myself by myself
 
 
 
@@ -17,24 +17,17 @@ made for myself by myself
 ## macOS app
 ![](mac.png)
 
-### Key features
+### TODO
+- [x] Add task direct to Inbox
+- [x] Projects review
+- [x] Kanban view
+- [x] Repeating tasks 
+- [x] Notifications
+- [x] Pomodoro timer
+- [ ] Location based contexts
+- [ ] iOS / iPadOS implementation
+- [ ] watchOS implementation
+- [ ] Sync via iCloud
 
-* Add task direct to Inbox
-* Projects review
-* Kanban view
-* Repeating tasks 
-
-### Roadmap
-
-* Notifications
-* Pomodoro timer
-* Location based contexts
-* iOS / iPadOS implementation
-* watchOS implementation
-* Sync via iCloud
-
-### Version Log
-
-#### 1.0
-
-* 
+#### Languages Supported
+- English 🇺🇸

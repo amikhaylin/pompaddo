@@ -70,6 +70,14 @@ struct TaskRowView: View {
                     .font(.caption)
             }
             
+            if task.tomatoesCount > 0 {
+                Image(systemName: "target")
+                    .foregroundStyle(Color.gray)
+                Text("\(task.tomatoesCount)")
+                    .foregroundStyle(Color.gray)
+                    .font(.caption)
+            }
+            
             if let dueDate = task.dueDate {
                 HStack {
                     if task.repeation != .none {
