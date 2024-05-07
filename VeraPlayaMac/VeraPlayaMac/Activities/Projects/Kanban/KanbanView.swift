@@ -124,6 +124,7 @@ struct KanbanView: View {
                 }
             }
         }
+        .padding()
     }
     
     private func deleteTask(task: Todo) {

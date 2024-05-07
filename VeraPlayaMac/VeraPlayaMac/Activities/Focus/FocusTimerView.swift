@@ -59,6 +59,7 @@ struct FocusTimerView: View {
                 }
             } else {
                 VStack {
+                    Spacer()
                     // MARK: Focus timer
                     if let task = selectedTask {
                         Text(task.name)

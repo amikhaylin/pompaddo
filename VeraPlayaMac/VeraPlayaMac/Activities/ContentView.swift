@@ -153,67 +153,73 @@ struct ContentView: View {
                 NewProjectGroupView(isVisible: self.$newProjectGroupShow)
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200)
-        } content: {
-            switch selectedSideBarItem {
-            case .inbox:
-                TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
-                              selectedTasks: $selectedTasks,
-                              currentTask: $currentTask,
-                              list: selectedSideBarItem)
-            case .today:
-                TasksListView(tasks: tasksToday
-                                        .filter({ TasksQuery.checkToday(date: $0.completionDate) })
-                                        .sorted(by: TasksQuery.defaultSorting),
-                              selectedTasks: $selectedTasks,
-                              currentTask: $currentTask,
-                              list: selectedSideBarItem)
-            case .tomorrow:
-                TasksListView(tasks: tasksTomorrow
-                                        .filter({ $0.completionDate == nil })
-                                        .sorted(by: TasksQuery.defaultSorting),
-                              selectedTasks: $selectedTasks,
-                              currentTask: $currentTask,
-                              list: selectedSideBarItem)
-            case .projects:
-                if let project = selectedProject {
-                    ProjectView(selectedTasks: $selectedTasks,
-                                         currentTask: $currentTask,
-                                         project: project)
-                } else {
-                    Text("Select a project")
-                }
-            case .review:
-                ReviewProjectsView(projects: projects.filter({
-                    let today = Date()
-                    if let dateToReview = Calendar.current.date(byAdding: .day,
-                                                                value: $0.reviewDaysCount,
-                                                                to: $0.reviewDate) {
-                        return dateToReview <= today
-                    } else {
-                        return false
-                    }
-                }),
-                                  selectedTasks: $selectedTasks,
-                                  currentTask: $currentTask)
-            }
         } detail: {
-            VStack {
+            HStack {
+                switch selectedSideBarItem {
+                case .inbox:
+                    TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
+                                  selectedTasks: $selectedTasks,
+                                  currentTask: $currentTask,
+                                  list: selectedSideBarItem)
+                case .today:
+                    TasksListView(tasks: tasksToday
+                        .filter({ TasksQuery.checkToday(date: $0.completionDate) })
+                        .sorted(by: TasksQuery.defaultSorting),
+                                  selectedTasks: $selectedTasks,
+                                  currentTask: $currentTask,
+                                  list: selectedSideBarItem)
+                case .tomorrow:
+                    TasksListView(tasks: tasksTomorrow
+                        .filter({ $0.completionDate == nil })
+                        .sorted(by: TasksQuery.defaultSorting),
+                                  selectedTasks: $selectedTasks,
+                                  currentTask: $currentTask,
+                                  list: selectedSideBarItem)
+                case .projects:
+                    if let project = selectedProject {
+                        ProjectView(selectedTasks: $selectedTasks,
+                                    currentTask: $currentTask,
+                                    project: project)
+                    } else {
+                        Text("Select a project")
+                    }
+                case .review:
+                    ReviewProjectsView(projects: projects.filter({
+                        let today = Date()
+                        if let dateToReview = Calendar.current.date(byAdding: .day,
+                                                                    value: $0.reviewDaysCount,
+                                                                    to: $0.reviewDate) {
+                            return dateToReview <= today
+                        } else {
+                            return false
+                        }
+                    }),
+                                       selectedTasks: $selectedTasks,
+                                       currentTask: $currentTask)
+                }
+                
                 if currentTask != nil || selectedTasks.count > 0 {
                     if let currentTask = currentTask {
                         EditTaskView(task: currentTask)
+                            .frame(minWidth: 270, idealWidth: 270, maxWidth: 350)
+                            .padding()
                     } else if let selectedTask = selectedTasks.first {
                         EditTaskView(task: selectedTask)
+                            .frame(minWidth: 270, idealWidth: 270, maxWidth: 350)
+                            .padding()
                     }
-                    Spacer()
-                } else {
-                    Image(systemName: "list.bullet.clipboard")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 100, height: 100)
-                        .foregroundStyle(Color.gray)
                 }
             }
-            .navigationSplitViewColumnWidth(min: 270, ideal: 270, max: 350)
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        currentTask = nil
+                        selectedTasks = []
+                    } label: {
+                        Image(systemName: "sidebar.right")
+                    }.disabled(!(currentTask != nil || selectedTasks.count > 0))
+                }
+            }
         }
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
