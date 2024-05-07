@@ -74,7 +74,7 @@ struct TasksQuery {
     }
     
     static func deleteTask(context: ModelContext, task: Todo) {
-        task.disconnect()
+        task.disconnectFromAll()
         task.deleteSubtasks(context: context)
         context.delete(task)
     }

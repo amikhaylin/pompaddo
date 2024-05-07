@@ -28,8 +28,9 @@ struct ProjectTasksListView: View {
                         TaskRowView(task: task, showingProject: false)
                             .draggable(task)
                             .dropDestination(for: Todo.self) { tasks, _ in
+                                // Attach dropped task as subtask
                                 for dropTask in tasks where dropTask != task {
-                                    dropTask.disconnect()
+                                    dropTask.disconnectFromAll()
                                     dropTask.project = nil
                                     dropTask.status = nil
                                     dropTask.parentTask = task
@@ -96,9 +97,10 @@ struct ProjectTasksListView: View {
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
-                        task.disconnect()
+                        task.disconnectFromParentTask()
                         task.parentTask = nil
-                        task.reconnect()
+                        task.project = project
+                        project.tasks.append(task)
                         
                         if status.doCompletion {
                             if !task.completed {

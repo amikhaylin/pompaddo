@@ -36,8 +36,9 @@ struct TasksListView: View {
                         TaskRowView(task: task)
                             .draggable(task)
                             .dropDestination(for: Todo.self) { tasks, _ in
+                                // Attach dropped task as subtask
                                 for dropTask in tasks where dropTask != task {
-                                    dropTask.disconnect()
+                                    dropTask.disconnectFromAll()
                                     dropTask.parentTask = task
                                     dropTask.reconnect()
                                 }
@@ -102,9 +103,8 @@ struct TasksListView: View {
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
-                        task.disconnect()
+                        task.disconnectFromParentTask()
                         task.parentTask = nil
-                        task.reconnect()
                         setDueDate(task: task)
                         
                         if section == CommonTaskListSections.completed {

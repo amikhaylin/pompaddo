@@ -103,10 +103,16 @@ extension Todo {
         }
     }
     
-    func disconnect() {
+    func disconnectFromAll() {
         if let project = self.project, let index = project.tasks.firstIndex(of: self) {
             project.tasks.remove(at: index)
         }
+        if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
+            parentTask.subtasks?.remove(at: index)
+        }
+    }
+    
+    func disconnectFromParentTask() {
         if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
             parentTask.subtasks?.remove(at: index)
         }

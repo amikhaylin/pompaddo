@@ -31,8 +31,9 @@ struct KanbanView: View {
                                 KanbanTaskRowView(task: task, completed: task.completed)
                                     .draggable(task)
                                     .dropDestination(for: Todo.self) { tasks, _ in
+                                        // Attach dropped task as subtask
                                         for dropTask in tasks where dropTask != task {
-                                            dropTask.disconnect()
+                                            dropTask.disconnectFromAll()
                                             dropTask.project = nil
                                             dropTask.status = nil
                                             dropTask.parentTask = task
@@ -102,9 +103,10 @@ struct KanbanView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.disconnect()
+                            task.disconnectFromParentTask()
                             task.parentTask = nil
-                            task.reconnect()
+                            task.project = project
+                            project.tasks.append(task)
                             
                             if status.doCompletion {
                                 if !task.completed {
@@ -123,6 +125,7 @@ struct KanbanView: View {
                 }
             }
         }
+        .padding()
     }
     
     private func deleteTask(task: Todo) {

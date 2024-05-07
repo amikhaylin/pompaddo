@@ -163,7 +163,6 @@ struct EditTaskView: View {
                 .padding(.bottom, 10.0)
             }
         }
-        .padding(10)
         .onChange(of: task) { _, _ in
             setPicker()
         }
