@@ -34,6 +34,9 @@ class Todo {
     var uid: String = UUID().uuidString
     var completionDate: Date?
     var alertDate: Date?
+    var hasEstimate: Bool = false
+    var clarity: Int = 0
+    var baseTimeHours: Int = 0
     
     @Relationship(deleteRule: .cascade)
     var subtasks: [Todo]? = [Todo]()
@@ -190,5 +193,48 @@ extension Todo {
             }
             print("Subtasks end")
         }
+    }
+    
+    func calculateEstimate(_ factor: Double) -> Int {
+        if self.hasEstimate {
+            var priorityValue = 0.0
+            
+            switch self.priority {
+            case 3:
+                priorityValue = 1.0 // High
+            case 2:
+                priorityValue = 1.5 // Medium
+            case 1:
+                priorityValue = 2 // Low
+            default:
+                priorityValue = 0.0
+            }
+            
+            var clarityValue = 0.0
+            
+            switch self.clarity {
+            case 1:
+                clarityValue = 1.0 // Clear
+            case 2:
+                clarityValue = 1.5 // Half clear
+            case 3:
+                clarityValue = 2.0 // Not clear
+            default:
+                clarityValue = 0.0
+            }
+            
+            return Int(ceil((Double(self.baseTimeHours) * clarityValue * priorityValue) * factor))
+        }
+        return 0
+    }
+    
+    func sumEstimates(_ factor: Double) -> Int {
+        var result = self.calculateEstimate(factor)
+        if let subtasks = self.subtasks {
+            for subtask in subtasks {
+                result += subtask.sumEstimates(factor)
+            }
+        }
+        return result
     }
 }

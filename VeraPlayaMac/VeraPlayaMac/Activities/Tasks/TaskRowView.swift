@@ -78,6 +78,15 @@ struct TaskRowView: View {
                     .font(.caption)
             }
             
+            if task.hasEstimate {
+                Image(systemName: "pencil.and.list.clipboard")
+                    .foregroundStyle(Color.gray)
+                // TODO: Change factor in settings
+                Text("\(task.sumEstimates(1.7))")
+                    .foregroundStyle(Color.gray)
+                    .font(.caption)
+            }
+            
             if let dueDate = task.dueDate {
                 HStack {
                     if task.repeation != .none {

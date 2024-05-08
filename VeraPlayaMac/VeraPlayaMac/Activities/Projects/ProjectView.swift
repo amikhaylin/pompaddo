@@ -30,6 +30,14 @@ struct ProjectView: View {
             }
         }
         .toolbar {
+            if project.hasEstimate {
+                ToolbarItem {
+                    // TODO: Change factor in settings
+                    Text("Project estimate is \(project.sumEstimateByProject(1.7)) hours")
+                        .foregroundStyle(Color.gray)
+                }
+            }
+            
             ToolbarItem {
                 Picker("View Mode", selection: $project.projectViewMode) {
                     ForEach(0...1, id: \.self) { mode in
