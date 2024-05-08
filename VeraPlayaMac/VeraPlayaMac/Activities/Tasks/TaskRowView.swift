@@ -82,7 +82,7 @@ struct TaskRowView: View {
                 Image(systemName: "pencil.and.list.clipboard")
                     .foregroundStyle(Color.gray)
                 // TODO: Change factor in settings
-                Text("\(task.sumEstimates(1.7))")
+                Text("\(task.sumEstimates(1.7))h")
                     .foregroundStyle(Color.gray)
                     .font(.caption)
             }

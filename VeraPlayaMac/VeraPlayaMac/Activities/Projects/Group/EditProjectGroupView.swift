@@ -9,8 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct EditProjectGroupView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Binding var isVisible: Bool
+    @Environment(\.presentationMode) var presentationMode
     @Bindable var group: ProjectGroup
     @State private var groupName = ""
     
@@ -20,7 +19,7 @@ struct EditProjectGroupView: View {
             
             HStack {
                 Button("OK") {
-                    self.isVisible = false
+                    presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.defaultAction)
             }
@@ -32,13 +31,9 @@ struct EditProjectGroupView: View {
 
 #Preview {
     do {
-        let previewer = try Previewer()
-        
-        @State var isVisible = true
         @State var group = ProjectGroup(name: "ZZZZ")
         
-        return EditProjectGroupView(isVisible: $isVisible, group: group)
-            .modelContainer(previewer.container)
+        return EditProjectGroupView(group: group)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
