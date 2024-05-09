@@ -30,11 +30,7 @@ struct EditProjectGroupView: View {
 }
 
 #Preview {
-    do {
-        @State var group = ProjectGroup(name: "ZZZZ")
-        
-        return EditProjectGroupView(group: group)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @State var group = ProjectGroup(name: "ZZZZ")
+       
+    return EditProjectGroupView(group: group)
 }

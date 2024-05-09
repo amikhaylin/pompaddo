@@ -48,6 +48,13 @@ struct PomPadDoMacApp: App {
     }()
 
     var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
+                                        modelContext: sharedModelContainer.mainContext)
+        }
+        .modelContainer(sharedModelContainer)
+        
         MenuBarExtra {
             FocusTimerView(timerCount: $timerCount,
                            focusMode: $focusMode)
@@ -76,12 +83,5 @@ struct PomPadDoMacApp: App {
             }
         }
         .menuBarExtraStyle(.window)
-
-        WindowGroup {
-            ContentView()
-                .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
-                                        modelContext: sharedModelContainer.mainContext)
-        }
-        .modelContainer(sharedModelContainer)
     }
 }
