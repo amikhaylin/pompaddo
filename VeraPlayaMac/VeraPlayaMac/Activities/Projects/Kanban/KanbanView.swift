@@ -97,9 +97,9 @@ struct KanbanView: View {
                                         }
                                     }
                             }
+                            .listRowSeparator(.hidden)
                         }
-                        //                        .cornerRadius(10)
-                        //                        .shadow(radius: 10)
+                        .cornerRadius(5)
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
