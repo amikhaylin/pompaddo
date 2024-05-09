@@ -18,6 +18,9 @@ struct ProjectsListView: View {
     @Binding var newProjectIsShowing: Bool
     @Binding var newProjectGroupShow: Bool
     
+//    @State private var editProjectGroup = false
+//    @State private var groupToEdit: ProjectGroup?
+    
     var projects: [Project]
     @Query var groups: [ProjectGroup]
     
@@ -87,6 +90,13 @@ struct ProjectsListView: View {
                         return true
                     }
                     .contextMenu {
+//                        Button {
+//                            editProjectGroup.toggle()
+//                        } label: {
+//                            Image(systemName: "pencil")
+//                            Text("Rename group")
+//                        }
+                        
                         Button {
                             for project in projects.filter({ $0.group == group }) {
                                 project.group = nil
@@ -97,6 +107,9 @@ struct ProjectsListView: View {
                             Text("Delete group")
                         }
                     }
+//                    .sheet(isPresented: $editProjectGroup) {
+//                        EditProjectGroupView(isVisible: self.$editProjectGroup, group: group)
+//                    }
                 }
             } label: {
                 HStack {

@@ -16,6 +16,7 @@ class Project {
     var note: String = ""
     var projectViewMode: Int = 0
     var group: ProjectGroup?
+    var hasEstimate: Bool = false
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status] = []
@@ -40,5 +41,13 @@ extension Project {
             task.deleteSubtasks(context: context)
             context.delete(task)
         }
+    }
+    
+    func sumEstimateByProject(_ factor: Double) -> Int {
+        var result = 0
+        for task in self.tasks {
+            result += task.sumEstimates(factor)
+        }
+        return result
     }
 }

@@ -282,5 +282,20 @@ final class VeraPlayaMacTests: XCTestCase {
         tasks = fetchData()
         XCTAssertEqual(tasks.count, 0, "There should be 0 task")
     }
+    
+    @MainActor func testCalculateEstimate() throws {
+        clearTasks()
+        let task = Todo(name: "Make soup",
+                        dueDate: Calendar.current.date(byAdding: .day, value: -1, to: Date()))
+        
+        task.priority = 3
+        task.clarity = 1
+        task.baseTimeHours = 1
+        task.hasEstimate = true
+        
+        let estimate = task.calculateEstimate(1.7)
+        
+        XCTAssertEqual(estimate, 2, "Estimate value should be 2 hours")
+    }
 }
 // swiftlint:enable function_body_length

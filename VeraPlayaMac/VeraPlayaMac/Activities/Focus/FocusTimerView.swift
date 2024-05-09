@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct FocusTimerView: View {
+    // TODO: Change values in settings
     var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,

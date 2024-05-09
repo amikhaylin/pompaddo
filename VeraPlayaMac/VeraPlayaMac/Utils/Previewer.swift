@@ -31,6 +31,11 @@ struct Previewer {
 
         task.tomatoesCount += 1
         
+        task.priority = 3
+        task.clarity = 1
+        task.baseTimeHours = 1
+        task.hasEstimate = true
+        
         subtask = Todo(name: "Buy potatoes", parentTask: task)
         task.subtasks?.append(subtask)
         container.mainContext.insert(subtask)

@@ -71,6 +71,9 @@ struct ProjectSettingsView: View {
                                 .tag(days)
                         }
                     }
+                    
+                    Toggle("Show estimate", isOn: $project.hasEstimate)
+                        .toggleStyle(.switch)
                 }
             }
             HStack {
