@@ -12,7 +12,6 @@ struct ReviewProjectsView: View {
     var projects: [Project]
     @State private var selectedProject: Project?
     @Binding var selectedTasks: Set<Todo>
-    @Binding var currentTask: Todo?
     
     var body: some View {
         NavigationSplitView {
@@ -40,7 +39,6 @@ struct ReviewProjectsView: View {
                     }
                     .padding(5)
                     ProjectView(selectedTasks: $selectedTasks,
-                                currentTask: $currentTask,
                                 project: project)
                 }
             } else {
@@ -58,11 +56,9 @@ struct ReviewProjectsView: View {
         let previewer = try Previewer()
         let projects: [Project] = [previewer.project]
         @State var selectedTasks = Set<Todo>()
-        @State var currentTask: Todo?
         
         return ReviewProjectsView(projects: projects,
-                                  selectedTasks: $selectedTasks,
-                                  currentTask: $currentTask)
+                                  selectedTasks: $selectedTasks)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

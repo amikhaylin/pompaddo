@@ -11,7 +11,6 @@ import SwiftData
 struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var selectedTasks: Set<Todo>
-    @Binding var currentTask: Todo?
     
     @Bindable var project: Project
     
@@ -21,11 +20,9 @@ struct ProjectView: View {
         Group {
             if project.projectViewMode == 1 {
                 KanbanView(project: project,
-                           selectedTasks: $selectedTasks,
-                           currentTask: $currentTask)
+                           selectedTasks: $selectedTasks)
             } else {
                 ProjectTasksListView(selectedTasks: $selectedTasks,
-                                     currentTask: $currentTask,
                                      project: project)
             }
         }
@@ -102,7 +99,8 @@ struct ProjectView: View {
                             status: project.statuses.sorted(by: { $0.order < $1.order }).first,
                             project: project)
             modelContext.insert(task)
-            currentTask = task
+            
+            selectedTasks.insert(task)
         }
     }
 }
@@ -111,11 +109,9 @@ struct ProjectView: View {
     do {
         let previewer = try Previewer()
         @State var selectedTasks = Set<Todo>()
-        @State var currentTask: Todo?
         @State var project = previewer.project
         
         return ProjectView(selectedTasks: $selectedTasks,
-                                    currentTask: $currentTask,
                                     project: previewer.project)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

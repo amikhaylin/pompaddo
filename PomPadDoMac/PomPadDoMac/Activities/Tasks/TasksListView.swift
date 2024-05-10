@@ -20,7 +20,6 @@ struct TasksListView: View {
     var tasks: [Todo]
 
     @Binding var selectedTasks: Set<Todo>
-    @Binding var currentTask: Todo?
     
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
@@ -73,7 +72,7 @@ struct TasksListView: View {
                                     task.subtasks?.append(subtask)
                                     modelContext.insert(subtask)
                                     
-                                    currentTask = subtask
+                                    selectedTasks.insert(subtask)
                                 } label: {
                                     Image(systemName: "plus")
                                     Text("Add subtask")
@@ -86,7 +85,7 @@ struct TasksListView: View {
                                     modelContext.insert(newTask)
                                     newTask.reconnect()
 
-                                    currentTask = newTask
+                                    selectedTasks.insert(newTask)
                                 } label: {
                                     Image(systemName: "doc.on.doc")
                                     Text("Dublicate task")
@@ -176,7 +175,8 @@ struct TasksListView: View {
             setDueDate(task: task)
             
             modelContext.insert(task)
-            currentTask = task
+
+            selectedTasks.insert(task)
         }
     }
 }
@@ -186,11 +186,9 @@ struct TasksListView: View {
         let previewer = try Previewer()
         let tasks: [Todo] = [previewer.task]
         @State var selectedTasks = Set<Todo>()
-        @State var currentTask: Todo?
         
         return TasksListView(tasks: tasks, 
                              selectedTasks: $selectedTasks,
-                             currentTask: $currentTask,
                              list: .inbox)
             .modelContainer(previewer.container)
     } catch {
