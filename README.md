@@ -15,7 +15,11 @@ made to myself by myself
 [![license](https://img.shields.io/github/license/sgr-ksmt/FireTodo.svg?style=for-the-badge)](https://github.com/sgr-ksmt/FireTodo/blob/master/LICENSE)--->
 
 ## macOS app
-![](mac.png)
+<!--![](mac-main.png) --->
+
+<img src="mac-main.png" align="left" />
+<img src="mac-focus-tasks.png" height="220" width="210" />
+<img src="mac-focus-timer.png"  height="220" width="210" />
 
 ### TODO
 - [x] Add task direct to Inbox
@@ -23,7 +27,7 @@ made to myself by myself
 - [x] Kanban view
 - [x] Repeating tasks 
 - [x] Notifications
-- [x] Pomodoro timer
+- [x] Focus timer
 - [ ] Location based contexts
 - [ ] iOS / iPadOS implementation
 - [ ] watchOS implementation
