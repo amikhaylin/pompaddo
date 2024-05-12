@@ -11,7 +11,6 @@ import SwiftData
 struct ProjectTasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var selectedTasks: Set<Todo>
-    @Binding var currentTask: Todo?
     
     @Bindable var project: Project
     @State private var groupsExpanded = true
@@ -67,7 +66,7 @@ struct ProjectTasksListView: View {
                                     task.subtasks?.append(subtask)
                                     modelContext.insert(subtask)
 
-                                    currentTask = subtask
+                                    selectedTasks.insert(subtask)
                                 } label: {
                                     Image(systemName: "plus")
                                     Text("Add subtask")
@@ -80,7 +79,7 @@ struct ProjectTasksListView: View {
                                     modelContext.insert(newTask)
                                     newTask.reconnect()
                                     
-                                    currentTask = newTask
+                                    selectedTasks.insert(newTask)
                                 } label: {
                                     Image(systemName: "doc.on.doc")
                                     Text("Dublicate task")
@@ -138,11 +137,9 @@ struct ProjectTasksListView: View {
     do {
         let previewer = try Previewer()
         @State var selectedTasks = Set<Todo>()
-        @State var currentTask: Todo?
         @State var project = previewer.project
         
         return ProjectTasksListView(selectedTasks: $selectedTasks,
-                                    currentTask: $currentTask,
                                     project: previewer.project)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

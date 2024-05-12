@@ -29,7 +29,6 @@ struct ContentView: View {
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
     @State private var selectedTasks = Set<Todo>()
-    @State private var currentTask: Todo?
     @State private var selectedProject: Project?
     
     @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
@@ -159,26 +158,22 @@ struct ContentView: View {
                 case .inbox:
                     TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
                                   selectedTasks: $selectedTasks,
-                                  currentTask: $currentTask,
                                   list: selectedSideBarItem)
                 case .today:
                     TasksListView(tasks: tasksToday
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                         .sorted(by: TasksQuery.defaultSorting),
                                   selectedTasks: $selectedTasks,
-                                  currentTask: $currentTask,
                                   list: selectedSideBarItem)
                 case .tomorrow:
                     TasksListView(tasks: tasksTomorrow
                         .filter({ $0.completionDate == nil })
                         .sorted(by: TasksQuery.defaultSorting),
                                   selectedTasks: $selectedTasks,
-                                  currentTask: $currentTask,
                                   list: selectedSideBarItem)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(selectedTasks: $selectedTasks,
-                                    currentTask: $currentTask,
                                     project: project)
                     } else {
                         Text("Select a project")
@@ -194,16 +189,11 @@ struct ContentView: View {
                             return false
                         }
                     }),
-                                       selectedTasks: $selectedTasks,
-                                       currentTask: $currentTask)
+                                       selectedTasks: $selectedTasks)
                 }
                 
-                if currentTask != nil || selectedTasks.count > 0 {
-                    if let currentTask = currentTask {
-                        EditTaskView(task: currentTask)
-                            .frame(minWidth: 270, idealWidth: 270, maxWidth: 350)
-                            .padding()
-                    } else if let selectedTask = selectedTasks.first {
+                if selectedTasks.count > 0 {
+                    if let selectedTask = selectedTasks.first {
                         EditTaskView(task: selectedTask)
                             .frame(minWidth: 270, idealWidth: 270, maxWidth: 350)
                             .padding()
@@ -213,11 +203,10 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem {
                     Button {
-                        currentTask = nil
                         selectedTasks = []
                     } label: {
                         Image(systemName: "sidebar.right")
-                    }.disabled(!(currentTask != nil || selectedTasks.count > 0))
+                    }.disabled(!(selectedTasks.count > 0))
                 }
             }
         }
@@ -226,7 +215,6 @@ struct ContentView: View {
         }
         .onChange(of: selectedSideBarItem, { _, newValue in
             selectedTasks = []
-            currentTask = nil
             if newValue != .projects {
                 selectedProject = nil
             }

@@ -13,7 +13,6 @@ struct KanbanView: View {
     @Bindable var project: Project
     
     @Binding var selectedTasks: Set<Todo>
-    @Binding var currentTask: Todo?
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -70,7 +69,7 @@ struct KanbanView: View {
                                             task.subtasks?.append(subtask)
                                             modelContext.insert(subtask)
                                             
-                                            currentTask = subtask
+                                            selectedTasks.insert(subtask)
                                         } label: {
                                             Image(systemName: "plus")
                                             Text("Add subtask")
@@ -82,8 +81,8 @@ struct KanbanView: View {
                                             let newTask = task.copy(modelContext: modelContext)
                                             modelContext.insert(newTask)
                                             newTask.reconnect()
-                                            
-                                            currentTask = newTask
+
+                                            selectedTasks.insert(newTask)
                                         } label: {
                                             Image(systemName: "doc.on.doc")
                                             Text("Dublicate task")
@@ -149,12 +148,10 @@ struct KanbanView: View {
     do {
         let previewer = try Previewer()
         @State var selectedTasks = Set<Todo>()
-        @State var currentTask: Todo?
         @State var project = previewer.project
         
         return KanbanView(project: project,
-                            selectedTasks: $selectedTasks,
-                            currentTask: $currentTask)
+                            selectedTasks: $selectedTasks)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

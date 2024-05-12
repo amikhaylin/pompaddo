@@ -37,6 +37,7 @@
 		4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */; };
 		4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */; };
 		4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */; };
+		4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBAD6152BECBEEF002666BD /* Credits.rtf */; };
 		4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
 		4DCE05D92BC9284A002C9566 /* KanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* KanbanView.swift */; };
@@ -99,6 +100,7 @@
 		4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
 		4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
 		4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
+		4DBAD6152BECBEEF002666BD /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4DBDC7EC2B7CB4EC0063F522 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		4DCE05D82BC9284A002C9566 /* KanbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanbanView.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 		4D95FE192B7B6BF300C8918D = {
 			isa = PBXGroup;
 			children = (
+				4DBAD6152BECBEEF002666BD /* Credits.rtf */,
 				4D95FE242B7B6BF300C8918D /* PomPadDoMac */,
 				4D95FE382B7B6BF600C8918D /* PomPadDoMacTests */,
 				4D95FE422B7B6BF600C8918D /* PomPadDoMacUITests */,
@@ -433,6 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D95FE2F2B7B6BF600C8918D /* Preview Assets.xcassets in Resources */,
+				4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */,
 				4D95FE2C2B7B6BF600C8918D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -690,7 +694,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoMac/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PomPadDo";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -723,7 +727,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoMac/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "PomPadDo";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
