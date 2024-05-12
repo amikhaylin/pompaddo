@@ -32,6 +32,7 @@ made to myself by myself
 - [ ] iOS / iPadOS implementation
 - [ ] watchOS implementation
 - [ ] Sync via iCloud
+- [ ] Settings for focus timer's factors and estimates
 
 #### Languages Supported
 - English 🇺🇸
