@@ -3,10 +3,12 @@
 //  PomPadDoMac
 //
 //  Created by Andrey Mikhaylin on 03.05.2024.
+//  based on PomodoroTimer by Martin B.I.
 //
 
 import Foundation
 import Observation
+import AudioToolbox
 
 enum FocusTimerState: String {
     case idle
@@ -55,7 +57,6 @@ class FocusTimer {
     private(set) var sessionsCounter: Int = 0
 
     private var timer: Timer?
-//    private var audio: PomodoroAudio = PomodoroAudio()
   
     init(workInSeconds: TimeInterval, 
          breakInSeconds: TimeInterval,
@@ -113,11 +114,12 @@ class FocusTimer {
     }
     
     func reset() {
+        state = .idle
+        killTimer()
+        dateStarted = Date.now
         secondsPassed = 0
         fractionPassed = 0
         secondsPassedBeforePause = 0
-        state = .idle
-        killTimer()
     }
     
     func skip() {
@@ -134,12 +136,6 @@ class FocusTimer {
         }
     }
     
-    func repeatTimer() {
-        skip()
-        secondsPassedBeforePause = 0
-        start()
-    }
-  
     // MARK: private methods
     private func createTimer() {
         // schedule notification
@@ -149,7 +145,7 @@ class FocusTimer {
                                             title: "PomPadDo Timer",
                                             body: "Your focus timer is finished")
         // create timer
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {[self] _ in
             self.onTick()
         }
     }
@@ -167,15 +163,16 @@ class FocusTimer {
         self.secondsPassed = Int(secondsSinceStartDate) + self.secondsPassedBeforePause
         // calculate fraction
         self.fractionPassed = TimeInterval(self.secondsPassed) / self.duration
-        // play tick
-//    _audio.play(.tick)
         // done? play sound, reset, switch (work->pause->work), reset timer
         if self.secondsLeft == 0 {
-//            self.fractionPassed = 0
-            self.repeatTimer()
-//            self.skip() // to switch mode
-//            self.reset() // also resets timer
-//        _audio.play(.done) // play ending sound
+            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_UserPreferredAlert))
+            self.fractionPassed = 0
+            self.secondsPassedBeforePause = 0
+            self.skip() // to switch mode
+            dateStarted = Date.now
+            secondsPassed = 0
+            fractionPassed = 0
+            state = .running
         }
     }
   
