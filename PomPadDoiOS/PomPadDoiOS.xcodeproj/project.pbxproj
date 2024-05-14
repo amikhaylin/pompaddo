@@ -1,0 +1,717 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D4272BD2BF36AEF0003E129 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */; };
+		4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */; };
+		4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D42BF23034002C4F95 /* ContentView.swift */; };
+		4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D82BF23037002C4F95 /* Assets.xcassets */; };
+		4DDDB3DC2BF23037002C4F95 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDDB3DB2BF23037002C4F95 /* Preview Assets.xcassets */; };
+		4DDDB3E62BF23037002C4F95 /* PomPadDoiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3E52BF23037002C4F95 /* PomPadDoiOSTests.swift */; };
+		4DDDB3F02BF23037002C4F95 /* PomPadDoiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3EF2BF23037002C4F95 /* PomPadDoiOSUITests.swift */; };
+		4DDDB3F22BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3F12BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift */; };
+		4DDDB3FF2BF257B7002C4F95 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3FE2BF257B7002C4F95 /* MainView.swift */; };
+		4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9C2BF351ED00E43E9A /* Todo.swift */; };
+		4DE97AA12BF351ED00E43E9A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9D2BF351ED00E43E9A /* Project.swift */; };
+		4DE97AA22BF351ED00E43E9A /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9E2BF351ED00E43E9A /* Status.swift */; };
+		4DE97AA32BF351EE00E43E9A /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9F2BF351ED00E43E9A /* ProjectGroup.swift */; };
+		4DE97AA92BF35BD300E43E9A /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AA62BF35BD300E43E9A /* CheckBoxView.swift */; };
+		4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AA72BF35BD300E43E9A /* CircularProgressView.swift */; };
+		4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AA82BF35BD300E43E9A /* Collapsible.swift */; };
+		4DE97AB22BF35CB000E43E9A /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AAE2BF35CAF00E43E9A /* Previewer.swift */; };
+		4DE97AB32BF35CB000E43E9A /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AAF2BF35CB000E43E9A /* TasksQuery.swift */; };
+		4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AB02BF35CB000E43E9A /* NotificationManager.swift */; };
+		4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */; };
+		4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */; };
+		4DE97AC02BF3688A00E43E9A /* KanbanTaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABF2BF3688A00E43E9A /* KanbanTaskRowView.swift */; };
+		4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4DDDB3E22BF23037002C4F95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDDB3C72BF23034002C4F95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DDDB3CE2BF23034002C4F95;
+			remoteInfo = PomPadDoiOS;
+		};
+		4DDDB3EC2BF23037002C4F95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDDB3C72BF23034002C4F95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DDDB3CE2BF23034002C4F95;
+			remoteInfo = PomPadDoiOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSApp.swift; sourceTree = "<group>"; };
+		4DDDB3D42BF23034002C4F95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4DDDB3D82BF23037002C4F95 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4DDDB3DB2BF23037002C4F95 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4DDDB3E12BF23037002C4F95 /* PomPadDoiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDoiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DDDB3E52BF23037002C4F95 /* PomPadDoiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSTests.swift; sourceTree = "<group>"; };
+		4DDDB3EB2BF23037002C4F95 /* PomPadDoiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDoiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DDDB3EF2BF23037002C4F95 /* PomPadDoiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSUITests.swift; sourceTree = "<group>"; };
+		4DDDB3F12BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4DDDB3FE2BF257B7002C4F95 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		4DE97A9C2BF351ED00E43E9A /* Todo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Todo.swift; path = ../../../PomPadDoMac/PomPadDoMac/Model/Todo.swift; sourceTree = "<group>"; };
+		4DE97A9D2BF351ED00E43E9A /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Project.swift; path = ../../../PomPadDoMac/PomPadDoMac/Model/Project.swift; sourceTree = "<group>"; };
+		4DE97A9E2BF351ED00E43E9A /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Status.swift; path = ../../../PomPadDoMac/PomPadDoMac/Model/Status.swift; sourceTree = "<group>"; };
+		4DE97A9F2BF351ED00E43E9A /* ProjectGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectGroup.swift; path = ../../../PomPadDoMac/PomPadDoMac/Model/ProjectGroup.swift; sourceTree = "<group>"; };
+		4DE97AA62BF35BD300E43E9A /* CheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBoxView.swift; path = ../../../PomPadDoMac/PomPadDoMac/CustomViews/CheckBoxView.swift; sourceTree = "<group>"; };
+		4DE97AA72BF35BD300E43E9A /* CircularProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CircularProgressView.swift; path = ../../../PomPadDoMac/PomPadDoMac/CustomViews/CircularProgressView.swift; sourceTree = "<group>"; };
+		4DE97AA82BF35BD300E43E9A /* Collapsible.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Collapsible.swift; path = ../../../PomPadDoMac/PomPadDoMac/CustomViews/Collapsible.swift; sourceTree = "<group>"; };
+		4DE97AAE2BF35CAF00E43E9A /* Previewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Previewer.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/Previewer.swift; sourceTree = "<group>"; };
+		4DE97AAF2BF35CB000E43E9A /* TasksQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksQuery.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/TasksQuery.swift; sourceTree = "<group>"; };
+		4DE97AB02BF35CB000E43E9A /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/NotificationManager.swift; sourceTree = "<group>"; };
+		4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusTimer.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Focus/FocusTimer.swift; sourceTree = "<group>"; };
+		4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BadgeManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/BadgeManager.swift; sourceTree = "<group>"; };
+		4DE97ABF2BF3688A00E43E9A /* KanbanTaskRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KanbanTaskRowView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/Kanban/KanbanTaskRowView.swift; sourceTree = "<group>"; };
+		4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCheckBoxView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskCheckBoxView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4DDDB3CC2BF23034002C4F95 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DDDB3DE2BF23037002C4F95 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DDDB3E82BF23037002C4F95 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4DDDB3C62BF23034002C4F95 = {
+			isa = PBXGroup;
+			children = (
+				4DDDB3D12BF23034002C4F95 /* PomPadDoiOS */,
+				4DDDB3E42BF23037002C4F95 /* PomPadDoiOSTests */,
+				4DDDB3EE2BF23037002C4F95 /* PomPadDoiOSUITests */,
+				4DDDB3D02BF23034002C4F95 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4DDDB3D02BF23034002C4F95 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */,
+				4DDDB3E12BF23037002C4F95 /* PomPadDoiOSTests.xctest */,
+				4DDDB3EB2BF23037002C4F95 /* PomPadDoiOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4DDDB3D12BF23034002C4F95 /* PomPadDoiOS */ = {
+			isa = PBXGroup;
+			children = (
+				4DE97AAC2BF35C0000E43E9A /* Utils */,
+				4DE97AA52BF35BBD00E43E9A /* CustomViews */,
+				4DE97AA42BF35ACA00E43E9A /* Activities */,
+				4DE97A9B2BF351BD00E43E9A /* Model */,
+				4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */,
+				4DDDB3D42BF23034002C4F95 /* ContentView.swift */,
+				4DDDB3D82BF23037002C4F95 /* Assets.xcassets */,
+				4DDDB3DA2BF23037002C4F95 /* Preview Content */,
+				4DDDB3FE2BF257B7002C4F95 /* MainView.swift */,
+			);
+			path = PomPadDoiOS;
+			sourceTree = "<group>";
+		};
+		4DDDB3DA2BF23037002C4F95 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4DDDB3DB2BF23037002C4F95 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4DDDB3E42BF23037002C4F95 /* PomPadDoiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				4DDDB3E52BF23037002C4F95 /* PomPadDoiOSTests.swift */,
+			);
+			path = PomPadDoiOSTests;
+			sourceTree = "<group>";
+		};
+		4DDDB3EE2BF23037002C4F95 /* PomPadDoiOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4DDDB3EF2BF23037002C4F95 /* PomPadDoiOSUITests.swift */,
+				4DDDB3F12BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift */,
+			);
+			path = PomPadDoiOSUITests;
+			sourceTree = "<group>";
+		};
+		4DE97A9B2BF351BD00E43E9A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4DE97A9D2BF351ED00E43E9A /* Project.swift */,
+				4DE97A9F2BF351ED00E43E9A /* ProjectGroup.swift */,
+				4DE97A9E2BF351ED00E43E9A /* Status.swift */,
+				4DE97A9C2BF351ED00E43E9A /* Todo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4DE97AA42BF35ACA00E43E9A /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				4DE97ABC2BF3686200E43E9A /* Tasks */,
+				4DE97AB52BF35E8A00E43E9A /* Focus */,
+			);
+			path = Activities;
+			sourceTree = "<group>";
+		};
+		4DE97AA52BF35BBD00E43E9A /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				4DE97AA62BF35BD300E43E9A /* CheckBoxView.swift */,
+				4DE97AA72BF35BD300E43E9A /* CircularProgressView.swift */,
+				4DE97AA82BF35BD300E43E9A /* Collapsible.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		4DE97AAC2BF35C0000E43E9A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */,
+				4DE97AB02BF35CB000E43E9A /* NotificationManager.swift */,
+				4DE97AAE2BF35CAF00E43E9A /* Previewer.swift */,
+				4DE97AAF2BF35CB000E43E9A /* TasksQuery.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		4DE97AB52BF35E8A00E43E9A /* Focus */ = {
+			isa = PBXGroup;
+			children = (
+				4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */,
+			);
+			path = Focus;
+			sourceTree = "<group>";
+		};
+		4DE97ABC2BF3686200E43E9A /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */,
+				4DE97ABF2BF3688A00E43E9A /* KanbanTaskRowView.swift */,
+				4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DDDB3F52BF23037002C4F95 /* Build configuration list for PBXNativeTarget "PomPadDoiOS" */;
+			buildPhases = (
+				4DDDB3CB2BF23034002C4F95 /* Sources */,
+				4DDDB3CC2BF23034002C4F95 /* Frameworks */,
+				4DDDB3CD2BF23034002C4F95 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PomPadDoiOS;
+			productName = PomPadDoiOS;
+			productReference = 4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4DDDB3E02BF23037002C4F95 /* PomPadDoiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DDDB3F82BF23037002C4F95 /* Build configuration list for PBXNativeTarget "PomPadDoiOSTests" */;
+			buildPhases = (
+				4DDDB3DD2BF23037002C4F95 /* Sources */,
+				4DDDB3DE2BF23037002C4F95 /* Frameworks */,
+				4DDDB3DF2BF23037002C4F95 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4DDDB3E32BF23037002C4F95 /* PBXTargetDependency */,
+			);
+			name = PomPadDoiOSTests;
+			productName = PomPadDoiOSTests;
+			productReference = 4DDDB3E12BF23037002C4F95 /* PomPadDoiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4DDDB3EA2BF23037002C4F95 /* PomPadDoiOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DDDB3FB2BF23037002C4F95 /* Build configuration list for PBXNativeTarget "PomPadDoiOSUITests" */;
+			buildPhases = (
+				4DDDB3E72BF23037002C4F95 /* Sources */,
+				4DDDB3E82BF23037002C4F95 /* Frameworks */,
+				4DDDB3E92BF23037002C4F95 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4DDDB3ED2BF23037002C4F95 /* PBXTargetDependency */,
+			);
+			name = PomPadDoiOSUITests;
+			productName = PomPadDoiOSUITests;
+			productReference = 4DDDB3EB2BF23037002C4F95 /* PomPadDoiOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4DDDB3C72BF23034002C4F95 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					4DDDB3CE2BF23034002C4F95 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					4DDDB3E02BF23037002C4F95 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 4DDDB3CE2BF23034002C4F95;
+					};
+					4DDDB3EA2BF23037002C4F95 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = 4DDDB3CE2BF23034002C4F95;
+					};
+				};
+			};
+			buildConfigurationList = 4DDDB3CA2BF23034002C4F95 /* Build configuration list for PBXProject "PomPadDoiOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4DDDB3C62BF23034002C4F95;
+			productRefGroup = 4DDDB3D02BF23034002C4F95 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */,
+				4DDDB3E02BF23037002C4F95 /* PomPadDoiOSTests */,
+				4DDDB3EA2BF23037002C4F95 /* PomPadDoiOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4DDDB3CD2BF23034002C4F95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DDDB3DC2BF23037002C4F95 /* Preview Assets.xcassets in Resources */,
+				4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DDDB3DF2BF23037002C4F95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DDDB3E92BF23037002C4F95 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4DDDB3CB2BF23034002C4F95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */,
+				4DE97AB22BF35CB000E43E9A /* Previewer.swift in Sources */,
+				4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */,
+				4DE97AC02BF3688A00E43E9A /* KanbanTaskRowView.swift in Sources */,
+				4DE97AA32BF351EE00E43E9A /* ProjectGroup.swift in Sources */,
+				4DDDB3FF2BF257B7002C4F95 /* MainView.swift in Sources */,
+				4DE97AA22BF351ED00E43E9A /* Status.swift in Sources */,
+				4DE97AB32BF35CB000E43E9A /* TasksQuery.swift in Sources */,
+				4DE97AA92BF35BD300E43E9A /* CheckBoxView.swift in Sources */,
+				4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */,
+				4D4272BD2BF36AEF0003E129 /* TaskRowView.swift in Sources */,
+				4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */,
+				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
+				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
+				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
+				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
+				4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */,
+				4DE97AA12BF351ED00E43E9A /* Project.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DDDB3DD2BF23037002C4F95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DDDB3E62BF23037002C4F95 /* PomPadDoiOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DDDB3E72BF23037002C4F95 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DDDB3F22BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift in Sources */,
+				4DDDB3F02BF23037002C4F95 /* PomPadDoiOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4DDDB3E32BF23037002C4F95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */;
+			targetProxy = 4DDDB3E22BF23037002C4F95 /* PBXContainerItemProxy */;
+		};
+		4DDDB3ED2BF23037002C4F95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */;
+			targetProxy = 4DDDB3EC2BF23037002C4F95 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4DDDB3F32BF23037002C4F95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4DDDB3F42BF23037002C4F95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4DDDB3F62BF23037002C4F95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDoiOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4DDDB3F72BF23037002C4F95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDoiOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4DDDB3F92BF23037002C4F95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomPadDoiOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomPadDoiOS";
+			};
+			name = Debug;
+		};
+		4DDDB3FA2BF23037002C4F95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomPadDoiOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomPadDoiOS";
+			};
+			name = Release;
+		};
+		4DDDB3FC2BF23037002C4F95 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PomPadDoiOS;
+			};
+			name = Debug;
+		};
+		4DDDB3FD2BF23037002C4F95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PomPadDoiOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4DDDB3CA2BF23034002C4F95 /* Build configuration list for PBXProject "PomPadDoiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DDDB3F32BF23037002C4F95 /* Debug */,
+				4DDDB3F42BF23037002C4F95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DDDB3F52BF23037002C4F95 /* Build configuration list for PBXNativeTarget "PomPadDoiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DDDB3F62BF23037002C4F95 /* Debug */,
+				4DDDB3F72BF23037002C4F95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DDDB3F82BF23037002C4F95 /* Build configuration list for PBXNativeTarget "PomPadDoiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DDDB3F92BF23037002C4F95 /* Debug */,
+				4DDDB3FA2BF23037002C4F95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DDDB3FB2BF23037002C4F95 /* Build configuration list for PBXNativeTarget "PomPadDoiOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DDDB3FC2BF23037002C4F95 /* Debug */,
+				4DDDB3FD2BF23037002C4F95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4DDDB3C72BF23034002C4F95 /* Project object */;
+}

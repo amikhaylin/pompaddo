@@ -165,7 +165,10 @@ class FocusTimer {
         self.fractionPassed = TimeInterval(self.secondsPassed) / self.duration
         // done? play sound, reset, switch (work->pause->work), reset timer
         if self.secondsLeft == 0 {
+            #if os(macOS)
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_UserPreferredAlert))
+            #endif
+            
             self.fractionPassed = 0
             self.secondsPassedBeforePause = 0
             self.skip() // to switch mode
