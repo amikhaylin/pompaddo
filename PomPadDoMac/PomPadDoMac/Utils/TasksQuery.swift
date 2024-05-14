@@ -18,10 +18,13 @@ struct TasksQuery {
     }
     
     static func predicateToday() -> Predicate<Todo> {
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
+        let today = Calendar.current.startOfDay(for: Date())
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
                 return date < tomorrow
+            } else if let completeDate = task.completionDate {
+                return (completeDate >= today && completeDate < tomorrow)
             } else {
                 return false
             }
