@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct PomPadDoiOSApp: App {
+
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Todo.self,
@@ -30,6 +32,8 @@ struct PomPadDoiOSApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
+                                        modelContext: sharedModelContainer.mainContext)
         }
         .modelContainer(sharedModelContainer)
     }

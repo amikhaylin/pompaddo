@@ -124,8 +124,6 @@ struct ContentView: View {
                 }
                 .frame(height: 125)
                 
-                Divider()
-                
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedTasks: $selectedTasks,
                                  newProjectIsShowing: $newProjectIsShowing,

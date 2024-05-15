@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import SwiftData
+
+import SwiftDataTransferrable
 
 enum MainViewTabs {
     case tasks
@@ -14,6 +17,12 @@ enum MainViewTabs {
 }
 
 struct MainView: View {
+    // TODO: Change values in settings
+    var timer = FocusTimer(workInSeconds: 1500,
+                           breakInSeconds: 300,
+                           longBreakInSeconds: 1200,
+                           workSessionsCount: 4)
+    
     @State private var newTaskIsShowing = false
     @State private var tab: MainViewTabs = .tasks
     
@@ -27,7 +36,8 @@ struct MainView: View {
                 case .tasks:
                     ContentView()
                 case .focus:
-                    Text("Focus timer")
+                    FocusTimerView(focusMode: $focusMode,
+                                   timer: timer)
                 case.settings:
                     Text("Settings")
                 }
@@ -54,7 +64,7 @@ struct MainView: View {
                                 Image(systemName: "cup.and.saucer.fill")
                                     .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
                             }
-                            Text(timerCount)
+                            Text(timer.secondsLeftString)
                                 .foregroundStyle(focusMode == .work ? Color.red : Color.green)
                         }
                     }
@@ -79,9 +89,13 @@ struct MainView: View {
 
                 }
             }
+//            .onChange(of: timer.secondsLeft, { _, _ in
+//                timerCount = timer.secondsLeftString
+//            })
         }
         .sheet(isPresented: $newTaskIsShowing, content: {
-            Text("Inbox dialog")
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
+                .presentationDetents([.height(200)])
         })
     }
 }

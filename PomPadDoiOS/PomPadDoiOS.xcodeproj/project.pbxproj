@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		4D4272BD2BF36AEF0003E129 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */; };
+		4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */; };
+		4D4272C72BF3BD160003E129 /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D4272C62BF3BD160003E129 /* SwiftDataTransferrable */; };
+		4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C82BF3BDF70003E129 /* NewTaskView.swift */; };
+		4D4272CC2BF3C5AB0003E129 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272CB2BF3C5AB0003E129 /* ProjectsListView.swift */; };
+		4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */; };
+		4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */; };
+		4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D22BF3C8070003E129 /* NewProjectView.swift */; };
 		4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */; };
 		4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D42BF23034002C4F95 /* ContentView.swift */; };
 		4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D82BF23037002C4F95 /* Assets.xcassets */; };
@@ -28,8 +35,8 @@
 		4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AB02BF35CB000E43E9A /* NotificationManager.swift */; };
 		4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */; };
 		4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */; };
-		4DE97AC02BF3688A00E43E9A /* KanbanTaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABF2BF3688A00E43E9A /* KanbanTaskRowView.swift */; };
 		4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
+		4DFB04042BF4A85F00436EDC /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB04032BF4A85F00436EDC /* TasksListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +58,12 @@
 
 /* Begin PBXFileReference section */
 		4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
+		4D4272C82BF3BDF70003E129 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4D4272CB2BF3C5AB0003E129 /* ProjectsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectsListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/ProjectsListView.swift; sourceTree = "<group>"; };
+		4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
+		4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
+		4D4272D22BF3C8070003E129 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSApp.swift; sourceTree = "<group>"; };
 		4DDDB3D42BF23034002C4F95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -74,8 +87,9 @@
 		4DE97AB02BF35CB000E43E9A /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/NotificationManager.swift; sourceTree = "<group>"; };
 		4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusTimer.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Focus/FocusTimer.swift; sourceTree = "<group>"; };
 		4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BadgeManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/BadgeManager.swift; sourceTree = "<group>"; };
-		4DE97ABF2BF3688A00E43E9A /* KanbanTaskRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KanbanTaskRowView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/Kanban/KanbanTaskRowView.swift; sourceTree = "<group>"; };
 		4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCheckBoxView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskCheckBoxView.swift; sourceTree = "<group>"; };
+		4DFB04032BF4A85F00436EDC /* TasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TasksListView.swift; sourceTree = "<group>"; };
+		4DFB04092BF4B7AF00436EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D4272C72BF3BD160003E129 /* SwiftDataTransferrable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +118,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D4272C52BF3BD160003E129 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D4272CA2BF3C5880003E129 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				4D4272CD2BF3C7600003E129 /* Groups */,
+				4D4272CB2BF3C5AB0003E129 /* ProjectsListView.swift */,
+				4D4272D22BF3C8070003E129 /* NewProjectView.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		4D4272CD2BF3C7600003E129 /* Groups */ = {
+			isa = PBXGroup;
+			children = (
+				4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */,
+				4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */,
+			);
+			path = Groups;
+			sourceTree = "<group>";
+		};
 		4DDDB3C62BF23034002C4F95 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +151,7 @@
 				4DDDB3E42BF23037002C4F95 /* PomPadDoiOSTests */,
 				4DDDB3EE2BF23037002C4F95 /* PomPadDoiOSUITests */,
 				4DDDB3D02BF23034002C4F95 /* Products */,
+				4D4272C52BF3BD160003E129 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -126,6 +168,7 @@
 		4DDDB3D12BF23034002C4F95 /* PomPadDoiOS */ = {
 			isa = PBXGroup;
 			children = (
+				4DFB04092BF4B7AF00436EDC /* Info.plist */,
 				4DE97AAC2BF35C0000E43E9A /* Utils */,
 				4DE97AA52BF35BBD00E43E9A /* CustomViews */,
 				4DE97AA42BF35ACA00E43E9A /* Activities */,
@@ -178,6 +221,7 @@
 		4DE97AA42BF35ACA00E43E9A /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				4D4272CA2BF3C5880003E129 /* Projects */,
 				4DE97ABC2BF3686200E43E9A /* Tasks */,
 				4DE97AB52BF35E8A00E43E9A /* Focus */,
 			);
@@ -209,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */,
+				4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */,
 			);
 			path = Focus;
 			sourceTree = "<group>";
@@ -216,9 +261,10 @@
 		4DE97ABC2BF3686200E43E9A /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				4DFB04032BF4A85F00436EDC /* TasksListView.swift */,
 				4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */,
-				4DE97ABF2BF3688A00E43E9A /* KanbanTaskRowView.swift */,
 				4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */,
+				4D4272C82BF3BDF70003E129 /* NewTaskView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -239,6 +285,9 @@
 			dependencies = (
 			);
 			name = PomPadDoiOS;
+			packageProductDependencies = (
+				4D4272C62BF3BD160003E129 /* SwiftDataTransferrable */,
+			);
 			productName = PomPadDoiOS;
 			productReference = 4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */;
 			productType = "com.apple.product-type.application";
@@ -311,6 +360,9 @@
 				Base,
 			);
 			mainGroup = 4DDDB3C62BF23034002C4F95;
+			packageReferences = (
+				4D4272C42BF3BD000003E129 /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */,
+			);
 			productRefGroup = 4DDDB3D02BF23034002C4F95 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -354,22 +406,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */,
+				4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */,
+				4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */,
+				4DFB04042BF4A85F00436EDC /* TasksListView.swift in Sources */,
+				4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */,
 				4DE97AB22BF35CB000E43E9A /* Previewer.swift in Sources */,
 				4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */,
-				4DE97AC02BF3688A00E43E9A /* KanbanTaskRowView.swift in Sources */,
 				4DE97AA32BF351EE00E43E9A /* ProjectGroup.swift in Sources */,
 				4DDDB3FF2BF257B7002C4F95 /* MainView.swift in Sources */,
 				4DE97AA22BF351ED00E43E9A /* Status.swift in Sources */,
 				4DE97AB32BF35CB000E43E9A /* TasksQuery.swift in Sources */,
 				4DE97AA92BF35BD300E43E9A /* CheckBoxView.swift in Sources */,
+				4D4272CC2BF3C5AB0003E129 /* ProjectsListView.swift in Sources */,
 				4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */,
 				4D4272BD2BF36AEF0003E129 /* TaskRowView.swift in Sources */,
 				4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */,
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
 				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
 				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
+				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
 				4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */,
+				4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */,
 				4DE97AA12BF351ED00E43E9A /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +595,7 @@
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoiOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -572,6 +631,7 @@
 				DEVELOPMENT_TEAM = 9Z68336878;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoiOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -712,6 +772,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4D4272C42BF3BD000003E129 /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Whiffer/swiftdata-transferrable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4D4272C62BF3BD160003E129 /* SwiftDataTransferrable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D4272C42BF3BD000003E129 /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */;
+			productName = SwiftDataTransferrable;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 4DDDB3C72BF23034002C4F95 /* Project object */;
 }
