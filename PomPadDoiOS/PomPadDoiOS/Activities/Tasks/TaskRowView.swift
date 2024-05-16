@@ -36,10 +36,16 @@ struct TaskRowView: View {
                         EmptyView()
                     }
                     
-                    Text(task.name)
-                        .foregroundStyle(task.completed ? Color.gray : Color.primary)
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(1)
+                    NavigationLink {
+                        EditTaskView(task: task)
+                    } label: {
+                        Text(task.name)
+                            .foregroundStyle(task.completed ? Color.gray : Color.primary)
+                            .minimumScaleFactor(0.5)
+                            .lineLimit(1)
+                    }
+
+
                     
                 }
                 HStack {

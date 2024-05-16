@@ -15,6 +15,8 @@
 		4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */; };
 		4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */; };
 		4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D22BF3C8070003E129 /* NewProjectView.swift */; };
+		4DA499042BF52C2A002A3B7D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA499032BF52C2A002A3B7D /* TasksListView.swift */; };
+		4DA499082BF52C9E002A3B7D /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA499072BF52C9E002A3B7D /* EditTaskView.swift */; };
 		4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */; };
 		4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D42BF23034002C4F95 /* ContentView.swift */; };
 		4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D82BF23037002C4F95 /* Assets.xcassets */; };
@@ -36,7 +38,6 @@
 		4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */; };
 		4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */; };
 		4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
-		4DFB04042BF4A85F00436EDC /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFB04032BF4A85F00436EDC /* TasksListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D22BF3C8070003E129 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
+		4DA499032BF52C2A002A3B7D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
+		4DA499072BF52C9E002A3B7D /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSApp.swift; sourceTree = "<group>"; };
 		4DDDB3D42BF23034002C4F95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,7 +91,6 @@
 		4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusTimer.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Focus/FocusTimer.swift; sourceTree = "<group>"; };
 		4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BadgeManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/BadgeManager.swift; sourceTree = "<group>"; };
 		4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCheckBoxView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskCheckBoxView.swift; sourceTree = "<group>"; };
-		4DFB04032BF4A85F00436EDC /* TasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TasksListView.swift; sourceTree = "<group>"; };
 		4DFB04092BF4B7AF00436EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -261,10 +263,11 @@
 		4DE97ABC2BF3686200E43E9A /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				4DFB04032BF4A85F00436EDC /* TasksListView.swift */,
 				4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */,
 				4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */,
 				4D4272C82BF3BDF70003E129 /* NewTaskView.swift */,
+				4DA499032BF52C2A002A3B7D /* TasksListView.swift */,
+				4DA499072BF52C9E002A3B7D /* EditTaskView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -408,7 +411,7 @@
 				4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */,
 				4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */,
 				4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */,
-				4DFB04042BF4A85F00436EDC /* TasksListView.swift in Sources */,
+				4DA499042BF52C2A002A3B7D /* TasksListView.swift in Sources */,
 				4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */,
 				4DE97AB22BF35CB000E43E9A /* Previewer.swift in Sources */,
 				4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */,
@@ -424,6 +427,7 @@
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
 				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
 				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
+				4DA499082BF52C9E002A3B7D /* EditTaskView.swift in Sources */,
 				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
 				4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */,

@@ -30,44 +30,43 @@ struct MainView: View {
     @State private var focusMode: FocusTimerMode = .work
     
     var body: some View {
-        NavigationStack {
-            Group {
-                switch tab {
-                case .tasks:
-                    ContentView()
-                case .focus:
-                    FocusTimerView(focusMode: $focusMode,
-                                   timer: timer)
-                case.settings:
-                    Text("Settings")
-                }
+        Group {
+            switch tab {
+            case .tasks:
+                ContentView()
+            case .focus:
+                FocusTimerView(focusMode: $focusMode,
+                               timer: timer)
+            case.settings:
+                Text("Settings")
             }
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Button {
-                        tab = .tasks
-                    } label: {
-                        Image(systemName: "checkmark.square")
-                            .foregroundStyle(tab == .tasks ? Color.blue : Color.gray)
-                    }
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .bottomBar) {
+                Button {
+                    tab = .tasks
+                } label: {
+                    Image(systemName: "checkmark.square")
+                        .foregroundStyle(tab == .tasks ? Color.blue : Color.gray)
+                }
 
-                    Spacer()
+                Spacer()
 
-                    Button {
-                        tab = .focus
-                    } label: {
-                        HStack {
-                            if focusMode == .work {
-                                Image(systemName: "target")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
-                            } else {
-                                Image(systemName: "cup.and.saucer.fill")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
-                            }
-                            Text(timer.secondsLeftString)
-                                .foregroundStyle(focusMode == .work ? Color.red : Color.green)
+                Button {
+                    tab = .focus
+                } label: {
+                    HStack {
+                        if focusMode == .work {
+                            Image(systemName: "target")
+                                .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
+                        } else {
+                            Image(systemName: "cup.and.saucer.fill")
+                                .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
                         }
+                        Text(timer.secondsLeftString)
+                            .foregroundStyle(focusMode == .work ? Color.red : Color.green)
                     }
+                }
 
 //                    Spacer()
 //                    
@@ -78,20 +77,16 @@ struct MainView: View {
 //                            .foregroundStyle(tab == .settings ? Color.blue : Color.gray)
 //                    }
 
-                    Spacer()
-                    
-                    Button {
-                        newTaskIsShowing.toggle()
-                    } label: {
-                        Image(systemName: "tray.and.arrow.down.fill")
-                            .foregroundStyle(Color.orange)
-                    }
-
+                Spacer()
+                
+                Button {
+                    newTaskIsShowing.toggle()
+                } label: {
+                    Image(systemName: "tray.and.arrow.down.fill")
+                        .foregroundStyle(Color.orange)
                 }
+
             }
-//            .onChange(of: timer.secondsLeft, { _, _ in
-//                timerCount = timer.secondsLeftString
-//            })
         }
         .sheet(isPresented: $newTaskIsShowing, content: {
             NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
