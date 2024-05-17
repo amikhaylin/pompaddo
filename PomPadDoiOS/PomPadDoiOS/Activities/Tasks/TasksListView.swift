@@ -25,114 +25,126 @@ struct TasksListView: View {
     @State private var newTaskIsShowing = false
     @State private var groupsExpanded = true
     
+    @State private var path = NavigationPath()
+    
     var body: some View {
-        List(selection: $selectedTasks) {
-            ForEach(CommonTaskListSections.allCases) { section in
-                DisclosureGroup(section.rawValue, isExpanded: $groupsExpanded) {
-                    OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
-                                 id: \.self,
-                                 children: \.subtasks) { task in
-                        TaskRowView(task: task)
-                            .draggable(task)
-                            .dropDestination(for: Todo.self) { tasks, _ in
-                                // Attach dropped task as subtask
-                                for dropTask in tasks where dropTask != task {
-                                    dropTask.disconnectFromAll()
-                                    dropTask.parentTask = task
-                                    dropTask.reconnect()
+        NavigationStack(path: $path) {
+            List(selection: $selectedTasks) {
+                ForEach(CommonTaskListSections.allCases) { section in
+                    DisclosureGroup(section.rawValue, isExpanded: $groupsExpanded) {
+                        OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
+                                     id: \.self,
+                                     children: \.subtasks) { task in
+                            TaskRowView(task: task)
+                                .draggable(task)
+                                .dropDestination(for: Todo.self) { tasks, _ in
+                                    // Attach dropped task as subtask
+                                    for dropTask in tasks where dropTask != task {
+                                        dropTask.disconnectFromAll()
+                                        dropTask.parentTask = task
+                                        dropTask.reconnect()
+                                    }
+                                    return true
                                 }
-                                return true
-                            }
-                            .contextMenu {
-                                Button {
-                                    task.dueDate = nil
-                                } label: {
-                                    Image(systemName: "clear")
-                                    Text("Clear due date")
-                                }
-                                
-                                Button {
-                                    task.dueDate = Calendar.current.startOfDay(for: Date())
-                                } label: {
-                                    Image(systemName: "calendar")
-                                    Text("Today")
-                                }
-                                
-                                Button {
-                                    task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                } label: {
-                                    Image(systemName: "sunrise")
-                                    Text("Tomorrow")
-                                }
-                                Divider()
-                                
-                                Button {
-                                    selectedTasks = []
-                                    let subtask = Todo(name: "", parentTask: task)
-                                    task.subtasks?.append(subtask)
-                                    modelContext.insert(subtask)
+                                .contextMenu {
+                                    Button {
+                                        task.dueDate = nil
+                                    } label: {
+                                        Image(systemName: "clear")
+                                        Text("Clear due date")
+                                    }
                                     
-                                    selectedTasks.insert(subtask)
-                                } label: {
-                                    Image(systemName: "plus")
-                                    Text("Add subtask")
-                                }
-                                Divider()
-                                Button {
-                                    selectedTasks = []
-                                    let newTask = task.copy(modelContext: modelContext)
+                                    Button {
+                                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                                    } label: {
+                                        Image(systemName: "calendar")
+                                        Text("Today")
+                                    }
                                     
-                                    modelContext.insert(newTask)
-                                    newTask.reconnect()
-
-                                    selectedTasks.insert(newTask)
-                                } label: {
-                                    Image(systemName: "doc.on.doc")
-                                    Text("Dublicate task")
+                                    Button {
+                                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                                    } label: {
+                                        Image(systemName: "sunrise")
+                                        Text("Tomorrow")
+                                    }
+                                    Divider()
+                                    
+                                    Button {
+                                        selectedTasks = []
+                                        let subtask = Todo(name: "", parentTask: task)
+                                        task.subtasks?.append(subtask)
+                                        modelContext.insert(subtask)
+                                        
+                                        selectedTasks.insert(subtask)
+                                        path.append(subtask)
+                                    } label: {
+                                        Image(systemName: "plus")
+                                        Text("Add subtask")
+                                    }
+                                    Divider()
+                                    Button {
+                                        selectedTasks = []
+                                        let newTask = task.copy(modelContext: modelContext)
+                                        
+                                        modelContext.insert(newTask)
+                                        newTask.reconnect()
+                                        
+                                        selectedTasks.insert(newTask)
+                                    } label: {
+                                        Image(systemName: "doc.on.doc")
+                                        Text("Dublicate task")
+                                    }
+                                    
+                                    Button {
+                                        deleteTask(task: task)
+                                    } label: {
+                                        Image(systemName: "trash")
+                                        Text("Delete task")
+                                    }
                                 }
-                                
-                                Button {
-                                    deleteTask(task: task)
-                                } label: {
-                                    Image(systemName: "trash")
-                                    Text("Delete task")
-                                }
-                            }
-                    }
-                }
-                .dropDestination(for: Todo.self) { tasks, _ in
-                    for task in tasks {
-                        task.disconnectFromParentTask()
-                        task.parentTask = nil
-                        setDueDate(task: task)
-                        
-                        if section == CommonTaskListSections.completed {
-                            if !task.completed {
-                                task.complete(modelContext: modelContext)
-                            }
-                        } else {
-                            task.reactivate()
                         }
                     }
-                    return true
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.disconnectFromParentTask()
+                            task.parentTask = nil
+                            setDueDate(task: task)
+                            
+                            if section == CommonTaskListSections.completed {
+                                if !task.completed {
+                                    task.complete(modelContext: modelContext)
+                                }
+                            } else {
+                                task.reactivate()
+                            }
+                        }
+                        return true
+                    }
                 }
             }
-        }
-        .toolbar {
-            ToolbarItem {
-                Button {
-                    addToCurrentList()
-                } label: {
-                    Label("Add task to current list", systemImage: "plus")
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        addToCurrentList()
+                    } label: {
+                        Label("Add task to current list", systemImage: "plus")
+                    }
+                }
+                
+                ToolbarItem {
+                    Button {
+                        deleteItems()
+                    } label: {
+                        Label("Delete task", systemImage: "trash")
+                    }.disabled(selectedTasks.count == 0)
+                }
+                
+                ToolbarItem {
+                    EditButton()
                 }
             }
-            
-            ToolbarItem {
-                Button {
-                    deleteItems()
-                } label: {
-                    Label("Delete task", systemImage: "trash")
-                }.disabled(selectedTasks.count == 0)
+            .navigationDestination(for: Todo.self) { task in
+                EditTaskView(task: task)
             }
         }
     }
@@ -177,6 +189,8 @@ struct TasksListView: View {
             modelContext.insert(task)
 
             selectedTasks.insert(task)
+            
+            path.append(task)
         }
     }
 }

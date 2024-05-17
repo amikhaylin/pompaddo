@@ -119,7 +119,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .frame(height: 200)
+                .frame(height: 220)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedTasks: $selectedTasks,
