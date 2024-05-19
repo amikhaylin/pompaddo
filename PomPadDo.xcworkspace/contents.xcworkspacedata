@@ -4,4 +4,7 @@
    <FileRef
       location = "group:PomPadDoMac/PomPadDoMac.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:PomPadDoiOS/PomPadDoiOS.xcodeproj">
+   </FileRef>
 </Workspace>
