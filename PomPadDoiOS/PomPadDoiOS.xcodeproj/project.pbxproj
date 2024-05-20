@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
+		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
 		4D4272BD2BF36AEF0003E129 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */; };
 		4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */; };
 		4D4272C72BF3BD160003E129 /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D4272C62BF3BD160003E129 /* SwiftDataTransferrable */; };
@@ -58,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
+		4D1959B12BFBB25900B90F10 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D4272BC2BF36AEF0003E129 /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
 		4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		4D4272C82BF3BDF70003E129 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 		4D4272CA2BF3C5880003E129 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				4DF3C6312BFB842B006EC565 /* Settings */,
 				4D4272CD2BF3C7600003E129 /* Groups */,
 				4D4272CB2BF3C5AB0003E129 /* ProjectsListView.swift */,
 				4D4272D22BF3C8070003E129 /* NewProjectView.swift */,
@@ -272,6 +277,15 @@
 			path = Tasks;
 			sourceTree = "<group>";
 		};
+		4DF3C6312BFB842B006EC565 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */,
+				4D1959B12BFBB25900B90F10 /* StatusRowView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -408,6 +422,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */,
 				4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */,
 				4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */,
 				4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */,
@@ -423,6 +438,7 @@
 				4D4272CC2BF3C5AB0003E129 /* ProjectsListView.swift in Sources */,
 				4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */,
 				4D4272BD2BF36AEF0003E129 /* TaskRowView.swift in Sources */,
+				4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */,
 				4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */,
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
 				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
