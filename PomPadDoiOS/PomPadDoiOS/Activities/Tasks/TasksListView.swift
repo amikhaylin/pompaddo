@@ -147,6 +147,8 @@ struct TasksListView: View {
                 EditTaskView(task: task)
             }
         }
+        .navigationTitle(list.name)
+        .navigationBarTitleDisplayMode(.automatic)
     }
     
     private func deleteItems() {

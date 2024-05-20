@@ -20,21 +20,6 @@ struct TaskRowView: View {
             VStack(alignment: .leading) {
                 HStack {
                     TaskCheckBoxView(task: task)
-                        .foregroundColor(.gray)
-                    
-                    switch task.priority {
-                    case 1:
-                        Image(systemName: "flag.fill")
-                            .foregroundStyle(Color.blue)
-                    case 2:
-                        Image(systemName: "flag.fill")
-                            .foregroundStyle(Color.yellow)
-                    case 3:
-                        Image(systemName: "flag.fill")
-                            .foregroundStyle(Color.red)
-                    default:
-                        EmptyView()
-                    }
                     
                     NavigationLink {
                         EditTaskView(task: task)
