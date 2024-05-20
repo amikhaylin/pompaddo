@@ -48,6 +48,7 @@ struct ReviewProjectsView: View {
         .onChange(of: projects) { _, _ in
             selectedProject = projects.first
         }
+        .navigationTitle("Review")
     }
 }
 

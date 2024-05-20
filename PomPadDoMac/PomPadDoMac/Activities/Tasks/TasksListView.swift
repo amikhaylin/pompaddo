@@ -135,6 +135,7 @@ struct TasksListView: View {
                 }.disabled(selectedTasks.count == 0)
             }
         }
+        .navigationTitle(list.name)
     }
     
     private func deleteItems() {
