@@ -8,6 +8,21 @@
 import Foundation
 import SwiftData
 
+enum DefaultProjectStatuses: String, CaseIterable {
+    case todo = "To do"
+    case progress = "In progress"
+    case completed = "Completed"
+    
+    var competion: Bool {
+        switch self {
+        case .completed:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 @Model
 class Project {
     var name: String = ""

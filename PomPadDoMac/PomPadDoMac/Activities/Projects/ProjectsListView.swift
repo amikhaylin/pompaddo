@@ -141,6 +141,7 @@ struct ProjectsListView: View {
             editProjectGroup = nil
         }, content: { editGroup in
             EditProjectGroupView(group: editGroup)
+                .presentationDetents([.height(200)])
         })
     }
 }

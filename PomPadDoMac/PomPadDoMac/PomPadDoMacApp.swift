@@ -17,7 +17,8 @@ struct PomPadDoMacApp: App {
         let schema = Schema([
             Todo.self,
             Project.self,
-            Status.self
+            Status.self,
+            ProjectGroup.self
         ])
         
         #if DEBUG

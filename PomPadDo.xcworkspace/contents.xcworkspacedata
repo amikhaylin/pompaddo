@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
       location = "group:PomPadDoMac/PomPadDoMac.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:PomPadDoiOS/PomPadDoiOS.xcodeproj">
    </FileRef>
 </Workspace>

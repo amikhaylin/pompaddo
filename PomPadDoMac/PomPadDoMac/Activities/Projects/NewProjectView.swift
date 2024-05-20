@@ -8,21 +8,6 @@
 import SwiftUI
 import SwiftData
 
-enum DefaultProjectStatuses: String, CaseIterable {
-    case todo = "To do"
-    case progress = "In progress"
-    case completed = "Completed"
-    
-    var competion: Bool {
-        switch self {
-        case .completed:
-            return true
-        default:
-            return false
-        }
-    }
-}
-
 struct NewProjectView: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var isVisible: Bool

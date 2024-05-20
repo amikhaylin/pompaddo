@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  PomPadDoMac
+//  PomPadDoiOS
 //
-//  Created by Andrey Mikhaylin on 13.02.2024.
+//  Created by Andrey Mikhaylin on 13.05.2024.
 //
 
 import SwiftUI
@@ -23,10 +23,10 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var newTaskIsShowing = false
     @State private var newProjectIsShowing = false
     @State private var newProjectGroupShow = false
-    @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
+//    @AppStorage("selectedSideBar")
+    @State var selectedSideBarItem: SideBarItem? = .inbox
     
     @State private var selectedTasks = Set<Todo>()
     @State private var selectedProject: Project?
@@ -34,11 +34,8 @@ struct ContentView: View {
     @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
     @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
     @Query(filter: TasksQuery.predicateTomorrow()) var tasksTomorrow: [Todo]
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @Query var projects: [Project]
-    
-    @State var badgeManager = BadgeManager()
 
     var body: some View {
         NavigationSplitView {
@@ -122,7 +119,7 @@ struct ContentView: View {
                         }
                     }
                 }
-                .frame(height: 125)
+                .frame(height: 220)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedTasks: $selectedTasks,
@@ -130,101 +127,32 @@ struct ContentView: View {
                                  newProjectGroupShow: $newProjectGroupShow,
                                  projects: projects)
             }
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        newTaskIsShowing.toggle()
-                    } label: {
-                        Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
-                    }
-                    
-                }
-            }
-            .sheet(isPresented: $newTaskIsShowing) {
-                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
-            }
             .sheet(isPresented: $newProjectIsShowing) {
                 NewProjectView(isVisible: self.$newProjectIsShowing)
+                    .presentationDetents([.height(200)])
             }
             .sheet(isPresented: $newProjectGroupShow) {
                 NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+                    .presentationDetents([.height(200)])
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200)
+            .navigationSplitViewColumnWidth(min: 300, ideal: 300)
         } detail: {
-            HStack {
-                switch selectedSideBarItem {
-                case .inbox:
-                    TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
-                                  selectedTasks: $selectedTasks,
-                                  list: selectedSideBarItem)
-                case .today:
-                    TasksListView(tasks: tasksToday
-                        .filter({ TasksQuery.checkToday(date: $0.completionDate) })
-                        .sorted(by: TasksQuery.defaultSorting),
-                                  selectedTasks: $selectedTasks,
-                                  list: selectedSideBarItem)
-                case .tomorrow:
-                    TasksListView(tasks: tasksTomorrow
-                        .filter({ $0.completionDate == nil })
-                        .sorted(by: TasksQuery.defaultSorting),
-                                  selectedTasks: $selectedTasks,
-                                  list: selectedSideBarItem)
-                case .projects:
-                    if let project = selectedProject {
-                        ProjectView(selectedTasks: $selectedTasks,
-                                    project: project)
-                    } else {
-                        Text("Select a project")
-                    }
-                case .review:
-                    ReviewProjectsView(projects: projects.filter({
-                        let today = Date()
-                        if let dateToReview = Calendar.current.date(byAdding: .day,
-                                                                    value: $0.reviewDaysCount,
-                                                                    to: $0.reviewDate) {
-                            return dateToReview <= today
-                        } else {
-                            return false
-                        }
-                    }),
-                                       selectedTasks: $selectedTasks)
-                }
-                
-                if selectedTasks.count > 0 {
-                    if let selectedTask = selectedTasks.first {
-                        EditTaskView(task: selectedTask)
-                            .frame(minWidth: 270, idealWidth: 270, maxWidth: 350)
-                            .padding()
-                    }
-                }
+            switch selectedSideBarItem {
+            case .inbox:
+                TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
+                              selectedTasks: $selectedTasks,
+                              list: selectedSideBarItem!)
+            case .today:
+                Text("Details")
+            case .tomorrow:
+                Text("Details")
+            case .review:
+                Text("Details")
+            case .projects:
+                Text("Details")
+            default:
+                EmptyView()
             }
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        selectedTasks = []
-                    } label: {
-                        Image(systemName: "sidebar.right")
-                    }.disabled(!(selectedTasks.count > 0))
-                }
-            }
-        }
-        .onChange(of: tasksTodayActive.count) { _, newValue in
-            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
-        }
-        .onChange(of: selectedSideBarItem, { _, newValue in
-            selectedTasks = []
-            if newValue != .projects {
-                selectedProject = nil
-            }
-        })
-        .onChange(of: selectedProject) { _, newValue in
-            selectedTasks = []
-            if newValue != nil {
-                selectedSideBarItem = .projects
-            }
-        }
-        .onAppear {
-            tasksToday.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }
