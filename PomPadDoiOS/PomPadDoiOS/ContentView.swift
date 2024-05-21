@@ -31,8 +31,6 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return "Review"
         case .projects:
             return "Projects"
-        default:
-            return ""
         }
     }
 }
@@ -174,7 +172,12 @@ struct ContentView: View {
             case .review:
                 Text("Details")
             case .projects:
-                Text("Details")
+                if let project = selectedProject {
+                    ProjectView(selectedTasks: $selectedTasks,
+                                project: project)
+                } else {
+                    Text("Select a project")
+                }
             default:
                 EmptyView()
             }
