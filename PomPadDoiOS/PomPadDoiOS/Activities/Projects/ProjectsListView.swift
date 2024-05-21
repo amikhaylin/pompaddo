@@ -11,12 +11,12 @@ import SwiftData
 struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var projectsExpanded = true
+    @AppStorage("projectsExpanded") private var projectsExpanded = true
     @AppStorage("groupsExpanded") var groupsExpanded = true
     @Binding var selectedProject: Project?
     @Binding var selectedTasks: Set<Todo>
-    @Binding var newProjectIsShowing: Bool
-    @Binding var newProjectGroupShow: Bool
+    @State private var newProjectIsShowing = false
+    @State private var newProjectGroupShow = false
     
     @State private var editProjectGroup: ProjectGroup?
     
@@ -85,6 +85,11 @@ struct ProjectsListView: View {
                             }
                         }
                     }
+                    .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
+                        EditProjectGroupView(group: editGroup)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
+                    })
                     .dropDestination(for: Project.self) { projects, _ in
                         for project in projects where project.group == nil || project.group != group {
                             project.group = group
@@ -121,6 +126,11 @@ struct ProjectsListView: View {
                         Image(systemName: "plus.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
+                        NewProjectView(isVisible: self.$newProjectIsShowing)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
+                    }
                     
                     Button {
                         newProjectGroupShow.toggle()
@@ -128,7 +138,11 @@ struct ProjectsListView: View {
                         Image(systemName: "folder.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
-
+                    .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
+                        NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
+                    }
                 }
                 .foregroundColor(Color(#colorLiteral(red: 0.5486837626, green: 0.827090323, blue: 0.8101685047, alpha: 1)))
                 .dropDestination(for: Project.self) { projects, _ in
@@ -140,12 +154,6 @@ struct ProjectsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
-        .sheet(item: $editProjectGroup, onDismiss: {
-            editProjectGroup = nil
-        }, content: { editGroup in
-            EditProjectGroupView(group: editGroup)
-                .presentationDetents([.height(200)])
-        })
     }
 }
 
@@ -156,13 +164,9 @@ struct ProjectsListView: View {
         @State var selectedTasks = Set<Todo>()
         
         @State var selectedProject: Project?
-        @State var newProjectIsShowing: Bool = false
-        @State var newProjectGroupShow: Bool = false
         
         return ProjectsListView(selectedProject: $selectedProject,
                              selectedTasks: $selectedTasks,
-                             newProjectIsShowing: $newProjectIsShowing,
-                             newProjectGroupShow: $newProjectGroupShow,
                              projects: projects)
             .modelContainer(previewer.container)
     } catch {

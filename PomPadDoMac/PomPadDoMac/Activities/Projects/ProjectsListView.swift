@@ -15,8 +15,8 @@ struct ProjectsListView: View {
     @AppStorage("groupsExpanded") var groupsExpanded = true
     @Binding var selectedProject: Project?
     @Binding var selectedTasks: Set<Todo>
-    @Binding var newProjectIsShowing: Bool
-    @Binding var newProjectGroupShow: Bool
+    @State private var newProjectIsShowing = false
+    @State private var newProjectGroupShow = false
     
     @State private var editProjectGroup: ProjectGroup?
     
@@ -95,6 +95,12 @@ struct ProjectsListView: View {
                             Image(systemName: "pencil")
                             Text("Rename group")
                         }
+                        .sheet(item: $editProjectGroup, onDismiss: {
+                            editProjectGroup = nil
+                        }, content: { editGroup in
+                            EditProjectGroupView(group: editGroup)
+                                .presentationDetents([.height(200)])
+                        })
                         
                         Button {
                             for project in projects.filter({ $0.group == group }) {
@@ -118,6 +124,9 @@ struct ProjectsListView: View {
                         Image(systemName: "plus.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .sheet(isPresented: $newProjectIsShowing) {
+                        NewProjectView(isVisible: self.$newProjectIsShowing)
+                    }
                     
                     Button {
                         newProjectGroupShow.toggle()
@@ -125,7 +134,9 @@ struct ProjectsListView: View {
                         Image(systemName: "folder.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
-
+                    .sheet(isPresented: $newProjectGroupShow) {
+                        NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+                    }
                 }
                 .foregroundColor(Color(#colorLiteral(red: 0.5486837626, green: 0.827090323, blue: 0.8101685047, alpha: 1)))
                 .dropDestination(for: Project.self) { projects, _ in
@@ -137,12 +148,6 @@ struct ProjectsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
-        .sheet(item: $editProjectGroup, onDismiss: {
-            editProjectGroup = nil
-        }, content: { editGroup in
-            EditProjectGroupView(group: editGroup)
-                .presentationDetents([.height(200)])
-        })
     }
 }
 
@@ -153,13 +158,9 @@ struct ProjectsListView: View {
         @State var selectedTasks = Set<Todo>()
         
         @State var selectedProject: Project?
-        @State var newProjectIsShowing: Bool = false
-        @State var newProjectGroupShow: Bool = false
         
         return ProjectsListView(selectedProject: $selectedProject,
                              selectedTasks: $selectedTasks,
-                             newProjectIsShowing: $newProjectIsShowing,
-                             newProjectGroupShow: $newProjectGroupShow,
                              projects: projects)
             .modelContainer(previewer.container)
     } catch {

@@ -31,8 +31,6 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return "Review"
         case .projects:
             return "Projects"
-        default:
-            return ""
         }
     }
 }
@@ -41,8 +39,6 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     
     @State private var newTaskIsShowing = false
-    @State private var newProjectIsShowing = false
-    @State private var newProjectGroupShow = false
     @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
     
     @State private var selectedTasks = Set<Todo>()
@@ -143,8 +139,6 @@ struct ContentView: View {
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedTasks: $selectedTasks,
-                                 newProjectIsShowing: $newProjectIsShowing,
-                                 newProjectGroupShow: $newProjectGroupShow,
                                  projects: projects)
             }
             .toolbar {
@@ -157,14 +151,8 @@ struct ContentView: View {
                     
                 }
             }
-            .sheet(isPresented: $newTaskIsShowing) {
+            .popover(isPresented: $newTaskIsShowing) {
                 NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
-            }
-            .sheet(isPresented: $newProjectIsShowing) {
-                NewProjectView(isVisible: self.$newProjectIsShowing)
-            }
-            .sheet(isPresented: $newProjectGroupShow) {
-                NewProjectGroupView(isVisible: self.$newProjectGroupShow)
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 200)
         } detail: {

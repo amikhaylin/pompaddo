@@ -38,8 +38,6 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var newProjectIsShowing = false
-    @State private var newProjectGroupShow = false
 //    @AppStorage("selectedSideBar")
     @State var selectedSideBarItem: SideBarItem? = .inbox
     
@@ -138,17 +136,7 @@ struct ContentView: View {
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedTasks: $selectedTasks,
-                                 newProjectIsShowing: $newProjectIsShowing,
-                                 newProjectGroupShow: $newProjectGroupShow,
                                  projects: projects)
-            }
-            .sheet(isPresented: $newProjectIsShowing) {
-                NewProjectView(isVisible: self.$newProjectIsShowing)
-                    .presentationDetents([.height(200)])
-            }
-            .sheet(isPresented: $newProjectGroupShow) {
-                NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-                    .presentationDetents([.height(200)])
             }
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
         } detail: {
@@ -180,6 +168,16 @@ struct ContentView: View {
                 }
             default:
                 EmptyView()
+            }
+        }
+        .onChange(of: selectedSideBarItem) { _, newValue in
+            if newValue != .projects {
+                selectedProject = nil
+            }
+        }
+        .onChange(of: selectedProject) { _, newValue in
+            if newValue != nil {
+                selectedSideBarItem = .projects
             }
         }
     }
