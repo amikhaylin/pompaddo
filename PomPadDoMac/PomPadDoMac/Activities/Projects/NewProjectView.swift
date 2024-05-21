@@ -35,7 +35,7 @@ struct NewProjectView: View {
                                             order: order,
                                             doCompletion: name.competion)
                         modelContext.insert(status)
-                        project.statuses.append(status)
+                        project.statuses?.append(status)
                     }
                     
                 }

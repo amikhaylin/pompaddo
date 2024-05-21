@@ -8,7 +8,7 @@
 
 import XCTest
 import SwiftData
-@testable import PomPadDoMac
+@testable import PomPadDo
 
 final class PomPadDoMacTests: XCTestCase {
     var dataContainer: ModelContainer!
@@ -229,28 +229,28 @@ final class PomPadDoMacTests: XCTestCase {
                                 order: order,
                                 doCompletion: name.competion)
             dataContainer.mainContext.insert(status)
-            project.statuses.append(status)
+            project.statuses?.append(status)
         }
         
         projects = fetchData()
         XCTAssertEqual(projects.count, 1, "There should be 1 project.")
         
         statuses = fetchData()
-        XCTAssertTrue(statuses.count == 3 && project.statuses.count == 3, "There should be 3 statuses")
+        XCTAssertTrue(statuses.count == 3 && project.getStatuses().count == 3, "There should be 3 statuses")
         
         tasks = fetchData()
         XCTAssertEqual(tasks.count, 0, "There should be 0 task")
-        XCTAssertEqual(project.tasks.count, 0, "There should be 0 task")
+        XCTAssertEqual(project.getTasks().count, 0, "There should be 0 task")
         
         // Add task to project
         var task = Todo(name: "Some project task",
-                        status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                        status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
                         project: project)
         dataContainer.mainContext.insert(task)
         
         tasks = fetchData()
         XCTAssertEqual(tasks.count, 1, "There should be 1 task")
-        XCTAssertEqual(project.tasks.count, 1, "There should be 1 task")
+        XCTAssertEqual(project.getTasks().count, 1, "There should be 1 task")
         
         // Delete task
         TasksQuery.deleteTask(context: dataContainer.mainContext,
@@ -258,16 +258,16 @@ final class PomPadDoMacTests: XCTestCase {
         
         tasks = fetchData()
         XCTAssertEqual(tasks.count, 0, "There should be 0 task")
-        XCTAssertEqual(project.tasks.count, 0, "There should be 0 task")
+        XCTAssertEqual(project.getTasks().count, 0, "There should be 0 task")
         
         task = Todo(name: "Another project task",
-                        status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                        status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
                         project: project)
         dataContainer.mainContext.insert(task)
         
         tasks = fetchData()
         XCTAssertEqual(tasks.count, 1, "There should be 1 task")
-        XCTAssertEqual(project.tasks.count, 1, "There should be 1 task")
+        XCTAssertEqual(project.getTasks().count, 1, "There should be 1 task")
         
         // Delete project with task
         project.deleteRelatives(context: dataContainer.mainContext)

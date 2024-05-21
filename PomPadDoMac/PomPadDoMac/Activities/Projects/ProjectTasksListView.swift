@@ -17,9 +17,9 @@ struct ProjectTasksListView: View {
     
     var body: some View {
         List(selection: $selectedTasks) {
-            ForEach(project.statuses.sorted(by: { $0.order < $1.order })) { status in
+            ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                 DisclosureGroup(status.name, isExpanded: $groupsExpanded) {
-                    OutlineGroup(project.tasks
+                    OutlineGroup(project.getTasks()
                                     .filter({ $0.status == status && $0.parentTask == nil })
                                     .sorted(by: TasksQuery.defaultSorting),
                                  id: \.self,
@@ -99,7 +99,7 @@ struct ProjectTasksListView: View {
                         task.disconnectFromParentTask()
                         task.parentTask = nil
                         task.project = project
-                        project.tasks.append(task)
+                        project.tasks?.append(task)
                         
                         if status.doCompletion {
                             if !task.completed {

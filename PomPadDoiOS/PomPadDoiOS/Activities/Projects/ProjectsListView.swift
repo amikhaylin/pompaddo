@@ -32,15 +32,15 @@ struct ProjectsListView: View {
                         return ProjectView(selectedTasks: $selectedTasks, project: project)
                     } label: {
                         Text(project.name)
-                            .badge(project.tasks.filter({ $0.completed == false }).count)
+                            .badge(project.getTasks().filter({ $0.completed == false }).count)
                     }
                     .tag(project)
                     .draggable(project)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.project = project
-                            task.status = project.statuses.sorted(by: { $0.order < $1.order }).first
-                            project.tasks.append(task)
+                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            project.tasks?.append(task)
                         }
                         return true
                     }
@@ -61,15 +61,15 @@ struct ProjectsListView: View {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
                                 Text(project.name)
-                                    .badge(project.tasks.filter({ $0.completed == false }).count)
+                                    .badge(project.getTasks().filter({ $0.completed == false }).count)
                             }
                             .tag(project)
                             .draggable(project)
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
                                     task.project = project
-                                    task.status = project.statuses.sorted(by: { $0.order < $1.order }).first
-                                    project.tasks.append(task)
+                                    task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                    project.tasks?.append(task)
                                 }
                                 return true
                             }

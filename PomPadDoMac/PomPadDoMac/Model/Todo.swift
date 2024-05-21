@@ -23,11 +23,11 @@ class Todo {
     var name: String = ""
     var dueDate: Date?
     var completed: Bool = false
-    var status: Status?
+    @Relationship var status: Status?
     var note: String = ""
     var tomatoesCount: Int = 0
-    var project: Project?
-    var parentTask: Todo?
+    @Relationship var project: Project?
+    @Relationship var parentTask: Todo?
     var link: String = ""
     var repeation: RepeationMode = RepeationMode.none
     var priority: Int = 0
@@ -38,7 +38,7 @@ class Todo {
     var clarity: Int = 0
     var baseTimeHours: Int = 0
     
-    @Relationship(deleteRule: .cascade)
+    @Relationship(deleteRule: .cascade, inverse: \Todo.parentTask)
     var subtasks: [Todo]? = [Todo]()
     
     init(name: String,
@@ -99,7 +99,7 @@ extension Todo {
     
     func reconnect() {
         if let project = self.project {
-            project.tasks.append(self)
+            project.tasks?.append(self)
         }
         if let parentTask = self.parentTask {
             parentTask.subtasks?.append(self)
@@ -107,8 +107,8 @@ extension Todo {
     }
     
     func disconnectFromAll() {
-        if let project = self.project, let index = project.tasks.firstIndex(of: self) {
-            project.tasks.remove(at: index)
+        if let project = self.project, let index = project.tasks?.firstIndex(of: self) {
+            project.tasks?.remove(at: index)
         }
         if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
             parentTask.subtasks?.remove(at: index)

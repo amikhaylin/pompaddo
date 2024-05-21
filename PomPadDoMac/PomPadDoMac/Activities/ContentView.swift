@@ -69,8 +69,8 @@ struct ContentView: View {
                         }
                         .dropDestination(for: Todo.self) { tasks, _ in
                             for task in tasks {
-                                if let project = task.project, let index = project.tasks.firstIndex(of: task) {
-                                    task.project?.tasks.remove(at: index)
+                                if let project = task.project, let index = project.tasks?.firstIndex(of: task) {
+                                    task.project?.tasks?.remove(at: index)
                                     task.project = nil
                                     task.status = nil
                                 }

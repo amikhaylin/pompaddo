@@ -18,11 +18,11 @@ struct KanbanView: View {
         ScrollView(.horizontal) {
             HStack {
                 
-                ForEach(project.statuses.sorted(by: { $0.order < $1.order })) { status in
+                ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                     VStack {
                         Text(status.name)
                         List(selection: $selectedTasks) {
-                            OutlineGroup(project.tasks
+                            OutlineGroup(project.getTasks()
                                 .filter({ $0.status == status && $0.parentTask == nil })
                                 .sorted(by: TasksQuery.defaultSorting),
                                          id: \.self,
@@ -105,7 +105,7 @@ struct KanbanView: View {
                             task.disconnectFromParentTask()
                             task.parentTask = nil
                             task.project = project
-                            project.tasks.append(task)
+                            project.tasks?.append(task)
                             
                             if status.doCompletion {
                                 if !task.completed {

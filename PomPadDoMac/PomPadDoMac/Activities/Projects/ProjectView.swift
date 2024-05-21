@@ -97,7 +97,7 @@ struct ProjectView: View {
         withAnimation {
             selectedTasks = []
             let task = Todo(name: "",
-                            status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                            status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
                             project: project)
             modelContext.insert(task)
             

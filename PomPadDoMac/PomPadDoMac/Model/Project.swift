@@ -30,14 +30,14 @@ class Project {
     var reviewDaysCount: Int = 7
     var note: String = ""
     var projectViewMode: Int = 0
-    var group: ProjectGroup?
+    @Relationship var group: ProjectGroup?
     var hasEstimate: Bool = false
     
     @Relationship(deleteRule: .cascade)
-    var statuses: [Status] = []
+    var statuses: [Status]? = [Status]()
     
-    @Relationship(deleteRule: .cascade)
-    var tasks: [Todo] = []
+    @Relationship(deleteRule: .cascade, inverse: \Todo.project)
+    var tasks: [Todo]? = [Todo]()
     
     init(name: String, note: String = "") {
         self.name = name
@@ -48,11 +48,11 @@ class Project {
 extension Project {
     // TODO: BE REMOVED WHEN `.cascade` is fixed
     func deleteRelatives(context: ModelContext) {
-        for status in self.statuses {
+        for status in self.getStatuses() {
             context.delete(status)
         }
         
-        for task in self.tasks {
+        for task in self.getTasks() {
             task.deleteSubtasks(context: context)
             context.delete(task)
         }
@@ -60,9 +60,25 @@ extension Project {
     
     func sumEstimateByProject(_ factor: Double) -> Int {
         var result = 0
-        for task in self.tasks {
+        for task in self.getTasks() {
             result += task.sumEstimates(factor)
         }
         return result
+    }
+    
+    func getStatuses() -> [Status] {
+        if let statuses = self.statuses {
+            return statuses
+        } else {
+            return []
+        }
+    }
+    
+    func getTasks() -> [Todo] {
+        if let tasks = self.tasks {
+            return tasks
+        } else {
+            return []
+        }
     }
 }

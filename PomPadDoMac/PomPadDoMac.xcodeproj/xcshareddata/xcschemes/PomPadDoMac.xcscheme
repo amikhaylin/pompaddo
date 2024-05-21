@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4D95FE212B7B6BF300C8918D"
-               BuildableName = "PomPadDoMac.app"
+               BuildableName = "PomPadDo.app"
                BlueprintName = "PomPadDoMac"
                ReferencedContainer = "container:PomPadDoMac.xcodeproj">
             </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D95FE212B7B6BF300C8918D"
-            BuildableName = "PomPadDoMac.app"
+            BuildableName = "PomPadDo.app"
             BlueprintName = "PomPadDoMac"
             ReferencedContainer = "container:PomPadDoMac.xcodeproj">
          </BuildableReference>
@@ -93,7 +93,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D95FE212B7B6BF300C8918D"
-            BuildableName = "PomPadDoMac.app"
+            BuildableName = "PomPadDo.app"
             BlueprintName = "PomPadDoMac"
             ReferencedContainer = "container:PomPadDoMac.xcodeproj">
          </BuildableReference>

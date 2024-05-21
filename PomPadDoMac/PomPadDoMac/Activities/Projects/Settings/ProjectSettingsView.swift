@@ -21,12 +21,12 @@ struct ProjectSettingsView: View {
                 Spacer()
                 Button(action: {
                     let status = Status(name: "Unnamed",
-                                        order: project.statuses.count + 1)
-                    project.statuses.append(status)
+                                        order: project.getStatuses().count + 1)
+                    project.statuses?.append(status)
                     modelContext.insert(status)
                     // if project has tasks and statuses count = 1 then connect all tasks to added status
-                    if project.statuses.count == 1 {
-                        for task in project.tasks {
+                    if project.getStatuses().count == 1 {
+                        for task in project.getTasks() {
                             task.status = status
                         }
                     }
@@ -35,13 +35,13 @@ struct ProjectSettingsView: View {
                 })
                 .buttonStyle(PlainButtonStyle())
                 Button(action: {
-                    if let status = selectedStatus, let index = project.statuses.firstIndex(of: status) {
-                        project.statuses.remove(at: index)
+                    if let status = selectedStatus, let index = project.statuses?.firstIndex(of: status) {
+                        project.statuses?.remove(at: index)
                         modelContext.delete(status)
                         
                         // if status has tasks then move its to first status or nil
-                        for task in project.tasks.filter({ $0.status == status && $0.parentTask == nil }) {
-                            if let firstStatus = project.statuses.sorted(by: { $0.order < $1.order }).first {
+                        for task in project.getTasks().filter({ $0.status == status && $0.parentTask == nil }) {
+                            if let firstStatus = project.getStatuses().sorted(by: { $0.order < $1.order }).first {
                                 task.status = firstStatus
                             } else {
                                 task.status = nil
@@ -53,7 +53,7 @@ struct ProjectSettingsView: View {
                 })
                 .buttonStyle(PlainButtonStyle())
             }
-            List(project.statuses.sorted(by: { $0.order < $1.order }),
+            List(project.getStatuses().sorted(by: { $0.order < $1.order }),
                  selection: $selectedStatus) { status in
                 StatusRowView(status: status,
                               project: project)
