@@ -92,11 +92,12 @@ struct KanbanView: View {
                                             deleteTask(task: task)
                                         } label: {
                                             Image(systemName: "trash")
+                                                .foregroundStyle(Color.red)
                                             Text("Delete task")
                                         }
                                     }
                             }
-                            .listRowSeparator(.hidden)
+                            .listRowSeparator(.visible)
                         }
                         .cornerRadius(5)
                     }

@@ -89,6 +89,7 @@ struct ProjectTasksListView: View {
                                     deleteTask(task: task)
                                 } label: {
                                     Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
                                     Text("Delete task")
                                 }
                             }

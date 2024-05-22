@@ -39,7 +39,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     
     @State private var newTaskIsShowing = false
-    @AppStorage("selectedSideBar") var selectedSideBarItem: SideBarItem = .inbox
+    @State var selectedSideBarItem: SideBarItem = .today
     
     @State private var selectedTasks = Set<Todo>()
     @State private var selectedProject: Project?
@@ -147,6 +147,7 @@ struct ContentView: View {
                         newTaskIsShowing.toggle()
                     } label: {
                         Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
+                            .foregroundStyle(Color.orange)
                     }
                     
                 }
@@ -229,7 +230,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            tasksToday.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
+            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }

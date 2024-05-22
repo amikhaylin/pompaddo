@@ -48,6 +48,7 @@ struct ProjectsListView: View {
                             modelContext.delete(project)
                         } label: {
                             Image(systemName: "trash")
+                                .foregroundStyle(Color.red)
                             Text("Delete project")
                         }
                     }
@@ -77,6 +78,7 @@ struct ProjectsListView: View {
                                     modelContext.delete(project)
                                 } label: {
                                     Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
                                     Text("Delete project")
                                 }
                             }
@@ -109,6 +111,7 @@ struct ProjectsListView: View {
                             }
                         } label: {
                             Image(systemName: "trash")
+                                .foregroundStyle(Color.red)
                             Text("Delete group")
                         }
                     }

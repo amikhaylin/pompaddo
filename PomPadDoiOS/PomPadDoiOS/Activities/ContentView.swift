@@ -39,7 +39,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     
 //    @AppStorage("selectedSideBar")
-    @State var selectedSideBarItem: SideBarItem? = .inbox
+    @State var selectedSideBarItem: SideBarItem? = .today
     
     @State private var selectedTasks = Set<Todo>()
     @State private var selectedProject: Project?
@@ -137,6 +137,7 @@ struct ContentView: View {
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedTasks: $selectedTasks,
                                  projects: projects)
+                
             }
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
         } detail: {

@@ -50,6 +50,7 @@ struct ProjectSettingsView: View {
                     }
                 }, label: {
                     Image(systemName: "trash")
+                        .foregroundStyle(Color.red)
                 })
                 .buttonStyle(PlainButtonStyle())
             }

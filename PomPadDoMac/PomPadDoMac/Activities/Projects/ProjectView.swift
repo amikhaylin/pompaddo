@@ -66,6 +66,7 @@ struct ProjectView: View {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
+                        .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
             }
             

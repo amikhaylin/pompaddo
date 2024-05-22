@@ -11,7 +11,7 @@ import SwiftData
 struct ProjectSettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var project: Project
-    @State private var selectedStatus: Status?
+    @State private var selectedStatus = Set<Status>()
     
     var body: some View {
         VStack {
@@ -22,7 +22,7 @@ struct ProjectSettingsView: View {
                 .tag(status as Status)
             }
              .toolbar {
-                 ToolbarItem {
+                 ToolbarItemGroup {
                      Button(action: {
                          let status = Status(name: "Unnamed",
                                              order: project.getStatuses().count + 1)
@@ -37,29 +37,28 @@ struct ProjectSettingsView: View {
                      }, label: {
                          Image(systemName: "plus")
                      })
-                 }
-                 
-                 ToolbarItem {
+                     
                      Button(action: {
-                         if let status = selectedStatus, let index = project.statuses?.firstIndex(of: status) {
-                             project.statuses?.remove(at: index)
-                             modelContext.delete(status)
-                             
-                             // if status has tasks then move its to first status or nil
-                             for task in project.getTasks().filter({ $0.status == status && $0.parentTask == nil }) {
-                                 if let firstStatus = project.getStatuses().sorted(by: { $0.order < $1.order }).first {
-                                     task.status = firstStatus
-                                 } else {
-                                     task.status = nil
+                         for status in selectedStatus {
+                             if  let index = project.statuses?.firstIndex(of: status) {
+                                 project.statuses?.remove(at: index)
+                                 modelContext.delete(status)
+                                 
+                                 // if status has tasks then move its to first status or nil
+                                 for task in project.getTasks().filter({ $0.status == status && $0.parentTask == nil }) {
+                                     if let firstStatus = project.getStatuses().sorted(by: { $0.order < $1.order }).first {
+                                         task.status = firstStatus
+                                     } else {
+                                         task.status = nil
+                                     }
                                  }
                              }
                          }
                      }, label: {
                          Image(systemName: "trash")
+                             .foregroundStyle(Color.red)
                      })
-                 }
-                 
-                 ToolbarItem {
+
                      EditButton()
                  }
              }

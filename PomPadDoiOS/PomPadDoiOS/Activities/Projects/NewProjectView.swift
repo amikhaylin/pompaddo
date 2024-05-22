@@ -18,6 +18,7 @@ struct NewProjectView: View {
             VStack {
                 TextField("Project name", text: $projectName)
             }
+            .padding()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {

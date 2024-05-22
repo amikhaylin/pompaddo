@@ -200,7 +200,6 @@
 				4DE97AA42BF35ACA00E43E9A /* Activities */,
 				4DE97A9B2BF351BD00E43E9A /* Model */,
 				4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */,
-				4DDDB3D42BF23034002C4F95 /* ContentView.swift */,
 				4DDDB3D82BF23037002C4F95 /* Assets.xcassets */,
 				4DDDB3DA2BF23037002C4F95 /* Preview Content */,
 				4DDDB3FE2BF257B7002C4F95 /* MainView.swift */,
@@ -247,6 +246,7 @@
 		4DE97AA42BF35ACA00E43E9A /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				4DDDB3D42BF23034002C4F95 /* ContentView.swift */,
 				4D4272CA2BF3C5880003E129 /* Projects */,
 				4DE97ABC2BF3686200E43E9A /* Tasks */,
 				4DE97AB52BF35E8A00E43E9A /* Focus */,

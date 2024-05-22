@@ -95,6 +95,7 @@ struct TasksListView: View {
                                     deleteTask(task: task)
                                 } label: {
                                     Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
                                     Text("Delete task")
                                 }
                             }
@@ -132,6 +133,7 @@ struct TasksListView: View {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
+                        .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
             }
         }

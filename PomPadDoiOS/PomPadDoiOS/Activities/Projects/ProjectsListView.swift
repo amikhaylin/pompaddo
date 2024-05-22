@@ -27,10 +27,7 @@ struct ProjectsListView: View {
         List(selection: $selectedProject) {
             DisclosureGroup(isExpanded: $projectsExpanded) {
                 ForEach(projects.filter({ $0.group == nil })) { project in
-                    NavigationLink {
-                        selectedProject = project
-                        return ProjectView(selectedTasks: $selectedTasks, project: project)
-                    } label: {
+                    NavigationLink(value: project) {
                         Text(project.name)
                             .badge(project.getTasks().filter({ $0.completed == false }).count)
                     }
@@ -51,6 +48,7 @@ struct ProjectsListView: View {
                             modelContext.delete(project)
                         } label: {
                             Image(systemName: "trash")
+                                .foregroundStyle(Color.red)
                             Text("Delete project")
                         }
                     }
@@ -80,6 +78,7 @@ struct ProjectsListView: View {
                                     modelContext.delete(project)
                                 } label: {
                                     Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
                                     Text("Delete project")
                                 }
                             }
@@ -111,6 +110,7 @@ struct ProjectsListView: View {
                             }
                         } label: {
                             Image(systemName: "trash")
+                                .foregroundStyle(Color.red)
                             Text("Delete group")
                         }
                     }
