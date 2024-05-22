@@ -22,11 +22,26 @@ struct TaskCheckBoxView: View {
         }, label: {
             if task.completed {
                 Image(systemName: "checkmark.square.fill")
+                    .foregroundStyle(Color.gray)
             } else {
                 Image(systemName: "square")
+                    .foregroundStyle(getColor())
             }
         })
         .buttonStyle(PlainButtonStyle())
+    }
+    
+    func getColor() -> Color {
+        switch task.priority {
+        case 1:
+            return .blue
+        case 2:
+            return .yellow
+        case 3:
+            return .red
+        default:
+            return .gray
+        }
     }
 }
 

@@ -18,6 +18,23 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case tomorrow
     case review
     case projects
+    
+    var name: String {
+        switch self {
+        case .inbox:
+            return "Inbox"
+        case .today:
+            return "Today"
+        case .tomorrow:
+            return "Tomorrow"
+        case .review:
+            return "Review"
+        case .projects:
+            return "Projects"
+        default:
+            return ""
+        }
+    }
 }
 
 struct ContentView: View {

@@ -19,21 +19,6 @@ struct KanbanTaskRowView: View {
             VStack(alignment: .leading) {
                 HStack {
                     TaskCheckBoxView(task: task)
-                        .foregroundColor(.gray)
-                    
-                    switch task.priority {
-                    case 1:
-                        Image(systemName: "flag.fill")
-                            .foregroundStyle(Color.blue)
-                    case 2:
-                        Image(systemName: "flag.fill")
-                            .foregroundStyle(Color.yellow)
-                    case 3:
-                        Image(systemName: "flag.fill")
-                            .foregroundStyle(Color.red)
-                    default:
-                        EmptyView()
-                    }
                     
                     Text(task.name)
                         .foregroundStyle(task.completed ? Color.gray : Color.primary)
@@ -109,7 +94,7 @@ struct KanbanTaskRowView: View {
             }
             .padding(2)
         }
-        .background(Color(#colorLiteral(red: 0.1656158268, green: 0.1761361659, blue: 0.1929222345, alpha: 1)))
+//        .background(Color(#colorLiteral(red: 0.1656158268, green: 0.1761361659, blue: 0.1929222345, alpha: 1)))
         .cornerRadius(5)
 //        .padding(2)
     }
