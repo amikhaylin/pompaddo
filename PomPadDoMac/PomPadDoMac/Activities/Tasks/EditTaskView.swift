@@ -21,7 +21,6 @@ struct EditTaskView: View {
             Section {
                 TextField("Name", text: $task.name)
                     .textFieldStyle(.roundedBorder)
-                    .padding(.top, 10.0)
                 
                 if showingDatePicker {
                     HStack {
@@ -86,8 +85,55 @@ struct EditTaskView: View {
                     }
                 }.pickerStyle(.segmented)
                 
+                if task.hasEstimate {
+                    Picker("Clarity", selection: $task.clarity) {
+                        ForEach(0...3, id: \.self) { clarity in
+                            HStack {
+                                switch clarity {
+                                case 1:
+                                    Text("Clear")
+                                case 2:
+                                    Text("Half clear")
+                                case 3:
+                                    Text("Not clear")
+                                default:
+                                    Text("None")
+                                }
+                            }
+                            .tag(clarity as Int)
+                        }
+                    }.pickerStyle(.segmented)
+                    
+                    Picker("Base hours", selection: $task.baseTimeHours) {
+                        ForEach(1...100, id: \.self) { hours in
+                            Text("\(hours)")
+                                .tag(hours)
+                        }
+                    }
+                    
+                    HStack {
+                        // TODO: Change factor in settings
+                        Text("Estimate is \(task.sumEstimates(1.7)) hours")
+                        
+                        Button {
+                            task.hasEstimate = false
+                        } label: {
+                            Image(systemName: "clear")
+                        }
+                    }
+                } else {
+                    Button {
+                        withAnimation {
+                            task.hasEstimate = true
+                        }
+                    } label: {
+                        Label("Estimate", systemImage: "pencil.and.list.clipboard")
+                    }
+                }
+                
                 HStack {
                     TextField("Link", text: $task.link)
+                        .textFieldStyle(.roundedBorder)
                         .textContentType(.URL)
                     if let url = URL(string: task.link) {
                         Link(destination: url,
@@ -145,58 +191,17 @@ struct EditTaskView: View {
                     Image(systemName: "stopwatch")
                     Text("\(Int((totalFocused * 25) / 60))h\(Int((totalFocused * 25) % 60))m ")
                 }
-
-                if task.hasEstimate {
-                    Picker("Clarity", selection: $task.clarity) {
-                        ForEach(0...3, id: \.self) { clarity in
-                            HStack {
-                                switch clarity {
-                                case 1:
-                                    Text("Clear")
-                                case 2:
-                                    Text("Half clear")
-                                case 3:
-                                    Text("Not clear")
-                                default:
-                                    Text("None")
-                                }
-                            }
-                            .tag(clarity as Int)
-                        }
-                    }.pickerStyle(.segmented)
-                    
-                    Picker("Base hours", selection: $task.baseTimeHours) {
-                        ForEach(1...100, id: \.self) { hours in
-                            Text("\(hours)")
-                                .tag(hours)
-                        }
-                    }
-                    
-                    // TODO: Change factor in settings
-                    Text("Estimate is \(task.sumEstimates(1.7)) hours")
-                } else {
-                    Button {
-                        withAnimation {
-                            task.hasEstimate = true
-                        }
-                    } label: {
-                        Label("Estimate", systemImage: "pencil.and.list.clipboard")
-                    }
-                }
                 
-                LabeledContent("Note") {
-                    TextEditor(text: $task.note)
-                        .background(Color.primary.colorInvert())
-                        .cornerRadius(5)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(.black, lineWidth: 1 / 3)
-                                .opacity(0.3)
-                        )
-                        .frame(maxHeight: .infinity)
-                        .padding(.bottom, 10.0)
-                }
-                .padding(.bottom, 10.0)
+                TextEditor(text: $task.note)
+                    .background(Color.primary.colorInvert())
+                    .cornerRadius(5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(.black, lineWidth: 1 / 3)
+                            .opacity(0.3)
+                    )
+                    .frame(maxHeight: .infinity)
+                    .padding(.bottom, 10.0)
             }
         }
         .onChange(of: task) { _, _ in
