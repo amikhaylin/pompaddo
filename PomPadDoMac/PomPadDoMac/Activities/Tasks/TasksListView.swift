@@ -69,7 +69,7 @@ struct TasksListView: View {
                                 Divider()
                                 
                                 Button {
-                                    selectedTasks = []
+                                    selectedTasks.removeAll()
                                     let subtask = Todo(name: "", parentTask: task)
                                     task.subtasks?.append(subtask)
                                     modelContext.insert(subtask)
@@ -81,7 +81,7 @@ struct TasksListView: View {
                                 }
                                 Divider()
                                 Button {
-                                    selectedTasks = []
+                                    selectedTasks.removeAll()
                                     let newTask = task.copy(modelContext: modelContext)
                                     
                                     modelContext.insert(newTask)
@@ -135,6 +135,10 @@ struct TasksListView: View {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
+                
+                #if os(iOS)
+                EditButton()
+                #endif
 
                 Button {
                     showInspector.toggle()
@@ -152,7 +156,7 @@ struct TasksListView: View {
                     Text("Select a task")
                 }
             }
-            .inspectorColumnWidth(min: 400, ideal: 400, max: 500)
+            .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
         }
         .onChange(of: selectedTasks) { _, _ in
             if selectedTasks.count > 0 {
@@ -198,7 +202,7 @@ struct TasksListView: View {
 
     private func addToCurrentList() {
         withAnimation {
-            selectedTasks = []
+            selectedTasks.removeAll()
             let task = Todo(name: "")
             setDueDate(task: task)
             

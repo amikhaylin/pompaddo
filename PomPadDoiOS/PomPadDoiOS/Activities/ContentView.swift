@@ -41,7 +41,6 @@ struct ContentView: View {
 //    @AppStorage("selectedSideBar")
     @State var selectedSideBarItem: SideBarItem? = .today
     
-    @State private var selectedTasks = Set<Todo>()
     @State private var selectedProject: Project?
     
     @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
@@ -135,7 +134,6 @@ struct ContentView: View {
                 .frame(height: 220)
                 
                 ProjectsListView(selectedProject: $selectedProject,
-                                 selectedTasks: $selectedTasks,
                                  projects: projects)
                 
             }
@@ -144,26 +142,22 @@ struct ContentView: View {
             switch selectedSideBarItem {
             case .inbox:
                 TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
-                              selectedTasks: $selectedTasks,
                               list: selectedSideBarItem!)
             case .today:
                 TasksListView(tasks: tasksToday
                     .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                     .sorted(by: TasksQuery.defaultSorting),
-                              selectedTasks: $selectedTasks,
                               list: selectedSideBarItem!)
             case .tomorrow:
                 TasksListView(tasks: tasksTomorrow
                     .filter({ $0.completionDate == nil })
                     .sorted(by: TasksQuery.defaultSorting),
-                              selectedTasks: $selectedTasks,
                               list: selectedSideBarItem!)
             case .review:
                 Text("Details")
             case .projects:
                 if let project = selectedProject {
-                    ProjectView(selectedTasks: $selectedTasks,
-                                project: project)
+                    ProjectView(project: project)
                 } else {
                     Text("Select a project")
                 }

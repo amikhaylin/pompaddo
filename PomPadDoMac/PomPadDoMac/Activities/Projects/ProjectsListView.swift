@@ -14,7 +14,6 @@ struct ProjectsListView: View {
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("groupsExpanded") var groupsExpanded = true
     @Binding var selectedProject: Project?
-//    @Binding var selectedTasks: Set<Todo>
     @State private var newProjectIsShowing = false
     @State private var newProjectGroupShow = false
     
@@ -43,7 +42,6 @@ struct ProjectsListView: View {
                     }
                     .contextMenu {
                         Button {
-//                            selectedTasks = []
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                         } label: {
@@ -96,8 +94,9 @@ struct ProjectsListView: View {
                                     Text("Delete group")
                                 }
                                 
+                                Divider()
+                                
                                 Button {
-//                                    selectedTasks = []
                                     project.deleteRelatives(context: modelContext)
                                     modelContext.delete(project)
                                 } label: {
@@ -158,12 +157,10 @@ struct ProjectsListView: View {
     do {
         let previewer = try Previewer()
         let projects: [Project] = [previewer.project]
-//        @State var selectedTasks = Set<Todo>()
         
         @State var selectedProject: Project?
         
         return ProjectsListView(selectedProject: $selectedProject,
-//                             selectedTasks: $selectedTasks,
                              projects: projects)
             .modelContainer(previewer.container)
     } catch {

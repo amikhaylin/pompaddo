@@ -61,7 +61,7 @@ struct ProjectTasksListView: View {
                                 Divider()
                                 
                                 Button {
-                                    selectedTasks = []
+                                    selectedTasks.removeAll()
                                     let subtask = Todo(name: "", parentTask: task)
                                     task.subtasks?.append(subtask)
                                     modelContext.insert(subtask)
@@ -74,7 +74,7 @@ struct ProjectTasksListView: View {
                                 Divider()
                                 
                                 Button {
-                                    selectedTasks = []
+                                    selectedTasks.removeAll()
                                     let newTask = task.copy(modelContext: modelContext)
                                     modelContext.insert(newTask)
                                     newTask.reconnect()

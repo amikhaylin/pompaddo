@@ -41,7 +41,6 @@ struct ContentView: View {
     @State private var newTaskIsShowing = false
     @State var selectedSideBarItem: SideBarItem = .today
     
-//    @State private var selectedTasks = Set<Todo>()
     @State private var selectedProject: Project?
     
     @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
@@ -138,7 +137,6 @@ struct ContentView: View {
                 .frame(height: 125)
                 
                 ProjectsListView(selectedProject: $selectedProject,
-//                                 selectedTasks: $selectedTasks,
                                  projects: projects)
             }
             .toolbar {
@@ -161,19 +159,16 @@ struct ContentView: View {
                 switch selectedSideBarItem {
                 case .inbox:
                     TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
-//                                  selectedTasks: $selectedTasks,
                                   list: selectedSideBarItem)
                 case .today:
                     TasksListView(tasks: tasksToday
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                         .sorted(by: TasksQuery.defaultSorting),
-//                                  selectedTasks: $selectedTasks,
                                   list: selectedSideBarItem)
                 case .tomorrow:
                     TasksListView(tasks: tasksTomorrow
                         .filter({ $0.completionDate == nil })
                         .sorted(by: TasksQuery.defaultSorting),
-//                                  selectedTasks: $selectedTasks,
                                   list: selectedSideBarItem)
                 case .projects:
                     if let project = selectedProject {
@@ -193,36 +188,17 @@ struct ContentView: View {
                         }
                     }))
                 }
-                
-//                if selectedTasks.count > 0 {
-//                    if let selectedTask = selectedTasks.first {
-//                        EditTaskView(task: selectedTask)
-//                            .frame(minWidth: 270, idealWidth: 270, maxWidth: 350)
-//                            .padding()
-//                    }
-//                }
             }
-//            .toolbar {
-//                ToolbarItem {
-//                    Button {
-//                        selectedTasks = []
-//                    } label: {
-//                        Image(systemName: "sidebar.right")
-//                    }.disabled(!(selectedTasks.count > 0))
-//                }
-//            }
         }
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
         }
         .onChange(of: selectedSideBarItem, { _, newValue in
-//            selectedTasks = []
             if newValue != .projects {
                 selectedProject = nil
             }
         })
         .onChange(of: selectedProject) { _, newValue in
-//            selectedTasks = []
             if newValue != nil {
                 selectedSideBarItem = .projects
             }
