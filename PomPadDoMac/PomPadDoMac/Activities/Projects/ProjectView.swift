@@ -81,6 +81,7 @@ struct ProjectView: View {
             ProjectSettingsView(isVisible: self.$showSettings,
                                 project: self.project)
         })
+        .navigationTitle(project.name)
     }
     
     private func deleteItems() {
