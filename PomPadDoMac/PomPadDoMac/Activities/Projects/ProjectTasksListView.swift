@@ -74,6 +74,31 @@ struct ProjectTasksListView: View {
                                 Divider()
                                 
                                 Button {
+                                    task.disconnectFromAll()
+                                    task.project = nil
+                                    task.status = nil
+                                } label: {
+                                    Image(systemName: "tray.fill")
+                                    Text("Move to Inbox")
+                                }
+                                
+                                Menu {
+                                    ForEach(project.getStatuses()) { status in
+                                        Button {
+                                            task.moveToStatus(status: status,
+                                                              project: project,
+                                                              context: modelContext)
+                                        } label: {
+                                            Text(status.name)
+                                        }
+                                    }
+                                } label: {
+                                    Text("Move to status")
+                                }
+                                
+                                Divider()
+                                
+                                Button {
                                     selectedTasks.removeAll()
                                     let newTask = task.copy(modelContext: modelContext)
                                     modelContext.insert(newTask)
@@ -97,19 +122,9 @@ struct ProjectTasksListView: View {
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
-                        task.disconnectFromParentTask()
-                        task.parentTask = nil
-                        task.project = project
-                        project.tasks?.append(task)
-                        
-                        if status.doCompletion {
-                            if !task.completed {
-                                task.complete(modelContext: modelContext)
-                            }
-                        } else {
-                            task.reactivate()
-                        }
-                        task.status = status
+                        task.moveToStatus(status: status,
+                                          project: project,
+                                          context: modelContext)
                     }
                     return true
                 }

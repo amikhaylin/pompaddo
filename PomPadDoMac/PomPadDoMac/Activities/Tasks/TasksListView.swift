@@ -27,6 +27,8 @@ struct TasksListView: View {
     
     @State private var showInspector = false
     
+    @Query var projects: [Project]
+    
     var body: some View {
         List(selection: $selectedTasks) {
             ForEach(CommonTaskListSections.allCases) { section in
@@ -80,6 +82,23 @@ struct TasksListView: View {
                                     Text("Add subtask")
                                 }
                                 Divider()
+                                
+                                Menu {
+                                    ForEach(projects) { project in
+                                        Button {
+                                            task.project = project
+                                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                            project.tasks?.append(task)
+                                        } label: {
+                                            Text(project.name)
+                                        }
+                                    }
+                                } label: {
+                                    Text("Move task to project")
+                                }
+                                
+                                Divider()
+                                
                                 Button {
                                     selectedTasks.removeAll()
                                     let newTask = task.copy(modelContext: modelContext)

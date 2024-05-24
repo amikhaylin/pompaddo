@@ -77,6 +77,31 @@ struct KanbanView: View {
                                         Divider()
                                         
                                         Button {
+                                            task.disconnectFromAll()
+                                            task.project = nil
+                                            task.status = nil
+                                        } label: {
+                                            Image(systemName: "tray.fill")
+                                            Text("Move to Inbox")
+                                        }
+                                        
+                                        Menu {
+                                            ForEach(project.getStatuses()) { status in
+                                                Button {
+                                                    task.moveToStatus(status: status,
+                                                                      project: project,
+                                                                      context: modelContext)
+                                                } label: {
+                                                    Text(status.name)
+                                                }
+                                            }
+                                        } label: {
+                                            Text("Move to status")
+                                        }
+                                        
+                                        Divider()
+                                        
+                                        Button {
                                             selectedTasks.removeAll()
                                             let newTask = task.copy(modelContext: modelContext)
                                             modelContext.insert(newTask)
