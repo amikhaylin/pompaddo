@@ -154,7 +154,7 @@ struct ContentView: View {
                     .sorted(by: TasksQuery.defaultSorting),
                               list: selectedSideBarItem!)
             case .review:
-                Text("Details")
+                Text("Project's review will be here")
             case .projects:
                 if let project = selectedProject {
                     ProjectView(project: project)
