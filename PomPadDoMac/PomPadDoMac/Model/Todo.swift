@@ -124,6 +124,13 @@ extension Todo {
     func complete(modelContext: ModelContext) {
         self.completed = true
         self.completionDate = Date()
+        
+        if let project = self.project, project.completedMoving {
+            if let status = project.getStatuses().first(where: { $0.doCompletion }) {
+                self.status = status
+            }
+        }
+        
         guard let dueDate = self.dueDate else { return }
         guard repeation != .none else { return }
         
