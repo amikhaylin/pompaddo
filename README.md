@@ -21,7 +21,7 @@ made to myself by myself
 <img src="mac-focus-tasks.png" height="220" width="210" />
 <img src="mac-focus-timer.png"  height="220" width="210" />
 
-### TODO
+### Roadmap
 - [x] Add task direct to Inbox
 - [x] Projects review
 - [x] Kanban view
@@ -29,9 +29,9 @@ made to myself by myself
 - [x] Notifications
 - [x] Focus timer
 - [ ] Location based contexts
-- [ ] iOS / iPadOS implementation
+- [x] iOS / iPadOS implementation
 - [ ] watchOS implementation
-- [ ] Sync via iCloud
+- [x] Sync via iCloud
 - [ ] Settings for focus timer's factors and estimates
 
 #### Languages Supported
