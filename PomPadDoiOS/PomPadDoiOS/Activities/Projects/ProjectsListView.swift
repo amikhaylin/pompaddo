@@ -41,6 +41,19 @@ struct ProjectsListView: View {
                         return true
                     }
                     .contextMenu {
+                        Menu {
+                            ForEach(groups) { group in
+                                Button {
+                                    project.group = group
+                                } label: {
+                                    Text(group.name)
+                                }
+                            }
+                        } label: {
+                            Image(systemName: "folder")
+                            Text("Add project to group")
+                        }
+                        
                         Button {
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
@@ -89,6 +102,13 @@ struct ProjectsListView: View {
                                 }
                                 
                                 Divider()
+                                
+                                Button {
+                                    project.group = nil
+                                } label: {
+                                    Image(systemName: "clear")
+                                    Text("Remove project from group")
+                                }
                                 
                                 Button {
                                     project.deleteRelatives(context: modelContext)
