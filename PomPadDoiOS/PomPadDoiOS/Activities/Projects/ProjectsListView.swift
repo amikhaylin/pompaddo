@@ -1,8 +1,8 @@
 //
-//  ProjectListView.swift
-//  PomPadDoMac
+//  ProjectsListView.swift
+//  PomPadDoiOS
 //
-//  Created by Andrey Mikhaylin on 06.05.2024.
+//  Created by Andrey Mikhaylin on 20.05.2024.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftData
 struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @AppStorage("projectsExpanded") var projectsExpanded = true
+    @AppStorage("projectsExpanded") private var projectsExpanded = true
     @AppStorage("groupsExpanded") var groupsExpanded = true
     @Binding var selectedProject: Project?
     @Binding var selectedTasks: Set<Todo>
@@ -27,7 +27,10 @@ struct ProjectsListView: View {
         List(selection: $selectedProject) {
             DisclosureGroup(isExpanded: $projectsExpanded) {
                 ForEach(projects.filter({ $0.group == nil })) { project in
-                    NavigationLink(value: SideBarItem.projects) {
+                    NavigationLink {
+                        selectedProject = project
+                        return ProjectView(selectedTasks: $selectedTasks, project: project)
+                    } label: {
                         Text(project.name)
                             .badge(project.tasks.filter({ $0.completed == false }).count)
                     }
@@ -82,6 +85,11 @@ struct ProjectsListView: View {
                             }
                         }
                     }
+                    .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
+                        EditProjectGroupView(group: editGroup)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
+                    })
                     .dropDestination(for: Project.self) { projects, _ in
                         for project in projects where project.group == nil || project.group != group {
                             project.group = group
@@ -95,12 +103,6 @@ struct ProjectsListView: View {
                             Image(systemName: "pencil")
                             Text("Rename group")
                         }
-                        .sheet(item: $editProjectGroup, onDismiss: {
-                            editProjectGroup = nil
-                        }, content: { editGroup in
-                            EditProjectGroupView(group: editGroup)
-                                .presentationDetents([.height(200)])
-                        })
                         
                         Button {
                             for project in projects.filter({ $0.group == group }) {
@@ -124,8 +126,10 @@ struct ProjectsListView: View {
                         Image(systemName: "plus.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .sheet(isPresented: $newProjectIsShowing) {
+                    .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
                         NewProjectView(isVisible: self.$newProjectIsShowing)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
                     }
                     
                     Button {
@@ -134,8 +138,10 @@ struct ProjectsListView: View {
                         Image(systemName: "folder.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .sheet(isPresented: $newProjectGroupShow) {
+                    .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
                         NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
                     }
                 }
                 .foregroundColor(Color(#colorLiteral(red: 0.5486837626, green: 0.827090323, blue: 0.8101685047, alpha: 1)))
