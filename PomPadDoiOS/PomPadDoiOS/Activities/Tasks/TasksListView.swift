@@ -75,7 +75,7 @@ struct TasksListView: View {
                                         task.subtasks?.append(subtask)
                                         modelContext.insert(subtask)
                                         
-                                        selectedTasks.insert(subtask)
+//                                        selectedTasks.insert(subtask)
                                         path.append(subtask)
                                     } label: {
                                         Image(systemName: "plus")
@@ -89,7 +89,7 @@ struct TasksListView: View {
                                         modelContext.insert(newTask)
                                         newTask.reconnect()
                                         
-                                        selectedTasks.insert(newTask)
+//                                        selectedTasks.insert(newTask)
                                     } label: {
                                         Image(systemName: "doc.on.doc")
                                         Text("Dublicate task")
@@ -136,6 +136,7 @@ struct TasksListView: View {
                         deleteItems()
                     } label: {
                         Label("Delete task", systemImage: "trash")
+                            .foregroundStyle(Color.red)
                     }.disabled(selectedTasks.count == 0)
                 }
                 
@@ -184,13 +185,13 @@ struct TasksListView: View {
 
     private func addToCurrentList() {
         withAnimation {
-            selectedTasks = []
+//            selectedTasks = []
             let task = Todo(name: "")
             setDueDate(task: task)
             
             modelContext.insert(task)
 
-            selectedTasks.insert(task)
+//            selectedTasks.insert(task)
             
             path.append(task)
         }

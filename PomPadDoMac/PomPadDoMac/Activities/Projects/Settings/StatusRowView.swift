@@ -17,7 +17,7 @@ struct StatusRowView: View {
             TextField("Name", text: $status.name)
             Spacer()
             Picker("Order", selection: $status.order) {
-                ForEach(1...project.statuses.count, id: \.self) { order in
+                ForEach(1...project.getStatuses().count, id: \.self) { order in
                     Text("\(order)")
                         .tag(order)
                 }
@@ -31,7 +31,7 @@ struct StatusRowView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-        guard let firstStatus = previewer.project.statuses.first else { return EmptyView() }
+        guard let firstStatus = previewer.project.statuses?.first else { return EmptyView() }
             
         @State var status = firstStatus
         @State var project = previewer.project

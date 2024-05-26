@@ -13,16 +13,17 @@ struct KanbanView: View {
     @Bindable var project: Project
     
     @Binding var selectedTasks: Set<Todo>
+    @Binding var path: NavigationPath
     
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
                 
-                ForEach(project.statuses.sorted(by: { $0.order < $1.order })) { status in
+                ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                     VStack {
                         Text(status.name)
                         List(selection: $selectedTasks) {
-                            OutlineGroup(project.tasks
+                            OutlineGroup(project.getTasks()
                                 .filter({ $0.status == status && $0.parentTask == nil })
                                 .sorted(by: TasksQuery.defaultSorting),
                                          id: \.self,
@@ -69,7 +70,7 @@ struct KanbanView: View {
                                             task.subtasks?.append(subtask)
                                             modelContext.insert(subtask)
                                             
-                                            selectedTasks.insert(subtask)
+                                            path.append(subtask)
                                         } label: {
                                             Image(systemName: "plus")
                                             Text("Add subtask")
@@ -82,7 +83,7 @@ struct KanbanView: View {
                                             modelContext.insert(newTask)
                                             newTask.reconnect()
 
-                                            selectedTasks.insert(newTask)
+                                            path.append(newTask)
                                         } label: {
                                             Image(systemName: "doc.on.doc")
                                             Text("Dublicate task")
@@ -92,11 +93,12 @@ struct KanbanView: View {
                                             deleteTask(task: task)
                                         } label: {
                                             Image(systemName: "trash")
+                                                .foregroundStyle(Color.red)
                                             Text("Delete task")
                                         }
                                     }
                             }
-                            .listRowSeparator(.hidden)
+                            .listRowSeparator(.visible)
                         }
                         .cornerRadius(5)
                     }
@@ -105,7 +107,7 @@ struct KanbanView: View {
                             task.disconnectFromParentTask()
                             task.parentTask = nil
                             task.project = project
-                            project.tasks.append(task)
+                            project.tasks?.append(task)
                             
                             if status.doCompletion {
                                 if !task.completed {
@@ -151,7 +153,8 @@ struct KanbanView: View {
         @State var project = previewer.project
         
         return KanbanView(project: project,
-                            selectedTasks: $selectedTasks)
+                            selectedTasks: $selectedTasks,
+                          path: .constant(NavigationPath()))
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

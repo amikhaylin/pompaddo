@@ -15,11 +15,13 @@ struct ProjectTasksListView: View {
     @Bindable var project: Project
     @State private var groupsExpanded = true
     
+    @Binding var path: NavigationPath
+    
     var body: some View {
         List(selection: $selectedTasks) {
-            ForEach(project.statuses.sorted(by: { $0.order < $1.order })) { status in
+            ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                 DisclosureGroup(status.name, isExpanded: $groupsExpanded) {
-                    OutlineGroup(project.tasks
+                    OutlineGroup(project.getTasks()
                                     .filter({ $0.status == status && $0.parentTask == nil })
                                     .sorted(by: TasksQuery.defaultSorting),
                                  id: \.self,
@@ -66,7 +68,7 @@ struct ProjectTasksListView: View {
                                     task.subtasks?.append(subtask)
                                     modelContext.insert(subtask)
 
-                                    selectedTasks.insert(subtask)
+                                    path.append(subtask)
                                 } label: {
                                     Image(systemName: "plus")
                                     Text("Add subtask")
@@ -79,7 +81,7 @@ struct ProjectTasksListView: View {
                                     modelContext.insert(newTask)
                                     newTask.reconnect()
                                     
-                                    selectedTasks.insert(newTask)
+                                    path.append(newTask)
                                 } label: {
                                     Image(systemName: "doc.on.doc")
                                     Text("Dublicate task")
@@ -89,6 +91,7 @@ struct ProjectTasksListView: View {
                                     deleteTask(task: task)
                                 } label: {
                                     Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
                                     Text("Delete task")
                                 }
                             }
@@ -99,7 +102,7 @@ struct ProjectTasksListView: View {
                         task.disconnectFromParentTask()
                         task.parentTask = nil
                         task.project = project
-                        project.tasks.append(task)
+                        project.tasks?.append(task)
                         
                         if status.doCompletion {
                             if !task.completed {
@@ -140,7 +143,8 @@ struct ProjectTasksListView: View {
         @State var project = previewer.project
         
         return ProjectTasksListView(selectedTasks: $selectedTasks,
-                                    project: previewer.project)
+                                    project: previewer.project,
+                                    path: .constant(NavigationPath()))
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

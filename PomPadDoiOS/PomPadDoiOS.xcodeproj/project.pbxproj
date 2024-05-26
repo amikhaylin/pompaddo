@@ -77,6 +77,7 @@
 		4D4272D22BF3C8070003E129 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DA499032BF52C2A002A3B7D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4DA499072BF52C9E002A3B7D /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		4DCB073A2BFCB5B7009BA752 /* PomPadDoiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoiOS.entitlements; sourceTree = "<group>"; };
 		4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSApp.swift; sourceTree = "<group>"; };
 		4DDDB3D42BF23034002C4F95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -192,13 +193,13 @@
 		4DDDB3D12BF23034002C4F95 /* PomPadDoiOS */ = {
 			isa = PBXGroup;
 			children = (
+				4DCB073A2BFCB5B7009BA752 /* PomPadDoiOS.entitlements */,
 				4DFB04092BF4B7AF00436EDC /* Info.plist */,
 				4DE97AAC2BF35C0000E43E9A /* Utils */,
 				4DE97AA52BF35BBD00E43E9A /* CustomViews */,
 				4DE97AA42BF35ACA00E43E9A /* Activities */,
 				4DE97A9B2BF351BD00E43E9A /* Model */,
 				4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */,
-				4DDDB3D42BF23034002C4F95 /* ContentView.swift */,
 				4DDDB3D82BF23037002C4F95 /* Assets.xcassets */,
 				4DDDB3DA2BF23037002C4F95 /* Preview Content */,
 				4DDDB3FE2BF257B7002C4F95 /* MainView.swift */,
@@ -245,6 +246,7 @@
 		4DE97AA42BF35ACA00E43E9A /* Activities */ = {
 			isa = PBXGroup;
 			children = (
+				4DDDB3D42BF23034002C4F95 /* ContentView.swift */,
 				4D4272CA2BF3C5880003E129 /* Projects */,
 				4DE97ABC2BF3686200E43E9A /* Tasks */,
 				4DE97AB52BF35E8A00E43E9A /* Focus */,
@@ -629,6 +631,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomPadDoiOS/PomPadDoiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDoiOS/Preview Content\"";
@@ -665,6 +668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomPadDoiOS/PomPadDoiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDoiOS/Preview Content\"";

@@ -11,8 +11,11 @@ import SwiftData
 @Model
 class Status {
     var name: String = ""
-    var order: Int
+    var order: Int = 0
     var doCompletion: Bool = false
+    
+    @Relationship(inverse: \Project.statuses) var project: Project?
+    @Relationship(inverse: \Todo.status) var tasks: [Todo]? = [Todo]()
     
     init(name: String,
          order: Int,

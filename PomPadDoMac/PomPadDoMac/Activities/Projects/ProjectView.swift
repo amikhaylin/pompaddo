@@ -66,6 +66,7 @@ struct ProjectView: View {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
+                        .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
             }
             
@@ -97,7 +98,7 @@ struct ProjectView: View {
         withAnimation {
             selectedTasks = []
             let task = Todo(name: "",
-                            status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                            status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
                             project: project)
             modelContext.insert(task)
             

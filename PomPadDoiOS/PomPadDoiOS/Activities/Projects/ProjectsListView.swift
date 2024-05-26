@@ -27,20 +27,17 @@ struct ProjectsListView: View {
         List(selection: $selectedProject) {
             DisclosureGroup(isExpanded: $projectsExpanded) {
                 ForEach(projects.filter({ $0.group == nil })) { project in
-                    NavigationLink {
-                        selectedProject = project
-                        return ProjectView(selectedTasks: $selectedTasks, project: project)
-                    } label: {
+                    NavigationLink(value: project) {
                         Text(project.name)
-                            .badge(project.tasks.filter({ $0.completed == false }).count)
+                            .badge(project.getTasks().filter({ $0.completed == false }).count)
                     }
                     .tag(project)
                     .draggable(project)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.project = project
-                            task.status = project.statuses.sorted(by: { $0.order < $1.order }).first
-                            project.tasks.append(task)
+                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            project.tasks?.append(task)
                         }
                         return true
                     }
@@ -51,6 +48,7 @@ struct ProjectsListView: View {
                             modelContext.delete(project)
                         } label: {
                             Image(systemName: "trash")
+                                .foregroundStyle(Color.red)
                             Text("Delete project")
                         }
                     }
@@ -61,15 +59,15 @@ struct ProjectsListView: View {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
                                 Text(project.name)
-                                    .badge(project.tasks.filter({ $0.completed == false }).count)
+                                    .badge(project.getTasks().filter({ $0.completed == false }).count)
                             }
                             .tag(project)
                             .draggable(project)
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
                                     task.project = project
-                                    task.status = project.statuses.sorted(by: { $0.order < $1.order }).first
-                                    project.tasks.append(task)
+                                    task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                    project.tasks?.append(task)
                                 }
                                 return true
                             }
@@ -80,6 +78,7 @@ struct ProjectsListView: View {
                                     modelContext.delete(project)
                                 } label: {
                                     Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
                                     Text("Delete project")
                                 }
                             }
@@ -111,6 +110,7 @@ struct ProjectsListView: View {
                             }
                         } label: {
                             Image(systemName: "trash")
+                                .foregroundStyle(Color.red)
                             Text("Delete group")
                         }
                     }

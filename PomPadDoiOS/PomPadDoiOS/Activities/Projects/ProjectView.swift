@@ -25,11 +25,16 @@ struct ProjectView: View {
             Group {
                 if project.projectViewMode == 1 {
                     KanbanView(project: project,
-                               selectedTasks: $selectedTasks)
+                               selectedTasks: $selectedTasks,
+                               path: $path)
                 } else {
                     ProjectTasksListView(selectedTasks: $selectedTasks,
-                                         project: project)
+                                         project: project,
+                                         path: $path)
                 }
+            }
+            .navigationDestination(for: Todo.self) { task in
+                EditTaskView(task: task)
             }
             .toolbar {
                 if project.hasEstimate {
@@ -71,6 +76,7 @@ struct ProjectView: View {
                         deleteItems()
                     } label: {
                         Label("Delete task", systemImage: "trash")
+                            .foregroundStyle(Color.red)
                     }.disabled(selectedTasks.count == 0)
                 }
                 
@@ -80,6 +86,10 @@ struct ProjectView: View {
                     } label: {
                         Label("Settings", systemImage: "gearshape")
                     }
+                }
+                
+                ToolbarItem {
+                    EditButton()
                 }
             }
             .navigationTitle(project.name)
@@ -99,11 +109,12 @@ struct ProjectView: View {
         withAnimation {
             selectedTasks = []
             let task = Todo(name: "",
-                            status: project.statuses.sorted(by: { $0.order < $1.order }).first,
+                            status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
                             project: project)
             modelContext.insert(task)
             
-            selectedTasks.insert(task)
+//            selectedTasks.insert(task)
+            path.append(task)
         }
     }
 }

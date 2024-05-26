@@ -12,6 +12,8 @@ import SwiftData
 class ProjectGroup {
     var name: String = ""
     
+    @Relationship(inverse: \Project.group) var projects: [Project]? = [Project]()
+    
     init(name: String) {
         self.name = name
     }

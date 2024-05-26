@@ -18,6 +18,7 @@ struct NewProjectView: View {
             VStack {
                 TextField("Project name", text: $projectName)
             }
+            .padding()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
@@ -38,7 +39,7 @@ struct NewProjectView: View {
                                                 order: order,
                                                 doCompletion: name.competion)
                             modelContext.insert(status)
-                            project.statuses.append(status)
+                            project.statuses?.append(status)
                         }
                     }
                 }

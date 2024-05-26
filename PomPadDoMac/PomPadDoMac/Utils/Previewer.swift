@@ -50,16 +50,16 @@ struct Previewer {
                                 order: order,
                                 doCompletion: name.competion)
             container.mainContext.insert(status)
-            project.statuses.append(status)
+            project.statuses?.append(status)
         }
         
         projectTask = Todo(name: "Draw some sketches", 
-                           status: project.statuses.first,
+                           status: project.statuses?.first,
                            project: project)
         container.mainContext.insert(projectTask)
         
         let projectTaskWithSubtask = Todo(name: "Make a project",
-                                          status: project.statuses.first,
+                                          status: project.statuses?.first,
                                           project: project)
         container.mainContext.insert(projectTaskWithSubtask)
         let projectSubtask = Todo(name: "Start Xcode", parentTask: projectTaskWithSubtask)
