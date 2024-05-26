@@ -44,9 +44,15 @@ struct TaskRowView: View {
                 
                 if showingProject {
                     if let project = task.project {
-                        Text("\(project.name)")
-                            .foregroundStyle(Color.gray)
-                            .font(.caption)
+                        if let status = task.status, project.showStatus {
+                            Text("\(project.name)>\(status.name)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
+                        } else {
+                            Text("\(project.name)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
+                        }
                     }
                 }
                 if let subtasksCount = task.subtasks?.count,

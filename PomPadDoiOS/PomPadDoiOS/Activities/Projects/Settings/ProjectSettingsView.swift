@@ -82,6 +82,9 @@ struct ProjectSettingsView: View {
                 
                 Toggle("Move completed", isOn: $project.completedMoving)
                     .toggleStyle(.switch)
+                
+                Toggle("Show status in tasks's lists", isOn: $project.showStatus)
+                    .toggleStyle(.switch)
             }
         }
     }

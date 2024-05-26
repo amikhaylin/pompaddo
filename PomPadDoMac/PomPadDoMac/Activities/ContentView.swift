@@ -153,7 +153,7 @@ struct ContentView: View {
             .popover(isPresented: $newTaskIsShowing) {
                 NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200)
+            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 400)
         } detail: {
             HStack {
                 switch selectedSideBarItem {
