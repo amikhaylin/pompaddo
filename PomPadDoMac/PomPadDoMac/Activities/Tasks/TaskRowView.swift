@@ -14,6 +14,7 @@ struct TaskRowView: View {
     @Bindable var task: Todo
     @State private var showingAlertSign = false
     var showingProject: Bool
+    var nameLineLimit: Int
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -23,7 +24,7 @@ struct TaskRowView: View {
                 Text(task.name)
                     .foregroundStyle(task.completed ? Color.gray : Color.primary)
                     .minimumScaleFactor(0.7)
-                    .lineLimit(1)
+                    .lineLimit(nameLineLimit)
             }
             
             HStack {
@@ -126,9 +127,10 @@ struct TaskRowView: View {
         }
     }
     
-    init(task: Todo, showingProject: Bool = true) {
+    init(task: Todo, showingProject: Bool = true, nameLineLimit: Int = 1) {
         self.task = task
         self.showingProject = showingProject
+        self.nameLineLimit = nameLineLimit
     }
 }
 

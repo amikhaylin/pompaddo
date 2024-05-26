@@ -27,7 +27,7 @@ struct KanbanView: View {
                                 .sorted(by: TasksQuery.defaultSorting),
                                          id: \.self,
                                          children: \.subtasks) { task in
-                                TaskRowView(task: task, showingProject: false)
+                                TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
                                     .draggable(task)
                                     .dropDestination(for: Todo.self) { tasks, _ in
                                         // Attach dropped task as subtask
