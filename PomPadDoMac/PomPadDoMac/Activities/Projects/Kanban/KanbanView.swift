@@ -86,7 +86,7 @@ struct KanbanView: View {
                                         }
                                         
                                         Menu {
-                                            ForEach(project.getStatuses()) { status in
+                                            ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                                                 Button {
                                                     task.moveToStatus(status: status,
                                                                       project: project,
