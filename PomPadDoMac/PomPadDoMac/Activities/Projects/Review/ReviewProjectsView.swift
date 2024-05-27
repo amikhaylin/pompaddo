@@ -11,7 +11,7 @@ import SwiftData
 struct ReviewProjectsView: View {
     var projects: [Project]
     @State private var selectedProject: Project?
-    @Binding var selectedTasks: Set<Todo>
+//    @Binding var selectedTasks: Set<Todo>
     
     var body: some View {
         NavigationSplitView {
@@ -38,8 +38,7 @@ struct ReviewProjectsView: View {
                         }
                     }
                     .padding(5)
-                    ProjectView(selectedTasks: $selectedTasks,
-                                project: project)
+                    ProjectView(project: project)
                 }
             } else {
                 Text("Select a project")
@@ -56,10 +55,9 @@ struct ReviewProjectsView: View {
     do {
         let previewer = try Previewer()
         let projects: [Project] = [previewer.project]
-        @State var selectedTasks = Set<Todo>()
+//        @State var selectedTasks = Set<Todo>()
         
-        return ReviewProjectsView(projects: projects,
-                                  selectedTasks: $selectedTasks)
+        return ReviewProjectsView(projects: projects)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

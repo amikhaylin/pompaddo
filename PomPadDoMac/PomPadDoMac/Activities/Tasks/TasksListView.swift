@@ -19,11 +19,13 @@ struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     var tasks: [Todo]
 
-    @Binding var selectedTasks: Set<Todo>
+    @State private var selectedTasks = Set<Todo>()
     
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
     @State private var groupsExpanded = true
+    
+    @State private var showInspector = false
     
     var body: some View {
         List(selection: $selectedTasks) {
@@ -120,24 +122,47 @@ struct TasksListView: View {
             }
         }
         .toolbar {
-            ToolbarItem {
+            ToolbarItemGroup {
                 Button {
                     addToCurrentList()
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
-            }
-            
-            ToolbarItem {
+
                 Button {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
+
+                Button {
+                    showInspector.toggle()
+                } label: {
+                    Label("Show task details", systemImage: "info.circle")
+                }
             }
         }
         .navigationTitle(list.name)
+        .inspector(isPresented: $showInspector) {
+            Group {
+                if let selectedTask = selectedTasks.first {
+                    EditTaskView(task: selectedTask)
+                } else {
+                    Text("Select a task")
+                }
+            }
+            .inspectorColumnWidth(min: 400, ideal: 400, max: 500)
+        }
+        .onChange(of: selectedTasks) { _, _ in
+            if selectedTasks.count > 0 {
+                showInspector = true
+            }
+        }
+        .onChange(of: list) { _, _ in
+            selectedTasks.removeAll()
+            showInspector = false
+        }
     }
     
     private func deleteItems() {
@@ -188,10 +213,10 @@ struct TasksListView: View {
     do {
         let previewer = try Previewer()
         let tasks: [Todo] = [previewer.task]
-        @State var selectedTasks = Set<Todo>()
+//        @State var selectedTasks = Set<Todo>()
         
         return TasksListView(tasks: tasks, 
-                             selectedTasks: $selectedTasks,
+//                             selectedTasks: $selectedTasks,
                              list: .inbox)
             .modelContainer(previewer.container)
     } catch {

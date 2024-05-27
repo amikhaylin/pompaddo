@@ -10,7 +10,8 @@ import SwiftData
 
 struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
-    @Binding var selectedTasks: Set<Todo>
+    @State private var selectedTasks = Set<Todo>()
+    @State private var showInspector = false
     
     @Bindable var project: Project
     
@@ -26,16 +27,24 @@ struct ProjectView: View {
                                      project: project)
             }
         }
+        .inspector(isPresented: $showInspector) {
+            Group {
+                if let selectedTask = selectedTasks.first {
+                    EditTaskView(task: selectedTask)
+                } else {
+                    Text("Select a task")
+                }
+            }
+            .inspectorColumnWidth(min: 400, ideal: 400, max: 500)
+        }
         .toolbar {
-            if project.hasEstimate {
-                ToolbarItem {
+            ToolbarItemGroup {
+                if project.hasEstimate {
                     // TODO: Change factor in settings
                     Text("Project estimate is \(project.sumEstimateByProject(1.7)) hours")
                         .foregroundStyle(Color.gray)
                 }
-            }
-            
-            ToolbarItem {
+
                 Picker("View Mode", selection: $project.projectViewMode) {
                     ForEach(0...1, id: \.self) { mode in
                         HStack {
@@ -51,38 +60,47 @@ struct ProjectView: View {
                         .tag(mode as Int)
                     }
                 }.pickerStyle(.segmented)
-            }
-            
-            ToolbarItem {
+
                 Button {
                     addTaskToProject()
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
-            }
-            
-            ToolbarItem {
+
                 Button {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
-            }
-            
-            ToolbarItem {
+
                 Button {
                     showSettings.toggle()
                 } label: {
                     Label("Settings", systemImage: "gearshape")
                 }
+                .sheet(isPresented: $showSettings, content: {
+                    ProjectSettingsView(isVisible: self.$showSettings,
+                                        project: self.project)
+                })
+
+                Button {
+                    showInspector.toggle()
+                } label: {
+                    Label("Show task details", systemImage: "info.circle")
+                }
             }
         }
-        .sheet(isPresented: $showSettings, content: {
-            ProjectSettingsView(isVisible: self.$showSettings,
-                                project: self.project)
-        })
         .navigationTitle(project.name)
+        .onChange(of: selectedTasks) { _, _ in
+            if selectedTasks.count > 0 {
+                showInspector = true
+            }
+        }
+        .onChange(of: project) { _, _ in
+            selectedTasks.removeAll()
+            showInspector = false
+        }
     }
     
     private func deleteItems() {
@@ -96,13 +114,14 @@ struct ProjectView: View {
     
     private func addTaskToProject() {
         withAnimation {
-            selectedTasks = []
+            selectedTasks.removeAll()
             let task = Todo(name: "",
                             status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
                             project: project)
             modelContext.insert(task)
             
             selectedTasks.insert(task)
+            showInspector = true
         }
     }
 }
@@ -110,11 +129,10 @@ struct ProjectView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-        @State var selectedTasks = Set<Todo>()
+//        @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
-        return ProjectView(selectedTasks: $selectedTasks,
-                                    project: previewer.project)
+        return ProjectView(project: previewer.project)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

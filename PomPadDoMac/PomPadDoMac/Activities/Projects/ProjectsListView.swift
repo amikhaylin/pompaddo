@@ -14,7 +14,7 @@ struct ProjectsListView: View {
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("groupsExpanded") var groupsExpanded = true
     @Binding var selectedProject: Project?
-    @Binding var selectedTasks: Set<Todo>
+//    @Binding var selectedTasks: Set<Todo>
     @State private var newProjectIsShowing = false
     @State private var newProjectGroupShow = false
     
@@ -43,7 +43,7 @@ struct ProjectsListView: View {
                     }
                     .contextMenu {
                         Button {
-                            selectedTasks = []
+//                            selectedTasks = []
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                         } label: {
@@ -73,7 +73,31 @@ struct ProjectsListView: View {
                             }
                             .contextMenu {
                                 Button {
-                                    selectedTasks = []
+                                    editProjectGroup = group
+                                } label: {
+                                    Image(systemName: "pencil")
+                                    Text("Rename group")
+                                }
+                                .sheet(item: $editProjectGroup, onDismiss: {
+                                    editProjectGroup = nil
+                                }, content: { editGroup in
+                                    EditProjectGroupView(group: editGroup)
+                                        .presentationDetents([.height(200)])
+                                })
+                                
+                                Button {
+                                    for project in projects.filter({ $0.group == group }) {
+                                        project.group = nil
+                                        modelContext.delete(group)
+                                    }
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
+                                    Text("Delete group")
+                                }
+                                
+                                Button {
+//                                    selectedTasks = []
                                     project.deleteRelatives(context: modelContext)
                                     modelContext.delete(project)
                                 } label: {
@@ -81,6 +105,7 @@ struct ProjectsListView: View {
                                         .foregroundStyle(Color.red)
                                     Text("Delete project")
                                 }
+
                             }
                         }
                     }
@@ -89,31 +114,6 @@ struct ProjectsListView: View {
                             project.group = group
                         }
                         return true
-                    }
-                    .contextMenu {
-                        Button {
-                            editProjectGroup = group
-                        } label: {
-                            Image(systemName: "pencil")
-                            Text("Rename group")
-                        }
-                        .sheet(item: $editProjectGroup, onDismiss: {
-                            editProjectGroup = nil
-                        }, content: { editGroup in
-                            EditProjectGroupView(group: editGroup)
-                                .presentationDetents([.height(200)])
-                        })
-                        
-                        Button {
-                            for project in projects.filter({ $0.group == group }) {
-                                project.group = nil
-                                modelContext.delete(group)
-                            }
-                        } label: {
-                            Image(systemName: "trash")
-                                .foregroundStyle(Color.red)
-                            Text("Delete group")
-                        }
                     }
                 }
             } label: {
@@ -158,12 +158,12 @@ struct ProjectsListView: View {
     do {
         let previewer = try Previewer()
         let projects: [Project] = [previewer.project]
-        @State var selectedTasks = Set<Todo>()
+//        @State var selectedTasks = Set<Todo>()
         
         @State var selectedProject: Project?
         
         return ProjectsListView(selectedProject: $selectedProject,
-                             selectedTasks: $selectedTasks,
+//                             selectedTasks: $selectedTasks,
                              projects: projects)
             .modelContainer(previewer.container)
     } catch {
