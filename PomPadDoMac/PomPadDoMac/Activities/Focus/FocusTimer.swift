@@ -9,6 +9,7 @@
 import Foundation
 import Observation
 import AudioToolbox
+import AVKit
 
 enum FocusTimerState: String {
     case idle
@@ -167,6 +168,8 @@ class FocusTimer: ObservableObject {
         if self.secondsLeft == 0 {
             #if os(macOS)
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_UserPreferredAlert))
+            #else
+            AudioServicesPlaySystemSound(SystemSoundID(1002))
             #endif
             
             self.fractionPassed = 0
