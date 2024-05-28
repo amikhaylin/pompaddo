@@ -20,7 +20,7 @@ struct ProjectView: View {
     var body: some View {
         NavigationStack {
             if project.projectViewMode == 1 {
-                KanbanView(project: project,
+                BoardView(project: project,
                            selectedTasks: $selectedTasks)
             } else {
                 ProjectTasksListView(selectedTasks: $selectedTasks,

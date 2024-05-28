@@ -24,7 +24,7 @@ made to myself by myself
 ### Roadmap
 - [x] Add task direct to Inbox
 - [x] Projects review
-- [x] Kanban view
+- [x] Project board view
 - [x] Repeating tasks 
 - [x] Notifications
 - [x] Focus timer
@@ -33,6 +33,7 @@ made to myself by myself
 - [ ] watchOS implementation
 - [x] Sync via iCloud
 - [ ] Settings for focus timer's factors and estimates
+- [ ] Localization
 
 #### Languages Supported
 - English 🇺🇸

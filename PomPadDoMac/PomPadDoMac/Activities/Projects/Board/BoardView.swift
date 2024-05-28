@@ -1,5 +1,5 @@
 //
-//  KanbanView.swift
+//  BoardView.swift
 //  PomPadDoMac
 //
 //  Created by Andrey Mikhaylin on 12.04.2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct KanbanView: View {
+struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var project: Project
     
@@ -176,7 +176,7 @@ struct KanbanView: View {
         @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
-        return KanbanView(project: project,
+        return BoardView(project: project,
                             selectedTasks: $selectedTasks)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
