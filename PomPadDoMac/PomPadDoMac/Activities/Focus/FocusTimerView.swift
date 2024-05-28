@@ -63,8 +63,15 @@ struct FocusTimerView: View {
                     Spacer()
                     // MARK: Focus timer
                     if let task = selectedTask {
-                        Text(task.name)
-                            .padding()
+                        HStack {
+                            Text(task.name)
+                                .padding()
+                            Button {
+                                selectedTask = nil
+                            } label: {
+                                Image(systemName: "clear")
+                            }
+                        }
                     }
                     
                     ZStack {

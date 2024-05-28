@@ -61,9 +61,12 @@ struct PomPadDoMacApp: App {
         .modelContainer(sharedModelContainer)
         
         MenuBarExtra {
-            FocusTimerView(timerCount: $timerCount,
-                           focusMode: $focusMode)
+            // TODO: Store refresh period in settings
+            TimelineView(.periodic(from: .now, by: 5.0)) { _ in
+                FocusTimerView(timerCount: $timerCount,
+                               focusMode: $focusMode)
                 .modelContainer(sharedModelContainer)
+            }
         } label: {
             HStack {
                 if focusMode == .work {

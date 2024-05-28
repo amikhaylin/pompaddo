@@ -28,6 +28,7 @@ struct MainView: View {
     
     @State private var timerCount: String = "25:00"
     @State private var focusMode: FocusTimerMode = .work
+    @State private var focusTask: Todo?
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
@@ -40,7 +41,8 @@ struct MainView: View {
                 ContentView()
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
-                               timer: timer)
+                               timer: timer,
+                               selectedTask: $focusTask)
             case.settings:
                 Text("Settings")
             }
