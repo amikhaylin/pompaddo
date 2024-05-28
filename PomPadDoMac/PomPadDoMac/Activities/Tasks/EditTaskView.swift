@@ -38,6 +38,7 @@ struct EditTaskView: View {
                             Image(systemName: "clear")
                         }
                         
+                        #if os(macOS)
                         Button {
                             task.dueDate = Calendar.current.startOfDay(for: Date())
                         } label: {
@@ -49,6 +50,7 @@ struct EditTaskView: View {
                         } label: {
                             Image(systemName: "sunrise")
                         }
+                        #endif
                     }
                 } else {
                     Button {

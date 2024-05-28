@@ -18,7 +18,7 @@ struct ProjectView: View {
     @State private var showSettings = false
     
     var body: some View {
-        Group {
+        NavigationStack {
             if project.projectViewMode == 1 {
                 KanbanView(project: project,
                            selectedTasks: $selectedTasks)
@@ -35,7 +35,7 @@ struct ProjectView: View {
                     Text("Select a task")
                 }
             }
-            .inspectorColumnWidth(min: 400, ideal: 400, max: 500)
+            .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
         }
         .toolbar {
             ToolbarItemGroup {
@@ -74,6 +74,7 @@ struct ProjectView: View {
                         .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
 
+                #if os(macOS)
                 Button {
                     showSettings.toggle()
                 } label: {
@@ -83,7 +84,16 @@ struct ProjectView: View {
                     ProjectSettingsView(isVisible: self.$showSettings,
                                         project: self.project)
                 })
-
+                #else
+                NavigationLink {
+                    ProjectSettingsView(project: self.project)
+                } label: {
+                    Label("Settings", systemImage: "gearshape")
+                }
+                
+                EditButton()
+                #endif
+                
                 Button {
                     showInspector.toggle()
                 } label: {

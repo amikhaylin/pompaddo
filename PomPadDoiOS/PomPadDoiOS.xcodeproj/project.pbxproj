@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
 		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
-		4D1959B52BFBB45600B90F10 /* KanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B42BFBB45600B90F10 /* KanbanView.swift */; };
-		4D1959B72BFBBDCF00B90F10 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B62BFBBDCF00B90F10 /* ProjectTasksListView.swift */; };
-		4D1959BB2BFBBE9300B90F10 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BA2BFBBE9300B90F10 /* ProjectView.swift */; };
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
 		4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */; };
 		4D4272C72BF3BD160003E129 /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D4272C62BF3BD160003E129 /* SwiftDataTransferrable */; };
@@ -19,9 +16,12 @@
 		4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */; };
 		4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */; };
 		4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D22BF3C8070003E129 /* NewProjectView.swift */; };
-		4DA499042BF52C2A002A3B7D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA499032BF52C2A002A3B7D /* TasksListView.swift */; };
 		4DA863EE2BFF4D3200269D83 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */; };
 		4DA863F02BFF691E00269D83 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863EF2BFF691E00269D83 /* TaskRowView.swift */; };
+		4DA863F22BFF711700269D83 /* KanbanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F12BFF711700269D83 /* KanbanView.swift */; };
+		4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */; };
+		4DA863F62BFF864A00269D83 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F52BFF864A00269D83 /* ProjectView.swift */; };
+		4DA863F82BFF879900269D83 /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F72BFF879900269D83 /* TasksListView.swift */; };
 		4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */; };
 		4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D42BF23034002C4F95 /* ContentView.swift */; };
 		4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D82BF23037002C4F95 /* Assets.xcassets */; };
@@ -65,18 +65,18 @@
 /* Begin PBXFileReference section */
 		4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4D1959B12BFBB25900B90F10 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
-		4D1959B42BFBB45600B90F10 /* KanbanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanbanView.swift; sourceTree = "<group>"; };
-		4D1959B62BFBBDCF00B90F10 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTasksListView.swift; sourceTree = "<group>"; };
-		4D1959BA2BFBBE9300B90F10 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		4D4272C82BF3BDF70003E129 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D22BF3C8070003E129 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
-		4DA499032BF52C2A002A3B7D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/EditTaskView.swift; sourceTree = "<group>"; };
 		4DA863EF2BFF691E00269D83 /* TaskRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskRowView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskRowView.swift; sourceTree = "<group>"; };
+		4DA863F12BFF711700269D83 /* KanbanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KanbanView.swift; path = ../../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/Kanban/KanbanView.swift; sourceTree = "<group>"; };
+		4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectTasksListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/ProjectTasksListView.swift; sourceTree = "<group>"; };
+		4DA863F52BFF864A00269D83 /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/ProjectView.swift; sourceTree = "<group>"; };
+		4DA863F72BFF879900269D83 /* TasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TasksListView.swift; sourceTree = "<group>"; };
 		4DCB073A2BFCB5B7009BA752 /* PomPadDoiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoiOS.entitlements; sourceTree = "<group>"; };
 		4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSApp.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		4D1959B32BFBB44000B90F10 /* Kanban */ = {
 			isa = PBXGroup;
 			children = (
-				4D1959B42BFBB45600B90F10 /* KanbanView.swift */,
+				4DA863F12BFF711700269D83 /* KanbanView.swift */,
 			);
 			path = Kanban;
 			sourceTree = "<group>";
@@ -152,9 +152,9 @@
 				4D1959B32BFBB44000B90F10 /* Kanban */,
 				4DF3C6312BFB842B006EC565 /* Settings */,
 				4D4272CD2BF3C7600003E129 /* Groups */,
-				4D1959B62BFBBDCF00B90F10 /* ProjectTasksListView.swift */,
 				4D4272D22BF3C8070003E129 /* NewProjectView.swift */,
-				4D1959BA2BFBBE9300B90F10 /* ProjectView.swift */,
+				4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */,
+				4DA863F52BFF864A00269D83 /* ProjectView.swift */,
 				4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */,
 			);
 			path = Projects;
@@ -290,7 +290,7 @@
 				4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */,
 				4DA863EF2BFF691E00269D83 /* TaskRowView.swift */,
 				4D4272C82BF3BDF70003E129 /* NewTaskView.swift */,
-				4DA499032BF52C2A002A3B7D /* TasksListView.swift */,
+				4DA863F72BFF879900269D83 /* TasksListView.swift */,
 				4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */,
 			);
 			path = Tasks;
@@ -445,18 +445,15 @@
 				4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */,
 				4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */,
 				4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */,
-				4DA499042BF52C2A002A3B7D /* TasksListView.swift in Sources */,
-				4D1959B52BFBB45600B90F10 /* KanbanView.swift in Sources */,
 				4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */,
 				4DE97AB22BF35CB000E43E9A /* Previewer.swift in Sources */,
 				4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */,
 				4DA863EE2BFF4D3200269D83 /* EditTaskView.swift in Sources */,
 				4DA863F02BFF691E00269D83 /* TaskRowView.swift in Sources */,
-				4D1959B72BFBBDCF00B90F10 /* ProjectTasksListView.swift in Sources */,
 				4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */,
 				4DE97AA32BF351EE00E43E9A /* ProjectGroup.swift in Sources */,
+				4DA863F62BFF864A00269D83 /* ProjectView.swift in Sources */,
 				4DDDB3FF2BF257B7002C4F95 /* MainView.swift in Sources */,
-				4D1959BB2BFBBE9300B90F10 /* ProjectView.swift in Sources */,
 				4DE97AA22BF351ED00E43E9A /* Status.swift in Sources */,
 				4DE97AB32BF35CB000E43E9A /* TasksQuery.swift in Sources */,
 				4DE97AA92BF35BD300E43E9A /* CheckBoxView.swift in Sources */,
@@ -465,10 +462,13 @@
 				4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */,
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
 				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
+				4DA863F82BFF879900269D83 /* TasksListView.swift in Sources */,
 				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
 				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
+				4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */,
 				4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */,
+				4DA863F22BFF711700269D83 /* KanbanView.swift in Sources */,
 				4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */,
 				4DE97AA12BF351ED00E43E9A /* Project.swift in Sources */,
 			);
@@ -643,7 +643,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -680,7 +679,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
