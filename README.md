@@ -34,6 +34,7 @@ made to myself by myself
 - [x] Sync via iCloud
 - [ ] Settings for focus timer's factors and estimates
 - [ ] Localization
+- [ ] Safari extension
 
 #### Languages Supported
 - English 🇺🇸
