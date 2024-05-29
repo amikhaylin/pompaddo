@@ -67,8 +67,16 @@ struct MainView: View {
                             Image(systemName: "cup.and.saucer.fill")
                                 .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
                         }
-                        Text(timer.secondsLeftString)
-                            .foregroundStyle(focusMode == .work ? Color.red : Color.green)
+                        if timer.state == .running {
+                            TimelineView(.periodic(from: .now, by: 0.5)) { _ in
+                                Text(timer.secondsLeftString)
+                                    .foregroundStyle(focusMode == .work ? Color.red : Color.green)
+                            }
+                        } else {
+                            Text(timer.secondsLeftString)
+                                .foregroundStyle(focusMode == .work ? Color.red : Color.green)
+                        }
+                            
                     }
                 }
 
