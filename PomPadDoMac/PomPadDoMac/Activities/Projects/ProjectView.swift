@@ -52,7 +52,7 @@ struct ProjectView: View {
                             case 0:
                                 Image(systemName: "list.bullet")
                             case 1:
-                                Image(systemName: "chart.bar")
+                                Image(systemName: "rectangle.split.3x1")
                             default:
                                 EmptyView()
                             }
