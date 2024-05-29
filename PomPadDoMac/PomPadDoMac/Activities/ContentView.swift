@@ -51,6 +51,8 @@ struct ContentView: View {
     @Query var projects: [Project]
     
     @State var badgeManager = BadgeManager()
+    
+    @State private var currentDate = Date()
 
     var body: some View {
         NavigationSplitView {
@@ -140,7 +142,7 @@ struct ContentView: View {
                                  projects: projects)
             }
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup {
                     Button {
                         newTaskIsShowing.toggle()
                     } label: {
@@ -148,6 +150,11 @@ struct ContentView: View {
                             .foregroundStyle(Color.orange)
                     }
                     
+                    Button {
+                        currentDate = .now
+                    } label: {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                    }
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {

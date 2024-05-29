@@ -29,6 +29,7 @@ struct MainView: View {
     @State private var timerCount: String = "25:00"
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusTask: Todo?
+    @State private var currentDate = Date()
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
@@ -46,6 +47,9 @@ struct MainView: View {
             case.settings:
                 Text("Settings")
             }
+        }
+        .refreshable {
+            currentDate = .now
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
