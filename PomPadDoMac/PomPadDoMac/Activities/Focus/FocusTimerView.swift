@@ -23,7 +23,7 @@ struct FocusTimerView: View {
     @State private var viewMode = 0
     @State private var selectedTask: Todo?
     
-    @State private var currentDate = Date()
+    @State private var refresh = false
     
     var body: some View {
         VStack {
@@ -45,7 +45,7 @@ struct FocusTimerView: View {
                 }.pickerStyle(.segmented)
                 
                 Button {
-                    currentDate = .now
+                    refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
                 }
