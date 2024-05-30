@@ -79,6 +79,9 @@ struct ProjectSettingsView: View {
                     
                 Toggle("Show estimate", isOn: $project.hasEstimate)
                     .toggleStyle(.switch)
+                
+                Toggle("Move completed", isOn: $project.completedMoving)
+                    .toggleStyle(.switch)
             }
         }
     }
