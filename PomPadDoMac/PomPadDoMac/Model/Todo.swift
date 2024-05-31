@@ -16,6 +16,26 @@ enum RepeationMode: String, Identifiable, CaseIterable, Codable {
     case weekly = "Weekly"
     case monthly = "Monthly"
     case yearly = "Yearly"
+    case custom = "Custom"
+}
+
+enum CustomRepeationType: String, Identifiable, CaseIterable, Codable {
+    var id: String { rawValue }
+    
+    case days
+    case months
+    case years
+    
+    var calendarComponent: Calendar.Component {
+        switch self {
+        case .days:
+            return .day
+        case .months:
+            return .month
+        case .years:
+            return .year
+        }
+    }
 }
 
 @Model
@@ -37,6 +57,8 @@ class Todo {
     var hasEstimate: Bool = false
     var clarity: Int = 0
     var baseTimeHours: Int = 0
+    var customRepeatValue: Int = 2
+    var customRepeatType: CustomRepeationType? = CustomRepeationType.days
     
     @Relationship(deleteRule: .cascade, inverse: \Todo.parentTask)
     var subtasks: [Todo]? = [Todo]()
@@ -142,6 +164,12 @@ extension Todo {
             newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
         case .yearly:
             newTask.dueDate = Calendar.current.date(byAdding: .year, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .custom:
+            if let repeatType = self.customRepeatType {
+                newTask.dueDate = Calendar.current.date(byAdding: repeatType.calendarComponent,
+                                                        value: self.customRepeatValue,
+                                                        to: Calendar.current.startOfDay(for: dueDate))
+            }
         }
         newTask.reconnect()
         modelContext.insert(newTask)

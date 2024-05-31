@@ -69,6 +69,22 @@ struct EditTaskView: View {
                     }
                 }
                 
+                if task.repeation == .custom {
+                    HStack {
+                        Picker("Repead every", selection: $task.customRepeatValue) {
+                            ForEach(1...30, id: \.self) { units in
+                                Text("\(units)")
+                                    .tag(units)
+                            }
+                        }
+                        Picker("", selection: $task.customRepeatType) {
+                            ForEach(CustomRepeationType.allCases, id: \.self) { reptype in
+                                Text(reptype.rawValue).tag(reptype as CustomRepeationType?)
+                            }
+                        }
+                    }
+                }
+                
                 Picker("Priority", selection: $task.priority) {
                     ForEach(0...3, id: \.self) { priority in
                         HStack {
