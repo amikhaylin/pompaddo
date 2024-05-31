@@ -52,8 +52,6 @@ struct ContentView: View {
     
     @State var badgeManager = BadgeManager()
     
-    @State private var refresh = false
-
     var body: some View {
         NavigationSplitView {
             VStack {
@@ -148,12 +146,6 @@ struct ContentView: View {
                     } label: {
                         Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
                             .foregroundStyle(Color.orange)
-                    }
-                    
-                    Button {
-                        refresh.toggle()
-                    } label: {
-                        Image(systemName: "arrow.triangle.2.circlepath")
                     }
                 }
             }

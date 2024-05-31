@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct FocusTimerView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     // TODO: Change values in settings
     var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -22,49 +24,49 @@ struct FocusTimerView: View {
     
     @State private var viewMode = 0
     @State private var selectedTask: Todo?
-    
-    @State private var refresh = false
+    @State private var textToInbox = ""
     
     var body: some View {
         VStack {
-            HStack {
-                Picker("", selection: $viewMode) {
-                    ForEach(0...1, id: \.self) { mode in
-                        HStack {
-                            switch mode {
-                            case 0:
-                                Text("Today tasks")
-                            case 1:
-                                Text("Focus Timer")
-                            default:
-                                EmptyView()
-                            }
-                        }
-                        .tag(mode as Int)
-                    }
-                }.pickerStyle(.segmented)
-                
-                Button {
-                    refresh.toggle()
-                } label: {
-                    Image(systemName: "arrow.triangle.2.circlepath")
+            TextField("Add to Inbox", text: $textToInbox)
+                .onSubmit {
+                    let task = Todo(name: textToInbox)
+                    modelContext.insert(task)
+                    textToInbox = ""
                 }
-            }
             
+            Picker("", selection: $viewMode) {
+                ForEach(0...1, id: \.self) { mode in
+                    HStack {
+                        switch mode {
+                        case 0:
+                            Text("Today tasks")
+                        case 1:
+                            Text("Focus Timer")
+                        default:
+                            EmptyView()
+                        }
+                    }
+                    .tag(mode as Int)
+                }
+            }.pickerStyle(.segmented)
+                
             if viewMode == 0 {
                 // MARK: Task list
-                List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                     children: \.subtasks, selection: $selectedTask) { task in
-                    HStack {
-                        TaskRowView(task: task)
-                        
-                        Button {
-                            selectedTask = task
-                            viewMode = 1
-                            timer.reset()
-                            timer.start()
-                        } label: {
-                            Image(systemName: "play.fill")
+                TimelineView(.periodic(from: .now, by: 5.0)) { _ in
+                    List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
+                         children: \.subtasks, selection: $selectedTask) { task in
+                        HStack {
+                            TaskRowView(task: task)
+                            
+                            Button {
+                                selectedTask = task
+                                viewMode = 1
+                                timer.reset()
+                                timer.start()
+                            } label: {
+                                Image(systemName: "play.fill")
+                            }
                         }
                     }
                 }
@@ -147,7 +149,7 @@ struct FocusTimerView: View {
             }
         })
         .padding()
-        .frame(width: 400, height: 400)
+        .frame(width: 400, height: 420)
     }
 }
 
