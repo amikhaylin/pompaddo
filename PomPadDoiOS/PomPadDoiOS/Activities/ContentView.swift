@@ -61,7 +61,7 @@ struct ContentView: View {
                                 Text("Inbox")
                             }
                             .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
-                            .badge(tasksInbox.count)
+                            .badge(tasksInbox.filter({ $0.completed == false}).count)
                         }
                         .dropDestination(for: Todo.self) { tasks, _ in
                             for task in tasks {
@@ -154,7 +154,7 @@ struct ContentView: View {
                     .sorted(by: TasksQuery.defaultSorting),
                               list: selectedSideBarItem!)
             case .review:
-                Text("Details")
+                Text("Project's review will be here")
             case .projects:
                 if let project = selectedProject {
                     ProjectView(project: project)

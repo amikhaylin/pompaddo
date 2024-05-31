@@ -244,4 +244,24 @@ extension Todo {
         }
         return result
     }
+    
+    func moveToStatus(status: Status, 
+                      project: Project,
+                      context: ModelContext) {
+        if self.parentTask != nil {
+            self.disconnectFromParentTask()
+            self.parentTask = nil
+            self.project = project
+            project.tasks?.append(self)
+        }
+            
+        if status.doCompletion {
+            if !self.completed {
+                self.complete(modelContext: context)
+            }
+        } else {
+            self.reactivate()
+        }
+        self.status = status
+    }
 }
