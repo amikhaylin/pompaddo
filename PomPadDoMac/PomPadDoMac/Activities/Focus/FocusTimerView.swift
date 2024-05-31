@@ -73,7 +73,6 @@ struct FocusTimerView: View {
             } else {
                 ZStack {
                     VStack {
-                        //                    Spacer()
                         // MARK: Focus timer
                         if let task = selectedTask {
                             HStack {
@@ -119,8 +118,6 @@ struct FocusTimerView: View {
                                 timer.reset()
                             }
                         }
-                        
-                        //                    Spacer()
                     }
                     VStack {
                         Spacer()
