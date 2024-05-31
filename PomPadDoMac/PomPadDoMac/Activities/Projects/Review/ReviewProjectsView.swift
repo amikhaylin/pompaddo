@@ -11,7 +11,6 @@ import SwiftData
 struct ReviewProjectsView: View {
     var projects: [Project]
     @State private var selectedProject: Project?
-//    @Binding var selectedTasks: Set<Todo>
     
     var body: some View {
         NavigationSplitView {

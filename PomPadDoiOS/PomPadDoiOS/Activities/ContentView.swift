@@ -48,6 +48,9 @@ struct ContentView: View {
     @Query(filter: TasksQuery.predicateTomorrow()) var tasksTomorrow: [Todo]
     
     @Query var projects: [Project]
+    
+    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    @State var badgeManager = BadgeManager()
 
     var body: some View {
         NavigationSplitView {
@@ -119,6 +122,9 @@ struct ContentView: View {
                             }
                             .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
                             .badge(projects.filter({
+                                if $0.showInReview == false {
+                                    return false
+                                }
                                 let today = Date()
                                 if let dateToReview = Calendar.current.date(byAdding: .day,
                                                                             value: $0.reviewDaysCount,
@@ -174,6 +180,12 @@ struct ContentView: View {
             if newValue != nil {
                 selectedSideBarItem = .projects
             }
+        }
+        .onChange(of: tasksTodayActive.count) { _, newValue in
+            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
+        }
+        .onAppear {
+            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }

@@ -34,6 +34,7 @@ class Project {
     var hasEstimate: Bool = false
     var completedMoving: Bool = false
     var showStatus: Bool = true
+    var showInReview: Bool = true
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status]? = [Status]()

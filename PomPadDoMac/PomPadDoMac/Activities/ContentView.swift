@@ -122,6 +122,9 @@ struct ContentView: View {
                             }
                             .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
                             .badge(projects.filter({
+                                if $0.showInReview == false {
+                                    return false
+                                }
                                 let today = Date()
                                 if let dateToReview = Calendar.current.date(byAdding: .day,
                                                                             value: $0.reviewDaysCount,
@@ -177,6 +180,9 @@ struct ContentView: View {
                     }
                 case .review:
                     ReviewProjectsView(projects: projects.filter({
+                        if $0.showInReview == false {
+                            return false
+                        }
                         let today = Date()
                         if let dateToReview = Calendar.current.date(byAdding: .day,
                                                                     value: $0.reviewDaysCount,

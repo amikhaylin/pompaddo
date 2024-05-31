@@ -85,6 +85,9 @@ struct ProjectSettingsView: View {
                 
                 Toggle("Show status in tasks's lists", isOn: $project.showStatus)
                     .toggleStyle(.switch)
+                
+                Toggle("Show project in Review", isOn: $project.showInReview)
+                    .toggleStyle(.switch)
             }
         }
     }
