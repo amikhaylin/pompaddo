@@ -28,7 +28,8 @@ struct FocusTimerView: View {
     
     var body: some View {
         VStack {
-            TextField("Add to Inbox", text: $textToInbox)
+            TextField("Add task to Inbox", text: $textToInbox)
+                .textFieldStyle(.roundedBorder)
                 .onSubmit {
                     let task = Todo(name: textToInbox)
                     modelContext.insert(task)
