@@ -20,7 +20,8 @@ struct FocusTimerView: View {
     @Binding var timerCount: String
     @Binding var focusMode: FocusTimerMode
     
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+//    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    @State private var tasksTodayActive: [Todo]
     
     @State private var viewMode = 0
     @State private var selectedTask: Todo?
@@ -36,21 +37,30 @@ struct FocusTimerView: View {
                     textToInbox = ""
                 }
             
-            Picker("", selection: $viewMode) {
-                ForEach(0...1, id: \.self) { mode in
-                    HStack {
-                        switch mode {
-                        case 0:
-                            Text("Today tasks")
-                        case 1:
-                            Text("Focus Timer")
-                        default:
-                            EmptyView()
+            HStack {
+                Picker("", selection: $viewMode) {
+                    ForEach(0...1, id: \.self) { mode in
+                        HStack {
+                            switch mode {
+                            case 0:
+                                Text("Today tasks")
+                            case 1:
+                                Text("Focus Timer")
+                            default:
+                                EmptyView()
+                            }
                         }
+                        .tag(mode as Int)
                     }
-                    .tag(mode as Int)
+                }.pickerStyle(.segmented)
+             
+                Button {
+                    tasksTodayActive = TasksQuery.fetchData(context: modelContext,
+                                                            predicate: TasksQuery.predicateTodayActive())
+                } label: {
+                    Image(systemName: "arrow.triangle.2.circlepath")
                 }
-            }.pickerStyle(.segmented)
+            }
                 
             if viewMode == 0 {
                 // MARK: Task list
@@ -156,6 +166,16 @@ struct FocusTimerView: View {
         .padding()
         .frame(width: 400, height: 420)
     }
+    
+    @MainActor init(context: ModelContext,
+                    timerCount: Binding<String>,
+                    focusMode: Binding<FocusTimerMode>) {
+        self._timerCount = timerCount
+        self._focusMode = focusMode
+        
+        self.tasksTodayActive = TasksQuery.fetchData(context: context, 
+                                                     predicate: TasksQuery.predicateTodayActive())
+    }
 }
 
 #Preview {
@@ -164,7 +184,8 @@ struct FocusTimerView: View {
         @State var timerString: String = "$$$$"
         @State var focusMode: FocusTimerMode = .work
         
-        return FocusTimerView(timerCount: $timerString,
+        return FocusTimerView(context: previewer.container.mainContext,
+                              timerCount: $timerString,
                               focusMode: $focusMode)
             .modelContainer(previewer.container)
     } catch {
