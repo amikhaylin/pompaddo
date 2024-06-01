@@ -63,8 +63,15 @@ struct FocusTimerView: View {
                     Spacer()
                     // MARK: Focus timer
                     if let task = selectedTask {
-                        Text(task.name)
-                            .padding()
+                        HStack {
+                            Text(task.name)
+                                .padding()
+                            Button {
+                                selectedTask = nil
+                            } label: {
+                                Image(systemName: "clear")
+                            }
+                        }
                     }
                     
                     ZStack {
@@ -88,40 +95,34 @@ struct FocusTimerView: View {
                             timer.reset()
                             timer.skip()
                         }
-                        .padding()
                     }
                     // start
                     if timer.state == .idle {
                         Button("Start") {
                             timer.start()
                         }
-                        .padding()
                     }
                     // resume
                     if timer.state == .paused {
                         Button("Resume") {
                             timer.resume()
                         }
-                        .padding()
                     }
                     // pause
                     if timer.state == .running {
                         Button("Pause") {
                             timer.pause()
                         }
-                        .padding()
                     }
                     // reset
                     if timer.state == .running || timer.state == .paused {
                         Button("Stop") {
                             timer.reset()
                         }
-                        .padding()
                     }
                     
                     Spacer()
                 }
-//                .padding()
             }
         }
         .onChange(of: timer.secondsLeft, { _, _ in

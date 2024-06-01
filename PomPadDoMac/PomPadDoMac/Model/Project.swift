@@ -33,6 +33,7 @@ class Project {
     @Relationship var group: ProjectGroup?
     var hasEstimate: Bool = false
     var completedMoving: Bool = false
+    var showStatus: Bool = true
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status]? = [Status]()

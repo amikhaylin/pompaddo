@@ -1,5 +1,5 @@
 //
-//  KanbanView.swift
+//  BoardView.swift
 //  PomPadDoMac
 //
 //  Created by Andrey Mikhaylin on 12.04.2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct KanbanView: View {
+struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var project: Project
     
@@ -27,7 +27,7 @@ struct KanbanView: View {
                                 .sorted(by: TasksQuery.defaultSorting),
                                          id: \.self,
                                          children: \.subtasks) { task in
-                                TaskRowView(task: task, showingProject: false)
+                                TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
                                     .draggable(task)
                                     .dropDestination(for: Todo.self) { tasks, _ in
                                         // Attach dropped task as subtask
@@ -86,7 +86,7 @@ struct KanbanView: View {
                                         }
                                         
                                         Menu {
-                                            ForEach(project.getStatuses()) { status in
+                                            ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                                                 Button {
                                                     task.moveToStatus(status: status,
                                                                       project: project,
@@ -176,7 +176,7 @@ struct KanbanView: View {
         @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
-        return KanbanView(project: project,
+        return BoardView(project: project,
                             selectedTasks: $selectedTasks)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

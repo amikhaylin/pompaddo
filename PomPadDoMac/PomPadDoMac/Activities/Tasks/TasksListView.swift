@@ -97,6 +97,22 @@ struct TasksListView: View {
                                     Text("Move task to project")
                                 }
                                 
+                                if let project = task.project {
+                                    Menu {
+                                        ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
+                                            Button {
+                                                task.moveToStatus(status: status,
+                                                                  project: project,
+                                                                  context: modelContext)
+                                            } label: {
+                                                Text(status.name)
+                                            }
+                                        }
+                                    } label: {
+                                        Text("Move to status")
+                                    }
+                                }
+                                
                                 Divider()
                                 
                                 Button {

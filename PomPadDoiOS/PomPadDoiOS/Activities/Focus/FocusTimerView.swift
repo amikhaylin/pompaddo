@@ -23,7 +23,7 @@ struct FocusTimerView: View {
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @AppStorage("focus-timer-tab") private var viewMode = 0
-    @State private var selectedTask: Todo?
+    @Binding var selectedTask: Todo?
     
     var body: some View {
         VStack {
@@ -65,8 +65,15 @@ struct FocusTimerView: View {
                     Spacer()
                     // MARK: Focus timer
                     if let task = selectedTask {
-                        Text(task.name)
-                            .padding()
+                        HStack {
+                            Text(task.name)
+                                .padding()
+                            Button {
+                                selectedTask = nil
+                            } label: {
+                                Image(systemName: "clear")
+                            }
+                        }
                     }
                     
                     ZStack {
@@ -143,6 +150,7 @@ struct FocusTimerView: View {
     do {
         let previewer = try Previewer()
         @State var focusMode: FocusTimerMode = .work
+        @State var focusTask: Todo?
         
         // TODO: Change values in settings
         let timer = FocusTimer(workInSeconds: 1500,
@@ -151,7 +159,8 @@ struct FocusTimerView: View {
                                workSessionsCount: 4)
         
         return FocusTimerView(focusMode: $focusMode,
-                              timer: timer)
+                              timer: timer,
+                              selectedTask: $focusTask)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
