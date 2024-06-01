@@ -89,6 +89,15 @@ struct FocusTimerView: View {
                             HStack {
                                 Text(task.name)
                                     .padding()
+                                
+                                if task.tomatoesCount > 0 {
+                                    Image(systemName: "target")
+                                        .foregroundStyle(Color.gray)
+                                    Text("\(task.tomatoesCount)")
+                                        .foregroundStyle(Color.gray)
+                                        .font(.caption)
+                                }
+                                
                                 Button {
                                     selectedTask = nil
                                 } label: {
