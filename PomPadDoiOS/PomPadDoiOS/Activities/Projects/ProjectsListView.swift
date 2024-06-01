@@ -12,7 +12,6 @@ struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
     
     @AppStorage("projectsExpanded") private var projectsExpanded = true
-    @AppStorage("groupsExpanded") var groupsExpanded = true
     @Binding var selectedProject: Project?
     @State private var newProjectIsShowing = false
     @State private var newProjectGroupShow = false
@@ -66,7 +65,8 @@ struct ProjectsListView: View {
                 }
                 
                 ForEach(groups) { group in
-                    DisclosureGroup(group.name, isExpanded: $groupsExpanded) {
+                    @Bindable var group = group
+                    DisclosureGroup(group.name, isExpanded: $group.expanded) {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
                                 Text(project.name)
@@ -121,11 +121,6 @@ struct ProjectsListView: View {
                             }
                         }
                     }
-                    .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
-                        EditProjectGroupView(group: editGroup)
-                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
-                            .presentationCompactAdaptation(.popover)
-                    })
                     .dropDestination(for: Project.self) { projects, _ in
                         for project in projects where project.group == nil || project.group != group {
                             project.group = group
@@ -172,6 +167,11 @@ struct ProjectsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
+        .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
+            EditProjectGroupView(group: editGroup)
+                .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                .presentationCompactAdaptation(.popover)
+        })
     }
 }
 

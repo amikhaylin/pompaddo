@@ -13,12 +13,12 @@ struct ProjectTasksListView: View {
     @Binding var selectedTasks: Set<Todo>
     
     @Bindable var project: Project
-    @State private var groupsExpanded = true
     
     var body: some View {
         List(selection: $selectedTasks) {
             ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
-                DisclosureGroup(status.name, isExpanded: $groupsExpanded) {
+                @Bindable var status = status
+                DisclosureGroup(status.name, isExpanded: $status.expanded) {
                     OutlineGroup(project.getTasks()
                                     .filter({ $0.status == status && $0.parentTask == nil })
                                     .sorted(by: TasksQuery.defaultSorting),

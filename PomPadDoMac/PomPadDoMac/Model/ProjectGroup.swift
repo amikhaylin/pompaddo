@@ -11,6 +11,7 @@ import SwiftData
 @Model
 class ProjectGroup {
     var name: String = ""
+    var expanded: Bool = true
     
     @Relationship(inverse: \Project.group) var projects: [Project]? = [Project]()
     
