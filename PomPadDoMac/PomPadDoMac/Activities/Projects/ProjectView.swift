@@ -122,7 +122,7 @@ struct ProjectView: View {
         }
     }
     
-    @MainActor private func addTaskToProject() {
+    private func addTaskToProject() {
         withAnimation {
             selectedTasks.removeAll()
             let task = Todo(name: "",
