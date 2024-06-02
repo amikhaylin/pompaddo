@@ -125,12 +125,6 @@ extension Todo {
         self.completed = true
         self.completionDate = Date()
         
-        if let project = self.project, project.completedMoving {
-            if let status = project.getStatuses().first(where: { $0.doCompletion }) {
-                self.status = status
-            }
-        }
-        
         guard let dueDate = self.dueDate else { return }
         guard repeation != .none else { return }
         
@@ -151,6 +145,12 @@ extension Todo {
         }
         newTask.reconnect()
         modelContext.insert(newTask)
+        
+        if let project = self.project, project.completedMoving {
+            if let status = project.getStatuses().first(where: { $0.doCompletion }) {
+                self.status = status
+            }
+        }
     }
     
     func reactivate() {

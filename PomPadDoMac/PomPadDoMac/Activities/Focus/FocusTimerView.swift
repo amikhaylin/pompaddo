@@ -23,23 +23,33 @@ struct FocusTimerView: View {
     @State private var viewMode = 0
     @State private var selectedTask: Todo?
     
+    @State private var currentDate = Date()
+    
     var body: some View {
         VStack {
-            Picker("", selection: $viewMode) {
-                ForEach(0...1, id: \.self) { mode in
-                    HStack {
-                        switch mode {
-                        case 0:
-                            Text("Today tasks")
-                        case 1:
-                            Text("Focus Timer")
-                        default:
-                            EmptyView()
+            HStack {
+                Picker("", selection: $viewMode) {
+                    ForEach(0...1, id: \.self) { mode in
+                        HStack {
+                            switch mode {
+                            case 0:
+                                Text("Today tasks")
+                            case 1:
+                                Text("Focus Timer")
+                            default:
+                                EmptyView()
+                            }
                         }
+                        .tag(mode as Int)
                     }
-                    .tag(mode as Int)
+                }.pickerStyle(.segmented)
+                
+                Button {
+                    currentDate = .now
+                } label: {
+                    Image(systemName: "arrow.triangle.2.circlepath")
                 }
-            }.pickerStyle(.segmented)
+            }
             
             if viewMode == 0 {
                 // MARK: Task list

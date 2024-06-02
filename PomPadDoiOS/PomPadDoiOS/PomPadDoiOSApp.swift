@@ -31,12 +31,9 @@ struct PomPadDoiOSApp: App {
 
     var body: some Scene {
         WindowGroup {
-            // TODO: Store refresh period in settings
-            TimelineView(.periodic(from: .now, by: 5.0)) { _ in
-                MainView()
-                    .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
-                                            modelContext: sharedModelContainer.mainContext)
-            }
+            MainView()
+                .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
+                                        modelContext: sharedModelContainer.mainContext)
         }
         .modelContainer(sharedModelContainer)
     }
