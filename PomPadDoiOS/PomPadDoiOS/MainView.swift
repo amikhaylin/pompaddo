@@ -35,7 +35,9 @@ struct MainView: View {
         Group {
             switch tab {
             case .tasks:
-                ContentView()
+                TimelineView(.periodic(from: .now, by: 600.0)) { _ in
+                    ContentView()
+                }
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
                                timer: timer,
