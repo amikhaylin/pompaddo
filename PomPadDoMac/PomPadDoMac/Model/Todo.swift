@@ -151,16 +151,16 @@ extension Todo {
         self.completed = true
         self.completionDate = Date()
         
-        guard repeation != .none else { return }
-        
-        let newTask = self.copy(modelContext: modelContext)
-        newTask.completed = false
-        newTask.completionDate = nil
-        
-        newTask.skip()
-
-        newTask.reconnect()
-        modelContext.insert(newTask)
+        if repeation != .none {
+            let newTask = self.copy(modelContext: modelContext)
+            newTask.completed = false
+            newTask.completionDate = nil
+            
+            newTask.skip()
+            
+            newTask.reconnect()
+            modelContext.insert(newTask)
+        }
         
         if let project = self.project, project.completedMoving {
             if let status = project.getStatuses().first(where: { $0.doCompletion }) {

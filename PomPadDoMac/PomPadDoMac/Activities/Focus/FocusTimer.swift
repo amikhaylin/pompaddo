@@ -138,13 +138,17 @@ class FocusTimer: ObservableObject {
     }
     
     // MARK: private methods
-    private func createTimer() {
-        // schedule notification
+    private func setNotification() {
         NotificationManager.removeRequest(identifier: "PomPadDo-Timer")
         NotificationManager.setNotification(timeInterval: TimeInterval(secondsLeft),
                                             identifier: "PomPadDo-Timer",
                                             title: "PomPadDo Timer",
                                             body: "Your focus timer is finished")
+    }
+    
+    private func createTimer() {
+        // schedule notification
+        setNotification()
         // create timer
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {[self] _ in
             self.onTick()
@@ -179,6 +183,7 @@ class FocusTimer: ObservableObject {
             secondsPassed = 0
             fractionPassed = 0
             state = .running
+            setNotification()
         }
     }
   
