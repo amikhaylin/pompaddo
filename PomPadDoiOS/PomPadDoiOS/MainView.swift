@@ -60,8 +60,6 @@ struct MainView: View {
                         .foregroundStyle(tab == .tasks ? Color.blue : Color.gray)
                 }
 
-                Text("\(refresh.description)")
-                
                 Spacer()
 
                 Button {

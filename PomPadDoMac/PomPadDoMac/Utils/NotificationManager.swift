@@ -80,7 +80,7 @@ struct NotificationManager {
     // remove old requests
     static func removeRequest(identifier: String) {
         let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.removeAllDeliveredNotifications()
+//        notificationCenter.removeAllDeliveredNotifications()
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
     }
 }

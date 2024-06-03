@@ -56,6 +56,7 @@ class FocusTimer: ObservableObject {
     private var dateStarted: Date = Date.now
     private var secondsPassedBeforePause: Int = 0
     private(set) var sessionsCounter: Int = 0
+    private var currentNotificatioId: String = ""
 
     private var timer: Timer?
   
@@ -138,17 +139,27 @@ class FocusTimer: ObservableObject {
     }
     
     // MARK: private methods
-    private func setNotification() {
-        NotificationManager.removeRequest(identifier: "PomPadDo-Timer")
+    private func setNotification(removeOld: Bool = false) {
+        var dispMode: String = ""
+        switch self.mode {
+        case .work:
+            dispMode = "work session"
+        default:
+            dispMode = self.mode.title
+        }
+        if removeOld {
+            NotificationManager.removeRequest(identifier: currentNotificatioId)
+        }
+        currentNotificatioId = UUID().uuidString
         NotificationManager.setNotification(timeInterval: TimeInterval(secondsLeft),
-                                            identifier: "PomPadDo-Timer",
+                                            identifier: currentNotificatioId,
                                             title: "PomPadDo Timer",
-                                            body: "Your focus timer is finished")
+                                            body: "Your \(dispMode) is finished")
     }
     
     private func createTimer() {
         // schedule notification
-        setNotification()
+        setNotification(removeOld: true)
         // create timer
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {[self] _ in
             self.onTick()

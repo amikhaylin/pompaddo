@@ -79,7 +79,7 @@ struct TaskRowView: View {
                 }
                 
                 if task.hasEstimate {
-                    Image(systemName: "pencil.and.list.clipboard")
+                    Image(systemName: "hourglass")
                         .foregroundStyle(Color.gray)
                     // TODO: Change factor in settings
                     Text("\(task.sumEstimates(1.7))h")

@@ -14,16 +14,18 @@ struct EditTaskView: View {
     @State private var showingDatePicker = false
     
     @State private var alertDate = Date()
-    @State private var showingAlertDatePicker = false
+    @State private var showingReminderDatePicker = false
     
     var body: some View {
         Form {
             Section {
                 TextField("Name", text: $task.name)
                     .textFieldStyle(.roundedBorder)
-                
+            }
+            
+            Section("Due date") {
                 if showingDatePicker {
-                    HStack {
+                    Group {
                         DatePicker("Due Date",
                                    selection: $dueDate,
                                    displayedComponents: .date)
@@ -32,25 +34,32 @@ struct EditTaskView: View {
                         })
                         
                         Button {
-                            task.dueDate = nil
-                            showingDatePicker = false
-                        } label: {
-                            Image(systemName: "clear")
-                        }
-                        
-                        #if os(macOS)
-                        Button {
                             task.dueDate = Calendar.current.startOfDay(for: Date())
                         } label: {
-                            Image(systemName: "calendar")
+                            HStack {
+                                Image(systemName: "calendar")
+                                Text("Today")
+                            }
                         }
                         
                         Button {
                             task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                         } label: {
-                            Image(systemName: "sunrise")
+                            HStack {
+                                Image(systemName: "sunrise")
+                                Text("Tomorrow")
+                            }
                         }
-                        #endif
+                        
+                        Button {
+                            task.dueDate = nil
+                            showingDatePicker = false
+                        } label: {
+                            HStack {
+                                Image(systemName: "clear")
+                                Text("Clear due date")
+                            }
+                        }
                     }
                 } else {
                     Button {
@@ -84,6 +93,9 @@ struct EditTaskView: View {
                         }
                     }
                 }
+            }
+            
+            Section {
                 
                 Picker("Priority", selection: $task.priority) {
                     ForEach(0...3, id: \.self) { priority in
@@ -145,10 +157,12 @@ struct EditTaskView: View {
                             task.hasEstimate = true
                         }
                     } label: {
-                        Label("Estimate", systemImage: "pencil.and.list.clipboard")
+                        Label("Estimate", systemImage: "hourglass")
                     }
                 }
-                
+            }
+             
+            Section {
                 HStack {
                     TextField("Link", text: $task.link)
                         .textFieldStyle(.roundedBorder)
@@ -160,39 +174,49 @@ struct EditTaskView: View {
                         })
                     }
                 }
-                
-                if showingAlertDatePicker {
-                    HStack {
-                        DatePicker("Alert at",
+            }
+            
+            Section("Reminder") {
+                if showingReminderDatePicker {
+                    Group {
+                        DatePicker("Remind at",
                                    selection: $alertDate)
-
+                        
                         Button {
                             NotificationManager.removeRequest(identifier: task.uid)
                             task.alertDate = alertDate
                             NotificationManager.setTaskNotification(task: task)
                         } label: {
-                            Image(systemName: "checkmark.square")
+                            HStack {
+                                Image(systemName: "checkmark.square")
+                                Text("Apply reminder")
+                            }
                         }
                         
                         Button {
                             task.alertDate = nil
                             NotificationManager.removeRequest(identifier: task.uid)
-                            showingAlertDatePicker = false
+                            showingReminderDatePicker = false
                         } label: {
-                            Image(systemName: "clear")
+                            HStack {
+                                Image(systemName: "clear")
+                                Text("Clear reminder")
+                            }
                         }
                     }
                 } else {
                     Button {
                         withAnimation {
-                            showingAlertDatePicker.toggle()
+                            showingReminderDatePicker.toggle()
                             alertDate = Date()
                         }
                     } label: {
-                        Label("Set Alert", systemImage: "bell")
+                        Label("Set Reminder", systemImage: "bell")
                     }
                 }
-                
+            }
+            
+            Section("Focus stats") {
                 HStack {
                     Text("Focused for ")
                     Image(systemName: "target")
@@ -209,6 +233,9 @@ struct EditTaskView: View {
                     Image(systemName: "stopwatch")
                     Text("\(Int((totalFocused * 25) / 60))h\(Int((totalFocused * 25) % 60))m ")
                 }
+            }
+            
+            Section("Note") {
                 
                 TextEditor(text: $task.note)
                     .background(Color.primary.colorInvert())
@@ -232,7 +259,7 @@ struct EditTaskView: View {
             let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
             if task.alertDate != nil && !hasAlert {
                 task.alertDate = nil
-                showingAlertDatePicker = false
+                showingReminderDatePicker = false
             }
         }
     }
@@ -248,10 +275,10 @@ struct EditTaskView: View {
         
         if let date = task.alertDate {
             alertDate = date
-            showingAlertDatePicker = true
+            showingReminderDatePicker = true
         } else {
             alertDate = Date()
-            showingAlertDatePicker = false
+            showingReminderDatePicker = false
         }
     }
 }
