@@ -167,7 +167,7 @@ class FocusTimer: ObservableObject {
     }
   
     private func killTimer() {
-        NotificationManager.removeRequest(identifier: "PomPadDo-Timer")
+        NotificationManager.removeRequest(identifier: currentNotificatioId)
         timer?.invalidate()
         timer = nil
     }
