@@ -213,6 +213,17 @@ struct ContentView: View {
         .onAppear {
             tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
+        .onOpenURL { url in
+            print(url.absoluteString)
+            let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            if let title = components?.queryItems?.first(where: { $0.name == "title" })?.value,
+               let link = components?.queryItems?.first(where: { $0.name == "link" })?.value,
+               let linkurl = URL(string: link) {
+                
+                let task = Todo(name: title, link: linkurl.absoluteString)
+                modelContext.insert(task)
+            }
+        }
     }
 }
 

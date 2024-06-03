@@ -19,6 +19,11 @@
 		4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8672BE10A180026C2EA /* FocusTimerView.swift */; };
 		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
 		4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */; };
+		4D7A1FD92C0778E4009052AE /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */; };
+		4D7A1FDB2C0778E4009052AE /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */; };
+		4D7A1FE32C0778E4009052AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4D7A1FE22C0778E4009052AE /* Base */; };
+		4D7A1FE82C0778E4009052AE /* PomPadDoExt.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D7A1FD62C0778E4009052AE /* PomPadDoExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D7A1FEE2C077DFD009052AE /* ToolbarItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */; };
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
 		4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
 		4D7C13C72B7E0DE70093595D /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskRowView.swift */; };
@@ -52,6 +57,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4D7A1FE62C0778E4009052AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D7A1FD52C0778E4009052AE;
+			remoteInfo = PomPadDoExt;
+		};
 		4D95FE362B7B6BF600C8918D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
@@ -68,6 +80,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4D7A1FE92C0778E4009052AE /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D7A1FE82C0778E4009052AE /* PomPadDoExt.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
@@ -77,6 +103,13 @@
 		4D59C8672BE10A180026C2EA /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
+		4D7A1FD62C0778E4009052AE /* PomPadDoExt.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoExt.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
+		4D7A1FE22C0778E4009052AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
+		4D7A1FE42C0778E4009052AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D7A1FE52C0778E4009052AE /* PomPadDoExt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoExt.entitlements; sourceTree = "<group>"; };
+		4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarItemIcon.png; sourceTree = "<group>"; };
 		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4D7C13C42B7E06F70093595D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		4D7C13C62B7E0DE70093595D /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
@@ -113,6 +146,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4D7A1FD32C0778E4009052AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4D95FE1F2B7B6BF300C8918D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -185,6 +225,27 @@
 			path = Activities;
 			sourceTree = "<group>";
 		};
+		4D7A1FD72C0778E4009052AE /* PomPadDoExt */ = {
+			isa = PBXGroup;
+			children = (
+				4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */,
+				4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */,
+				4D7A1FE12C0778E4009052AE /* SafariExtensionViewController.xib */,
+				4D7A1FE42C0778E4009052AE /* Info.plist */,
+				4D7A1FE52C0778E4009052AE /* PomPadDoExt.entitlements */,
+				4D7A1FDC2C0778E4009052AE /* Resources */,
+			);
+			path = PomPadDoExt;
+			sourceTree = "<group>";
+		};
+		4D7A1FDC2C0778E4009052AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		4D7C13C32B7E06DE0093595D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +264,7 @@
 				4D95FE242B7B6BF300C8918D /* PomPadDoMac */,
 				4D95FE382B7B6BF600C8918D /* PomPadDoMacTests */,
 				4D95FE422B7B6BF600C8918D /* PomPadDoMacUITests */,
+				4D7A1FD72C0778E4009052AE /* PomPadDoExt */,
 				4D95FE232B7B6BF300C8918D /* Products */,
 				4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */,
 			);
@@ -214,6 +276,7 @@
 				4D95FE222B7B6BF300C8918D /* PomPadDo.app */,
 				4D95FE352B7B6BF600C8918D /* PomPadDoMacTests.xctest */,
 				4D95FE3F2B7B6BF600C8918D /* PomPadDoMacUITests.xctest */,
+				4D7A1FD62C0778E4009052AE /* PomPadDoExt.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,6 +387,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4D7A1FD52C0778E4009052AE /* PomPadDoExt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D7A1FEC2C0778E4009052AE /* Build configuration list for PBXNativeTarget "PomPadDoExt" */;
+			buildPhases = (
+				4D7A1FD22C0778E4009052AE /* Sources */,
+				4D7A1FD32C0778E4009052AE /* Frameworks */,
+				4D7A1FD42C0778E4009052AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PomPadDoExt;
+			productName = PomPadDoExt;
+			productReference = 4D7A1FD62C0778E4009052AE /* PomPadDoExt.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		4D95FE212B7B6BF300C8918D /* PomPadDoMac */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D95FE492B7B6BF600C8918D /* Build configuration list for PBXNativeTarget "PomPadDoMac" */;
@@ -332,10 +412,12 @@
 				4D95FE1F2B7B6BF300C8918D /* Frameworks */,
 				4D95FE202B7B6BF300C8918D /* Resources */,
 				4DBFA7562BAD72AB006232FE /* SwiftLint */,
+				4D7A1FE92C0778E4009052AE /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4D7A1FE72C0778E4009052AE /* PBXTargetDependency */,
 			);
 			name = PomPadDoMac;
 			packageProductDependencies = (
@@ -388,9 +470,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					4D7A1FD52C0778E4009052AE = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					4D95FE212B7B6BF300C8918D = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -423,11 +508,21 @@
 				4D95FE212B7B6BF300C8918D /* PomPadDoMac */,
 				4D95FE342B7B6BF600C8918D /* PomPadDoMacTests */,
 				4D95FE3E2B7B6BF600C8918D /* PomPadDoMacUITests */,
+				4D7A1FD52C0778E4009052AE /* PomPadDoExt */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4D7A1FD42C0778E4009052AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D7A1FEE2C077DFD009052AE /* ToolbarItemIcon.png in Resources */,
+				4D7A1FE32C0778E4009052AE /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4D95FE202B7B6BF300C8918D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -477,6 +572,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4D7A1FD22C0778E4009052AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D7A1FDB2C0778E4009052AE /* SafariExtensionViewController.swift in Sources */,
+				4D7A1FD92C0778E4009052AE /* SafariExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4D95FE1E2B7B6BF300C8918D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -539,6 +643,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4D7A1FE72C0778E4009052AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D7A1FD52C0778E4009052AE /* PomPadDoExt */;
+			targetProxy = 4D7A1FE62C0778E4009052AE /* PBXContainerItemProxy */;
+		};
 		4D95FE372B7B6BF600C8918D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4D95FE212B7B6BF300C8918D /* PomPadDoMac */;
@@ -551,7 +660,80 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		4D7A1FE12C0778E4009052AE /* SafariExtensionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D7A1FE22C0778E4009052AE /* Base */,
+			);
+			name = SafariExtensionViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		4D7A1FEA2C0778E4009052AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PomPadDoExt/PomPadDoExt.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoExt/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoExt;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoMac.PomPadDoExt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4D7A1FEB2C0778E4009052AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PomPadDoExt/PomPadDoExt.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoExt/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoExt;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoMac.PomPadDoExt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 		4D95FE472B7B6BF600C8918D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -676,6 +858,7 @@
 		4D95FE4A2B7B6BF600C8918D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoMac/PomPadDoMac.entitlements;
@@ -709,6 +892,7 @@
 		4D95FE4B2B7B6BF600C8918D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoMac/PomPadDoMac.entitlements;
@@ -818,6 +1002,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4D7A1FEC2C0778E4009052AE /* Build configuration list for PBXNativeTarget "PomPadDoExt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D7A1FEA2C0778E4009052AE /* Debug */,
+				4D7A1FEB2C0778E4009052AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4D95FE1D2B7B6BF300C8918D /* Build configuration list for PBXProject "PomPadDoMac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
