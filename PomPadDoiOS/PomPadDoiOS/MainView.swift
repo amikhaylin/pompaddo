@@ -35,13 +35,15 @@ struct MainView: View {
         Group {
             switch tab {
             case .tasks:
-                TimelineView(.periodic(from: .now, by: 600.0)) { _ in
-                    ContentView()
-                }
+//                TimelineView(.periodic(from: .now, by: 600.0)) { _ in
+                ContentView()
+                    .id(refresh)
+//                }
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
                                timer: timer,
                                selectedTask: $focusTask)
+                    .id(refresh)
             case.settings:
                 Text("Settings")
             }
@@ -58,6 +60,8 @@ struct MainView: View {
                         .foregroundStyle(tab == .tasks ? Color.blue : Color.gray)
                 }
 
+                Text("\(refresh.description)")
+                
                 Spacer()
 
                 Button {
