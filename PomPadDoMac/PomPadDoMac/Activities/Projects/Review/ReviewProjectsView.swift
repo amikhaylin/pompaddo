@@ -26,7 +26,7 @@ struct ReviewProjectsView: View {
                     Text("No projects to review")
                 }
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200)
+            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 400)
         } detail: {
             if let project = selectedProject {
                 VStack {
@@ -54,7 +54,6 @@ struct ReviewProjectsView: View {
     do {
         let previewer = try Previewer()
         let projects: [Project] = [previewer.project]
-//        @State var selectedTasks = Set<Todo>()
         
         return ReviewProjectsView(projects: projects)
     } catch {
