@@ -12,12 +12,18 @@ struct ReviewProjectsView: View {
     
     var body: some View {
         NavigationStack {
-            List(projects) { project in
-                NavigationLink {
-                    ProjectToReviewView(project: project)
-                } label: {
-                    Text(project.name)
-                        .badge(project.getTasks().count)
+            Group {
+                if projects.count > 0 {
+                    List(projects) { project in
+                        NavigationLink {
+                            ProjectToReviewView(project: project)
+                        } label: {
+                            Text(project.name)
+                                .badge(project.getTasks().count)
+                        }
+                    }
+                } else {
+                    Text("No projects to review")
                 }
             }
         }
