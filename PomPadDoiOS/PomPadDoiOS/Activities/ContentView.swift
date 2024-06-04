@@ -137,6 +137,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .listStyle(SidebarListStyle())
                 .frame(height: 220)
                 
                 ProjectsListView(selectedProject: $selectedProject,
