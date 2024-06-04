@@ -52,7 +52,7 @@ struct ContentView: View {
     
     @State var badgeManager = BadgeManager()
     
-    @State private var currentDate = Date()
+    @State private var refresh = false
 
     var body: some View {
         NavigationSplitView {
@@ -151,7 +151,7 @@ struct ContentView: View {
                     }
                     
                     Button {
-                        currentDate = .now
+                        refresh.toggle()
                     } label: {
                         Image(systemName: "arrow.triangle.2.circlepath")
                     }
