@@ -24,7 +24,7 @@
 			<key>Image</key>
 			<string>ToolbarItemIcon.png</string>
 			<key>Label</key>
-			<string>Add to PomPadDo Inbox</string>
+			<string>Send current page to PomPadDo Inbox</string>
 		</dict>
 		<key>SFSafariWebsiteAccess</key>
 		<dict>

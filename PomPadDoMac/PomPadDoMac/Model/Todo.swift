@@ -147,30 +147,14 @@ extension Todo {
         self.completed = true
         self.completionDate = Date()
         
-        guard let dueDate = self.dueDate else { return }
         guard repeation != .none else { return }
         
         let newTask = self.copy(modelContext: modelContext)
         newTask.completed = false
         newTask.completionDate = nil
-        switch repeation {
-        case .none:
-            break
-        case .daily:
-            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
-        case .weekly:
-            newTask.dueDate = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: dueDate))
-        case .monthly:
-            newTask.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
-        case .yearly:
-            newTask.dueDate = Calendar.current.date(byAdding: .year, value: 1, to: Calendar.current.startOfDay(for: dueDate))
-        case .custom:
-            if let repeatType = self.customRepeatType {
-                newTask.dueDate = Calendar.current.date(byAdding: repeatType.calendarComponent,
-                                                        value: self.customRepeatValue,
-                                                        to: Calendar.current.startOfDay(for: dueDate))
-            }
-        }
+        
+        newTask.skip()
+
         newTask.reconnect()
         modelContext.insert(newTask)
         
@@ -179,6 +163,31 @@ extension Todo {
                 self.status = status
             }
         }
+    }
+    
+    func skip() {
+        guard let dueDate = self.dueDate else { return }
+        guard repeation != .none else { return }
+        
+        switch repeation {
+        case .none:
+            break
+        case .daily:
+            self.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .weekly:
+            self.dueDate = Calendar.current.date(byAdding: .day, value: 7, to: Calendar.current.startOfDay(for: dueDate))
+        case .monthly:
+            self.dueDate = Calendar.current.date(byAdding: .month, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .yearly:
+            self.dueDate = Calendar.current.date(byAdding: .year, value: 1, to: Calendar.current.startOfDay(for: dueDate))
+        case .custom:
+            if let repeatType = self.customRepeatType {
+                self.dueDate = Calendar.current.date(byAdding: repeatType.calendarComponent,
+                                                        value: self.customRepeatValue,
+                                                        to: Calendar.current.startOfDay(for: dueDate))
+            }
+        }
+
     }
     
     func reactivate() {

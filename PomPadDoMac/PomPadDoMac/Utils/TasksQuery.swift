@@ -81,4 +81,21 @@ struct TasksQuery {
         task.deleteSubtasks(context: context)
         context.delete(task)
     }
+    
+    @MainActor static func fetchData<T: PersistentModel>(context: ModelContext, 
+                                                  predicate: Predicate<T>? = nil,
+                                                  sort: [SortDescriptor<T>]? = nil) -> [T] {
+        do {
+            var descriptor = FetchDescriptor<T>()
+            if let sort = sort {
+                descriptor.sortBy = sort
+            }
+            descriptor.predicate = predicate
+            let result: [T] = try context.fetch(descriptor)
+            return result
+        } catch {
+            print("Fetch failed")
+        }
+        return []
+    }
 }

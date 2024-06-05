@@ -9,6 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct FocusTimerView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     // TODO: Change values in settings
     var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -18,15 +20,23 @@ struct FocusTimerView: View {
     @Binding var timerCount: String
     @Binding var focusMode: FocusTimerMode
     
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+//    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    @State private var tasksTodayActive: [Todo]
     
     @State private var viewMode = 0
     @State private var selectedTask: Todo?
-    
-    @State private var refresh = false
+    @State private var textToInbox = ""
     
     var body: some View {
         VStack {
+            TextField("Add task to Inbox", text: $textToInbox)
+                .textFieldStyle(.roundedBorder)
+                .onSubmit {
+                    let task = Todo(name: textToInbox)
+                    modelContext.insert(task)
+                    textToInbox = ""
+                }
+            
             HStack {
                 Picker("", selection: $viewMode) {
                     ForEach(0...1, id: \.self) { mode in
@@ -43,95 +53,111 @@ struct FocusTimerView: View {
                         .tag(mode as Int)
                     }
                 }.pickerStyle(.segmented)
-                
+             
                 Button {
-                    refresh.toggle()
+                    tasksTodayActive = TasksQuery.fetchData(context: modelContext,
+                                                            predicate: TasksQuery.predicateTodayActive())
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
                 }
             }
-            
+                
             if viewMode == 0 {
                 // MARK: Task list
-                List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                     children: \.subtasks, selection: $selectedTask) { task in
-                    HStack {
-                        TaskRowView(task: task)
-                        
-                        Button {
-                            selectedTask = task
-                            viewMode = 1
-                            timer.reset()
-                            timer.start()
-                        } label: {
-                            Image(systemName: "play.fill")
+                TimelineView(.periodic(from: .now, by: 5.0)) { _ in
+                    List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
+                         children: \.subtasks, selection: $selectedTask) { task in
+                        HStack {
+                            TaskRowView(task: task)
+                            
+                            Button {
+                                selectedTask = task
+                                viewMode = 1
+                                timer.reset()
+                                timer.start()
+                            } label: {
+                                Image(systemName: "play.fill")
+                            }
                         }
                     }
                 }
             } else {
-                VStack {
-                    Spacer()
-                    // MARK: Focus timer
-                    if let task = selectedTask {
-                        HStack {
-                            Text(task.name)
-                                .padding()
-                            Button {
-                                selectedTask = nil
-                            } label: {
-                                Image(systemName: "clear")
+                ZStack {
+                    VStack {
+                        // MARK: Focus timer
+                        if let task = selectedTask {
+                            HStack {
+                                Text(task.name)
+                                    .padding()
+                                
+                                if task.tomatoesCount > 0 {
+                                    Image(systemName: "target")
+                                        .foregroundStyle(Color.gray)
+                                    Text("\(task.tomatoesCount)")
+                                        .foregroundStyle(Color.gray)
+                                        .font(.caption)
+                                }
+                                
+                                Button {
+                                    selectedTask = nil
+                                } label: {
+                                    Image(systemName: "clear")
+                                }
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        if timer.state == .idle && (timer.mode == .pause || timer.mode == .longbreak) {
+                            Button("Skip") {
+                                timer.reset()
+                                timer.skip()
+                            }
+                        }
+                        // start
+                        if timer.state == .idle {
+                            Button("Start") {
+                                timer.start()
+                            }
+                        }
+                        // resume
+                        if timer.state == .paused {
+                            Button("Resume") {
+                                timer.resume()
+                            }
+                        }
+                        // pause
+                        if timer.state == .running {
+                            Button("Pause") {
+                                timer.pause()
+                            }
+                        }
+                        // reset
+                        if timer.state == .running || timer.state == .paused {
+                            Button("Stop") {
+                                timer.reset()
                             }
                         }
                     }
-                    
-                    ZStack {
-                        CircularProgressView(progress: CGFloat(timer.fractionPassed),
-                                             color: timer.mode == .work ? .red : .green,
-                                             lineWidth: 5)
-                        .frame(width: 200, height: 200)
-                        
-                        VStack {
-                            Text("\(timer.secondsLeftString)")
-                                .font(.system(size: 50, weight: .semibold, design: .rounded))
+                    VStack {
+                        Spacer()
+                        ZStack {
+                            CircularProgressView(progress: CGFloat(timer.fractionPassed),
+                                                 color: timer.mode == .work ? .red : .green,
+                                                 lineWidth: 5)
+                            .frame(width: 200, height: 200)
                             
-                            Text("\(timer.mode.title)")
-                                .font(.system(size: 24, weight: .light, design: .rounded))
-                                .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
+                            VStack {
+                                Text("\(timer.secondsLeftString)")
+                                    .font(.system(size: 50, weight: .semibold, design: .rounded))
+                                
+                                Text("\(timer.mode.title)")
+                                    .font(.system(size: 24, weight: .light, design: .rounded))
+                                    .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
+                            }
                         }
+                        Spacer()
                     }
-                    
-                    if timer.state == .idle && (timer.mode == .pause || timer.mode == .longbreak) {
-                        Button("Skip") {
-                            timer.reset()
-                            timer.skip()
-                        }
-                    }
-                    // start
-                    if timer.state == .idle {
-                        Button("Start") {
-                            timer.start()
-                        }
-                    }
-                    // resume
-                    if timer.state == .paused {
-                        Button("Resume") {
-                            timer.resume()
-                        }
-                    }
-                    // pause
-                    if timer.state == .running {
-                        Button("Pause") {
-                            timer.pause()
-                        }
-                    }
-                    // reset
-                    if timer.state == .running || timer.state == .paused {
-                        Button("Stop") {
-                            timer.reset()
-                        }
-                    }
-                    
-                    Spacer()
                 }
             }
         }
@@ -147,7 +173,17 @@ struct FocusTimerView: View {
             }
         })
         .padding()
-        .frame(width: 400, height: 400)
+        .frame(width: 400, height: 420)
+    }
+    
+    @MainActor init(context: ModelContext,
+                    timerCount: Binding<String>,
+                    focusMode: Binding<FocusTimerMode>) {
+        self._timerCount = timerCount
+        self._focusMode = focusMode
+        
+        self.tasksTodayActive = TasksQuery.fetchData(context: context, 
+                                                     predicate: TasksQuery.predicateTodayActive())
     }
 }
 
@@ -157,7 +193,8 @@ struct FocusTimerView: View {
         @State var timerString: String = "$$$$"
         @State var focusMode: FocusTimerMode = .work
         
-        return FocusTimerView(timerCount: $timerString,
+        return FocusTimerView(context: previewer.container.mainContext,
+                              timerCount: $timerString,
                               focusMode: $focusMode)
             .modelContainer(previewer.container)
     } catch {

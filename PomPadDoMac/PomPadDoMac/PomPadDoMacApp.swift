@@ -60,7 +60,8 @@ struct PomPadDoMacApp: App {
         .modelContainer(sharedModelContainer)
         
         MenuBarExtra {
-            FocusTimerView(timerCount: $timerCount,
+            FocusTimerView(context: sharedModelContainer.mainContext,
+                           timerCount: $timerCount,
                            focusMode: $focusMode)
             .modelContainer(sharedModelContainer)
         } label: {

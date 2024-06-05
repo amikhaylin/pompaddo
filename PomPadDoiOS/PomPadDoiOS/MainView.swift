@@ -31,10 +31,6 @@ struct MainView: View {
     @State private var focusTask: Todo?
     @State private var refresh = false
     
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
-    
-    @State var badgeManager = BadgeManager()
-    
     var body: some View {
         Group {
             switch tab {
@@ -109,12 +105,6 @@ struct MainView: View {
                         .presentationCompactAdaptation(.popover)
                 })
             }
-        }
-        .onChange(of: tasksTodayActive.count) { _, newValue in
-            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
-        }
-        .onAppear {
-            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }

@@ -61,76 +61,89 @@ struct FocusTimerView: View {
                     }
                 }
             } else {
-                VStack {
-                    Spacer()
-                    // MARK: Focus timer
-                    if let task = selectedTask {
-                        HStack {
-                            Text(task.name)
-                                .padding()
-                            Button {
-                                selectedTask = nil
-                            } label: {
-                                Image(systemName: "clear")
+                ZStack {
+                    VStack {
+                        // MARK: Focus timer
+                        if let task = selectedTask {
+                            HStack {
+                                Text(task.name)
+                                    .padding()
+                                
+                                if task.tomatoesCount > 0 {
+                                    Image(systemName: "target")
+                                        .foregroundStyle(Color.gray)
+                                    Text("\(task.tomatoesCount)")
+                                        .foregroundStyle(Color.gray)
+                                        .font(.caption)
+                                }
+                                
+                                Button {
+                                    selectedTask = nil
+                                } label: {
+                                    Image(systemName: "clear")
+                                }
                             }
                         }
-                    }
-                    
-                    ZStack {
-                        CircularProgressView(progress: CGFloat(timer.fractionPassed),
-                                             color: timer.mode == .work ? .red : .green,
-                                             lineWidth: 5)
-                        .frame(width: 200, height: 200)
                         
-                        VStack {
-                            Text("\(timer.secondsLeftString)")
-                                .font(.system(size: 50, weight: .semibold, design: .rounded))
+                        Spacer()
+                        
+                        if timer.state == .idle && (timer.mode == .pause || timer.mode == .longbreak) {
+                            Button("Skip") {
+                                timer.reset()
+                                timer.skip()
+                            }
+                            .padding()
+                        }
+                        // start
+                        if timer.state == .idle {
+                            Button("Start") {
+                                timer.start()
+                            }
+                            .padding()
+                        }
+                        // resume
+                        if timer.state == .paused {
+                            Button("Resume") {
+                                timer.resume()
+                            }
+                            .padding()
+                        }
+                        // pause
+                        if timer.state == .running {
+                            Button("Pause") {
+                                timer.pause()
+                            }
+                            .padding()
+                        }
+                        // reset
+                        if timer.state == .running || timer.state == .paused {
+                            Button("Stop") {
+                                timer.reset()
+                            }
+                            .padding()
+                        }
+                    }
+                    
+                    VStack {
+                        Spacer()
+                        ZStack {
+                            CircularProgressView(progress: CGFloat(timer.fractionPassed),
+                                                 color: timer.mode == .work ? .red : .green,
+                                                 lineWidth: 5)
+                            .frame(width: 200, height: 200)
                             
-                            Text("\(timer.mode.title)")
-                                .font(.system(size: 24, weight: .light, design: .rounded))
-                                .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
+                            VStack {
+                                Text("\(timer.secondsLeftString)")
+                                    .font(.system(size: 50, weight: .semibold, design: .rounded))
+                                
+                                Text("\(timer.mode.title)")
+                                    .font(.system(size: 24, weight: .light, design: .rounded))
+                                    .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
+                            }
                         }
+                        Spacer()
                     }
-                    
-                    if timer.state == .idle && (timer.mode == .pause || timer.mode == .longbreak) {
-                        Button("Skip") {
-                            timer.reset()
-                            timer.skip()
-                        }
-                        .padding()
-                    }
-                    // start
-                    if timer.state == .idle {
-                        Button("Start") {
-                            timer.start()
-                        }
-                        .padding()
-                    }
-                    // resume
-                    if timer.state == .paused {
-                        Button("Resume") {
-                            timer.resume()
-                        }
-                        .padding()
-                    }
-                    // pause
-                    if timer.state == .running {
-                        Button("Pause") {
-                            timer.pause()
-                        }
-                        .padding()
-                    }
-                    // reset
-                    if timer.state == .running || timer.state == .paused {
-                        Button("Stop") {
-                            timer.reset()
-                        }
-                        .padding()
-                    }
-                    
-                    Spacer()
                 }
-//                .padding()
             }
         }
         .onChange(of: timer.mode, { _, _ in

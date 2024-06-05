@@ -58,6 +58,15 @@ struct ProjectTasksListView: View {
                                     Image(systemName: "sunrise")
                                     Text("Tomorrow")
                                 }
+                                
+                                if task.repeation != .none {
+                                    Button {
+                                        task.skip()
+                                    } label: {
+                                        Image(systemName: "arrow.uturn.forward")
+                                        Text("Skip")
+                                    }
+                                }
                                 Divider()
                                 
                                 Button {
