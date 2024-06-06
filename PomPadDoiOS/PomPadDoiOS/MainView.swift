@@ -86,14 +86,14 @@ struct MainView: View {
                     }
                 }
 
-//                    Spacer()
-//                    
-//                    Button {
-//                        tab = .settings
-//                    } label: {
-//                        Image(systemName: "gear")
-//                            .foregroundStyle(tab == .settings ? Color.blue : Color.gray)
-//                    }
+                Spacer()
+                
+                Button {
+                    tab = .settings
+                } label: {
+                    Image(systemName: "gear")
+                        .foregroundStyle(tab == .settings ? Color.blue : Color.gray)
+                }
 
                 Spacer()
                 
