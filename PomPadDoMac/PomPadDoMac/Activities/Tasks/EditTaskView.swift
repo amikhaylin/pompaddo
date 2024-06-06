@@ -30,11 +30,15 @@ struct EditTaskView: View {
                                    selection: $dueDate,
                                    displayedComponents: .date)
                         .onChange(of: dueDate, { _, newValue in
-                            task.dueDate = newValue
+                            if showingDatePicker {
+                                task.dueDate = newValue
+                            }
                         })
                         
                         Button {
-                            task.dueDate = Calendar.current.startOfDay(for: Date())
+                            let date = Calendar.current.startOfDay(for: Date())
+                            task.dueDate = date
+//                            dueDate = date
                         } label: {
                             HStack {
                                 Image(systemName: "calendar")
@@ -43,7 +47,9 @@ struct EditTaskView: View {
                         }
                         
                         Button {
-                            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                            let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                            task.dueDate = date
+//                            dueDate = date
                         } label: {
                             HStack {
                                 Image(systemName: "sunrise")
@@ -248,9 +254,12 @@ struct EditTaskView: View {
                     .padding(.bottom, 10.0)
             }
         }
-        .onChange(of: task) { _, _ in
+        .onChange(of: task.dueDate) { _, _ in
             setPicker()
         }
+        .onChange(of: task.alertDate, { _, _ in
+            setPicker()
+        })
         .onAppear(perform: {
             setPicker()
         })
