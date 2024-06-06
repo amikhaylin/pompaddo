@@ -12,7 +12,6 @@ struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
     
     @AppStorage("projectsExpanded") var projectsExpanded = true
-    @AppStorage("groupsExpanded") var groupsExpanded = true
     @Binding var selectedProject: Project?
     @State private var newProjectIsShowing = false
     @State private var newProjectGroupShow = false
@@ -66,7 +65,8 @@ struct ProjectsListView: View {
                 }
                 
                 ForEach(groups) { group in
-                    DisclosureGroup(group.name, isExpanded: $groupsExpanded) {
+                    @Bindable var group = group
+                    DisclosureGroup(group.name, isExpanded: $group.expanded) {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
                                 Text(project.name)
@@ -89,12 +89,6 @@ struct ProjectsListView: View {
                                     Image(systemName: "pencil")
                                     Text("Rename group")
                                 }
-                                .sheet(item: $editProjectGroup, onDismiss: {
-                                    editProjectGroup = nil
-                                }, content: { editGroup in
-                                    EditProjectGroupView(group: editGroup)
-                                        .presentationDetents([.height(200)])
-                                })
                                 
                                 Button {
                                     for project in projects.filter({ $0.group == group }) {
@@ -170,6 +164,12 @@ struct ProjectsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
+        .sheet(item: $editProjectGroup, onDismiss: {
+            editProjectGroup = nil
+        }, content: { editGroup in
+            EditProjectGroupView(group: editGroup)
+                .presentationDetents([.height(200)])
+        })
     }
 }
 

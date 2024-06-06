@@ -39,7 +39,7 @@ enum CustomRepeationType: String, Identifiable, CaseIterable, Codable {
 }
 
 @Model
-class Todo {
+class Todo: Hashable {
     var name: String = ""
     var dueDate: Date?
     var completed: Bool = false
@@ -91,6 +91,10 @@ class Todo {
         self.priority = priority
         self.completionDate = completionDate
         self.alertDate = alertDate
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uid) // UUID
     }
 }
 

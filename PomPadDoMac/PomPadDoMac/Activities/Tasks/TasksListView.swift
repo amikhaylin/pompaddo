@@ -23,7 +23,8 @@ struct TasksListView: View {
     
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
-    @State private var groupsExpanded = true
+    
+    @State private var groupsExpanded: Set<String> = ["To do"]
     
     @State private var showInspector = false
     
@@ -32,7 +33,16 @@ struct TasksListView: View {
     var body: some View {
         List(selection: $selectedTasks) {
             ForEach(CommonTaskListSections.allCases) { section in
-                DisclosureGroup(section.rawValue, isExpanded: $groupsExpanded) {
+                DisclosureGroup(section.rawValue, isExpanded: Binding<Bool>(
+                    get: { groupsExpanded.contains(section.rawValue) },
+                    set: { isExpanding in
+                        if isExpanding {
+                            groupsExpanded.insert(section.rawValue)
+                        } else {
+                            groupsExpanded.remove(section.rawValue)
+                        }
+                    }
+                )) {
                     OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
                                  id: \.self,
                                  children: \.subtasks) { task in

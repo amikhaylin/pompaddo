@@ -13,6 +13,7 @@ class Status {
     var name: String = ""
     var order: Int = 0
     var doCompletion: Bool = false
+    var expanded: Bool = true
     
     @Relationship(inverse: \Project.statuses) var project: Project?
     @Relationship(inverse: \Todo.status) var tasks: [Todo]? = [Todo]()
