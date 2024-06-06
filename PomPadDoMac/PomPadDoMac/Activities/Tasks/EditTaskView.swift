@@ -12,7 +12,7 @@ struct EditTaskView: View {
     @Bindable var task: Todo
     @State private var dueDate = Date()
     @State private var showingDatePicker = false
-    
+    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     @State private var alertDate = Date()
     @State private var showingReminderDatePicker = false
     
@@ -142,8 +142,7 @@ struct EditTaskView: View {
                     }
                     
                     HStack {
-                        // TODO: Change factor in settings
-                        Text("Estimate is \(task.sumEstimates(1.7)) hours")
+                        Text("Estimate is \(task.sumEstimates(estimateFactor)) hours")
                         
                         Button {
                             task.hasEstimate = false

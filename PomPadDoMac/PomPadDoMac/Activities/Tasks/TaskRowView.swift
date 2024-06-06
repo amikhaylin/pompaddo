@@ -13,6 +13,7 @@ struct TaskRowView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
     @State private var showingAlertSign = false
+    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     var showingProject: Bool
     var nameLineLimit: Int
     
@@ -81,8 +82,7 @@ struct TaskRowView: View {
                 if task.hasEstimate {
                     Image(systemName: "hourglass")
                         .foregroundStyle(Color.gray)
-                    // TODO: Change factor in settings
-                    Text("\(task.sumEstimates(1.7))h")
+                    Text("\(task.sumEstimates(estimateFactor))h")
                         .foregroundStyle(Color.gray)
                         .font(.caption)
                 }

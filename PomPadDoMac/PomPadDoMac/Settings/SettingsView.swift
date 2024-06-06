@@ -14,6 +14,8 @@ struct SettingsView: View {
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
     
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    
+    @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
 
     private enum Tabs: Hashable {
         case timer, estimates, advanced
@@ -23,7 +25,7 @@ struct SettingsView: View {
         TabView {
             Form {
                 Slider(value: $timerWorkSession, in: 600...3600) {
-                    Text("Work session duration: \(timerWorkSession / 60, specifier: "%.0f")m")
+                    Text("Work session duration: \(Common.formatSeconds(Int(timerWorkSession)))")
                 } minimumValueLabel: {
                     Text("10m")
                 } maximumValueLabel: {
@@ -31,7 +33,7 @@ struct SettingsView: View {
                 }
                 
                 Slider(value: $timerBreakSession, in: 60...3600) {
-                    Text("Break duration: \(timerBreakSession / 60, specifier: "%.0f")m")
+                    Text("Break duration: \(Common.formatSeconds(Int(timerBreakSession)))")
                 } minimumValueLabel: {
                     Text("1m")
                 } maximumValueLabel: {
@@ -39,7 +41,7 @@ struct SettingsView: View {
                 }
 
                 Slider(value: $timerLongBreakSession, in: 60...3600) {
-                    Text("Long break duration: \(timerLongBreakSession / 60, specifier: "%.0f")m")
+                    Text("Long break duration: \(Common.formatSeconds(Int(timerLongBreakSession)))")
                 } minimumValueLabel: {
                     Text("1m")
                 } maximumValueLabel: {
@@ -52,6 +54,15 @@ struct SettingsView: View {
                     Text("1")
                 } maximumValueLabel: {
                     Text("10")
+                }
+                
+                Button {
+                    timerWorkSession = 1500.0
+                    timerBreakSession = 300.0
+                    timerLongBreakSession = 1200.0
+                    timerWorkSessionsCount = 4.0
+                } label: {
+                    Label("Default values", systemImage: "arrow.circlepath")
                 }
             }
             .tabItem {
@@ -67,16 +78,36 @@ struct SettingsView: View {
                 } maximumValueLabel: {
                     Text("3")
                 }
+                
+                Button {
+                    estimateFactor = 1.7
+                } label: {
+                    Label("Default values", systemImage: "arrow.circlepath")
+                }
             }
             .tabItem {
                 Label("Estimates", systemImage: "hourglass")
             }
 
-            Text("Advanced")
-                .tabItem {
-                    Label("Advanced", systemImage: "gear")
+            Form {
+                Slider(value: $refreshPeriod, in: 1...600) {
+                    Text("Refresh period: \(Common.formatSeconds(Int(timerLongBreakSession)))")
+                } minimumValueLabel: {
+                    Text("1s")
+                } maximumValueLabel: {
+                    Text("10m")
                 }
-                .tag(Tabs.advanced)
+                
+                Button {
+                    refreshPeriod = 15.0
+                } label: {
+                    Label("Default values", systemImage: "arrow.circlepath")
+                }
+            }
+            .tabItem {
+                Label("Advanced", systemImage: "gear")
+            }
+            .tag(Tabs.advanced)
         }
         .padding(20)
         .frame(width: 575, height: 150)
