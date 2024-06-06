@@ -9,13 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct FocusTimerView: View {
-    // TODO: Change values in settings
-//    var timer = FocusTimer(workInSeconds: 1500,
-//                           breakInSeconds: 300,
-//                           longBreakInSeconds: 1200,
-//                           workSessionsCount: 4)
-    
-//    @Binding var timerCount: String
     @Binding var focusMode: FocusTimerMode
     
     let timer: FocusTimer
@@ -154,8 +147,6 @@ struct FocusTimerView: View {
                 task.tomatoesCount += 1
             }
         })
-//        .padding()
-//        .frame(width: 400, height: 400)
     }
 }
 
@@ -165,7 +156,6 @@ struct FocusTimerView: View {
         @State var focusMode: FocusTimerMode = .work
         @State var focusTask: Todo?
         
-        // TODO: Change values in settings
         let timer = FocusTimer(workInSeconds: 1500,
                                breakInSeconds: 300,
                                longBreakInSeconds: 1200,

@@ -91,7 +91,7 @@ struct SettingsView: View {
 
             Form {
                 Slider(value: $refreshPeriod, in: 1...600) {
-                    Text("Refresh period: \(Common.formatSeconds(Int(timerLongBreakSession)))")
+                    Text("Refresh period: \(Common.formatSeconds(Int(refreshPeriod)))")
                 } minimumValueLabel: {
                     Text("1s")
                 } maximumValueLabel: {

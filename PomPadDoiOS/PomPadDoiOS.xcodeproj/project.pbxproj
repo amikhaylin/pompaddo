@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4D0179EB2C11C99B00D76BF5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179EA2C11C99B00D76BF5 /* Common.swift */; };
+		4D0179F12C11F30A00D76BF5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179F02C11F30A00D76BF5 /* SettingsView.swift */; };
 		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
 		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		4D0179EA2C11C99B00D76BF5 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Common.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/Common.swift; sourceTree = "<group>"; };
+		4D0179F02C11F30A00D76BF5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4D1959B12BFBB25900B90F10 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 		4D0179EC2C11C9A100D76BF5 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				4D0179F02C11F30A00D76BF5 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */,
 				4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */,
 				4D0179EB2C11C99B00D76BF5 /* Common.swift in Sources */,
+				4D0179F12C11F30A00D76BF5 /* SettingsView.swift in Sources */,
 				4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */,
 				4DE97AB22BF35CB000E43E9A /* Previewer.swift in Sources */,
 				4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */,
