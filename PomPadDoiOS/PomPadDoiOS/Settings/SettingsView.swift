@@ -15,22 +15,18 @@ struct SettingsView: View {
     
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     
-    @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
-    
     @State private var viewMode = 0
     
     var body: some View {
         VStack {
             Picker("", selection: $viewMode) {
-                ForEach(0...2, id: \.self) { mode in
+                ForEach(0...1, id: \.self) { mode in
                     HStack {
                         switch mode {
                         case 0:
                             Label("Focus timer", systemImage: "timer")
                         case 1:
                             Label("Estimates", systemImage: "hourglass")
-                        case 2:
-                            Label("Advanced", systemImage: "gear")
                         default:
                             EmptyView()
                         }
@@ -110,25 +106,6 @@ struct SettingsView: View {
                     
                     Button {
                         estimateFactor = 1.7
-                    } label: {
-                        Label("Default values", systemImage: "arrow.circlepath")
-                    }
-                }
-            case 2:
-                Form {
-                    VStack {
-                        Text("Refresh period: \(Common.formatSeconds(Int(refreshPeriod)))")
-                        Slider(value: $refreshPeriod, in: 1...600) {
-                            EmptyView()
-                        } minimumValueLabel: {
-                            Text("1s")
-                        } maximumValueLabel: {
-                            Text("10m")
-                        }
-                    }
-                    
-                    Button {
-                        refreshPeriod = 15.0
                     } label: {
                         Label("Default values", systemImage: "arrow.circlepath")
                     }
