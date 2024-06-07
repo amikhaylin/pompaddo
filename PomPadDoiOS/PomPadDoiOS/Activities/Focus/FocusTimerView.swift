@@ -139,9 +139,6 @@ struct FocusTimerView: View {
                 }
             }
         }
-        .onChange(of: timer.mode, { _, _ in
-            focusMode = timer.mode
-        })
         .onChange(of: timer.sessionsCounter, { oldValue, newValue in
             if let task = selectedTask, newValue > oldValue {
                 task.tomatoesCount += 1
