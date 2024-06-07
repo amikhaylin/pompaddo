@@ -97,7 +97,7 @@ struct ProjectView: View {
                 Button {
                     showInspector.toggle()
                 } label: {
-                    Label("Show task details", systemImage: "info.circle")
+                    Label("Show task details", systemImage: "sidebar.trailing")
                 }
             }
         }

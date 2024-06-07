@@ -15,6 +15,7 @@ struct EditTaskView: View {
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     @State private var alertDate = Date()
     @State private var showingReminderDatePicker = false
+    @State private var estimateExplanation = false
     
     var body: some View {
         Form {
@@ -155,6 +156,23 @@ struct EditTaskView: View {
                         } label: {
                             Image(systemName: "clear")
                         }
+                    }
+                    
+                    Button {
+                        estimateExplanation.toggle()
+                    } label: {
+                        Text(estimateExplanation ? "Hide explanation" : "Show explanation")
+                    }
+                    if estimateExplanation {
+                        Text("""
+                        The estimate is calculated using the formula:
+                        (base hours * priority factor * clarity factor) * estimate factor
+
+                        base hours - estimated number of hours
+                        priority factor - high (1), medium (1.5), low (2)
+                        clarity factor - clear (1), half clear (1.5), not clear (2)
+                        estimate factor - 1.7 by default, can be changed in settings
+                        """)
                     }
                 } else {
                     Button {
