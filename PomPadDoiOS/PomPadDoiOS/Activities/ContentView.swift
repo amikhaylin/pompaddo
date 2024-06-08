@@ -137,6 +137,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .listStyle(SidebarListStyle())
                 .frame(height: 220)
                 
                 ProjectsListView(selectedProject: $selectedProject,
@@ -160,7 +161,19 @@ struct ContentView: View {
                     .sorted(by: TasksQuery.defaultSorting),
                               list: selectedSideBarItem!)
             case .review:
-                Text("Project's review will be here")
+                ReviewProjectsView(projects: projects.filter({
+                    if $0.showInReview == false {
+                        return false
+                    }
+                    let today = Date()
+                    if let dateToReview = Calendar.current.date(byAdding: .day,
+                                                                value: $0.reviewDaysCount,
+                                                                to: $0.reviewDate) {
+                        return dateToReview <= today
+                    } else {
+                        return false
+                    }
+                }))
             case .projects:
                 if let project = selectedProject {
                     ProjectView(project: project)

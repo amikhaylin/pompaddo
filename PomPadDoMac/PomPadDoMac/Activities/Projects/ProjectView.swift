@@ -139,7 +139,6 @@ struct ProjectView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-//        @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
         return ProjectView(project: previewer.project)

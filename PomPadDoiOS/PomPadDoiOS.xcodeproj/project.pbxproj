@@ -10,6 +10,8 @@
 		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
 		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
+		4D21F3E82C0EFF3D00CB4E7F /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21F3E72C0EFF3D00CB4E7F /* ReviewProjectsView.swift */; };
+		4D21F3EA2C0F278F00CB4E7F /* ProjectToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21F3E92C0F278F00CB4E7F /* ProjectToReviewView.swift */; };
 		4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */; };
 		4D4272C72BF3BD160003E129 /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D4272C62BF3BD160003E129 /* SwiftDataTransferrable */; };
 		4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C82BF3BDF70003E129 /* NewTaskView.swift */; };
@@ -66,6 +68,8 @@
 		4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4D1959B12BFBB25900B90F10 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
+		4D21F3E72C0EFF3D00CB4E7F /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
+		4D21F3E92C0F278F00CB4E7F /* ProjectToReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectToReviewView.swift; sourceTree = "<group>"; };
 		4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		4D4272C82BF3BDF70003E129 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
@@ -139,6 +143,15 @@
 			path = Board;
 			sourceTree = "<group>";
 		};
+		4D21F3E62C0EFF1D00CB4E7F /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				4D21F3E72C0EFF3D00CB4E7F /* ReviewProjectsView.swift */,
+				4D21F3E92C0F278F00CB4E7F /* ProjectToReviewView.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
 		4D4272C52BF3BD160003E129 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +162,7 @@
 		4D4272CA2BF3C5880003E129 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				4D21F3E62C0EFF1D00CB4E7F /* Review */,
 				4D1959B32BFBB44000B90F10 /* Board */,
 				4DF3C6312BFB842B006EC565 /* Settings */,
 				4D4272CD2BF3C7600003E129 /* Groups */,
@@ -460,6 +474,7 @@
 				4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */,
 				4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */,
 				4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */,
+				4D21F3E82C0EFF3D00CB4E7F /* ReviewProjectsView.swift in Sources */,
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
 				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
 				4DA863F82BFF879900269D83 /* TasksListView.swift in Sources */,
@@ -467,6 +482,7 @@
 				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
 				4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */,
+				4D21F3EA2C0F278F00CB4E7F /* ProjectToReviewView.swift in Sources */,
 				4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */,
 				4DCBF8B02C062D5700E1537A /* BoardView.swift in Sources */,
 				4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */,
