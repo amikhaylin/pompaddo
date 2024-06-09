@@ -29,6 +29,19 @@ struct TaskRowView: View {
             }
             
             HStack {
+                if let subtasksCount = task.subtasks?.count,
+                   subtasksCount > 0,
+                   let finished = task.subtasks?.filter({ $0.completed }) {
+                    
+                    CircularProgressView(progress: CGFloat(subtasksCount == finished.count ? 1.0 : 1.0 / Double(subtasksCount) * Double(finished.count)),
+                                         color: .gray,
+                                         lineWidth: 2)
+                    .frame(width: 15, height: 15)
+                    
+                    Text("\(subtasksCount == finished.count ? 100 : (100 / subtasksCount) * finished.count) %")
+                        .foregroundStyle(Color.gray)
+                        .font(.caption)
+                }
                 
                 Spacer()
                 
@@ -56,19 +69,6 @@ struct TaskRowView: View {
                                 .font(.caption)
                         }
                     }
-                }
-                if let subtasksCount = task.subtasks?.count,
-                   subtasksCount > 0,
-                   let finished = task.subtasks?.filter({ $0.completed }) {
-                    
-                    CircularProgressView(progress: CGFloat(subtasksCount == finished.count ? 1.0 : 1.0 / Double(subtasksCount) * Double(finished.count)),
-                                         color: .gray,
-                                         lineWidth: 2)
-                    .frame(width: 15, height: 15)
-                    
-                    Text("\(subtasksCount == finished.count ? 100 : (100 / subtasksCount) * finished.count) %")
-                        .foregroundStyle(Color.gray)
-                        .font(.caption)
                 }
                 
                 if task.tomatoesCount > 0 {
