@@ -88,7 +88,7 @@ struct SettingsView: View {
                         timerLongBreakSession = 1200.0
                         timerWorkSessionsCount = 4.0
                     } label: {
-                        Label("Default values", systemImage: "arrow.circlepath")
+                        Label("Restore defaults", systemImage: "arrow.circlepath")
                     }
                 }
             case 1:
@@ -107,7 +107,7 @@ struct SettingsView: View {
                     Button {
                         estimateFactor = 1.7
                     } label: {
-                        Label("Default values", systemImage: "arrow.circlepath")
+                        Label("Restore defaults", systemImage: "arrow.circlepath")
                     }
                 }
             default:

@@ -29,6 +29,22 @@ struct TaskRowView: View {
             }
             
             HStack {
+                Spacer()
+                
+                if showingProject {
+                    if let project = task.project {
+                        if let status = task.status, project.showStatus {
+                            Text("\(project.name)>\(status.name)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
+                        } else {
+                            Text("\(project.name)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
+                        }
+                    }
+                }
+                
                 if let subtasksCount = task.subtasks?.count,
                    subtasksCount > 0,
                    let finished = task.subtasks?.filter({ $0.completed }) {
@@ -43,8 +59,6 @@ struct TaskRowView: View {
                         .font(.caption)
                 }
                 
-                Spacer()
-                
                 if !task.link.isEmpty {
                     if let url = URL(string: task.link) {
                         #if os(macOS)
@@ -54,20 +68,6 @@ struct TaskRowView: View {
                         #else
                         Image(systemName: "link.circle.fill")
                         #endif
-                    }
-                }
-                
-                if showingProject {
-                    if let project = task.project {
-                        if let status = task.status, project.showStatus {
-                            Text("\(project.name)>\(status.name)")
-                                .foregroundStyle(Color.gray)
-                                .font(.caption)
-                        } else {
-                            Text("\(project.name)")
-                                .foregroundStyle(Color.gray)
-                                .font(.caption)
-                        }
                     }
                 }
                 
