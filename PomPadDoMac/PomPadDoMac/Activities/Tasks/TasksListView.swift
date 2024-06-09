@@ -24,7 +24,7 @@ struct TasksListView: View {
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
     
-    @State private var groupsExpanded: Set<String> = ["To do"]
+    @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
     
     @State private var showInspector = false
     
