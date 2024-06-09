@@ -12,6 +12,7 @@ struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var selectedTasks = Set<Todo>()
     @State private var showInspector = false
+    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     
     @Bindable var project: Project
     
@@ -40,8 +41,7 @@ struct ProjectView: View {
         .toolbar {
             ToolbarItemGroup {
                 if project.hasEstimate {
-                    // TODO: Change factor in settings
-                    Text("Project estimate is \(project.sumEstimateByProject(1.7)) hours")
+                    Text("Project estimate is \(project.sumEstimateByProject(estimateFactor)) hours")
                         .foregroundStyle(Color.gray)
                 }
 

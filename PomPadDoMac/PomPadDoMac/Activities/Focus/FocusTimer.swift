@@ -72,13 +72,13 @@ class FocusTimer: ObservableObject {
   
     // MARK: Computed Properties
     var secondsPassedString: String {
-        return formatSeconds(_secondsPassed)
+        return Common.formatSeconds(_secondsPassed)
     }
     var secondsLeft: Int {
         Int(duration) - _secondsPassed
     }
     var secondsLeftString: String {
-        return formatSeconds(secondsLeft)
+        return Common.formatSeconds(secondsLeft)
     }
     var fractionLeft: Double {
         1.0 - fractionPassed
@@ -95,6 +95,16 @@ class FocusTimer: ObservableObject {
     }
   
     // MARK: Public Methods
+    func setDurations(workInSeconds: TimeInterval,
+                      breakInSeconds: TimeInterval,
+                      longBreakInSeconds: TimeInterval,
+                      workSessionsCount: Int) {
+        self.durationWork = workInSeconds
+        self.durationBreak = breakInSeconds
+        self.durationLongBreak = longBreakInSeconds
+        self.workSessionsCount = workSessionsCount
+    }
+    
     func start() {
         dateStarted = Date.now
         secondsPassed = 0
@@ -195,20 +205,6 @@ class FocusTimer: ObservableObject {
             fractionPassed = 0
             state = .running
             setNotification()
-        }
-    }
-  
-    private func formatSeconds(_ seconds: Int) -> String {
-        if seconds <= 0 {
-            return "00:00"
-        }
-        let hours: Int = seconds / 3600
-        let minutes: Int = (seconds % 3600) / 60
-        let secs: Int = seconds % 60
-        if hours > 0 {
-            return String(format: "%02d:%02d:%02d", hours, minutes, secs)
-        } else {
-            return String(format: "%02d:%02d", minutes, secs)
         }
     }
 }

@@ -83,8 +83,8 @@ struct TasksQuery {
     }
     
     @MainActor static func fetchData<T: PersistentModel>(context: ModelContext, 
-                                                  predicate: Predicate<T>? = nil,
-                                                  sort: [SortDescriptor<T>]? = nil) -> [T] {
+                                                         predicate: Predicate<T>? = nil,
+                                                         sort: [SortDescriptor<T>]? = nil) -> [T] {
         do {
             var descriptor = FetchDescriptor<T>()
             if let sort = sort {

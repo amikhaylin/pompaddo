@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D169BCE2C106039001F995F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D169BCD2C106039001F995F /* SettingsView.swift */; };
 		4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */; };
 		4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
 		4D1D9EB62BD152F700CFF31C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
@@ -27,6 +28,7 @@
 		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
 		4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
 		4D7C13C72B7E0DE70093595D /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskRowView.swift */; };
+		4D821E4E2C11A03A008E79F6 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D821E4D2C11A03A008E79F6 /* Common.swift */; };
 		4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */; };
 		4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
 		4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B42BA1F437000829E1 /* BadgeManager.swift */; };
@@ -95,6 +97,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
 		4D4139852BE8DEF700AA840C /* ProjectGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectGroup.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4D7C13C42B7E06F70093595D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
 		4D7C13C62B7E0DE70093595D /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		4D821E4D2C11A03A008E79F6 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksQuery.swift; sourceTree = "<group>"; };
 		4D8422B42BA1F437000829E1 /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeManager.swift; sourceTree = "<group>"; };
@@ -178,6 +182,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4D169BCC2C106010001F995F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4D169BCD2C106039001F995F /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		4D1D9EAC2BCD334D00CFF31C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +265,7 @@
 				4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */,
 				4D7C13C42B7E06F70093595D /* Previewer.swift */,
 				4D59C8642BDF8B580026C2EA /* NotificationManager.swift */,
+				4D821E4D2C11A03A008E79F6 /* Common.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -284,6 +297,7 @@
 		4D95FE242B7B6BF300C8918D /* PomPadDoMac */ = {
 			isa = PBXGroup;
 			children = (
+				4D169BCC2C106010001F995F /* Settings */,
 				4D1D9EAC2BCD334D00CFF31C /* CustomViews */,
 				4D9FFAD32BA9C43600C5F5AE /* Info.plist */,
 				4D7C13C32B7E06DE0093595D /* Utils */,
@@ -601,6 +615,7 @@
 				4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */,
 				4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */,
 				4D41398B2BE8F31A00AA840C /* ProjectsListView.swift in Sources */,
+				4D821E4E2C11A03A008E79F6 /* Common.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
 				4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */,
 				4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */,
@@ -614,6 +629,7 @@
 				4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */,
 				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
+				4D169BCE2C106039001F995F /* SettingsView.swift in Sources */,
 				4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

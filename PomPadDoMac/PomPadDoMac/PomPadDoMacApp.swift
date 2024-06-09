@@ -10,8 +10,9 @@ import SwiftData
 
 @main
 struct PomPadDoMacApp: App {
-    @State private var timerCount: String = "25:00"
+    @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
+    @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -50,8 +51,7 @@ struct PomPadDoMacApp: App {
 
     var body: some Scene {
         WindowGroup {
-            // TODO: Store refresh period in settings
-            TimelineView(.periodic(from: .now, by: 5.0)) { _ in
+            TimelineView(.periodic(from: .now, by: refreshPeriod)) { _ in
                 ContentView()
                     .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
                                             modelContext: sharedModelContainer.mainContext)
@@ -88,5 +88,9 @@ struct PomPadDoMacApp: App {
             }
         }
         .menuBarExtraStyle(.window)
+        
+        Settings {
+            SettingsView()
+        }
     }
 }

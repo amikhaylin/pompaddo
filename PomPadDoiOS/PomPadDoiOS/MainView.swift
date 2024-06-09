@@ -17,7 +17,11 @@ enum MainViewTabs {
 }
 
 struct MainView: View {
-    // TODO: Change values in settings
+    @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
+    @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
+    @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
+    @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
+    
     var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
@@ -26,7 +30,7 @@ struct MainView: View {
     @State private var newTaskIsShowing = false
     @State private var tab: MainViewTabs = .tasks
     
-    @State private var timerCount: String = "25:00"
+    @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusTask: Todo?
     @State private var refresh = false
@@ -45,7 +49,7 @@ struct MainView: View {
                                selectedTask: $focusTask)
                     .id(refresh)
             case.settings:
-                Text("Settings")
+                SettingsView()
             }
         }
         .refreshable {
@@ -86,14 +90,14 @@ struct MainView: View {
                     }
                 }
 
-//                    Spacer()
-//                    
-//                    Button {
-//                        tab = .settings
-//                    } label: {
-//                        Image(systemName: "gear")
-//                            .foregroundStyle(tab == .settings ? Color.blue : Color.gray)
-//                    }
+                Spacer()
+                
+                Button {
+                    tab = .settings
+                } label: {
+                    Image(systemName: "gear")
+                        .foregroundStyle(tab == .settings ? Color.blue : Color.gray)
+                }
 
                 Spacer()
                 
@@ -110,6 +114,36 @@ struct MainView: View {
                 })
             }
         }
+        .onAppear {
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        }
+        .onChange(of: timerWorkSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerBreakSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerLongBreakSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerWorkSessionsCount, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
     }
 }
 

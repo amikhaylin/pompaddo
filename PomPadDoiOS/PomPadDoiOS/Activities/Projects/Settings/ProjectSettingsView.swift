@@ -63,7 +63,6 @@ struct ProjectSettingsView: View {
                  }
              }
             
-            
             Spacer()
             Form {
                 TextField("Project name", text: $project.name)

@@ -11,7 +11,11 @@ import SwiftData
 struct FocusTimerView: View {
     @Environment(\.modelContext) private var modelContext
     
-    // TODO: Change values in settings
+    @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
+    @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
+    @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
+    @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
+    
     var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
@@ -161,6 +165,12 @@ struct FocusTimerView: View {
                 }
             }
         }
+        .onAppear {
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        }
         .onChange(of: timer.secondsLeft, { _, _ in
             timerCount = timer.secondsLeftString
         })
@@ -171,6 +181,30 @@ struct FocusTimerView: View {
             if let task = selectedTask, newValue > oldValue {
                 task.tomatoesCount += 1
             }
+        })
+        .onChange(of: timerWorkSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerBreakSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerLongBreakSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerWorkSessionsCount, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
         })
         .padding()
         .frame(width: 400, height: 420)

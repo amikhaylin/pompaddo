@@ -10,8 +10,6 @@ import SwiftData
 
 @main
 struct PomPadDoiOSApp: App {
-
-    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Todo.self,
