@@ -22,15 +22,15 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     var name: String {
         switch self {
         case .inbox:
-            return "Inbox"
+            return NSLocalizedString("Inbox", comment: "")
         case .today:
-            return "Today"
+            return NSLocalizedString("Today", comment: "")
         case .tomorrow:
-            return "Tomorrow"
+            return NSLocalizedString("Tomorrow", comment: "")
         case .review:
-            return "Review"
+            return NSLocalizedString("Review", comment: "")
         case .projects:
-            return "Projects"
+            return NSLocalizedString("Projects", comment: "")
         }
     }
 }
@@ -222,6 +222,7 @@ struct ContentView: View {
                 let task = Todo(name: title, link: linkurl.absoluteString)
                 modelContext.insert(task)
             }
+            selectedSideBarItem = .inbox
         }
     }
 }
