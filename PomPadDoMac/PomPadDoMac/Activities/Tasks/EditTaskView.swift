@@ -81,7 +81,7 @@ struct EditTaskView: View {
                 
                 Picker("Repeat", selection: $task.repeation) {
                     ForEach(RepeationMode.allCases, id: \.self) { mode in
-                        Text(mode.rawValue).tag(mode as RepeationMode?)
+                        Text(mode.localizedString()).tag(mode as RepeationMode?)
                     }
                 }
                 
@@ -95,7 +95,7 @@ struct EditTaskView: View {
                         }
                         Picker("", selection: $task.customRepeatType) {
                             ForEach(CustomRepeationType.allCases, id: \.self) { reptype in
-                                Text(reptype.rawValue).tag(reptype as CustomRepeationType?)
+                                Text(reptype.localizedString()).tag(reptype as CustomRepeationType?)
                             }
                         }
                     }

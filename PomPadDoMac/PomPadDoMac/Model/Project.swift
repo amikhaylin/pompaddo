@@ -21,6 +21,10 @@ enum DefaultProjectStatuses: String, CaseIterable {
             return false
         }
     }
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 @Model

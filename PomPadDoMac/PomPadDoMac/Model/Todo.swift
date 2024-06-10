@@ -17,14 +17,18 @@ enum RepeationMode: String, Identifiable, CaseIterable, Codable {
     case monthly = "Monthly"
     case yearly = "Yearly"
     case custom = "Custom"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 enum CustomRepeationType: String, Identifiable, CaseIterable, Codable {
     var id: String { rawValue }
     
-    case days
-    case months
-    case years
+    case days = "days"
+    case months = "months"
+    case years = "years"
     
     var calendarComponent: Calendar.Component {
         switch self {
@@ -35,6 +39,10 @@ enum CustomRepeationType: String, Identifiable, CaseIterable, Codable {
         case .years:
             return .year
         }
+    }
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
     }
 }
 

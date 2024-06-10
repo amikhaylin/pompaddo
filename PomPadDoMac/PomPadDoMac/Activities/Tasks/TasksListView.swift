@@ -13,6 +13,10 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
     
     case todo = "To do"
     case completed = "Completed"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 struct TasksListView: View {
@@ -33,7 +37,7 @@ struct TasksListView: View {
     var body: some View {
         List(selection: $selectedTasks) {
             ForEach(CommonTaskListSections.allCases) { section in
-                DisclosureGroup(section.rawValue, isExpanded: Binding<Bool>(
+                DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
                     get: { groupsExpanded.contains(section.rawValue) },
                     set: { isExpanding in
                         if isExpanding {
