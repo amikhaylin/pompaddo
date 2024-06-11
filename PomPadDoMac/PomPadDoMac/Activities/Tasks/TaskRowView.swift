@@ -29,20 +29,7 @@ struct TaskRowView: View {
             }
             
             HStack {
-                
                 Spacer()
-                
-                if !task.link.isEmpty {
-                    if let url = URL(string: task.link) {
-                        #if os(macOS)
-                        Link(destination: url) {
-                            Image(systemName: "link.circle.fill")
-                        }
-                        #else
-                        Image(systemName: "link.circle.fill")
-                        #endif
-                    }
-                }
                 
                 if showingProject {
                     if let project = task.project {
@@ -57,6 +44,7 @@ struct TaskRowView: View {
                         }
                     }
                 }
+                
                 if let subtasksCount = task.subtasks?.count,
                    subtasksCount > 0,
                    let finished = task.subtasks?.filter({ $0.completed }) {
@@ -69,6 +57,18 @@ struct TaskRowView: View {
                     Text("\(subtasksCount == finished.count ? 100 : (100 / subtasksCount) * finished.count) %")
                         .foregroundStyle(Color.gray)
                         .font(.caption)
+                }
+                
+                if !task.link.isEmpty {
+                    if let url = URL(string: task.link) {
+                        #if os(macOS)
+                        Link(destination: url) {
+                            Image(systemName: "link.circle.fill")
+                        }
+                        #else
+                        Image(systemName: "link.circle.fill")
+                        #endif
+                    }
                 }
                 
                 if task.tomatoesCount > 0 {

@@ -39,10 +39,8 @@ struct MainView: View {
         Group {
             switch tab {
             case .tasks:
-//                TimelineView(.periodic(from: .now, by: 600.0)) { _ in
                 ContentView()
                     .id(refresh)
-//                }
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
                                timer: timer,
@@ -69,24 +67,23 @@ struct MainView: View {
                 Button {
                     tab = .focus
                 } label: {
-                    HStack {
-                        if focusMode == .work {
-                            Image(systemName: "target")
-                                .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
-                        } else {
-                            Image(systemName: "cup.and.saucer.fill")
-                                .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
-                        }
-                        if timer.state == .running {
-                            TimelineView(.periodic(from: .now, by: 0.5)) { _ in
+                    TimelineView(.periodic(from: .now, by: 0.5)) { _ in
+                        HStack {
+                            if focusMode == .work {
+                                Image(systemName: "target")
+                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
+                            } else {
+                                Image(systemName: "cup.and.saucer.fill")
+                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
+                            }
+                            if timer.state == .running {
+                                Text(timer.secondsLeftString)
+                                    .foregroundStyle(focusMode == .work ? Color.red : Color.green)
+                            } else {
                                 Text(timer.secondsLeftString)
                                     .foregroundStyle(focusMode == .work ? Color.red : Color.green)
                             }
-                        } else {
-                            Text(timer.secondsLeftString)
-                                .foregroundStyle(focusMode == .work ? Color.red : Color.green)
                         }
-                            
                     }
                 }
 
@@ -143,6 +140,9 @@ struct MainView: View {
                                breakInSeconds: timerBreakSession,
                                longBreakInSeconds: timerLongBreakSession,
                                workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timer.mode, { _, _ in
+            focusMode = timer.mode
         })
     }
 }

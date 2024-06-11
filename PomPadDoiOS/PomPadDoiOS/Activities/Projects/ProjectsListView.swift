@@ -141,7 +141,7 @@ struct ProjectsListView: View {
                     .buttonStyle(PlainButtonStyle())
                     .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
                         NewProjectView(isVisible: self.$newProjectIsShowing)
-                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 130)
                             .presentationCompactAdaptation(.popover)
                     }
                     

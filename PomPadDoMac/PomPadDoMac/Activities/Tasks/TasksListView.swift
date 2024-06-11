@@ -13,6 +13,10 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
     
     case todo = "To do"
     case completed = "Completed"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 struct TasksListView: View {
@@ -24,7 +28,7 @@ struct TasksListView: View {
     @State var list: SideBarItem
     @State private var newTaskIsShowing = false
     
-    @State private var groupsExpanded: Set<String> = ["To do"]
+    @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
     
     @State private var showInspector = false
     
@@ -33,7 +37,7 @@ struct TasksListView: View {
     var body: some View {
         List(selection: $selectedTasks) {
             ForEach(CommonTaskListSections.allCases) { section in
-                DisclosureGroup(section.rawValue, isExpanded: Binding<Bool>(
+                DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
                     get: { groupsExpanded.contains(section.rawValue) },
                     set: { isExpanding in
                         if isExpanding {
@@ -56,6 +60,29 @@ struct TasksListView: View {
                                     dropTask.reconnect()
                                 }
                                 return true
+                            }
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    deleteTask(task: task)
+                                } label: {
+                                    Label("Delete", systemImage: "trash.fill")
+                                }
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    if !task.completed {
+                                        task.complete(modelContext: modelContext)
+                                    } else {
+                                        task.reactivate()
+                                    }
+                                } label: {
+                                    if !task.completed {
+                                        Label("Complete", systemImage: "checkmark.square.fill")
+                                    } else {
+                                        Label("Reactivate", systemImage: "square")
+                                    }
+                                }
+                                .tint(.green)
                             }
                             .contextMenu {
                                 Button {
@@ -197,7 +224,7 @@ struct TasksListView: View {
                 Button {
                     showInspector.toggle()
                 } label: {
-                    Label("Show task details", systemImage: "info.circle")
+                    Label("Show task details", systemImage: "sidebar.trailing")
                 }
             }
         }

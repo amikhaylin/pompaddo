@@ -46,8 +46,10 @@ struct FocusTimerView: View {
                         Button {
                             selectedTask = task
                             viewMode = 1
-                            timer.reset()
-                            timer.start()
+                            if timer.state == .idle {
+                                timer.reset()
+                                timer.start()
+                            }
                         } label: {
                             Image(systemName: "play.fill")
                         }
@@ -139,9 +141,6 @@ struct FocusTimerView: View {
                 }
             }
         }
-        .onChange(of: timer.mode, { _, _ in
-            focusMode = timer.mode
-        })
         .onChange(of: timer.sessionsCounter, { oldValue, newValue in
             if let task = selectedTask, newValue > oldValue {
                 task.tomatoesCount += 1

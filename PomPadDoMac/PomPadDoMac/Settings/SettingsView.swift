@@ -62,7 +62,7 @@ struct SettingsView: View {
                     timerLongBreakSession = 1200.0
                     timerWorkSessionsCount = 4.0
                 } label: {
-                    Label("Default values", systemImage: "arrow.circlepath")
+                    Label("Restore defaults", systemImage: "arrow.circlepath")
                 }
             }
             .tabItem {
@@ -82,7 +82,7 @@ struct SettingsView: View {
                 Button {
                     estimateFactor = 1.7
                 } label: {
-                    Label("Default values", systemImage: "arrow.circlepath")
+                    Label("Restore defaults", systemImage: "arrow.circlepath")
                 }
             }
             .tabItem {
@@ -101,7 +101,7 @@ struct SettingsView: View {
                 Button {
                     refreshPeriod = 15.0
                 } label: {
-                    Label("Default values", systemImage: "arrow.circlepath")
+                    Label("Restore defaults", systemImage: "arrow.circlepath")
                 }
             }
             .tabItem {

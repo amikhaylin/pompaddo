@@ -77,8 +77,10 @@ struct FocusTimerView: View {
                             Button {
                                 selectedTask = task
                                 viewMode = 1
-                                timer.reset()
-                                timer.start()
+                                if timer.state == .idle {
+                                    timer.reset()
+                                    timer.start()
+                                }
                             } label: {
                                 Image(systemName: "play.fill")
                             }

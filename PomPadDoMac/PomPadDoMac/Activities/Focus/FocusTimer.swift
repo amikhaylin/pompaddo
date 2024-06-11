@@ -25,11 +25,11 @@ enum FocusTimerMode: String {
     var title: String {
         switch self {
         case .work:
-            return "work"
+            return NSLocalizedString("work", comment: "")
         case .pause:
-            return "break"
+            return NSLocalizedString("break", comment: "")
         case .longbreak:
-            return "long break"
+            return NSLocalizedString("long break", comment: "")
         }
     }
 }

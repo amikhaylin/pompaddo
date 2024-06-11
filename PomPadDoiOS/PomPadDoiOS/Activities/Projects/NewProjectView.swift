@@ -12,11 +12,17 @@ struct NewProjectView: View {
     @Environment(\.modelContext) private var modelContext
     @Binding var isVisible: Bool
     @State private var projectName = ""
+    @State private var createSimpleList = false
     
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Project name", text: $projectName)
+                
+                Toggle(isOn: $createSimpleList) {
+                    Text("Create simple list")
+                }
+                .toggleStyle(.switch)
             }
             .padding()
             .toolbar {
@@ -30,16 +36,22 @@ struct NewProjectView: View {
                     Button("OK") {
                         self.isVisible = false
                         let project = Project(name: projectName)
+                        if createSimpleList {
+                            project.completedMoving = true
+                            project.showStatus = false
+                        }
                         modelContext.insert(project)
                         
                         var order = 0
                         for name in DefaultProjectStatuses.allCases {
                             order += 1
-                            let status = Status(name: name.rawValue,
-                                                order: order,
-                                                doCompletion: name.competion)
-                            modelContext.insert(status)
-                            project.statuses?.append(status)
+                            if !(createSimpleList && name == .progress) {
+                                let status = Status(name: name.rawValue,
+                                                    order: order,
+                                                    doCompletion: name.competion)
+                                modelContext.insert(status)
+                                project.statuses?.append(status)
+                            }
                         }
                     }
                 }
