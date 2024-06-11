@@ -22,15 +22,15 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     var name: String {
         switch self {
         case .inbox:
-            return "Inbox"
+            return NSLocalizedString("Inbox", comment: "")
         case .today:
-            return "Today"
+            return NSLocalizedString("Today", comment: "")
         case .tomorrow:
-            return "Tomorrow"
+            return NSLocalizedString("Tomorrow", comment: "")
         case .review:
-            return "Review"
+            return NSLocalizedString("Review", comment: "")
         case .projects:
-            return "Projects"
+            return NSLocalizedString("Projects", comment: "")
         }
     }
 }
@@ -149,17 +149,20 @@ struct ContentView: View {
             switch selectedSideBarItem {
             case .inbox:
                 TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
-                              list: selectedSideBarItem!)
+                              list: selectedSideBarItem!,
+                              title: selectedSideBarItem!.name)
             case .today:
                 TasksListView(tasks: tasksToday
                     .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                     .sorted(by: TasksQuery.defaultSorting),
-                              list: selectedSideBarItem!)
+                              list: selectedSideBarItem!,
+                              title: selectedSideBarItem!.name)
             case .tomorrow:
                 TasksListView(tasks: tasksTomorrow
                     .filter({ $0.completionDate == nil })
                     .sorted(by: TasksQuery.defaultSorting),
-                              list: selectedSideBarItem!)
+                              list: selectedSideBarItem!,
+                              title: selectedSideBarItem!.name)
             case .review:
                 ReviewProjectsView(projects: projects.filter({
                     if $0.showInReview == false {
