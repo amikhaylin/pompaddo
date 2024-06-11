@@ -173,6 +173,7 @@ struct EditTaskView: View {
                         clarity factor - clear (1), half clear (1.5), not clear (2)
                         estimate factor - 1.7 by default, can be changed in settings
                         """)
+                        .font(.caption2)
                     }
                 } else {
                     Button {
