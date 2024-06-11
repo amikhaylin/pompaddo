@@ -14,6 +14,7 @@
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
 		4D21F3E82C0EFF3D00CB4E7F /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21F3E72C0EFF3D00CB4E7F /* ReviewProjectsView.swift */; };
 		4D21F3EA2C0F278F00CB4E7F /* ProjectToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21F3E92C0F278F00CB4E7F /* ProjectToReviewView.swift */; };
+		4D3769182C188B0D00EBC0C5 /* TaskRowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3769172C188B0D00EBC0C5 /* TaskRowModifier.swift */; };
 		4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */; };
 		4D4272C72BF3BD160003E129 /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D4272C62BF3BD160003E129 /* SwiftDataTransferrable */; };
 		4D4272C92BF3BDF70003E129 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C82BF3BDF70003E129 /* NewTaskView.swift */; };
@@ -74,6 +75,7 @@
 		4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		4D21F3E72C0EFF3D00CB4E7F /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D21F3E92C0F278F00CB4E7F /* ProjectToReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectToReviewView.swift; sourceTree = "<group>"; };
+		4D3769172C188B0D00EBC0C5 /* TaskRowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowModifier.swift; sourceTree = "<group>"; };
 		4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		4D4272C82BF3BDF70003E129 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				4D4272C82BF3BDF70003E129 /* NewTaskView.swift */,
 				4DA863F72BFF879900269D83 /* TasksListView.swift */,
 				4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */,
+				4D3769172C188B0D00EBC0C5 /* TaskRowModifier.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
 				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
 				4DA863F82BFF879900269D83 /* TasksListView.swift in Sources */,
+				4D3769182C188B0D00EBC0C5 /* TaskRowModifier.swift in Sources */,
 				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
 				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
