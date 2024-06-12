@@ -50,6 +50,8 @@
 		4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */; };
 		4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
 		4DEF682E2C19E47F000B9F1F /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
+		4DEF68302C19FD12000B9F1F /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */; };
+		4DEF68322C19FD45000B9F1F /* MainTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF68312C19FD45000B9F1F /* MainTasksListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +118,8 @@
 		4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BadgeManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/BadgeManager.swift; sourceTree = "<group>"; };
 		4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCheckBoxView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskCheckBoxView.swift; sourceTree = "<group>"; };
 		4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskSwipeModifier.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskSwipeModifier.swift; sourceTree = "<group>"; };
+		4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsListView.swift; sourceTree = "<group>"; };
+		4DEF68312C19FD45000B9F1F /* MainTasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTasksListView.swift; sourceTree = "<group>"; };
 		4DFB04092BF4B7AF00436EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -284,6 +288,7 @@
 				4D4272CA2BF3C5880003E129 /* Projects */,
 				4DE97ABC2BF3686200E43E9A /* Tasks */,
 				4DE97AB52BF35E8A00E43E9A /* Focus */,
+				4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */,
 				4D3769172C188B0D00EBC0C5 /* TaskRowModifier.swift */,
 				4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */,
+				4DEF68312C19FD45000B9F1F /* MainTasksListView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -523,6 +529,7 @@
 				4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */,
 				4DEF682E2C19E47F000B9F1F /* TaskSwipeModifier.swift in Sources */,
 				4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */,
+				4DEF68322C19FD45000B9F1F /* MainTasksListView.swift in Sources */,
 				4D21F3E82C0EFF3D00CB4E7F /* ReviewProjectsView.swift in Sources */,
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
 				4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */,
@@ -531,6 +538,7 @@
 				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
 				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
+				4DEF68302C19FD12000B9F1F /* SectionsListView.swift in Sources */,
 				4DBBB0332C189B0300F1D400 /* ProjectTaskModifier.swift in Sources */,
 				4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */,
 				4D21F3EA2C0F278F00CB4E7F /* ProjectToReviewView.swift in Sources */,
