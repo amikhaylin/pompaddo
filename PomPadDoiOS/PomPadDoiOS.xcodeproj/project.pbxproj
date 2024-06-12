@@ -49,6 +49,7 @@
 		4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */; };
 		4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */; };
 		4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
+		4DEF682E2C19E47F000B9F1F /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 		4DE97AB62BF35EA200E43E9A /* FocusTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FocusTimer.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Focus/FocusTimer.swift; sourceTree = "<group>"; };
 		4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BadgeManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/BadgeManager.swift; sourceTree = "<group>"; };
 		4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCheckBoxView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskCheckBoxView.swift; sourceTree = "<group>"; };
+		4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskSwipeModifier.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskSwipeModifier.swift; sourceTree = "<group>"; };
 		4DFB04092BF4B7AF00436EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -326,6 +328,7 @@
 				4DA863F72BFF879900269D83 /* TasksListView.swift */,
 				4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */,
 				4D3769172C188B0D00EBC0C5 /* TaskRowModifier.swift */,
+				4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				4DE97AA92BF35BD300E43E9A /* CheckBoxView.swift in Sources */,
 				4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */,
 				4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */,
+				4DEF682E2C19E47F000B9F1F /* TaskSwipeModifier.swift in Sources */,
 				4DE97AA02BF351ED00E43E9A /* Todo.swift in Sources */,
 				4D21F3E82C0EFF3D00CB4E7F /* ReviewProjectsView.swift in Sources */,
 				4DE97AAB2BF35BD300E43E9A /* Collapsible.swift in Sources */,
