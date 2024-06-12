@@ -26,6 +26,7 @@
 		4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */; };
 		4DA863F62BFF864A00269D83 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F52BFF864A00269D83 /* ProjectView.swift */; };
 		4DA863F82BFF879900269D83 /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F72BFF879900269D83 /* TasksListView.swift */; };
+		4DBBB0332C189B0300F1D400 /* ProjectTaskModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBBB0322C189B0300F1D400 /* ProjectTaskModifier.swift */; };
 		4DCBF8B02C062D5700E1537A /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBF8AF2C062D5700E1537A /* BoardView.swift */; };
 		4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */; };
 		4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D42BF23034002C4F95 /* ContentView.swift */; };
@@ -86,6 +87,7 @@
 		4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectTasksListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/ProjectTasksListView.swift; sourceTree = "<group>"; };
 		4DA863F52BFF864A00269D83 /* ProjectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/ProjectView.swift; sourceTree = "<group>"; };
 		4DA863F72BFF879900269D83 /* TasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TasksListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TasksListView.swift; sourceTree = "<group>"; };
+		4DBBB0322C189B0300F1D400 /* ProjectTaskModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTaskModifier.swift; sourceTree = "<group>"; };
 		4DCB073A2BFCB5B7009BA752 /* PomPadDoiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoiOS.entitlements; sourceTree = "<group>"; };
 		4DCBF8AF2C062D5700E1537A /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoardView.swift; path = ../../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/Board/BoardView.swift; sourceTree = "<group>"; };
 		4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +186,7 @@
 				4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */,
 				4DA863F52BFF864A00269D83 /* ProjectView.swift */,
 				4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */,
+				4DBBB0322C189B0300F1D400 /* ProjectTaskModifier.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
 				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
+				4DBBB0332C189B0300F1D400 /* ProjectTaskModifier.swift in Sources */,
 				4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */,
 				4D21F3EA2C0F278F00CB4E7F /* ProjectToReviewView.swift in Sources */,
 				4DE97AB42BF35CB000E43E9A /* NotificationManager.swift in Sources */,

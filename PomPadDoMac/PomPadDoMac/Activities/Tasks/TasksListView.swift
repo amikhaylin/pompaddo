@@ -62,6 +62,8 @@ struct TasksListView: View {
                                                                   selectedTasks: $selectedTasks,
                                                                   projects: projects,
                                                                   list: list))
+                                        .modifier(TaskSwipeModifier(task: maintask,
+                                                                    modelContext: modelContext))
                                         .tag(maintask)
                                 }
                             } else {
@@ -71,6 +73,8 @@ struct TasksListView: View {
                                                               selectedTasks: $selectedTasks,
                                                               projects: projects,
                                                               list: list))
+                                    .modifier(TaskSwipeModifier(task: task,
+                                                                modelContext: modelContext))
                                     .tag(task)
                             }
                         }
