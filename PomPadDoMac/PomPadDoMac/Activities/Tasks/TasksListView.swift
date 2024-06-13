@@ -21,11 +21,13 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    var tasks: [Todo]
+    @State var tasks: [Todo]
 
     @State private var selectedTasks = Set<Todo>()
     
     @State var list: SideBarItem
+    @State var title: String
+    @State var mainTask: Todo?
     @State private var newTaskIsShowing = false
     
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
@@ -35,170 +37,185 @@ struct TasksListView: View {
     @Query var projects: [Project]
     
     var body: some View {
-        List(selection: $selectedTasks) {
-            ForEach(CommonTaskListSections.allCases) { section in
-                DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
-                    get: { groupsExpanded.contains(section.rawValue) },
-                    set: { isExpanding in
-                        if isExpanding {
-                            groupsExpanded.insert(section.rawValue)
-                        } else {
-                            groupsExpanded.remove(section.rawValue)
+        NavigationStack {
+            List(selection: $selectedTasks) {
+                ForEach(CommonTaskListSections.allCases) { section in
+                    DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
+                        get: { groupsExpanded.contains(section.rawValue) },
+                        set: { isExpanding in
+                            if isExpanding {
+                                groupsExpanded.insert(section.rawValue)
+                            } else {
+                                groupsExpanded.remove(section.rawValue)
+                            }
                         }
-                    }
-                )) {
-                    OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
-                                 id: \.self,
-                                 children: \.subtasks) { task in
-                        TaskRowView(task: task)
-                            .draggable(task)
-                            .dropDestination(for: Todo.self) { tasks, _ in
-                                // Attach dropped task as subtask
-                                for dropTask in tasks where dropTask != task {
-                                    dropTask.disconnectFromAll()
-                                    dropTask.parentTask = task
-                                    dropTask.reconnect()
-                                }
-                                return true
-                            }
-                            .swipeActions {
-                                Button(role: .destructive) {
-                                    deleteTask(task: task)
-                                } label: {
-                                    Label("Delete", systemImage: "trash.fill")
-                                }
-                            }
-                            .swipeActions(edge: .leading) {
-                                Button {
-                                    if !task.completed {
-                                        task.complete(modelContext: modelContext)
-                                    } else {
-                                        task.reactivate()
+                    )) {
+                        OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
+                                     id: \.self,
+                                     children: \.subtasks) { task in
+                            TaskRowView(task: task)
+                                .draggable(task)
+                                .dropDestination(for: Todo.self) { tasks, _ in
+                                    // Attach dropped task as subtask
+                                    for dropTask in tasks where dropTask != task {
+                                        dropTask.disconnectFromAll()
+                                        dropTask.parentTask = task
+                                        dropTask.reconnect()
                                     }
-                                } label: {
-                                    if !task.completed {
-                                        Label("Complete", systemImage: "checkmark.square.fill")
-                                    } else {
-                                        Label("Reactivate", systemImage: "square")
-                                    }
+                                    return true
                                 }
-                                .tint(.green)
-                            }
-                            .contextMenu {
-                                Button {
-                                    task.dueDate = nil
-                                } label: {
-                                    Image(systemName: "clear")
-                                    Text("Clear due date")
-                                }
-                                
-                                Button {
-                                    task.dueDate = Calendar.current.startOfDay(for: Date())
-                                } label: {
-                                    Image(systemName: "calendar")
-                                    Text("Today")
-                                }
-                                
-                                Button {
-                                    task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                } label: {
-                                    Image(systemName: "sunrise")
-                                    Text("Tomorrow")
-                                }
-                                
-                                if task.repeation != .none {
-                                    Button {
-                                        task.skip()
+                                .swipeActions {
+                                    Button(role: .destructive) {
+                                        deleteTask(task: task)
                                     } label: {
-                                        Image(systemName: "arrow.uturn.forward")
-                                        Text("Skip")
+                                        Label("Delete", systemImage: "trash.fill")
                                     }
                                 }
-                                Divider()
-                                
-                                Button {
-                                    selectedTasks.removeAll()
-                                    let subtask = Todo(name: "", parentTask: task)
-                                    task.subtasks?.append(subtask)
-                                    modelContext.insert(subtask)
-                                    
-                                    selectedTasks.insert(subtask)
-                                } label: {
-                                    Image(systemName: "plus")
-                                    Text("Add subtask")
-                                }
-                                Divider()
-                                
-                                Menu {
-                                    ForEach(projects) { project in
-                                        Button {
-                                            task.project = project
-                                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
-                                            project.tasks?.append(task)
-                                        } label: {
-                                            Text(project.name)
+                                .swipeActions(edge: .leading) {
+                                    Button {
+                                        if !task.completed {
+                                            task.complete(modelContext: modelContext)
+                                        } else {
+                                            task.reactivate()
+                                        }
+                                    } label: {
+                                        if !task.completed {
+                                            Label("Complete", systemImage: "checkmark.square.fill")
+                                        } else {
+                                            Label("Reactivate", systemImage: "square")
                                         }
                                     }
-                                } label: {
-                                    Text("Move task to project")
+                                    .tint(.green)
                                 }
-                                
-                                if let project = task.project {
+                                .contextMenu {
+                                    Button {
+                                        task.dueDate = nil
+                                    } label: {
+                                        Image(systemName: "clear")
+                                        Text("Clear due date")
+                                    }
+                                    
+                                    Button {
+                                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                                    } label: {
+                                        Image(systemName: "calendar")
+                                        Text("Today")
+                                    }
+                                    
+                                    Button {
+                                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                                    } label: {
+                                        Image(systemName: "sunrise")
+                                        Text("Tomorrow")
+                                    }
+                                    
+                                    if task.repeation != .none {
+                                        Button {
+                                            task.skip()
+                                        } label: {
+                                            Image(systemName: "arrow.uturn.forward")
+                                            Text("Skip")
+                                        }
+                                    }
+                                    Divider()
+                                    
+                                    Button {
+                                        selectedTasks.removeAll()
+                                        let subtask = Todo(name: "", parentTask: task)
+                                        task.subtasks?.append(subtask)
+                                        modelContext.insert(subtask)
+                                        
+                                        selectedTasks.insert(subtask)
+                                    } label: {
+                                        Image(systemName: "plus")
+                                        Text("Add subtask")
+                                    }
+                                    
+                                    if let subtasks = task.subtasks, subtasks.count > 0 {
+                                        NavigationLink {
+                                            TasksListView(tasks: subtasks,
+                                                          list: list,
+                                                          title: task.name,
+                                                          mainTask: task)
+                                        } label: {
+                                            Image(systemName: "arrow.right")
+                                            Text("Open subtasks")
+                                        }
+                                    }
+                                    
+                                    Divider()
+                                    
                                     Menu {
-                                        ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
+                                        ForEach(projects) { project in
                                             Button {
-                                                task.moveToStatus(status: status,
-                                                                  project: project,
-                                                                  context: modelContext)
+                                                task.project = project
+                                                task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                                project.tasks?.append(task)
                                             } label: {
-                                                Text(status.name)
+                                                Text(project.name)
                                             }
                                         }
                                     } label: {
-                                        Text("Move to status")
+                                        Text("Move task to project")
+                                    }
+                                    
+                                    if let project = task.project {
+                                        Menu {
+                                            ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
+                                                Button {
+                                                    task.moveToStatus(status: status,
+                                                                      project: project,
+                                                                      context: modelContext)
+                                                } label: {
+                                                    Text(status.name)
+                                                }
+                                            }
+                                        } label: {
+                                            Text("Move to status")
+                                        }
+                                    }
+                                    
+                                    Divider()
+                                    
+                                    Button {
+                                        selectedTasks.removeAll()
+                                        let newTask = task.copy(modelContext: modelContext)
+                                        
+                                        modelContext.insert(newTask)
+                                        newTask.reconnect()
+                                        
+                                        selectedTasks.insert(newTask)
+                                    } label: {
+                                        Image(systemName: "doc.on.doc")
+                                        Text("Dublicate task")
+                                    }
+                                    
+                                    Button {
+                                        deleteTask(task: task)
+                                    } label: {
+                                        Image(systemName: "trash")
+                                            .foregroundStyle(Color.red)
+                                        Text("Delete task")
                                     }
                                 }
-                                
-                                Divider()
-                                
-                                Button {
-                                    selectedTasks.removeAll()
-                                    let newTask = task.copy(modelContext: modelContext)
-                                    
-                                    modelContext.insert(newTask)
-                                    newTask.reconnect()
-
-                                    selectedTasks.insert(newTask)
-                                } label: {
-                                    Image(systemName: "doc.on.doc")
-                                    Text("Dublicate task")
-                                }
-                                
-                                Button {
-                                    deleteTask(task: task)
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(Color.red)
-                                    Text("Delete task")
-                                }
-                            }
-                    }
-                }
-                .dropDestination(for: Todo.self) { tasks, _ in
-                    for task in tasks {
-                        task.disconnectFromParentTask()
-                        task.parentTask = nil
-                        setDueDate(task: task)
-                        
-                        if section == CommonTaskListSections.completed {
-                            if !task.completed {
-                                task.complete(modelContext: modelContext)
-                            }
-                        } else {
-                            task.reactivate()
                         }
                     }
-                    return true
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.disconnectFromParentTask()
+                            task.parentTask = nil
+                            setDueDate(task: task)
+                            
+                            if section == CommonTaskListSections.completed {
+                                if !task.completed {
+                                    task.complete(modelContext: modelContext)
+                                }
+                            } else {
+                                task.reactivate()
+                            }
+                        }
+                        return true
+                    }
                 }
             }
         }
@@ -228,7 +245,7 @@ struct TasksListView: View {
                 }
             }
         }
-        .navigationTitle(list.name)
+        .navigationTitle(title)
         .inspector(isPresented: $showInspector) {
             Group {
                 if let selectedTask = selectedTasks.first {
@@ -285,8 +302,12 @@ struct TasksListView: View {
         withAnimation {
             selectedTasks.removeAll()
             let task = Todo(name: "")
-            setDueDate(task: task)
-            
+            if let mainTask = mainTask {
+                mainTask.subtasks?.append(task)
+            } else {
+                setDueDate(task: task)
+            }
+            tasks.append(task)
             modelContext.insert(task)
 
             selectedTasks.insert(task)
@@ -298,11 +319,10 @@ struct TasksListView: View {
     do {
         let previewer = try Previewer()
         let tasks: [Todo] = [previewer.task]
-//        @State var selectedTasks = Set<Todo>()
         
         return TasksListView(tasks: tasks, 
-//                             selectedTasks: $selectedTasks,
-                             list: .inbox)
+                             list: .inbox,
+                             title: "Some list")
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

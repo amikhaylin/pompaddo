@@ -83,6 +83,18 @@ struct BoardView: View {
                                             Image(systemName: "plus")
                                             Text("Add subtask")
                                         }
+                                        
+                                        if let subtasks = task.subtasks, subtasks.count > 0 {
+                                            NavigationLink {
+                                                TasksListView(tasks: subtasks,
+                                                              list: .projects,
+                                                              title: task.name,
+                                                              mainTask: task)
+                                            } label: {
+                                                Image(systemName: "arrow.right")
+                                                Text("Open subtasks")
+                                            }
+                                        }
                                         Divider()
                                         
                                         Button {

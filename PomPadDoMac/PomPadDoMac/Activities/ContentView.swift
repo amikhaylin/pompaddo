@@ -162,17 +162,20 @@ struct ContentView: View {
                 switch selectedSideBarItem {
                 case .inbox:
                     TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
-                                  list: selectedSideBarItem)
+                                  list: selectedSideBarItem,
+                                  title: selectedSideBarItem.name)
                 case .today:
                     TasksListView(tasks: tasksToday
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                         .sorted(by: TasksQuery.defaultSorting),
-                                  list: selectedSideBarItem)
+                                  list: selectedSideBarItem,
+                                  title: selectedSideBarItem.name)
                 case .tomorrow:
                     TasksListView(tasks: tasksTomorrow
                         .filter({ $0.completionDate == nil })
                         .sorted(by: TasksQuery.defaultSorting),
-                                  list: selectedSideBarItem)
+                                  list: selectedSideBarItem,
+                                  title: selectedSideBarItem.name)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
