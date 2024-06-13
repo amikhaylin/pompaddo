@@ -33,7 +33,6 @@ struct MainTasksListView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-        let tasks: [Todo] = [previewer.task]
         
         return MainTasksListView(predicate: TasksQuery.predicateInbox(),
                                  filter: { $0.uid == $0.uid },
