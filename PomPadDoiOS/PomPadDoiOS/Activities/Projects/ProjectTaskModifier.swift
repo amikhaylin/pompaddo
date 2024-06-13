@@ -84,6 +84,15 @@ struct ProjectTaskModifier: ViewModifier {
                         Text("Open subtasks")
                     }
                 }
+                
+                if let url = URL(string: task.link) {
+                    Link(destination: url,
+                         label: {
+                        Image(systemName: "link")
+                        Text("Open link")
+                    })
+                }
+                
                 Divider()
                 
                 Button {

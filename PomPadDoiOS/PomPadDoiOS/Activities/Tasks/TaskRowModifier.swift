@@ -84,6 +84,14 @@ struct TaskRowModifier: ViewModifier {
                 }
             }
             
+            if let url = URL(string: task.link) {
+                Link(destination: url,
+                     label: {
+                    Image(systemName: "link")
+                    Text("Open link")
+                })
+            }
+            
             Divider()
             
             Menu {
