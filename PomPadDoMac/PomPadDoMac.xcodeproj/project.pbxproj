@@ -56,6 +56,8 @@
 		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
 		4DEC4BE22BEA240000DC3AAB /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4DEF68342C1A11E7000B9F1F /* MainTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF68332C1A11E7000B9F1F /* MainTasksListView.swift */; };
+		4DEF68362C1A11F4000B9F1F /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF68352C1A11F4000B9F1F /* SectionsListView.swift */; };
 		4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */; };
 		4DF91FDF2BCBD460009A6DA8 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */; };
 		4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
@@ -150,6 +152,8 @@
 		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
 		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4DEF68332C1A11E7000B9F1F /* MainTasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTasksListView.swift; path = ../../../../PomPadDoiOS/PomPadDoiOS/Activities/Tasks/MainTasksListView.swift; sourceTree = "<group>"; };
+		4DEF68352C1A11F4000B9F1F /* SectionsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionsListView.swift; path = ../../../PomPadDoiOS/PomPadDoiOS/Activities/SectionsListView.swift; sourceTree = "<group>"; };
 		4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTasksListView.swift; sourceTree = "<group>"; };
 		4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckBoxView.swift; sourceTree = "<group>"; };
@@ -239,6 +243,7 @@
 				4DAA67B62BC52CBC0045CE22 /* Projects */,
 				4DAA67B52BC52C970045CE22 /* Tasks */,
 				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
+				4DEF68352C1A11F4000B9F1F /* SectionsListView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 				4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */,
 				4DBBB0362C18A57300F1D400 /* TaskRowModifier.swift */,
 				4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */,
+				4DEF68332C1A11E7000B9F1F /* MainTasksListView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -612,6 +618,7 @@
 				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
 				4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */,
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
+				4DEF68342C1A11E7000B9F1F /* MainTasksListView.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
 				4D4139862BE8DEF700AA840C /* ProjectGroup.swift in Sources */,
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
@@ -619,6 +626,7 @@
 				4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */,
 				4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */,
 				4D2BBCBF2BE4DEAB00E105C1 /* FocusTimer.swift in Sources */,
+				4DEF68362C1A11F4000B9F1F /* SectionsListView.swift in Sources */,
 				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
 				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
 				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,

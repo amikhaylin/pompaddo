@@ -29,7 +29,7 @@ struct TaskCheckBoxView: View {
             }
         })
         .buttonStyle(PlainButtonStyle())
-        .sensoryFeedback(.impact, trigger: task.completed)
+        .sensoryFeedback(.success, trigger: task.completed)
     }
     
     func getColor() -> Color {

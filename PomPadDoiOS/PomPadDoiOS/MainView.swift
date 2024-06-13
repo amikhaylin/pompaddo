@@ -33,6 +33,7 @@ struct MainView: View {
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusTask: Todo?
+    
     @State private var refresh = false
     
     var body: some View {
@@ -40,18 +41,17 @@ struct MainView: View {
             switch tab {
             case .tasks:
                 ContentView()
-                    .id(refresh)
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
                                timer: timer,
                                selectedTask: $focusTask)
                     .id(refresh)
+                    .refreshable {
+                        refresh.toggle()
+                    }
             case.settings:
                 SettingsView()
             }
-        }
-        .refreshable {
-            refresh.toggle()
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {

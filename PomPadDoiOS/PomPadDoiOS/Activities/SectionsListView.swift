@@ -14,7 +14,11 @@ struct SectionsListView: View {
     @Query(filter: TasksQuery.predicateTomorrow()) var tasksTomorrow: [Todo]
     @Query var projects: [Project]
     
+    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    
     @Binding var selectedSideBarItem: SideBarItem?
+    
+    @State var badgeManager = BadgeManager()
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -100,9 +104,23 @@ struct SectionsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
+        .onChange(of: tasksTodayActive.count) { _, newValue in
+            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
+        }
+        .onAppear {
+            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
+        }
     }
 }
 
-//#Preview {
-//    SectionsListView()
-//}
+#Preview {
+    do {
+        let previewer = try Previewer()
+        @State var selectedSideBarItem: SideBarItem? = .today
+        
+        return SectionsListView(selectedSideBarItem: $selectedSideBarItem)
+            .modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
+}

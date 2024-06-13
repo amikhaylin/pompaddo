@@ -6,13 +6,41 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainTasksListView: View {
+    @Query var tasks: [Todo]
+    @State private var list: SideBarItem
+    @State private var title: String
+    private var filter: (Todo) -> Bool
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TasksListView(tasks: tasks
+                        .filter(filter)
+                        .sorted(by: TasksQuery.defaultSorting),
+                      list: list,
+                      title: title)
+    }
+    
+    init(predicate: Predicate<Todo>, filter: @escaping (Todo) -> Bool, list: SideBarItem, title: String) {
+        _tasks = Query(filter: predicate)
+        _list = State(wrappedValue: list)
+        _title = State(wrappedValue: title)
+        self.filter = filter
     }
 }
 
 #Preview {
-    MainTasksListView()
+    do {
+        let previewer = try Previewer()
+        let tasks: [Todo] = [previewer.task]
+        
+        return MainTasksListView(predicate: TasksQuery.predicateInbox(),
+                                 filter: { $0.uid == $0.uid },
+                                 list: .inbox,
+                                 title: "Some list")
+            .modelContainer(previewer.container)
+    } catch {
+        return Text("Failed to create preview: \(error.localizedDescription)")
+    }
 }
