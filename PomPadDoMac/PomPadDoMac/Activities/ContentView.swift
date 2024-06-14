@@ -79,7 +79,7 @@ struct ContentView: View {
             .sheet(isPresented: $newTaskIsShowing) {
                 NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
             }
-            .navigationSplitViewColumnWidth(min: 200, ideal: 200, max: 400)
+            .navigationSplitViewColumnWidth(min: 230, ideal: 230, max: 400)
         } detail: {
             HStack {
                 switch selectedSideBarItem {
