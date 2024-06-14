@@ -58,23 +58,19 @@ struct TasksListView: View {
                                              children: \.subtasks) { maintask in
                                     TaskRowView(task: maintask)
                                         .modifier(TaskRowModifier(task: maintask,
-                                                                  modelContext: modelContext,
                                                                   selectedTasks: $selectedTasks,
                                                                   projects: projects,
                                                                   list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask,
-                                                                    modelContext: modelContext))
+                                        .modifier(TaskSwipeModifier(task: maintask))
                                         .tag(maintask)
                                 }
                             } else {
                                 TaskRowView(task: task)
                                     .modifier(TaskRowModifier(task: task,
-                                                              modelContext: modelContext,
                                                               selectedTasks: $selectedTasks,
                                                               projects: projects,
                                                               list: list))
-                                    .modifier(TaskSwipeModifier(task: task,
-                                                                modelContext: modelContext))
+                                    .modifier(TaskSwipeModifier(task: task))
                                     .tag(task)
                             }
                         }

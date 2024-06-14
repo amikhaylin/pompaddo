@@ -10,8 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct TaskRowModifier: ViewModifier {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
-    var modelContext: ModelContext
     @Binding var selectedTasks: Set<Todo>
     var projects: [Project]
     var list: SideBarItem

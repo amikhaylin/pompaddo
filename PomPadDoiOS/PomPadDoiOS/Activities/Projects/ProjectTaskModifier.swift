@@ -10,8 +10,8 @@ import SwiftUI
 import SwiftData
 
 struct ProjectTaskModifier: ViewModifier {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
-    var modelContext: ModelContext
     @Binding var selectedTasks: Set<Todo>
     @Bindable var project: Project
     
