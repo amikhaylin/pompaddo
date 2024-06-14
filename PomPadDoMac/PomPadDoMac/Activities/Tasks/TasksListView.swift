@@ -50,154 +50,33 @@ struct TasksListView: View {
                             }
                         }
                     )) {
-                        OutlineGroup(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
-                                     id: \.self,
-                                     children: \.subtasks) { task in
-                            TaskRowView(task: task)
-                                .draggable(task)
-                                .dropDestination(for: Todo.self) { tasks, _ in
-                                    // Attach dropped task as subtask
-                                    for dropTask in tasks where dropTask != task {
-                                        dropTask.disconnectFromAll()
-                                        dropTask.parentTask = task
-                                        dropTask.reconnect()
-                                    }
-                                    return true
+                        ForEach(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
+                                     id: \.self) { task in
+                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                                OutlineGroup([task],
+                                             id: \.self,
+                                             children: \.subtasks) { maintask in
+                                    TaskRowView(task: maintask)
+                                        .modifier(TaskRowModifier(task: maintask,
+                                                                  modelContext: modelContext,
+                                                                  selectedTasks: $selectedTasks,
+                                                                  projects: projects,
+                                                                  list: list))
+                                        .modifier(TaskSwipeModifier(task: maintask,
+                                                                    modelContext: modelContext))
+                                        .tag(maintask)
                                 }
-                                .swipeActions {
-                                    Button(role: .destructive) {
-                                        deleteTask(task: task)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash.fill")
-                                    }
-                                }
-                                .swipeActions(edge: .leading) {
-                                    Button {
-                                        if !task.completed {
-                                            task.complete(modelContext: modelContext)
-                                        } else {
-                                            task.reactivate()
-                                        }
-                                    } label: {
-                                        if !task.completed {
-                                            Label("Complete", systemImage: "checkmark.square.fill")
-                                        } else {
-                                            Label("Reactivate", systemImage: "square")
-                                        }
-                                    }
-                                    .tint(.green)
-                                }
-                                .contextMenu {
-                                    Button {
-                                        task.dueDate = nil
-                                    } label: {
-                                        Image(systemName: "clear")
-                                        Text("Clear due date")
-                                    }
-                                    
-                                    Button {
-                                        task.dueDate = Calendar.current.startOfDay(for: Date())
-                                    } label: {
-                                        Image(systemName: "calendar")
-                                        Text("Today")
-                                    }
-                                    
-                                    Button {
-                                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                                    } label: {
-                                        Image(systemName: "sunrise")
-                                        Text("Tomorrow")
-                                    }
-                                    
-                                    if task.repeation != .none {
-                                        Button {
-                                            task.skip()
-                                        } label: {
-                                            Image(systemName: "arrow.uturn.forward")
-                                            Text("Skip")
-                                        }
-                                    }
-                                    Divider()
-                                    
-                                    Button {
-                                        selectedTasks.removeAll()
-                                        let subtask = Todo(name: "", parentTask: task)
-                                        task.subtasks?.append(subtask)
-                                        modelContext.insert(subtask)
-                                        
-                                        selectedTasks.insert(subtask)
-                                    } label: {
-                                        Image(systemName: "plus")
-                                        Text("Add subtask")
-                                    }
-                                    
-                                    if let subtasks = task.subtasks, subtasks.count > 0 {
-                                        NavigationLink {
-                                            TasksListView(tasks: subtasks,
-                                                          list: list,
-                                                          title: task.name,
-                                                          mainTask: task)
-                                        } label: {
-                                            Image(systemName: "arrow.right")
-                                            Text("Open subtasks")
-                                        }
-                                    }
-                                    
-                                    Divider()
-                                    
-                                    Menu {
-                                        ForEach(projects) { project in
-                                            Button {
-                                                task.project = project
-                                                task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
-                                                project.tasks?.append(task)
-                                            } label: {
-                                                Text(project.name)
-                                            }
-                                        }
-                                    } label: {
-                                        Text("Move task to project")
-                                    }
-                                    
-                                    if let project = task.project {
-                                        Menu {
-                                            ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
-                                                Button {
-                                                    task.moveToStatus(status: status,
-                                                                      project: project,
-                                                                      context: modelContext)
-                                                } label: {
-                                                    Text(status.name)
-                                                }
-                                            }
-                                        } label: {
-                                            Text("Move to status")
-                                        }
-                                    }
-                                    
-                                    Divider()
-                                    
-                                    Button {
-                                        selectedTasks.removeAll()
-                                        let newTask = task.copy(modelContext: modelContext)
-                                        
-                                        modelContext.insert(newTask)
-                                        newTask.reconnect()
-                                        
-                                        selectedTasks.insert(newTask)
-                                    } label: {
-                                        Image(systemName: "doc.on.doc")
-                                        Text("Dublicate task")
-                                    }
-                                    
-                                    Button {
-                                        deleteTask(task: task)
-                                    } label: {
-                                        Image(systemName: "trash")
-                                            .foregroundStyle(Color.red)
-                                        Text("Delete task")
-                                    }
-                                }
+                            } else {
+                                TaskRowView(task: task)
+                                    .modifier(TaskRowModifier(task: task,
+                                                              modelContext: modelContext,
+                                                              selectedTasks: $selectedTasks,
+                                                              projects: projects,
+                                                              list: list))
+                                    .modifier(TaskSwipeModifier(task: task,
+                                                                modelContext: modelContext))
+                                    .tag(task)
+                            }
                         }
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
