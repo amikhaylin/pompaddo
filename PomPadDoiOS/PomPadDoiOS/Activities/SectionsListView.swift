@@ -9,16 +9,12 @@ import SwiftUI
 import SwiftData
 
 struct SectionsListView: View {
-    @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
-    @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
-    @Query(filter: TasksQuery.predicateTomorrow()) var tasksTomorrow: [Todo]
-    @Query var projects: [Project]
-    
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    var tasksInbox: [Todo]
+    var tasksToday: [Todo]
+    var tasksTomorrow: [Todo]
+    var projects: [Project]
     
     @Binding var selectedSideBarItem: SideBarItem?
-    
-    @State var badgeManager = BadgeManager()
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -104,12 +100,6 @@ struct SectionsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
-        .onChange(of: tasksTodayActive.count) { _, newValue in
-            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
-        }
-        .onAppear {
-            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
-        }
     }
 }
 
@@ -117,8 +107,16 @@ struct SectionsListView: View {
     do {
         let previewer = try Previewer()
         @State var selectedSideBarItem: SideBarItem? = .today
+        let tasksInbox = [Todo]()
+        let tasksToday = [Todo]()
+        let tasksTomorrow = [Todo]()
+        let projects = [Project]()
         
-        return SectionsListView(selectedSideBarItem: $selectedSideBarItem)
+        return SectionsListView(tasksInbox: tasksInbox,
+                                tasksToday: tasksToday,
+                                tasksTomorrow: tasksTomorrow,
+                                projects: projects,
+                                selectedSideBarItem: $selectedSideBarItem)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

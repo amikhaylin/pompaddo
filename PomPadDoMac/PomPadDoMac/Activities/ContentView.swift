@@ -43,31 +43,30 @@ struct ContentView: View {
     
     @State private var selectedProject: Project?
     
+    @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
+    @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
+    @Query(filter: TasksQuery.predicateTomorrow()) var tasksTomorrow: [Todo]
     @Query var projects: [Project]
     
-    @State private var refresh = false
+    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    
+    @State var badgeManager = BadgeManager()
     
     var body: some View {
         NavigationSplitView {
             VStack {
-                SectionsListView(selectedSideBarItem: $selectedSideBarItem)
+                SectionsListView(tasksInbox: tasksInbox,
+                                 tasksToday: tasksToday,
+                                 tasksTomorrow: tasksTomorrow,
+                                 projects: projects,
+                                 selectedSideBarItem: $selectedSideBarItem)
                     .frame(height: 125)
-                    .id(refresh)
-                    .refreshable {
-                        refresh.toggle()
-                    }
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects)
             }
             .toolbar {
                 ToolbarItemGroup {
-                    Button {
-                        refresh.toggle()
-                    } label: {
-                        Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
-                    }
-                    
                     Button {
                         newTaskIsShowing.toggle()
                     } label: {
@@ -84,32 +83,21 @@ struct ContentView: View {
             HStack {
                 switch selectedSideBarItem {
                 case .inbox:
-                    MainTasksListView(predicate: TasksQuery.predicateInbox(),
-                                      filter: { $0.uid == $0.uid },
-                                      list: selectedSideBarItem!,
-                                      title: selectedSideBarItem!.name)
-                        .id(refresh)
-                        .refreshable {
-                            refresh.toggle()
-                        }
+                    TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
+                                  list: selectedSideBarItem!,
+                                  title: selectedSideBarItem!.name)
                 case .today:
-                    MainTasksListView(predicate: TasksQuery.predicateToday(),
-                                      filter: { TasksQuery.checkToday(date: $0.completionDate) },
-                                      list: selectedSideBarItem!,
-                                      title: selectedSideBarItem!.name)
-                    .id(refresh)
-                    .refreshable {
-                        refresh.toggle()
-                    }
+                    TasksListView(tasks: tasksToday
+                        .filter({ TasksQuery.checkToday(date: $0.completionDate) })
+                        .sorted(by: TasksQuery.defaultSorting),
+                                  list: selectedSideBarItem!,
+                                  title: selectedSideBarItem!.name)
                 case .tomorrow:
-                    MainTasksListView(predicate: TasksQuery.predicateTomorrow(),
-                                      filter: { $0.completionDate == nil },
-                                      list: selectedSideBarItem!,
-                                      title: selectedSideBarItem!.name)
-                    .id(refresh)
-                    .refreshable {
-                        refresh.toggle()
-                    }
+                    TasksListView(tasks: tasksTomorrow
+                        .filter({ $0.completionDate == nil })
+                        .sorted(by: TasksQuery.defaultSorting),
+                                  list: selectedSideBarItem!,
+                                  title: selectedSideBarItem!.name)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
@@ -156,6 +144,12 @@ struct ContentView: View {
                 modelContext.insert(task)
             }
             selectedSideBarItem = .inbox
+        }
+        .onChange(of: tasksTodayActive.count) { _, newValue in
+            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
+        }
+        .onAppear {
+            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }
