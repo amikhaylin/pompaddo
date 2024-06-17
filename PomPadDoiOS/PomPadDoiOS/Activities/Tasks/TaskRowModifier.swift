@@ -11,6 +11,7 @@ import SwiftData
 
 struct TaskRowModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     @Bindable var task: Todo
     @Binding var selectedTasks: Set<Todo>
     var projects: [Project]
@@ -31,6 +32,7 @@ struct TaskRowModifier: ViewModifier {
         .contextMenu {
             Button {
                 task.dueDate = nil
+                refresher.refresh.toggle()
             } label: {
                 Image(systemName: "clear")
                 Text("Clear due date")
@@ -38,6 +40,7 @@ struct TaskRowModifier: ViewModifier {
             
             Button {
                 task.dueDate = Calendar.current.startOfDay(for: Date())
+                refresher.refresh.toggle()
             } label: {
                 Image(systemName: "calendar")
                 Text("Today")
@@ -45,6 +48,7 @@ struct TaskRowModifier: ViewModifier {
             
             Button {
                 task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                refresher.refresh.toggle()
             } label: {
                 Image(systemName: "sunrise")
                 Text("Tomorrow")
@@ -53,6 +57,7 @@ struct TaskRowModifier: ViewModifier {
             if task.repeation != .none {
                 Button {
                     task.skip()
+                    refresher.refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.uturn.forward")
                     Text("Skip")
@@ -78,6 +83,7 @@ struct TaskRowModifier: ViewModifier {
                                   list: list,
                                   title: task.name,
                                   mainTask: task)
+                    .environmentObject(refresher)
                 } label: {
                     Image(systemName: "arrow.right")
                     Text("Open subtasks")
@@ -100,6 +106,7 @@ struct TaskRowModifier: ViewModifier {
                         task.project = project
                         task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
                         project.tasks?.append(task)
+                        refresher.refresh.toggle()
                     } label: {
                         Text(project.name)
                     }

@@ -37,15 +37,14 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     
     @State private var newTaskIsShowing = false
     @State var selectedSideBarItem: SideBarItem? = .today
     
     @State private var selectedProject: Project?
     
-    @Query(filter: TasksQuery.predicateInbox()) var tasksInbox: [Todo]
-    @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
-    @Query(filter: TasksQuery.predicateTomorrow()) var tasksTomorrow: [Todo]
+    @Query var tasks: [Todo]
     @Query var projects: [Project]
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
@@ -55,9 +54,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             VStack {
-                SectionsListView(tasksInbox: tasksInbox,
-                                 tasksToday: tasksToday,
-                                 tasksTomorrow: tasksTomorrow,
+                SectionsListView(tasks: tasks,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                     .frame(height: 125)
@@ -77,27 +74,34 @@ struct ContentView: View {
             }
             .sheet(isPresented: $newTaskIsShowing) {
                 NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
+                    .environmentObject(refresher)
             }
             .navigationSplitViewColumnWidth(min: 230, ideal: 230, max: 400)
         } detail: {
             HStack {
                 switch selectedSideBarItem {
                 case .inbox:
-                    TasksListView(tasks: tasksInbox.sorted(by: TasksQuery.defaultSorting),
+                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateInbox()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
+                    .environmentObject(refresher)
                 case .today:
-                    TasksListView(tasks: tasksToday
+                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                         .sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
+                    .environmentObject(refresher)
+                    .id(refresher.refresh)
                 case .tomorrow:
-                    TasksListView(tasks: tasksTomorrow
+                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow())
                         .filter({ $0.completionDate == nil })
                         .sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
+                    .environmentObject(refresher)
+                    .id(refresher.refresh)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
@@ -105,19 +109,7 @@ struct ContentView: View {
                         Text("Select a project")
                     }
                 case .review:
-                    ReviewProjectsView(projects: projects.filter({
-                        if $0.showInReview == false {
-                            return false
-                        }
-                        let today = Date()
-                        if let dateToReview = Calendar.current.date(byAdding: .day,
-                                                                    value: $0.reviewDaysCount,
-                                                                    to: $0.reviewDate) {
-                            return dateToReview <= today
-                        } else {
-                            return false
-                        }
-                    }))
+                    ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
                 default:
                     EmptyView()
                 }

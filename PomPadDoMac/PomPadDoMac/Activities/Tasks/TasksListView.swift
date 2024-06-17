@@ -21,6 +21,7 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     @State var tasks: [Todo]
 
     @State private var selectedTasks = Set<Todo>()
@@ -61,6 +62,7 @@ struct TasksListView: View {
                                                                   selectedTasks: $selectedTasks,
                                                                   projects: projects,
                                                                   list: list))
+                                        .environmentObject(refresher)
                                         .modifier(TaskSwipeModifier(task: maintask))
                                         .tag(maintask)
                                 }
@@ -70,6 +72,7 @@ struct TasksListView: View {
                                                               selectedTasks: $selectedTasks,
                                                               projects: projects,
                                                               list: list))
+                                    .environmentObject(refresher)
                                     .modifier(TaskSwipeModifier(task: task))
                                     .tag(task)
                             }
@@ -195,7 +198,7 @@ struct TasksListView: View {
         let previewer = try Previewer()
         let tasks: [Todo] = [previewer.task]
         
-        return TasksListView(tasks: tasks, 
+        return TasksListView(tasks: tasks,
                              list: .inbox,
                              title: "Some list")
             .modelContainer(previewer.container)

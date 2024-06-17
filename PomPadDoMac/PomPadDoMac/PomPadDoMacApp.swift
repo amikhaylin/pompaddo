@@ -13,6 +13,7 @@ struct PomPadDoMacApp: App {
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
+    @State private var refresher = Refresher()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -55,6 +56,7 @@ struct PomPadDoMacApp: App {
                 ContentView()
                     .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
                                             modelContext: sharedModelContainer.mainContext)
+                    .environmentObject(refresher)
             }
         }
         .modelContainer(sharedModelContainer)
@@ -64,6 +66,7 @@ struct PomPadDoMacApp: App {
                            timerCount: $timerCount,
                            focusMode: $focusMode)
             .modelContainer(sharedModelContainer)
+            .environmentObject(refresher)
         } label: {
             HStack {
                 if focusMode == .work {

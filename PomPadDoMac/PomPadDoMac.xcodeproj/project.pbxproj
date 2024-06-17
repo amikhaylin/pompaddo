@@ -52,6 +52,7 @@
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
 		4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* BoardView.swift */; };
 		4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DC2BC940B6002C9566 /* ProjectView.swift */; };
+		4DD0FA3A2C20914600C99E25 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0FA392C20914600C99E25 /* Refresher.swift */; };
 		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
 		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
@@ -149,6 +150,7 @@
 		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		4DCE05D82BC9284A002C9566 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		4DCE05DC2BC940B6002C9566 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		4DD0FA392C20914600C99E25 /* Refresher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Refresher.swift; path = ../../../PomPadDoiOS/PomPadDoiOS/Utils/Refresher.swift; sourceTree = "<group>"; };
 		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
 		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				4D7C13C42B7E06F70093595D /* Previewer.swift */,
 				4D59C8642BDF8B580026C2EA /* NotificationManager.swift */,
 				4D821E4D2C11A03A008E79F6 /* Common.swift */,
+				4DD0FA392C20914600C99E25 /* Refresher.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
 				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,
+				4DD0FA3A2C20914600C99E25 /* Refresher.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* PomPadDoMacApp.swift in Sources */,
 				4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */,
 				4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */,

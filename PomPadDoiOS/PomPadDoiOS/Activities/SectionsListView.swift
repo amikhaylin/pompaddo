@@ -9,9 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SectionsListView: View {
-    var tasksInbox: [Todo]
-    var tasksToday: [Todo]
-    var tasksTomorrow: [Todo]
+    var tasks: [Todo]
     var projects: [Project]
     
     @Binding var selectedSideBarItem: SideBarItem?
@@ -26,7 +24,14 @@ struct SectionsListView: View {
                         Text("Inbox")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
-                    .badge(tasksInbox.filter({ $0.completed == false}).count)
+                    .badge({
+                        do {
+                            return try tasks.filter(TasksQuery.predicateInboxActive()).count
+                        } catch {
+                            print(error.localizedDescription)
+                            return 0
+                        }
+                    }())
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
@@ -51,7 +56,14 @@ struct SectionsListView: View {
                         Text("Today")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.9496305585, green: 0.5398437977, blue: 0.3298020959, alpha: 1)))
-                    .badge(tasksToday.filter({ $0.completed == false}).count)
+                    .badge({
+                        do {
+                            return try tasks.filter(TasksQuery.predicateTodayActive()).count
+                        } catch {
+                            print(error.localizedDescription)
+                            return 0
+                        }
+                    }())
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
@@ -66,7 +78,14 @@ struct SectionsListView: View {
                         Text("Tomorrow")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
-                    .badge(tasksTomorrow.filter({ $0.completed == false }).count)
+                    .badge({
+                        do {
+                            return try tasks.filter(TasksQuery.predicateTomorrow()).count
+                        } catch {
+                            print(error.localizedDescription)
+                            return 0
+                        }
+                    }())
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
@@ -83,19 +102,7 @@ struct SectionsListView: View {
                         Text("Review")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
-                    .badge(projects.filter({
-                        if $0.showInReview == false {
-                            return false
-                        }
-                        let today = Date()
-                        if let dateToReview = Calendar.current.date(byAdding: .day,
-                                                                    value: $0.reviewDaysCount,
-                                                                    to: $0.reviewDate) {
-                            return dateToReview <= today
-                        } else {
-                            return false
-                        }
-                    }).count)
+                    .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
                 }
             }
         }
@@ -107,14 +114,10 @@ struct SectionsListView: View {
     do {
         let previewer = try Previewer()
         @State var selectedSideBarItem: SideBarItem? = .today
-        let tasksInbox = [Todo]()
-        let tasksToday = [Todo]()
-        let tasksTomorrow = [Todo]()
+        let tasks = [Todo]()
         let projects = [Project]()
         
-        return SectionsListView(tasksInbox: tasksInbox,
-                                tasksToday: tasksToday,
-                                tasksTomorrow: tasksTomorrow,
+        return SectionsListView(tasks: tasks,
                                 projects: projects,
                                 selectedSideBarItem: $selectedSideBarItem)
             .modelContainer(previewer.container)

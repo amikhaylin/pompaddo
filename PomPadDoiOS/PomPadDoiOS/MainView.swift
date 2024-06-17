@@ -35,6 +35,7 @@ struct MainView: View {
     @State private var focusTask: Todo?
     
     @State private var refresh = false
+    @State private var refresher = Refresher()
     
     var body: some View {
         Group {
@@ -42,6 +43,7 @@ struct MainView: View {
             case .tasks:
                 ContentView()
                     .id(refresh)
+                    .environmentObject(refresher)
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
                                timer: timer,
@@ -109,6 +111,7 @@ struct MainView: View {
                     NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
                         .frame(minWidth: 200, maxHeight: 180)
                         .presentationCompactAdaptation(.popover)
+                        .environmentObject(refresher)
                 })
             }
         }

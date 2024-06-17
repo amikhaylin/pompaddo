@@ -10,6 +10,7 @@ import SwiftData
 
 struct FocusTimerView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
@@ -38,6 +39,7 @@ struct FocusTimerView: View {
                 .onSubmit {
                     let task = Todo(name: textToInbox)
                     modelContext.insert(task)
+                    refresher.refresh.toggle()
                     textToInbox = ""
                 }
             

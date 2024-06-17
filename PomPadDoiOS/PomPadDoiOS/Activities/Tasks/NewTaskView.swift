@@ -10,6 +10,7 @@ import SwiftData
 
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     @Binding var isVisible: Bool
     @State var list: SideBarItem
     @State private var taskName = ""
@@ -43,6 +44,7 @@ struct NewTaskView: View {
                         }
                         
                         modelContext.insert(task)
+                        refresher.refresh.toggle()
                     }
                 }
             }
