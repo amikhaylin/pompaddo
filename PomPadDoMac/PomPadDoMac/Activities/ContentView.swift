@@ -47,10 +47,6 @@ struct ContentView: View {
     @Query var tasks: [Todo]
     @Query var projects: [Project]
     
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
-    
-    @State var badgeManager = BadgeManager()
-    
     var body: some View {
         NavigationSplitView {
             VStack {
@@ -58,12 +54,19 @@ struct ContentView: View {
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                     .frame(height: 125)
+                    .id(refresher.refresh)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects)
             }
             .toolbar {
                 ToolbarItemGroup {
+                    Button {
+                        refresher.refresh.toggle()
+                    } label: {
+                        Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
+                    }
+                    
                     Button {
                         newTaskIsShowing.toggle()
                     } label: {
@@ -128,20 +131,14 @@ struct ContentView: View {
         .onOpenURL { url in
             print(url.absoluteString)
             let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-            if let title = components?.queryItems?.first(where: { $0.name == "title" })?.value,
-               let link = components?.queryItems?.first(where: { $0.name == "link" })?.value,
-               let linkurl = URL(string: link) {
-                
-                let task = Todo(name: title, link: linkurl.absoluteString)
+            if let title = components?.queryItems?.first(where: { $0.name == "title" })?.value {
+                var task = Todo(name: title)
+                if let link = components?.queryItems?.first(where: { $0.name == "link" })?.value, let linkurl = URL(string: link) {
+                    task.link = linkurl.absoluteString
+                }
                 modelContext.insert(task)
             }
             selectedSideBarItem = .inbox
-        }
-        .onChange(of: tasksTodayActive.count) { _, newValue in
-            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
-        }
-        .onAppear {
-            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }

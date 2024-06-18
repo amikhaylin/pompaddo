@@ -42,19 +42,19 @@ struct MainView: View {
             switch tab {
             case .tasks:
                 ContentView()
-                    .id(refresh)
+//                    .id(refresh)
                     .environmentObject(refresher)
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
                                timer: timer,
                                selectedTask: $focusTask)
                     .id(refresh)
+                    .refreshable {
+                        refresh.toggle()
+                    }
             case.settings:
                 SettingsView()
             }
-        }
-        .refreshable {
-            refresh.toggle()
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {

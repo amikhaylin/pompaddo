@@ -52,12 +52,12 @@ struct PomPadDoMacApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TimelineView(.periodic(from: .now, by: refreshPeriod)) { _ in
+//            TimelineView(.periodic(from: .now, by: refreshPeriod)) { _ in
                 ContentView()
                     .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
                                             modelContext: sharedModelContainer.mainContext)
                     .environmentObject(refresher)
-            }
+//            }
         }
         .modelContainer(sharedModelContainer)
         

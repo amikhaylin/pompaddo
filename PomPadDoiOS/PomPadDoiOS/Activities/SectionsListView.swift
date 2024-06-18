@@ -14,6 +14,9 @@ struct SectionsListView: View {
     
     @Binding var selectedSideBarItem: SideBarItem?
     
+    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    @State var badgeManager = BadgeManager()
+    
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
             switch item {
@@ -56,14 +59,7 @@ struct SectionsListView: View {
                         Text("Today")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.9496305585, green: 0.5398437977, blue: 0.3298020959, alpha: 1)))
-                    .badge({
-                        do {
-                            return try tasks.filter(TasksQuery.predicateTodayActive()).count
-                        } catch {
-                            print(error.localizedDescription)
-                            return 0
-                        }
-                    }())
+                    .badge(tasksTodayActive.count)
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
@@ -107,6 +103,12 @@ struct SectionsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
+        .onChange(of: tasksTodayActive.count) { _, newValue in
+            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
+        }
+        .onAppear {
+            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
+        }
     }
 }
 

@@ -46,10 +46,6 @@ struct ContentView: View {
     @Query var tasks: [Todo]
     @Query var projects: [Project]
     
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
-    
-    @State var badgeManager = BadgeManager()
-    
     var body: some View {
         NavigationSplitView {
             VStack {
@@ -57,6 +53,7 @@ struct ContentView: View {
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                     .frame(height: 220)
+                    .id(refresher.refresh)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects)
@@ -71,6 +68,9 @@ struct ContentView: View {
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
                 .environmentObject(refresher)
+                .refreshable {
+                    refresher.refresh.toggle()
+                }
             case .today:
                 try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
                     .filter({ TasksQuery.checkToday(date: $0.completionDate) })
@@ -79,6 +79,9 @@ struct ContentView: View {
                               title: selectedSideBarItem!.name)
                 .environmentObject(refresher)
                 .id(refresher.refresh)
+                .refreshable {
+                    refresher.refresh.toggle()
+                }
             case .tomorrow:
                 try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow())
                     .filter({ $0.completionDate == nil })
@@ -87,6 +90,9 @@ struct ContentView: View {
                               title: selectedSideBarItem!.name)
                 .environmentObject(refresher)
                 .id(refresher.refresh)
+                .refreshable {
+                    refresher.refresh.toggle()
+                }
             case .review:
                 ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
             case .projects:
@@ -108,12 +114,6 @@ struct ContentView: View {
             if newValue != nil {
                 selectedSideBarItem = .projects
             }
-        }
-        .onChange(of: tasksTodayActive.count) { _, newValue in
-            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
-        }
-        .onAppear {
-            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
         }
     }
 }
