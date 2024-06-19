@@ -167,6 +167,7 @@ struct ProjectsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
+        .id(UUID())
         .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
             EditProjectGroupView(group: editGroup)
                 .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)

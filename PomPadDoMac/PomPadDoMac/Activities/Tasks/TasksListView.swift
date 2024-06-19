@@ -96,6 +96,7 @@ struct TasksListView: View {
                     }
                 }
             }
+            .id(UUID())
         }
         .toolbar {
             ToolbarItemGroup {
@@ -151,6 +152,7 @@ struct TasksListView: View {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }
+            refresher.refresh.toggle()
         }
     }
     
@@ -158,6 +160,7 @@ struct TasksListView: View {
         withAnimation {
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
+            refresher.refresh.toggle()
         }
     }
     

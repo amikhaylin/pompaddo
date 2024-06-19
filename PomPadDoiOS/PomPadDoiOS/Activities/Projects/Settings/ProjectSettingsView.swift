@@ -32,6 +32,7 @@ struct ProjectSettingsView: View {
                     }
                 })
             }
+            .id(UUID())
              .toolbar {
                  ToolbarItemGroup {
                      Button(action: {

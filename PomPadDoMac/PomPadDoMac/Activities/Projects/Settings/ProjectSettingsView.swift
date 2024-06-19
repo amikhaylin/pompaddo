@@ -71,6 +71,7 @@ struct ProjectSettingsView: View {
                     }
                 })
             }
+            .id(UUID())
             Spacer()
             Section {
                 TextField("Project name", text: $project.name)
