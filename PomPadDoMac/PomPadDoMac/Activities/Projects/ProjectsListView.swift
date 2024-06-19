@@ -140,9 +140,6 @@ struct ProjectsListView: View {
                         Image(systemName: "plus.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .sheet(isPresented: $newProjectIsShowing) {
-                        NewProjectView(isVisible: self.$newProjectIsShowing)
-                    }
                     
                     Button {
                         newProjectGroupShow.toggle()
@@ -150,9 +147,6 @@ struct ProjectsListView: View {
                         Image(systemName: "folder.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
-                    .sheet(isPresented: $newProjectGroupShow) {
-                        NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-                    }
                 }
                 .foregroundColor(Color(#colorLiteral(red: 0.5486837626, green: 0.827090323, blue: 0.8101685047, alpha: 1)))
                 .dropDestination(for: Project.self) { projects, _ in
@@ -171,6 +165,12 @@ struct ProjectsListView: View {
             EditProjectGroupView(group: editGroup)
                 .presentationDetents([.height(200)])
         })
+        .sheet(isPresented: $newProjectIsShowing) {
+            NewProjectView(isVisible: self.$newProjectIsShowing)
+        }
+        .sheet(isPresented: $newProjectGroupShow) {
+            NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+        }
     }
 }
 

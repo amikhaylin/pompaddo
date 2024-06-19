@@ -70,24 +70,26 @@ struct FocusTimerView: View {
                 
             if viewMode == 0 {
                 // MARK: Task list
-                List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                     children: \.subtasks, selection: $selectedTask) { task in
-                    HStack {
-                        TaskRowView(task: task)
-                        
-                        Button {
-                            selectedTask = task
-                            viewMode = 1
-                            if timer.state == .idle {
-                                timer.reset()
-                                timer.start()
+                TimelineView(.periodic(from: .now, by: 5.0)) { _ in
+                    List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
+                         children: \.subtasks, selection: $selectedTask) { task in
+                        HStack {
+                            TaskRowView(task: task)
+                            
+                            Button {
+                                selectedTask = task
+                                viewMode = 1
+                                if timer.state == .idle {
+                                    timer.reset()
+                                    timer.start()
+                                }
+                            } label: {
+                                Image(systemName: "play.fill")
                             }
-                        } label: {
-                            Image(systemName: "play.fill")
                         }
                     }
+                    .id(UUID())
                 }
-                .id(UUID())
             } else {
                 ZStack {
                     VStack {
