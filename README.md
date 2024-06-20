@@ -35,7 +35,7 @@ made to myself by myself
 - [ ] Settings for focus timer's factors and estimates
 - [ ] Localization
 - [x] Safari extension
-- [ ] Add event to Calendar from task
+- [x] Add event to Calendar from task
 
 #### Languages Supported
 - English 🇺🇸
