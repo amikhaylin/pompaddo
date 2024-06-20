@@ -103,7 +103,6 @@ struct SectionsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
-        .id(UUID())
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
         }

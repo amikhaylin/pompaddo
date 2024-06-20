@@ -158,7 +158,6 @@ struct ProjectsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
-        .id(UUID())
         .sheet(item: $editProjectGroup, onDismiss: {
             editProjectGroup = nil
         }, content: { editGroup in

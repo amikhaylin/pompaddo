@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */; };
 		4D169BCE2C106039001F995F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D169BCD2C106039001F995F /* SettingsView.swift */; };
 		4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */; };
 		4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
@@ -103,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerScene.swift; sourceTree = "<group>"; };
 		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			children = (
 				4D59C8672BE10A180026C2EA /* FocusTimerView.swift */,
 				4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */,
+				4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */,
 			);
 			path = Focus;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
 				4D169BCE2C106039001F995F /* SettingsView.swift in Sources */,
+				4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */,
 				4DBBB0372C18A57300F1D400 /* TaskRowModifier.swift in Sources */,
 				4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */,
 			);
