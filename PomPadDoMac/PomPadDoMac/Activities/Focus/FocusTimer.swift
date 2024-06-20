@@ -164,12 +164,12 @@ class FocusTimer: ObservableObject {
         NotificationManager.setNotification(timeInterval: TimeInterval(secondsLeft),
                                             identifier: currentNotificatioId,
                                             title: "PomPadDo Timer",
-                                            body: "Your \(dispMode) is finished")
+                                            body: NSLocalizedString("Your \(dispMode) is finished", comment: ""))
     }
     
     private func createTimer() {
         // schedule notification
-        setNotification(removeOld: true)
+//        setNotification(removeOld: true)
         // create timer
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {[self] _ in
             self.onTick()
@@ -204,6 +204,8 @@ class FocusTimer: ObservableObject {
             secondsPassed = 0
             fractionPassed = 0
             state = .running
+//            setNotification()
+        } else if self.secondsLeft == 2 {
             setNotification()
         }
     }

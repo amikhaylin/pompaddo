@@ -21,6 +21,7 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     @State var tasks: [Todo]
 
     @State private var selectedTasks = Set<Todo>()
@@ -58,23 +59,21 @@ struct TasksListView: View {
                                              children: \.subtasks) { maintask in
                                     TaskRowView(task: maintask)
                                         .modifier(TaskRowModifier(task: maintask,
-                                                                  modelContext: modelContext,
                                                                   selectedTasks: $selectedTasks,
                                                                   projects: projects,
                                                                   list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask,
-                                                                    modelContext: modelContext))
+                                        .environmentObject(refresher)
+                                        .modifier(TaskSwipeModifier(task: maintask))
                                         .tag(maintask)
                                 }
                             } else {
                                 TaskRowView(task: task)
                                     .modifier(TaskRowModifier(task: task,
-                                                              modelContext: modelContext,
                                                               selectedTasks: $selectedTasks,
                                                               projects: projects,
                                                               list: list))
-                                    .modifier(TaskSwipeModifier(task: task,
-                                                                modelContext: modelContext))
+                                    .environmentObject(refresher)
+                                    .modifier(TaskSwipeModifier(task: task))
                                     .tag(task)
                             }
                         }
@@ -97,6 +96,7 @@ struct TasksListView: View {
                     }
                 }
             }
+            .id(UUID())
         }
         .toolbar {
             ToolbarItemGroup {
@@ -152,6 +152,7 @@ struct TasksListView: View {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }
+            refresher.refresh.toggle()
         }
     }
     
@@ -159,6 +160,7 @@ struct TasksListView: View {
         withAnimation {
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
+            refresher.refresh.toggle()
         }
     }
     
@@ -199,7 +201,7 @@ struct TasksListView: View {
         let previewer = try Previewer()
         let tasks: [Todo] = [previewer.task]
         
-        return TasksListView(tasks: tasks, 
+        return TasksListView(tasks: tasks,
                              list: .inbox,
                              title: "Some list")
             .modelContainer(previewer.container)

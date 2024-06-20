@@ -89,25 +89,25 @@ struct SettingsView: View {
                 Label("Estimates", systemImage: "hourglass")
             }
 
-            Form {
-                Slider(value: $refreshPeriod, in: 1...600) {
-                    Text("Refresh period: \(Common.formatSeconds(Int(refreshPeriod)))")
-                } minimumValueLabel: {
-                    Text("1s")
-                } maximumValueLabel: {
-                    Text("10m")
-                }
-                
-                Button {
-                    refreshPeriod = 15.0
-                } label: {
-                    Label("Restore defaults", systemImage: "arrow.circlepath")
-                }
-            }
-            .tabItem {
-                Label("Advanced", systemImage: "gear")
-            }
-            .tag(Tabs.advanced)
+//            Form {
+//                Slider(value: $refreshPeriod, in: 1...600) {
+//                    Text("Refresh period: \(Common.formatSeconds(Int(refreshPeriod)))")
+//                } minimumValueLabel: {
+//                    Text("1s")
+//                } maximumValueLabel: {
+//                    Text("10m")
+//                }
+//                
+//                Button {
+//                    refreshPeriod = 15.0
+//                } label: {
+//                    Label("Restore defaults", systemImage: "arrow.circlepath")
+//                }
+//            }
+//            .tabItem {
+//                Label("Advanced", systemImage: "gear")
+//            }
+//            .tag(Tabs.advanced)
         }
         .padding(20)
         .frame(width: 575, height: 150)

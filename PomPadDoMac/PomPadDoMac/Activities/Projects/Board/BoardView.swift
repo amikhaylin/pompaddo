@@ -32,7 +32,6 @@ struct BoardView: View {
                                                  children: \.subtasks) { maintask in
                                         TaskRowView(task: maintask, showingProject: false, nameLineLimit: 5)
                                             .modifier(ProjectTaskModifier(task: maintask,
-                                                                          modelContext: modelContext,
                                                                           selectedTasks: $selectedTasks,
                                                                           project: project))
                                             .tag(maintask)
@@ -40,7 +39,6 @@ struct BoardView: View {
                                 } else {
                                     TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
                                         .modifier(ProjectTaskModifier(task: task,
-                                                                      modelContext: modelContext,
                                                                       selectedTasks: $selectedTasks,
                                                                       project: project))
                                         .tag(task)
@@ -48,6 +46,7 @@ struct BoardView: View {
                             }
                             .listRowSeparator(.visible)
                         }
+                        .id(UUID())
                         .cornerRadius(5)
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
@@ -69,8 +68,6 @@ struct BoardView: View {
                         return true
                     }
                     .frame(minWidth: 200, idealWidth: 300)
-                    //                    .padding()
-                    
                 }
             }
         }

@@ -15,13 +15,9 @@ struct StatusRowView: View {
     var body: some View {
         HStack {
             TextField("Name", text: $status.name)
+            
             Spacer()
-            Picker("Order", selection: $status.order) {
-                ForEach(1...project.getStatuses().count, id: \.self) { order in
-                    Text("\(order)")
-                        .tag(order)
-                }
-            }
+            
             Toggle("Do Completion", isOn: $status.doCompletion)
                 .toggleStyle(.switch)
         }

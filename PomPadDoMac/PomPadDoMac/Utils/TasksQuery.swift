@@ -17,6 +17,7 @@ struct TasksQuery {
         }
     }
     
+    // TasksQuery.checkToday(date: $0.completionDate)
     static func predicateToday() -> Predicate<Todo> {
         let today = Calendar.current.startOfDay(for: Date())
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
@@ -47,7 +48,7 @@ struct TasksQuery {
         let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
-                return date >= tomorrow && date < future
+                return date >= tomorrow && date < future && task.completionDate == nil
             } else {
                 return false
             }
@@ -60,6 +61,26 @@ struct TasksQuery {
         }
     }
     
+    static func predicateInboxActive() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            task.project == nil && task.parentTask == nil && !task.completed
+        }
+    }
+    
+    static func filterProjectToReview(_ project: Project) -> Bool {
+        if project.showInReview == false {
+            return false
+        }
+        let today = Date()
+        if let dateToReview = Calendar.current.date(byAdding: .day,
+                                                    value: project.reviewDaysCount,
+                                                    to: project.reviewDate) {
+            return dateToReview <= today
+        } else {
+            return false
+        }
+    }
+        
     static func defaultTaskSortDescriptor() -> [SortDescriptor<Todo>] {
         return [SortDescriptor(\Todo.dueDate), SortDescriptor(\Todo.priority, order: .reverse)]
     }

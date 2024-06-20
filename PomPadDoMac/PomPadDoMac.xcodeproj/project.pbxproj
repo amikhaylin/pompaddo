@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */; };
 		4D169BCE2C106039001F995F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D169BCD2C106039001F995F /* SettingsView.swift */; };
 		4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */; };
 		4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
@@ -52,10 +53,13 @@
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
 		4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* BoardView.swift */; };
 		4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DC2BC940B6002C9566 /* ProjectView.swift */; };
+		4DD0FA3A2C20914600C99E25 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0FA392C20914600C99E25 /* Refresher.swift */; };
 		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
 		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
 		4DEC4BE22BEA240000DC3AAB /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4DEF68362C1A11F4000B9F1F /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF68352C1A11F4000B9F1F /* SectionsListView.swift */; };
+		4DF1E9E42C1B56E7007FC401 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */; };
 		4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */; };
 		4DF91FDF2BCBD460009A6DA8 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */; };
 		4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
@@ -100,6 +104,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerScene.swift; sourceTree = "<group>"; };
 		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
@@ -147,9 +152,12 @@
 		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		4DCE05D82BC9284A002C9566 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		4DCE05DC2BC940B6002C9566 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		4DD0FA392C20914600C99E25 /* Refresher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Refresher.swift; path = ../../../PomPadDoiOS/PomPadDoiOS/Utils/Refresher.swift; sourceTree = "<group>"; };
 		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
 		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4DEF68352C1A11F4000B9F1F /* SectionsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionsListView.swift; path = ../../../PomPadDoiOS/PomPadDoiOS/Activities/SectionsListView.swift; sourceTree = "<group>"; };
+		4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTasksListView.swift; sourceTree = "<group>"; };
 		4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckBoxView.swift; sourceTree = "<group>"; };
@@ -168,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */,
+				4DF1E9E42C1B56E7007FC401 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +237,7 @@
 			children = (
 				4D59C8672BE10A180026C2EA /* FocusTimerView.swift */,
 				4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */,
+				4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */,
 			);
 			path = Focus;
 			sourceTree = "<group>";
@@ -239,6 +249,7 @@
 				4DAA67B62BC52CBC0045CE22 /* Projects */,
 				4DAA67B52BC52C970045CE22 /* Tasks */,
 				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
+				4DEF68352C1A11F4000B9F1F /* SectionsListView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -272,6 +283,7 @@
 				4D7C13C42B7E06F70093595D /* Previewer.swift */,
 				4D59C8642BDF8B580026C2EA /* NotificationManager.swift */,
 				4D821E4D2C11A03A008E79F6 /* Common.swift */,
+				4DD0FA392C20914600C99E25 /* Refresher.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -356,6 +368,7 @@
 		4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -619,6 +632,7 @@
 				4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */,
 				4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */,
 				4D2BBCBF2BE4DEAB00E105C1 /* FocusTimer.swift in Sources */,
+				4DEF68362C1A11F4000B9F1F /* SectionsListView.swift in Sources */,
 				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
 				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
 				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,
@@ -634,6 +648,7 @@
 				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
 				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,
+				4DD0FA3A2C20914600C99E25 /* Refresher.swift in Sources */,
 				4D95FE262B7B6BF300C8918D /* PomPadDoMacApp.swift in Sources */,
 				4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */,
 				4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */,
@@ -641,6 +656,7 @@
 				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
 				4D169BCE2C106039001F995F /* SettingsView.swift in Sources */,
+				4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */,
 				4DBBB0372C18A57300F1D400 /* TaskRowModifier.swift in Sources */,
 				4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */,
 			);

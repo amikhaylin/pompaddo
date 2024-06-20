@@ -10,9 +10,8 @@ import SwiftData
 
 @main
 struct PomPadDoMacApp: App {
-    @State private var timerCount: String = ""
-    @State private var focusMode: FocusTimerMode = .work
-    @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
+//    @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
+    @State private var refresher = Refresher()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -51,43 +50,18 @@ struct PomPadDoMacApp: App {
 
     var body: some Scene {
         WindowGroup {
-            TimelineView(.periodic(from: .now, by: refreshPeriod)) { _ in
-                ContentView()
-                    .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
-                                            modelContext: sharedModelContainer.mainContext)
-            }
+//            TimelineView(.periodic(from: .now, by: refreshPeriod)) { _ in
+            ContentView()
+                .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
+                                        modelContext: sharedModelContainer.mainContext)
+                .environmentObject(refresher)
+//            }
         }
         .modelContainer(sharedModelContainer)
         
-        MenuBarExtra {
-            FocusTimerView(context: sharedModelContainer.mainContext,
-                           timerCount: $timerCount,
-                           focusMode: $focusMode)
+        FocusTimerScene()
             .modelContainer(sharedModelContainer)
-        } label: {
-            HStack {
-                if focusMode == .work {
-                    let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
-                        .applying(.init(hierarchicalColor: .red))
-                    
-                    let image = NSImage(systemSymbolName: "target", accessibilityDescription: nil)
-                    let updateImage = image?.withSymbolConfiguration(configuration)
-                    
-                    Image(nsImage: updateImage!)
-                } else {
-                    let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
-                                    .applying(.init(hierarchicalColor: .green))
-                                    
-                    let image = NSImage(systemSymbolName: "cup.and.saucer.fill", accessibilityDescription: nil)
-                    let updateImage = image?.withSymbolConfiguration(configuration)
-
-                    Image(nsImage: updateImage!) // This works.
-                }
-
-                Text(timerCount)
-            }
-        }
-        .menuBarExtraStyle(.window)
+            .environmentObject(refresher)
         
         Settings {
             SettingsView()

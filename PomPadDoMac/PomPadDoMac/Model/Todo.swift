@@ -26,9 +26,9 @@ enum RepeationMode: String, Identifiable, CaseIterable, Codable {
 enum CustomRepeationType: String, Identifiable, CaseIterable, Codable {
     var id: String { rawValue }
     
-    case days = "days"
-    case months = "months"
-    case years = "years"
+    case days
+    case months
+    case years
     
     var calendarComponent: Calendar.Component {
         switch self {

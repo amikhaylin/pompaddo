@@ -28,6 +28,7 @@
 		4DA863F82BFF879900269D83 /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F72BFF879900269D83 /* TasksListView.swift */; };
 		4DBBB0332C189B0300F1D400 /* ProjectTaskModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBBB0322C189B0300F1D400 /* ProjectTaskModifier.swift */; };
 		4DCBF8B02C062D5700E1537A /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCBF8AF2C062D5700E1537A /* BoardView.swift */; };
+		4DD0FA382C20794300C99E25 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0FA372C20794300C99E25 /* Refresher.swift */; };
 		4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */; };
 		4DDDB3D52BF23034002C4F95 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D42BF23034002C4F95 /* ContentView.swift */; };
 		4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DDDB3D82BF23037002C4F95 /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		4DE97ABB2BF366B300E43E9A /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */; };
 		4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
 		4DEF682E2C19E47F000B9F1F /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
+		4DEF68302C19FD12000B9F1F /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +93,7 @@
 		4DBBB0322C189B0300F1D400 /* ProjectTaskModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTaskModifier.swift; sourceTree = "<group>"; };
 		4DCB073A2BFCB5B7009BA752 /* PomPadDoiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoiOS.entitlements; sourceTree = "<group>"; };
 		4DCBF8AF2C062D5700E1537A /* BoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoardView.swift; path = ../../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/Board/BoardView.swift; sourceTree = "<group>"; };
+		4DD0FA372C20794300C99E25 /* Refresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresher.swift; sourceTree = "<group>"; };
 		4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDoiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DDDB3D22BF23034002C4F95 /* PomPadDoiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoiOSApp.swift; sourceTree = "<group>"; };
 		4DDDB3D42BF23034002C4F95 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -116,6 +119,7 @@
 		4DE97ABA2BF366B300E43E9A /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BadgeManager.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/BadgeManager.swift; sourceTree = "<group>"; };
 		4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskCheckBoxView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskCheckBoxView.swift; sourceTree = "<group>"; };
 		4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskSwipeModifier.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskSwipeModifier.swift; sourceTree = "<group>"; };
+		4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsListView.swift; sourceTree = "<group>"; };
 		4DFB04092BF4B7AF00436EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -284,6 +288,7 @@
 				4D4272CA2BF3C5880003E129 /* Projects */,
 				4DE97ABC2BF3686200E43E9A /* Tasks */,
 				4DE97AB52BF35E8A00E43E9A /* Focus */,
+				4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */,
 			);
 			path = Activities;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 				4DE97AAE2BF35CAF00E43E9A /* Previewer.swift */,
 				4DE97AAF2BF35CB000E43E9A /* TasksQuery.swift */,
 				4D0179EA2C11C99B00D76BF5 /* Common.swift */,
+				4DD0FA372C20794300C99E25 /* Refresher.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 				4DA863F62BFF864A00269D83 /* ProjectView.swift in Sources */,
 				4DDDB3FF2BF257B7002C4F95 /* MainView.swift in Sources */,
 				4DE97AA22BF351ED00E43E9A /* Status.swift in Sources */,
+				4DD0FA382C20794300C99E25 /* Refresher.swift in Sources */,
 				4DE97AB32BF35CB000E43E9A /* TasksQuery.swift in Sources */,
 				4DE97AA92BF35BD300E43E9A /* CheckBoxView.swift in Sources */,
 				4DDDB3D32BF23034002C4F95 /* PomPadDoiOSApp.swift in Sources */,
@@ -531,6 +538,7 @@
 				4DE97AAA2BF35BD300E43E9A /* CircularProgressView.swift in Sources */,
 				4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */,
 				4DE97AB82BF35EA200E43E9A /* FocusTimer.swift in Sources */,
+				4DEF68302C19FD12000B9F1F /* SectionsListView.swift in Sources */,
 				4DBBB0332C189B0300F1D400 /* ProjectTaskModifier.swift in Sources */,
 				4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */,
 				4D21F3EA2C0F278F00CB4E7F /* ProjectToReviewView.swift in Sources */,

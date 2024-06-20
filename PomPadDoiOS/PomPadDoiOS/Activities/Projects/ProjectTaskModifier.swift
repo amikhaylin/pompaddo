@@ -10,10 +10,11 @@ import SwiftUI
 import SwiftData
 
 struct ProjectTaskModifier: ViewModifier {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
-    var modelContext: ModelContext
     @Binding var selectedTasks: Set<Todo>
     @Bindable var project: Project
+    @Query var projects: [Project]
     
     func body(content: Content) -> some View {
         content
@@ -84,6 +85,15 @@ struct ProjectTaskModifier: ViewModifier {
                         Text("Open subtasks")
                     }
                 }
+                
+                if let url = URL(string: task.link) {
+                    Link(destination: url,
+                         label: {
+                        Image(systemName: "link")
+                        Text("Open link")
+                    })
+                }
+                
                 Divider()
                 
                 Button {
@@ -93,6 +103,20 @@ struct ProjectTaskModifier: ViewModifier {
                 } label: {
                     Image(systemName: "tray.fill")
                     Text("Move to Inbox")
+                }
+                
+                Menu {
+                    ForEach(projects) { project in
+                        Button {
+                            task.project = project
+                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            project.tasks?.append(task)
+                        } label: {
+                            Text(project.name)
+                        }
+                    }
+                } label: {
+                    Text("Move task to project")
                 }
                 
                 Menu {

@@ -9,8 +9,8 @@ import SwiftUI
 import SwiftData
 
 struct TaskSwipeModifier: ViewModifier {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
-    var modelContext: ModelContext
     
     func body(content: Content) -> some View {
         content

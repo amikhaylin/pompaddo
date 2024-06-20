@@ -22,6 +22,7 @@ struct ReviewProjectsView: View {
                                 .badge(project.getTasks().count)
                         }
                     }
+                    .id(UUID())
                 } else {
                     Text("No projects to review")
                 }

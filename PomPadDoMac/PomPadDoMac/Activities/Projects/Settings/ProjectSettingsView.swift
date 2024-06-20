@@ -54,12 +54,24 @@ struct ProjectSettingsView: View {
                 })
                 .buttonStyle(PlainButtonStyle())
             }
-            List(project.getStatuses().sorted(by: { $0.order < $1.order }),
-                 selection: $selectedStatus) { status in
-                StatusRowView(status: status,
-                              project: project)
-                .tag(status as Status)
+            List(selection: $selectedStatus) {
+                ForEach(project.getStatuses().sorted(by: { $0.order < $1.order }), id: \.self) { status in
+                    StatusRowView(status: status,
+                                  project: project)
+                    .tag(status as Status)
+                }
+                .onMove(perform: { from, toInt in
+                    var statusList = project.getStatuses().sorted(by: { $0.order < $1.order })
+                    statusList.move(fromOffsets: from, toOffset: toInt)
+
+                    var order = 0
+                    for status in statusList {
+                        order += 1
+                        status.order = order
+                    }
+                })
             }
+            .id(UUID())
             Spacer()
             Section {
                 TextField("Project name", text: $project.name)

@@ -33,25 +33,28 @@ struct MainView: View {
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusTask: Todo?
+    
     @State private var refresh = false
+    @State private var refresher = Refresher()
     
     var body: some View {
         Group {
             switch tab {
             case .tasks:
                 ContentView()
-                    .id(refresh)
+//                    .id(refresh)
+                    .environmentObject(refresher)
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
                                timer: timer,
                                selectedTask: $focusTask)
                     .id(refresh)
+                    .refreshable {
+                        refresh.toggle()
+                    }
             case.settings:
                 SettingsView()
             }
-        }
-        .refreshable {
-            refresh.toggle()
         }
         .toolbar {
             ToolbarItemGroup(placement: .bottomBar) {
@@ -108,6 +111,7 @@ struct MainView: View {
                     NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
                         .frame(minWidth: 200, maxHeight: 180)
                         .presentationCompactAdaptation(.popover)
+                        .environmentObject(refresher)
                 })
             }
         }
