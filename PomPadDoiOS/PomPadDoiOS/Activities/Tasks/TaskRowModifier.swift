@@ -150,6 +150,7 @@ struct TaskRowModifier: ViewModifier {
                 withAnimation {
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
+                    refresher.refresh.toggle()
                 }
             } label: {
                 Image(systemName: "trash")

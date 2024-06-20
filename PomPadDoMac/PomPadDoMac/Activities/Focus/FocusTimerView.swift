@@ -70,11 +70,33 @@ struct FocusTimerView: View {
                 
             if viewMode == 0 {
                 // MARK: Task list
-                TimelineView(.periodic(from: .now, by: 5.0)) { _ in
-                    List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                         children: \.subtasks, selection: $selectedTask) { task in
+                List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
+                     id: \.self,
+                     selection: $selectedTask) { task in
+                    if let subtasks = task.subtasks, subtasks.count > 0 {
+                        OutlineGroup([task],
+                                     id: \.self,
+                                     children: \.subtasks) { maintask in
+                            HStack {
+                                TaskRowView(task: maintask)
+                                    .tag(maintask)
+                                
+                                Button {
+                                    selectedTask = maintask
+                                    viewMode = 1
+                                    if timer.state == .idle {
+                                        timer.reset()
+                                        timer.start()
+                                    }
+                                } label: {
+                                    Image(systemName: "play.fill")
+                                }
+                            }
+                        }
+                    } else {
                         HStack {
                             TaskRowView(task: task)
+                                .tag(task)
                             
                             Button {
                                 selectedTask = task
@@ -88,7 +110,6 @@ struct FocusTimerView: View {
                             }
                         }
                     }
-                    .id(UUID())
                 }
             } else {
                 ZStack {

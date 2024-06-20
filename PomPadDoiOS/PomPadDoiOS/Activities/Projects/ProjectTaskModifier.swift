@@ -14,6 +14,7 @@ struct ProjectTaskModifier: ViewModifier {
     @Bindable var task: Todo
     @Binding var selectedTasks: Set<Todo>
     @Bindable var project: Project
+    @Query var projects: [Project]
     
     func body(content: Content) -> some View {
         content
@@ -102,6 +103,20 @@ struct ProjectTaskModifier: ViewModifier {
                 } label: {
                     Image(systemName: "tray.fill")
                     Text("Move to Inbox")
+                }
+                
+                Menu {
+                    ForEach(projects) { project in
+                        Button {
+                            task.project = project
+                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            project.tasks?.append(task)
+                        } label: {
+                            Text(project.name)
+                        }
+                    }
+                } label: {
+                    Text("Move task to project")
                 }
                 
                 Menu {

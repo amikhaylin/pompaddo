@@ -39,19 +39,43 @@ struct FocusTimerView: View {
             if viewMode == 0 {
                 // MARK: Task list
                 List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                     children: \.subtasks, selection: $selectedTask) { task in
-                    HStack {
-                        TaskRowView(task: task)
-                        
-                        Button {
-                            selectedTask = task
-                            viewMode = 1
-                            if timer.state == .idle {
-                                timer.reset()
-                                timer.start()
+                     id: \.self,
+                     selection: $selectedTask) { task in
+                    if let subtasks = task.subtasks, subtasks.count > 0 {
+                        OutlineGroup([task],
+                                     id: \.self,
+                                     children: \.subtasks) { maintask in
+                            HStack {
+                                TaskRowView(task: maintask)
+                                    .tag(maintask)
+                                
+                                Button {
+                                    selectedTask = maintask
+                                    viewMode = 1
+                                    if timer.state == .idle {
+                                        timer.reset()
+                                        timer.start()
+                                    }
+                                } label: {
+                                    Image(systemName: "play.fill")
+                                }
                             }
-                        } label: {
-                            Image(systemName: "play.fill")
+                        }
+                    } else {
+                        HStack {
+                            TaskRowView(task: task)
+                                .tag(task)
+                            
+                            Button {
+                                selectedTask = task
+                                viewMode = 1
+                                if timer.state == .idle {
+                                    timer.reset()
+                                    timer.start()
+                                }
+                            } label: {
+                                Image(systemName: "play.fill")
+                            }
                         }
                     }
                 }
