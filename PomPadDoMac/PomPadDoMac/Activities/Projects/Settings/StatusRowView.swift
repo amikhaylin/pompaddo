@@ -17,7 +17,8 @@ struct StatusRowView: View {
             TextField("Name", text: $status.name)
             
             Spacer()
-            
+            Toggle("Clear due date", isOn: $status.clearDueDate)
+                .toggleStyle(.switch)
             Toggle("Do Completion", isOn: $status.doCompletion)
                 .toggleStyle(.switch)
         }
