@@ -122,6 +122,7 @@ struct TaskRowModifier: ViewModifier {
                             task.moveToStatus(status: status,
                                               project: project,
                                               context: modelContext)
+                            refresher.refresh.toggle()
                         } label: {
                             Text(status.name)
                         }

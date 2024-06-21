@@ -32,10 +32,10 @@ made to myself by myself
 - [x] iOS / iPadOS implementation
 - [ ] watchOS implementation
 - [x] Sync via iCloud
-- [ ] Settings for focus timer's factors and estimates
+- [x] Settings for focus timer's factors and estimates
 - [ ] Localization
 - [x] Safari extension
-- [ ] Add event to Calendar from task
+- [x] Add event to Calendar from task
 
 #### Languages Supported
 - English 🇺🇸

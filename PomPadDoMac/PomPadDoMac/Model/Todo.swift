@@ -311,6 +311,11 @@ extension Todo {
         } else {
             self.reactivate()
         }
+        
+        if status.clearDueDate {
+            self.dueDate = nil
+        }
+        
         self.status = status
     }
 }

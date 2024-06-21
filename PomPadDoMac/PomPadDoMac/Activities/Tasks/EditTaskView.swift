@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import EventKit
 
 struct EditTaskView: View {
     @Bindable var task: Todo
@@ -16,6 +17,9 @@ struct EditTaskView: View {
     @State private var alertDate = Date()
     @State private var showingReminderDatePicker = false
     @State private var estimateExplanation = false
+    @State private var addCalendarEvent = false
+    @State private var eventStartDate = Date()
+    @State private var eventEndDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
     
     var body: some View {
         Form {
@@ -98,6 +102,95 @@ struct EditTaskView: View {
                                 Text(reptype.localizedString()).tag(reptype as CustomRepeationType?)
                             }
                         }
+                    }
+                }
+            }
+            
+            Section("Reminder") {
+                if showingReminderDatePicker {
+                    Group {
+                        Text("Remind at")
+                        DatePicker("",
+                                   selection: $alertDate)
+                        
+                        Button {
+                            NotificationManager.removeRequest(identifier: task.uid)
+                            task.alertDate = alertDate
+                            NotificationManager.setTaskNotification(task: task)
+                        } label: {
+                            HStack {
+                                Image(systemName: "checkmark.square")
+                                Text("Apply reminder")
+                            }
+                        }
+                        
+                        Button {
+                            task.alertDate = nil
+                            NotificationManager.removeRequest(identifier: task.uid)
+                            showingReminderDatePicker = false
+                        } label: {
+                            HStack {
+                                Image(systemName: "clear")
+                                Text("Clear reminder")
+                            }
+                        }
+                    }
+                } else {
+                    Button {
+                        withAnimation {
+                            showingReminderDatePicker.toggle()
+                            alertDate = Date()
+                        }
+                    } label: {
+                        Label("Set Reminder", systemImage: "bell")
+                    }
+                }
+            }
+            
+            Section("Calendar") {
+                if addCalendarEvent {
+                    Group {
+                        Text("Event Start Date")
+                        DatePicker("", selection: $eventStartDate)
+                        
+                        Text("Event End Date")
+                        DatePicker("", selection: $eventEndDate)
+                        
+                        Button {
+                            let store = EKEventStore()
+                            
+                            store.requestWriteOnlyAccessToEvents { allowed, error in
+                                if let error {
+                                    print(error.localizedDescription)
+                                } else if allowed {
+                                    let event = EKEvent(eventStore: store)
+                                    event.calendar = store.defaultCalendarForNewEvents
+                                    event.title = task.name
+                                    event.startDate = eventStartDate
+                                    event.endDate = eventEndDate
+
+                                    // Save the event
+                                    do {
+                                        try store.save(event, span: .thisEvent)
+                                    } catch {
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            }
+                        } label: {
+                            HStack {
+                                Image(systemName: "calendar.badge.plus")
+                                Text("Apply event")
+                            }
+                        }
+                    }
+                } else {
+                    Button {
+                        withAnimation {
+                            addCalendarEvent.toggle()
+                        }
+                    } label: {
+                        Label("Add to Calendar", systemImage: "calendar.badge.plus")
                     }
                 }
             }
@@ -196,46 +289,6 @@ struct EditTaskView: View {
                              label: {
                             Image(systemName: "link")
                         })
-                    }
-                }
-            }
-            
-            Section("Reminder") {
-                if showingReminderDatePicker {
-                    Group {
-                        DatePicker("Remind at",
-                                   selection: $alertDate)
-                        
-                        Button {
-                            NotificationManager.removeRequest(identifier: task.uid)
-                            task.alertDate = alertDate
-                            NotificationManager.setTaskNotification(task: task)
-                        } label: {
-                            HStack {
-                                Image(systemName: "checkmark.square")
-                                Text("Apply reminder")
-                            }
-                        }
-                        
-                        Button {
-                            task.alertDate = nil
-                            NotificationManager.removeRequest(identifier: task.uid)
-                            showingReminderDatePicker = false
-                        } label: {
-                            HStack {
-                                Image(systemName: "clear")
-                                Text("Clear reminder")
-                            }
-                        }
-                    }
-                } else {
-                    Button {
-                        withAnimation {
-                            showingReminderDatePicker.toggle()
-                            alertDate = Date()
-                        }
-                    } label: {
-                        Label("Set Reminder", systemImage: "bell")
                     }
                 }
             }

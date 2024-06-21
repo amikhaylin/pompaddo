@@ -63,6 +63,11 @@ struct BoardView: View {
                             } else {
                                 task.reactivate()
                             }
+                            
+                            if status.clearDueDate {
+                                task.dueDate = nil
+                            }
+                            
                             task.status = status
                         }
                         return true
