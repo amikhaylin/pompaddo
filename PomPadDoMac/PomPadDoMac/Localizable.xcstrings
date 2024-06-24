@@ -178,6 +178,7 @@
       }
     },
     "Add task to Inbox" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -386,6 +387,7 @@
       }
     },
     "Close" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -416,6 +418,26 @@
           }
         }
       }
+    },
+    "Completed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Completed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завершенные"
+          }
+        }
+      }
+    },
+    "Crear due date" : {
+
     },
     "Create simple list" : {
       "localizations" : {
@@ -791,6 +813,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Высокий"
+          }
+        }
+      }
+    },
+    "In progress" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "В процессе"
           }
         }
       }
@@ -1196,6 +1229,7 @@
       }
     },
     "Refresh" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1580,6 +1614,7 @@
       }
     },
     "Statuses" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1639,6 +1674,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оценка рассчитывается по формуле:\n(базовые часы * коэффициент приоритета * коэффициент ясности) * коэффициент оценки\n\nбазовые часы - расчетное количество часов\nкоэффициент приоритета – высокий (1), средний (1,5), низкий (2)\nкоэффициент понятности - понятно (1), не совсем понятно (1,5), непонятно (2)\nкоэффициент оценки - по умолчанию 1,7, можно изменить в настройках"
+          }
+        }
+      }
+    },
+    "To do" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To do"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запланированые"
           }
         }
       }

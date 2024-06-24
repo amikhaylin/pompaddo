@@ -21,6 +21,8 @@
 		4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */; };
 		4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */; };
 		4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D22BF3C8070003E129 /* NewProjectView.swift */; };
+		4D8F04F02C296F7200B7698B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */; };
+		4D8F04F22C296F8C00B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04F12C296F8C00B7698B /* InfoPlist.xcstrings */; };
 		4DA863EE2BFF4D3200269D83 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */; };
 		4DA863F02BFF691E00269D83 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863EF2BFF691E00269D83 /* TaskRowView.swift */; };
 		4DA863F42BFF71B100269D83 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */; };
@@ -85,6 +87,8 @@
 		4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D22BF3C8070003E129 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
+		4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = ../../PomPadDoMac/PomPadDoMac/Localizable.xcstrings; sourceTree = "<group>"; };
+		4D8F04F12C296F8C00B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/EditTaskView.swift; sourceTree = "<group>"; };
 		4DA863EF2BFF691E00269D83 /* TaskRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskRowView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskRowView.swift; sourceTree = "<group>"; };
 		4DA863F32BFF71B100269D83 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectTasksListView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Projects/ProjectTasksListView.swift; sourceTree = "<group>"; };
@@ -230,6 +234,7 @@
 		4DDDB3D12BF23034002C4F95 /* PomPadDoiOS */ = {
 			isa = PBXGroup;
 			children = (
+				4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */,
 				4D0179EC2C11C9A100D76BF5 /* Settings */,
 				4DCB073A2BFCB5B7009BA752 /* PomPadDoiOS.entitlements */,
 				4DFB04092BF4B7AF00436EDC /* Info.plist */,
@@ -241,6 +246,7 @@
 				4DDDB3D82BF23037002C4F95 /* Assets.xcassets */,
 				4DDDB3DA2BF23037002C4F95 /* Preview Content */,
 				4DDDB3FE2BF257B7002C4F95 /* MainView.swift */,
+				4D8F04F12C296F8C00B7698B /* InfoPlist.xcstrings */,
 			);
 			path = PomPadDoiOS;
 			sourceTree = "<group>";
@@ -438,6 +444,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 4DDDB3C62BF23034002C4F95;
 			packageReferences = (
@@ -461,6 +468,8 @@
 			files = (
 				4DDDB3DC2BF23037002C4F95 /* Preview Assets.xcassets in Resources */,
 				4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */,
+				4D8F04F22C296F8C00B7698B /* InfoPlist.xcstrings in Resources */,
+				4D8F04F02C296F7200B7698B /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
