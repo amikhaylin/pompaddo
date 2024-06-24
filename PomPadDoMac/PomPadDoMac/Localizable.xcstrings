@@ -178,6 +178,7 @@
       }
     },
     "Add task to Inbox" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -386,6 +387,7 @@
       }
     },
     "Close" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -433,6 +435,9 @@
           }
         }
       }
+    },
+    "Crear due date" : {
+
     },
     "Create simple list" : {
       "localizations" : {
@@ -1315,6 +1320,7 @@
       }
     },
     "Refresh" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1699,6 +1705,7 @@
       }
     },
     "Statuses" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
