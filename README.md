@@ -30,12 +30,13 @@ made to myself by myself
 - [x] Focus timer
 - [ ] Location based contexts
 - [x] iOS / iPadOS implementation
-- [ ] watchOS implementation
+- [ ] watchOS companion app
 - [x] Sync via iCloud
 - [x] Settings for focus timer's factors and estimates
-- [ ] Localization
+- [x] Localization
 - [x] Safari extension
 - [x] Add event to Calendar from task
 
 #### Languages Supported
 - English 🇺🇸
+- Russian 🇷🇺
