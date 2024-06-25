@@ -31,6 +31,7 @@ struct ContentView: View {
     @Query var tasks: [Todo]
     
     @State var selectedSideBarItem: SideBarItem? = .today
+    @State private var refresher = Refresher()
     
     var body: some View {
         NavigationSplitView {
@@ -43,14 +44,17 @@ struct ContentView: View {
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateInboxActive()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTodayActive()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
                 case .tomorrow:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
                 case nil:
                     EmptyView()
                 }
@@ -59,6 +63,7 @@ struct ContentView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
                         NewTaskView()
+                            .environmentObject(refresher)
                     } label: {
                         Image(systemName: "tray.and.arrow.down.fill")
                             .foregroundStyle(Color.orange)

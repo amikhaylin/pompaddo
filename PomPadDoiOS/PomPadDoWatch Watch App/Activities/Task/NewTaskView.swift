@@ -11,6 +11,7 @@ import SwiftData
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var refresher: Refresher
     @State private var taskName = ""
     
     var body: some View {
@@ -19,6 +20,7 @@ struct NewTaskView: View {
                 .onSubmit {
                     let task = Todo(name: taskName)
                     modelContext.insert(task)
+                    refresher.refresh.toggle()
                     presentationMode.wrappedValue.dismiss()
                 }
         }
