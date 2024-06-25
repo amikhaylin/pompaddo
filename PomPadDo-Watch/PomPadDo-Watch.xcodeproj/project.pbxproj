@@ -23,6 +23,7 @@
 		4D8F056D2C29D6CB00B7698B /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F05692C29D6CB00B7698B /* ProjectGroup.swift */; };
 		4D8F056E2C29D6CB00B7698B /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F056A2C29D6CB00B7698B /* Todo.swift */; };
 		4D8F056F2C29D6CB00B7698B /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8F056B2C29D6CB00B7698B /* Status.swift */; };
+		4DE79C9E2C2AAB7A001FA612 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE79C9D2C2AAB7A001FA612 /* NewTaskView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		4D8F05692C29D6CB00B7698B /* ProjectGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectGroup.swift; path = ../../../PomPadDoMac/PomPadDoMac/Model/ProjectGroup.swift; sourceTree = "<group>"; };
 		4D8F056A2C29D6CB00B7698B /* Todo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Todo.swift; path = ../../../PomPadDoMac/PomPadDoMac/Model/Todo.swift; sourceTree = "<group>"; };
 		4D8F056B2C29D6CB00B7698B /* Status.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Status.swift; path = ../../../PomPadDoMac/PomPadDoMac/Model/Status.swift; sourceTree = "<group>"; };
+		4DE79C9D2C2AAB7A001FA612 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				4D8C49212C29E901004A63C4 /* TaskCheckBoxView.swift */,
+				4DE79C9D2C2AAB7A001FA612 /* NewTaskView.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -328,6 +331,7 @@
 				4D8F053B2C29D5AB00B7698B /* ContentView.swift in Sources */,
 				4D8F05392C29D5AB00B7698B /* PomPadDo_WatchApp.swift in Sources */,
 				4D8F056C2C29D6CB00B7698B /* Project.swift in Sources */,
+				4DE79C9E2C2AAB7A001FA612 /* NewTaskView.swift in Sources */,
 				4D8F056D2C29D6CB00B7698B /* ProjectGroup.swift in Sources */,
 				4D8C49222C29E901004A63C4 /* TaskCheckBoxView.swift in Sources */,
 				4D8C49182C29DEA3004A63C4 /* TasksQuery.swift in Sources */,

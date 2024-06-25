@@ -57,8 +57,8 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        
+                    NavigationLink {
+                        NewTaskView()
                     } label: {
                         Image(systemName: "tray.and.arrow.down.fill")
                             .foregroundStyle(Color.orange)
