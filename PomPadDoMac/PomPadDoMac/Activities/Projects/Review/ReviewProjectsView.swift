@@ -21,7 +21,6 @@ struct ReviewProjectsView: View {
                             .badge(project.getTasks().count)
                     }
                     .listStyle(SidebarListStyle())
-                    .id(UUID())
                     .padding(.top, 5)
                 } else {
                     Text("No projects to review")

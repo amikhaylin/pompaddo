@@ -46,7 +46,6 @@ struct BoardView: View {
                             }
                             .listRowSeparator(.visible)
                         }
-                        .id(UUID())
                         .cornerRadius(5)
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
