@@ -178,7 +178,6 @@
       }
     },
     "Add task to Inbox" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -435,9 +434,6 @@
           }
         }
       }
-    },
-    "Crear due date" : {
-
     },
     "Create simple list" : {
       "localizations" : {

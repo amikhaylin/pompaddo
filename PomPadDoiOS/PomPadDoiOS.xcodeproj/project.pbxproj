@@ -13,6 +13,7 @@
 		4D1210272C2AD23400ACD511 /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
 		4D1210292C2AD4C800ACD511 /* TaskDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */; };
 		4D12102A2C2AD75500ACD511 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AA72BF35BD300E43E9A /* CircularProgressView.swift */; };
+		4D12102B2C2AE6EB00ACD511 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */; };
 		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
 		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
@@ -695,6 +696,7 @@
 			files = (
 				4D807D162C2ABE6E000A973A /* Preview Assets.xcassets in Resources */,
 				4D807D132C2ABE6E000A973A /* Assets.xcassets in Resources */,
+				4D12102B2C2AE6EB00ACD511 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
