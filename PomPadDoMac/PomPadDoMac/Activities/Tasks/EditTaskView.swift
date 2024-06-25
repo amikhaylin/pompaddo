@@ -79,7 +79,7 @@ struct EditTaskView: View {
                             task.dueDate = Calendar.current.startOfDay(for: dueDate)
                         }
                     } label: {
-                        Label("Set due Date", systemImage: "calendar.badge.plus")
+                        Label("Set due Date", systemImage: "calendar")
                     }
                 }
                 

@@ -23,7 +23,12 @@ struct TasksListView: View {
                 HStack {
                     TaskCheckBoxView(task: task)
                     
-                    Text(task.name)
+                    NavigationLink {
+                        TaskDetailsView(task: task)
+                            .environmentObject(refresher)
+                    } label: {
+                        Text(task.name)
+                    }
                 }
                 .modifier(TaskSwipeModifier(task: task))
                 .environmentObject(refresher)
