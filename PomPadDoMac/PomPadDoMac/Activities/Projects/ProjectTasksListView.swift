@@ -14,6 +14,8 @@ struct ProjectTasksListView: View {
     
     @Bindable var project: Project
     
+    @State private var refresher = Refresher()
+    
     var body: some View {
         List(selection: $selectedTasks) {
             ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in

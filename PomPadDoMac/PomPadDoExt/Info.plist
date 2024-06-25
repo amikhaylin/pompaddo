@@ -24,7 +24,7 @@
 			<key>Image</key>
 			<string>ToolbarItemIcon.png</string>
 			<key>Label</key>
-			<string>Send current page to PomPadDo Inbox</string>
+			<string>Send current page link to PomPadDo Inbox</string>
 		</dict>
 		<key>SFSafariWebsiteAccess</key>
 		<dict>
@@ -37,6 +37,6 @@
 		</dict>
 	</dict>
 	<key>NSHumanReadableDescription</key>
-	<string>This is PomPadDoExt. You should tell us what your extension does here.</string>
+	<string>This is PomPadDo Extension. With it you can send page links to your PomPadDo Inbox</string>
 </dict>
 </plist>

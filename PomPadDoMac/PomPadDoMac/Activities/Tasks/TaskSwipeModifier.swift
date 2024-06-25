@@ -10,6 +10,7 @@ import SwiftData
 
 struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     @Bindable var task: Todo
     
     func body(content: Content) -> some View {
@@ -19,6 +20,7 @@ struct TaskSwipeModifier: ViewModifier {
                     withAnimation {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
+                        refresher.refresh.toggle()
                     }
                 } label: {
                     Label("Delete", systemImage: "trash.fill")
@@ -31,6 +33,7 @@ struct TaskSwipeModifier: ViewModifier {
                     } else {
                         task.reactivate()
                     }
+                    refresher.refresh.toggle()
                 } label: {
                     if !task.completed {
                         Label("Complete", systemImage: "checkmark.square.fill")
