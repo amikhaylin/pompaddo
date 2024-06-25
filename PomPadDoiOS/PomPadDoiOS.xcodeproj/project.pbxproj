@@ -10,6 +10,7 @@
 		4D0179EB2C11C99B00D76BF5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179EA2C11C99B00D76BF5 /* Common.swift */; };
 		4D0179F12C11F30A00D76BF5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179F02C11F30A00D76BF5 /* SettingsView.swift */; };
 		4D1210262C2ACDFD00ACD511 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0FA372C20794300C99E25 /* Refresher.swift */; };
+		4D1210272C2AD23400ACD511 /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
 		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
 		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
@@ -761,6 +762,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D1210272C2AD23400ACD511 /* TaskSwipeModifier.swift in Sources */,
 				4D807D482C2AC34E000A973A /* SectionsListView.swift in Sources */,
 				4D807D112C2ABE6B000A973A /* ContentView.swift in Sources */,
 				4D807D402C2AC219000A973A /* TasksQuery.swift in Sources */,

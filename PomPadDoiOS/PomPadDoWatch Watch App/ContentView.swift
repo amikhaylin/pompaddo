@@ -45,16 +45,19 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
+                    .environmentObject(refresher)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTodayActive()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
+                    .environmentObject(refresher)
                 case .tomorrow:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
+                    .environmentObject(refresher)
                 case nil:
                     EmptyView()
                 }

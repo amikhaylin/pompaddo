@@ -10,6 +10,7 @@ import SwiftData
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     @State var tasks: [Todo]
     
     @State var list: SideBarItem
@@ -24,6 +25,8 @@ struct TasksListView: View {
                     
                     Text(task.name)
                 }
+                .modifier(TaskSwipeModifier(task: task))
+                .environmentObject(refresher)
             }
         }
         .navigationTitle(title)
