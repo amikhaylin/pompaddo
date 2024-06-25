@@ -16,14 +16,10 @@ struct NewTaskView: View {
     var body: some View {
         NavigationView {
             TextField("Add task to Inbox", text: $taskName)
-                .toolbar {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("OK") {
-                            let task = Todo(name: taskName)
-                            modelContext.insert(task)
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
+                .onSubmit {
+                    let task = Todo(name: taskName)
+                    modelContext.insert(task)
+                    presentationMode.wrappedValue.dismiss()
                 }
         }
     }
