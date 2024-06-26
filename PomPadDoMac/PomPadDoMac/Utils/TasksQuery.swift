@@ -75,7 +75,7 @@ struct TasksQuery {
         if let dateToReview = Calendar.current.date(byAdding: .day,
                                                     value: project.reviewDaysCount,
                                                     to: project.reviewDate) {
-            return dateToReview <= today
+            return Calendar.current.isDateInToday(dateToReview) || dateToReview < today
         } else {
             return false
         }
