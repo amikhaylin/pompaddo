@@ -56,7 +56,6 @@ struct ProjectTasksListView: View {
                 }
             }
         }
-        .id(UUID())
     }
     
     private func deleteTask(task: Todo) {

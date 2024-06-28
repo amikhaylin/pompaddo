@@ -83,6 +83,7 @@ struct TaskRowModifier: ViewModifier {
                                   list: list,
                                   title: task.name,
                                   mainTask: task)
+                    .id(refresher.refresh)
                     .environmentObject(refresher)
                 } label: {
                     Image(systemName: "arrow.right")

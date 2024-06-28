@@ -96,7 +96,6 @@ struct TasksListView: View {
                     }
                 }
             }
-            .id(UUID())
         }
         .toolbar {
             ToolbarItemGroup {
@@ -136,7 +135,7 @@ struct TasksListView: View {
             .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
         }
         .onChange(of: selectedTasks) { _, _ in
-            if selectedTasks.count > 0 {
+            if selectedTasks.count > 0 && !showInspector {
                 showInspector = true
             }
         }

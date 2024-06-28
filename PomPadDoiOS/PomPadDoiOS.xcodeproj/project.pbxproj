@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		4D0179EB2C11C99B00D76BF5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179EA2C11C99B00D76BF5 /* Common.swift */; };
 		4D0179F12C11F30A00D76BF5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179F02C11F30A00D76BF5 /* SettingsView.swift */; };
+		4D1210262C2ACDFD00ACD511 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0FA372C20794300C99E25 /* Refresher.swift */; };
+		4D1210272C2AD23400ACD511 /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
+		4D1210292C2AD4C800ACD511 /* TaskDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */; };
+		4D12102A2C2AD75500ACD511 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AA72BF35BD300E43E9A /* CircularProgressView.swift */; };
+		4D12102B2C2AE6EB00ACD511 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */; };
 		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
 		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
@@ -21,6 +26,24 @@
 		4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */; };
 		4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */; };
 		4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D22BF3C8070003E129 /* NewProjectView.swift */; };
+		4D807D0F2C2ABE6B000A973A /* PomPadDoWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D0E2C2ABE6B000A973A /* PomPadDoWatchApp.swift */; };
+		4D807D112C2ABE6B000A973A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D102C2ABE6B000A973A /* ContentView.swift */; };
+		4D807D132C2ABE6E000A973A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D807D122C2ABE6E000A973A /* Assets.xcassets */; };
+		4D807D162C2ABE6E000A973A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D807D152C2ABE6E000A973A /* Preview Assets.xcassets */; };
+		4D807D202C2ABE6F000A973A /* PomPadDoWatchAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D1F2C2ABE6F000A973A /* PomPadDoWatchAppTests.swift */; };
+		4D807D2A2C2ABE6F000A973A /* PomPadDoWatchAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D292C2ABE6F000A973A /* PomPadDoWatchAppUITests.swift */; };
+		4D807D2C2C2ABE6F000A973A /* PomPadDoWatchAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D2B2C2ABE6F000A973A /* PomPadDoWatchAppUITestsLaunchTests.swift */; };
+		4D807D2F2C2ABE6F000A973A /* PomPadDoWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4D807D0C2C2ABE6B000A973A /* PomPadDoWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D807D3A2C2AC1EF000A973A /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9D2BF351ED00E43E9A /* Project.swift */; };
+		4D807D3B2C2AC1EF000A973A /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9E2BF351ED00E43E9A /* Status.swift */; };
+		4D807D3C2C2AC1EF000A973A /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9C2BF351ED00E43E9A /* Todo.swift */; };
+		4D807D3D2C2AC1EF000A973A /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9F2BF351ED00E43E9A /* ProjectGroup.swift */; };
+		4D807D3E2C2AC202000A973A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
+		4D807D3F2C2AC211000A973A /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AAE2BF35CAF00E43E9A /* Previewer.swift */; };
+		4D807D402C2AC219000A973A /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AAF2BF35CB000E43E9A /* TasksQuery.swift */; };
+		4D807D462C2AC2BC000A973A /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D452C2AC2BC000A973A /* NewTaskView.swift */; };
+		4D807D482C2AC34E000A973A /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D472C2AC34E000A973A /* SectionsListView.swift */; };
+		4D807D4A2C2AC384000A973A /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D492C2AC384000A973A /* TasksListView.swift */; };
 		4D8F04F02C296F7200B7698B /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */; };
 		4D8F04F22C296F8C00B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04F12C296F8C00B7698B /* InfoPlist.xcstrings */; };
 		4DA863EE2BFF4D3200269D83 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */; };
@@ -57,6 +80,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4D807D1C2C2ABE6F000A973A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDDB3C72BF23034002C4F95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D807D0B2C2ABE6B000A973A;
+			remoteInfo = "PomPadDoWatch Watch App";
+		};
+		4D807D262C2ABE6F000A973A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDDB3C72BF23034002C4F95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D807D0B2C2ABE6B000A973A;
+			remoteInfo = "PomPadDoWatch Watch App";
+		};
+		4D807D2D2C2ABE6F000A973A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDDB3C72BF23034002C4F95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D807D0B2C2ABE6B000A973A;
+			remoteInfo = "PomPadDoWatch Watch App";
+		};
 		4DDDB3E22BF23037002C4F95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4DDDB3C72BF23034002C4F95 /* Project object */;
@@ -73,9 +117,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4D807D302C2ABE6F000A973A /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				4D807D2F2C2ABE6F000A973A /* PomPadDoWatch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		4D0179EA2C11C99B00D76BF5 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Common.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/Common.swift; sourceTree = "<group>"; };
 		4D0179F02C11F30A00D76BF5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsView.swift; sourceTree = "<group>"; };
 		4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4D1959B12BFBB25900B90F10 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
@@ -87,6 +146,21 @@
 		4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
 		4D4272D22BF3C8070003E129 /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
+		4D807D0C2C2ABE6B000A973A /* PomPadDoWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PomPadDoWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D807D0E2C2ABE6B000A973A /* PomPadDoWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoWatchApp.swift; sourceTree = "<group>"; };
+		4D807D102C2ABE6B000A973A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4D807D122C2ABE6E000A973A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4D807D152C2ABE6E000A973A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4D807D1B2C2ABE6E000A973A /* PomPadDoWatch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PomPadDoWatch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D807D1F2C2ABE6F000A973A /* PomPadDoWatchAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoWatchAppTests.swift; sourceTree = "<group>"; };
+		4D807D252C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PomPadDoWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D807D292C2ABE6F000A973A /* PomPadDoWatchAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoWatchAppUITests.swift; sourceTree = "<group>"; };
+		4D807D2B2C2ABE6F000A973A /* PomPadDoWatchAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoWatchAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		4D807D412C2AC26A000A973A /* PomPadDoWatch Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "PomPadDoWatch Watch App.entitlements"; sourceTree = "<group>"; };
+		4D807D422C2AC27C000A973A /* PomPadDoWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "PomPadDoWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		4D807D452C2AC2BC000A973A /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4D807D472C2AC34E000A973A /* SectionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsListView.swift; sourceTree = "<group>"; };
+		4D807D492C2AC384000A973A /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = ../../PomPadDoMac/PomPadDoMac/Localizable.xcstrings; sourceTree = "<group>"; };
 		4D8F04F12C296F8C00B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/EditTaskView.swift; sourceTree = "<group>"; };
@@ -128,6 +202,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4D807D092C2ABE6B000A973A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D807D182C2ABE6E000A973A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D807D222C2ABE6F000A973A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DDDB3CC2BF23034002C4F95 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -210,12 +305,73 @@
 			path = Groups;
 			sourceTree = "<group>";
 		};
+		4D807D0D2C2ABE6B000A973A /* PomPadDoWatch Watch App */ = {
+			isa = PBXGroup;
+			children = (
+				4D807D432C2AC297000A973A /* Activities */,
+				4D807D422C2AC27C000A973A /* PomPadDoWatch-Watch-App-Info.plist */,
+				4D807D412C2AC26A000A973A /* PomPadDoWatch Watch App.entitlements */,
+				4D807D0E2C2ABE6B000A973A /* PomPadDoWatchApp.swift */,
+				4D807D102C2ABE6B000A973A /* ContentView.swift */,
+				4D807D122C2ABE6E000A973A /* Assets.xcassets */,
+				4D807D142C2ABE6E000A973A /* Preview Content */,
+				4D807D472C2AC34E000A973A /* SectionsListView.swift */,
+			);
+			path = "PomPadDoWatch Watch App";
+			sourceTree = "<group>";
+		};
+		4D807D142C2ABE6E000A973A /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4D807D152C2ABE6E000A973A /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4D807D1E2C2ABE6F000A973A /* PomPadDoWatch Watch AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				4D807D1F2C2ABE6F000A973A /* PomPadDoWatchAppTests.swift */,
+			);
+			path = "PomPadDoWatch Watch AppTests";
+			sourceTree = "<group>";
+		};
+		4D807D282C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				4D807D292C2ABE6F000A973A /* PomPadDoWatchAppUITests.swift */,
+				4D807D2B2C2ABE6F000A973A /* PomPadDoWatchAppUITestsLaunchTests.swift */,
+			);
+			path = "PomPadDoWatch Watch AppUITests";
+			sourceTree = "<group>";
+		};
+		4D807D432C2AC297000A973A /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				4D807D442C2AC2A3000A973A /* Task */,
+			);
+			path = Activities;
+			sourceTree = "<group>";
+		};
+		4D807D442C2AC2A3000A973A /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				4D807D452C2AC2BC000A973A /* NewTaskView.swift */,
+				4D807D492C2AC384000A973A /* TasksListView.swift */,
+				4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
 		4DDDB3C62BF23034002C4F95 = {
 			isa = PBXGroup;
 			children = (
 				4DDDB3D12BF23034002C4F95 /* PomPadDoiOS */,
 				4DDDB3E42BF23037002C4F95 /* PomPadDoiOSTests */,
 				4DDDB3EE2BF23037002C4F95 /* PomPadDoiOSUITests */,
+				4D807D0D2C2ABE6B000A973A /* PomPadDoWatch Watch App */,
+				4D807D1E2C2ABE6F000A973A /* PomPadDoWatch Watch AppTests */,
+				4D807D282C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests */,
 				4DDDB3D02BF23034002C4F95 /* Products */,
 				4D4272C52BF3BD160003E129 /* Frameworks */,
 			);
@@ -227,6 +383,9 @@
 				4DDDB3CF2BF23034002C4F95 /* PomPadDoiOS.app */,
 				4DDDB3E12BF23037002C4F95 /* PomPadDoiOSTests.xctest */,
 				4DDDB3EB2BF23037002C4F95 /* PomPadDoiOSUITests.xctest */,
+				4D807D0C2C2ABE6B000A973A /* PomPadDoWatch Watch App.app */,
+				4D807D1B2C2ABE6E000A973A /* PomPadDoWatch Watch AppTests.xctest */,
+				4D807D252C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -357,6 +516,59 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4D807D0B2C2ABE6B000A973A /* PomPadDoWatch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D807D372C2ABE6F000A973A /* Build configuration list for PBXNativeTarget "PomPadDoWatch Watch App" */;
+			buildPhases = (
+				4D807D082C2ABE6B000A973A /* Sources */,
+				4D807D092C2ABE6B000A973A /* Frameworks */,
+				4D807D0A2C2ABE6B000A973A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PomPadDoWatch Watch App";
+			productName = "PomPadDoWatch Watch App";
+			productReference = 4D807D0C2C2ABE6B000A973A /* PomPadDoWatch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4D807D1A2C2ABE6E000A973A /* PomPadDoWatch Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D807D382C2ABE6F000A973A /* Build configuration list for PBXNativeTarget "PomPadDoWatch Watch AppTests" */;
+			buildPhases = (
+				4D807D172C2ABE6E000A973A /* Sources */,
+				4D807D182C2ABE6E000A973A /* Frameworks */,
+				4D807D192C2ABE6E000A973A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D807D1D2C2ABE6F000A973A /* PBXTargetDependency */,
+			);
+			name = "PomPadDoWatch Watch AppTests";
+			productName = "PomPadDoWatch Watch AppTests";
+			productReference = 4D807D1B2C2ABE6E000A973A /* PomPadDoWatch Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4D807D242C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D807D392C2ABE6F000A973A /* Build configuration list for PBXNativeTarget "PomPadDoWatch Watch AppUITests" */;
+			buildPhases = (
+				4D807D212C2ABE6F000A973A /* Sources */,
+				4D807D222C2ABE6F000A973A /* Frameworks */,
+				4D807D232C2ABE6F000A973A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D807D272C2ABE6F000A973A /* PBXTargetDependency */,
+			);
+			name = "PomPadDoWatch Watch AppUITests";
+			productName = "PomPadDoWatch Watch AppUITests";
+			productReference = 4D807D252C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4DDDB3F52BF23037002C4F95 /* Build configuration list for PBXNativeTarget "PomPadDoiOS" */;
@@ -365,10 +577,12 @@
 				4DDDB3CC2BF23034002C4F95 /* Frameworks */,
 				4DDDB3CD2BF23034002C4F95 /* Resources */,
 				4D0179EF2C11CA1400D76BF5 /* SwiftLint */,
+				4D807D302C2ABE6F000A973A /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4D807D2E2C2ABE6F000A973A /* PBXTargetDependency */,
 			);
 			name = PomPadDoiOS;
 			packageProductDependencies = (
@@ -421,9 +635,20 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					4D807D0B2C2ABE6B000A973A = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					4D807D1A2C2ABE6E000A973A = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 4D807D0B2C2ABE6B000A973A;
+					};
+					4D807D242C2ABE6F000A973A = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 4D807D0B2C2ABE6B000A973A;
+					};
 					4DDDB3CE2BF23034002C4F95 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -457,11 +682,38 @@
 				4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */,
 				4DDDB3E02BF23037002C4F95 /* PomPadDoiOSTests */,
 				4DDDB3EA2BF23037002C4F95 /* PomPadDoiOSUITests */,
+				4D807D0B2C2ABE6B000A973A /* PomPadDoWatch Watch App */,
+				4D807D1A2C2ABE6E000A973A /* PomPadDoWatch Watch AppTests */,
+				4D807D242C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4D807D0A2C2ABE6B000A973A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D807D162C2ABE6E000A973A /* Preview Assets.xcassets in Resources */,
+				4D807D132C2ABE6E000A973A /* Assets.xcassets in Resources */,
+				4D12102B2C2AE6EB00ACD511 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D807D192C2ABE6E000A973A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D807D232C2ABE6F000A973A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DDDB3CD2BF23034002C4F95 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -512,6 +764,46 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4D807D082C2ABE6B000A973A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D1210272C2AD23400ACD511 /* TaskSwipeModifier.swift in Sources */,
+				4D807D482C2AC34E000A973A /* SectionsListView.swift in Sources */,
+				4D807D112C2ABE6B000A973A /* ContentView.swift in Sources */,
+				4D807D402C2AC219000A973A /* TasksQuery.swift in Sources */,
+				4D1210262C2ACDFD00ACD511 /* Refresher.swift in Sources */,
+				4D807D4A2C2AC384000A973A /* TasksListView.swift in Sources */,
+				4D807D3A2C2AC1EF000A973A /* Project.swift in Sources */,
+				4D807D3E2C2AC202000A973A /* TaskCheckBoxView.swift in Sources */,
+				4D807D3F2C2AC211000A973A /* Previewer.swift in Sources */,
+				4D807D3B2C2AC1EF000A973A /* Status.swift in Sources */,
+				4D12102A2C2AD75500ACD511 /* CircularProgressView.swift in Sources */,
+				4D807D462C2AC2BC000A973A /* NewTaskView.swift in Sources */,
+				4D807D3C2C2AC1EF000A973A /* Todo.swift in Sources */,
+				4D807D3D2C2AC1EF000A973A /* ProjectGroup.swift in Sources */,
+				4D807D0F2C2ABE6B000A973A /* PomPadDoWatchApp.swift in Sources */,
+				4D1210292C2AD4C800ACD511 /* TaskDetailsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D807D172C2ABE6E000A973A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D807D202C2ABE6F000A973A /* PomPadDoWatchAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D807D212C2ABE6F000A973A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D807D2C2C2ABE6F000A973A /* PomPadDoWatchAppUITestsLaunchTests.swift in Sources */,
+				4D807D2A2C2ABE6F000A973A /* PomPadDoWatchAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DDDB3CB2BF23034002C4F95 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -578,6 +870,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		4D807D1D2C2ABE6F000A973A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D807D0B2C2ABE6B000A973A /* PomPadDoWatch Watch App */;
+			targetProxy = 4D807D1C2C2ABE6F000A973A /* PBXContainerItemProxy */;
+		};
+		4D807D272C2ABE6F000A973A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D807D0B2C2ABE6B000A973A /* PomPadDoWatch Watch App */;
+			targetProxy = 4D807D262C2ABE6F000A973A /* PBXContainerItemProxy */;
+		};
+		4D807D2E2C2ABE6F000A973A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D807D0B2C2ABE6B000A973A /* PomPadDoWatch Watch App */;
+			targetProxy = 4D807D2D2C2ABE6F000A973A /* PBXContainerItemProxy */;
+		};
 		4DDDB3E32BF23037002C4F95 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */;
@@ -591,6 +898,154 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		4D807D312C2ABE6F000A973A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "PomPadDoWatch Watch App/PomPadDoWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDoWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PomPadDoWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.amikhaylin.PomPadDoiOS;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOS.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Debug;
+		};
+		4D807D322C2ABE6F000A973A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "PomPadDoWatch Watch App/PomPadDoWatch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDoWatch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PomPadDoWatch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.amikhaylin.PomPadDoiOS;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOS.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Release;
+		};
+		4D807D332C2ABE6F000A973A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDoWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomPadDoWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomPadDoWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Debug;
+		};
+		4D807D342C2ABE6F000A973A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDoWatch-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomPadDoWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomPadDoWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Release;
+		};
+		4D807D352C2ABE6F000A973A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDoWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "PomPadDoWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Debug;
+		};
+		4D807D362C2ABE6F000A973A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDoWatch-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "PomPadDoWatch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Release;
+		};
 		4DDDB3F32BF23037002C4F95 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -713,6 +1168,7 @@
 		4DDDB3F62BF23037002C4F95 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoiOS/PomPadDoiOS.entitlements;
@@ -750,6 +1206,7 @@
 		4DDDB3F72BF23037002C4F95 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoiOS/PomPadDoiOS.entitlements;
@@ -863,6 +1320,33 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4D807D372C2ABE6F000A973A /* Build configuration list for PBXNativeTarget "PomPadDoWatch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D807D312C2ABE6F000A973A /* Debug */,
+				4D807D322C2ABE6F000A973A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D807D382C2ABE6F000A973A /* Build configuration list for PBXNativeTarget "PomPadDoWatch Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D807D332C2ABE6F000A973A /* Debug */,
+				4D807D342C2ABE6F000A973A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D807D392C2ABE6F000A973A /* Build configuration list for PBXNativeTarget "PomPadDoWatch Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D807D352C2ABE6F000A973A /* Debug */,
+				4D807D362C2ABE6F000A973A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		4DDDB3CA2BF23034002C4F95 /* Build configuration list for PBXProject "PomPadDoiOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

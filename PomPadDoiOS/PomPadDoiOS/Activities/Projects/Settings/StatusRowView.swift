@@ -15,7 +15,7 @@ struct StatusRowView: View {
     var body: some View {
         VStack {
             TextField("Name", text: $status.name)
-            Toggle("Crear due date", isOn: $status.clearDueDate)
+            Toggle("Clear due date", isOn: $status.clearDueDate)
                 .toggleStyle(.switch)
             Toggle("Do Completion", isOn: $status.doCompletion)
                 .toggleStyle(.switch)
