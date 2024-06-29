@@ -77,7 +77,21 @@ struct TaskRowModifier: ViewModifier {
                 Text("Add subtask")
             }
             
-            if let subtasks = task.subtasks, subtasks.count > 0 {
+            if let subtasks = task.subtasks {
+                NavigationLink {
+                    TasksListView(tasks: subtasks,
+                                  list: list,
+                                  title: task.name,
+                                  mainTask: task)
+                    .id(refresher.refresh)
+                    .environmentObject(refresher)
+                } label: {
+                    Image(systemName: "arrow.right")
+                    Text("Open subtasks")
+                }
+            } else {
+                let subtasks = [Todo]()
+                
                 NavigationLink {
                     TasksListView(tasks: subtasks,
                                   list: list,
