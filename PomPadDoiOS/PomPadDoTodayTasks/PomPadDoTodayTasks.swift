@@ -10,26 +10,6 @@ import SwiftUI
 import SwiftData
 
 struct Provider: TimelineProvider {
-    private let modelContainer: ModelContainer
-        
-    init() {
-        modelContainer = {
-                let schema = Schema([
-                    Todo.self
-                ])
-                
-                let modelConfiguration = ModelConfiguration(schema: schema,
-                                                            isStoredInMemoryOnly: false,
-                                                            cloudKitDatabase: .private("iCloud.com.amikhaylin.PomPadDo"))
-                
-                do {
-                    return try ModelContainer(for: schema, configurations: [modelConfiguration])
-                } catch {
-                    fatalError("Could not create ModelContainer: \(error)")
-                }
-            }()
-    }
-    
     func placeholder(in context: Context) -> TodayTasksEntry {
         TodayTasksEntry(date: Date())
     }
@@ -64,14 +44,14 @@ struct TodayTasksEntry: TimelineEntry {
 struct PomPadDoTodayTasksEntryView: View {
     var entry: Provider.Entry
     @Environment(\.widgetFamily) var family
-    @Query(filter: TasksQuery.predicateTodayAssign()) var tasksTodayAssign: [Todo]
+    @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
     
     var body: some View {
        ZStack {
            AccessoryWidgetBackground()
            // Value: completed tasks, in: 0...X (total today tasks)
-           Gauge(value: Double(tasksTodayAssign.filter({ $0.completed }).count), in: 0...Double(tasksTodayAssign.count)) {
-               Text("\(tasksTodayAssign.filter({ $0.completed == false }).count)")
+           Gauge(value: Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) && $0.completed }).count), in: 0...Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) }).count)) {
+               Text("\(tasksToday.filter({ $0.completed == false }).count)")
             }
             .gaugeStyle(.accessoryCircularCapacity)
             .tint(.orange)
