@@ -43,6 +43,18 @@ struct TasksQuery {
         }
     }
     
+    static func predicateTodayAssign() -> Predicate<Todo> {
+        let today = Calendar.current.startOfDay(for: Date())
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+        return #Predicate<Todo> { task in
+            if let date = task.dueDate {
+                return date < tomorrow
+            } else {
+                return false
+            }
+        }
+    }
+    
     static func predicateTomorrow() -> Predicate<Todo> {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
@@ -95,6 +107,13 @@ struct TasksQuery {
             return (first.priority > second.priority)
         }
         return (first.dueDate! < second.dueDate!)
+    }
+    
+    static func sortCompleted(_ first: Todo, _ second: Todo) -> Bool {
+        if first.completed == false && second.completed == false { return true }
+        if first.completed == false && second.completed { return true }
+        if first.completed && second.completed == false { return false }
+        return (first.completed && second.completed)
     }
     
     static func deleteTask(context: ModelContext, task: Todo) {
