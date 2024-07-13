@@ -33,7 +33,7 @@ struct ContentView: View {
     
     @State var selectedSideBarItem: SideBarItem? = .today
     @State private var refresher = Refresher()
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+//    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     var body: some View {
         NavigationSplitView {
@@ -81,7 +81,7 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: tasksTodayActive.count) { _, _ in
+        .onChange(of: refresher.refresh) { _, _ in
             WidgetCenter.shared.reloadAllTimelines()
         }
     }

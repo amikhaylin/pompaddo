@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
@@ -16,6 +17,7 @@ struct TasksListView: View {
     @State var list: SideBarItem
     @State var title: String
     @State var mainTask: Todo?
+    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     var body: some View {
         NavigationStack {
@@ -35,6 +37,12 @@ struct TasksListView: View {
             }
         }
         .navigationTitle(title)
+        .onChange(of: tasksTodayActive.count) { _, _ in
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        .onAppear {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
     }
 }
 
