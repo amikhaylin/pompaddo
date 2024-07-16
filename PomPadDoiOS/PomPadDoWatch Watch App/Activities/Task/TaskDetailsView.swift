@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct TaskDetailsView: View {
     @Environment(\.modelContext) private var modelContext
@@ -94,6 +95,7 @@ struct TaskDetailsView: View {
                     } else {
                         task.reactivate()
                     }
+                    WidgetCenter.shared.reloadAllTimelines()
                     refresher.refresh.toggle()
                     presentationMode.wrappedValue.dismiss()
                 } label: {

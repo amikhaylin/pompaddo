@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 enum SideBarItem: String, Identifiable, CaseIterable {
     var id: String { rawValue }
@@ -32,6 +33,7 @@ struct ContentView: View {
     
     @State var selectedSideBarItem: SideBarItem? = .today
     @State private var refresher = Refresher()
+//    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     var body: some View {
         NavigationSplitView {
@@ -41,13 +43,18 @@ struct ContentView: View {
             Group {
                 switch selectedSideBarItem {
                 case .inbox:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateInboxActive()).sorted(by: TasksQuery.defaultSorting),
+                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateInbox())
+                                                   .sorted(by: TasksQuery.defaultSorting)
+                                                   .sorted(by: TasksQuery.sortCompleted),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
                     .environmentObject(refresher)
                 case .today:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTodayActive()).sorted(by: TasksQuery.defaultSorting),
+                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
+                                                   .filter({ TasksQuery.checkToday(date: $0.completionDate) })
+                                                   .sorted(by: TasksQuery.defaultSorting)
+                                                   .sorted(by: TasksQuery.sortCompleted),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
@@ -73,6 +80,9 @@ struct ContentView: View {
                     }
                 }
             }
+        }
+        .onChange(of: refresher.refresh) { _, _ in
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }
