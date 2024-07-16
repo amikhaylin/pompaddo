@@ -26,7 +26,7 @@ struct TaskSwipeModifier: ViewModifier {
                     Label("Delete", systemImage: "trash.fill")
                 }
             }
-            .swipeActions(edge: .leading) {
+            .swipeActions(edge: .leading, allowsFullSwipe: true) {
                 Button {
                     if !task.completed {
                         task.complete(modelContext: modelContext)

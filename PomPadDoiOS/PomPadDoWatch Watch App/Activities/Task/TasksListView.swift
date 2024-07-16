@@ -26,7 +26,7 @@ struct TasksListView: View {
                     TaskCheckBoxView(task: task)
                     
                     NavigationLink {
-                        TaskDetailsView(task: task)
+                        TaskDetailsView(task: task, list: list)
                             .environmentObject(refresher)
                     } label: {
                         Text(task.name)
