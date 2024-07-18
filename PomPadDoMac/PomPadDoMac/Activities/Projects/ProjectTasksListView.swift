@@ -33,7 +33,7 @@ struct ProjectTasksListView: View {
                                     .modifier(ProjectTaskModifier(task: maintask,
                                                                   selectedTasks: $selectedTasks,
                                                                   project: project))
-                                    .modifier(TaskSwipeModifier(task: maintask))
+                                    .modifier(TaskSwipeModifier(task: maintask, list: .projects))
                                     .tag(maintask)
                             }
                         } else {
@@ -41,7 +41,7 @@ struct ProjectTasksListView: View {
                                 .modifier(ProjectTaskModifier(task: task,
                                                               selectedTasks: $selectedTasks,
                                                               project: project))
-                                .modifier(TaskSwipeModifier(task: task))
+                                .modifier(TaskSwipeModifier(task: task, list: .projects))
                                 .tag(task)
                         }
                     }

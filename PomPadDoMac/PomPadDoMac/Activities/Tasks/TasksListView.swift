@@ -62,7 +62,7 @@ struct TasksListView: View {
                                                                   selectedTasks: $selectedTasks,
                                                                   projects: projects,
                                                                   list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: list))
                                         .environmentObject(refresher)
                                         .tag(maintask)
                                 }
@@ -72,7 +72,7 @@ struct TasksListView: View {
                                                               selectedTasks: $selectedTasks,
                                                               projects: projects,
                                                               list: list))
-                                    .modifier(TaskSwipeModifier(task: task))
+                                    .modifier(TaskSwipeModifier(task: task, list: list))
                                     .environmentObject(refresher)
                                     .tag(task)
                             }

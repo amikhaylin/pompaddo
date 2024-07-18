@@ -136,16 +136,6 @@ struct TaskDetailsView: View {
                 } label: {
                     Label("Skip", systemImage: "arrow.uturn.forward")
                 }
-                
-                Button {
-                    TasksQuery.deleteTask(context: modelContext,
-                                          task: task)
-                    refresher.refresh.toggle()
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Label("Delete task", systemImage: "trash")
-                        .foregroundStyle(Color.red)
-                }
             
                 if let subtasks = task.subtasks {
                     NavigationLink {
@@ -159,6 +149,16 @@ struct TaskDetailsView: View {
                         Image(systemName: "arrow.right")
                         Text("Open subtasks")
                     }
+                }
+                
+                Button {
+                    TasksQuery.deleteTask(context: modelContext,
+                                          task: task)
+                    refresher.refresh.toggle()
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Label("Delete task", systemImage: "trash")
+                        .foregroundStyle(Color.red)
                 }
             }
         }

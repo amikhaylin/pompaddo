@@ -32,7 +32,7 @@ struct TasksListView: View {
                         Text(task.name)
                     }
                 }
-                .modifier(TaskSwipeModifier(task: task))
+                .modifier(TaskSwipeModifier(task: task, list: list))
                 .environmentObject(refresher)
             }
         }
