@@ -33,7 +33,7 @@ struct ContentView: View {
     
     @State var selectedSideBarItem: SideBarItem? = .today
     @State private var refresher = Refresher()
-//    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    @State private var addToInbox = false
     
     var body: some View {
         NavigationSplitView {
@@ -83,6 +83,17 @@ struct ContentView: View {
         }
         .onChange(of: refresher.refresh) { _, _ in
             WidgetCenter.shared.reloadAllTimelines()
+        }
+        .sheet(isPresented: $addToInbox) {
+            NewTaskView()
+                .environmentObject(refresher)
+        }
+        .onOpenURL { url in
+            if url.absoluteString == "pompaddo://addtoinbox" {
+                print("WIDGET EXECUTED")
+                
+                addToInbox.toggle()
+            }
         }
     }
 }
