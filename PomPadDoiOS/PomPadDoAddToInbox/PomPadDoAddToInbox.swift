@@ -49,7 +49,7 @@ struct PomPadDoAddToInboxEntryView: View {
                 .resizable()
                 .scaledToFit()
                 .padding(10)
-                .tint(.orange)
+                .foregroundStyle(Color.orange)
                 .widgetURL(URL(string: "pompaddo://addtoinbox"))
         }
     }

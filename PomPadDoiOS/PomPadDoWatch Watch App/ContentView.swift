@@ -71,9 +71,8 @@ struct ContentView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        NewTaskView()
-                            .environmentObject(refresher)
+                    Button {
+                        addToInbox.toggle()
                     } label: {
                         Image(systemName: "tray.and.arrow.down.fill")
                             .foregroundStyle(Color.orange)
@@ -90,8 +89,6 @@ struct ContentView: View {
         }
         .onOpenURL { url in
             if url.absoluteString == "pompaddo://addtoinbox" {
-                print("WIDGET EXECUTED")
-                
                 addToInbox.toggle()
             }
         }
