@@ -12,6 +12,7 @@ struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @Bindable var task: Todo
+    var list: SideBarItem
     
     func body(content: Content) -> some View {
         content
@@ -26,22 +27,55 @@ struct TaskSwipeModifier: ViewModifier {
                     Label("Delete", systemImage: "trash.fill")
                 }
             }
-            .swipeActions(edge: .leading) {
-                Button {
-                    if !task.completed {
-                        task.complete(modelContext: modelContext)
-                    } else {
-                        task.reactivate()
+        #if os(iOS)
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                if let subtasks = task.subtasks {
+                    NavigationLink {
+                        TasksListView(tasks: subtasks,
+                                      list: list,
+                                      title: task.name,
+                                      mainTask: task)
+                        .id(refresher.refresh)
+                        .environmentObject(refresher)
+                    } label: {
+                        Image(systemName: "arrow.right")
+                        Text("Open subtasks")
                     }
-                    refresher.refresh.toggle()
-                } label: {
-                    if !task.completed {
-                        Label("Complete", systemImage: "checkmark.square.fill")
-                    } else {
-                        Label("Reactivate", systemImage: "square")
+                } else {
+                    let subtasks = [Todo]()
+                    
+                    NavigationLink {
+                        TasksListView(tasks: subtasks,
+                                      list: list,
+                                      title: task.name,
+                                      mainTask: task)
+                        .id(refresher.refresh)
+                        .environmentObject(refresher)
+                    } label: {
+                        Image(systemName: "arrow.right")
+                        Text("Open subtasks")
                     }
                 }
-                .tint(.green)
             }
+        #endif
+        #if os(watchOS)
+            .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                if let subtasks = task.subtasks {
+                    NavigationLink {
+                        TasksListView(tasks: subtasks,
+                                      list: list,
+                                      title: task.name,
+                                      mainTask: task)
+                        .id(refresher.refresh)
+                        .environmentObject(refresher)
+                    } label: {
+                        Image(systemName: "arrow.right")
+                        Text("Open subtasks")
+                    }
+                } else {
+                    EmptyView()
+                }
+            }
+        #endif
     }
 }

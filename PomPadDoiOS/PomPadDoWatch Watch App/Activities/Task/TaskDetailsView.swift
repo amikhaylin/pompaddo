@@ -14,6 +14,7 @@ struct TaskDetailsView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var refresher: Refresher
     @Bindable var task: Todo
+    @State var list: SideBarItem
     
     var body: some View {
 //        NavigationView {
@@ -135,6 +136,20 @@ struct TaskDetailsView: View {
                 } label: {
                     Label("Skip", systemImage: "arrow.uturn.forward")
                 }
+            
+                if let subtasks = task.subtasks {
+                    NavigationLink {
+                        TasksListView(tasks: subtasks,
+                                      list: list,
+                                      title: task.name,
+                                      mainTask: task)
+                        .id(refresher.refresh)
+                        .environmentObject(refresher)
+                    } label: {
+                        Image(systemName: "arrow.right")
+                        Text("Open subtasks")
+                    }
+                }
                 
                 Button {
                     TasksQuery.deleteTask(context: modelContext,
@@ -154,7 +169,7 @@ struct TaskDetailsView: View {
     do {
         let previewer = try Previewer()
         
-        return TaskDetailsView(task: previewer.task)
+        return TaskDetailsView(task: previewer.task, list: .today)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
