@@ -54,7 +54,7 @@ struct PomPadDoTodayTasksEntryView: View {
                Text("\(tasksToday.filter({ $0.completed == false }).count)")
             }
             .gaugeStyle(.accessoryCircularCapacity)
-            .tint(.orange)
+            .tint(.green)
         }
     }
 }
