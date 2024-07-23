@@ -231,7 +231,7 @@
 		4D83FCD92C4FB27F00F407C9 /* TodayTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayTasks.swift; sourceTree = "<group>"; };
 		4D83FCE12C4FC08500F407C9 /* AddToInbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddToInbox.swift; sourceTree = "<group>"; };
 		4D83FCF62C50016100F407C9 /* PomPadDoWidgetsWatchExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoWidgetsWatchExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D83FCF72C50016100F407C9 /* PomPadDoWidgetsExtension copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "PomPadDoWidgetsExtension copy-Info.plist"; path = "/Users/cenobith/Desktop/PomPadDo/PomPadDoiOS/PomPadDoWidgetsExtension copy-Info.plist"; sourceTree = "<absolute>"; };
+		4D83FCF72C50016100F407C9 /* PomPadDoWidgetsWatchExtension-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "PomPadDoWidgetsWatchExtension-Info.plist"; path = "/Users/cenobith/Desktop/PomPadDo/PomPadDoiOS/PomPadDoWidgetsWatchExtension-Info.plist"; sourceTree = "<absolute>"; };
 		4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = ../../PomPadDoMac/PomPadDoMac/Localizable.xcstrings; sourceTree = "<group>"; };
 		4D8F04F12C296F8C00B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		4DA863ED2BFF4D3200269D83 /* EditTaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditTaskView.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/EditTaskView.swift; sourceTree = "<group>"; };
@@ -479,7 +479,7 @@
 				4D83FCC92C4FB15200F407C9 /* PomPadDoWidgets */,
 				4DDDB3D02BF23034002C4F95 /* Products */,
 				4D4272C52BF3BD160003E129 /* Frameworks */,
-				4D83FCF72C50016100F407C9 /* PomPadDoWidgetsExtension copy-Info.plist */,
+				4D83FCF72C50016100F407C9 /* PomPadDoWidgetsWatchExtension-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1321,7 +1321,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PomPadDoWidgetsExtension copy-Info.plist";
+				INFOPLIST_FILE = "PomPadDoWidgetsWatchExtension-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
@@ -1351,7 +1351,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PomPadDoWidgetsExtension copy-Info.plist";
+				INFOPLIST_FILE = "PomPadDoWidgetsWatchExtension-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
