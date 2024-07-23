@@ -57,7 +57,6 @@
 		4D83FCC72C4FB15200F407C9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D1FA5DC2C387B7300B30FEB /* WidgetKit.framework */; };
 		4D83FCC82C4FB15200F407C9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D1FA5DE2C387B7300B30FEB /* SwiftUI.framework */; };
 		4D83FCCB2C4FB15200F407C9 /* PomPadDoWidgetsBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D83FCCA2C4FB15200F407C9 /* PomPadDoWidgetsBundle.swift */; };
-		4D83FCCD2C4FB15200F407C9 /* PomPadDoWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D83FCCC2C4FB15200F407C9 /* PomPadDoWidgets.swift */; };
 		4D83FCCF2C4FB15400F407C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D83FCCE2C4FB15400F407C9 /* Assets.xcassets */; };
 		4D83FCD32C4FB15400F407C9 /* PomPadDoWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D83FCC62C4FB15200F407C9 /* PomPadDoWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D83FCDB2C4FB28B00F407C9 /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97A9F2BF351ED00E43E9A /* ProjectGroup.swift */; };
@@ -242,7 +241,6 @@
 		4D807D492C2AC384000A973A /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
 		4D83FCC62C4FB15200F407C9 /* PomPadDoWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D83FCCA2C4FB15200F407C9 /* PomPadDoWidgetsBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoWidgetsBundle.swift; sourceTree = "<group>"; };
-		4D83FCCC2C4FB15200F407C9 /* PomPadDoWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoWidgets.swift; sourceTree = "<group>"; };
 		4D83FCCE2C4FB15400F407C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4D83FCD02C4FB15400F407C9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D83FCD82C4FB1BE00F407C9 /* PomPadDoWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoWidgetsExtension.entitlements; sourceTree = "<group>"; };
@@ -497,7 +495,6 @@
 			isa = PBXGroup;
 			children = (
 				4D83FCCA2C4FB15200F407C9 /* PomPadDoWidgetsBundle.swift */,
-				4D83FCCC2C4FB15200F407C9 /* PomPadDoWidgets.swift */,
 				4D83FCCE2C4FB15400F407C9 /* Assets.xcassets */,
 				4D83FCD02C4FB15400F407C9 /* Info.plist */,
 				4D83FCD92C4FB27F00F407C9 /* TodayTasks.swift */,
@@ -1082,7 +1079,6 @@
 				4D83FCDE2C4FB28B00F407C9 /* Status.swift in Sources */,
 				4D83FCE32C4FC08D00F407C9 /* AddToInbox.swift in Sources */,
 				4D83FCDF2C4FB29000F407C9 /* TasksQuery.swift in Sources */,
-				4D83FCCD2C4FB15200F407C9 /* PomPadDoWidgets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
