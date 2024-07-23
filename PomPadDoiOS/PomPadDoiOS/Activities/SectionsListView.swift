@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct SectionsListView: View {
     var tasks: [Todo]
@@ -105,9 +106,11 @@ struct SectionsListView: View {
         .listStyle(SidebarListStyle())
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
+            WidgetCenter.shared.reloadAllTimelines()
         }
         .onAppear {
             tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
+            WidgetCenter.shared.reloadAllTimelines()
         }
     }
 }
