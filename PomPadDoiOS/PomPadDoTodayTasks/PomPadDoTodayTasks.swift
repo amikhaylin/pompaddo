@@ -54,7 +54,7 @@ struct PomPadDoTodayTasksEntryView: View {
                Text("\(tasksToday.filter({ $0.completed == false }).count)")
             }
             .gaugeStyle(.accessoryCircularCapacity)
-            .tint(.orange)
+            .tint(.green)
         }
     }
 }
@@ -69,7 +69,6 @@ struct PomPadDoTodayTasks: Widget {
         
         let modelConfiguration = ModelConfiguration(schema: schema,
                                                     isStoredInMemoryOnly: false)
-//                                                    cloudKitDatabase: .private("iCloud.com.amikhaylin.PomPadDo"))
         
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])

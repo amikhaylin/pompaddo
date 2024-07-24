@@ -87,6 +87,11 @@
 		4DE97AC22BF368B300E43E9A /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AC12BF368B300E43E9A /* TaskCheckBoxView.swift */; };
 		4DEF682E2C19E47F000B9F1F /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
 		4DEF68302C19FD12000B9F1F /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */; };
+		4DFDB1F02C4E7848009C33C0 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D1FA5DC2C387B7300B30FEB /* WidgetKit.framework */; };
+		4DFDB1F12C4E7848009C33C0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D1FA5DE2C387B7300B30FEB /* SwiftUI.framework */; };
+		4DFDB1F42C4E7848009C33C0 /* PomPadDoAddToInbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DFDB1F32C4E7848009C33C0 /* PomPadDoAddToInbox.swift */; };
+		4DFDB1F62C4E784A009C33C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DFDB1F52C4E784A009C33C0 /* Assets.xcassets */; };
+		4DFDB1FA2C4E784A009C33C0 /* PomPadDoAddToInboxExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4DFDB1EF2C4E7848009C33C0 /* PomPadDoAddToInboxExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +137,13 @@
 			remoteGlobalIDString = 4DDDB3CE2BF23034002C4F95;
 			remoteInfo = PomPadDoiOS;
 		};
+		4DFDB1F82C4E784A009C33C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4DDDB3C72BF23034002C4F95 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DFDB1EE2C4E7848009C33C0;
+			remoteInfo = PomPadDoAddToInboxExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -141,6 +153,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				4DFDB1FA2C4E784A009C33C0 /* PomPadDoAddToInboxExtension.appex in Embed Foundation Extensions */,
 				4D1FA5E82C387B7600B30FEB /* PomPadDoTodayTasksExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
@@ -234,6 +247,10 @@
 		4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskSwipeModifier.swift; path = ../../../../PomPadDoMac/PomPadDoMac/Activities/Tasks/TaskSwipeModifier.swift; sourceTree = "<group>"; };
 		4DEF682F2C19FD12000B9F1F /* SectionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsListView.swift; sourceTree = "<group>"; };
 		4DFB04092BF4B7AF00436EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4DFDB1EF2C4E7848009C33C0 /* PomPadDoAddToInboxExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoAddToInboxExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DFDB1F32C4E7848009C33C0 /* PomPadDoAddToInbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoAddToInbox.swift; sourceTree = "<group>"; };
+		4DFDB1F52C4E784A009C33C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4DFDB1F72C4E784A009C33C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +303,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFDB1EC2C4E7848009C33C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DFDB1F12C4E7848009C33C0 /* SwiftUI.framework in Frameworks */,
+				4DFDB1F02C4E7848009C33C0 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +456,7 @@
 				4D807D1E2C2ABE6F000A973A /* PomPadDoWatch Watch AppTests */,
 				4D807D282C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests */,
 				4D1FA5E02C387B7300B30FEB /* PomPadDoTodayTasks */,
+				4DFDB1F22C4E7848009C33C0 /* PomPadDoAddToInbox */,
 				4DDDB3D02BF23034002C4F95 /* Products */,
 				4D4272C52BF3BD160003E129 /* Frameworks */,
 			);
@@ -445,6 +472,7 @@
 				4D807D1B2C2ABE6E000A973A /* PomPadDoWatch Watch AppTests.xctest */,
 				4D807D252C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests.xctest */,
 				4D1FA5DB2C387B7300B30FEB /* PomPadDoTodayTasksExtension.appex */,
+				4DFDB1EF2C4E7848009C33C0 /* PomPadDoAddToInboxExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -572,6 +600,16 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		4DFDB1F22C4E7848009C33C0 /* PomPadDoAddToInbox */ = {
+			isa = PBXGroup;
+			children = (
+				4DFDB1F32C4E7848009C33C0 /* PomPadDoAddToInbox.swift */,
+				4DFDB1F52C4E784A009C33C0 /* Assets.xcassets */,
+				4DFDB1F72C4E784A009C33C0 /* Info.plist */,
+			);
+			path = PomPadDoAddToInbox;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -605,6 +643,7 @@
 			);
 			dependencies = (
 				4D1FA5E72C387B7600B30FEB /* PBXTargetDependency */,
+				4DFDB1F92C4E784A009C33C0 /* PBXTargetDependency */,
 			);
 			name = "PomPadDoWatch Watch App";
 			productName = "PomPadDoWatch Watch App";
@@ -706,6 +745,23 @@
 			productReference = 4DDDB3EB2BF23037002C4F95 /* PomPadDoiOSUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		4DFDB1EE2C4E7848009C33C0 /* PomPadDoAddToInboxExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4DFDB1FD2C4E784A009C33C0 /* Build configuration list for PBXNativeTarget "PomPadDoAddToInboxExtension" */;
+			buildPhases = (
+				4DFDB1EB2C4E7848009C33C0 /* Sources */,
+				4DFDB1EC2C4E7848009C33C0 /* Frameworks */,
+				4DFDB1ED2C4E7848009C33C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PomPadDoAddToInboxExtension;
+			productName = PomPadDoAddToInboxExtension;
+			productReference = 4DFDB1EF2C4E7848009C33C0 /* PomPadDoAddToInboxExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -741,6 +797,9 @@
 						CreatedOnToolsVersion = 15.3;
 						TestTargetID = 4DDDB3CE2BF23034002C4F95;
 					};
+					4DFDB1EE2C4E7848009C33C0 = {
+						CreatedOnToolsVersion = 15.4;
+					};
 				};
 			};
 			buildConfigurationList = 4DDDB3CA2BF23034002C4F95 /* Build configuration list for PBXProject "PomPadDoiOS" */;
@@ -767,6 +826,7 @@
 				4D807D1A2C2ABE6E000A973A /* PomPadDoWatch Watch AppTests */,
 				4D807D242C2ABE6F000A973A /* PomPadDoWatch Watch AppUITests */,
 				4D1FA5DA2C387B7300B30FEB /* PomPadDoTodayTasksExtension */,
+				4DFDB1EE2C4E7848009C33C0 /* PomPadDoAddToInboxExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -826,6 +886,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4DFDB1ED2C4E7848009C33C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DFDB1F62C4E784A009C33C0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -970,6 +1038,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4DFDB1EB2C4E7848009C33C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4DFDB1F42C4E7848009C33C0 /* PomPadDoAddToInbox.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1002,6 +1078,11 @@
 			isa = PBXTargetDependency;
 			target = 4DDDB3CE2BF23034002C4F95 /* PomPadDoiOS */;
 			targetProxy = 4DDDB3EC2BF23037002C4F95 /* PBXContainerItemProxy */;
+		};
+		4DFDB1F92C4E784A009C33C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DFDB1EE2C4E7848009C33C0 /* PomPadDoAddToInboxExtension */;
+			targetProxy = 4DFDB1F82C4E784A009C33C0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1489,6 +1570,66 @@
 			};
 			name = Release;
 		};
+		4DFDB1FB2C4E784A009C33C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoAddToInbox/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoAddToInbox;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOS.watchkitapp.PomPadDoAddToInbox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Debug;
+		};
+		4DFDB1FC2C4E784A009C33C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoAddToInbox/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoAddToInbox;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDoiOS.watchkitapp.PomPadDoAddToInbox;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.5;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1560,6 +1701,15 @@
 			buildConfigurations = (
 				4DDDB3FC2BF23037002C4F95 /* Debug */,
 				4DDDB3FD2BF23037002C4F95 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4DFDB1FD2C4E784A009C33C0 /* Build configuration list for PBXNativeTarget "PomPadDoAddToInboxExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DFDB1FB2C4E784A009C33C0 /* Debug */,
+				4DFDB1FC2C4E784A009C33C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
