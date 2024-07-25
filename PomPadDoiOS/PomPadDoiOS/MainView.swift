@@ -148,6 +148,11 @@ struct MainView: View {
         .onChange(of: timer.mode, { _, _ in
             focusMode = timer.mode
         })
+        .onOpenURL { url in
+            if url.absoluteString == "pompaddo://addtoinbox" {
+                newTaskIsShowing.toggle()
+            }
+        }
     }
 }
 
