@@ -19,7 +19,7 @@ struct ReviewProjectsView: View {
                             ProjectToReviewView(project: project)
                         } label: {
                             Text(project.name)
-                                .badge(project.getTasks().count)
+                                .badge(project.getTasks().filter({ $0.completed == false }).count)
                         }
                     }
                 } else {

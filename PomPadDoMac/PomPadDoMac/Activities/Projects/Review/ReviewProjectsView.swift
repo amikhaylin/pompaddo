@@ -19,7 +19,7 @@ struct ReviewProjectsView: View {
                 if projects.count > 0 {
                     List(projects, id: \.self, selection: $selectedProject) { project in
                         Text(project.name)
-                            .badge(project.getTasks().count)
+                            .badge(project.getTasks().filter({ $0.completed == false }).count)
                     }
                     .listStyle(SidebarListStyle())
                     .padding(.top, 5)
