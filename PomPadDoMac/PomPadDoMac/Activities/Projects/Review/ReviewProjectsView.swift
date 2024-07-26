@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ReviewProjectsView: View {
+    @Environment(\.modelContext) private var modelContext
     var projects: [Project]
     @State private var selectedProject: Project?
     
@@ -32,6 +33,11 @@ struct ReviewProjectsView: View {
                 VStack {
                     HStack {
                         Spacer()
+                        Button("Delete project") {
+                            project.deleteRelatives(context: modelContext)
+                            modelContext.delete(project)
+                        }
+                        
                         Button("Mark Reviewed") {
                             project.reviewDate = Date()
                         }

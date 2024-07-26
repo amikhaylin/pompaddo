@@ -9,12 +9,19 @@ import SwiftUI
 
 struct ProjectToReviewView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) private var modelContext
     @Bindable var project: Project
     
     var body: some View {
         VStack {
             HStack {
                 Spacer()
+                Button("Delete project") {
+                    project.deleteRelatives(context: modelContext)
+                    modelContext.delete(project)
+                    presentationMode.wrappedValue.dismiss()
+                }
+                
                 Button("Mark Reviewed") {
                     project.reviewDate = Date()
                     presentationMode.wrappedValue.dismiss()
