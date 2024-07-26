@@ -58,6 +58,7 @@ struct ContentView: View {
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects)
+                    .environmentObject(refresher)
             }
             .toolbar {
                 ToolbarItemGroup {
