@@ -44,6 +44,21 @@ struct AddToInbox: Widget {
         .description("This is a widget to display Add to Inbox dialog")
         .supportedFamilies([.systemSmall,
                             .accessoryCircular])
+        #else
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            if #available(watchOS 10.0, *) {
+                AddToInboxEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                AddToInboxEntryView(entry: entry)
+                    .padding()
+                    .background()
+            }
+        }
+        .configurationDisplayName("PomPadDo add to Inbox")
+        .description("This is a widget to display Add to Inbox dialog")
+        .supportedFamilies([.accessoryCorner,
+                            .accessoryCircular])
         #endif
     }
 }

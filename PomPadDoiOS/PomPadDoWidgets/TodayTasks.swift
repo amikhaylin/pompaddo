@@ -45,6 +45,7 @@ struct TodayTasks: Widget {
     }()
 
     var body: some WidgetConfiguration {
+        #if os(iOS)
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
                 TodayTasksEntryView(entry: entry)
@@ -61,6 +62,24 @@ struct TodayTasks: Widget {
         .description("This is a widget to display today tasks number")
         .supportedFamilies([.accessoryCircular,
                             .systemSmall])
+        #else
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            if #available(watchOS 10.0, *) {
+                TodayTasksEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+                    .modelContainer(modelContainer)
+            } else {
+                TodayTasksEntryView(entry: entry)
+                    .padding()
+                    .background()
+                    .modelContainer(modelContainer)
+            }
+        }
+        .configurationDisplayName("PomPadDo today tasks")
+        .description("This is a widget to display today tasks number")
+        .supportedFamilies([.accessoryCorner,
+                            .accessoryCircular])
+        #endif
     }
 }
 
