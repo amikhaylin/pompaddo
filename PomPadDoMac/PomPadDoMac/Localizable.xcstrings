@@ -549,6 +549,22 @@
         }
       }
     },
+    "Delete Project" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete Project"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить проект"
+          }
+        }
+      }
+    },
     "Delete task" : {
       "localizations" : {
         "en" : {
@@ -1759,6 +1775,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Оценка рассчитывается по формуле:\n(базовые часы * коэффициент приоритета * коэффициент ясности) * коэффициент оценки\n\nбазовые часы - расчетное количество часов\nкоэффициент приоритета – высокий (1), средний (1,5), низкий (2)\nкоэффициент понятности - понятно (1), не совсем понятно (1,5), непонятно (2)\nкоэффициент оценки - по умолчанию 1,7, можно изменить в настройках"
+          }
+        }
+      }
+    },
+    "This project will be permanently deleted" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This project will be permanently deleted"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот проект будет безвозвратно удален"
           }
         }
       }

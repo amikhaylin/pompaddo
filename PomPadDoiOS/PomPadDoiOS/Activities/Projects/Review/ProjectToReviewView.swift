@@ -11,15 +11,29 @@ struct ProjectToReviewView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
     @Bindable var project: Project
+    @State private var deletionRequested = false
     
     var body: some View {
         VStack {
             HStack {
                 Spacer()
+                
                 Button("Delete project") {
-                    project.deleteRelatives(context: modelContext)
-                    modelContext.delete(project)
-                    presentationMode.wrappedValue.dismiss()
+                    deletionRequested.toggle()
+                }
+                .popover(isPresented: $deletionRequested, attachmentAnchor: .point(.top)) {
+                    VStack {
+                        Text("This project will be permanently deleted")
+                        Button {
+                            project.deleteRelatives(context: modelContext)
+                            modelContext.delete(project)
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Label("Delete Project", systemImage: "trash")
+                        }
+                    }
+                    .padding(10)
+                    .presentationCompactAdaptation(.popover)
                 }
                 
                 Button("Mark Reviewed") {

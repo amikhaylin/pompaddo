@@ -52,7 +52,7 @@ struct ContentView: View {
                     .environmentObject(refresher)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
-                                                   .filter({ TasksQuery.checkToday(date: $0.completionDate) })
+                        .filter({ TasksQuery.checkToday(date: $0.completionDate) && ($0.completed == false || ($0.completed && $0.parentTask == nil)) })
                                                    .sorted(by: TasksQuery.defaultSorting)
                                                    .sorted(by: TasksQuery.sortCompleted),
                                   list: selectedSideBarItem!,
