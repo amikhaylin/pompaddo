@@ -64,6 +64,33 @@ struct TaskRowModifier: ViewModifier {
                 }
             }
             Divider()
+
+            Menu {
+                ForEach(0...3, id: \.self) { priority in
+                    Button {
+                        task.priority = priority
+                        refresher.refresh.toggle()
+                    } label: {
+                        HStack {
+                            switch priority {
+                            case 3:
+                                Text("High")
+                            case 2:
+                                Text("Medium")
+                            case 1:
+                                Text("Low")
+                            default:
+                                Text("None")
+                            }
+                        }
+                    }
+                    .tag(priority as Int)
+                }
+            } label: {
+                Text("Priority")
+            }
+            
+            Divider()
             
             Button {
                 selectedTasks.removeAll()
