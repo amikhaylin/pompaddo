@@ -57,7 +57,7 @@ struct ContentView: View {
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects)
-                
+                    .environmentObject(refresher)
             }
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
         } detail: {

@@ -10,6 +10,7 @@ import SwiftData
 
 struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @Binding var selectedProject: Project?
@@ -37,6 +38,7 @@ struct ProjectsListView: View {
                             task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
                             project.tasks?.append(task)
                         }
+                        refresher.refresh.toggle()
                         return true
                     }
                     .contextMenu {
@@ -80,6 +82,7 @@ struct ProjectsListView: View {
                                     task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
                                     project.tasks?.append(task)
                                 }
+                                refresher.refresh.toggle()
                                 return true
                             }
                             .contextMenu {
