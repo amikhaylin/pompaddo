@@ -116,6 +116,25 @@ struct TasksQuery {
         return (first.completed && second.completed)
     }
     
+    static func sortingWithCompleted(_ first: Todo, _ second: Todo) -> Bool {
+        if first.completed == false && second.completed == false {
+            if first.dueDate == nil && second.dueDate == nil {
+                return (first.priority > second.priority)
+            }
+            if first.dueDate == nil && second.dueDate != nil { return false }
+            if first.dueDate != nil && second.dueDate == nil { return true }
+            if first.dueDate! == second.dueDate! {
+                return (first.priority > second.priority)
+            }
+            return (first.dueDate! < second.dueDate!)
+        } else {
+            if first.completed == false && second.completed == false { return true }
+            if first.completed == false && second.completed { return true }
+            if first.completed && second.completed == false { return false }
+            return (first.completed && second.completed)
+        }
+    }
+    
     static func deleteTask(context: ModelContext, task: Todo) {
         task.disconnectFromAll()
         task.deleteSubtasks(context: context)
