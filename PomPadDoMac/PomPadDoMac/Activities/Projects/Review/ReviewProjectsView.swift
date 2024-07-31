@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ReviewProjectsView: View {
+    @Environment(\.modelContext) private var modelContext
     var projects: [Project]
     @State private var selectedProject: Project?
     
@@ -18,7 +19,7 @@ struct ReviewProjectsView: View {
                 if projects.count > 0 {
                     List(projects, id: \.self, selection: $selectedProject) { project in
                         Text(project.name)
-                            .badge(project.getTasks().count)
+                            .badge(project.getTasks().filter({ $0.completed == false }).count)
                     }
                     .listStyle(SidebarListStyle())
                     .padding(.top, 5)
@@ -32,6 +33,11 @@ struct ReviewProjectsView: View {
                 VStack {
                     HStack {
                         Spacer()
+                        Button("Delete project") {
+                            project.deleteRelatives(context: modelContext)
+                            modelContext.delete(project)
+                        }
+                        
                         Button("Mark Reviewed") {
                             project.reviewDate = Date()
                         }
