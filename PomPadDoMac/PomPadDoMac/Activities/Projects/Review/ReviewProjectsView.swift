@@ -12,6 +12,7 @@ struct ReviewProjectsView: View {
     @Environment(\.modelContext) private var modelContext
     var projects: [Project]
     @State private var selectedProject: Project?
+    @State private var deletionRequested = false
     
     var body: some View {
         NavigationSplitView {
@@ -34,8 +35,19 @@ struct ReviewProjectsView: View {
                     HStack {
                         Spacer()
                         Button("Delete project") {
-                            project.deleteRelatives(context: modelContext)
-                            modelContext.delete(project)
+                            deletionRequested.toggle()
+                        }
+                        .popover(isPresented: $deletionRequested, attachmentAnchor: .point(.top)) {
+                            VStack {
+                                Text("This project will be permanently deleted")
+                                Button {
+                                    project.deleteRelatives(context: modelContext)
+                                    modelContext.delete(project)
+                                } label: {
+                                    Label("Delete Project", systemImage: "trash")
+                                }
+                            }
+                            .padding(10)
                         }
                         
                         Button("Mark Reviewed") {
@@ -45,6 +57,7 @@ struct ReviewProjectsView: View {
                     .padding(5)
                     ProjectView(project: project)
                 }
+                
             } else {
                 Text("Select a project")
             }
@@ -54,6 +67,13 @@ struct ReviewProjectsView: View {
         }
         .navigationTitle("Review")
     }
+    /*
+     .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
+         NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+             .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+             .presentationCompactAdaptation(.popover)
+     }
+     */
 }
 
 #Preview {

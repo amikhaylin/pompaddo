@@ -51,7 +51,7 @@ struct TasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? tasks.filter({ $0.completed }) : tasks.filter({ $0.completed == false }),
+                        ForEach(section == .completed ? tasks.filter({ $0.completed && $0.parentTask == nil }) : tasks.filter({ $0.completed == false }),
                                      id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
