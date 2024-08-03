@@ -115,6 +115,16 @@ struct ContentView: View {
                 selectedSideBarItem = .projects
             }
         }
+        .task {
+            for task in tasks {
+                if let reminder = task.alertDate, reminder > Date() {
+                    let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
+                    if !hasAlert {
+                        NotificationManager.setTaskNotification(task: task)
+                    }
+                }
+            }
+        }
     }
 }
 

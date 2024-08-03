@@ -43,7 +43,6 @@ struct EditTaskView: View {
                         Button {
                             let date = Calendar.current.startOfDay(for: Date())
                             task.dueDate = date
-//                            dueDate = date
                         } label: {
                             HStack {
                                 Image(systemName: "calendar")
@@ -54,7 +53,6 @@ struct EditTaskView: View {
                         Button {
                             let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                             task.dueDate = date
-//                            dueDate = date
                         } label: {
                             HStack {
                                 Image(systemName: "sunrise")
@@ -113,25 +111,27 @@ struct EditTaskView: View {
                         DatePicker("",
                                    selection: $alertDate)
                         
-                        Button {
-                            NotificationManager.removeRequest(identifier: task.uid)
-                            task.alertDate = alertDate
-                            NotificationManager.setTaskNotification(task: task)
-                        } label: {
-                            HStack {
-                                Image(systemName: "checkmark.square")
-                                Text("Apply reminder")
+                        if task.alertDate == nil {
+                            Button {
+                                NotificationManager.removeRequest(identifier: task.uid)
+                                task.alertDate = alertDate
+                                NotificationManager.setTaskNotification(task: task)
+                            } label: {
+                                HStack {
+                                    Image(systemName: "checkmark.square")
+                                    Text("Apply reminder")
+                                }
                             }
-                        }
-                        
-                        Button {
-                            task.alertDate = nil
-                            NotificationManager.removeRequest(identifier: task.uid)
-                            showingReminderDatePicker = false
-                        } label: {
-                            HStack {
-                                Image(systemName: "clear")
-                                Text("Clear reminder")
+                        } else {
+                            Button {
+                                task.alertDate = nil
+                                NotificationManager.removeRequest(identifier: task.uid)
+                                showingReminderDatePicker = false
+                            } label: {
+                                HStack {
+                                    Image(systemName: "clear")
+                                    Text("Clear reminder")
+                                }
                             }
                         }
                     }
@@ -139,7 +139,11 @@ struct EditTaskView: View {
                     Button {
                         withAnimation {
                             showingReminderDatePicker.toggle()
-                            alertDate = Date()
+                            if let reminder = task.dueDate {
+                                alertDate = reminder
+                            } else {
+                                alertDate = Date()
+                            }
                         }
                     } label: {
                         Label("Set Reminder", systemImage: "bell")
@@ -337,7 +341,7 @@ struct EditTaskView: View {
         })
         .task {
             let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
-            if task.alertDate != nil && !hasAlert {
+            if let reminder = task.alertDate, reminder < Date() && !hasAlert {
                 task.alertDate = nil
                 showingReminderDatePicker = false
             }

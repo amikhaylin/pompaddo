@@ -129,12 +129,14 @@ struct TaskDetailsView: View {
                     Label("Clear due date", systemImage: "clear")
                 }
                 
-                Button {
-                    task.skip()
-                    refresher.refresh.toggle()
-                    presentationMode.wrappedValue.dismiss()
-                } label: {
-                    Label("Skip", systemImage: "arrow.uturn.forward")
+                if task.repeation != .none {
+                    Button {
+                        task.skip()
+                        refresher.refresh.toggle()
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Label("Skip", systemImage: "arrow.uturn.forward")
+                    }
                 }
             
                 if let subtasks = task.subtasks {
