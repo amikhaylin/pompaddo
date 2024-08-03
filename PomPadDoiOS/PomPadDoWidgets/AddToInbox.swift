@@ -9,18 +9,36 @@ import WidgetKit
 import SwiftUI
 
 struct AddToInboxEntryView: View {
+    @Environment(\.widgetFamily) var widgetFamily
     var entry: Provider.Entry
 
     var body: some View {
-        ZStack {
-            AccessoryWidgetBackground()
-            
-            Image(systemName: "tray.and.arrow.down.fill")
-                .resizable()
-                .scaledToFit()
-                .padding(10)
-                .foregroundStyle(Color.orange)
-                .widgetURL(URL(string: "pompaddo://addtoinbox"))
+        switch widgetFamily {
+        #if os(iOS)
+        case .systemSmall:
+            VStack {
+                Text("Add Task")
+                    .font(.title)
+                Text("to Inbox")
+                
+                Image(systemName: "tray.and.arrow.down.fill")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                    .foregroundStyle(Color.orange)
+                    .widgetURL(URL(string: "pompaddo://addtoinbox"))
+            }
+            #endif
+        default:
+            ZStack {
+                AccessoryWidgetBackground()
+                
+                Image(systemName: "tray.and.arrow.down.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(10)
+                    .foregroundStyle(Color.orange)
+                    .widgetURL(URL(string: "pompaddo://addtoinbox"))
+            }
         }
     }
 }
@@ -63,7 +81,7 @@ struct AddToInbox: Widget {
     }
 }
 
-#Preview(as: .accessoryRectangular) {
+#Preview(as: .accessoryCircular) {
     AddToInbox()
 } timeline: {
     SimpleEntry(date: .now)
