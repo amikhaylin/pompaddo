@@ -29,21 +29,23 @@ struct TodayTasksHomeScreen: View {
     @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
     
     var body: some View {
-        VStack {
-//            VStack {
-//                HStack {
-//                    Text("Today")
-//                        .font(.title)
-//                    
-//                    Spacer()
-//                }
-//                
-//                Spacer()
-//            }
-            
-            Text("Today")
-                .font(.title)
-            
+        ZStack {
+            VStack {
+                HStack {
+                    Text("Today")
+                        .font(.title2)
+                    
+                    Spacer()
+                    
+                    Link(destination: URL(string: "pompaddo://addtoinbox")!, label: {
+                        Image(systemName: "tray.and.arrow.down.fill")
+                            .foregroundStyle(Color.orange)
+                    })
+                }
+                
+                Spacer()
+            }
+
             Gauge(value: Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) && $0.completed }).count), in: 0...Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) }).count)) {
                 Text("\(tasksToday.filter({ $0.completed == false }).count)")
             }
