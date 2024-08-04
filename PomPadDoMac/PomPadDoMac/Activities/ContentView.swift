@@ -59,6 +59,7 @@ struct ContentView: View {
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects)
                     .environmentObject(refresher)
+                    .id(refresher.refresh)
             }
             .toolbar {
                 ToolbarItemGroup {
@@ -109,6 +110,7 @@ struct ContentView: View {
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
+                            .id(refresher.refresh)
                     } else {
                         Text("Select a project")
                     }
