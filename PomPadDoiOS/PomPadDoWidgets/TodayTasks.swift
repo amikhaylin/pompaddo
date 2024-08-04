@@ -9,9 +9,7 @@ import WidgetKit
 import SwiftUI
 import SwiftData
 
-struct TodayTasksEntryView: View {
-    var entry: Provider.Entry
-    @Environment(\.widgetFamily) var family
+struct TodayTasksAccessory: View {
     @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
     
     var body: some View {
@@ -23,6 +21,48 @@ struct TodayTasksEntryView: View {
             }
             .gaugeStyle(.accessoryCircularCapacity)
             .tint(.green)
+        }
+    }
+}
+
+struct TodayTasksHomeScreen: View {
+    @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
+    
+    var body: some View {
+        VStack {
+//            VStack {
+//                HStack {
+//                    Text("Today")
+//                        .font(.title)
+//                    
+//                    Spacer()
+//                }
+//                
+//                Spacer()
+//            }
+            
+            Text("Today")
+                .font(.title)
+            
+            Gauge(value: Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) && $0.completed }).count), in: 0...Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) }).count)) {
+                Text("\(tasksToday.filter({ $0.completed == false }).count)")
+            }
+            .gaugeStyle(.accessoryCircularCapacity)
+            .tint(.green)
+        }
+    }
+}
+
+struct TodayTasksEntryView: View {
+    var entry: Provider.Entry
+    @Environment(\.widgetFamily) var family
+    
+    var body: some View {
+        switch family {
+        case .systemSmall:
+            TodayTasksHomeScreen()
+        default:
+            TodayTasksAccessory()
         }
     }
 }
