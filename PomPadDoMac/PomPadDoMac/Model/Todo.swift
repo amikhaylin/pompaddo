@@ -201,7 +201,16 @@ extension Todo {
                                                         to: Calendar.current.startOfDay(for: dueDate))
             }
         }
-
+    }
+    
+    func nextWeek() {
+        let dueDate = Date()
+        
+        let weekday = Calendar.current.component(.weekday, from: dueDate)
+        let startWeek = Calendar.current.firstWeekday
+        self.dueDate = Calendar.current.date(byAdding: .day,
+                                             value: (7 - (weekday - startWeek)),
+                                             to: Calendar.current.startOfDay(for: dueDate))
     }
     
     func reactivate() {

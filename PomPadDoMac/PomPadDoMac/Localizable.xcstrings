@@ -1122,6 +1122,22 @@
         }
       }
     },
+    "Next week" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next week"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "На следующей неделе"
+          }
+        }
+      }
+    },
     "No projects to review" : {
       "localizations" : {
         "en" : {

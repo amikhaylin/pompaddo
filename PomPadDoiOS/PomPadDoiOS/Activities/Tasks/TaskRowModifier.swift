@@ -54,6 +54,16 @@ struct TaskRowModifier: ViewModifier {
                 Text("Tomorrow")
             }
             
+            Button {
+                task.nextWeek()
+                refresher.refresh.toggle()
+            } label: {
+                HStack {
+                    Image(systemName: "calendar.badge.clock")
+                    Text("Next week")
+                }
+            }
+            
             if task.repeation != .none {
                 Button {
                     task.skip()
