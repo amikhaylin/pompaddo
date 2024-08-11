@@ -17,6 +17,7 @@ enum MainViewTabs {
 }
 
 struct MainView: View {
+    @Environment(\.scenePhase) var scenePhase
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
@@ -42,7 +43,6 @@ struct MainView: View {
             switch tab {
             case .tasks:
                 ContentView()
-//                    .id(refresh)
                     .environmentObject(refresher)
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
@@ -151,6 +151,11 @@ struct MainView: View {
         .onOpenURL { url in
             if url.absoluteString == "pompaddo://addtoinbox" {
                 newTaskIsShowing.toggle()
+            }
+        }
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active && oldPhase == .background {
+                refresher.refresh.toggle()
             }
         }
     }

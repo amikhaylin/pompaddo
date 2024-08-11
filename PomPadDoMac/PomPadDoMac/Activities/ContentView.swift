@@ -38,6 +38,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    @Environment(\.scenePhase) var scenePhase
     
     @State private var newTaskIsShowing = false
     @State var selectedSideBarItem: SideBarItem? = .today
@@ -151,6 +152,11 @@ struct ContentView: View {
                         NotificationManager.setTaskNotification(task: task)
                     }
                 }
+            }
+        }
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active && oldPhase == .background {
+                refresher.refresh.toggle()
             }
         }
     }
