@@ -120,6 +120,17 @@ struct TaskDetailsView: View {
                 } label: {
                     Label("Tomorrow", systemImage: "sunrise")
                 }
+            
+                Button {
+                    task.nextWeek()
+                    refresher.refresh.toggle()
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "calendar.badge.clock")
+                        Text("Next week")
+                    }
+                }
                 
                 Button {
                     task.dueDate = nil

@@ -34,17 +34,22 @@ struct ReviewProjectsView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        Button("Delete project") {
+                        Button(role: .destructive) {
                             deletionRequested.toggle()
+                        } label: {
+                            Text("Delete project")
+                                .foregroundStyle(Color.red)
                         }
                         .popover(isPresented: $deletionRequested, attachmentAnchor: .point(.top)) {
                             VStack {
                                 Text("This project will be permanently deleted")
-                                Button {
+                                Button(role: .destructive) {
                                     project.deleteRelatives(context: modelContext)
                                     modelContext.delete(project)
+                                    deletionRequested.toggle()
                                 } label: {
                                     Label("Delete Project", systemImage: "trash")
+                                        .foregroundStyle(Color.red)
                                 }
                             }
                             .padding(10)

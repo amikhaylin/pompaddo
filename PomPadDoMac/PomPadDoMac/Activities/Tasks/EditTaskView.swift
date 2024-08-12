@@ -61,6 +61,15 @@ struct EditTaskView: View {
                         }
                         
                         Button {
+                            task.nextWeek()
+                        } label: {
+                            HStack {
+                                Image(systemName: "calendar.badge.clock")
+                                Text("Next week")
+                            }
+                        }
+                        
+                        Button {
                             task.dueDate = nil
                             showingDatePicker = false
                         } label: {
