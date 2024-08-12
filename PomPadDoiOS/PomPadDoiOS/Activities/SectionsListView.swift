@@ -10,6 +10,7 @@ import SwiftData
 import WidgetKit
 
 struct SectionsListView: View {
+    @EnvironmentObject var refresher: Refresher
     var tasks: [Todo]
     var projects: [Project]
     
@@ -107,6 +108,7 @@ struct SectionsListView: View {
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
             WidgetCenter.shared.reloadAllTimelines()
+            refresher.refresh.toggle()
         }
         .onAppear {
             tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()

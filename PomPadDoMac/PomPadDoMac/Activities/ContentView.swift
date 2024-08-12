@@ -55,7 +55,6 @@ struct ContentView: View {
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                     .frame(height: 125)
-                    .id(refresher.refresh)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects)
