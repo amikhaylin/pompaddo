@@ -16,6 +16,7 @@
 		4D1D9EB72BD152FB00CFF31C /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
 		4D1D9EB82BD1530000CFF31C /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
 		4D2BBCBF2BE4DEAB00E105C1 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */; };
+		4D3939A02C64FF05004B08B9 /* FocusTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */; };
 		4D4139862BE8DEF700AA840C /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
 		4D41398B2BE8F31A00AA840C /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */; };
 		4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8642BDF8B580026C2EA /* NotificationManager.swift */; };
@@ -113,6 +114,7 @@
 		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
+		4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTasksView.swift; sourceTree = "<group>"; };
 		4D4139852BE8DEF700AA840C /* ProjectGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectGroup.swift; sourceTree = "<group>"; };
 		4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		4D59C8642BDF8B580026C2EA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				4D59C8672BE10A180026C2EA /* FocusTimerView.swift */,
 				4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */,
 				4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */,
+				4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */,
 			);
 			path = Focus;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
 				4D169BCE2C106039001F995F /* SettingsView.swift in Sources */,
 				4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */,
+				4D3939A02C64FF05004B08B9 /* FocusTasksView.swift in Sources */,
 				4DBBB0372C18A57300F1D400 /* TaskRowModifier.swift in Sources */,
 				4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */,
 			);

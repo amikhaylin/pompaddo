@@ -25,9 +25,6 @@ struct FocusTimerView: View {
     @Binding var timerCount: String
     @Binding var focusMode: FocusTimerMode
     
-//    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
-    @State private var tasksTodayActive: [Todo]
-    
     @State private var viewMode = 0
     @State private var selectedTask: Todo?
     @State private var textToInbox = ""
@@ -61,8 +58,7 @@ struct FocusTimerView: View {
                 }.pickerStyle(.segmented)
              
                 Button {
-                    tasksTodayActive = TasksQuery.fetchData(context: modelContext,
-                                                            predicate: TasksQuery.predicateTodayActive())
+                    refresher.refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
                 }
@@ -70,47 +66,8 @@ struct FocusTimerView: View {
                 
             if viewMode == 0 {
                 // MARK: Task list
-                List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                     id: \.self,
-                     selection: $selectedTask) { task in
-                    if let subtasks = task.subtasks, subtasks.count > 0 {
-                        OutlineGroup([task],
-                                     id: \.self,
-                                     children: \.subtasks) { maintask in
-                            HStack {
-                                TaskRowView(task: maintask)
-                                    .tag(maintask)
-                                
-                                Button {
-                                    selectedTask = maintask
-                                    viewMode = 1
-                                    if timer.state == .idle {
-                                        timer.reset()
-                                        timer.start()
-                                    }
-                                } label: {
-                                    Image(systemName: "play.fill")
-                                }
-                            }
-                        }
-                    } else {
-                        HStack {
-                            TaskRowView(task: task)
-                                .tag(task)
-                            
-                            Button {
-                                selectedTask = task
-                                viewMode = 1
-                                if timer.state == .idle {
-                                    timer.reset()
-                                    timer.start()
-                                }
-                            } label: {
-                                Image(systemName: "play.fill")
-                            }
-                        }
-                    }
-                }
+                FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode, timer: timer)
+                    .id(refresher.refresh)
             } else {
                 ZStack {
                     VStack {
@@ -241,9 +198,6 @@ struct FocusTimerView: View {
                     focusMode: Binding<FocusTimerMode>) {
         self._timerCount = timerCount
         self._focusMode = focusMode
-        
-        self.tasksTodayActive = TasksQuery.fetchData(context: context, 
-                                                     predicate: TasksQuery.predicateTodayActive())
     }
 }
 
