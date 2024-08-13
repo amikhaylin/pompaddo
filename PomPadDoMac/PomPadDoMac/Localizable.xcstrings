@@ -1234,6 +1234,22 @@
         }
       }
     },
+    "Open parent task" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open parent task"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Открыть основную задачу"
+          }
+        }
+      }
+    },
     "Open subtasks" : {
       "localizations" : {
         "en" : {
