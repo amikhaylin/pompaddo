@@ -107,6 +107,7 @@ struct MainView: View {
                     Image(systemName: "tray.and.arrow.down.fill")
                         .foregroundStyle(Color.orange)
                 }
+                .keyboardShortcut("i", modifiers: [.command]) 
                 .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottomTrailing), content: {
                     NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
                         .frame(minWidth: 200, maxHeight: 180)
