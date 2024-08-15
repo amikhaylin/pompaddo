@@ -52,6 +52,15 @@ struct ProjectTaskModifier: ViewModifier {
                     Text("Tomorrow")
                 }
                 
+                Button {
+                    task.nextWeek()
+                } label: {
+                    HStack {
+                        Image(systemName: "calendar.badge.clock")
+                        Text("Next week")
+                    }
+                }
+                
                 if task.repeation != .none {
                     Button {
                         task.skip()
@@ -60,6 +69,32 @@ struct ProjectTaskModifier: ViewModifier {
                         Text("Skip")
                     }
                 }
+                Divider()
+                
+                Menu {
+                    ForEach(0...3, id: \.self) { priority in
+                        Button {
+                            task.priority = priority
+                        } label: {
+                            HStack {
+                                switch priority {
+                                case 3:
+                                    Text("High")
+                                case 2:
+                                    Text("Medium")
+                                case 1:
+                                    Text("Low")
+                                default:
+                                    Text("None")
+                                }
+                            }
+                        }
+                        .tag(priority as Int)
+                    }
+                } label: {
+                    Text("Priority")
+                }
+                
                 Divider()
                 
                 Button {
