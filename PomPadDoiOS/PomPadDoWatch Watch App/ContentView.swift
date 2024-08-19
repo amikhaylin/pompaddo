@@ -29,6 +29,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 }
 
 struct ContentView: View {
+    @Environment(\.scenePhase) var scenePhase
+    
     @Query var tasks: [Todo]
     
     @State var selectedSideBarItem: SideBarItem? = .today
@@ -91,6 +93,11 @@ struct ContentView: View {
         .onOpenURL { url in
             if url.absoluteString == "pompaddo://addtoinbox" {
                 addToInbox.toggle()
+            }
+        }
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active && oldPhase == .background {
+                refresher.refresh.toggle()
             }
         }
     }
