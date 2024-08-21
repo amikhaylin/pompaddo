@@ -114,33 +114,33 @@ struct TaskRowModifier: ViewModifier {
                 Text("Add subtask")
             }
             
-            if let subtasks = task.subtasks {
+            NavigationLink {
+                TasksListView(tasks: task.subtasks != nil ? task.subtasks! : [Todo](),
+                              list: list,
+                              title: task.name,
+                              mainTask: task)
+                .id(refresher.refresh)
+                .environmentObject(refresher)
+            } label: {
+                Image(systemName: "arrow.right")
+                Text("Open subtasks")
+            }
+            
+            if let parentTask = task.parentTask {
                 NavigationLink {
-                    TasksListView(tasks: subtasks,
+                    TasksListView(tasks: parentTask.subtasks != nil ? parentTask.subtasks! : [Todo](),
                                   list: list,
-                                  title: task.name,
-                                  mainTask: task)
+                                  title: parentTask.name,
+                                  mainTask: parentTask)
                     .id(refresher.refresh)
                     .environmentObject(refresher)
                 } label: {
-                    Image(systemName: "arrow.right")
-                    Text("Open subtasks")
-                }
-            } else {
-                let subtasks = [Todo]()
-                
-                NavigationLink {
-                    TasksListView(tasks: subtasks,
-                                  list: list,
-                                  title: task.name,
-                                  mainTask: task)
-                    .id(refresher.refresh)
-                    .environmentObject(refresher)
-                } label: {
-                    Image(systemName: "arrow.right")
-                    Text("Open subtasks")
+                    Image(systemName: "arrow.left")
+                    Text("Open parent task")
                 }
             }
+            
+            Divider()
             
             if let url = URL(string: task.link) {
                 Link(destination: url,
