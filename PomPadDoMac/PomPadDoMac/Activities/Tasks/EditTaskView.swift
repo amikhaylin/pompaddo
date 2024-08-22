@@ -26,6 +26,7 @@ struct EditTaskView: View {
             Section {
                 TextField("Name", text: $task.name)
                     .textFieldStyle(.roundedBorder)
+                    .accessibility(identifier: "EditTaskName")
             }
             
             Section("Due date") {
@@ -95,6 +96,7 @@ struct EditTaskView: View {
                         Text(mode.localizedString()).tag(mode as RepeationMode?)
                     }
                 }
+                .accessibility(identifier: "EditTaskRepeation")
                 
                 if task.repeation == .custom {
                     HStack {

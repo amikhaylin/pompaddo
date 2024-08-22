@@ -104,6 +104,7 @@ struct TasksListView: View {
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
+                .accessibility(identifier: "AddToCurrentList")
 
                 Button {
                     deleteItems()
@@ -121,6 +122,7 @@ struct TasksListView: View {
                 } label: {
                     Label("Show task details", systemImage: "sidebar.trailing")
                 }
+                .accessibility(identifier: "ShowTaskDetails")
             }
         }
         .navigationTitle(title)
@@ -146,13 +148,13 @@ struct TasksListView: View {
     }
     
     private func deleteItems() {
-        withAnimation {
+//        withAnimation {
             for task in selectedTasks {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }
             refresher.refresh.toggle()
-        }
+//        }
     }
     
     private func deleteTask(task: Todo) {
@@ -179,7 +181,7 @@ struct TasksListView: View {
     }
 
     private func addToCurrentList() {
-        withAnimation {
+//        withAnimation {
             selectedTasks.removeAll()
             let task = Todo(name: "")
             if let mainTask = mainTask {
@@ -191,7 +193,7 @@ struct TasksListView: View {
             modelContext.insert(task)
 
             selectedTasks.insert(task)
-        }
+//        }
     }
 }
 
