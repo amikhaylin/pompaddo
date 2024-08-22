@@ -68,6 +68,7 @@ struct ContentView: View {
                     } label: {
                         Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
                     }
+                    .keyboardShortcut("r", modifiers: [.command])
                     
                     Button {
                         newTaskIsShowing.toggle()
@@ -75,6 +76,7 @@ struct ContentView: View {
                         Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
                             .foregroundStyle(Color.orange)
                     }
+                    .keyboardShortcut("i", modifiers: [.command])
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
