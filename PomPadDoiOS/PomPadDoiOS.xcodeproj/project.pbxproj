@@ -26,6 +26,8 @@
 		4D4272CF2BF3C7890003E129 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272CE2BF3C7890003E129 /* EditProjectGroupView.swift */; };
 		4D4272D12BF3C7E20003E129 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D02BF3C7E20003E129 /* NewProjectGroupView.swift */; };
 		4D4272D32BF3C8070003E129 /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272D22BF3C8070003E129 /* NewProjectView.swift */; };
+		4D6C78BD2C6DEBEA00C70FDA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */; };
+		4D6C78BE2C6DEBEC00C70FDA /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */; };
 		4D807D0F2C2ABE6B000A973A /* PomPadDoWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D0E2C2ABE6B000A973A /* PomPadDoWatchApp.swift */; };
 		4D807D112C2ABE6B000A973A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D807D102C2ABE6B000A973A /* ContentView.swift */; };
 		4D807D132C2ABE6E000A973A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D807D122C2ABE6E000A973A /* Assets.xcassets */; };
@@ -869,6 +871,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D6C78BD2C6DEBEA00C70FDA /* Localizable.xcstrings in Resources */,
 				4D83FCCF2C4FB15400F407C9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -877,6 +880,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D6C78BE2C6DEBEC00C70FDA /* Localizable.xcstrings in Resources */,
 				4D83FCF22C50016100F407C9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

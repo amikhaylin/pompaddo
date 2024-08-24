@@ -161,6 +161,22 @@
         }
       }
     },
+    "Add Task" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Task"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить"
+          }
+        }
+      }
+    },
     "Add task to current list" : {
       "localizations" : {
         "en" : {
@@ -1282,6 +1298,38 @@
         }
       }
     },
+    "PomPadDo add to Inbox" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PomPadDo add to Inbox"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PomPadDo добавить во Входящие"
+          }
+        }
+      }
+    },
+    "PomPadDo today tasks" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PomPadDo today tasks"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PomPadDo задачи на сегодня"
+          }
+        }
+      }
+    },
     "Priority" : {
       "localizations" : {
         "en" : {
@@ -1811,6 +1859,38 @@
         }
       }
     },
+    "This is a widget to display Add to Inbox dialog" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is a widget to display Add to Inbox dialog"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Это виджет для отображения диалогового окна «Добавить в папку «Входящие»»"
+          }
+        }
+      }
+    },
+    "This is a widget to display today tasks number" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This is a widget to display today tasks number"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Это виджет для отображения количества задач на сегодня."
+          }
+        }
+      }
+    },
     "This project will be permanently deleted" : {
       "localizations" : {
         "en" : {
@@ -1839,7 +1919,23 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Запланированые"
+            "value" : "Запланированные"
+          }
+        }
+      }
+    },
+    "to Inbox" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "to Inbox"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "во Входящие"
           }
         }
       }
