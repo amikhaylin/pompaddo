@@ -4,6 +4,7 @@
 //
 //  Created by Andrey Mikhaylin on 13.02.2024.
 //
+// swiftlint:disable function_body_length
 
 import XCTest
 
@@ -77,8 +78,31 @@ final class PomPadDoMacUITests: XCTestCase {
         let edittaskrepeationPopUpButton = groupsQuery.popUpButtons["EditTaskRepeation"]
         edittaskrepeationPopUpButton.click()
         app/*@START_MENU_TOKEN@*/.groups.menuItems["Daily"]/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".popUpButtons[\"EditTaskRepeation\"]",".menus.menuItems[\"Daily\"]",".menuItems[\"Daily\"]",".groups"],[[[-1,6,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,6,3],[-1,2,3],[-1,1,2]],[[-1,6,3],[-1,2,3]],[[-1,5],[-1,4],[-1,3,4]],[[-1,5],[-1,4]]],[0,0]]@END_MENU_TOKEN@*/.click()
+        
+        app.outlines.matching(identifier: "Sidebar").buttons["🚗 Car"].click()
+        app.toolbars.children(matching: .button)["Add task to current list"].children(matching: .button)["Add task to current list"].click()
+        app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.textFields["EditTaskName"].click()
+        app/*@START_MENU_TOKEN@*/.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier:"Inbox").element/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".groups",".scrollViews.outlines.matching(identifier: \"Sidebar\")",".outlineRows.cells.containing(.button, identifier:\"Inbox\").element",".cells.containing(.button, identifier:\"Inbox\").element",".outlines.matching(identifier: \"Sidebar\")"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.typeText("Maintenance")
+        app.groups.buttons["Set due Date"].click()
+        
+        app.outlines.matching(identifier: "Sidebar").buttons["❤️Health"].click()
+        app.toolbars.children(matching: .button)["Add task to current list"].children(matching: .button)["Add task to current list"].click()
+        app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.textFields["EditTaskName"].click()
+        app/*@START_MENU_TOKEN@*/.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier:"Inbox").element/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".groups",".scrollViews.outlines.matching(identifier: \"Sidebar\")",".outlineRows.cells.containing(.button, identifier:\"Inbox\").element",".cells.containing(.button, identifier:\"Inbox\").element",".outlines.matching(identifier: \"Sidebar\")"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.typeText("Workout")
+        app.groups.buttons["Set due Date"].click()
 
+        app.outlines.matching(identifier: "Sidebar").buttons["💻John’s project"].click()
+        app.toolbars.children(matching: .button)["Add task to current list"].children(matching: .button)["Add task to current list"].click()
+        app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.textFields["EditTaskName"].click()
+        app/*@START_MENU_TOKEN@*/.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier:"Inbox").element/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".groups",".scrollViews.outlines.matching(identifier: \"Sidebar\")",".outlineRows.cells.containing(.button, identifier:\"Inbox\").element",".cells.containing(.button, identifier:\"Inbox\").element",".outlines.matching(identifier: \"Sidebar\")"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.typeText("Design data model")
+        app/*@START_MENU_TOKEN@*/.groups.radioButtons["Medium"]/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".radioGroups.radioButtons[\"Medium\"]",".radioButtons[\"Medium\"]",".groups"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
+        app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.buttons["Estimate"].click()
+        app/*@START_MENU_TOKEN@*/.groups.radioButtons["Half clear"]/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".radioGroups.radioButtons[\"Half clear\"]",".radioButtons[\"Half clear\"]",".groups"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
+        app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.popUpButtons["1"].click()
+        app/*@START_MENU_TOKEN@*/.groups.menuItems["3"]/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".popUpButtons[\"1\"]",".menus.menuItems[\"3\"]",".menuItems[\"3\"]",".groups"],[[[-1,6,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,6,3],[-1,2,3],[-1,1,2]],[[-1,6,3],[-1,2,3]],[[-1,5],[-1,4],[-1,3,4]],[[-1,5],[-1,4]]],[0,0]]@END_MENU_TOKEN@*/.click()
+        app.groups.buttons["Set due Date"].click()
 
+        app.outlines.matching(identifier: "Sidebar").buttons["Today"].click()
         
         
         
@@ -101,3 +125,4 @@ final class PomPadDoMacUITests: XCTestCase {
 //        }
 //    }
 }
+// swiftlint:enable function_body_length
