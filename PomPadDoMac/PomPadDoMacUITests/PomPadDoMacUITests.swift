@@ -107,13 +107,20 @@ final class PomPadDoMacUITests: XCTestCase {
         
         
         let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "First task"
+        attachment.name = "Filled projects and tasks"
         attachment.lifetime = .keepAlways
         add(attachment)
         
 //        app.buttons["AddToCurrentList"].firstMatch.tap()
         
 //        print(app.debugDescription)
+    }
+    
+    func testAddSubtasks() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        
     }
 
 //    func testLaunchPerformance() throws {
