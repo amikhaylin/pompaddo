@@ -75,6 +75,14 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
+                        refresher.refresh.toggle()
+                    } label: {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                    }
+                }
+                
+                ToolbarItem(placement: .bottomBar) {
+                    Button {
                         addToInbox.toggle()
                     } label: {
                         Image(systemName: "tray.and.arrow.down.fill")
