@@ -68,7 +68,7 @@ struct ProjectsListView: View {
                 
                 ForEach(groups) { group in
                     @Bindable var group = group
-                    DisclosureGroup(group.name, isExpanded: $group.expanded) {
+                    DisclosureGroup(isExpanded: $group.expanded) {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
                                 Text(project.name)
@@ -87,6 +87,26 @@ struct ProjectsListView: View {
                             }
                             .contextMenu {
                                 Button {
+                                    project.group = nil
+                                } label: {
+                                    Image(systemName: "clear")
+                                    Text("Remove project from group")
+                                }
+                                
+                                Button {
+                                    project.deleteRelatives(context: modelContext)
+                                    modelContext.delete(project)
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
+                                    Text("Delete project")
+                                }
+                            }
+                        }
+                    } label: {
+                        Text(group.name)
+                            .contextMenu {
+                                Button {
                                     editProjectGroup = group
                                 } label: {
                                     Image(systemName: "pencil")
@@ -103,27 +123,7 @@ struct ProjectsListView: View {
                                         .foregroundStyle(Color.red)
                                     Text("Delete group")
                                 }
-                                
-                                Divider()
-                                
-                                Button {
-                                    project.group = nil
-                                } label: {
-                                    Image(systemName: "clear")
-                                    Text("Remove project from group")
-                                }
-                                
-                                Button {
-                                    project.deleteRelatives(context: modelContext)
-                                    modelContext.delete(project)
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(Color.red)
-                                    Text("Delete project")
-                                }
-
                             }
-                        }
                     }
                     .dropDestination(for: Project.self) { projects, _ in
                         for project in projects where project.group == nil || project.group != group {
