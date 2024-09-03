@@ -58,6 +58,7 @@
 		4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* BoardView.swift */; };
 		4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DC2BC940B6002C9566 /* ProjectView.swift */; };
 		4DD0FA3A2C20914600C99E25 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0FA392C20914600C99E25 /* Refresher.swift */; };
+		4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */; };
 		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
 		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
 		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
@@ -162,6 +163,7 @@
 		4DCE05D82BC9284A002C9566 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
 		4DCE05DC2BC940B6002C9566 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
 		4DD0FA392C20914600C99E25 /* Refresher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Refresher.swift; path = ../../../PomPadDoiOS/PomPadDoiOS/Utils/Refresher.swift; sourceTree = "<group>"; };
+		4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectNameView.swift; sourceTree = "<group>"; };
 		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
 		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
 		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				4DCE05DC2BC940B6002C9566 /* ProjectView.swift */,
 				4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */,
 				4DBBB0342C18A55D00F1D400 /* ProjectTaskModifier.swift */,
+				4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -659,6 +662,7 @@
 				4D41398B2BE8F31A00AA840C /* ProjectsListView.swift in Sources */,
 				4D821E4E2C11A03A008E79F6 /* Common.swift in Sources */,
 				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
+				4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */,
 				4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */,
 				4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */,
 				4DF91FDF2BCBD460009A6DA8 /* CheckBoxView.swift in Sources */,

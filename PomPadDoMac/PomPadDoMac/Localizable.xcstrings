@@ -1491,6 +1491,22 @@
         }
       }
     },
+    "Rename project" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rename project"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Переименовать проект"
+          }
+        }
+      }
+    },
     "Repead every" : {
       "localizations" : {
         "en" : {

@@ -18,6 +18,7 @@ struct ProjectsListView: View {
     @State private var newProjectGroupShow = false
     
     @State private var editProjectGroup: ProjectGroup?
+    @State private var editProjectName: Project?
     
     var projects: [Project]
     @Query var groups: [ProjectGroup]
@@ -42,6 +43,13 @@ struct ProjectsListView: View {
                         return true
                     }
                     .contextMenu {
+                        Button {
+                            editProjectName = project
+                        } label: {
+                            Image(systemName: "pencil")
+                            Text("Rename project")
+                        }
+                        
                         Menu {
                             ForEach(groups) { group in
                                 Button {
@@ -67,7 +75,7 @@ struct ProjectsListView: View {
                 }
                 
                 ForEach(groups) { group in
-                    @Bindable var group = group
+                    @Bindable var group: ProjectGroup = group
                     DisclosureGroup(isExpanded: $group.expanded) {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
@@ -86,6 +94,13 @@ struct ProjectsListView: View {
                                 return true
                             }
                             .contextMenu {
+                                Button {
+                                    editProjectName = project
+                                } label: {
+                                    Image(systemName: "pencil")
+                                    Text("Rename project")
+                                }
+                                
                                 Button {
                                     project.group = nil
                                 } label: {
@@ -173,6 +188,11 @@ struct ProjectsListView: View {
         .listStyle(SidebarListStyle())
         .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
             EditProjectGroupView(group: editGroup)
+                .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                .presentationCompactAdaptation(.popover)
+        })
+        .popover(item: $editProjectName, attachmentAnchor: .point(.bottomLeading), content: { editProject in
+            EditProjectNameView(project: editProject)
                 .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
                 .presentationCompactAdaptation(.popover)
         })

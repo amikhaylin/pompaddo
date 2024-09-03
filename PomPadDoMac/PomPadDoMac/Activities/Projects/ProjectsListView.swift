@@ -18,6 +18,7 @@ struct ProjectsListView: View {
     @State private var newProjectGroupShow = false
     
     @State private var editProjectGroup: ProjectGroup?
+    @State private var editProjectName: Project?
     
     var projects: [Project]
     @Query var groups: [ProjectGroup]
@@ -42,6 +43,13 @@ struct ProjectsListView: View {
                         return true
                     }
                     .contextMenu {
+                        Button {
+                            editProjectName = project
+                        } label: {
+                            Image(systemName: "pencil")
+                            Text("Rename project")
+                        }
+                        
                         Menu {
                             ForEach(groups) { group in
                                 Button {
@@ -86,6 +94,13 @@ struct ProjectsListView: View {
                                 return true
                             }
                             .contextMenu {
+                                Button {
+                                    editProjectName = project
+                                } label: {
+                                    Image(systemName: "pencil")
+                                    Text("Rename project")
+                                }
+                                
                                 Button {
                                     project.group = nil
                                 } label: {
@@ -165,6 +180,12 @@ struct ProjectsListView: View {
             editProjectGroup = nil
         }, content: { editGroup in
             EditProjectGroupView(group: editGroup)
+                .presentationDetents([.height(200)])
+        })
+        .sheet(item: $editProjectName, onDismiss: {
+            editProjectName = nil
+        }, content: { editProject in
+            EditProjectNameView(project: editProject)
                 .presentationDetents([.height(200)])
         })
         .sheet(isPresented: $newProjectIsShowing) {
