@@ -148,21 +148,17 @@ struct TasksListView: View {
     }
     
     private func deleteItems() {
-//        withAnimation {
-            for task in selectedTasks {
-                TasksQuery.deleteTask(context: modelContext,
-                                      task: task)
-            }
-            refresher.refresh.toggle()
-//        }
+        for task in selectedTasks {
+            TasksQuery.deleteTask(context: modelContext,
+                                  task: task)
+        }
+        refresher.refresh.toggle()
     }
     
     private func deleteTask(task: Todo) {
-        withAnimation {
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
-            refresher.refresh.toggle()
-        }
+        TasksQuery.deleteTask(context: modelContext,
+                              task: task)
+        refresher.refresh.toggle()
     }
     
     private func setDueDate(task: Todo) {
@@ -181,19 +177,17 @@ struct TasksListView: View {
     }
 
     private func addToCurrentList() {
-//        withAnimation {
-            selectedTasks.removeAll()
-            let task = Todo(name: "")
-            if let mainTask = mainTask {
-                mainTask.subtasks?.append(task)
-            } else {
-                setDueDate(task: task)
-            }
-            tasks.append(task)
-            modelContext.insert(task)
+        selectedTasks.removeAll()
+        let task = Todo(name: "")
+        if let mainTask = mainTask {
+            mainTask.subtasks?.append(task)
+        } else {
+            setDueDate(task: task)
+        }
+        tasks.append(task)
+        modelContext.insert(task)
 
-            selectedTasks.insert(task)
-//        }
+        selectedTasks.insert(task)
     }
 }
 
