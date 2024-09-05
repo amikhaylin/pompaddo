@@ -5,6 +5,7 @@
 //  Created by Andrey Mikhaylin on 11.06.2024.
 //
 // swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
 
 import SwiftUI
 import SwiftData
@@ -257,3 +258,4 @@ struct TaskRowModifier: ViewModifier {
     }
 }
 // swiftlint:enable function_body_length
+// swiftlint:enable cyclomatic_complexity
