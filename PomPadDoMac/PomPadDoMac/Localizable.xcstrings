@@ -225,6 +225,22 @@
         }
       }
     },
+    "Add to Inbox ⌘I" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add to Inbox ⌘I"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить во Входящие ⌘R"
+          }
+        }
+      }
+    },
     "Apply event" : {
       "localizations" : {
         "en" : {
@@ -446,6 +462,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Завершенные"
+          }
+        }
+      }
+    },
+    "Create group" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create group"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создать группу"
+          }
+        }
+      }
+    },
+    "Create project" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Create project"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Создать проект"
           }
         }
       }
@@ -1439,6 +1487,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Обновить"
+          }
+        }
+      }
+    },
+    "Refresh ⌘R" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh ⌘R"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить ⌘R"
           }
         }
       }

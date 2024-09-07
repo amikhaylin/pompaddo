@@ -66,6 +66,7 @@ struct ProjectView: View {
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
+                .help("Add task to current list")
 
                 Button {
                     deleteItems()
@@ -73,6 +74,7 @@ struct ProjectView: View {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
+                    .help("Delete task")
 
                 #if os(macOS)
                 Button {
@@ -80,6 +82,7 @@ struct ProjectView: View {
                 } label: {
                     Label("Settings", systemImage: "gearshape")
                 }
+                .help("Settings")
                 .sheet(isPresented: $showSettings, content: {
                     ProjectSettingsView(isVisible: self.$showSettings,
                                         project: self.project)
@@ -90,6 +93,7 @@ struct ProjectView: View {
                 } label: {
                     Label("Settings", systemImage: "gearshape")
                 }
+                .help("Settings")
                 
                 EditButton()
                 #endif

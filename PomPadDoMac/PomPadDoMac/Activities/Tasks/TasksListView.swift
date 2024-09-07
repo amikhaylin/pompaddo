@@ -105,6 +105,7 @@ struct TasksListView: View {
                     Label("Add task to current list", systemImage: "plus")
                 }
                 .accessibility(identifier: "AddToCurrentList")
+                .help("Add task to current list")
 
                 Button {
                     deleteItems()
@@ -112,6 +113,7 @@ struct TasksListView: View {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
+                    .help("Delete task")
                 
                 #if os(iOS)
                 EditButton()
