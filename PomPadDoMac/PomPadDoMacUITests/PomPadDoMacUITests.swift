@@ -82,19 +82,19 @@ final class PomPadDoMacUITests: XCTestCase {
         app.outlines.matching(identifier: "Sidebar").buttons["🚗 Car"].click()
         app.toolbars.children(matching: .button)["Add task to current list"].children(matching: .button)["Add task to current list"].click()
         app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.textFields["EditTaskName"].click()
-        app/*@START_MENU_TOKEN@*/.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier:"Inbox").element/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".groups",".scrollViews.outlines.matching(identifier: \"Sidebar\")",".outlineRows.cells.containing(.button, identifier:\"Inbox\").element",".cells.containing(.button, identifier:\"Inbox\").element",".outlines.matching(identifier: \"Sidebar\")"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.typeText("Maintenance")
+        app.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier: "Inbox").element.typeText("Maintenance")
         app.groups.buttons["Set due Date"].click()
         
         app.outlines.matching(identifier: "Sidebar").buttons["❤️Health"].click()
         app.toolbars.children(matching: .button)["Add task to current list"].children(matching: .button)["Add task to current list"].click()
         app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.textFields["EditTaskName"].click()
-        app/*@START_MENU_TOKEN@*/.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier:"Inbox").element/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".groups",".scrollViews.outlines.matching(identifier: \"Sidebar\")",".outlineRows.cells.containing(.button, identifier:\"Inbox\").element",".cells.containing(.button, identifier:\"Inbox\").element",".outlines.matching(identifier: \"Sidebar\")"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.typeText("Workout")
+        app.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier: "Inbox").element.typeText("Workout")
         app.groups.buttons["Set due Date"].click()
 
         app.outlines.matching(identifier: "Sidebar").buttons["💻John’s project"].click()
         app.toolbars.children(matching: .button)["Add task to current list"].children(matching: .button)["Add task to current list"].click()
         app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.textFields["EditTaskName"].click()
-        app/*@START_MENU_TOKEN@*/.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier:"Inbox").element/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".groups",".scrollViews.outlines.matching(identifier: \"Sidebar\")",".outlineRows.cells.containing(.button, identifier:\"Inbox\").element",".cells.containing(.button, identifier:\"Inbox\").element",".outlines.matching(identifier: \"Sidebar\")"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.typeText("Design data model")
+        app.outlines.matching(identifier: "Sidebar").cells.containing(.button, identifier: "Inbox").element.typeText("Design data model")
         app/*@START_MENU_TOKEN@*/.groups.radioButtons["Medium"]/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".radioGroups.radioButtons[\"Medium\"]",".radioButtons[\"Medium\"]",".groups"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
         app/*@START_MENU_TOKEN@*/.groups/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".groups"],[[[-1,3],[-1,2],[-1,1,2],[-1,0,1]],[[-1,3],[-1,2],[-1,1,2]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.buttons["Estimate"].click()
         app/*@START_MENU_TOKEN@*/.groups.radioButtons["Half clear"]/*[[".splitGroups[\"SwiftUI.ModifiedContent<PomPadDo.ContentView, SwiftUI._EnvironmentKeyWritingModifier<Swift.Optional<PomPadDo.Refresher>>>-1-AppWindow-1, SidebarNavigationSplitView\"]",".splitGroups",".scrollViews.groups",".radioGroups.radioButtons[\"Half clear\"]",".radioButtons[\"Half clear\"]",".groups"],[[[-1,5,3],[-1,2,3],[-1,1,2],[-1,0,1]],[[-1,5,3],[-1,2,3],[-1,1,2]],[[-1,5,3],[-1,2,3]],[[-1,4],[-1,3]]],[0,0]]@END_MENU_TOKEN@*/.click()
@@ -104,16 +104,21 @@ final class PomPadDoMacUITests: XCTestCase {
 
         app.outlines.matching(identifier: "Sidebar").buttons["Today"].click()
         
-        
+        let exp = expectation(description: "Screenshot after 1 seconds")
+        let result = XCTWaiter.wait(for: [exp], timeout: 1.0)
+        if result == XCTWaiter.Result.timedOut {
+            let attachment = XCTAttachment(screenshot: app.windows.firstMatch.screenshot())
+            attachment.name = "Filled projects and tasks"
+            attachment.lifetime = .keepAlways
+            add(attachment)
+        } else {
+            XCTFail("Delay interrupted")
+        }
         
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "Filled projects and tasks"
         attachment.lifetime = .keepAlways
         add(attachment)
-        
-//        app.buttons["AddToCurrentList"].firstMatch.tap()
-        
-//        print(app.debugDescription)
     }
     
     func testAddSubtasks() throws {
@@ -144,7 +149,6 @@ final class PomPadDoMacUITests: XCTestCase {
         } else {
             XCTFail("Delay interrupted")
         }
-        
     }
 
 //    func testLaunchPerformance() throws {
