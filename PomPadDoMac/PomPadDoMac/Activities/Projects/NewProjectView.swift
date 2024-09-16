@@ -22,6 +22,7 @@ struct NewProjectView: View {
                 Text("Create simple list")
             }
             .toggleStyle(.switch)
+            .accessibility(identifier: "CreateSimpleList")
             
             HStack {
                 Button("Cancel") {
