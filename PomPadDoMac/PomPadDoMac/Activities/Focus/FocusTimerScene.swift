@@ -13,12 +13,18 @@ struct FocusTimerScene: Scene {
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     
+    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+                           breakInSeconds: 300,
+                           longBreakInSeconds: 1200,
+                           workSessionsCount: 4)
+
     var body: some Scene {
         MenuBarExtra {
             FocusTimerView(context: modelContext,
                            timerCount: $timerCount,
                            focusMode: $focusMode)
             .environmentObject(refresher)
+            .environmentObject(timer)
             .modelContext(modelContext)
         } label: {
             HStack {
@@ -46,5 +52,11 @@ struct FocusTimerScene: Scene {
             }
         }
         .menuBarExtraStyle(.window)
+        .onChange(of: timer.secondsPassed, { _, _ in
+            timerCount = timer.secondsLeftString
+        })
+        .onChange(of: timer.mode, { _, _ in
+            focusMode = timer.mode
+        })
     }
 }

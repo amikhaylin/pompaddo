@@ -11,16 +11,12 @@ import SwiftData
 struct FocusTimerView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var timer: FocusTimer
     
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
-    
-    var timer = FocusTimer(workInSeconds: 1500,
-                           breakInSeconds: 300,
-                           longBreakInSeconds: 1200,
-                           workSessionsCount: 4)
     
     @Binding var timerCount: String
     @Binding var focusMode: FocusTimerMode
@@ -154,12 +150,6 @@ struct FocusTimerView: View {
                                longBreakInSeconds: timerLongBreakSession,
                                workSessionsCount: Int(timerWorkSessionsCount))
         }
-        .onChange(of: timer.secondsLeft, { _, _ in
-            timerCount = timer.secondsLeftString
-        })
-        .onChange(of: timer.mode, { _, _ in
-            focusMode = timer.mode
-        })
         .onChange(of: timer.sessionsCounter, { oldValue, newValue in
             if let task = selectedTask, newValue > oldValue {
                 task.tomatoesCount += 1
