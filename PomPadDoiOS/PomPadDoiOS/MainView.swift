@@ -23,7 +23,7 @@ struct MainView: View {
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
     
-    var timer = FocusTimer(workInSeconds: 1500,
+    @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
@@ -33,6 +33,7 @@ struct MainView: View {
     
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
+    @State private var focusState: FocusTimerState = .idle
     @State private var focusTask: Todo?
     
     @State private var refresh = false
@@ -46,9 +47,9 @@ struct MainView: View {
                     .environmentObject(refresher)
             case .focus:
                 FocusTimerView(focusMode: $focusMode,
-                               timer: timer,
                                selectedTask: $focusTask)
                     .id(refresh)
+                    .environmentObject(timer)
                     .refreshable {
                         refresh.toggle()
                     }
@@ -70,20 +71,23 @@ struct MainView: View {
                 Button {
                     tab = .focus
                 } label: {
-                    TimelineView(.periodic(from: .now, by: 0.5)) { _ in
+                    if focusState == .idle {
+                        Image(systemName: "target")
+                            .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
+                    } else {
                         HStack {
                             if focusMode == .work {
                                 Image(systemName: "target")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
+                                    .foregroundStyle(tab == .focus ? Color.blue : Color.red)
                             } else {
                                 Image(systemName: "cup.and.saucer.fill")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
+                                    .foregroundStyle(tab == .focus ? Color.blue : Color.green)
                             }
                             if timer.state == .running {
-                                Text(timer.secondsLeftString)
+                                Text(timerCount)
                                     .foregroundStyle(focusMode == .work ? Color.red : Color.green)
                             } else {
-                                Text(timer.secondsLeftString)
+                                Text(timerCount)
                                     .foregroundStyle(focusMode == .work ? Color.red : Color.green)
                             }
                         }
@@ -158,6 +162,12 @@ struct MainView: View {
             if newPhase == .active && oldPhase == .background {
                 refresher.refresh.toggle()
             }
+        }
+        .onChange(of: timer.secondsPassed, { _, _ in
+            timerCount = timer.secondsLeftString
+        })
+        .onChange(of: timer.state) { _, _ in
+            focusState = timer.state
         }
     }
 }
