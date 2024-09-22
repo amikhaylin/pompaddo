@@ -10,9 +10,9 @@ import SwiftData
 
 struct FocusTasksView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var timer: FocusTimer
     @Binding var selectedTask: Todo?
     @Binding var viewMode: Int
-    var timer: FocusTimer
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
@@ -62,9 +62,9 @@ struct FocusTasksView: View {
 }
 
 #Preview {
-    @State var viewMode = 0
-    @State var selectedTask: Todo?
-    var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var viewMode = 0
+    @Previewable @State var selectedTask: Todo?
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
@@ -72,8 +72,9 @@ struct FocusTasksView: View {
     do {
         let previewer = try Previewer()
         
-        return FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode, timer: timer)
+        return FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
             .modelContainer(previewer.container)
+            .environmentObject(timer)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

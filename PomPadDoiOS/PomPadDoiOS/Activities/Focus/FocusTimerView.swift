@@ -15,7 +15,7 @@ struct FocusTimerView: View {
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @AppStorage("focus-timer-tab") private var viewMode = 0
-    @Binding var selectedTask: Todo?
+    @State private var selectedTask: Todo?
     
     var body: some View {
         VStack {
@@ -37,51 +37,14 @@ struct FocusTimerView: View {
             
             if viewMode == 0 {
                 // MARK: Task list
-                List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                     id: \.self,
-                     selection: $selectedTask) { task in
-                    if let subtasks = task.subtasks, subtasks.count > 0 {
-                        OutlineGroup([task],
-                                     id: \.self,
-                                     children: \.subtasks) { maintask in
-                            HStack {
-                                TaskRowView(task: maintask)
-                                    .tag(maintask)
-                                
-                                Button {
-                                    selectedTask = maintask
-                                    viewMode = 1
-                                    if timer.state == .idle {
-                                        timer.reset()
-                                        timer.start()
-                                    }
-                                } label: {
-                                    Image(systemName: "play.fill")
-                                }
-                            }
-                        }
-                    } else {
-                        HStack {
-                            TaskRowView(task: task)
-                                .tag(task)
-                            
-                            Button {
-                                selectedTask = task
-                                viewMode = 1
-                                if timer.state == .idle {
-                                    timer.reset()
-                                    timer.start()
-                                }
-                            } label: {
-                                Image(systemName: "play.fill")
-                            }
-                        }
-                    }
-                }
+                FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
+                    .environmentObject(timer)
             } else {
                 ZStack {
                     VStack {
                         // MARK: Focus timer
+                        Text(selectedTask?.name ?? "None")
+                        
                         if let task = selectedTask {
                             HStack {
                                 Text(task.name)
@@ -173,7 +136,6 @@ struct FocusTimerView: View {
 }
 
 #Preview {
-    @Previewable @State var focusTask: Todo?
     @Previewable @State var focusMode: FocusTimerMode = .work
     @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
@@ -182,8 +144,7 @@ struct FocusTimerView: View {
     do {
         let previewer = try Previewer()
         
-        return FocusTimerView(focusMode: $focusMode,
-                              selectedTask: $focusTask)
+        return FocusTimerView(focusMode: $focusMode)
         .environmentObject(timer)
         .modelContainer(previewer.container)
     } catch {

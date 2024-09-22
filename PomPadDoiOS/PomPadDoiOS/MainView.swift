@@ -31,10 +31,7 @@ struct MainView: View {
     @State private var newTaskIsShowing = false
     @State private var tab: MainViewTabs = .tasks
     
-    @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
-    @State private var focusState: FocusTimerState = .idle
-    @State private var focusTask: Todo?
     
     @State private var refresh = false
     @State private var refresher = Refresher()
@@ -46,8 +43,7 @@ struct MainView: View {
                 ContentView()
                     .environmentObject(refresher)
             case .focus:
-                FocusTimerView(focusMode: $focusMode,
-                               selectedTask: $focusTask)
+                FocusTimerView(focusMode: $focusMode)
                     .id(refresh)
                     .environmentObject(timer)
                     .refreshable {
@@ -71,27 +67,8 @@ struct MainView: View {
                 Button {
                     tab = .focus
                 } label: {
-                    if focusState == .idle {
-                        Image(systemName: "target")
-                            .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
-                    } else {
-                        HStack {
-                            if focusMode == .work {
-                                Image(systemName: "target")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.red)
-                            } else {
-                                Image(systemName: "cup.and.saucer.fill")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.green)
-                            }
-                            if timer.state == .running {
-                                Text(timerCount)
-                                    .foregroundStyle(focusMode == .work ? Color.red : Color.green)
-                            } else {
-                                Text(timerCount)
-                                    .foregroundStyle(focusMode == .work ? Color.red : Color.green)
-                            }
-                        }
-                    }
+                    FocusTabItemView(tab: $tab)
+                        .environmentObject(timer)
                 }
 
                 Spacer()
@@ -162,12 +139,6 @@ struct MainView: View {
             if newPhase == .active && oldPhase == .background {
                 refresher.refresh.toggle()
             }
-        }
-        .onChange(of: timer.secondsPassed, { _, _ in
-            timerCount = timer.secondsLeftString
-        })
-        .onChange(of: timer.state) { _, _ in
-            focusState = timer.state
         }
     }
 }

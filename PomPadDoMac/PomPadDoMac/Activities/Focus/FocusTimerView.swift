@@ -62,8 +62,9 @@ struct FocusTimerView: View {
                 
             if viewMode == 0 {
                 // MARK: Task list
-                FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode, timer: timer)
+                FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
                     .id(refresher.refresh)
+                    .environmentObject(timer)
             } else {
                 ZStack {
                     VStack {
