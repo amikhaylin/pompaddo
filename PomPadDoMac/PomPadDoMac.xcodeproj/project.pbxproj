@@ -10,7 +10,6 @@
 		4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */; };
 		4D0A88642C25953900E39E38 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
 		4D169BCE2C106039001F995F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D169BCD2C106039001F995F /* SettingsView.swift */; };
-		4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */; };
 		4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
 		4D1D9EB62BD152F700CFF31C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
 		4D1D9EB72BD152FB00CFF31C /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
@@ -23,6 +22,8 @@
 		4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8672BE10A180026C2EA /* FocusTimerView.swift */; };
 		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
 		4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */; };
+		4D720B2C2CA15423006F00B1 /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D720B2B2CA15423006F00B1 /* ReviewProjectsView.swift */; };
+		4D720B2D2CA15423006F00B1 /* ProjectToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D720B2A2CA15423006F00B1 /* ProjectToReviewView.swift */; };
 		4D7A1FD92C0778E4009052AE /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */; };
 		4D7A1FDB2C0778E4009052AE /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */; };
 		4D7A1FE32C0778E4009052AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4D7A1FE22C0778E4009052AE /* Base */; };
@@ -113,7 +114,6 @@
 		4D0A88622C2594FC00E39E38 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
 		4D0A88632C25953900E39E38 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
 		4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTasksView.swift; sourceTree = "<group>"; };
 		4D4139852BE8DEF700AA840C /* ProjectGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectGroup.swift; sourceTree = "<group>"; };
@@ -122,6 +122,8 @@
 		4D59C8672BE10A180026C2EA /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
+		4D720B2A2CA15423006F00B1 /* ProjectToReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProjectToReviewView.swift; path = ../PomPadDoiOS/PomPadDoiOS/Activities/Projects/Review/ProjectToReviewView.swift; sourceTree = SOURCE_ROOT; };
+		4D720B2B2CA15423006F00B1 /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReviewProjectsView.swift; path = ../PomPadDoiOS/PomPadDoiOS/Activities/Projects/Review/ReviewProjectsView.swift; sourceTree = SOURCE_ROOT; };
 		4D7A1FD62C0778E4009052AE /* PomPadDoExt.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoExt.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
 		4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
@@ -229,7 +231,8 @@
 		4D1D9EB22BCD576F00CFF31C /* Review */ = {
 			isa = PBXGroup;
 			children = (
-				4D1D9EB32BCD57DB00CFF31C /* ReviewProjectsView.swift */,
+				4D720B2A2CA15423006F00B1 /* ProjectToReviewView.swift */,
+				4D720B2B2CA15423006F00B1 /* ReviewProjectsView.swift */,
 			);
 			path = Review;
 			sourceTree = "<group>";
@@ -646,6 +649,8 @@
 				4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */,
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
+				4D720B2C2CA15423006F00B1 /* ReviewProjectsView.swift in Sources */,
+				4D720B2D2CA15423006F00B1 /* ProjectToReviewView.swift in Sources */,
 				4D4139862BE8DEF700AA840C /* ProjectGroup.swift in Sources */,
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
 				4D8800BB2C18B8EF00AB4D78 /* TaskSwipeModifier.swift in Sources */,
@@ -656,7 +661,6 @@
 				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
 				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
 				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,
-				4D1D9EB42BCD57DB00CFF31C /* ReviewProjectsView.swift in Sources */,
 				4DBBB0352C18A55D00F1D400 /* ProjectTaskModifier.swift in Sources */,
 				4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */,
 				4D41398B2BE8F31A00AA840C /* ProjectsListView.swift in Sources */,

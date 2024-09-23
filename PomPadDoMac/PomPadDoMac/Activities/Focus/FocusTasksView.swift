@@ -62,9 +62,9 @@ struct FocusTasksView: View {
 }
 
 #Preview {
-    @Previewable @State var viewMode = 0
-    @Previewable @State var selectedTask: Todo?
-    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
+    @State var viewMode = 0
+    @State var selectedTask: Todo?
+    @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
