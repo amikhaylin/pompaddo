@@ -43,8 +43,6 @@ struct FocusTimerView: View {
                 ZStack {
                     VStack {
                         // MARK: Focus timer
-                        Text(selectedTask?.name ?? "None")
-                        
                         if let task = selectedTask {
                             HStack {
                                 Text(task.name)

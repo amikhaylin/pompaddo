@@ -18,8 +18,7 @@ struct FocusTasksView: View {
     
     var body: some View {
         List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-             id: \.self,
-             selection: $selectedTask) { task in
+             id: \.self) { task in
             if let subtasks = task.subtasks, subtasks.count > 0 {
                 OutlineGroup([task],
                              id: \.self,
@@ -62,9 +61,9 @@ struct FocusTasksView: View {
 }
 
 #Preview {
-    @State var viewMode = 0
-    @State var selectedTask: Todo?
-    @State var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var viewMode = 0
+    @Previewable @State var selectedTask: Todo?
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
