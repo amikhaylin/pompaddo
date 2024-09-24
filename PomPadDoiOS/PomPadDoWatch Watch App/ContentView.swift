@@ -73,7 +73,7 @@ struct ContentView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .bottomBar) {
                     Button {
                         refresher.refresh.toggle()
                     } label: {
@@ -81,7 +81,7 @@ struct ContentView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .bottomBar) {
+                ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         addToInbox.toggle()
                     } label: {
