@@ -134,8 +134,8 @@ struct FocusTimerView: View {
 }
 
 #Preview {
-    @Previewable @State var focusMode: FocusTimerMode = .work
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @State var focusMode: FocusTimerMode = .work
+    @StateObject var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
