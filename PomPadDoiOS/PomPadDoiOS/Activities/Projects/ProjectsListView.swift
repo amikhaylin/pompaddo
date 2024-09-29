@@ -18,6 +18,7 @@ struct ProjectsListView: View {
     @State private var newProjectGroupShow = false
     
     @State private var editProjectGroup: ProjectGroup?
+    @State private var editProjectName: Project?
     
     var projects: [Project]
     @Query var groups: [ProjectGroup]
@@ -42,6 +43,13 @@ struct ProjectsListView: View {
                         return true
                     }
                     .contextMenu {
+                        Button {
+                            editProjectName = project
+                        } label: {
+                            Image(systemName: "pencil")
+                            Text("Rename project")
+                        }
+                        
                         Menu {
                             ForEach(groups) { group in
                                 Button {
@@ -67,8 +75,8 @@ struct ProjectsListView: View {
                 }
                 
                 ForEach(groups) { group in
-                    @Bindable var group = group
-                    DisclosureGroup(group.name, isExpanded: $group.expanded) {
+                    @Bindable var group: ProjectGroup = group
+                    DisclosureGroup(isExpanded: $group.expanded) {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
                                 Text(project.name)
@@ -87,24 +95,11 @@ struct ProjectsListView: View {
                             }
                             .contextMenu {
                                 Button {
-                                    editProjectGroup = group
+                                    editProjectName = project
                                 } label: {
                                     Image(systemName: "pencil")
-                                    Text("Rename group")
+                                    Text("Rename project")
                                 }
-                                
-                                Button {
-                                    for project in projects.filter({ $0.group == group }) {
-                                        project.group = nil
-                                        modelContext.delete(group)
-                                    }
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(Color.red)
-                                    Text("Delete group")
-                                }
-                                
-                                Divider()
                                 
                                 Button {
                                     project.group = nil
@@ -123,6 +118,27 @@ struct ProjectsListView: View {
                                 }
                             }
                         }
+                    } label: {
+                        Text(group.name)
+                            .contextMenu {
+                                Button {
+                                    editProjectGroup = group
+                                } label: {
+                                    Image(systemName: "pencil")
+                                    Text("Rename group")
+                                }
+                                
+                                Button {
+                                    for project in projects.filter({ $0.group == group }) {
+                                        project.group = nil
+                                        modelContext.delete(group)
+                                    }
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .foregroundStyle(Color.red)
+                                    Text("Delete group")
+                                }
+                            }
                     }
                     .dropDestination(for: Project.self) { projects, _ in
                         for project in projects where project.group == nil || project.group != group {
@@ -172,6 +188,11 @@ struct ProjectsListView: View {
         .listStyle(SidebarListStyle())
         .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
             EditProjectGroupView(group: editGroup)
+                .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                .presentationCompactAdaptation(.popover)
+        })
+        .popover(item: $editProjectName, attachmentAnchor: .point(.bottomLeading), content: { editProject in
+            EditProjectNameView(project: editProject)
                 .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
                 .presentationCompactAdaptation(.popover)
         })
