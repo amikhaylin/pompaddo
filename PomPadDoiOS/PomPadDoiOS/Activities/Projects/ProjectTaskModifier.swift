@@ -5,6 +5,7 @@
 //  Created by Andrey Mikhaylin on 11.06.2024.
 //
 // swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
 
 import SwiftUI
 import SwiftData
@@ -32,28 +33,52 @@ struct ProjectTaskModifier: ViewModifier {
             }
             .contextMenu {
                 Button {
-                    task.dueDate = nil
+                    if selectedTasks.count > 0 {
+                        for task in selectedTasks {
+                            task.dueDate = nil
+                        }
+                    } else {
+                        task.dueDate = nil
+                    }
                 } label: {
                     Image(systemName: "clear")
                     Text("Clear due date")
                 }
                 
                 Button {
-                    task.dueDate = Calendar.current.startOfDay(for: Date())
+                    if selectedTasks.count > 0 {
+                        for task in selectedTasks {
+                            task.dueDate = Calendar.current.startOfDay(for: Date())
+                        }
+                    } else {
+                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                    }
                 } label: {
                     Image(systemName: "calendar")
                     Text("Today")
                 }
                 
                 Button {
-                    task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                    if selectedTasks.count > 0 {
+                        for task in selectedTasks {
+                            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                        }
+                    } else {
+                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                    }
                 } label: {
                     Image(systemName: "sunrise")
                     Text("Tomorrow")
                 }
                 
                 Button {
-                    task.nextWeek()
+                    if selectedTasks.count > 0 {
+                        for task in selectedTasks {
+                            task.nextWeek()
+                        }
+                    } else {
+                        task.nextWeek()
+                    }
                 } label: {
                     HStack {
                         Image(systemName: "calendar.badge.clock")
@@ -63,7 +88,13 @@ struct ProjectTaskModifier: ViewModifier {
                 
                 if task.repeation != .none {
                     Button {
-                        task.skip()
+                        if selectedTasks.count > 0 {
+                            for task in selectedTasks {
+                                task.skip()
+                            }
+                        } else {
+                            task.skip()
+                        }
                     } label: {
                         Image(systemName: "arrow.uturn.forward")
                         Text("Skip")
@@ -74,7 +105,13 @@ struct ProjectTaskModifier: ViewModifier {
                 Menu {
                     ForEach(0...3, id: \.self) { priority in
                         Button {
-                            task.priority = priority
+                            if selectedTasks.count > 0 {
+                                for task in selectedTasks {
+                                    task.priority = priority
+                                }
+                            } else {
+                                task.priority = priority
+                            }
                         } label: {
                             HStack {
                                 switch priority {
@@ -132,9 +169,17 @@ struct ProjectTaskModifier: ViewModifier {
                 Divider()
                 
                 Button {
-                    task.disconnectFromAll()
-                    task.project = nil
-                    task.status = nil
+                    if selectedTasks.count > 0 {
+                        for task in selectedTasks {
+                            task.disconnectFromAll()
+                            task.project = nil
+                            task.status = nil
+                        }
+                    } else {
+                        task.disconnectFromAll()
+                        task.project = nil
+                        task.status = nil
+                    }
                 } label: {
                     Image(systemName: "tray.fill")
                     Text("Move to Inbox")
@@ -143,9 +188,17 @@ struct ProjectTaskModifier: ViewModifier {
                 Menu {
                     ForEach(projects) { project in
                         Button {
-                            task.project = project
-                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
-                            project.tasks?.append(task)
+                            if selectedTasks.count > 0 {
+                                for task in selectedTasks {
+                                    task.project = project
+                                    task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                    project.tasks?.append(task)
+                                }
+                            } else {
+                                task.project = project
+                                task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                project.tasks?.append(task)
+                            }
                         } label: {
                             Text(project.name)
                         }
@@ -157,9 +210,17 @@ struct ProjectTaskModifier: ViewModifier {
                 Menu {
                     ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                         Button {
-                            task.moveToStatus(status: status,
-                                              project: project,
-                                              context: modelContext)
+                            if selectedTasks.count > 0 {
+                                for task in selectedTasks {
+                                    task.moveToStatus(status: status,
+                                                      project: project,
+                                                      context: modelContext)
+                                }
+                            } else {
+                                task.moveToStatus(status: status,
+                                                  project: project,
+                                                  context: modelContext)
+                            }
                         } label: {
                             Text(status.name)
                         }
@@ -183,7 +244,12 @@ struct ProjectTaskModifier: ViewModifier {
                 }
                 
                 Button {
-                    withAnimation {
+                    if selectedTasks.count > 0 {
+                        for task in selectedTasks {
+                            TasksQuery.deleteTask(context: modelContext,
+                                                  task: task)
+                        }
+                    } else {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
                     }
@@ -196,3 +262,4 @@ struct ProjectTaskModifier: ViewModifier {
     }
 }
 // swiftlint:enable function_body_length
+// swiftlint:enable cyclomatic_complexity

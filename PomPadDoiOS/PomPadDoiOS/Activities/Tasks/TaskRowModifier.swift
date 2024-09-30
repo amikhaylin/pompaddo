@@ -5,6 +5,7 @@
 //  Created by Andrey Mikhaylin on 11.06.2024.
 //
 // swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
 
 import SwiftUI
 import SwiftData
@@ -31,7 +32,13 @@ struct TaskRowModifier: ViewModifier {
         }
         .contextMenu {
             Button {
-                task.dueDate = nil
+                if selectedTasks.count > 0 {
+                    for task in selectedTasks {
+                        task.dueDate = nil
+                    }
+                } else {
+                    task.dueDate = nil
+                }
                 refresher.refresh.toggle()
             } label: {
                 Image(systemName: "clear")
@@ -39,7 +46,13 @@ struct TaskRowModifier: ViewModifier {
             }
             
             Button {
-                task.dueDate = Calendar.current.startOfDay(for: Date())
+                if selectedTasks.count > 0 {
+                    for task in selectedTasks {
+                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                    }
+                } else {
+                    task.dueDate = Calendar.current.startOfDay(for: Date())
+                }
                 refresher.refresh.toggle()
             } label: {
                 Image(systemName: "calendar")
@@ -47,7 +60,13 @@ struct TaskRowModifier: ViewModifier {
             }
             
             Button {
-                task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                if selectedTasks.count > 0 {
+                    for task in selectedTasks {
+                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                    }
+                } else {
+                    task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                }
                 refresher.refresh.toggle()
             } label: {
                 Image(systemName: "sunrise")
@@ -55,7 +74,13 @@ struct TaskRowModifier: ViewModifier {
             }
             
             Button {
-                task.nextWeek()
+                if selectedTasks.count > 0 {
+                    for task in selectedTasks {
+                        task.nextWeek()
+                    }
+                } else {
+                    task.nextWeek()
+                }
                 refresher.refresh.toggle()
             } label: {
                 HStack {
@@ -78,7 +103,13 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(0...3, id: \.self) { priority in
                     Button {
-                        task.priority = priority
+                        if selectedTasks.count > 0 {
+                            for task in selectedTasks {
+                                task.priority = priority
+                            }
+                        } else {
+                            task.priority = priority
+                        }
                         refresher.refresh.toggle()
                     } label: {
                         HStack {
@@ -155,9 +186,17 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(projects) { project in
                     Button {
-                        task.project = project
-                        task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
-                        project.tasks?.append(task)
+                        if selectedTasks.count > 0 {
+                            for task in selectedTasks {
+                                task.project = project
+                                task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                project.tasks?.append(task)
+                            }
+                        } else {
+                            task.project = project
+                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            project.tasks?.append(task)
+                        }
                         refresher.refresh.toggle()
                     } label: {
                         Text(project.name)
@@ -200,11 +239,16 @@ struct TaskRowModifier: ViewModifier {
             }
             
             Button {
-                withAnimation {
+                if selectedTasks.count > 0 {
+                    for task in selectedTasks {
+                        TasksQuery.deleteTask(context: modelContext,
+                                              task: task)
+                    }
+                } else {
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
-                    refresher.refresh.toggle()
                 }
+                refresher.refresh.toggle()
             } label: {
                 Image(systemName: "trash")
                     .foregroundStyle(Color.red)
@@ -214,3 +258,4 @@ struct TaskRowModifier: ViewModifier {
     }
 }
 // swiftlint:enable function_body_length
+// swiftlint:enable cyclomatic_complexity
