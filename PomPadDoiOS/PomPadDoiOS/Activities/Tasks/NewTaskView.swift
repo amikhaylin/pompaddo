@@ -15,6 +15,7 @@ struct NewTaskView: View {
     @State var list: SideBarItem
     @State private var taskName = ""
     @State private var link = ""
+    @State private var dueToday = false
     
     var body: some View {
         NavigationView {
@@ -26,6 +27,9 @@ struct NewTaskView: View {
                 
                 TextField("Link", text: $link)
                     .textContentType(.URL)
+                
+                Toggle("Due today", isOn: $dueToday)
+                    .toggleStyle(.switch)
             }
             .padding()
             .toolbar {
@@ -39,7 +43,7 @@ struct NewTaskView: View {
                     Button("OK") {
                         self.isVisible = false
                         let task = Todo(name: taskName, link: link)
-                        if list == .today {
+                        if list == .today || dueToday {
                             task.dueDate = Calendar.current.startOfDay(for: Date())
                         }
                         

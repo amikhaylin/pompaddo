@@ -661,6 +661,22 @@
         }
       }
     },
+    "Due today" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Due today"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запланировать на сегодня"
+          }
+        }
+      }
+    },
     "Estimate" : {
       "localizations" : {
         "en" : {
