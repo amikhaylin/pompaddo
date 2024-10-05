@@ -57,6 +57,7 @@ struct ProjectsListView: View {
                                 } label: {
                                     Text(group.name)
                                 }
+                                .accessibility(identifier: "\(group.name)ContextMenuButton")
                             }
                         } label: {
                             Image(systemName: "folder")
