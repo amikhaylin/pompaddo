@@ -56,7 +56,8 @@ struct ContentView: View {
                     .id(refresher.refresh)
                 
                 ProjectsListView(selectedProject: $selectedProject,
-                                 projects: projects)
+                                 projects: projects,
+                                 selectedSideBarItem: $selectedSideBarItem)
                     .environmentObject(refresher)
                     .id(refresher.refresh)
             }

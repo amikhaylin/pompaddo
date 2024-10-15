@@ -23,6 +23,8 @@ struct ProjectsListView: View {
     var projects: [Project]
     @Query var groups: [ProjectGroup]
     
+    @Binding var selectedSideBarItem: SideBarItem?
+    
     var body: some View {
         List(selection: $selectedProject) {
             DisclosureGroup(isExpanded: $projectsExpanded) {
@@ -65,6 +67,11 @@ struct ProjectsListView: View {
                         }
                         
                         Button {
+                            if let projectSelected = selectedProject, projectSelected == project {
+                                selectedProject = nil
+                                selectedSideBarItem = .today
+                            }
+                            
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                         } label: {
@@ -110,6 +117,11 @@ struct ProjectsListView: View {
                                 }
                                 
                                 Button {
+                                    if let projectSelected = selectedProject, projectSelected == project {
+                                        selectedProject = nil
+                                        selectedSideBarItem = .today
+                                    }
+                                    
                                     project.deleteRelatives(context: modelContext)
                                     modelContext.delete(project)
                                 } label: {
@@ -177,7 +189,7 @@ struct ProjectsListView: View {
                             .presentationCompactAdaptation(.popover)
                     }
                 }
-                .foregroundColor(Color(#colorLiteral(red: 0.5486837626, green: 0.827090323, blue: 0.8101685047, alpha: 1)))
+                .foregroundColor(Color("ProjectsColor"))
                 .dropDestination(for: Project.self) { projects, _ in
                     for project in projects {
                         project.group = nil
@@ -208,8 +220,11 @@ struct ProjectsListView: View {
         
         @State var selectedProject: Project?
         
+        @State var selectedSideBarItem: SideBarItem? = .today
+        
         return ProjectsListView(selectedProject: $selectedProject,
-                             projects: projects)
+                                projects: projects,
+                                selectedSideBarItem: $selectedSideBarItem)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
