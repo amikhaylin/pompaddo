@@ -75,6 +75,7 @@ struct ProjectView: View {
                         .foregroundStyle(Color.red)
                 }.disabled(selectedTasks.count == 0)
                     .help("Delete task")
+                    .keyboardShortcut(.delete)
 
                 #if os(macOS)
                 Button {
