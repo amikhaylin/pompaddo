@@ -158,6 +158,7 @@ struct ProjectsListView: View {
                         Image(systemName: "plus.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .help("Create project")
                     
                     Button {
                         newProjectGroupShow.toggle()
@@ -165,6 +166,7 @@ struct ProjectsListView: View {
                         Image(systemName: "folder.circle")
                     }
                     .buttonStyle(PlainButtonStyle())
+                    .help("Create group")
                 }
                 .foregroundColor(Color(#colorLiteral(red: 0.5486837626, green: 0.827090323, blue: 0.8101685047, alpha: 1)))
                 .dropDestination(for: Project.self) { projects, _ in

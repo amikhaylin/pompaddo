@@ -69,6 +69,7 @@ struct ContentView: View {
                         Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
                     }
                     .keyboardShortcut("r", modifiers: [.command])
+                    .help("Refresh ⌘R")
                     
                     Button {
                         newTaskIsShowing.toggle()
@@ -77,6 +78,7 @@ struct ContentView: View {
                             .foregroundStyle(Color.orange)
                     }
                     .keyboardShortcut("i", modifiers: [.command])
+                    .help("Add to Inbox ⌘I")
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
