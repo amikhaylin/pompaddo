@@ -17,9 +17,12 @@ made to myself by myself
 ## macOS app
 <!--![](mac-main.png) --->
 
-<img src="mac-main.png" align="left" />
-<img src="mac-focus-tasks.png" height="220" width="210" />
-<img src="mac-focus-timer.png"  height="220" width="210" />
+<img src="mac-main.png"/><br>
+<img src="mac-contextmenu.png"/>
+<img src="mac-inspector.png" /><br>
+<img src="mac-board.png" /><br>
+<img src="mac-focus-tasks.png" height="320" align="left" />
+<img src="mac-focus-timer.png"  height="320" />
 
 ### Roadmap
 - [x] Add task direct to Inbox
