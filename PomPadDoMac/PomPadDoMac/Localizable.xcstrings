@@ -822,6 +822,7 @@
       }
     },
     "Failed to create preview: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2233,6 +2234,7 @@
       }
     },
     "Your (dispMode) is finished" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4D0179EB2C11C99B00D76BF5 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179EA2C11C99B00D76BF5 /* Common.swift */; };
 		4D0179F12C11F30A00D76BF5 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0179F02C11F30A00D76BF5 /* SettingsView.swift */; };
+		4D1135E72C943090005DA9DB /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1135E62C943090005DA9DB /* SnapshotHelper.swift */; };
 		4D1210262C2ACDFD00ACD511 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD0FA372C20794300C99E25 /* Refresher.swift */; };
 		4D1210272C2AD23400ACD511 /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DEF682D2C19E47F000B9F1F /* TaskSwipeModifier.swift */; };
 		4D1210292C2AD4C800ACD511 /* TaskDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */; };
@@ -197,6 +198,7 @@
 /* Begin PBXFileReference section */
 		4D0179EA2C11C99B00D76BF5 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Common.swift; path = ../../../PomPadDoMac/PomPadDoMac/Utils/Common.swift; sourceTree = "<group>"; };
 		4D0179F02C11F30A00D76BF5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4D1135E62C943090005DA9DB /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsView.swift; sourceTree = "<group>"; };
 		4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4D1959B12BFBB25900B90F10 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
@@ -542,6 +544,7 @@
 		4DDDB3EE2BF23037002C4F95 /* PomPadDoiOSUITests */ = {
 			isa = PBXGroup;
 			children = (
+				4D1135E62C943090005DA9DB /* SnapshotHelper.swift */,
 				4DDDB3EF2BF23037002C4F95 /* PomPadDoiOSUITests.swift */,
 				4DDDB3F12BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift */,
 			);
@@ -1069,6 +1072,7 @@
 			files = (
 				4DDDB3F22BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift in Sources */,
 				4DDDB3F02BF23037002C4F95 /* PomPadDoiOSUITests.swift in Sources */,
+				4D1135E72C943090005DA9DB /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

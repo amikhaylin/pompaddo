@@ -32,6 +32,7 @@ struct NewProjectGroupView: View {
                         let group = ProjectGroup(name: groupName)
                         modelContext.insert(group)
                     }
+                    .accessibility(identifier: "SaveGroup")
                 }
             }
         }

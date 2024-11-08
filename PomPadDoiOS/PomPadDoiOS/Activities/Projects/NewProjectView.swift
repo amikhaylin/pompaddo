@@ -23,6 +23,7 @@ struct NewProjectView: View {
                     Text("Create simple list")
                 }
                 .toggleStyle(.switch)
+                .accessibility(identifier: "CreateSimpleList")
             }
             .padding()
             .toolbar {
@@ -54,6 +55,7 @@ struct NewProjectView: View {
                             }
                         }
                     }
+                    .accessibility(identifier: "SaveProject")
                 }
             }
         }
