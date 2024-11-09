@@ -23,7 +23,7 @@ struct MainView: View {
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
     
-    var timer = FocusTimer(workInSeconds: 1500,
+    @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
@@ -31,9 +31,7 @@ struct MainView: View {
     @State private var newTaskIsShowing = false
     @State private var tab: MainViewTabs = .tasks
     
-    @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
-    @State private var focusTask: Todo?
     
     @State private var refresh = false
     @State private var refresher = Refresher()
@@ -45,10 +43,9 @@ struct MainView: View {
                 ContentView()
                     .environmentObject(refresher)
             case .focus:
-                FocusTimerView(focusMode: $focusMode,
-                               timer: timer,
-                               selectedTask: $focusTask)
+                FocusTimerView(focusMode: $focusMode)
                     .id(refresh)
+                    .environmentObject(timer)
                     .refreshable {
                         refresh.toggle()
                     }
@@ -70,24 +67,8 @@ struct MainView: View {
                 Button {
                     tab = .focus
                 } label: {
-                    TimelineView(.periodic(from: .now, by: 0.5)) { _ in
-                        HStack {
-                            if focusMode == .work {
-                                Image(systemName: "target")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
-                            } else {
-                                Image(systemName: "cup.and.saucer.fill")
-                                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
-                            }
-                            if timer.state == .running {
-                                Text(timer.secondsLeftString)
-                                    .foregroundStyle(focusMode == .work ? Color.red : Color.green)
-                            } else {
-                                Text(timer.secondsLeftString)
-                                    .foregroundStyle(focusMode == .work ? Color.red : Color.green)
-                            }
-                        }
-                    }
+                    FocusTabItemView(tab: $tab)
+                        .environmentObject(timer)
                 }
 
                 Spacer()

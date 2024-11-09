@@ -10,13 +10,12 @@ import SwiftData
 
 struct FocusTimerView: View {
     @Binding var focusMode: FocusTimerMode
-    
-    let timer: FocusTimer
+    @EnvironmentObject var timer: FocusTimer
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @AppStorage("focus-timer-tab") private var viewMode = 0
-    @Binding var selectedTask: Todo?
+    @State private var selectedTask: Todo?
     
     var body: some View {
         VStack {
@@ -38,47 +37,8 @@ struct FocusTimerView: View {
             
             if viewMode == 0 {
                 // MARK: Task list
-                List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                     id: \.self,
-                     selection: $selectedTask) { task in
-                    if let subtasks = task.subtasks, subtasks.count > 0 {
-                        OutlineGroup([task],
-                                     id: \.self,
-                                     children: \.subtasks) { maintask in
-                            HStack {
-                                TaskRowView(task: maintask)
-                                    .tag(maintask)
-                                
-                                Button {
-                                    selectedTask = maintask
-                                    viewMode = 1
-                                    if timer.state == .idle {
-                                        timer.reset()
-                                        timer.start()
-                                    }
-                                } label: {
-                                    Image(systemName: "play.fill")
-                                }
-                            }
-                        }
-                    } else {
-                        HStack {
-                            TaskRowView(task: task)
-                                .tag(task)
-                            
-                            Button {
-                                selectedTask = task
-                                viewMode = 1
-                                if timer.state == .idle {
-                                    timer.reset()
-                                    timer.start()
-                                }
-                            } label: {
-                                Image(systemName: "play.fill")
-                            }
-                        }
-                    }
-                }
+                FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
+                    .environmentObject(timer)
             } else {
                 ZStack {
                     VStack {
@@ -174,20 +134,17 @@ struct FocusTimerView: View {
 }
 
 #Preview {
+    @State var focusMode: FocusTimerMode = .work
+    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+                                                     breakInSeconds: 300,
+                                                     longBreakInSeconds: 1200,
+                                                     workSessionsCount: 4)
     do {
         let previewer = try Previewer()
-        @State var focusMode: FocusTimerMode = .work
-        @State var focusTask: Todo?
         
-        let timer = FocusTimer(workInSeconds: 1500,
-                               breakInSeconds: 300,
-                               longBreakInSeconds: 1200,
-                               workSessionsCount: 4)
-        
-        return FocusTimerView(focusMode: $focusMode,
-                              timer: timer,
-                              selectedTask: $focusTask)
-            .modelContainer(previewer.container)
+        return FocusTimerView(focusMode: $focusMode)
+        .environmentObject(timer)
+        .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
