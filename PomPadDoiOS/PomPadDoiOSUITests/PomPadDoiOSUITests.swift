@@ -42,6 +42,12 @@ final class PomPadDoiOSUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    func testZInfo() throws {
+        app.navigationBars["Today"].buttons["Back"].tap()
+        
+        print(app.debugDescription)
+    }
+    
     func testAMainWindow() throws {
         // UI tests must launch the application that they test.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -49,20 +55,20 @@ final class PomPadDoiOSUITests: XCTestCase {
         app.navigationBars["Today"].buttons["Back"].tap()
         
         // MARK: Create groups
-        app.collectionViews.matching(identifier: "Sidebar").disclosureTriangles["Move"].tap()
+        app.collectionViews.matching(identifier: "Sidebar").buttons["folder.circle"].tap()
         app.popovers.textFields["Group name"].tap()
         
         app.popovers.textFields["Group name"].typeText("🦝Personal")
         app.buttons["SaveGroup"].tap()
         
-        app.collectionViews.matching(identifier: "Sidebar")/*@START_MENU_TOKEN@*/.disclosureTriangles["Move"]/*[[".cells.disclosureTriangles[\"Move\"]",".disclosureTriangles[\"Move\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.collectionViews.matching(identifier: "Sidebar").buttons["folder.circle"].tap()
         app.popovers.textFields["Group name"].tap()
         
         app.popovers.textFields["Group name"].typeText("🏢Work")
         app.buttons["SaveGroup"].tap()
 
         // MARK: Create first project
-        app.collectionViews.matching(identifier: "Sidebar").disclosureTriangles["Add"].tap()
+        app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
         app.popovers.textFields["Project name"].tap()
         app.popovers.textFields["Project name"].typeText("🚗 Car")
         
@@ -72,10 +78,12 @@ final class PomPadDoiOSUITests: XCTestCase {
 
         app.collectionViews.matching(identifier: "Sidebar").buttons["🚗 Car"].press(forDuration: 1.6)
         app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add project to group"]/*[[".cells.buttons[\"Add project to group\"]",".buttons[\"Add project to group\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.collectionViews.buttons["🦝Personal"].tap()
+        
+        print(app.collectionViews.buttons.debugDescription)
+        app.collectionViews.buttons["🦝PersonalContextMenuButton"].tap()
         
         // MARK: Create second project
-        app.collectionViews.matching(identifier: "Sidebar").disclosureTriangles["Add"].tap()
+        app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
         app.popovers.textFields["Project name"].tap()
         app.popovers.textFields["Project name"].typeText("❤️Health")
         
@@ -85,10 +93,10 @@ final class PomPadDoiOSUITests: XCTestCase {
 
         app.collectionViews.matching(identifier: "Sidebar").buttons["❤️Health"].press(forDuration: 1.6)
         app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add project to group"]/*[[".cells.buttons[\"Add project to group\"]",".buttons[\"Add project to group\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.collectionViews.buttons["🦝Personal"].tap()
+        app.collectionViews.buttons["🦝PersonalContextMenuButton"].tap()
         
         // MARK: Create third project
-        app.collectionViews.matching(identifier: "Sidebar").disclosureTriangles["Add"].tap()
+        app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
         app.popovers.textFields["Project name"].tap()
         app.popovers.textFields["Project name"].typeText("💻John’s project")
         
@@ -96,12 +104,23 @@ final class PomPadDoiOSUITests: XCTestCase {
 
         app.collectionViews.matching(identifier: "Sidebar").buttons["💻John’s project"].press(forDuration: 1.6)
         app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add project to group"]/*[[".cells.buttons[\"Add project to group\"]",".buttons[\"Add project to group\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.collectionViews.buttons["🏢Work"].tap()
+        app.collectionViews.buttons["🏢WorkContextMenuButton"].tap()
         
         // MARK: Create first task
         app.collectionViews.matching(identifier: "Sidebar").buttons["Today"].tap()
         app.navigationBars["Today"].buttons["Add task to current list"].tap()
-
+        
+//        let exp = expectation(description: "Wait for inspector")
+//        let result = XCTWaiter.wait(for: [exp], timeout: 1.0)
+//        if result == XCTWaiter.Result.timedOut {
+//            let collectionViewsQuery = app.collectionViews
+//            collectionViewsQuery.children(matching: .cell).element(boundBy: 1).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.tap()
+//            collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["EditTaskName"]/*[[".cells",".textFields[\"Name\"]",".textFields[\"EditTaskName\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+//            app.navigationBars["Today"].buttons["ShowTaskDetails"].tap()
+//        } else {
+//            XCTFail("Delay interrupted")
+//        }
+        
         
                 
 //        app.collectionViews.matching(identifier: "Sidebar").buttons["💻John’s project"].tap()
