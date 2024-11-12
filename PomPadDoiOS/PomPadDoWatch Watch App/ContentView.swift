@@ -30,11 +30,11 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 
 struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var refresher: Refresher
     
     @Query var tasks: [Todo]
     
     @State var selectedSideBarItem: SideBarItem? = .today
-    @State private var refresher = Refresher()
     @State private var addToInbox = false
     
     var body: some View {
@@ -51,7 +51,6 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) && ($0.completed == false || ($0.completed && $0.parentTask == nil)) })
@@ -61,13 +60,11 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 case .tomorrow:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 case nil:
                     EmptyView()
                 }

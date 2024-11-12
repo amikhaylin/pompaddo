@@ -51,7 +51,7 @@ struct TasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? tasks.filter({ $0.completed && $0.parentTask == nil }) : tasks.filter({ $0.completed == false }),
+                        ForEach(section == .completed ? tasks.filter({ $0.completed && ($0.parentTask == nil || mainTask != nil) }) : tasks.filter({ $0.completed == false }),
                                      id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
@@ -100,12 +100,13 @@ struct TasksListView: View {
         .toolbar {
             ToolbarItemGroup {
                 Button {
-                    addToCurrentList()
+                    newTaskIsShowing.toggle()
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
                 .accessibility(identifier: "AddToCurrentList")
-                .help("Add task to current list")
+                .help("Add task to current list ⌘⌥I")
+                .keyboardShortcut("i", modifiers: [.command, .option])
 
                 Button {
                     deleteItems()
@@ -148,6 +149,19 @@ struct TasksListView: View {
             selectedTasks.removeAll()
             showInspector = false
         }
+        #if os(macOS)
+        .sheet(isPresented: $newTaskIsShowing) {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
+                .environmentObject(refresher)
+        }
+        #else
+        .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
+                .frame(minWidth: 200, maxHeight: 180)
+                .presentationCompactAdaptation(.popover)
+                .environmentObject(refresher)
+        })
+        #endif
     }
     
     private func deleteItems() {
@@ -177,20 +191,6 @@ struct TasksListView: View {
         case .review:
             break
         }
-    }
-
-    private func addToCurrentList() {
-        selectedTasks.removeAll()
-        let task = Todo(name: "")
-        if let mainTask = mainTask {
-            mainTask.subtasks?.append(task)
-        } else {
-            setDueDate(task: task)
-        }
-        tasks.append(task)
-        modelContext.insert(task)
-
-        selectedTasks.insert(task)
     }
 }
 

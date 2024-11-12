@@ -90,7 +90,7 @@ struct MainView: View {
                 }
                 .keyboardShortcut("i", modifiers: [.command]) 
                 .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottomTrailing), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
                         .frame(minWidth: 200, maxHeight: 180)
                         .presentationCompactAdaptation(.popover)
                         .environmentObject(refresher)

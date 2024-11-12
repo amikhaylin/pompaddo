@@ -83,7 +83,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
-                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
+                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
                     .environmentObject(refresher)
             }
             .navigationSplitViewColumnWidth(min: 230, ideal: 230, max: 400)
@@ -116,6 +116,7 @@ struct ContentView: View {
                     if let project = selectedProject {
                         ProjectView(project: project)
                             .id(refresher.refresh)
+                            .environmentObject(refresher)
                     } else {
                         Text("Select a project")
                     }

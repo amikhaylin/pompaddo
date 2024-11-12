@@ -16,11 +16,18 @@ struct NewTaskView: View {
     @State private var taskName = ""
     @State private var link = ""
     @State private var dueToday = false
+    @State var project: Project?
+    @State var mainTask: Todo?
+    @Binding var tasks: [Todo]
     
     var body: some View {
         VStack {
-            Text("Add task to \(list)...")
-                .font(.headline)
+            HStack {
+                Text("Add task to ")
+                    .font(.headline)
+                Text("\(getListName())")
+                    .font(.headline)
+            }
             
             TextField("Task name", text: $taskName)
             
@@ -39,18 +46,62 @@ struct NewTaskView: View {
                 Button("OK") {
                     self.isVisible = false
                     let task = Todo(name: taskName, link: link)
-                    if list == .today || dueToday {
+                    if dueToday {
                         task.dueDate = Calendar.current.startOfDay(for: Date())
+                    } else if project == nil && mainTask == nil {
+                        setDueDate(task: task)
+                    }
+                    
+                    if let mainTask = mainTask {
+                        mainTask.subtasks?.append(task)
+                    }
+                    
+                    if let project = project {
+                        task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                        task.project = project
                     }
 
                     modelContext.insert(task)
-                    refresher.refresh.toggle()
+                    task.reconnect()
+                    
+                    if list == .inbox {
+                        refresher.refresh.toggle()
+                    } else {
+                        tasks.append(task)
+                    }
                 }
                 .keyboardShortcut(.defaultAction)
             }
         }
         .frame(width: 400, height: 120)
         .padding()
+    }
+        
+    private func setDueDate(task: Todo) {
+        switch list {
+        case .inbox:
+            break
+        case .today:
+            task.dueDate = Calendar.current.startOfDay(for: Date())
+        case .tomorrow:
+            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+        case .projects:
+            break
+        case .review:
+            break
+        }
+    }
+    
+    private func getListName() -> String {
+        if let mainTask = mainTask {
+            return mainTask.name
+        }
+        
+        if let project = project {
+            return project.name
+        }
+        
+        return list.name
     }
 }
 
@@ -59,8 +110,9 @@ struct NewTaskView: View {
         let previewer = try Previewer()
         
         @State var isVisible = true
+        @State var tasks: [Todo] = []
         
-        return NewTaskView(isVisible: $isVisible, list: .inbox)
+        return NewTaskView(isVisible: $isVisible, list: .inbox, tasks: $tasks)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

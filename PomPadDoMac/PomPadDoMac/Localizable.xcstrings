@@ -177,6 +177,22 @@
         }
       }
     },
+    "Add task to " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add task to "
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить задачу в "
+          }
+        }
+      }
+    },
     "Add task to current list" : {
       "localizations" : {
         "en" : {
@@ -192,6 +208,9 @@
           }
         }
       }
+    },
+    "Add task to current list ⌘⌥I" : {
+
     },
     "Add task to Inbox" : {
       "localizations" : {

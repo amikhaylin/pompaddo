@@ -10,9 +10,11 @@ import SwiftData
 
 struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var refresher: Refresher
     @State private var selectedTasks = Set<Todo>()
     @State private var showInspector = false
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @State private var newTaskIsShowing = false
     
     @Bindable var project: Project
     
@@ -62,12 +64,13 @@ struct ProjectView: View {
                 }.pickerStyle(.segmented)
 
                 Button {
-                    addTaskToProject()
+                    newTaskIsShowing.toggle()
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
-                .help("Add task to current list")
-
+                .help("Add task to current list ⌘⌥I")
+                .keyboardShortcut("i", modifiers: [.command, .option])
+                
                 Button {
                     deleteItems()
                 } label: {
@@ -116,6 +119,27 @@ struct ProjectView: View {
             selectedTasks.removeAll()
             showInspector = false
         }
+        #if os(macOS)
+        .sheet(isPresented: $newTaskIsShowing) {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
+                        tasks: Binding(
+                            get: { project.tasks ?? [] },
+                            set: { project.tasks = $0 }
+                        ))
+                .environmentObject(refresher)
+        }
+        #else
+        .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
+                        tasks: Binding(
+                            get: { project.tasks ?? [] },
+                            set: { project.tasks = $0 }
+                        ))
+                .frame(minWidth: 200, maxHeight: 180)
+                .presentationCompactAdaptation(.popover)
+                .environmentObject(refresher)
+        })
+        #endif
     }
     
     private func deleteItems() {
@@ -124,19 +148,6 @@ struct ProjectView: View {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }
-        }
-    }
-    
-    private func addTaskToProject() {
-        withAnimation {
-            selectedTasks.removeAll()
-            let task = Todo(name: "",
-                            status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
-                            project: project)
-            modelContext.insert(task)
-            
-            selectedTasks.insert(task)
-            showInspector = true
         }
     }
 }

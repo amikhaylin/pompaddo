@@ -17,6 +17,7 @@ struct TaskRowModifier: ViewModifier {
     @Binding var selectedTasks: Set<Todo>
     var projects: [Project]
     var list: SideBarItem
+    @State private var showAddSubtask = false
     
     func body(content: Content) -> some View {
        content
@@ -134,12 +135,13 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
-                selectedTasks.removeAll()
-                let subtask = Todo(name: "", parentTask: task)
-                task.subtasks?.append(subtask)
-                modelContext.insert(subtask)
-                
-                selectedTasks.insert(subtask)
+//                selectedTasks.removeAll()
+//                let subtask = Todo(name: "", parentTask: task)
+//                task.subtasks?.append(subtask)
+//                modelContext.insert(subtask)
+//                
+//                selectedTasks.insert(subtask)
+                showAddSubtask.toggle()
             } label: {
                 Image(systemName: "plus")
                 Text("Add subtask")
@@ -152,6 +154,9 @@ struct TaskRowModifier: ViewModifier {
                               mainTask: task)
                 .id(refresher.refresh)
                 .environmentObject(refresher)
+                .refreshable {
+                    refresher.refresh.toggle()
+                }
             } label: {
                 Image(systemName: "arrow.right")
                 Text("Open subtasks")
@@ -255,6 +260,27 @@ struct TaskRowModifier: ViewModifier {
                 Text("Delete task")
             }
         }
+        #if os(macOS)
+        .sheet(isPresented: $showAddSubtask) {
+            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
+                        tasks: Binding(
+                            get: { task.subtasks ?? [] },
+                            set: { task.subtasks = $0 }
+                        ))
+                .environmentObject(refresher)
+        }
+        #else
+        .popover(isPresented: $showAddSubtask, attachmentAnchor: .point(.topLeading), content: {
+            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
+                        tasks: Binding(
+                            get: { task.subtasks ?? [] },
+                            set: { task.subtasks = $0 }
+                        ))
+                .frame(minWidth: 200, maxHeight: 180)
+                .presentationCompactAdaptation(.popover)
+                .environmentObject(refresher)
+        })
+        #endif
     }
 }
 // swiftlint:enable function_body_length
