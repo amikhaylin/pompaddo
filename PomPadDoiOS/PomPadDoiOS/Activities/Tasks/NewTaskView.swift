@@ -61,7 +61,7 @@ struct NewTaskView: View {
                         }
                         
                         if let project = project {
-                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            task.status = project.getDefaultStatus()
                             task.project = project
                         }
 

@@ -58,7 +58,6 @@ struct ContentView: View {
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .environmentObject(refresher)
                     .id(refresher.refresh)
             }
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
@@ -69,7 +68,6 @@ struct ContentView: View {
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
                 .refreshable {
                     refresher.refresh.toggle()
                 }
@@ -79,7 +77,6 @@ struct ContentView: View {
                     .sorted(by: TasksQuery.defaultSorting),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
-                .environmentObject(refresher)
                 .id(refresher.refresh)
                 .refreshable {
                     refresher.refresh.toggle()
@@ -90,7 +87,6 @@ struct ContentView: View {
                     .sorted(by: TasksQuery.defaultSorting),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
-                .environmentObject(refresher)
                 .id(refresher.refresh)
                 .refreshable {
                     refresher.refresh.toggle()

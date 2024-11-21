@@ -244,7 +244,7 @@ final class PomPadDoMacTests: XCTestCase {
         
         // Add task to project
         var task = Todo(name: "Some project task",
-                        status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
+                        status: project.getDefaultStatus(),
                         project: project)
         dataContainer.mainContext.insert(task)
         
@@ -261,7 +261,7 @@ final class PomPadDoMacTests: XCTestCase {
         XCTAssertEqual(project.getTasks().count, 0, "There should be 0 task")
         
         task = Todo(name: "Another project task",
-                        status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
+                        status: project.getDefaultStatus(),
                         project: project)
         dataContainer.mainContext.insert(task)
         

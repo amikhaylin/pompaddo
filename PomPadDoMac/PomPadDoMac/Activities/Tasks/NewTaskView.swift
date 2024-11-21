@@ -57,7 +57,7 @@ struct NewTaskView: View {
                     }
                     
                     if let project = project {
-                        task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                        task.status = project.getDefaultStatus()
                         task.project = project
                     }
 
@@ -93,15 +93,7 @@ struct NewTaskView: View {
     }
     
     private func getListName() -> String {
-        if let mainTask = mainTask {
-            return mainTask.name
-        }
-        
-        if let project = project {
-            return project.name
-        }
-        
-        return list.name
+        return mainTask?.name ?? project?.name ?? list.name
     }
 }
 

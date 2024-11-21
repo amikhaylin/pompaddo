@@ -22,3 +22,7 @@ struct Common {
         }
     }
 }
+
+class InspectorToggler: ObservableObject {
+    @Published var on = false
+}

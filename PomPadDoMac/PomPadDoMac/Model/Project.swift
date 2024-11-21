@@ -81,6 +81,10 @@ extension Project {
         }
     }
     
+    func getDefaultStatus() -> Status? {
+        return self.getStatuses().sorted(by: { $0.order < $1.order }).first
+    }
+    
     func getTasks() -> [Todo] {
         if let tasks = self.tasks {
             return tasks

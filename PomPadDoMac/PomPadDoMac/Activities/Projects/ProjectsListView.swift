@@ -38,7 +38,7 @@ struct ProjectsListView: View {
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.project = project
-                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
                         refresher.refresh.toggle()
@@ -66,11 +66,8 @@ struct ProjectsListView: View {
                         }
                         
                         Button {
-                            if let projectSelected = selectedProject, projectSelected == project {
-                                selectedProject = nil
-                                selectedSideBarItem = .today
-                            }
-                            
+                            handleProjectSelection(for: project)
+
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                         } label: {
@@ -94,7 +91,7 @@ struct ProjectsListView: View {
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
                                     task.project = project
-                                    task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                    task.status = project.getDefaultStatus()
                                     project.tasks?.append(task)
                                 }
                                 refresher.refresh.toggle()
@@ -116,10 +113,7 @@ struct ProjectsListView: View {
                                 }
                                 
                                 Button {
-                                    if let projectSelected = selectedProject, projectSelected == project {
-                                        selectedProject = nil
-                                        selectedSideBarItem = .today
-                                    }
+                                    handleProjectSelection(for: project)
                                     
                                     project.deleteRelatives(context: modelContext)
                                     modelContext.delete(project)
@@ -207,6 +201,13 @@ struct ProjectsListView: View {
         }
         .sheet(isPresented: $newProjectGroupShow) {
             NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+        }
+    }
+    
+    private func handleProjectSelection(for project: Project) {
+        if let projectSelected = selectedProject, projectSelected == project {
+            selectedProject = nil
+            selectedSideBarItem = .today
         }
     }
 }

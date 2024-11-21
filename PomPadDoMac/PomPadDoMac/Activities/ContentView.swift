@@ -59,7 +59,6 @@ struct ContentView: View {
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .environmentObject(refresher)
                     .id(refresher.refresh)
             }
             .toolbar {
@@ -84,7 +83,6 @@ struct ContentView: View {
             }
             .sheet(isPresented: $newTaskIsShowing) {
                 NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
-                    .environmentObject(refresher)
             }
             .navigationSplitViewColumnWidth(min: 230, ideal: 230, max: 400)
         } detail: {
@@ -95,14 +93,12 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                         .sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(refresher)
                     .id(refresher.refresh)
                 case .tomorrow:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow())
@@ -110,13 +106,11 @@ struct ContentView: View {
                         .sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(refresher)
                     .id(refresher.refresh)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
                             .id(refresher.refresh)
-                            .environmentObject(refresher)
                     } else {
                         Text("Select a project")
                     }

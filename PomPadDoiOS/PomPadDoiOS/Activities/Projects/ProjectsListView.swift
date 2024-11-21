@@ -38,7 +38,7 @@ struct ProjectsListView: View {
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.project = project
-                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
                         refresher.refresh.toggle()
@@ -67,13 +67,7 @@ struct ProjectsListView: View {
                         }
                         
                         Button {
-                            if let projectSelected = selectedProject, projectSelected == project {
-                                selectedProject = nil
-                                selectedSideBarItem = .today
-                            }
-                            
-                            project.deleteRelatives(context: modelContext)
-                            modelContext.delete(project)
+                            deleteProject(project)
                         } label: {
                             Image(systemName: "trash")
                                 .foregroundStyle(Color.red)
@@ -95,7 +89,7 @@ struct ProjectsListView: View {
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
                                     task.project = project
-                                    task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                    task.status = project.getDefaultStatus()
                                     project.tasks?.append(task)
                                 }
                                 refresher.refresh.toggle()
@@ -117,13 +111,7 @@ struct ProjectsListView: View {
                                 }
                                 
                                 Button {
-                                    if let projectSelected = selectedProject, projectSelected == project {
-                                        selectedProject = nil
-                                        selectedSideBarItem = .today
-                                    }
-                                    
-                                    project.deleteRelatives(context: modelContext)
-                                    modelContext.delete(project)
+                                    deleteProject(project)
                                 } label: {
                                     Image(systemName: "trash")
                                         .foregroundStyle(Color.red)
@@ -209,6 +197,16 @@ struct ProjectsListView: View {
                 .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
                 .presentationCompactAdaptation(.popover)
         })
+    }
+    
+    private func deleteProject(_ project: Project) {
+        if let projectSelected = selectedProject, projectSelected == project {
+            selectedProject = nil
+            selectedSideBarItem = .today
+        }
+        
+        project.deleteRelatives(context: modelContext)
+        modelContext.delete(project)
     }
 }
 

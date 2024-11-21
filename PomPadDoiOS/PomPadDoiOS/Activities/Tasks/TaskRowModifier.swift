@@ -194,12 +194,12 @@ struct TaskRowModifier: ViewModifier {
                         if selectedTasks.count > 0 {
                             for task in selectedTasks {
                                 task.project = project
-                                task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                task.status = project.getDefaultStatus()
                                 project.tasks?.append(task)
                             }
                         } else {
                             task.project = project
-                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
                         refresher.refresh.toggle()
