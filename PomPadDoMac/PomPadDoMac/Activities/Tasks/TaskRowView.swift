@@ -34,7 +34,7 @@ struct TaskRowView: View {
                 if showingProject {
                     if let project = task.project {
                         if let status = task.status, project.showStatus {
-                            Text("\(project.name)>\(status.name)")
+                            Text("\(project.name)→\(status.name)")
                                 .foregroundStyle(Color.gray)
                                 .font(.caption)
                         } else {

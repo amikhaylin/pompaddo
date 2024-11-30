@@ -13,6 +13,7 @@ import SwiftData
 struct TaskRowModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var showInspector: InspectorToggler
     @Bindable var task: Todo
     @Binding var selectedTasks: Set<Todo>
     var projects: [Project]
@@ -33,7 +34,7 @@ struct TaskRowModifier: ViewModifier {
         }
         .contextMenu {
             Button {
-                if selectedTasks.count > 0 {
+                if selectedTasks.count > 0 && selectedTasks.contains(task) {
                     for task in selectedTasks {
                         task.dueDate = nil
                     }
@@ -47,7 +48,7 @@ struct TaskRowModifier: ViewModifier {
             }
             
             Button {
-                if selectedTasks.count > 0 {
+                if selectedTasks.count > 0 && selectedTasks.contains(task) {
                     for task in selectedTasks {
                         task.dueDate = Calendar.current.startOfDay(for: Date())
                     }
@@ -61,7 +62,7 @@ struct TaskRowModifier: ViewModifier {
             }
             
             Button {
-                if selectedTasks.count > 0 {
+                if selectedTasks.count > 0 && selectedTasks.contains(task) {
                     for task in selectedTasks {
                         task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                     }
@@ -75,7 +76,7 @@ struct TaskRowModifier: ViewModifier {
             }
             
             Button {
-                if selectedTasks.count > 0 {
+                if selectedTasks.count > 0 && selectedTasks.contains(task) {
                     for task in selectedTasks {
                         task.nextWeek()
                     }
@@ -104,7 +105,7 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(0...3, id: \.self) { priority in
                     Button {
-                        if selectedTasks.count > 0 {
+                        if selectedTasks.count > 0 && selectedTasks.contains(task) {
                             for task in selectedTasks {
                                 task.priority = priority
                             }
@@ -135,12 +136,6 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
-//                selectedTasks.removeAll()
-//                let subtask = Todo(name: "", parentTask: task)
-//                task.subtasks?.append(subtask)
-//                modelContext.insert(subtask)
-//                
-//                selectedTasks.insert(subtask)
                 showAddSubtask.toggle()
             } label: {
                 Image(systemName: "plus")
@@ -153,7 +148,6 @@ struct TaskRowModifier: ViewModifier {
                               title: task.name,
                               mainTask: task)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
                 .refreshable {
                     refresher.refresh.toggle()
                 }
@@ -169,7 +163,6 @@ struct TaskRowModifier: ViewModifier {
                                   title: parentTask.name,
                                   mainTask: parentTask)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 } label: {
                     Image(systemName: "arrow.left")
                     Text("Open parent task")
@@ -191,7 +184,7 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(projects) { project in
                     Button {
-                        if selectedTasks.count > 0 {
+                        if selectedTasks.count > 0 && selectedTasks.contains(task) {
                             for task in selectedTasks {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
@@ -249,6 +242,8 @@ struct TaskRowModifier: ViewModifier {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
                     }
+                    showInspector.on = false
+                    selectedTasks.removeAll()
                 } else {
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
@@ -267,7 +262,6 @@ struct TaskRowModifier: ViewModifier {
                             get: { task.subtasks ?? [] },
                             set: { task.subtasks = $0 }
                         ))
-                .environmentObject(refresher)
         }
         #else
         .popover(isPresented: $showAddSubtask, attachmentAnchor: .point(.topLeading), content: {
@@ -278,7 +272,6 @@ struct TaskRowModifier: ViewModifier {
                         ))
                 .frame(minWidth: 200, maxHeight: 180)
                 .presentationCompactAdaptation(.popover)
-                .environmentObject(refresher)
         })
         #endif
     }

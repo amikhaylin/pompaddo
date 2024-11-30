@@ -22,7 +22,7 @@ struct TaskDetailsView: View {
             
             if let project = task.project {
                 if let status = task.status, project.showStatus {
-                    Text("\(project.name)>\(status.name)")
+                    Text("\(project.name)→\(status.name)")
                         .foregroundStyle(Color.gray)
                         .font(.caption)
                 } else {
@@ -155,7 +155,6 @@ struct TaskDetailsView: View {
                                   title: task.name,
                                   mainTask: task)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 } label: {
                     Image(systemName: "arrow.right")
                     Text("Open subtasks")
@@ -169,7 +168,6 @@ struct TaskDetailsView: View {
                                   title: parentTask.name,
                                   mainTask: parentTask)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 } label: {
                     Image(systemName: "arrow.left")
                     Text("Open parent task")

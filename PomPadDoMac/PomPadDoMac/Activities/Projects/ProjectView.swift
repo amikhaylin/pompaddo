@@ -11,8 +11,8 @@ import SwiftData
 struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @State private var selectedTasks = Set<Todo>()
-    @State private var showInspector = false
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     @State private var newTaskIsShowing = false
     
@@ -24,15 +24,15 @@ struct ProjectView: View {
         NavigationStack {
             if project.projectViewMode == 1 {
                 BoardView(project: project,
-                           selectedTasks: $selectedTasks)
+                          selectedTasks: $selectedTasks.tasks)
             } else {
-                ProjectTasksListView(selectedTasks: $selectedTasks,
+                ProjectTasksListView(selectedTasks: $selectedTasks.tasks,
                                      project: project)
             }
         }
-        .inspector(isPresented: $showInspector) {
+        .inspector(isPresented: $showInspector.on) {
             Group {
-                if let selectedTask = selectedTasks.first {
+                if let selectedTask = selectedTasks.tasks.first {
                     EditTaskView(task: selectedTask)
                 } else {
                     Text("Select a task")
@@ -76,7 +76,7 @@ struct ProjectView: View {
                 } label: {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
-                }.disabled(selectedTasks.count == 0)
+                }.disabled(selectedTasks.tasks.count == 0)
                     .help("Delete task")
                     .keyboardShortcut(.delete)
 
@@ -103,21 +103,21 @@ struct ProjectView: View {
                 #endif
                 
                 Button {
-                    showInspector.toggle()
+                    showInspector.on.toggle()
                 } label: {
                     Label("Show task details", systemImage: "sidebar.trailing")
                 }
             }
         }
         .navigationTitle(project.name)
-        .onChange(of: selectedTasks) { _, _ in
-            if selectedTasks.count > 0 {
-                showInspector = true
+        .onChange(of: selectedTasks.tasks) { _, _ in
+            if selectedTasks.tasks.count > 0 {
+                showInspector.on = true
             }
         }
         .onChange(of: project) { _, _ in
-            selectedTasks.removeAll()
-            showInspector = false
+            selectedTasks.tasks.removeAll()
+            showInspector.on = false
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
@@ -126,7 +126,6 @@ struct ProjectView: View {
                             get: { project.tasks ?? [] },
                             set: { project.tasks = $0 }
                         ))
-                .environmentObject(refresher)
         }
         #else
         .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
@@ -137,17 +136,18 @@ struct ProjectView: View {
                         ))
                 .frame(minWidth: 200, maxHeight: 180)
                 .presentationCompactAdaptation(.popover)
-                .environmentObject(refresher)
         })
         #endif
     }
     
     private func deleteItems() {
         withAnimation {
-            for task in selectedTasks {
+            for task in selectedTasks.tasks {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }
+            showInspector.on = false
+            selectedTasks.tasks.removeAll()
         }
     }
 }

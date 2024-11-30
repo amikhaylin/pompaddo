@@ -91,7 +91,6 @@ struct ContentView: View {
         }
         .sheet(isPresented: $addToInbox) {
             NewTaskView()
-                .environmentObject(refresher)
         }
         .onOpenURL { url in
             if url.absoluteString == "pompaddo://addtoinbox" {

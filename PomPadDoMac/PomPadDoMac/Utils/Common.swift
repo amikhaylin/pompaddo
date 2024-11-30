@@ -26,3 +26,7 @@ struct Common {
 class InspectorToggler: ObservableObject {
     @Published var on = false
 }
+
+class SelectedTasks: ObservableObject {
+    @Published var tasks = Set<Todo>()
+}

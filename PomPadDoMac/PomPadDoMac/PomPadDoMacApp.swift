@@ -10,7 +10,6 @@ import SwiftData
 
 @main
 struct PomPadDoMacApp: App {
-//    @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
     @State private var refresher = Refresher()
     
     var sharedModelContainer: ModelContainer = {
@@ -50,12 +49,10 @@ struct PomPadDoMacApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            TimelineView(.periodic(from: .now, by: refreshPeriod)) { _ in
             ContentView()
                 .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
                                         modelContext: sharedModelContainer.mainContext)
                 .environmentObject(refresher)
-//            }
         }
         .modelContainer(sharedModelContainer)
         

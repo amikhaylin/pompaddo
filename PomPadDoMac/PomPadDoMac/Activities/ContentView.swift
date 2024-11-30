@@ -39,6 +39,9 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @Environment(\.scenePhase) var scenePhase
+  
+    @ObservedObject private var showInspector = InspectorToggler()
+    @ObservedObject private var selectedTasks = SelectedTasks()
     
     @State private var newTaskIsShowing = false
     @State var selectedSideBarItem: SideBarItem? = .today
@@ -93,6 +96,8 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) })
@@ -100,6 +105,8 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 case .tomorrow:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow())
                         .filter({ $0.completionDate == nil })
@@ -107,27 +114,41 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
                             .id(refresher.refresh)
+                            .environmentObject(showInspector)
+                            .environmentObject(selectedTasks)
                     } else {
                         Text("Select a project")
                     }
                 case .review:
                     ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
+                        .environmentObject(showInspector)
+                        .environmentObject(selectedTasks)
                 default:
                     EmptyView()
                 }
             }
         }
         .onChange(of: selectedSideBarItem, { _, newValue in
+            if showInspector.on {
+                showInspector.on = false
+            }
+            
+            if selectedTasks.tasks.count > 0 {
+                selectedTasks.tasks.removeAll()
+            }
+
             if newValue != .projects {
                 selectedProject = nil
             }
         })
         .onChange(of: selectedProject) { _, newValue in
-            if newValue != nil {
+            if newValue != nil && selectedSideBarItem != .projects {
                 selectedSideBarItem = .projects
             }
         }

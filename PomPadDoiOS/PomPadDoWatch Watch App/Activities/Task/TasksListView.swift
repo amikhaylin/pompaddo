@@ -27,13 +27,11 @@ struct TasksListView: View {
                     
                     NavigationLink {
                         TaskDetailsView(task: task, list: list)
-                            .environmentObject(refresher)
                     } label: {
                         Text(task.name)
                     }
                 }
                 .modifier(TaskSwipeModifier(task: task, list: list))
-                .environmentObject(refresher)
             }
         }
         .navigationTitle(title)
