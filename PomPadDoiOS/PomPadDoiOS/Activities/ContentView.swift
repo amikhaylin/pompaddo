@@ -38,8 +38,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @ObservedObject private var showInspector = InspectorToggler()
-    @ObservedObject private var selectedTasks = SelectedTasks()
+    @StateObject private var showInspector = InspectorToggler()
+    @StateObject private var selectedTasks = SelectedTasks()
     @State var selectedSideBarItem: SideBarItem? = .today
     
     @State private var selectedProject: Project?

@@ -40,8 +40,8 @@ struct ContentView: View {
     @EnvironmentObject var refresher: Refresher
     @Environment(\.scenePhase) var scenePhase
   
-    @ObservedObject private var showInspector = InspectorToggler()
-    @ObservedObject private var selectedTasks = SelectedTasks()
+    @StateObject private var showInspector = InspectorToggler()
+    @StateObject private var selectedTasks = SelectedTasks()
     
     @State private var newTaskIsShowing = false
     @State var selectedSideBarItem: SideBarItem? = .today
