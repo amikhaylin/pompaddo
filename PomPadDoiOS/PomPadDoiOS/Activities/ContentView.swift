@@ -10,31 +10,6 @@ import SwiftData
 
 import SwiftDataTransferrable
 
-enum SideBarItem: String, Identifiable, CaseIterable {
-    var id: String { rawValue }
-    
-    case inbox
-    case today
-    case tomorrow
-    case review
-    case projects
-    
-    var name: String {
-        switch self {
-        case .inbox:
-            return NSLocalizedString("Inbox", comment: "")
-        case .today:
-            return NSLocalizedString("Today", comment: "")
-        case .tomorrow:
-            return NSLocalizedString("Tomorrow", comment: "")
-        case .review:
-            return NSLocalizedString("Review", comment: "")
-        case .projects:
-            return NSLocalizedString("Projects", comment: "")
-        }
-    }
-}
-
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
@@ -53,7 +28,7 @@ struct ContentView: View {
                 SectionsListView(tasks: tasks,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: 220)
+                    .frame(height: 260)
                     .id(refresher.refresh)
                 
                 ProjectsListView(selectedProject: $selectedProject,
@@ -111,6 +86,13 @@ struct ContentView: View {
                 } else {
                     Text("Select a project")
                 }
+            case .alltasks:
+                TasksListView(tasks: tasks.sorted(by: TasksQuery.defaultSorting),
+                              list: selectedSideBarItem!,
+                              title: selectedSideBarItem!.name)
+                .id(refresher.refresh)
+                .environmentObject(showInspector)
+                .environmentObject(selectedTasks)
             default:
                 EmptyView()
             }

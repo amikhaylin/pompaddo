@@ -11,6 +11,10 @@ import SwiftData
 struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    #if os(iOS)
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
+    #endif
     @Bindable var task: Todo
     var list: SideBarItem
     
@@ -21,7 +25,7 @@ struct TaskSwipeModifier: ViewModifier {
                     withAnimation {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
-                        refresher.refresh.toggle()
+                        // FIXME: refresher.refresh.toggle()
                     }
                 } label: {
                     Label("Delete", systemImage: "trash.fill")
@@ -36,6 +40,11 @@ struct TaskSwipeModifier: ViewModifier {
                                       title: task.name,
                                       mainTask: task)
                         .id(refresher.refresh)
+                        .refreshable {
+                            refresher.refresh.toggle()
+                        }
+                        .environmentObject(showInspector)
+                        .environmentObject(selectedTasks)
                     } label: {
                         Image(systemName: "arrow.right")
                         Text("Open subtasks")

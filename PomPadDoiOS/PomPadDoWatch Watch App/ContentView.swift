@@ -97,11 +97,11 @@ struct ContentView: View {
                 addToInbox.toggle()
             }
         }
-        .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && oldPhase == .background {
-                refresher.refresh.toggle()
-            }
-        }
+        // FIXME: .onChange(of: scenePhase) { oldPhase, newPhase in
+//            if newPhase == .active && oldPhase == .background {
+//                refresher.refresh.toggle()
+//            }
+//        }
     }
 }
 

@@ -102,13 +102,29 @@ struct SectionsListView: View {
                     .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
                     .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
                 }
+            case .alltasks:
+                NavigationLink(value: item) {
+                    HStack {
+                        Image(systemName: "rectangle.stack")
+                        Text("All")
+                    }
+                    .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
+                    .badge({
+                        do {
+                            return try tasks.filter(TasksQuery.predicateActive()).count
+                        } catch {
+                            print(error.localizedDescription)
+                            return 0
+                        }
+                    }())
+                }
             }
         }
         .listStyle(SidebarListStyle())
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
             WidgetCenter.shared.reloadAllTimelines()
-            refresher.refresh.toggle()
+            // FIXME: refresher.refresh.toggle()
         }
         .onAppear {
             tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()

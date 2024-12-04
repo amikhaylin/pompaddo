@@ -41,7 +41,7 @@ struct ProjectsListView: View {
                             task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
-                        refresher.refresh.toggle()
+                        // FIXME: refresher.refresh.toggle()
                         return true
                     }
                     .contextMenu {
@@ -94,7 +94,7 @@ struct ProjectsListView: View {
                                     task.status = project.getDefaultStatus()
                                     project.tasks?.append(task)
                                 }
-                                refresher.refresh.toggle()
+                                // FIXME: refresher.refresh.toggle()
                                 return true
                             }
                             .contextMenu {

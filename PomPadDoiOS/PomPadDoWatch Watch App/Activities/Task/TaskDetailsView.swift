@@ -95,7 +95,7 @@ struct TaskDetailsView: View {
                     task.reactivate()
                 }
                 WidgetCenter.shared.reloadAllTimelines()
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Complete", systemImage: "checkmark.square")
@@ -104,7 +104,7 @@ struct TaskDetailsView: View {
             Button {
                 let date = Calendar.current.startOfDay(for: Date())
                 task.dueDate = date
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Today", systemImage: "calendar")
@@ -113,7 +113,7 @@ struct TaskDetailsView: View {
             Button {
                 let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                 task.dueDate = date
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Tomorrow", systemImage: "sunrise")
@@ -121,7 +121,7 @@ struct TaskDetailsView: View {
         
             Button {
                 task.nextWeek()
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 HStack {
@@ -132,7 +132,7 @@ struct TaskDetailsView: View {
             
             Button {
                 task.dueDate = nil
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Clear due date", systemImage: "clear")
@@ -141,7 +141,7 @@ struct TaskDetailsView: View {
             if task.repeation != .none {
                 Button {
                     task.skip()
-                    refresher.refresh.toggle()
+                    // FIXME: refresher.refresh.toggle()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Label("Skip", systemImage: "arrow.uturn.forward")
@@ -177,7 +177,7 @@ struct TaskDetailsView: View {
             Button {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Delete task", systemImage: "trash")

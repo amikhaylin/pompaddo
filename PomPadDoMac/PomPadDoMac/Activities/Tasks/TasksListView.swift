@@ -61,7 +61,7 @@ struct TasksListView: View {
                                              children: \.subtasks) { maintask in
                                     TaskRowView(task: maintask)
                                         .modifier(TaskRowModifier(task: maintask,
-                                                                  selectedTasks: $selectedTasks.tasks,
+                                                                  selectedTasksSet: $selectedTasks.tasks,
                                                                   projects: projects,
                                                                   list: list))
                                         .modifier(TaskSwipeModifier(task: maintask, list: list))
@@ -70,7 +70,7 @@ struct TasksListView: View {
                             } else {
                                 TaskRowView(task: task)
                                     .modifier(TaskRowModifier(task: task,
-                                                              selectedTasks: $selectedTasks.tasks,
+                                                              selectedTasksSet: $selectedTasks.tasks,
                                                               projects: projects,
                                                               list: list))
                                     .modifier(TaskSwipeModifier(task: task, list: list))
@@ -169,13 +169,13 @@ struct TasksListView: View {
         }
         showInspector.on = false
         selectedTasks.tasks.removeAll()
-        refresher.refresh.toggle()
+        // FIXME: refresher.refresh.toggle()
     }
     
     private func deleteTask(task: Todo) {
         TasksQuery.deleteTask(context: modelContext,
                               task: task)
-        refresher.refresh.toggle()
+        // FIXME: refresher.refresh.toggle()
     }
     
     private func setDueDate(task: Todo) {
@@ -189,6 +189,8 @@ struct TasksListView: View {
         case .projects:
             break
         case .review:
+            break
+        case .alltasks:
             break
         }
     }

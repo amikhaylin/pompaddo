@@ -10,6 +10,8 @@ import SwiftUI
 struct ProjectToReviewView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @Bindable var project: Project
     @State private var deletionRequested = false
     

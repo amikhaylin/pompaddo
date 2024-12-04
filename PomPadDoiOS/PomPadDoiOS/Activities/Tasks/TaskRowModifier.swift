@@ -14,8 +14,9 @@ struct TaskRowModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @Bindable var task: Todo
-    @Binding var selectedTasks: Set<Todo>
+    @Binding var selectedTasksSet: Set<Todo>
     var projects: [Project]
     var list: SideBarItem
     @State private var showAddSubtask = false
@@ -34,56 +35,56 @@ struct TaskRowModifier: ViewModifier {
         }
         .contextMenu {
             Button {
-                if selectedTasks.count > 0 && selectedTasks.contains(task) {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.dueDate = nil
                     }
                 } else {
                     task.dueDate = nil
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "clear")
                 Text("Clear due date")
             }
             
             Button {
-                if selectedTasks.count > 0 && selectedTasks.contains(task) {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.dueDate = Calendar.current.startOfDay(for: Date())
                     }
                 } else {
                     task.dueDate = Calendar.current.startOfDay(for: Date())
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "calendar")
                 Text("Today")
             }
             
             Button {
-                if selectedTasks.count > 0 && selectedTasks.contains(task) {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                     }
                 } else {
                     task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "sunrise")
                 Text("Tomorrow")
             }
             
             Button {
-                if selectedTasks.count > 0 && selectedTasks.contains(task) {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.nextWeek()
                     }
                 } else {
                     task.nextWeek()
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 HStack {
                     Image(systemName: "calendar.badge.clock")
@@ -94,7 +95,7 @@ struct TaskRowModifier: ViewModifier {
             if task.repeation != .none {
                 Button {
                     task.skip()
-                    refresher.refresh.toggle()
+                    // FIXME: refresher.refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.uturn.forward")
                     Text("Skip")
@@ -105,14 +106,14 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(0...3, id: \.self) { priority in
                     Button {
-                        if selectedTasks.count > 0 && selectedTasks.contains(task) {
-                            for task in selectedTasks {
+                        if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                            for task in selectedTasksSet {
                                 task.priority = priority
                             }
                         } else {
                             task.priority = priority
                         }
-                        refresher.refresh.toggle()
+                        // FIXME: refresher.refresh.toggle()
                     } label: {
                         HStack {
                             switch priority {
@@ -151,6 +152,8 @@ struct TaskRowModifier: ViewModifier {
                 .refreshable {
                     refresher.refresh.toggle()
                 }
+                .environmentObject(showInspector)
+                .environmentObject(selectedTasks)
             } label: {
                 Image(systemName: "arrow.right")
                 Text("Open subtasks")
@@ -163,6 +166,8 @@ struct TaskRowModifier: ViewModifier {
                                   title: parentTask.name,
                                   mainTask: parentTask)
                     .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 } label: {
                     Image(systemName: "arrow.left")
                     Text("Open parent task")
@@ -184,8 +189,8 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(projects) { project in
                     Button {
-                        if selectedTasks.count > 0 && selectedTasks.contains(task) {
-                            for task in selectedTasks {
+                        if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                            for task in selectedTasksSet {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
                                 project.tasks?.append(task)
@@ -195,7 +200,7 @@ struct TaskRowModifier: ViewModifier {
                             task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
-                        refresher.refresh.toggle()
+                        // FIXME: refresher.refresh.toggle()
                     } label: {
                         Text(project.name)
                     }
@@ -211,7 +216,7 @@ struct TaskRowModifier: ViewModifier {
                             task.moveToStatus(status: status,
                                               project: project,
                                               context: modelContext)
-                            refresher.refresh.toggle()
+                            // FIXME: refresher.refresh.toggle()
                         } label: {
                             Text(status.name)
                         }
@@ -224,31 +229,31 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
-                selectedTasks.removeAll()
+                selectedTasksSet.removeAll()
                 let newTask = task.copy(modelContext: modelContext)
                 
                 modelContext.insert(newTask)
                 newTask.reconnect()
                 
-                selectedTasks.insert(newTask)
+                selectedTasksSet.insert(newTask)
             } label: {
                 Image(systemName: "doc.on.doc")
                 Text("Dublicate task")
             }
             
             Button {
-                if selectedTasks.count > 0 {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 {
+                    for task in selectedTasksSet {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
                     }
                     showInspector.on = false
-                    selectedTasks.removeAll()
+                    selectedTasksSet.removeAll()
                 } else {
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "trash")
                     .foregroundStyle(Color.red)

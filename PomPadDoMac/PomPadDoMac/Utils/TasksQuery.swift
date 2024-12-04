@@ -79,6 +79,12 @@ struct TasksQuery {
         }
     }
     
+    static func predicateActive() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            !task.completed
+        }
+    }
+    
     static func filterProjectToReview(_ project: Project) -> Bool {
         if project.showInReview == false {
             return false

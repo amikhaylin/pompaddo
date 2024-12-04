@@ -68,11 +68,14 @@ struct NewTaskView: View {
                         modelContext.insert(task)
                         task.reconnect()
                         
-                        if list == .inbox {
-                            refresher.refresh.toggle()
-                        } else {
+                        if list != .inbox {
                             tasks.append(task)
                         }
+                        // FIXME: if list == .inbox {
+//                            refresher.refresh.toggle()
+//                        } else {
+//                            tasks.append(task)
+//                        }
                     }
                 }
             }
@@ -90,6 +93,8 @@ struct NewTaskView: View {
         case .projects:
             break
         case .review:
+            break
+        case .alltasks:
             break
         }
     }

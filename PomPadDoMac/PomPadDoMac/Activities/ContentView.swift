@@ -10,31 +10,6 @@ import SwiftData
 
 import SwiftDataTransferrable
 
-enum SideBarItem: String, Identifiable, CaseIterable {
-    var id: String { rawValue }
-    
-    case inbox
-    case today
-    case tomorrow
-    case review
-    case projects
-    
-    var name: String {
-        switch self {
-        case .inbox:
-            return NSLocalizedString("Inbox", comment: "")
-        case .today:
-            return NSLocalizedString("Today", comment: "")
-        case .tomorrow:
-            return NSLocalizedString("Tomorrow", comment: "")
-        case .review:
-            return NSLocalizedString("Review", comment: "")
-        case .projects:
-            return NSLocalizedString("Projects", comment: "")
-        }
-    }
-}
-
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
@@ -57,7 +32,7 @@ struct ContentView: View {
                 SectionsListView(tasks: tasks,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: 125)
+                    .frame(height: 150)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects,
@@ -129,6 +104,13 @@ struct ContentView: View {
                     ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
                         .environmentObject(showInspector)
                         .environmentObject(selectedTasks)
+                case .alltasks:
+                    TasksListView(tasks: tasks.sorted(by: TasksQuery.defaultSorting),
+                                  list: selectedSideBarItem!,
+                                  title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 default:
                     EmptyView()
                 }
@@ -174,11 +156,11 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && oldPhase == .background {
-                refresher.refresh.toggle()
-            }
-        }
+        // FIXME: .onChange(of: scenePhase) { oldPhase, newPhase in
+//            if newPhase == .active && oldPhase == .background {
+//                refresher.refresh.toggle()
+//            }
+//        }
     }
 }
 
