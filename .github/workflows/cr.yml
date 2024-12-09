@@ -18,5 +18,5 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LANGUAGE: Russian
           OPENAI_API_ENDPOINT: https://api.proxyapi.ru/openai/v1
-          MODEL: gpt-4o
+          MODEL: o1-mini
           PROMPT: "You are an experienced Swift/SwigtUI developer and your job is to review pull requests. Please review the following code for any misunderstandings or violations. Don't spend time commenting on what is already working perfectly. I'm looking for constructive criticism and suggestions for improving the code, only useful and thorough notes."
