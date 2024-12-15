@@ -156,11 +156,11 @@ struct ContentView: View {
                 }
             }
         }
-        // FIXME: .onChange(of: scenePhase) { oldPhase, newPhase in
-//            if newPhase == .active && oldPhase == .background {
-//                refresher.refresh.toggle()
-//            }
-//        }
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) { 
+                refresher.refresh.toggle()
+            }
+        }
     }
 }
 

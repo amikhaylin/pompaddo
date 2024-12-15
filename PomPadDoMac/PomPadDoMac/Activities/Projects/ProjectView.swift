@@ -23,11 +23,9 @@ struct ProjectView: View {
     var body: some View {
         NavigationStack {
             if project.projectViewMode == 1 {
-                BoardView(project: project,
-                          selectedTasks: $selectedTasks.tasks)
+                BoardView(project: project)
             } else {
-                ProjectTasksListView(selectedTasks: $selectedTasks.tasks,
-                                     project: project)
+                ProjectTasksListView(project: project)
             }
         }
         .inspector(isPresented: $showInspector.on) {
@@ -145,9 +143,17 @@ struct ProjectView: View {
             for task in selectedTasks.tasks {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
+//                if let index = project.tasks?.firstIndex(of: task) {
+//                    project.tasks.remove(at: index)
+//                }
             }
-            showInspector.on = false
-            selectedTasks.tasks.removeAll()
+            if showInspector.on {
+                showInspector.on = false
+            }
+            
+            if selectedTasks.tasks.count > 0 {
+                selectedTasks.tasks.removeAll()
+            }
         }
     }
 }

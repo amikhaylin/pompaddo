@@ -165,6 +165,10 @@ extension Todo {
 
             modelContext.insert(newTask)
             newTask.reconnect()
+            
+            if let status = self.status {
+                newTask.status = status
+            }
         }
         
         self.completed = true

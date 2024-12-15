@@ -15,6 +15,7 @@ struct TaskDetailsView: View {
     @EnvironmentObject var refresher: Refresher
     @Bindable var task: Todo
     @State var list: SideBarItem
+    @Binding var tasks: [Todo]
     
     var body: some View {
         ScrollView(.vertical) {
@@ -104,6 +105,12 @@ struct TaskDetailsView: View {
             Button {
                 let date = Calendar.current.startOfDay(for: Date())
                 task.dueDate = date
+                if list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
@@ -113,6 +120,12 @@ struct TaskDetailsView: View {
             Button {
                 let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                 task.dueDate = date
+                if list == .today {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
@@ -121,6 +134,12 @@ struct TaskDetailsView: View {
         
             Button {
                 task.nextWeek()
+                if list == .today || list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
@@ -132,6 +151,12 @@ struct TaskDetailsView: View {
             
             Button {
                 task.dueDate = nil
+                if list == .today || list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
@@ -142,6 +167,7 @@ struct TaskDetailsView: View {
                 Button {
                     task.skip()
                     // FIXME: refresher.refresh.toggle()
+                    WidgetCenter.shared.reloadAllTimelines()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Label("Skip", systemImage: "arrow.uturn.forward")
@@ -177,6 +203,10 @@ struct TaskDetailsView: View {
             Button {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
+                if let index = tasks.firstIndex(of: task) {
+                    tasks.remove(at: index)
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
                 // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
@@ -190,8 +220,9 @@ struct TaskDetailsView: View {
 #Preview {
     do {
         let previewer = try Previewer()
+        @State var tasks: [Todo] = [previewer.task]
         
-        return TaskDetailsView(task: previewer.task, list: .today)
+        return TaskDetailsView(task: previewer.task, list: .today, tasks: $tasks)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

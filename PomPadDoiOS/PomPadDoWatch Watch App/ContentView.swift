@@ -15,6 +15,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case inbox
     case today
     case tomorrow
+    case alltasks
     
     var name: String {
         switch self {
@@ -24,6 +25,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return NSLocalizedString("Today", comment: "")
         case .tomorrow:
             return NSLocalizedString("Tomorrow", comment: "")
+        case .alltasks:
+            return NSLocalizedString("All", comment: "")
         }
     }
 }
@@ -63,6 +66,11 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
+                case .alltasks:
+                    try? TasksListView(tasks: tasks.sorted(by: TasksQuery.defaultSorting),
+                                       list: selectedSideBarItem!,
+                                       title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
                 case nil:
                     EmptyView()
                 }
@@ -97,11 +105,11 @@ struct ContentView: View {
                 addToInbox.toggle()
             }
         }
-        // FIXME: .onChange(of: scenePhase) { oldPhase, newPhase in
-//            if newPhase == .active && oldPhase == .background {
-//                refresher.refresh.toggle()
-//            }
-//        }
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
+                refresher.refresh.toggle()
+            }
+        }
     }
 }
 

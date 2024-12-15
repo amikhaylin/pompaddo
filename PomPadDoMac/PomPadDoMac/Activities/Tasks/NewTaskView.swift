@@ -64,9 +64,7 @@ struct NewTaskView: View {
                     modelContext.insert(task)
                     task.reconnect()
                     
-                    if list != .inbox {
-                        tasks.append(task)
-                    }
+                    tasks.append(task)
                     
                     // FIXME: if list == .inbox {
 //                        refresher.refresh.toggle()

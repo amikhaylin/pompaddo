@@ -26,12 +26,12 @@ struct TasksListView: View {
                     TaskCheckBoxView(task: task)
                     
                     NavigationLink {
-                        TaskDetailsView(task: task, list: list)
+                        TaskDetailsView(task: task, list: list, tasks: $tasks)
                     } label: {
                         Text(task.name)
                     }
                 }
-                .modifier(TaskSwipeModifier(task: task, list: list))
+                .modifier(TaskSwipeModifier(task: task, list: list, tasks: $tasks))
             }
         }
         .navigationTitle(title)

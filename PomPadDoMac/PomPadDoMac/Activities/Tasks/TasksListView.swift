@@ -63,8 +63,9 @@ struct TasksListView: View {
                                         .modifier(TaskRowModifier(task: maintask,
                                                                   selectedTasksSet: $selectedTasks.tasks,
                                                                   projects: projects,
-                                                                  list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: list))
+                                                                  list: list,
+                                                                  tasks: $tasks))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: list, tasks: $tasks))
                                         .tag(maintask)
                                 }
                             } else {
@@ -72,8 +73,9 @@ struct TasksListView: View {
                                     .modifier(TaskRowModifier(task: task,
                                                               selectedTasksSet: $selectedTasks.tasks,
                                                               projects: projects,
-                                                              list: list))
-                                    .modifier(TaskSwipeModifier(task: task, list: list))
+                                                              list: list,
+                                                              tasks: $tasks))
+                                    .modifier(TaskSwipeModifier(task: task, list: list, tasks: $tasks))
                                     .tag(task)
                             }
                         }
@@ -146,8 +148,13 @@ struct TasksListView: View {
             }
         }
         .onChange(of: list) { _, _ in
-            selectedTasks.tasks.removeAll()
-            showInspector.on = false
+            if showInspector.on {
+                showInspector.on = false
+            }
+            
+            if selectedTasks.tasks.count > 0 {
+                selectedTasks.tasks.removeAll()
+            }
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
@@ -166,15 +173,26 @@ struct TasksListView: View {
         for task in selectedTasks.tasks {
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
+            if let index = tasks.firstIndex(of: task) {
+                tasks.remove(at: index)
+            }
         }
-        showInspector.on = false
-        selectedTasks.tasks.removeAll()
+        if showInspector.on {
+            showInspector.on = false
+        }
+        
+        if selectedTasks.tasks.count > 0 {
+            selectedTasks.tasks.removeAll()
+        }
         // FIXME: refresher.refresh.toggle()
     }
     
     private func deleteTask(task: Todo) {
         TasksQuery.deleteTask(context: modelContext,
                               task: task)
+        if let index = tasks.firstIndex(of: task) {
+            tasks.remove(at: index)
+        }
         // FIXME: refresher.refresh.toggle()
     }
     

@@ -17,6 +17,7 @@ struct TaskSwipeModifier: ViewModifier {
     #endif
     @Bindable var task: Todo
     var list: SideBarItem
+    @Binding var tasks: [Todo]
     
     func body(content: Content) -> some View {
         content
@@ -25,6 +26,9 @@ struct TaskSwipeModifier: ViewModifier {
                     withAnimation {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                         // FIXME: refresher.refresh.toggle()
                     }
                 } label: {

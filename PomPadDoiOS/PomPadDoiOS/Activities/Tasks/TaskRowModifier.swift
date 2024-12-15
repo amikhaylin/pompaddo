@@ -19,6 +19,7 @@ struct TaskRowModifier: ViewModifier {
     @Binding var selectedTasksSet: Set<Todo>
     var projects: [Project]
     var list: SideBarItem
+    @Binding var tasks: [Todo]
     @State private var showAddSubtask = false
     
     func body(content: Content) -> some View {
@@ -42,6 +43,12 @@ struct TaskRowModifier: ViewModifier {
                 } else {
                     task.dueDate = nil
                 }
+                
+                if list == .today || list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                }
                 // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "clear")
@@ -55,6 +62,11 @@ struct TaskRowModifier: ViewModifier {
                     }
                 } else {
                     task.dueDate = Calendar.current.startOfDay(for: Date())
+                }
+                if list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
                 }
                 // FIXME: refresher.refresh.toggle()
             } label: {
@@ -70,6 +82,11 @@ struct TaskRowModifier: ViewModifier {
                 } else {
                     task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                 }
+                if list == .today {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                }
                 // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "sunrise")
@@ -83,6 +100,11 @@ struct TaskRowModifier: ViewModifier {
                     }
                 } else {
                     task.nextWeek()
+                }
+                if list == .today || list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
                 }
                 // FIXME: refresher.refresh.toggle()
             } label: {
@@ -200,6 +222,11 @@ struct TaskRowModifier: ViewModifier {
                             task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
+                        if list == .inbox {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                         // FIXME: refresher.refresh.toggle()
                     } label: {
                         Text(project.name)
@@ -216,6 +243,12 @@ struct TaskRowModifier: ViewModifier {
                             task.moveToStatus(status: status,
                                               project: project,
                                               context: modelContext)
+                            
+                            if status.clearDueDate && (list == .today || list == .tomorrow) {
+                                if let index = tasks.firstIndex(of: task) {
+                                    tasks.remove(at: index)
+                                }
+                            }
                             // FIXME: refresher.refresh.toggle()
                         } label: {
                             Text(status.name)
@@ -229,13 +262,14 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
-                selectedTasksSet.removeAll()
+//                selectedTasksSet.removeAll()
                 let newTask = task.copy(modelContext: modelContext)
                 
                 modelContext.insert(newTask)
                 newTask.reconnect()
                 
-                selectedTasksSet.insert(newTask)
+                tasks.append(newTask)
+//                selectedTasksSet.insert(newTask)
             } label: {
                 Image(systemName: "doc.on.doc")
                 Text("Dublicate task")
@@ -246,12 +280,18 @@ struct TaskRowModifier: ViewModifier {
                     for task in selectedTasksSet {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                     }
                     showInspector.on = false
                     selectedTasksSet.removeAll()
                 } else {
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
                 }
                 // FIXME: refresher.refresh.toggle()
             } label: {

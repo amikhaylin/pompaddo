@@ -20,6 +20,13 @@ struct NewTaskView: View {
     @State var mainTask: Todo?
     @Binding var tasks: [Todo]
     
+    enum FocusField: Hashable {
+        case taskName
+        case link
+    }
+    
+    @FocusState private var focusField: FocusField?
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -31,9 +38,14 @@ struct NewTaskView: View {
                 }
                 
                 TextField("Task name", text: $taskName)
+                    .focused($focusField, equals: .taskName)
+                    .task {
+                        self.focusField = .taskName
+                    }
                 
                 TextField("Link", text: $link)
                     .textContentType(.URL)
+                    .focused($focusField, equals: .link)
                 
                 Toggle("Due today", isOn: $dueToday)
                     .toggleStyle(.switch)
