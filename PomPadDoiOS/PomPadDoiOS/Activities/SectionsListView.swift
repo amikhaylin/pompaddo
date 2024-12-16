@@ -111,7 +111,7 @@ struct SectionsListView: View {
                     .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
                     .badge({
                         do {
-                            return try tasks.filter(TasksQuery.predicateActive()).count
+                            return try tasks.filter(TasksQuery.predicateAllActive()).count
                         } catch {
                             print(error.localizedDescription)
                             return 0

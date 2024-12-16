@@ -87,7 +87,7 @@ struct ContentView: View {
                     Text("Select a project")
                 }
             case .alltasks:
-                TasksListView(tasks: tasks.sorted(by: TasksQuery.defaultSorting),
+                try? TasksListView(tasks: tasks.filter(TasksQuery.predicateAll()).sorted(by: TasksQuery.defaultSorting),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)

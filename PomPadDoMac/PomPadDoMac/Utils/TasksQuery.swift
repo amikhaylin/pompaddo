@@ -98,6 +98,18 @@ struct TasksQuery {
             return false
         }
     }
+    
+    static func predicateAll() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            task.parentTask == nil
+        }
+    }
+    
+    static func predicateAllActive() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            task.parentTask == nil && !task.completed
+        }
+    }
         
     static func defaultTaskSortDescriptor() -> [SortDescriptor<Todo>] {
         return [SortDescriptor(\Todo.dueDate), SortDescriptor(\Todo.priority, order: .reverse)]
