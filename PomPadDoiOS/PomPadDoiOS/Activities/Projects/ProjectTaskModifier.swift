@@ -178,14 +178,17 @@ struct ProjectTaskModifier: ViewModifier {
                             task.disconnectFromAll()
                             task.project = nil
                             task.status = nil
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
                         }
                     } else {
                         task.disconnectFromAll()
                         task.project = nil
                         task.status = nil
-                    }
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                     }
                 } label: {
                     Image(systemName: "tray.fill")

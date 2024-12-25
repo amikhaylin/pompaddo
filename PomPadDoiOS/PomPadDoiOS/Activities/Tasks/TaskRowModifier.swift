@@ -39,14 +39,18 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.dueDate = nil
+                        if list == .today || list == .tomorrow {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.dueDate = nil
-                }
-                
-                if list == .today || list == .tomorrow {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
+                    if list == .today || list == .tomorrow {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                     }
                 }
                 // FIXME: refresher.refresh.toggle()
@@ -59,13 +63,18 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.dueDate = Calendar.current.startOfDay(for: Date())
+                        if list == .tomorrow {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.dueDate = Calendar.current.startOfDay(for: Date())
-                }
-                if list == .tomorrow {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
+                    if list == .tomorrow {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                     }
                 }
                 // FIXME: refresher.refresh.toggle()
@@ -78,13 +87,18 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                        if list == .today {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                }
-                if list == .today {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
+                    if list == .today {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                     }
                 }
                 // FIXME: refresher.refresh.toggle()
@@ -97,13 +111,18 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.nextWeek()
+                        if list == .today || list == .tomorrow {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.nextWeek()
-                }
-                if list == .today || list == .tomorrow {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
+                    if list == .today || list == .tomorrow {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                     }
                 }
                 // FIXME: refresher.refresh.toggle()
@@ -216,15 +235,20 @@ struct TaskRowModifier: ViewModifier {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
                                 project.tasks?.append(task)
+                                if list == .inbox {
+                                    if let index = tasks.firstIndex(of: task) {
+                                        tasks.remove(at: index)
+                                    }
+                                }
                             }
                         } else {
                             task.project = project
                             task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
-                        }
-                        if list == .inbox {
-                            if let index = tasks.firstIndex(of: task) {
-                                tasks.remove(at: index)
+                            if list == .inbox {
+                                if let index = tasks.firstIndex(of: task) {
+                                    tasks.remove(at: index)
+                                }
                             }
                         }
                         // FIXME: refresher.refresh.toggle()
