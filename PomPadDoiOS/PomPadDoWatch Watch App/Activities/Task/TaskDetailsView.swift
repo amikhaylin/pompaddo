@@ -15,6 +15,7 @@ struct TaskDetailsView: View {
     @EnvironmentObject var refresher: Refresher
     @Bindable var task: Todo
     @State var list: SideBarItem
+    @Binding var tasks: [Todo]
     
     var body: some View {
         ScrollView(.vertical) {
@@ -22,7 +23,7 @@ struct TaskDetailsView: View {
             
             if let project = task.project {
                 if let status = task.status, project.showStatus {
-                    Text("\(project.name)>\(status.name)")
+                    Text("\(project.name)→\(status.name)")
                         .foregroundStyle(Color.gray)
                         .font(.caption)
                 } else {
@@ -95,7 +96,7 @@ struct TaskDetailsView: View {
                     task.reactivate()
                 }
                 WidgetCenter.shared.reloadAllTimelines()
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Complete", systemImage: "checkmark.square")
@@ -104,7 +105,13 @@ struct TaskDetailsView: View {
             Button {
                 let date = Calendar.current.startOfDay(for: Date())
                 task.dueDate = date
-                refresher.refresh.toggle()
+                if list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Today", systemImage: "calendar")
@@ -113,7 +120,13 @@ struct TaskDetailsView: View {
             Button {
                 let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                 task.dueDate = date
-                refresher.refresh.toggle()
+                if list == .today {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Tomorrow", systemImage: "sunrise")
@@ -121,7 +134,13 @@ struct TaskDetailsView: View {
         
             Button {
                 task.nextWeek()
-                refresher.refresh.toggle()
+                if list == .today || list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 HStack {
@@ -132,7 +151,13 @@ struct TaskDetailsView: View {
             
             Button {
                 task.dueDate = nil
-                refresher.refresh.toggle()
+                if list == .today || list == .tomorrow {
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Clear due date", systemImage: "clear")
@@ -141,7 +166,8 @@ struct TaskDetailsView: View {
             if task.repeation != .none {
                 Button {
                     task.skip()
-                    refresher.refresh.toggle()
+                    // FIXME: refresher.refresh.toggle()
+                    WidgetCenter.shared.reloadAllTimelines()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Label("Skip", systemImage: "arrow.uturn.forward")
@@ -155,7 +181,6 @@ struct TaskDetailsView: View {
                                   title: task.name,
                                   mainTask: task)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 } label: {
                     Image(systemName: "arrow.right")
                     Text("Open subtasks")
@@ -169,7 +194,6 @@ struct TaskDetailsView: View {
                                   title: parentTask.name,
                                   mainTask: parentTask)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 } label: {
                     Image(systemName: "arrow.left")
                     Text("Open parent task")
@@ -179,7 +203,11 @@ struct TaskDetailsView: View {
             Button {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
-                refresher.refresh.toggle()
+                if let index = tasks.firstIndex(of: task) {
+                    tasks.remove(at: index)
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Delete task", systemImage: "trash")
@@ -192,8 +220,9 @@ struct TaskDetailsView: View {
 #Preview {
     do {
         let previewer = try Previewer()
+        @State var tasks: [Todo] = [previewer.task]
         
-        return TaskDetailsView(task: previewer.task, list: .today)
+        return TaskDetailsView(task: previewer.task, list: .today, tasks: $tasks)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

@@ -23,6 +23,8 @@ struct ProjectsListView: View {
     var projects: [Project]
     @Query var groups: [ProjectGroup]
     
+    @Binding var selectedSideBarItem: SideBarItem?
+    
     var body: some View {
         List(selection: $selectedProject) {
             DisclosureGroup(isExpanded: $projectsExpanded) {
@@ -36,10 +38,10 @@ struct ProjectsListView: View {
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.project = project
-                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
-                        refresher.refresh.toggle()
+                        // FIXME: refresher.refresh.toggle()
                         return true
                     }
                     .contextMenu {
@@ -64,6 +66,8 @@ struct ProjectsListView: View {
                         }
                         
                         Button {
+                            handleProjectSelection(for: project)
+
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                         } label: {
@@ -87,10 +91,10 @@ struct ProjectsListView: View {
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
                                     task.project = project
-                                    task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                    task.status = project.getDefaultStatus()
                                     project.tasks?.append(task)
                                 }
-                                refresher.refresh.toggle()
+                                // FIXME: refresher.refresh.toggle()
                                 return true
                             }
                             .contextMenu {
@@ -109,6 +113,8 @@ struct ProjectsListView: View {
                                 }
                                 
                                 Button {
+                                    handleProjectSelection(for: project)
+                                    
                                     project.deleteRelatives(context: modelContext)
                                     modelContext.delete(project)
                                 } label: {
@@ -168,7 +174,7 @@ struct ProjectsListView: View {
                     .buttonStyle(PlainButtonStyle())
                     .help("Create group")
                 }
-                .foregroundColor(Color(#colorLiteral(red: 0.5486837626, green: 0.827090323, blue: 0.8101685047, alpha: 1)))
+                .foregroundColor(Color("ProjectsColor"))
                 .dropDestination(for: Project.self) { projects, _ in
                     for project in projects {
                         project.group = nil
@@ -197,6 +203,13 @@ struct ProjectsListView: View {
             NewProjectGroupView(isVisible: self.$newProjectGroupShow)
         }
     }
+    
+    private func handleProjectSelection(for project: Project) {
+        if let projectSelected = selectedProject, projectSelected == project {
+            selectedProject = nil
+            selectedSideBarItem = .today
+        }
+    }
 }
 
 #Preview {
@@ -206,8 +219,11 @@ struct ProjectsListView: View {
         
         @State var selectedProject: Project?
         
+        @State var selectedSideBarItem: SideBarItem? = .today
+        
         return ProjectsListView(selectedProject: $selectedProject,
-                             projects: projects)
+                                projects: projects,
+                                selectedSideBarItem: $selectedSideBarItem)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

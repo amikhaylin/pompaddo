@@ -10,9 +10,11 @@ import SwiftData
 
 struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
-    @State private var selectedTasks = Set<Todo>()
-    @State private var showInspector = false
+    @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @State private var newTaskIsShowing = false
     
     @Bindable var project: Project
     
@@ -21,16 +23,14 @@ struct ProjectView: View {
     var body: some View {
         NavigationStack {
             if project.projectViewMode == 1 {
-                BoardView(project: project,
-                           selectedTasks: $selectedTasks)
+                BoardView(project: project)
             } else {
-                ProjectTasksListView(selectedTasks: $selectedTasks,
-                                     project: project)
+                ProjectTasksListView(project: project)
             }
         }
-        .inspector(isPresented: $showInspector) {
+        .inspector(isPresented: $showInspector.on) {
             Group {
-                if let selectedTask = selectedTasks.first {
+                if let selectedTask = selectedTasks.tasks.first {
                     EditTaskView(task: selectedTask)
                 } else {
                     Text("Select a task")
@@ -62,19 +62,21 @@ struct ProjectView: View {
                 }.pickerStyle(.segmented)
 
                 Button {
-                    addTaskToProject()
+                    newTaskIsShowing.toggle()
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
-                .help("Add task to current list")
-
+                .help("Add task to current list ⌘⌥I")
+                .keyboardShortcut("i", modifiers: [.command, .option])
+                
                 Button {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
-                }.disabled(selectedTasks.count == 0)
+                }.disabled(selectedTasks.tasks.count == 0)
                     .help("Delete task")
+                    .keyboardShortcut(.delete)
 
                 #if os(macOS)
                 Button {
@@ -99,43 +101,59 @@ struct ProjectView: View {
                 #endif
                 
                 Button {
-                    showInspector.toggle()
+                    showInspector.on.toggle()
                 } label: {
                     Label("Show task details", systemImage: "sidebar.trailing")
                 }
             }
         }
         .navigationTitle(project.name)
-        .onChange(of: selectedTasks) { _, _ in
-            if selectedTasks.count > 0 {
-                showInspector = true
+        .onChange(of: selectedTasks.tasks) { _, _ in
+            if selectedTasks.tasks.count > 0 {
+                showInspector.on = true
             }
         }
         .onChange(of: project) { _, _ in
-            selectedTasks.removeAll()
-            showInspector = false
+            selectedTasks.tasks.removeAll()
+            showInspector.on = false
         }
+        #if os(macOS)
+        .sheet(isPresented: $newTaskIsShowing) {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
+                        tasks: Binding(
+                            get: { project.tasks ?? [] },
+                            set: { project.tasks = $0 }
+                        ))
+        }
+        #else
+        .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
+                        tasks: Binding(
+                            get: { project.tasks ?? [] },
+                            set: { project.tasks = $0 }
+                        ))
+                .frame(minWidth: 200, maxHeight: 180)
+                .presentationCompactAdaptation(.popover)
+        })
+        #endif
     }
     
     private func deleteItems() {
         withAnimation {
-            for task in selectedTasks {
+            for task in selectedTasks.tasks {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
+//                if let index = project.tasks?.firstIndex(of: task) {
+//                    project.tasks.remove(at: index)
+//                }
             }
-        }
-    }
-    
-    private func addTaskToProject() {
-        withAnimation {
-            selectedTasks.removeAll()
-            let task = Todo(name: "",
-                            status: project.getStatuses().sorted(by: { $0.order < $1.order }).first,
-                            project: project)
-            modelContext.insert(task)
+            if showInspector.on {
+                showInspector.on = false
+            }
             
-            selectedTasks.insert(task)
-            showInspector = true
+            if selectedTasks.tasks.count > 0 {
+                selectedTasks.tasks.removeAll()
+            }
         }
     }
 }

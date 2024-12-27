@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ReviewProjectsView: View {
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
+    
     var projects: [Project]
     
     var body: some View {
@@ -17,6 +20,8 @@ struct ReviewProjectsView: View {
                     List(projects) { project in
                         NavigationLink {
                             ProjectToReviewView(project: project)
+                                .environmentObject(showInspector)
+                                .environmentObject(selectedTasks)
                         } label: {
                             Text(project.name)
                                 .badge(project.getTasks().filter({ $0.completed == false }).count)

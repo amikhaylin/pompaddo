@@ -22,9 +22,11 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @State var tasks: [Todo]
 
-    @State private var selectedTasks = Set<Todo>()
+//    @State private var selectedTasks = Set<Todo>()
     
     @State var list: SideBarItem
     @State var title: String
@@ -33,13 +35,13 @@ struct TasksListView: View {
     
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
     
-    @State private var showInspector = false
+//    @State private var showInspector = false
     
     @Query var projects: [Project]
     
     var body: some View {
         NavigationStack {
-            List(selection: $selectedTasks) {
+            List(selection: $selectedTasks.tasks) {
                 ForEach(CommonTaskListSections.allCases) { section in
                     DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
                         get: { groupsExpanded.contains(section.rawValue) },
@@ -51,7 +53,7 @@ struct TasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? tasks.filter({ $0.completed && $0.parentTask == nil }) : tasks.filter({ $0.completed == false }),
+                        ForEach(section == .completed ? tasks.filter({ $0.completed && ($0.parentTask == nil || mainTask != nil) }) : tasks.filter({ $0.completed == false }),
                                      id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
@@ -59,21 +61,21 @@ struct TasksListView: View {
                                              children: \.subtasks) { maintask in
                                     TaskRowView(task: maintask)
                                         .modifier(TaskRowModifier(task: maintask,
-                                                                  selectedTasks: $selectedTasks,
+                                                                  selectedTasksSet: $selectedTasks.tasks,
                                                                   projects: projects,
-                                                                  list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: list))
-                                        .environmentObject(refresher)
+                                                                  list: list,
+                                                                  tasks: $tasks))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: list, tasks: $tasks))
                                         .tag(maintask)
                                 }
                             } else {
                                 TaskRowView(task: task)
                                     .modifier(TaskRowModifier(task: task,
-                                                              selectedTasks: $selectedTasks,
+                                                              selectedTasksSet: $selectedTasks.tasks,
                                                               projects: projects,
-                                                              list: list))
-                                    .modifier(TaskSwipeModifier(task: task, list: list))
-                                    .environmentObject(refresher)
+                                                              list: list,
+                                                              tasks: $tasks))
+                                    .modifier(TaskSwipeModifier(task: task, list: list, tasks: $tasks))
                                     .tag(task)
                             }
                         }
@@ -100,27 +102,29 @@ struct TasksListView: View {
         .toolbar {
             ToolbarItemGroup {
                 Button {
-                    addToCurrentList()
+                    newTaskIsShowing.toggle()
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
                 .accessibility(identifier: "AddToCurrentList")
-                .help("Add task to current list")
+                .help("Add task to current list ⌘⌥I")
+                .keyboardShortcut("i", modifiers: [.command, .option])
 
                 Button {
                     deleteItems()
                 } label: {
                     Label("Delete task", systemImage: "trash")
                         .foregroundStyle(Color.red)
-                }.disabled(selectedTasks.count == 0)
+                }.disabled(selectedTasks.tasks.count == 0)
                     .help("Delete task")
+                    .keyboardShortcut(.delete)
                 
                 #if os(iOS)
                 EditButton()
                 #endif
 
                 Button {
-                    showInspector.toggle()
+                    showInspector.on.toggle()
                 } label: {
                     Label("Show task details", systemImage: "sidebar.trailing")
                 }
@@ -128,9 +132,9 @@ struct TasksListView: View {
             }
         }
         .navigationTitle(title)
-        .inspector(isPresented: $showInspector) {
+        .inspector(isPresented: $showInspector.on) {
             Group {
-                if let selectedTask = selectedTasks.first {
+                if let selectedTask = selectedTasks.tasks.first {
                     EditTaskView(task: selectedTask)
                 } else {
                     Text("Select a task")
@@ -138,29 +142,58 @@ struct TasksListView: View {
             }
             .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
         }
-        .onChange(of: selectedTasks) { _, _ in
-            if selectedTasks.count > 0 && !showInspector {
-                showInspector = true
+        .onChange(of: selectedTasks.tasks) { _, _ in
+            if selectedTasks.tasks.count > 0 && !showInspector.on {
+                showInspector.on = true
             }
         }
         .onChange(of: list) { _, _ in
-            selectedTasks.removeAll()
-            showInspector = false
+            if showInspector.on {
+                showInspector.on = false
+            }
+            
+            if selectedTasks.tasks.count > 0 {
+                selectedTasks.tasks.removeAll()
+            }
         }
+        #if os(macOS)
+        .sheet(isPresented: $newTaskIsShowing) {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
+        }
+        #else
+        .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
+                .frame(minWidth: 200, maxHeight: 180)
+                .presentationCompactAdaptation(.popover)
+        })
+        #endif
     }
     
     private func deleteItems() {
-        for task in selectedTasks {
+        for task in selectedTasks.tasks {
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
+            if let index = tasks.firstIndex(of: task) {
+                tasks.remove(at: index)
+            }
         }
-        refresher.refresh.toggle()
+        if showInspector.on {
+            showInspector.on = false
+        }
+        
+        if selectedTasks.tasks.count > 0 {
+            selectedTasks.tasks.removeAll()
+        }
+        // FIXME: refresher.refresh.toggle()
     }
     
     private func deleteTask(task: Todo) {
         TasksQuery.deleteTask(context: modelContext,
                               task: task)
-        refresher.refresh.toggle()
+        if let index = tasks.firstIndex(of: task) {
+            tasks.remove(at: index)
+        }
+        // FIXME: refresher.refresh.toggle()
     }
     
     private func setDueDate(task: Todo) {
@@ -175,21 +208,9 @@ struct TasksListView: View {
             break
         case .review:
             break
+        case .alltasks:
+            break
         }
-    }
-
-    private func addToCurrentList() {
-        selectedTasks.removeAll()
-        let task = Todo(name: "")
-        if let mainTask = mainTask {
-            mainTask.subtasks?.append(task)
-        } else {
-            setDueDate(task: task)
-        }
-        tasks.append(task)
-        modelContext.insert(task)
-
-        selectedTasks.insert(task)
     }
 }
 

@@ -41,7 +41,7 @@ struct ProjectSettingsView: View {
                         
                         // if status has tasks then move its to first status or nil
                         for task in project.getTasks().filter({ $0.status == status && $0.parentTask == nil }) {
-                            if let firstStatus = project.getStatuses().sorted(by: { $0.order < $1.order }).first {
+                            if let firstStatus = project.getDefaultStatus() {
                                 task.status = firstStatus
                             } else {
                                 task.status = nil

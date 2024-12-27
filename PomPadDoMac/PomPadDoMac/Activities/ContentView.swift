@@ -10,35 +10,13 @@ import SwiftData
 
 import SwiftDataTransferrable
 
-enum SideBarItem: String, Identifiable, CaseIterable {
-    var id: String { rawValue }
-    
-    case inbox
-    case today
-    case tomorrow
-    case review
-    case projects
-    
-    var name: String {
-        switch self {
-        case .inbox:
-            return NSLocalizedString("Inbox", comment: "")
-        case .today:
-            return NSLocalizedString("Today", comment: "")
-        case .tomorrow:
-            return NSLocalizedString("Tomorrow", comment: "")
-        case .review:
-            return NSLocalizedString("Review", comment: "")
-        case .projects:
-            return NSLocalizedString("Projects", comment: "")
-        }
-    }
-}
-
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @Environment(\.scenePhase) var scenePhase
+  
+    @StateObject private var showInspector = InspectorToggler()
+    @StateObject private var selectedTasks = SelectedTasks()
     
     @State private var newTaskIsShowing = false
     @State var selectedSideBarItem: SideBarItem? = .today
@@ -54,11 +32,11 @@ struct ContentView: View {
                 SectionsListView(tasks: tasks,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: 125)
+                    .frame(height: 150)
                 
                 ProjectsListView(selectedProject: $selectedProject,
-                                 projects: projects)
-                    .environmentObject(refresher)
+                                 projects: projects,
+                                 selectedSideBarItem: $selectedSideBarItem)
                     .id(refresher.refresh)
             }
             .toolbar {
@@ -82,8 +60,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
-                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox)
-                    .environmentObject(refresher)
+                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
             }
             .navigationSplitViewColumnWidth(min: 230, ideal: 230, max: 400)
         } detail: {
@@ -94,44 +71,66 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) })
                         .sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(refresher)
                     .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 case .tomorrow:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow())
                         .filter({ $0.completionDate == nil })
                         .sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(refresher)
                     .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
                             .id(refresher.refresh)
+                            .environmentObject(showInspector)
+                            .environmentObject(selectedTasks)
                     } else {
                         Text("Select a project")
                     }
                 case .review:
                     ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
+                        .environmentObject(showInspector)
+                        .environmentObject(selectedTasks)
+                case .alltasks:
+                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateAll()).sorted(by: TasksQuery.defaultSorting),
+                                  list: selectedSideBarItem!,
+                                  title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 default:
                     EmptyView()
                 }
             }
         }
         .onChange(of: selectedSideBarItem, { _, newValue in
+            if showInspector.on {
+                showInspector.on = false
+            }
+            
+            if selectedTasks.tasks.count > 0 {
+                selectedTasks.tasks.removeAll()
+            }
+
             if newValue != .projects {
                 selectedProject = nil
             }
         })
         .onChange(of: selectedProject) { _, newValue in
-            if newValue != nil {
+            if newValue != nil && selectedSideBarItem != .projects {
                 selectedSideBarItem = .projects
             }
         }
@@ -158,7 +157,7 @@ struct ContentView: View {
             }
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && oldPhase == .background {
+            if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) { 
                 refresher.refresh.toggle()
             }
         }

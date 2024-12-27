@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct PomPadDoWatchpApp: App {
+    @State private var refresher = Refresher()
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Todo.self,
@@ -30,6 +32,7 @@ struct PomPadDoWatchpApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(refresher)
         }
         .modelContainer(sharedModelContainer)
     }

@@ -11,8 +11,13 @@ import SwiftData
 struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    #if os(iOS)
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
+    #endif
     @Bindable var task: Todo
     var list: SideBarItem
+    @Binding var tasks: [Todo]
     
     func body(content: Content) -> some View {
         content
@@ -21,7 +26,10 @@ struct TaskSwipeModifier: ViewModifier {
                     withAnimation {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
-                        refresher.refresh.toggle()
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
+                        // FIXME: refresher.refresh.toggle()
                     }
                 } label: {
                     Label("Delete", systemImage: "trash.fill")
@@ -36,7 +44,11 @@ struct TaskSwipeModifier: ViewModifier {
                                       title: task.name,
                                       mainTask: task)
                         .id(refresher.refresh)
-                        .environmentObject(refresher)
+                        .refreshable {
+                            refresher.refresh.toggle()
+                        }
+                        .environmentObject(showInspector)
+                        .environmentObject(selectedTasks)
                     } label: {
                         Image(systemName: "arrow.right")
                         Text("Open subtasks")
@@ -50,7 +62,6 @@ struct TaskSwipeModifier: ViewModifier {
                                       title: task.name,
                                       mainTask: task)
                         .id(refresher.refresh)
-                        .environmentObject(refresher)
                     } label: {
                         Image(systemName: "arrow.right")
                         Text("Open subtasks")
@@ -67,7 +78,6 @@ struct TaskSwipeModifier: ViewModifier {
                                       title: task.name,
                                       mainTask: task)
                         .id(refresher.refresh)
-                        .environmentObject(refresher)
                     } label: {
                         Image(systemName: "arrow.right")
                         Text("Open subtasks")

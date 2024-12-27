@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import WidgetKit
 
 struct TaskCheckBoxView: View {
     @Environment(\.modelContext) private var modelContext
@@ -19,6 +20,9 @@ struct TaskCheckBoxView: View {
             } else {
                 task.reactivate()
             }
+            #if os(watchOS)
+            WidgetCenter.shared.reloadAllTimelines()
+            #endif
         }, label: {
             if task.completed {
                 Image(systemName: "checkmark.square.fill")

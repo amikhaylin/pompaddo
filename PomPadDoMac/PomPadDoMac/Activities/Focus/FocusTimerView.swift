@@ -32,7 +32,7 @@ struct FocusTimerView: View {
                 .onSubmit {
                     let task = Todo(name: textToInbox)
                     modelContext.insert(task)
-                    refresher.refresh.toggle()
+                    // FIXME: refresher.refresh.toggle()
                     textToInbox = ""
                 }
             

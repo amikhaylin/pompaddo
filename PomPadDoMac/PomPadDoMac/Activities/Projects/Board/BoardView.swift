@@ -10,9 +10,11 @@ import SwiftData
 
 struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @Bindable var project: Project
     
-    @Binding var selectedTasks: Set<Todo>
+//    @Binding var selectedTasks: Set<Todo>
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -21,7 +23,7 @@ struct BoardView: View {
                 ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                     VStack {
                         Text(status.name)
-                        List(selection: $selectedTasks) {
+                        List(selection: $selectedTasks.tasks) {
                             ForEach(project.getTasks()
                                         .filter({ $0.status == status && $0.parentTask == nil })
                                         .sorted(by: TasksQuery.defaultSorting),
@@ -32,15 +34,21 @@ struct BoardView: View {
                                                  children: \.subtasks) { maintask in
                                         TaskRowView(task: maintask, showingProject: false, nameLineLimit: 5)
                                             .modifier(ProjectTaskModifier(task: maintask,
-                                                                          selectedTasks: $selectedTasks,
-                                                                          project: project))
+                                                                          selectedTasksSet: $selectedTasks.tasks,
+                                                                          project: project,
+                                                                          tasks: Binding(
+                                                                            get: { project.tasks ?? [] },
+                                                                            set: { project.tasks = $0 })))
                                             .tag(maintask)
                                     }
                                 } else {
                                     TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
                                         .modifier(ProjectTaskModifier(task: task,
-                                                                      selectedTasks: $selectedTasks,
-                                                                      project: project))
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      project: project,
+                                                                      tasks: Binding(
+                                                                        get: { project.tasks ?? [] },
+                                                                        set: { project.tasks = $0 })))
                                         .tag(task)
                                 }
                             }
@@ -87,7 +95,7 @@ struct BoardView: View {
     
     private func deleteItems() {
         withAnimation {
-            for task in selectedTasks {
+            for task in selectedTasks.tasks {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }
@@ -98,11 +106,10 @@ struct BoardView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-        @State var selectedTasks = Set<Todo>()
+//        @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
-        return BoardView(project: project,
-                            selectedTasks: $selectedTasks)
+        return BoardView(project: project)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

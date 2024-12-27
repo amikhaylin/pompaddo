@@ -14,7 +14,18 @@
         }
       }
     },
+    "%@→%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@→%2$@"
+          }
+        }
+      }
+    },
     "%@>%@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -177,6 +188,22 @@
         }
       }
     },
+    "Add task to " : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add task to "
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить задачу в "
+          }
+        }
+      }
+    },
     "Add task to current list" : {
       "localizations" : {
         "en" : {
@@ -192,6 +219,9 @@
           }
         }
       }
+    },
+    "Add task to current list ⌘⌥I" : {
+
     },
     "Add task to Inbox" : {
       "localizations" : {
@@ -237,6 +267,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Добавить во Входящие ⌘R"
+          }
+        }
+      }
+    },
+    "All" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все"
           }
         }
       }

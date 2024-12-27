@@ -13,10 +13,14 @@ import SwiftData
 struct TaskRowModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @Bindable var task: Todo
-    @Binding var selectedTasks: Set<Todo>
+    @Binding var selectedTasksSet: Set<Todo>
     var projects: [Project]
     var list: SideBarItem
+    @Binding var tasks: [Todo]
+    @State private var showAddSubtask = false
     
     func body(content: Content) -> some View {
        content
@@ -32,56 +36,96 @@ struct TaskRowModifier: ViewModifier {
         }
         .contextMenu {
             Button {
-                if selectedTasks.count > 0 {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.dueDate = nil
+                        if list == .today || list == .tomorrow {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.dueDate = nil
+                    if list == .today || list == .tomorrow {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
+                    }
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "clear")
                 Text("Clear due date")
             }
             
             Button {
-                if selectedTasks.count > 0 {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.dueDate = Calendar.current.startOfDay(for: Date())
+                        if list == .tomorrow {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.dueDate = Calendar.current.startOfDay(for: Date())
+                    if list == .tomorrow {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
+                    }
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "calendar")
                 Text("Today")
             }
             
             Button {
-                if selectedTasks.count > 0 {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                        if list == .today {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                    if list == .today {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
+                    }
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "sunrise")
                 Text("Tomorrow")
             }
             
             Button {
-                if selectedTasks.count > 0 {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                    for task in selectedTasksSet {
                         task.nextWeek()
+                        if list == .today || list == .tomorrow {
+                            if let index = tasks.firstIndex(of: task) {
+                                tasks.remove(at: index)
+                            }
+                        }
                     }
                 } else {
                     task.nextWeek()
+                    if list == .today || list == .tomorrow {
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
+                    }
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 HStack {
                     Image(systemName: "calendar.badge.clock")
@@ -92,7 +136,7 @@ struct TaskRowModifier: ViewModifier {
             if task.repeation != .none {
                 Button {
                     task.skip()
-                    refresher.refresh.toggle()
+                    // FIXME: refresher.refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.uturn.forward")
                     Text("Skip")
@@ -103,14 +147,14 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(0...3, id: \.self) { priority in
                     Button {
-                        if selectedTasks.count > 0 {
-                            for task in selectedTasks {
+                        if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                            for task in selectedTasksSet {
                                 task.priority = priority
                             }
                         } else {
                             task.priority = priority
                         }
-                        refresher.refresh.toggle()
+                        // FIXME: refresher.refresh.toggle()
                     } label: {
                         HStack {
                             switch priority {
@@ -134,12 +178,7 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
-                selectedTasks.removeAll()
-                let subtask = Todo(name: "", parentTask: task)
-                task.subtasks?.append(subtask)
-                modelContext.insert(subtask)
-                
-                selectedTasks.insert(subtask)
+                showAddSubtask.toggle()
             } label: {
                 Image(systemName: "plus")
                 Text("Add subtask")
@@ -151,7 +190,11 @@ struct TaskRowModifier: ViewModifier {
                               title: task.name,
                               mainTask: task)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
+                .refreshable {
+                    refresher.refresh.toggle()
+                }
+                .environmentObject(showInspector)
+                .environmentObject(selectedTasks)
             } label: {
                 Image(systemName: "arrow.right")
                 Text("Open subtasks")
@@ -164,7 +207,8 @@ struct TaskRowModifier: ViewModifier {
                                   title: parentTask.name,
                                   mainTask: parentTask)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 } label: {
                     Image(systemName: "arrow.left")
                     Text("Open parent task")
@@ -186,18 +230,28 @@ struct TaskRowModifier: ViewModifier {
             Menu {
                 ForEach(projects) { project in
                     Button {
-                        if selectedTasks.count > 0 {
-                            for task in selectedTasks {
+                        if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                            for task in selectedTasksSet {
                                 task.project = project
-                                task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                                task.status = project.getDefaultStatus()
                                 project.tasks?.append(task)
+                                if list == .inbox {
+                                    if let index = tasks.firstIndex(of: task) {
+                                        tasks.remove(at: index)
+                                    }
+                                }
                             }
                         } else {
                             task.project = project
-                            task.status = project.getStatuses().sorted(by: { $0.order < $1.order }).first
+                            task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
+                            if list == .inbox {
+                                if let index = tasks.firstIndex(of: task) {
+                                    tasks.remove(at: index)
+                                }
+                            }
                         }
-                        refresher.refresh.toggle()
+                        // FIXME: refresher.refresh.toggle()
                     } label: {
                         Text(project.name)
                     }
@@ -213,7 +267,13 @@ struct TaskRowModifier: ViewModifier {
                             task.moveToStatus(status: status,
                                               project: project,
                                               context: modelContext)
-                            refresher.refresh.toggle()
+                            
+                            if status.clearDueDate && (list == .today || list == .tomorrow) {
+                                if let index = tasks.firstIndex(of: task) {
+                                    tasks.remove(at: index)
+                                }
+                            }
+                            // FIXME: refresher.refresh.toggle()
                         } label: {
                             Text(status.name)
                         }
@@ -226,35 +286,63 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
-                selectedTasks.removeAll()
+//                selectedTasksSet.removeAll()
                 let newTask = task.copy(modelContext: modelContext)
                 
                 modelContext.insert(newTask)
                 newTask.reconnect()
                 
-                selectedTasks.insert(newTask)
+                tasks.append(newTask)
+//                selectedTasksSet.insert(newTask)
             } label: {
                 Image(systemName: "doc.on.doc")
                 Text("Dublicate task")
             }
             
             Button {
-                if selectedTasks.count > 0 {
-                    for task in selectedTasks {
+                if selectedTasksSet.count > 0 {
+                    for task in selectedTasksSet {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
+                        if let index = tasks.firstIndex(of: task) {
+                            tasks.remove(at: index)
+                        }
                     }
+                    showInspector.on = false
+                    selectedTasksSet.removeAll()
                 } else {
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
+                    if let index = tasks.firstIndex(of: task) {
+                        tasks.remove(at: index)
+                    }
                 }
-                refresher.refresh.toggle()
+                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "trash")
                     .foregroundStyle(Color.red)
                 Text("Delete task")
             }
         }
+        #if os(macOS)
+        .sheet(isPresented: $showAddSubtask) {
+            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
+                        tasks: Binding(
+                            get: { task.subtasks ?? [] },
+                            set: { task.subtasks = $0 }
+                        ))
+        }
+        #else
+        .popover(isPresented: $showAddSubtask, attachmentAnchor: .point(.topLeading), content: {
+            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
+                        tasks: Binding(
+                            get: { task.subtasks ?? [] },
+                            set: { task.subtasks = $0 }
+                        ))
+                .frame(minWidth: 200, maxHeight: 180)
+                .presentationCompactAdaptation(.popover)
+        })
+        #endif
     }
 }
 // swiftlint:enable function_body_length

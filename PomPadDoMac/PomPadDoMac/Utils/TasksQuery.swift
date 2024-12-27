@@ -79,6 +79,12 @@ struct TasksQuery {
         }
     }
     
+    static func predicateActive() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            !task.completed
+        }
+    }
+    
     static func filterProjectToReview(_ project: Project) -> Bool {
         if project.showInReview == false {
             return false
@@ -90,6 +96,18 @@ struct TasksQuery {
             return Calendar.current.isDateInToday(dateToReview) || dateToReview < today
         } else {
             return false
+        }
+    }
+    
+    static func predicateAll() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            task.parentTask == nil
+        }
+    }
+    
+    static func predicateAllActive() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            task.parentTask == nil && !task.completed
         }
     }
         

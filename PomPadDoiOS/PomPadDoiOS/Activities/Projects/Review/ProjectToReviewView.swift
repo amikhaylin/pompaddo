@@ -10,6 +10,8 @@ import SwiftUI
 struct ProjectToReviewView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     @Bindable var project: Project
     @State private var deletionRequested = false
     
@@ -28,6 +30,14 @@ struct ProjectToReviewView: View {
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                             deletionRequested.toggle()
+                            if showInspector.on {
+                                showInspector.on = false
+                            }
+                            
+                            if selectedTasks.tasks.count > 0 {
+                                selectedTasks.tasks.removeAll()
+                            }
+                            
                             presentationMode.wrappedValue.dismiss()
                         } label: {
                             Label("Delete Project", systemImage: "trash")
@@ -39,6 +49,13 @@ struct ProjectToReviewView: View {
                 
                 Button("Mark Reviewed") {
                     project.reviewDate = Date()
+                    if showInspector.on {
+                        showInspector.on = false
+                    }
+                    
+                    if selectedTasks.tasks.count > 0 {
+                        selectedTasks.tasks.removeAll()
+                    }
                     presentationMode.wrappedValue.dismiss()
                 }
             }

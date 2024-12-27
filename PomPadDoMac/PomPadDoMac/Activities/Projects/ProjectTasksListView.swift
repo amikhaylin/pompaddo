@@ -10,14 +10,15 @@ import SwiftData
 
 struct ProjectTasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @Binding var selectedTasks: Set<Todo>
+    @EnvironmentObject var showInspector: InspectorToggler
+    @EnvironmentObject var selectedTasks: SelectedTasks
     
     @Bindable var project: Project
     
     @State private var refresher = Refresher()
     
     var body: some View {
-        List(selection: $selectedTasks) {
+        List(selection: $selectedTasks.tasks) {
             ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                 @Bindable var status = status
                 DisclosureGroup(status.name, isExpanded: $status.expanded) {
@@ -31,17 +32,27 @@ struct ProjectTasksListView: View {
                                          children: \.subtasks) { maintask in
                                 TaskRowView(task: maintask, showingProject: false)
                                     .modifier(ProjectTaskModifier(task: maintask,
-                                                                  selectedTasks: $selectedTasks,
-                                                                  project: project))
-                                    .modifier(TaskSwipeModifier(task: maintask, list: .projects))
+                                                                  selectedTasksSet: $selectedTasks.tasks,
+                                                                  project: project,
+                                                                  tasks: Binding(
+                                                                    get: { project.tasks ?? [] },
+                                                                    set: { project.tasks = $0 })))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: .projects, tasks: Binding(
+                                            get: { project.tasks ?? [] },
+                                            set: { project.tasks = $0 })))
                                     .tag(maintask)
                             }
                         } else {
                             TaskRowView(task: task, showingProject: false)
                                 .modifier(ProjectTaskModifier(task: task,
-                                                              selectedTasks: $selectedTasks,
-                                                              project: project))
-                                .modifier(TaskSwipeModifier(task: task, list: .projects))
+                                                              selectedTasksSet: $selectedTasks.tasks,
+                                                              project: project,
+                                                              tasks: Binding(
+                                                                get: { project.tasks ?? [] },
+                                                                set: { project.tasks = $0 })))
+                                    .modifier(TaskSwipeModifier(task: task, list: .projects, tasks: Binding(
+                                        get: { project.tasks ?? [] },
+                                        set: { project.tasks = $0 })))
                                 .tag(task)
                         }
                     }
@@ -67,7 +78,7 @@ struct ProjectTasksListView: View {
     
     private func deleteItems() {
         withAnimation {
-            for task in selectedTasks {
+            for task in selectedTasks.tasks {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }
@@ -78,11 +89,10 @@ struct ProjectTasksListView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-        @State var selectedTasks = Set<Todo>()
+//        @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
-        return ProjectTasksListView(selectedTasks: $selectedTasks,
-                                    project: previewer.project)
+        return ProjectTasksListView(project: previewer.project)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }

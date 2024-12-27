@@ -15,6 +15,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case inbox
     case today
     case tomorrow
+    case alltasks
     
     var name: String {
         switch self {
@@ -24,17 +25,19 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return NSLocalizedString("Today", comment: "")
         case .tomorrow:
             return NSLocalizedString("Tomorrow", comment: "")
+        case .alltasks:
+            return NSLocalizedString("All", comment: "")
         }
     }
 }
 
 struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var refresher: Refresher
     
     @Query var tasks: [Todo]
     
     @State var selectedSideBarItem: SideBarItem? = .today
-    @State private var refresher = Refresher()
     @State private var addToInbox = false
     
     var body: some View {
@@ -51,23 +54,23 @@ struct ContentView: View {
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 case .today:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
                         .filter({ TasksQuery.checkToday(date: $0.completionDate) && ($0.completed == false || ($0.completed && $0.parentTask == nil)) })
                         .sorted(by: TasksQuery.sortingWithCompleted),
-//                                                   .sorted(by: TasksQuery.defaultSorting)
-//                                                   .sorted(by: TasksQuery.sortCompleted),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
                 case .tomorrow:
                     try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow()).sorted(by: TasksQuery.defaultSorting),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
-                    .environmentObject(refresher)
+                case .alltasks:
+                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateAll()).sorted(by: TasksQuery.defaultSorting),
+                                       list: selectedSideBarItem!,
+                                       title: selectedSideBarItem!.name)
+                    .id(refresher.refresh)
                 case nil:
                     EmptyView()
                 }
@@ -96,7 +99,6 @@ struct ContentView: View {
         }
         .sheet(isPresented: $addToInbox) {
             NewTaskView()
-                .environmentObject(refresher)
         }
         .onOpenURL { url in
             if url.absoluteString == "pompaddo://addtoinbox" {
@@ -104,7 +106,7 @@ struct ContentView: View {
             }
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && oldPhase == .background {
+            if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
                 refresher.refresh.toggle()
             }
         }
