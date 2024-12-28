@@ -12,10 +12,20 @@ struct EditProjectNameView: View {
     @Environment(\.presentationMode) var presentationMode
     @Bindable var project: Project
     
+    enum FocusField: Hashable {
+        case projectName
+    }
+    
+    @FocusState private var focusField: FocusField?
+    
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Project name", text: $project.name)
+                    .focused($focusField, equals: .projectName)
+                    .task {
+                        self.focusField = .projectName
+                    }
             }
             .padding()
             .toolbar {
