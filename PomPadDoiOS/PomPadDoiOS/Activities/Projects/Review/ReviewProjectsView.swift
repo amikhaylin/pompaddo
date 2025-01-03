@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ReviewProjectsView: View {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
     
     var projects: [Project]
+    
+    @Query var projectsAll: [Project]
     
     var body: some View {
         NavigationStack {
@@ -32,7 +35,42 @@ struct ReviewProjectsView: View {
                 }
             }
         }
+        .toolbar {
+            Button {
+                for project in projectsAll {
+                    for task in project.tasks ?? [] {
+                        if task.status == nil {
+                            if task.completed {
+                                if let status = project.getStatuses().first(where: { $0.doCompletion }) {
+                                    task.status = status
+                                } else {
+                                    task.status = project.getDefaultStatus()
+                                }
+                            } else {
+                                task.status = project.getDefaultStatus()
+                            }
+                        }
+                    }
+                }
+            } label: {
+                Label("Fix sync issues", systemImage: "exclamationmark.arrow.trianglehead.2.clockwise.rotate.90")
+            }
+            .disabled(!checkIssues())
+            .help("Fix sync issues")
+        }
         .navigationTitle("Review")
+    }
+    
+    private func checkIssues() -> Bool {
+        for project in projectsAll {
+            for task in project.tasks ?? [] {
+                if task.status == nil {
+                    return true
+                }
+            }
+        }
+        
+        return false
     }
 }
 

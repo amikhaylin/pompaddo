@@ -878,6 +878,22 @@
         }
       }
     },
+    "Fix sync issues" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fix sync issues"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Исправить проблемы синхронизации"
+          }
+        }
+      }
+    },
     "Focus stats" : {
       "localizations" : {
         "en" : {
