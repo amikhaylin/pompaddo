@@ -143,10 +143,16 @@ extension Todo {
     }
     
     func disconnectFromAll() {
+        if let status = self.status, let index = status.tasks?.firstIndex(of: self) {
+            self.status = nil
+            status.tasks?.remove(at: index)
+        }
         if let project = self.project, let index = project.tasks?.firstIndex(of: self) {
+            self.project = nil
             project.tasks?.remove(at: index)
         }
         if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
+            self.parentTask = nil
             parentTask.subtasks?.remove(at: index)
         }
     }
@@ -168,6 +174,7 @@ extension Todo {
             
             if let status = self.status {
                 newTask.status = status
+                status.tasks?.append(newTask)
             }
         }
         
@@ -176,7 +183,11 @@ extension Todo {
         
         if let project = self.project, project.completedMoving {
             if let status = project.getStatuses().first(where: { $0.doCompletion }) {
+                if let oldStatus = self.status, let index = oldStatus.tasks?.firstIndex(of: self) {
+                    oldStatus.tasks?.remove(at: index)
+                }
                 self.status = status
+                status.tasks?.append(self)
             }
         }
     }
@@ -310,6 +321,10 @@ extension Todo {
     func moveToStatus(status: Status, 
                       project: Project,
                       context: ModelContext) {
+        if let oldStatus = self.status, let index = oldStatus.tasks?.firstIndex(of: self) {
+            oldStatus.tasks?.remove(at: index)
+        }
+        
         if self.parentTask != nil {
             self.disconnectFromParentTask()
             self.parentTask = nil
@@ -330,5 +345,6 @@ extension Todo {
         }
         
         self.status = status
+        status.tasks?.append(self)
     }
 }
