@@ -43,6 +43,9 @@ struct ContentView: View {
                 ToolbarItemGroup {
                     Button {
                         refresher.refresh.toggle()
+                        if checkSyncIssues() {
+                            fixSyncIssues()
+                        }
                     } label: {
                         Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
                     }
@@ -159,8 +162,37 @@ struct ContentView: View {
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) { 
                 refresher.refresh.toggle()
+                if checkSyncIssues() {
+                    fixSyncIssues()
+                }
             }
         }
+    }
+    
+    private func fixSyncIssues() {
+        for project in projects {
+            for task in project.tasks ?? [] where task.status == nil {
+                if task.completed {
+                    if let status = project.getStatuses().first(where: { $0.doCompletion }) {
+                        task.status = status
+                    } else {
+                        task.status = project.getDefaultStatus()
+                    }
+                } else {
+                    task.status = project.getDefaultStatus()
+                }
+            }
+        }
+    }
+    
+    private func checkSyncIssues() -> Bool {
+        for project in projects {
+            for task in project.tasks ?? [] where task.status == nil {
+                return true
+            }
+        }
+        
+        return false
     }
 }
 

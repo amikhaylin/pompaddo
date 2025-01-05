@@ -115,6 +115,11 @@ struct ContentView: View {
                 selectedSideBarItem = .projects
             }
         }
+        .onChange(of: refresher.refresh, { _, _ in
+            if checkSyncIssues() {
+                fixSyncIssues()
+            }
+        })
         .task {
             for task in tasks {
                 if let reminder = task.alertDate, reminder > Date() {
@@ -125,6 +130,32 @@ struct ContentView: View {
                 }
             }
         }
+    }
+    
+    private func fixSyncIssues() {
+        for project in projects {
+            for task in project.tasks ?? [] where task.status == nil {
+                if task.completed {
+                    if let status = project.getStatuses().first(where: { $0.doCompletion }) {
+                        task.status = status
+                    } else {
+                        task.status = project.getDefaultStatus()
+                    }
+                } else {
+                    task.status = project.getDefaultStatus()
+                }
+            }
+        }
+    }
+    
+    private func checkSyncIssues() -> Bool {
+        for project in projects {
+            for task in project.tasks ?? [] where task.status == nil {
+                return true
+            }
+        }
+        
+        return false
     }
 }
 

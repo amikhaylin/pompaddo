@@ -879,6 +879,7 @@
       }
     },
     "Fix sync issues" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
