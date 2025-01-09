@@ -24,36 +24,32 @@ struct SettingsView: View {
     var body: some View {
         TabView {
             Form {
-                Slider(value: $timerWorkSession, in: 600...3600) {
-                    Text("Work session duration: \(Common.formatSeconds(Int(timerWorkSession)))")
-                } minimumValueLabel: {
-                    Text("10m")
-                } maximumValueLabel: {
-                    Text("1h")
+                Picker("Work session duration", selection: $timerWorkSession) {
+                    ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                        Text(Common.formatSecondsToMinutes(Int(index)))
+                            .tag(Double(index))
+                    }
                 }
                 
-                Slider(value: $timerBreakSession, in: 60...3600) {
-                    Text("Break duration: \(Common.formatSeconds(Int(timerBreakSession)))")
-                } minimumValueLabel: {
-                    Text("1m")
-                } maximumValueLabel: {
-                    Text("1h")
+                Picker("Break duration", selection: $timerBreakSession) {
+                    ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                        Text(Common.formatSecondsToMinutes(Int(index)))
+                            .tag(Double(index))
+                    }
                 }
 
-                Slider(value: $timerLongBreakSession, in: 60...3600) {
-                    Text("Long break duration: \(Common.formatSeconds(Int(timerLongBreakSession)))")
-                } minimumValueLabel: {
-                    Text("1m")
-                } maximumValueLabel: {
-                    Text("1h")
+                Picker("Long break duration", selection: $timerLongBreakSession) {
+                    ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                        Text(Common.formatSecondsToMinutes(Int(index)))
+                            .tag(Double(index))
+                    }
                 }
 
-                Slider(value: $timerWorkSessionsCount, in: 1...10) {
-                    Text("Work sessions before long break: \(timerWorkSessionsCount, specifier: "%.0f")")
-                } minimumValueLabel: {
-                    Text("1")
-                } maximumValueLabel: {
-                    Text("10")
+                Picker("Work sessions before long break", selection: $timerWorkSessionsCount) {
+                    ForEach(1..<11) {
+                        Text("\($0)")
+                            .tag(Double($0))
+                    }
                 }
                 
                 Button {
@@ -88,26 +84,6 @@ struct SettingsView: View {
             .tabItem {
                 Label("Estimates", systemImage: "hourglass")
             }
-
-//            Form {
-//                Slider(value: $refreshPeriod, in: 1...600) {
-//                    Text("Refresh period: \(Common.formatSeconds(Int(refreshPeriod)))")
-//                } minimumValueLabel: {
-//                    Text("1s")
-//                } maximumValueLabel: {
-//                    Text("10m")
-//                }
-//                
-//                Button {
-//                    refreshPeriod = 15.0
-//                } label: {
-//                    Label("Restore defaults", systemImage: "arrow.circlepath")
-//                }
-//            }
-//            .tabItem {
-//                Label("Advanced", systemImage: "gear")
-//            }
-//            .tag(Tabs.advanced)
         }
         .padding(20)
         .frame(width: 575, height: 150)
