@@ -42,19 +42,17 @@ final class PomPadDoiOSUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testZInfo() throws {
-        app.navigationBars["Today"].buttons["Back"].tap()
-        
-        print(app.debugDescription)
-    }
+//    func testZInfo() throws {
+////        app.navigationBars["Today"].buttons["Back"].tap()
+//        
+//        print(app.debugDescription)
+//    
+//    }
     
-    func testAMainWindow() throws {
-        // UI tests must launch the application that they test.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        app.navigationBars["Today"].buttons["Back"].tap()
-        
+    @MainActor func testAFullCycle() throws {
         // MARK: Create groups
+        app.navigationBars["Today"].buttons["Back"].tap()
+
         app.collectionViews.matching(identifier: "Sidebar").buttons["folder.circle"].tap()
         app.popovers.textFields["Group name"].tap()
         
@@ -67,80 +65,136 @@ final class PomPadDoiOSUITests: XCTestCase {
         app.popovers.textFields["Group name"].typeText("🏢Work")
         app.buttons["SaveGroup"].tap()
 
-        // MARK: Create first project
+        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
+        
+        // MARK: Fill projects
+        app.navigationBars["Today"].buttons["Back"].tap()
+
+        // MARK: Create project **Vacation Planning**
         app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
         app.popovers.textFields["Project name"].tap()
-        app.popovers.textFields["Project name"].typeText("🚗 Car")
+        app.popovers.textFields["Project name"].typeText("🏖️ Vacation Planning")
         
         app.popovers.switches["CreateSimpleList"].children(matching: .switch).element.tap()
         
         app.buttons["SaveProject"].tap()
 
-        app.collectionViews.matching(identifier: "Sidebar").buttons["🚗 Car"].press(forDuration: 1.6)
-        app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add project to group"]/*[[".cells.buttons[\"Add project to group\"]",".buttons[\"Add project to group\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.collectionViews.matching(identifier: "Sidebar").buttons["🏖️ Vacation Planning"].press(forDuration: 1.6)
+        app.collectionViews.buttons["Add project to group"].tap()
         
         print(app.collectionViews.buttons.debugDescription)
         app.collectionViews.buttons["🦝PersonalContextMenuButton"].tap()
         
-        // MARK: Create second project
+        // MARK: Create project **App Development**
         app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
         app.popovers.textFields["Project name"].tap()
-        app.popovers.textFields["Project name"].typeText("❤️Health")
-        
-        app.popovers.switches["CreateSimpleList"].children(matching: .switch).element.tap()
+        app.popovers.textFields["Project name"].typeText("📱App Development")
         
         app.buttons["SaveProject"].tap()
 
-        app.collectionViews.matching(identifier: "Sidebar").buttons["❤️Health"].press(forDuration: 1.6)
-        app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add project to group"]/*[[".cells.buttons[\"Add project to group\"]",".buttons[\"Add project to group\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.collectionViews.buttons["🦝PersonalContextMenuButton"].tap()
+        app.collectionViews.matching(identifier: "Sidebar").buttons["📱App Development"].press(forDuration: 1.6)
+        app.collectionViews.buttons["Add project to group"].tap()
         
-        // MARK: Create third project
-        app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
-        app.popovers.textFields["Project name"].tap()
-        app.popovers.textFields["Project name"].typeText("💻John’s project")
-        
-        app.buttons["SaveProject"].tap()
-
-        app.collectionViews.matching(identifier: "Sidebar").buttons["💻John’s project"].press(forDuration: 1.6)
-        app.collectionViews/*@START_MENU_TOKEN@*/.buttons["Add project to group"]/*[[".cells.buttons[\"Add project to group\"]",".buttons[\"Add project to group\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        print(app.collectionViews.buttons.debugDescription)
         app.collectionViews.buttons["🏢WorkContextMenuButton"].tap()
         
-        // MARK: Create first task
-        app.collectionViews.matching(identifier: "Sidebar").buttons["Today"].tap()
-        app.navigationBars["Today"].buttons["Add task to current list"].tap()
+        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
+
+        // MARK: Fill Vacation planning tasks
+        app.navigationBars["Today"].buttons["Back"].tap()
         
-//        let exp = expectation(description: "Wait for inspector")
-//        let result = XCTWaiter.wait(for: [exp], timeout: 1.0)
-//        if result == XCTWaiter.Result.timedOut {
-//            let collectionViewsQuery = app.collectionViews
-//            collectionViewsQuery.children(matching: .cell).element(boundBy: 1).children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element.tap()
-//            collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["EditTaskName"]/*[[".cells",".textFields[\"Name\"]",".textFields[\"EditTaskName\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-//            app.navigationBars["Today"].buttons["ShowTaskDetails"].tap()
-//        } else {
-//            XCTFail("Delay interrupted")
+        app.collectionViews.matching(identifier: "Sidebar").staticTexts["🏖️ Vacation Planning"].tap()
+        
+        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Book airline tickets")
+        app.popovers.switches["DueToday"].children(matching: .switch).element.tap()
+        app.buttons["SaveTask"].tap()
+        
+        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Find and reserve a hotel")
+        app.buttons["SaveTask"].tap()
+        
+        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Create a list of places to visit")
+        app.buttons["SaveTask"].tap()
+        
+        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Arrange travel insurance")
+        app.buttons["SaveTask"].tap()
+        
+        app.navigationBars["🏖️ Vacation Planning"].buttons["Back"].tap()
+        
+        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
+
+        // MARK: Fill App Development tasks
+        app.navigationBars["Today"].buttons["Back"].tap()
+        
+        app.collectionViews.matching(identifier: "Sidebar").staticTexts["📱App Development"].tap()
+        
+        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Define functional requirements")
+        app.buttons["SaveTask"].tap()
+        
+        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Create interface design")
+        app.popovers.switches["DueToday"].children(matching: .switch).element.tap()
+        app.buttons["SaveTask"].tap()
+        
+        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Test the beta version")
+        app.buttons["SaveTask"].tap()
+        
+        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
+        app.popovers.textFields["Task name"].tap()
+        app.popovers.textFields["Task name"].typeText("Launch the app in the App Store")
+        app.buttons["SaveTask"].tap()
+        
+        // MARK: Switch project view
+        app.navigationBars["📱App Development"].segmentedControls["ProjectViewMode"].tap()
+        app.navigationBars["📱App Development"].segmentedControls["ProjectViewMode"].buttons["rectangle.split.3x1"].tap()
+        
+        app.scrollViews.otherElements.collectionViews.staticTexts["Define functional requirements"].press(forDuration: 1.6)
+        
+        snapshot("02TaskMenu")
+        app.collectionViews.buttons["Move to status"].tap()
+        app.collectionViews.buttons["CompletedContextMenuButton"].tap()
+        
+        snapshot("03ProjectView")
+        
+        app.navigationBars["📱App Development"].buttons["Back"].tap()
+        
+        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
+        
+        snapshot("01TodayScreen")
+        
+//        app.collectionViews.containing(.other, identifier: "FocusSection").element.tap()
+//        
+//        snapshot("04FocusTasksView")
+//        
+//        app.collectionViews.buttons["Create interface designPlayButton"].tap()
+//        
+//        let exp = expectation(description: "Test after 5 seconds")
+//        _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
+//
+//        snapshot("05FocusTimerView")
+//        
+//        app.toolbars["Toolbar"].buttons["TasksSection"].tap()
+    }
+
+//    func testLaunchPerformance() throws {
+//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+//            // This measures how long it takes to launch your application.
+//            measure(metrics: [XCTApplicationLaunchMetric()]) {
+//                XCUIApplication().launch()
+//            }
 //        }
-        
-        
-                
-//        app.collectionViews.matching(identifier: "Sidebar").buttons["💻John’s project"].tap()
-//        
-//        app.navigationBars["🚗 Car"].buttons["Add task to current list"].tap()
-//        
-//        let collectionViewsQuery = app.collectionViews
-//        collectionViewsQuery.textFields["EditTaskName"].tap()
-//        collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Set due Date"]/*[[".cells",".buttons[\"Set due Date\"].staticTexts[\"Set due Date\"]",".staticTexts[\"Set due Date\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-                        
-
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+//    }
 }
 // swiftlint:enable function_body_length

@@ -11,11 +11,15 @@
 #   "Apple TV 1080p",
 #   "Apple Watch Series 6 - 44mm"
 # ])
+# devices([
+#   "iPhone 14 Plus",
+#   "iPhone 8 Plus",
+#   "iPad Pro (12.9-inch) (4th generation)",
+#   "iPad Pro (12.9-inch) (2nd generation)"
+# ])
+
 devices([
-  "iPhone 14 Plus",
-  "iPhone 8 Plus",
-  "iPad Pro (12.9-inch) (4th generation)",
-  "iPad Pro (12.9-inch) (2nd generation)"
+  "iPhone 16 Pro Max"
 ])
 
 # languages([
@@ -24,15 +28,19 @@ devices([
 #   "it-IT",
 #   ["pt", "pt_BR"] # Portuguese with Brazilian locale
 # ])
+# languages([
+#   "en-US",
+#   "ru"
+# ])
+
 languages([
-  "en-US",
-  "ru"
+  "en-US"
 ])
 # The name of the scheme which contains the UI Tests
 scheme("PomPadDoiOSUITests")
 
 # Where should the resulting screenshots be stored?
-# output_directory("./screenshots")
+output_directory("./screenshots")
 
 # remove the '#' to clear all previously generated screenshots before creating new ones
 clear_previous_screenshots(true)

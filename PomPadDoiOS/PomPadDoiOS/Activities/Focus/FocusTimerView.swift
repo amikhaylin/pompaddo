@@ -72,6 +72,7 @@ struct FocusTimerView: View {
                                 timer.skip()
                             }
                             .padding()
+                            .accessibility(identifier: "SkipTimerButton")
                         }
                         // start
                         if timer.state == .idle {
@@ -79,6 +80,7 @@ struct FocusTimerView: View {
                                 timer.start()
                             }
                             .padding()
+                            .accessibility(identifier: "StartTimerButton")
                         }
                         // resume
                         if timer.state == .paused {
@@ -86,6 +88,7 @@ struct FocusTimerView: View {
                                 timer.resume()
                             }
                             .padding()
+                            .accessibility(identifier: "ResumeTimerButton")
                         }
                         // pause
                         if timer.state == .running {
@@ -93,6 +96,7 @@ struct FocusTimerView: View {
                                 timer.pause()
                             }
                             .padding()
+                            .accessibility(identifier: "PauseTimerButton")
                         }
                         // reset
                         if timer.state == .running || timer.state == .paused {
@@ -100,6 +104,7 @@ struct FocusTimerView: View {
                                 timer.reset()
                             }
                             .padding()
+                            .accessibility(identifier: "StopTimerButton")
                         }
                     }
                     

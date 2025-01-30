@@ -244,6 +244,7 @@ struct ProjectTaskModifier: ViewModifier {
                         } label: {
                             Text(status.name)
                         }
+                        .accessibility(identifier: "\(status.name)ContextMenuButton")
                     }
                 } label: {
                     Text("Move to status")

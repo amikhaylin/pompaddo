@@ -59,7 +59,9 @@ struct ProjectView: View {
                         }
                         .tag(mode as Int)
                     }
-                }.pickerStyle(.segmented)
+                }
+                .pickerStyle(.segmented)
+                .accessibility(identifier: "ProjectViewMode")
 
                 Button {
                     newTaskIsShowing.toggle()

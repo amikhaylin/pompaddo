@@ -49,6 +49,7 @@ struct NewTaskView: View {
                 
                 Toggle("Due today", isOn: $dueToday)
                     .toggleStyle(.switch)
+                    .accessibility(identifier: "DueToday")
             }
             .padding()
             .toolbar {
@@ -79,16 +80,10 @@ struct NewTaskView: View {
 
                         modelContext.insert(task)
                         task.reconnect()
-                        
-                        if list != .inbox {
-                            tasks.append(task)
-                        }
-                        // FIXME: if list == .inbox {
-//                            refresher.refresh.toggle()
-//                        } else {
-//                            tasks.append(task)
-//                        }
+
+                        tasks.append(task)
                     }
+                    .accessibility(identifier: "SaveTask")
                 }
             }
         }
