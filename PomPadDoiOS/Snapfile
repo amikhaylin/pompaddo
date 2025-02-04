@@ -65,3 +65,5 @@ clean(true)
 headless(false)
 
 stop_after_first_error(false)
+
+testplan("PomPadDoiOSUITests")

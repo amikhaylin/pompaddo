@@ -41,13 +41,6 @@ final class PomPadDoiOSUITests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-//    func testZInfo() throws {
-////        app.navigationBars["Today"].buttons["Back"].tap()
-//        
-//        print(app.debugDescription)
-//    
-//    }
     
     @MainActor func testAFullCycle() throws {
         // MARK: Create groups
@@ -174,20 +167,20 @@ final class PomPadDoiOSUITests: XCTestCase {
         
         snapshot("01TodayScreen")
         
-//        app.collectionViews.containing(.other, identifier: "FocusSection").element.tap()
-//        
-//        snapshot("04FocusTasksView")
-//        
-//        app.collectionViews.buttons["Create interface designPlayButton"].tap()
-//        
-//        let exp = expectation(description: "Test after 5 seconds")
-//        _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
-//
-//        snapshot("05FocusTimerView")
-//        
-//        app.toolbars["Toolbar"].buttons["TasksSection"].tap()
-    }
+        app.toolbars["Toolbar"].buttons["FocusSection"].forceTap()
+        
+        snapshot("04FocusTasksView")
+        
+        app.collectionViews.buttons["Create interface designPlayButton"].tap()
+        
+        let exp = expectation(description: "Test after 5 seconds")
+        _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
 
+        snapshot("05FocusTimerView")
+        
+        app.toolbars["Toolbar"].buttons["TasksSection"].tap()
+    }
+    
 //    func testLaunchPerformance() throws {
 //        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
 //            // This measures how long it takes to launch your application.
@@ -198,3 +191,10 @@ final class PomPadDoiOSUITests: XCTestCase {
 //    }
 }
 // swiftlint:enable function_body_length
+
+
+extension XCUIElement {
+    func forceTap() {
+        coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+    }
+}

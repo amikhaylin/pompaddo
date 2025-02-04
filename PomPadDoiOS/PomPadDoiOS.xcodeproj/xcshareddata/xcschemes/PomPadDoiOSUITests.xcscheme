@@ -22,12 +22,16 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:PomPadDoiOSUITests.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4DDDB3EA2BF23037002C4F95"
@@ -35,6 +39,14 @@
                BlueprintName = "PomPadDoiOSUITests"
                ReferencedContainer = "container:PomPadDoiOS.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "PomPadDoiOSUITestsLaunchTests">
+               </Test>
+               <Test
+                  Identifier = "PomPadDoiOSUITestsLaunchTests/testLaunch()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>
@@ -62,15 +74,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4DDDB3EA2BF23037002C4F95"
-            BuildableName = "PomPadDoiOSUITests.xctest"
-            BlueprintName = "PomPadDoiOSUITests"
-            ReferencedContainer = "container:PomPadDoiOS.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
