@@ -43,7 +43,10 @@ final class PomPadDoiOSUITests: XCTestCase {
     }
     
     @MainActor func testAFullCycle() throws {
+        let locale = String(Locale.current.identifier.prefix(2))
+        
         // MARK: Create groups
+        // NSLocalizedString("Inbox", comment: "")
         app.navigationBars["Today"].buttons["Back"].tap()
 
         app.collectionViews.matching(identifier: "Sidebar").buttons["folder.circle"].tap()
@@ -155,30 +158,32 @@ final class PomPadDoiOSUITests: XCTestCase {
         
         app.scrollViews.otherElements.collectionViews.staticTexts["Define functional requirements"].press(forDuration: 1.6)
         
-        snapshot("02TaskMenu")
+        snapshot("03TaskMenu")
         app.collectionViews.buttons["Move to status"].tap()
         app.collectionViews.buttons["CompletedContextMenuButton"].tap()
         
-        snapshot("03ProjectView")
+        snapshot("04ProjectView")
         
         app.navigationBars["📱App Development"].buttons["Back"].tap()
         
-        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
+        snapshot("02SectionsPanel")
         
-        snapshot("01TodayScreen")
+        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
         
         app.toolbars["Toolbar"].buttons["FocusSection"].forceTap()
         
-        snapshot("04FocusTasksView")
+        snapshot("05FocusTasksView")
         
         app.collectionViews.buttons["Create interface designPlayButton"].tap()
         
         let exp = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
 
-        snapshot("05FocusTimerView")
+        snapshot("06FocusTimerView")
         
         app.toolbars["Toolbar"].buttons["TasksSection"].tap()
+        
+        snapshot("01TodayScreen")
     }
     
 //    func testLaunchPerformance() throws {
