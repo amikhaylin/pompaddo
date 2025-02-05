@@ -19,7 +19,8 @@
 # ])
 
 devices([
-  "iPhone 16 Pro Max"
+  "iPhone 14 Pro Max",
+  "iPad Pro (12.9-inch) (4th generation)"
 ])
 
 # languages([
@@ -28,14 +29,11 @@ devices([
 #   "it-IT",
 #   ["pt", "pt_BR"] # Portuguese with Brazilian locale
 # ])
-# languages([
-#   "en-US",
-#   "ru"
-# ])
-
 languages([
-  "en-US"
+  "en-US",
+  "ru"
 ])
+
 # The name of the scheme which contains the UI Tests
 scheme("PomPadDoiOSUITests")
 

@@ -1,0 +1,48 @@
+{
+  "configurations" : [
+    {
+      "id" : "53369E12-6CC7-4F7D-AE3B-942E8D635A79",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "IS_FASTLANE",
+        "value" : "NO"
+      },
+      {
+        "key" : "IDEPreferLogStreaming",
+        "value" : "YES"
+      }
+    ],
+    "language" : "en",
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PomPadDoiOS.xcodeproj",
+      "identifier" : "4DDDB3CE2BF23034002C4F95",
+      "name" : "PomPadDoiOS"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PomPadDoiOS.xcodeproj",
+        "identifier" : "4DDDB3E02BF23037002C4F95",
+        "name" : "PomPadDoiOSTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PomPadDoiOS.xcodeproj",
+        "identifier" : "4DDDB3EA2BF23037002C4F95",
+        "name" : "PomPadDoiOSUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

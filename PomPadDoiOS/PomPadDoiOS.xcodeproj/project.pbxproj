@@ -20,7 +20,6 @@
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
 		4D21F3E82C0EFF3D00CB4E7F /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21F3E72C0EFF3D00CB4E7F /* ReviewProjectsView.swift */; };
 		4D21F3EA2C0F278F00CB4E7F /* ProjectToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D21F3E92C0F278F00CB4E7F /* ProjectToReviewView.swift */; };
-		4D2C2C522D5284930085420E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D2C2C512D5284930085420E /* Localizable.xcstrings */; };
 		4D3145052CFDEC77005BD65A /* SideBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3145042CFDEC77005BD65A /* SideBarItem.swift */; };
 		4D3769182C188B0D00EBC0C5 /* TaskRowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3769172C188B0D00EBC0C5 /* TaskRowModifier.swift */; };
 		4D4272C12BF36F7F0003E129 /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */; };
@@ -211,7 +210,6 @@
 		4D1FA5DE2C387B7300B30FEB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		4D21F3E72C0EFF3D00CB4E7F /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
 		4D21F3E92C0F278F00CB4E7F /* ProjectToReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectToReviewView.swift; sourceTree = "<group>"; };
-		4D2C2C512D5284930085420E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = Localizable.xcstrings; path = ../PomPadDoMac/PomPadDoMac/Localizable.xcstrings; sourceTree = SOURCE_ROOT; };
 		4D3145042CFDEC77005BD65A /* SideBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SideBarItem.swift; path = ../PomPadDoMac/PomPadDoMac/Utils/SideBarItem.swift; sourceTree = SOURCE_ROOT; };
 		4D3769172C188B0D00EBC0C5 /* TaskRowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowModifier.swift; sourceTree = "<group>"; };
 		4D4272C02BF36F7F0003E129 /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
@@ -552,7 +550,6 @@
 		4DDDB3EE2BF23037002C4F95 /* PomPadDoiOSUITests */ = {
 			isa = PBXGroup;
 			children = (
-				4D2C2C512D5284930085420E /* Localizable.xcstrings */,
 				4D1135E62C943090005DA9DB /* SnapshotHelper.swift */,
 				4DDDB3EF2BF23037002C4F95 /* PomPadDoiOSUITests.swift */,
 				4DDDB3F12BF23037002C4F95 /* PomPadDoiOSUITestsLaunchTests.swift */,
@@ -925,7 +922,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D2C2C522D5284930085420E /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

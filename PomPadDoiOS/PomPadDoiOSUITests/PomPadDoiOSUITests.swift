@@ -43,138 +43,144 @@ final class PomPadDoiOSUITests: XCTestCase {
     }
     
     @MainActor func testAFullCycle() throws {
-        let locale = String(Locale.current.identifier.prefix(2))
+        var locale: String!
+        if app.navigationBars["Today"].exists {
+            locale = "en"
+        } else if app.navigationBars["Сегодня"].exists {
+            locale = "ru"
+        }
         
         // MARK: Create groups
-        // NSLocalizedString("Inbox", comment: "")
-        app.navigationBars["Today"].buttons["Back"].tap()
+        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
 
-        app.collectionViews.matching(identifier: "Sidebar").buttons["folder.circle"].tap()
-        app.popovers.textFields["Group name"].tap()
+        print(app.debugDescription)
+
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["folder.circle"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].tap()
         
-        app.popovers.textFields["Group name"].typeText("🦝Personal")
+        app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].typeText(locale == "ru" ? "🦝 Личное" : "🦝 Personal")
         app.buttons["SaveGroup"].tap()
         
-        app.collectionViews.matching(identifier: "Sidebar").buttons["folder.circle"].tap()
-        app.popovers.textFields["Group name"].tap()
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["folder.circle"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].tap()
         
-        app.popovers.textFields["Group name"].typeText("🏢Work")
+        app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].typeText(locale == "ru" ? "🏢 Работа" : "🏢 Work")
         app.buttons["SaveGroup"].tap()
 
-        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
-        
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
+
         // MARK: Fill projects
-        app.navigationBars["Today"].buttons["Back"].tap()
+        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
 
         // MARK: Create project **Vacation Planning**
-        app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
-        app.popovers.textFields["Project name"].tap()
-        app.popovers.textFields["Project name"].typeText("🏖️ Vacation Planning")
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["plus.circle"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].typeText(locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning")
         
         app.popovers.switches["CreateSimpleList"].children(matching: .switch).element.tap()
         
         app.buttons["SaveProject"].tap()
 
-        app.collectionViews.matching(identifier: "Sidebar").buttons["🏖️ Vacation Planning"].press(forDuration: 1.6)
-        app.collectionViews.buttons["Add project to group"].tap()
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].press(forDuration: 1.6)
+        app.collectionViews.buttons[locale == "ru" ? "Добавить проект в группу" : "Add project to group"].tap()
         
         print(app.collectionViews.buttons.debugDescription)
-        app.collectionViews.buttons["🦝PersonalContextMenuButton"].tap()
+        app.collectionViews.buttons["\(locale == "ru" ? "🦝 Личное" : "🦝 Personal")ContextMenuButton"].tap()
         
         // MARK: Create project **App Development**
-        app.collectionViews.matching(identifier: "Sidebar").buttons["plus.circle"].tap()
-        app.popovers.textFields["Project name"].tap()
-        app.popovers.textFields["Project name"].typeText("📱App Development")
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["plus.circle"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].typeText(locale == "ru" ? "📱Разработка приложения" : "📱App Development")
         
         app.buttons["SaveProject"].tap()
 
-        app.collectionViews.matching(identifier: "Sidebar").buttons["📱App Development"].press(forDuration: 1.6)
-        app.collectionViews.buttons["Add project to group"].tap()
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].press(forDuration: 1.6)
+        app.collectionViews.buttons[locale == "ru" ? "Добавить проект в группу" : "Add project to group"].tap()
         
         print(app.collectionViews.buttons.debugDescription)
-        app.collectionViews.buttons["🏢WorkContextMenuButton"].tap()
+        app.collectionViews.buttons["\(locale == "ru" ? "🏢 Работа" : "🏢 Work")ContextMenuButton"].tap()
         
-        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
 
         // MARK: Fill Vacation planning tasks
-        app.navigationBars["Today"].buttons["Back"].tap()
+        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
         
-        app.collectionViews.matching(identifier: "Sidebar").staticTexts["🏖️ Vacation Planning"].tap()
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].tap()
         
-        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Book airline tickets")
+        app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Забронировать авиабилеты" : "Book airline tickets")
         app.popovers.switches["DueToday"].children(matching: .switch).element.tap()
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Find and reserve a hotel")
+        app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Найти и забронировать отель" : "Find and reserve a hotel")
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Create a list of places to visit")
+        app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Составить список мест для посещения" : "Create a list of places to visit")
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars["🏖️ Vacation Planning"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Arrange travel insurance")
+        app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Оформить туристическую страховку" : "Arrange travel insurance")
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars["🏖️ Vacation Planning"].buttons["Back"].tap()
+        app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
         
-        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
 
         // MARK: Fill App Development tasks
-        app.navigationBars["Today"].buttons["Back"].tap()
+        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].tap()
         
-        app.collectionViews.matching(identifier: "Sidebar").staticTexts["📱App Development"].tap()
-        
-        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Define functional requirements")
+        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Определить функциональные требования" : "Define functional requirements")
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Create interface design")
+        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Создать дизайн интерфейса" : "Create interface design")
         app.popovers.switches["DueToday"].children(matching: .switch).element.tap()
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Test the beta version")
+        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Протестировать бета-версию" : "Test the beta version")
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars["📱App Development"].buttons["Add task to current list"].tap()
-        app.popovers.textFields["Task name"].tap()
-        app.popovers.textFields["Task name"].typeText("Launch the app in the App Store")
+        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Запустить приложение в App Store" : "Launch the app in the App Store")
         app.buttons["SaveTask"].tap()
         
         // MARK: Switch project view
-        app.navigationBars["📱App Development"].segmentedControls["ProjectViewMode"].tap()
-        app.navigationBars["📱App Development"].segmentedControls["ProjectViewMode"].buttons["rectangle.split.3x1"].tap()
+        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].segmentedControls["ProjectViewMode"].tap()
+        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].segmentedControls["ProjectViewMode"].buttons["rectangle.split.3x1"].tap()
         
-        app.scrollViews.otherElements.collectionViews.staticTexts["Define functional requirements"].press(forDuration: 1.6)
+        app.scrollViews.otherElements.collectionViews.staticTexts[locale == "ru" ? "Определить функциональные требования" : "Define functional requirements"].press(forDuration: 1.6)
         
         snapshot("03TaskMenu")
-        app.collectionViews.buttons["Move to status"].tap()
+        app.collectionViews.buttons[locale == "ru" ? "Переместить в состояние" : "Move to status"].tap()
         app.collectionViews.buttons["CompletedContextMenuButton"].tap()
         
         snapshot("04ProjectView")
         
-        app.navigationBars["📱App Development"].buttons["Back"].tap()
+        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
         
         snapshot("02SectionsPanel")
         
-        app.collectionViews.matching(identifier: "Sidebar").staticTexts["Today"].tap()
-        
+        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
+
         app.toolbars["Toolbar"].buttons["FocusSection"].forceTap()
         
         snapshot("05FocusTasksView")
         
-        app.collectionViews.buttons["Create interface designPlayButton"].tap()
+        app.collectionViews.buttons["\(locale == "ru" ? "Создать дизайн интерфейса" : "Create interface design")PlayButton"].tap()
         
         let exp = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
@@ -185,15 +191,6 @@ final class PomPadDoiOSUITests: XCTestCase {
         
         snapshot("01TodayScreen")
     }
-    
-//    func testLaunchPerformance() throws {
-//        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-//            // This measures how long it takes to launch your application.
-//            measure(metrics: [XCTApplicationLaunchMetric()]) {
-//                XCUIApplication().launch()
-//            }
-//        }
-//    }
 }
 // swiftlint:enable function_body_length
 
