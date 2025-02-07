@@ -27,14 +27,15 @@ final class PomPadDoiOSUITests: XCTestCase {
         app.launch()
 
         addUIInterruptionMonitor(withDescription: "Tracking Usage Permission Alert") { (alert) -> Bool in
-                if alert.buttons["Allow"].exists {
-                    alert.buttons["Allow"].tap()
-                    self.app.activate()
-                    return true
-                }
-                return false
+            print("Alert appeared: \(alert)")
+            if alert.buttons["Allow"].exists {
+                alert.buttons["Allow"].tap()
+                self.app.activate()
+                return true
             }
-        
+            return false
+        }
+                
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
@@ -50,8 +51,14 @@ final class PomPadDoiOSUITests: XCTestCase {
             locale = "ru"
         }
         
+        let model = UIDevice.current.model
+        
         // MARK: Create groups
-        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+        if model.lowercased().contains("ipad") {
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons["ToggleSidebar"].tap()
+        } else {
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+        }
 
         print(app.debugDescription)
 
@@ -67,11 +74,18 @@ final class PomPadDoiOSUITests: XCTestCase {
         app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].typeText(locale == "ru" ? "🏢 Работа" : "🏢 Work")
         app.buttons["SaveGroup"].tap()
 
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
+        if model.lowercased().contains("ipad") {
+            app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons["ToggleSidebar"].tap()
+
+        } else {
+            app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
+            
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+        }
 
         // MARK: Fill projects
-        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
-
         // MARK: Create project **Vacation Planning**
         app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["plus.circle"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].tap()
@@ -100,13 +114,23 @@ final class PomPadDoiOSUITests: XCTestCase {
         print(app.collectionViews.buttons.debugDescription)
         app.collectionViews.buttons["\(locale == "ru" ? "🏢 Работа" : "🏢 Work")ContextMenuButton"].tap()
         
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
+        if model.lowercased().contains("ipad") {
+            app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons["ToggleSidebar"].tap()
+
+            app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].tap()
+            
+            app.otherElements["PopoverDismissRegion"].tap()
+        } else {
+            app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
+            
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+            
+            app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].tap()
+        }
 
         // MARK: Fill Vacation planning tasks
-        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
-        
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].tap()
-        
         app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Забронировать авиабилеты" : "Book airline tickets")
@@ -128,14 +152,28 @@ final class PomPadDoiOSUITests: XCTestCase {
         app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Оформить туристическую страховку" : "Arrange travel insurance")
         app.buttons["SaveTask"].tap()
         
-        app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+        if model.lowercased().contains("ipad") {
+            app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons["ToggleSidebar"].tap()
+        } else {
+            app.navigationBars[locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+        }
         
         app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
-
+            
         // MARK: Fill App Development tasks
-        app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
-
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].tap()
+        if model.lowercased().contains("ipad") {
+            app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+            
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons["ToggleSidebar"].tap()
+            
+            app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].tap()
+            
+            app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        } else {
+            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+            
+            app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].tap()
+        }
         
         app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Добавить задачу в текущий список" : "Add task to current list"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
@@ -170,7 +208,12 @@ final class PomPadDoiOSUITests: XCTestCase {
         
         snapshot("04ProjectView")
         
-        app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+        
+        if model.lowercased().contains("ipad") {
+            app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons["ToggleSidebar"].tap()
+        } else {
+            app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+        }
         
         snapshot("02SectionsPanel")
         
@@ -190,6 +233,36 @@ final class PomPadDoiOSUITests: XCTestCase {
         app.toolbars["Toolbar"].buttons["TasksSection"].tap()
         
         snapshot("01TodayScreen")
+    }
+    
+    func testipad() throws {
+        
+        app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Today"]/*@START_MENU_TOKEN@*/.buttons["ToggleSidebar"]/*[[".buttons[\"Show Sidebar\"]",".buttons[\"ToggleSidebar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"закрыть всплывающее меню\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.navigationBars["Сегодня"]/*@START_MENU_TOKEN@*/.buttons["ToggleSidebar"]/*[[".buttons[\"Показать боковое меню\"]",".buttons[\"ToggleSidebar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+              
+        app.collectionViews.matching(identifier: "Sidebar")/*@START_MENU_TOKEN@*/.buttons["Inbox"]/*[[".cells.buttons[\"Inbox\"]",".buttons[\"Inbox\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+                
+    }
+    
+    func testB() throws {
+        
+        let app = XCUIApplication()
+        app.navigationBars["Today"]/*@START_MENU_TOKEN@*/.buttons["ToggleSidebar"]/*[[".buttons[\"Show Sidebar\"]",".buttons[\"ToggleSidebar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.collectionViews.matching(identifier: "Sidebar")/*@START_MENU_TOKEN@*/.buttons["2222"]/*[[".cells.buttons[\"2222\"]",".buttons[\"2222\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+                        
+    }
+    
+    func testOSType() throws {
+        let model = UIDevice.current.model
+
+        print("Модель устройства: \(model)")
+//        print("Версия ОС: \(osVersion)")
+
+//        if model.lowercased().contains("ipad") {
     }
 }
 // swiftlint:enable function_body_length
