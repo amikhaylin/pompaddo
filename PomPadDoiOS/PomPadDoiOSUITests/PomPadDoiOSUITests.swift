@@ -208,7 +208,6 @@ final class PomPadDoiOSUITests: XCTestCase {
         
         snapshot("04ProjectView")
         
-        
         if model.lowercased().contains("ipad") {
             app.navigationBars[locale == "ru" ? "📱Разработка приложения" : "📱App Development"].buttons["ToggleSidebar"].tap()
         } else {
@@ -232,6 +231,13 @@ final class PomPadDoiOSUITests: XCTestCase {
         
         app.toolbars["Toolbar"].buttons["TasksSection"].tap()
         
+        if model.lowercased().contains("iphone") {
+            app.collectionViews.containing(.other, identifier: locale == "ru" ? "Вертикальная полоса прокрутки, 1 страница" : "Vertical scroll bar, 1 page").element.swipeDown()
+        }
+        
+        let exp2 = expectation(description: "Test after 5 seconds")
+        _ = XCTWaiter.wait(for: [exp2], timeout: 5.0)
+        
         snapshot("01TodayScreen")
     }
     
@@ -253,7 +259,6 @@ final class PomPadDoiOSUITests: XCTestCase {
         let app = XCUIApplication()
         app.navigationBars["Today"]/*@START_MENU_TOKEN@*/.buttons["ToggleSidebar"]/*[[".buttons[\"Show Sidebar\"]",".buttons[\"ToggleSidebar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
         app.collectionViews.matching(identifier: "Sidebar")/*@START_MENU_TOKEN@*/.buttons["2222"]/*[[".cells.buttons[\"2222\"]",".buttons[\"2222\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-                        
     }
     
     func testOSType() throws {
