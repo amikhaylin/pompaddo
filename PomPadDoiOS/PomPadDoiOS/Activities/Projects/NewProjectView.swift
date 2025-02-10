@@ -14,10 +14,20 @@ struct NewProjectView: View {
     @State private var projectName = ""
     @State private var createSimpleList = false
     
+    enum FocusField: Hashable {
+        case projectName
+    }
+    
+    @FocusState private var focusField: FocusField?
+    
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Project name", text: $projectName)
+                    .focused($focusField, equals: .projectName)
+                    .task {
+                        self.focusField = .projectName
+                    }
                 
                 Toggle(isOn: $createSimpleList) {
                     Text("Create simple list")

@@ -166,6 +166,20 @@ struct TaskDetailsView: View {
             if task.repeation != .none {
                 Button {
                     task.skip()
+                    
+                    if list == .today || list == .tomorrow {
+                        if let date = task.dueDate {
+                            let today = Calendar.current.startOfDay(for: Date())
+                            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+                            let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
+
+                            if (list == .today && date >= tomorrow) || (list == .tomorrow && date >= future) {
+                                if let index = tasks.firstIndex(of: task) {
+                                    tasks.remove(at: index)
+                                }
+                            }
+                        }
+                    }
                     // FIXME: refresher.refresh.toggle()
                     WidgetCenter.shared.reloadAllTimelines()
                     presentationMode.wrappedValue.dismiss()

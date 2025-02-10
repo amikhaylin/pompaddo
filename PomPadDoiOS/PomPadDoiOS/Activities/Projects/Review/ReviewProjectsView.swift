@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ReviewProjectsView: View {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
     
     var projects: [Project]
+    
+    @Query var projectsAll: [Project]
     
     var body: some View {
         NavigationStack {

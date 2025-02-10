@@ -13,10 +13,20 @@ struct NewProjectGroupView: View {
     @Binding var isVisible: Bool
     @State private var groupName = ""
     
+    enum FocusField: Hashable {
+        case groupName
+    }
+    
+    @FocusState private var focusField: FocusField?
+    
     var body: some View {
         NavigationView {
             VStack {
                 TextField("Group name", text: $groupName)
+                    .focused($focusField, equals: .groupName)
+                    .task {
+                        self.focusField = .groupName
+                    }
             }
             .padding()
             .toolbar {
