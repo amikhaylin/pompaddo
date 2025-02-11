@@ -38,47 +38,31 @@ struct SettingsView: View {
             switch viewMode {
             case 0:
                 Form {
-                    VStack {
-                        Text("Work session duration: \(Common.formatSeconds(Int(timerWorkSession)))")
-                        Slider(value: $timerWorkSession, in: 600...3600) {
-                            EmptyView()
-                        } minimumValueLabel: {
-                            Text("10m")
-                        } maximumValueLabel: {
-                            Text("1h")
+                    Picker("Work session duration", selection: $timerWorkSession) {
+                        ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                            Text(Common.formatSecondsToMinutes(Int(index)))
+                                .tag(Double(index))
                         }
                     }
                     
-                    VStack {
-                        Text("Break duration: \(Common.formatSeconds(Int(timerBreakSession)))")
-                        Slider(value: $timerBreakSession, in: 60...3600) {
-                            EmptyView()
-                        } minimumValueLabel: {
-                            Text("1m")
-                        } maximumValueLabel: {
-                            Text("1h")
+                    Picker("Break duration", selection: $timerBreakSession) {
+                        ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                            Text(Common.formatSecondsToMinutes(Int(index)))
+                                .tag(Double(index))
                         }
                     }
 
-                    VStack {
-                        Text("Long break duration: \(Common.formatSeconds(Int(timerLongBreakSession)))")
-                        Slider(value: $timerLongBreakSession, in: 60...3600) {
-                            EmptyView()
-                        } minimumValueLabel: {
-                            Text("1m")
-                        } maximumValueLabel: {
-                            Text("1h")
+                    Picker("Long break duration", selection: $timerLongBreakSession) {
+                        ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                            Text(Common.formatSecondsToMinutes(Int(index)))
+                                .tag(Double(index))
                         }
                     }
 
-                    VStack {
-                        Text("Work sessions before long break: \(timerWorkSessionsCount, specifier: "%.0f")")
-                        Slider(value: $timerWorkSessionsCount, in: 1...10) {
-                            EmptyView()
-                        } minimumValueLabel: {
-                            Text("1")
-                        } maximumValueLabel: {
-                            Text("10")
+                    Picker("Work sessions before long break", selection: $timerWorkSessionsCount) {
+                        ForEach(1..<11) {
+                            Text("\($0)")
+                                .tag(Double($0))
                         }
                     }
                     

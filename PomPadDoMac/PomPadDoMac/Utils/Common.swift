@@ -21,6 +21,20 @@ struct Common {
             return String(format: "%02d:%02d", minutes, secs)
         }
     }
+    
+    static func formatSecondsToMinutes(_ seconds: Int) -> String {
+        let hours: Int = seconds / 3600
+        let minutes: Int = (seconds % 3600) / 60
+        if hours > 0 {
+            if minutes > 0 {
+                return String(format: "%dh %dm", hours, minutes)
+            } else {
+                return String(format: "%dh", hours)
+            }
+        } else {
+            return String(format: "%dm", minutes)
+        }
+    }
 }
 
 class InspectorToggler: ObservableObject {

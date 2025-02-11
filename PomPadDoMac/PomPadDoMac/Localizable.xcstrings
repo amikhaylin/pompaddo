@@ -83,10 +83,8 @@
     "0.01" : {
 
     },
-    "1" : {
-
-    },
     "1h" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -103,6 +101,7 @@
       }
     },
     "1m" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -121,10 +120,8 @@
     "3" : {
 
     },
-    "10" : {
-
-    },
     "10m" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -221,7 +218,20 @@
       }
     },
     "Add task to current list ⌘⌥I" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add task to current list ⌘⌥I"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить задачу в текущий список ⌘⌥I"
+          }
+        }
+      }
     },
     "Add task to Inbox" : {
       "localizations" : {
@@ -351,7 +361,24 @@
         }
       }
     },
+    "Break duration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Break duration"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжительность перерыва"
+          }
+        }
+      }
+    },
     "Break duration: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1088,7 +1115,24 @@
         }
       }
     },
+    "Long break duration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Long break duration"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжительность длинного перерыва"
+          }
+        }
+      }
+    },
     "Long break duration: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2214,7 +2258,24 @@
         }
       }
     },
+    "Work session duration" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Work session duration"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Продолжительность рабочей сессии"
+          }
+        }
+      }
+    },
     "Work session duration: %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2230,7 +2291,24 @@
         }
       }
     },
+    "Work sessions before long break" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Work sessions before long break"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Кол-во рабочих сессий до длинного перерыва"
+          }
+        }
+      }
+    },
     "Work sessions before long break: %.0f" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
