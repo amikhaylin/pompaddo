@@ -37,6 +37,7 @@ struct FocusTasksView: View {
                         } label: {
                             Image(systemName: "play.fill")
                         }
+                        .accessibility(identifier: "\(maintask.name)PlayButton")
                     }
                 }
             } else {
@@ -54,6 +55,7 @@ struct FocusTasksView: View {
                     } label: {
                         Image(systemName: "play.fill")
                     }
+                    .accessibility(identifier: "\(task.name)PlayButton")
                 }
             }
         }

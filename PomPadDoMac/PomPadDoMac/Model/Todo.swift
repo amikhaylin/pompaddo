@@ -150,7 +150,6 @@ extension Todo {
             self.project = nil
         }
         if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
-            self.parentTask = nil
             parentTask.subtasks?.remove(at: index)
         }
     }

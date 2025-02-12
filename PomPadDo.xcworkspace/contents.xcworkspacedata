@@ -10,4 +10,10 @@
    <FileRef
       location = "group:PomPadDoiOS/PomPadDoiOS.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:PomPadDoiOS/PomPadDoiOSUITests.xctestplan">
+   </FileRef>
+   <FileRef
+      location = "group:PomPadDoiOS/PomPadDoiOS.xctestplan">
+   </FileRef>
 </Workspace>

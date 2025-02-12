@@ -32,6 +32,6 @@ Package.resolved
 Pods/
 
 # Screenshots
-screenshots/*.html
-screenshots/ru/*.png
-screenshots/en-US/*.png
+PomPadDoiOS/screenshots/*.html
+PomPadDoiOS/screenshots/ru/*.png
+PomPadDoiOS/screenshots/en-US/*.png

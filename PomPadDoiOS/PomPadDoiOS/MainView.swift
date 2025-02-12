@@ -61,6 +61,7 @@ struct MainView: View {
                     Image(systemName: "checkmark.square")
                         .foregroundStyle(tab == .tasks ? Color.blue : Color.gray)
                 }
+                .accessibility(identifier: "TasksSection")
 
                 Spacer()
 
@@ -70,6 +71,7 @@ struct MainView: View {
                     FocusTabItemView(tab: $tab)
                         .environmentObject(timer)
                 }
+                .accessibility(identifier: "FocusSection")
 
                 Spacer()
                 
