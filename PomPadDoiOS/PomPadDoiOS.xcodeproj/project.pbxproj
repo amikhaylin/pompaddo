@@ -15,6 +15,7 @@
 		4D1210292C2AD4C800ACD511 /* TaskDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */; };
 		4D12102A2C2AD75500ACD511 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE97AA72BF35BD300E43E9A /* CircularProgressView.swift */; };
 		4D12102B2C2AE6EB00ACD511 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EF2C296F7200B7698B /* Localizable.xcstrings */; };
+		4D15DFDE2D60944C008AFFC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D15DFDD2D60944C008AFFC0 /* LaunchScreen.storyboard */; };
 		4D1959B02BFB8D9200B90F10 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */; };
 		4D1959B22BFBB25900B90F10 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959B12BFBB25900B90F10 /* StatusRowView.swift */; };
 		4D1959BD2BFBC2CF00B90F10 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */; };
@@ -203,6 +204,7 @@
 		4D0179F02C11F30A00D76BF5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4D1135E62C943090005DA9DB /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		4D1210282C2AD4C800ACD511 /* TaskDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsView.swift; sourceTree = "<group>"; };
+		4D15DFDD2D60944C008AFFC0 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4D1959AF2BFB8D9200B90F10 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4D1959B12BFBB25900B90F10 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D1959BC2BFBC2CF00B90F10 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				4DDDB3DA2BF23037002C4F95 /* Preview Content */,
 				4DDDB3FE2BF257B7002C4F95 /* MainView.swift */,
 				4D8F04F12C296F8C00B7698B /* InfoPlist.xcstrings */,
+				4D15DFDD2D60944C008AFFC0 /* LaunchScreen.storyboard */,
 			);
 			path = PomPadDoiOS;
 			sourceTree = "<group>";
@@ -907,6 +910,7 @@
 				4DDDB3DC2BF23037002C4F95 /* Preview Assets.xcassets in Resources */,
 				4DDDB3D92BF23037002C4F95 /* Assets.xcassets in Resources */,
 				4D8F04F22C296F8C00B7698B /* InfoPlist.xcstrings in Resources */,
+				4D15DFDE2D60944C008AFFC0 /* LaunchScreen.storyboard in Resources */,
 				4D8F04F02C296F7200B7698B /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
