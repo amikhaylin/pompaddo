@@ -35,3 +35,6 @@ Pods/
 PomPadDoiOS/screenshots/*.html
 PomPadDoiOS/screenshots/ru/*.png
 PomPadDoiOS/screenshots/en-US/*.png
+screenshots-watchOS/*.html
+screenshots-watchOS/ru/*.png
+screenshots-watchOS/en-US/*.png
