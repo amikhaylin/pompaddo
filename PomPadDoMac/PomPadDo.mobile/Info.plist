@@ -2,20 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
-	<string>Adding events to your calendars</string>
-	<key>CFBundleURLTypes</key>
+	<key>UIBackgroundModes</key>
 	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>com.amikhaylin.PomPadDoMac</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>pompaddo</string>
-			</array>
-		</dict>
+		<string>remote-notification</string>
+		<string>fetch</string>
 	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
@@ -34,5 +24,7 @@
 			<dict/>
 		</dict>
 	</array>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>Adding events to your calendars</string>	
 </dict>
 </plist>

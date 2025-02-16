@@ -10,7 +10,7 @@ import XCTest
 import SwiftData
 @testable import PomPadDo
 
-final class PomPadDoMacTests: XCTestCase {
+final class PomPadDoTests: XCTestCase {
     var dataContainer: ModelContainer!
     
     override func setUpWithError() throws {

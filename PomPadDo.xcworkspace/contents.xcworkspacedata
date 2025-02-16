@@ -5,7 +5,7 @@
       location = "group:README.md">
    </FileRef>
    <FileRef
-      location = "group:PomPadDoMac/PomPadDoMac.xcodeproj">
+      location = "group:PomPadDoMac/PomPadDo.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:PomPadDoiOS/PomPadDoiOS.xcodeproj">

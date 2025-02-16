@@ -170,6 +170,7 @@
       }
     },
     "Add Task" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -507,6 +508,7 @@
       }
     },
     "Complete" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1471,6 +1473,7 @@
       }
     },
     "PomPadDo add to Inbox" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1487,6 +1490,7 @@
       }
     },
     "PomPadDo today tasks" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2064,6 +2068,7 @@
       }
     },
     "This is a widget to display Add to Inbox dialog" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2080,6 +2085,7 @@
       }
     },
     "This is a widget to display today tasks number" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2129,6 +2135,7 @@
       }
     },
     "to Inbox" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
