@@ -50,6 +50,8 @@
 		4D2867BF2D622A830064ADF3 /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
 		4D2867C02D622AA40064ADF3 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */; };
 		4D2867C12D622AA40064ADF3 /* FocusTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */; };
+		4D2867C22D6258610064ADF3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
+		4D2867C32D6258610064ADF3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
 		4D2BBCBF2BE4DEAB00E105C1 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */; };
 		4D3145032CFDEC16005BD65A /* SideBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3145022CFDEC16005BD65A /* SideBarItem.swift */; };
 		4D3939A02C64FF05004B08B9 /* FocusTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */; };
@@ -652,6 +654,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D2867C22D6258610064ADF3 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,6 +662,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D2867C32D6258610064ADF3 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -881,7 +885,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
@@ -920,7 +925,8 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;

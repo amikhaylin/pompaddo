@@ -8,7 +8,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.amikhaylin.PomPadDoMac</string>
+			<string>com.amikhaylin.PomPadDo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>pompaddo</string>
