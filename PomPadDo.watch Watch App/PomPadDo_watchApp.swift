@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct PomPadDo_watch_Watch_AppApp: App {
+struct PomPadDoWatchApp: App {
     @State private var refresher = Refresher()
     
     var sharedModelContainer: ModelContainer = {

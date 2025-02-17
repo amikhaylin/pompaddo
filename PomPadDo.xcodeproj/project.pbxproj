@@ -232,7 +232,6 @@
 
 /* Begin PBXFileReference section */
 		4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.watch.widgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D0540132D63A4980098FEC7 /* PomPadDoWatchWidgetsExtension Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "PomPadDoWatchWidgetsExtension Info.plist"; path = "/Users/cenobith/Desktop/PomPadDo/PomPadDoMac/PomPadDoWatchWidgetsExtension Info.plist"; sourceTree = "<absolute>"; };
 		4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerScene.swift; sourceTree = "<group>"; };
 		4D0A88622C2594FC00E39E38 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
 		4D0A88632C25953900E39E38 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -243,6 +242,8 @@
 		4D15DFF32D60AF95008AFFC0 /* TaskRowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowModifier.swift; sourceTree = "<group>"; };
 		4D15DFF72D60B23E008AFFC0 /* SectionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsListView.swift; sourceTree = "<group>"; };
 		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4D1A88FA2D63B84200CEA4C6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4D1A88FB2D63B84200CEA4C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4D28673D2D61F5BE0064ADF3 /* PomPadDo.mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D28675A2D61F5C20064ADF3 /* PomPadDo.mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDo.mobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
@@ -501,6 +502,8 @@
 		4D95FE192B7B6BF300C8918D = {
 			isa = PBXGroup;
 			children = (
+				4D1A88FA2D63B84200CEA4C6 /* LICENSE */,
+				4D1A88FB2D63B84200CEA4C6 /* README.md */,
 				4D71DB792D6340D200C1FE13 /* PomPadDoWidgetsExtension.entitlements */,
 				4DBAD6152BECBEEF002666BD /* Credits.rtf */,
 				4D95FE242B7B6BF300C8918D /* PomPadDo */,
@@ -512,7 +515,6 @@
 				4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */,
 				4D95FE232B7B6BF300C8918D /* Products */,
 				4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */,
-				4D0540132D63A4980098FEC7 /* PomPadDoWatchWidgetsExtension Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
