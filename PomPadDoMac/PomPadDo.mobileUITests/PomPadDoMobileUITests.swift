@@ -240,35 +240,6 @@ final class PomPadDoMobileUITests: XCTestCase {
         
         snapshot("01TodayScreen")
     }
-    
-    func testipad() throws {
-        
-        app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.navigationBars["Today"]/*@START_MENU_TOKEN@*/.buttons["ToggleSidebar"]/*[[".buttons[\"Show Sidebar\"]",".buttons[\"ToggleSidebar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        
-        app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"закрыть всплывающее меню\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.navigationBars["Сегодня"]/*@START_MENU_TOKEN@*/.buttons["ToggleSidebar"]/*[[".buttons[\"Показать боковое меню\"]",".buttons[\"ToggleSidebar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-              
-        app.collectionViews.matching(identifier: "Sidebar")/*@START_MENU_TOKEN@*/.buttons["Inbox"]/*[[".cells.buttons[\"Inbox\"]",".buttons[\"Inbox\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.otherElements["PopoverDismissRegion"]/*[[".otherElements[\"dismiss popup\"]",".otherElements[\"PopoverDismissRegion\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-                
-    }
-    
-    func testB() throws {
-        
-        let app = XCUIApplication()
-        app.navigationBars["Today"]/*@START_MENU_TOKEN@*/.buttons["ToggleSidebar"]/*[[".buttons[\"Show Sidebar\"]",".buttons[\"ToggleSidebar\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.collectionViews.matching(identifier: "Sidebar")/*@START_MENU_TOKEN@*/.buttons["2222"]/*[[".cells.buttons[\"2222\"]",".buttons[\"2222\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-    }
-    
-    func testOSType() throws {
-        let model = UIDevice.current.model
-
-        print("Модель устройства: \(model)")
-//        print("Версия ОС: \(osVersion)")
-
-//        if model.lowercased().contains("ipad") {
-    }
 }
 // swiftlint:enable function_body_length
 
