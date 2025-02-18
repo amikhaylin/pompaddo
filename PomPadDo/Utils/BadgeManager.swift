@@ -12,7 +12,11 @@ actor BadgeManager {
     @MainActor
     func setBadge(number: Int) {
         #if os(macOS)
-        NSApplication.shared.dockTile.badgeLabel = "\(number)"
+        NotificationManager.checkAuthorization { authorized in
+            if authorized {
+                NSApplication.shared.dockTile.badgeLabel = "\(number)"
+            }
+        }
         #else
         NotificationManager.checkAuthorization { authorized in
             if authorized {
