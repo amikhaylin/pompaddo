@@ -254,6 +254,7 @@
 		4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		4D59C8642BDF8B580026C2EA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		4D59C8672BE10A180026C2EA /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
+		4D5D4C842D6638F60064B27C /* PomPadDo.mobile.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = PomPadDo.mobile.xctestplan; path = PomPadDo.mobileUITests/PomPadDo.mobile.xctestplan; sourceTree = "<group>"; };
 		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -502,6 +503,7 @@
 		4D95FE192B7B6BF300C8918D = {
 			isa = PBXGroup;
 			children = (
+				4D5D4C842D6638F60064B27C /* PomPadDo.mobile.xctestplan */,
 				4D1A88FA2D63B84200CEA4C6 /* LICENSE */,
 				4D1A88FB2D63B84200CEA4C6 /* README.md */,
 				4D71DB792D6340D200C1FE13 /* PomPadDoWidgetsExtension.entitlements */,
@@ -1290,6 +1292,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1329,6 +1332,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
