@@ -27,7 +27,15 @@ struct AddToInboxEntryView: View {
                     .foregroundStyle(Color.orange)
                     .widgetURL(URL(string: "pompaddo://addtoinbox"))
             }
-            #endif
+        #endif
+        #if os(watchOS)
+        case .accessoryCorner:
+            Image(systemName: "tray.and.arrow.down.fill")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundStyle(Color.orange)
+                .widgetURL(URL(string: "pompaddo://addtoinbox"))
+        #endif
         default:
             ZStack {
                 AccessoryWidgetBackground()

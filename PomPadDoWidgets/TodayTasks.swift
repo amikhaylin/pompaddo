@@ -25,6 +25,21 @@ struct TodayTasksAccessory: View {
     }
 }
 
+struct TodayTasksCorner: View {
+    @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
+    
+    var body: some View {
+       ZStack {
+           Text("\(tasksToday.filter({ $0.completed == false }).count)")
+               .widgetCurvesContent()
+               .widgetLabel {
+                   ProgressView(value: Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) && $0.completed }).count), total: Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) }).count))
+                       .tint(.green)
+               }
+        }
+    }
+}
+
 struct TodayTasksHomeScreen: View {
     @Query(filter: TasksQuery.predicateToday()) var tasksToday: [Todo]
     
@@ -63,6 +78,10 @@ struct TodayTasksEntryView: View {
         switch family {
         case .systemSmall:
             TodayTasksHomeScreen()
+        #if os(watchOS)
+        case .accessoryCorner:
+            TodayTasksCorner()
+        #endif
         default:
             TodayTasksAccessory()
         }
