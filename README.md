@@ -4,25 +4,62 @@
 PomPadDo is a personal task manager / planner app <br>
 made to myself by myself
 
-
-
 ![Swift](https://img.shields.io/badge/swift-5.10-orange.svg?style=for-the-badge)
 ![SwiftUI](https://img.shields.io/badge/use-SwiftUI-orange.svg?style=for-the-badge)
 ![SwiftData](https://img.shields.io/badge/use-SwiftData-orange?style=for-the-badge)
 ![Xcode](https://img.shields.io/badge/Xcode-15.3-blue.svg?style=for-the-badge)
 ![macOS](https://img.shields.io/badge/macOS-14.0-blue.svg?style=for-the-badge)
-<!---[![Git Version](https://img.shields.io/github/release/sgr-ksmt/FireTodo.svg?style=for-the-badge)](https://github.com/sgr-ksmt/FireTodo/releases)
-[![license](https://img.shields.io/github/license/sgr-ksmt/FireTodo.svg?style=for-the-badge)](https://github.com/sgr-ksmt/FireTodo/blob/master/LICENSE)--->
+<!---[![Git Version](https://img.shields.io/github/release/sgr-ksmt/FireTodo.svg?style=for-the-badge)](https://github.com/sgr-ksmt/FireTodo/releases) --->
+
+Manage projects, stay focused, and sync progress across devices — all in one app designed specifically for freelancers and solo workers.
+
+🌟 Key Features: <br>
+✅ Flexible Task Lists<br>
+Prioritize tasks, add subtasks. No detail slips through the cracks. <br>
+✅ Kanban Boards for Projects<br>
+Visualize workflows from idea to completion. Drag and drop cards, customize statuses, and track progress.<br>
+✅ Regular Project Reviews<br>
+Conduct weekly or monthly check-ins. Celebrate wins, adjust plans, and stay on track.<br>
+✅ Built-in Focus Timer<br>
+Work in cycles: 25 minutes of focus + 5 minutes of rest. Beat procrastination and boost efficiency.<br>
+✅ Instant iCloud Sync<br>
+Your tasks and projects stay updated across iPhone, iPad, Mac, and Apple Watch.<br>
+
+💡 Why PomPadDo?<br>
+We’ve combined the best of task management and productivity techniques so you can:
+
+Plan without chaos,<br>
+Track projects visually,<br>
+Focus without distractions,<br>
+Sync seamlessly across devices.<br>
+
+🚀 Perfect for:
+
+Freelancers,<br>
+Designers, developers, writers,<br>
+Students and anyone craving order in their workflow.
+
 
 ## macOS app
 <!--![](mac-main.png) --->
 
-<img src="mac-main.png"/><br>
-<img src="mac-contextmenu.png"/>
-<img src="mac-inspector.png" /><br>
-<img src="mac-board.png" /><br>
-<img src="mac-focus-tasks.png" height="320" align="left" />
-<img src="mac-focus-timer.png"  height="320" />
+<img src="page-pix/mac-today.png"/><br>
+<img src="page-pix/mac-project.png"/><br>
+<img src="page-pix/mac-timer.png" height="320" /><br>
+
+## iOS / iPadOS app
+<img src="page-pix/iphone-today.png" height="620" align="left" />
+<img src="page-pix/iphone-section.png" height="620" align="left" />
+<img src="page-pix/iphone-project.png" height="620"/>
+
+
+
+## watchOS companion app
+
+<img src="page-pix/watch-today.png" height="200" align="left" />
+<img src="page-pix/watch-section.png" height="200" align="left" />
+<img src="page-pix/watch-menu.png" height="200" />
+
 
 ### Roadmap
 - [x] Add task direct to Inbox
