@@ -9,7 +9,9 @@ made to myself by myself
 ![SwiftData](https://img.shields.io/badge/use-SwiftData-orange?style=for-the-badge)
 ![Xcode](https://img.shields.io/badge/Xcode-15.3-blue.svg?style=for-the-badge)
 ![macOS](https://img.shields.io/badge/macOS-14.0-blue.svg?style=for-the-badge)
-<!---[![Git Version](https://img.shields.io/github/release/sgr-ksmt/FireTodo.svg?style=for-the-badge)](https://github.com/sgr-ksmt/FireTodo/releases) --->
+<!---[![Git Version](https://img.shields.io/github/release/amikhaylin/pompaddo.svg?style=for-the-badge)](https://github.com/amikhaylin/pompaddo/releases) --->
+
+[![](https://toolbox.marketingtools.apple.com/api/assets/featured-content/apps/badges/badge-1/en-us.svg)](https://apps.apple.com/app/id6742197499)
 
 Manage projects, stay focused, and sync progress across devices — all in one app designed specifically for freelancers and solo workers.
 
