@@ -1,0 +1,1918 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4D0540052D63A4980098FEC7 /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
+		4D0540062D63A4980098FEC7 /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4D0540072D63A4980098FEC7 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4D0540082D63A4980098FEC7 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4D0540092D63A4980098FEC7 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4D05400B2D63A4980098FEC7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB652D63404900C1FE13 /* SwiftUI.framework */; };
+		4D05400C2D63A4980098FEC7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB632D63404900C1FE13 /* WidgetKit.framework */; };
+		4D05400E2D63A4980098FEC7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
+		4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */; };
+		4D0A88642C25953900E39E38 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
+		4D15DFE02D60ACCC008AFFC0 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */; };
+		4D15DFE92D60AE15008AFFC0 /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFE82D60AE15008AFFC0 /* ReviewProjectsView.swift */; };
+		4D15DFEA2D60AE15008AFFC0 /* ProjectToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFE72D60AE15008AFFC0 /* ProjectToReviewView.swift */; };
+		4D15DFF02D60AEC5008AFFC0 /* ProjectTaskModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFEF2D60AEC5008AFFC0 /* ProjectTaskModifier.swift */; };
+		4D15DFF42D60AF95008AFFC0 /* TaskRowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFF32D60AF95008AFFC0 /* TaskRowModifier.swift */; };
+		4D15DFF82D60B23E008AFFC0 /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFF72D60B23E008AFFC0 /* SectionsListView.swift */; };
+		4D169BCE2C106039001F995F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D169BCD2C106039001F995F /* SettingsView.swift */; };
+		4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4D1D9EB62BD152F700CFF31C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4D1D9EB72BD152FB00CFF31C /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4D1D9EB82BD1530000CFF31C /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
+		4D2867812D61FAFE0064ADF3 /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D2867802D61FAFE0064ADF3 /* SwiftDataTransferrable */; };
+		4D2867822D62279F0064ADF3 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4D2867832D6227A80064ADF3 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4D2867842D6227AF0064ADF3 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4D2867852D6227B70064ADF3 /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4D2867A92D6228450064ADF3 /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */; };
+		4D2867AA2D62284D0064ADF3 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B42BA1F437000829E1 /* BadgeManager.swift */; };
+		4D2867AB2D62285C0064ADF3 /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
+		4D2867AC2D6228650064ADF3 /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
+		4D2867AD2D6228730064ADF3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8642BDF8B580026C2EA /* NotificationManager.swift */; };
+		4D2867AE2D62287B0064ADF3 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D821E4D2C11A03A008E79F6 /* Common.swift */; };
+		4D2867AF2D6228830064ADF3 /* SideBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3145022CFDEC16005BD65A /* SideBarItem.swift */; };
+		4D2867B02D6229680064ADF3 /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
+		4D2867B12D6229680064ADF3 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */; };
+		4D2867B22D6229680064ADF3 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */; };
+		4D2867B32D6229800064ADF3 /* SectionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFF72D60B23E008AFFC0 /* SectionsListView.swift */; };
+		4D2867B42D6229D10064ADF3 /* ProjectTaskModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFEF2D60AEC5008AFFC0 /* ProjectTaskModifier.swift */; };
+		4D2867B52D6229D10064ADF3 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */; };
+		4D2867B62D6229D10064ADF3 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DC2BC940B6002C9566 /* ProjectView.swift */; };
+		4D2867B72D6229E20064ADF3 /* ProjectToReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFE72D60AE15008AFFC0 /* ProjectToReviewView.swift */; };
+		4D2867B82D6229E20064ADF3 /* ReviewProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFE82D60AE15008AFFC0 /* ReviewProjectsView.swift */; };
+		4D2867B92D6229F10064ADF3 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* BoardView.swift */; };
+		4D2867BA2D622A830064ADF3 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
+		4D2867BB2D622A830064ADF3 /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
+		4D2867BC2D622A830064ADF3 /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */; };
+		4D2867BD2D622A830064ADF3 /* TaskRowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFF32D60AF95008AFFC0 /* TaskRowModifier.swift */; };
+		4D2867BE2D622A830064ADF3 /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskRowView.swift */; };
+		4D2867BF2D622A830064ADF3 /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
+		4D2867C02D622AA40064ADF3 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */; };
+		4D2867C12D622AA40064ADF3 /* FocusTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */; };
+		4D2867C22D6258610064ADF3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
+		4D2867C32D6258610064ADF3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
+		4D2BBCBF2BE4DEAB00E105C1 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */; };
+		4D3025572D63AD24000E5C3D /* PomPadDo.watch.widgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D3145032CFDEC16005BD65A /* SideBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3145022CFDEC16005BD65A /* SideBarItem.swift */; };
+		4D3939A02C64FF05004B08B9 /* FocusTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */; };
+		4D3E50BF2D6382EA008C1FDB /* PomPadDo.watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D3E50D12D638656008C1FDB /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
+		4D3E50D22D638656008C1FDB /* Refresher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */; };
+		4D3E50D32D638661008C1FDB /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4D3E50D42D638661008C1FDB /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4D3E50D52D638661008C1FDB /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4D3E50D62D638661008C1FDB /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4D3E50D72D638677008C1FDB /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
+		4D3E50D82D638698008C1FDB /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */; };
+		4D3E50D92D6386F2008C1FDB /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */; };
+		4D3E50DA2D638709008C1FDB /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
+		4D4139862BE8DEF700AA840C /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4D41398B2BE8F31A00AA840C /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */; };
+		4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8642BDF8B580026C2EA /* NotificationManager.swift */; };
+		4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8672BE10A180026C2EA /* FocusTimerView.swift */; };
+		4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D5FCF1F2B82059400FE944E /* EditTaskView.swift */; };
+		4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */; };
+		4D71DB642D63404900C1FE13 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB632D63404900C1FE13 /* WidgetKit.framework */; };
+		4D71DB662D63404900C1FE13 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB652D63404900C1FE13 /* SwiftUI.framework */; };
+		4D71DB732D63404C00C1FE13 /* PomPadDoWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D71DB802D63416400C1FE13 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4D71DB812D63417300C1FE13 /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
+		4D71DB822D63418800C1FE13 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4D71DB832D63418800C1FE13 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4D71DB842D63419A00C1FE13 /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4D71DB852D6341D500C1FE13 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
+		4D7A1FD92C0778E4009052AE /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */; };
+		4D7A1FDB2C0778E4009052AE /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */; };
+		4D7A1FE32C0778E4009052AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4D7A1FE22C0778E4009052AE /* Base */; };
+		4D7A1FE82C0778E4009052AE /* PomPadDo.safari.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D7A1FEE2C077DFD009052AE /* ToolbarItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */; };
+		4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C12B7E03500093595D /* TasksListView.swift */; };
+		4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C42B7E06F70093595D /* Previewer.swift */; };
+		4D7C13C72B7E0DE70093595D /* TaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7C13C62B7E0DE70093595D /* TaskRowView.swift */; };
+		4D821E4E2C11A03A008E79F6 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D821E4D2C11A03A008E79F6 /* Common.swift */; };
+		4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */; };
+		4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
+		4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B42BA1F437000829E1 /* BadgeManager.swift */; };
+		4D8800BB2C18B8EF00AB4D78 /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */; };
+		4D8F04EC2C29645300B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */; };
+		4D8F04EE2C2964B500B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */; };
+		4D95FE262B7B6BF300C8918D /* PomPadDoMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE252B7B6BF300C8918D /* PomPadDoMacApp.swift */; };
+		4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE272B7B6BF300C8918D /* ContentView.swift */; };
+		4D95FE2C2B7B6BF600C8918D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */; };
+		4D95FE2F2B7B6BF600C8918D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */; };
+		4D95FE3A2B7B6BF600C8918D /* PomPadDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE392B7B6BF600C8918D /* PomPadDoTests.swift */; };
+		4D95FE542B7B6C3000C8918D /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE532B7B6C3000C8918D /* Project.swift */; };
+		4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */; };
+		4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */; };
+		4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */; };
+		4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */; };
+		4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBAD6152BECBEEF002666BD /* Credits.rtf */; };
+		4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
+		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
+		4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* BoardView.swift */; };
+		4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DC2BC940B6002C9566 /* ProjectView.swift */; };
+		4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */; };
+		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
+		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
+		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
+		4DEC4BE22BEA240000DC3AAB /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
+		4DF1E9E42C1B56E7007FC401 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */; };
+		4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */; };
+		4DF91FDF2BCBD460009A6DA8 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */; };
+		4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4D0540192D63A7F70098FEC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D0540032D63A4980098FEC7;
+			remoteInfo = PomPadDo.watch.widgetsExtension;
+		};
+		4D28675B2D61F5C20064ADF3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D28673C2D61F5BE0064ADF3;
+			remoteInfo = PomPadDo.mobile;
+		};
+		4D3025582D63AD24000E5C3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D0540032D63A4980098FEC7;
+			remoteInfo = PomPadDo.watch.widgetsExtension;
+		};
+		4D3E50BD2D6382EA008C1FDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D3E50B12D6382E7008C1FDB;
+			remoteInfo = "PomPadDo.watch Watch App";
+		};
+		4D71DB712D63404C00C1FE13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D71DB612D63404900C1FE13;
+			remoteInfo = PomPadDoWidgetsExtension;
+		};
+		4D7A1FE62C0778E4009052AE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D7A1FD52C0778E4009052AE;
+			remoteInfo = PomPadDoExt;
+		};
+		4D95FE362B7B6BF600C8918D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D95FE212B7B6BF300C8918D;
+			remoteInfo = PomPadDoMac;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4D30255A2D63AD24000E5C3D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D3025572D63AD24000E5C3D /* PomPadDo.watch.widgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D3E50C02D6382EA008C1FDB /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				4D3E50BF2D6382EA008C1FDB /* PomPadDo.watch Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D71DB782D63404C00C1FE13 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D71DB732D63404C00C1FE13 /* PomPadDoWidgetsExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D7A1FE92C0778E4009052AE /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D7A1FE82C0778E4009052AE /* PomPadDo.safari.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.watch.widgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerScene.swift; sourceTree = "<group>"; };
+		4D0A88622C2594FC00E39E38 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
+		4D0A88632C25953900E39E38 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresher.swift; sourceTree = "<group>"; };
+		4D15DFE72D60AE15008AFFC0 /* ProjectToReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectToReviewView.swift; sourceTree = "<group>"; };
+		4D15DFE82D60AE15008AFFC0 /* ReviewProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewProjectsView.swift; sourceTree = "<group>"; };
+		4D15DFEF2D60AEC5008AFFC0 /* ProjectTaskModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTaskModifier.swift; sourceTree = "<group>"; };
+		4D15DFF32D60AF95008AFFC0 /* TaskRowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowModifier.swift; sourceTree = "<group>"; };
+		4D15DFF72D60B23E008AFFC0 /* SectionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsListView.swift; sourceTree = "<group>"; };
+		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4D1A88FA2D63B84200CEA4C6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4D1A88FB2D63B84200CEA4C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		4D28673D2D61F5BE0064ADF3 /* PomPadDo.mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D28675A2D61F5C20064ADF3 /* PomPadDo.mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDo.mobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
+		4D3145022CFDEC16005BD65A /* SideBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarItem.swift; sourceTree = "<group>"; };
+		4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTasksView.swift; sourceTree = "<group>"; };
+		4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PomPadDo.watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D4139852BE8DEF700AA840C /* ProjectGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectGroup.swift; sourceTree = "<group>"; };
+		4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
+		4D59C8642BDF8B580026C2EA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		4D59C8672BE10A180026C2EA /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
+		4D5D4C842D6638F60064B27C /* PomPadDo.mobile.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = PomPadDo.mobile.xctestplan; path = PomPadDo.mobileUITests/PomPadDo.mobile.xctestplan; sourceTree = "<group>"; };
+		4D5FCF1F2B82059400FE944E /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
+		4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D71DB632D63404900C1FE13 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		4D71DB652D63404900C1FE13 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		4D71DB792D6340D200C1FE13 /* PomPadDoWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoWidgetsExtension.entitlements; sourceTree = "<group>"; };
+		4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.safari.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
+		4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
+		4D7A1FE22C0778E4009052AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
+		4D7A1FE42C0778E4009052AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D7A1FE52C0778E4009052AE /* PomPadDoExt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoExt.entitlements; sourceTree = "<group>"; };
+		4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarItemIcon.png; sourceTree = "<group>"; };
+		4D7C13C12B7E03500093595D /* TasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListView.swift; sourceTree = "<group>"; };
+		4D7C13C42B7E06F70093595D /* Previewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Previewer.swift; sourceTree = "<group>"; };
+		4D7C13C62B7E0DE70093595D /* TaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRowView.swift; sourceTree = "<group>"; };
+		4D821E4D2C11A03A008E79F6 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
+		4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksQuery.swift; sourceTree = "<group>"; };
+		4D8422B42BA1F437000829E1 /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeManager.swift; sourceTree = "<group>"; };
+		4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSwipeModifier.swift; sourceTree = "<group>"; };
+		4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		4D95FE222B7B6BF300C8918D /* PomPadDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D95FE252B7B6BF300C8918D /* PomPadDoMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoMacApp.swift; sourceTree = "<group>"; };
+		4D95FE272B7B6BF300C8918D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4D95FE302B7B6BF600C8918D /* PomPadDoMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoMac.entitlements; sourceTree = "<group>"; };
+		4D95FE352B7B6BF600C8918D /* PomPadDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D95FE392B7B6BF600C8918D /* PomPadDoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoTests.swift; sourceTree = "<group>"; };
+		4D95FE532B7B6C3000C8918D /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		4D9FFAD32BA9C43600C5F5AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
+		4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
+		4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
+		4DBAD6152BECBEEF002666BD /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		4DBDC7EC2B7CB4EC0063F522 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
+		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		4DCE05D82BC9284A002C9566 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		4DCE05DC2BC940B6002C9566 /* ProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectView.swift; sourceTree = "<group>"; };
+		4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectNameView.swift; sourceTree = "<group>"; };
+		4DE238562BAC9269009BCCCF /* Collapsible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collapsible.swift; sourceTree = "<group>"; };
+		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
+		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
+		4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTasksListView.swift; sourceTree = "<group>"; };
+		4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
+		4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCheckBoxView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4D0540142D63A4980098FEC7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Assets.xcassets,
+				Info.plist,
+			);
+			target = 4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */;
+		};
+		4D2867622D61F5C20064ADF3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4D28673C2D61F5BE0064ADF3 /* PomPadDo.mobile */;
+		};
+		4D71DB772D63404C00C1FE13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D2867622D61F5C20064ADF3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobile; sourceTree = "<group>"; };
+		4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobileUITests; sourceTree = "<group>"; };
+		4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PomPadDo.watch Watch App"; sourceTree = "<group>"; };
+		4D71DB672D63404900C1FE13 /* PomPadDoWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D71DB772D63404C00C1FE13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0540142D63A4980098FEC7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDoWidgets; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4D05400A2D63A4980098FEC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D05400B2D63A4980098FEC7 /* SwiftUI.framework in Frameworks */,
+				4D05400C2D63A4980098FEC7 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D28673A2D61F5BE0064ADF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2867812D61FAFE0064ADF3 /* SwiftDataTransferrable in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D2867572D61F5C20064ADF3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D3E50AF2D6382E7008C1FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D71DB5F2D63404900C1FE13 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D71DB662D63404900C1FE13 /* SwiftUI.framework in Frameworks */,
+				4D71DB642D63404900C1FE13 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D7A1FD32C0778E4009052AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D95FE1F2B7B6BF300C8918D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */,
+				4DF1E9E42C1B56E7007FC401 /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D95FE322B7B6BF600C8918D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4D169BCC2C106010001F995F /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4D169BCD2C106039001F995F /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		4D1D9EAC2BCD334D00CFF31C /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */,
+				4DF91FDE2BCBD460009A6DA8 /* CheckBoxView.swift */,
+				4DE238562BAC9269009BCCCF /* Collapsible.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		4D1D9EB22BCD576F00CFF31C /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				4D15DFE72D60AE15008AFFC0 /* ProjectToReviewView.swift */,
+				4D15DFE82D60AE15008AFFC0 /* ReviewProjectsView.swift */,
+			);
+			path = Review;
+			sourceTree = "<group>";
+		};
+		4D4139872BE8E2C200AA840C /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */,
+				4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		4D59C8662BE109EB0026C2EA /* Focus */ = {
+			isa = PBXGroup;
+			children = (
+				4D59C8672BE10A180026C2EA /* FocusTimerView.swift */,
+				4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */,
+				4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */,
+				4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */,
+			);
+			path = Focus;
+			sourceTree = "<group>";
+		};
+		4D736B132B7D1383000C0BFD /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				4D15DFF72D60B23E008AFFC0 /* SectionsListView.swift */,
+				4D59C8662BE109EB0026C2EA /* Focus */,
+				4DAA67B62BC52CBC0045CE22 /* Projects */,
+				4DAA67B52BC52C970045CE22 /* Tasks */,
+				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
+			);
+			path = Activities;
+			sourceTree = "<group>";
+		};
+		4D7A1FD72C0778E4009052AE /* PomPadDo.safari */ = {
+			isa = PBXGroup;
+			children = (
+				4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */,
+				4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */,
+				4D7A1FE12C0778E4009052AE /* SafariExtensionViewController.xib */,
+				4D7A1FE42C0778E4009052AE /* Info.plist */,
+				4D7A1FE52C0778E4009052AE /* PomPadDoExt.entitlements */,
+				4D7A1FDC2C0778E4009052AE /* Resources */,
+				4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */,
+			);
+			path = PomPadDo.safari;
+			sourceTree = "<group>";
+		};
+		4D7A1FDC2C0778E4009052AE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4D7C13C32B7E06DE0093595D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */,
+				4D8422B42BA1F437000829E1 /* BadgeManager.swift */,
+				4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */,
+				4D7C13C42B7E06F70093595D /* Previewer.swift */,
+				4D59C8642BDF8B580026C2EA /* NotificationManager.swift */,
+				4D821E4D2C11A03A008E79F6 /* Common.swift */,
+				4D3145022CFDEC16005BD65A /* SideBarItem.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		4D95FE192B7B6BF300C8918D = {
+			isa = PBXGroup;
+			children = (
+				4D5D4C842D6638F60064B27C /* PomPadDo.mobile.xctestplan */,
+				4D1A88FA2D63B84200CEA4C6 /* LICENSE */,
+				4D1A88FB2D63B84200CEA4C6 /* README.md */,
+				4D71DB792D6340D200C1FE13 /* PomPadDoWidgetsExtension.entitlements */,
+				4DBAD6152BECBEEF002666BD /* Credits.rtf */,
+				4D95FE242B7B6BF300C8918D /* PomPadDo */,
+				4D95FE382B7B6BF600C8918D /* PomPadDo.Tests */,
+				4D7A1FD72C0778E4009052AE /* PomPadDo.safari */,
+				4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */,
+				4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */,
+				4D71DB672D63404900C1FE13 /* PomPadDoWidgets */,
+				4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */,
+				4D95FE232B7B6BF300C8918D /* Products */,
+				4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		4D95FE232B7B6BF300C8918D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4D95FE222B7B6BF300C8918D /* PomPadDo.app */,
+				4D95FE352B7B6BF600C8918D /* PomPadDoTests.xctest */,
+				4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */,
+				4D28673D2D61F5BE0064ADF3 /* PomPadDo.mobile.app */,
+				4D28675A2D61F5C20064ADF3 /* PomPadDo.mobileUITests.xctest */,
+				4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */,
+				4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */,
+				4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4D95FE242B7B6BF300C8918D /* PomPadDo */ = {
+			isa = PBXGroup;
+			children = (
+				4D169BCC2C106010001F995F /* Settings */,
+				4D1D9EAC2BCD334D00CFF31C /* CustomViews */,
+				4D9FFAD32BA9C43600C5F5AE /* Info.plist */,
+				4D7C13C32B7E06DE0093595D /* Utils */,
+				4D736B132B7D1383000C0BFD /* Activities */,
+				4D95FE522B7B6C1300C8918D /* Model */,
+				4D95FE252B7B6BF300C8918D /* PomPadDoMacApp.swift */,
+				4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */,
+				4D95FE302B7B6BF600C8918D /* PomPadDoMac.entitlements */,
+				4D95FE2D2B7B6BF600C8918D /* Preview Content */,
+				4D0A88632C25953900E39E38 /* Localizable.xcstrings */,
+				4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */,
+			);
+			path = PomPadDo;
+			sourceTree = "<group>";
+		};
+		4D95FE2D2B7B6BF600C8918D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4D95FE382B7B6BF600C8918D /* PomPadDo.Tests */ = {
+			isa = PBXGroup;
+			children = (
+				4D95FE392B7B6BF600C8918D /* PomPadDoTests.swift */,
+			);
+			path = PomPadDo.Tests;
+			sourceTree = "<group>";
+		};
+		4D95FE522B7B6C1300C8918D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4D95FE532B7B6C3000C8918D /* Project.swift */,
+				4DBDC7EE2B7CBE450063F522 /* Todo.swift */,
+				4DBDC7EC2B7CB4EC0063F522 /* Status.swift */,
+				4D4139852BE8DEF700AA840C /* ProjectGroup.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */,
+				4D71DB632D63404900C1FE13 /* WidgetKit.framework */,
+				4D71DB652D63404900C1FE13 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4DAA67B52BC52C970045CE22 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				4D15DFF32D60AF95008AFFC0 /* TaskRowModifier.swift */,
+				4D7C13C12B7E03500093595D /* TasksListView.swift */,
+				4D7C13C62B7E0DE70093595D /* TaskRowView.swift */,
+				4D5FCF1F2B82059400FE944E /* EditTaskView.swift */,
+				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
+				4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */,
+				4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		4DAA67B62BC52CBC0045CE22 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				4D15DFEF2D60AEC5008AFFC0 /* ProjectTaskModifier.swift */,
+				4D4139872BE8E2C200AA840C /* Group */,
+				4D1D9EB22BCD576F00CFF31C /* Review */,
+				4DCE05DE2BCA711B002C9566 /* Settings */,
+				4DCE05D52BC6F1D6002C9566 /* Board */,
+				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
+				4DE238582BAC9C01009BCCCF /* NewProjectView.swift */,
+				4DCE05DC2BC940B6002C9566 /* ProjectView.swift */,
+				4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */,
+				4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		4DCE05D52BC6F1D6002C9566 /* Board */ = {
+			isa = PBXGroup;
+			children = (
+				4DCE05D82BC9284A002C9566 /* BoardView.swift */,
+			);
+			path = Board;
+			sourceTree = "<group>";
+		};
+		4DCE05DE2BCA711B002C9566 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */,
+				4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D05400F2D63A4980098FEC7 /* Build configuration list for PBXNativeTarget "PomPadDo.watch.widgetsExtension" */;
+			buildPhases = (
+				4D0540042D63A4980098FEC7 /* Sources */,
+				4D05400A2D63A4980098FEC7 /* Frameworks */,
+				4D05400D2D63A4980098FEC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4D71DB672D63404900C1FE13 /* PomPadDoWidgets */,
+			);
+			name = PomPadDo.watch.widgetsExtension;
+			packageProductDependencies = (
+			);
+			productName = PomPadDoWidgetsExtension;
+			productReference = 4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		4D28673C2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D2867632D61F5C20064ADF3 /* Build configuration list for PBXNativeTarget "PomPadDo.mobile" */;
+			buildPhases = (
+				4D2867392D61F5BE0064ADF3 /* Sources */,
+				4D28673A2D61F5BE0064ADF3 /* Frameworks */,
+				4D28673B2D61F5BE0064ADF3 /* Resources */,
+				4D71DB782D63404C00C1FE13 /* Embed Foundation Extensions */,
+				4D3E50C02D6382EA008C1FDB /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D71DB722D63404C00C1FE13 /* PBXTargetDependency */,
+				4D3E50BE2D6382EA008C1FDB /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */,
+			);
+			name = PomPadDo.mobile;
+			packageProductDependencies = (
+				4D2867802D61FAFE0064ADF3 /* SwiftDataTransferrable */,
+			);
+			productName = PomPadDo.mobile;
+			productReference = 4D28673D2D61F5BE0064ADF3 /* PomPadDo.mobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4D2867592D61F5C20064ADF3 /* PomPadDo.mobileUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D2867692D61F5C20064ADF3 /* Build configuration list for PBXNativeTarget "PomPadDo.mobileUITests" */;
+			buildPhases = (
+				4D2867562D61F5C20064ADF3 /* Sources */,
+				4D2867572D61F5C20064ADF3 /* Frameworks */,
+				4D2867582D61F5C20064ADF3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D28675C2D61F5C20064ADF3 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */,
+			);
+			name = PomPadDo.mobileUITests;
+			packageProductDependencies = (
+			);
+			productName = PomPadDo.mobileUITests;
+			productReference = 4D28675A2D61F5C20064ADF3 /* PomPadDo.mobileUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D3E50C32D6382EA008C1FDB /* Build configuration list for PBXNativeTarget "PomPadDo.watch Watch App" */;
+			buildPhases = (
+				4D3E50AE2D6382E7008C1FDB /* Sources */,
+				4D3E50AF2D6382E7008C1FDB /* Frameworks */,
+				4D3E50B02D6382E7008C1FDB /* Resources */,
+				4D30255A2D63AD24000E5C3D /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D05401A2D63A7F70098FEC7 /* PBXTargetDependency */,
+				4D3025592D63AD24000E5C3D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */,
+			);
+			name = "PomPadDo.watch Watch App";
+			packageProductDependencies = (
+			);
+			productName = "PomPadDo.watch Watch App";
+			productReference = 4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D71DB742D63404C00C1FE13 /* Build configuration list for PBXNativeTarget "PomPadDoWidgetsExtension" */;
+			buildPhases = (
+				4D71DB5E2D63404900C1FE13 /* Sources */,
+				4D71DB5F2D63404900C1FE13 /* Frameworks */,
+				4D71DB602D63404900C1FE13 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				4D71DB672D63404900C1FE13 /* PomPadDoWidgets */,
+			);
+			name = PomPadDoWidgetsExtension;
+			packageProductDependencies = (
+			);
+			productName = PomPadDoWidgetsExtension;
+			productReference = 4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		4D7A1FD52C0778E4009052AE /* PomPadDo.safari */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D7A1FEC2C0778E4009052AE /* Build configuration list for PBXNativeTarget "PomPadDo.safari" */;
+			buildPhases = (
+				4D7A1FD22C0778E4009052AE /* Sources */,
+				4D7A1FD32C0778E4009052AE /* Frameworks */,
+				4D7A1FD42C0778E4009052AE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PomPadDo.safari;
+			productName = PomPadDoExt;
+			productReference = 4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		4D95FE212B7B6BF300C8918D /* PomPadDo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D95FE492B7B6BF600C8918D /* Build configuration list for PBXNativeTarget "PomPadDo" */;
+			buildPhases = (
+				4D95FE1E2B7B6BF300C8918D /* Sources */,
+				4D95FE1F2B7B6BF300C8918D /* Frameworks */,
+				4D95FE202B7B6BF300C8918D /* Resources */,
+				4DBFA7562BAD72AB006232FE /* SwiftLint */,
+				4D7A1FE92C0778E4009052AE /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D7A1FE72C0778E4009052AE /* PBXTargetDependency */,
+			);
+			name = PomPadDo;
+			packageProductDependencies = (
+				4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */,
+			);
+			productName = PomPadDoMac;
+			productReference = 4D95FE222B7B6BF300C8918D /* PomPadDo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4D95FE342B7B6BF600C8918D /* PomPadDoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D95FE4C2B7B6BF600C8918D /* Build configuration list for PBXNativeTarget "PomPadDoTests" */;
+			buildPhases = (
+				4D95FE312B7B6BF600C8918D /* Sources */,
+				4D95FE322B7B6BF600C8918D /* Frameworks */,
+				4D95FE332B7B6BF600C8918D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D95FE372B7B6BF600C8918D /* PBXTargetDependency */,
+			);
+			name = PomPadDoTests;
+			productName = PomPadDoMacTests;
+			productReference = 4D95FE352B7B6BF600C8918D /* PomPadDoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4D95FE1A2B7B6BF300C8918D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					4D28673C2D61F5BE0064ADF3 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					4D2867592D61F5C20064ADF3 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 4D28673C2D61F5BE0064ADF3;
+					};
+					4D3E50B12D6382E7008C1FDB = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					4D71DB612D63404900C1FE13 = {
+						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
+					};
+					4D7A1FD52C0778E4009052AE = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					4D95FE212B7B6BF300C8918D = {
+						CreatedOnToolsVersion = 15.2;
+					};
+					4D95FE342B7B6BF600C8918D = {
+						CreatedOnToolsVersion = 15.2;
+						TestTargetID = 4D95FE212B7B6BF300C8918D;
+					};
+				};
+			};
+			buildConfigurationList = 4D95FE1D2B7B6BF300C8918D /* Build configuration list for PBXProject "PomPadDo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				ru,
+			);
+			mainGroup = 4D95FE192B7B6BF300C8918D;
+			packageReferences = (
+				4D9FFAD22BA9C38300C5F5AE /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */,
+			);
+			productRefGroup = 4D95FE232B7B6BF300C8918D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4D95FE212B7B6BF300C8918D /* PomPadDo */,
+				4D95FE342B7B6BF600C8918D /* PomPadDoTests */,
+				4D7A1FD52C0778E4009052AE /* PomPadDo.safari */,
+				4D28673C2D61F5BE0064ADF3 /* PomPadDo.mobile */,
+				4D2867592D61F5C20064ADF3 /* PomPadDo.mobileUITests */,
+				4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */,
+				4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */,
+				4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4D05400D2D63A4980098FEC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D05400E2D63A4980098FEC7 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D28673B2D61F5BE0064ADF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2867C22D6258610064ADF3 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D2867582D61F5C20064ADF3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2867C32D6258610064ADF3 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D3E50B02D6382E7008C1FDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D71DB602D63404900C1FE13 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D71DB852D6341D500C1FE13 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D7A1FD42C0778E4009052AE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D8F04EE2C2964B500B7698B /* InfoPlist.xcstrings in Resources */,
+				4D7A1FEE2C077DFD009052AE /* ToolbarItemIcon.png in Resources */,
+				4D7A1FE32C0778E4009052AE /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D95FE202B7B6BF300C8918D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D95FE2F2B7B6BF600C8918D /* Preview Assets.xcassets in Resources */,
+				4D8F04EC2C29645300B7698B /* InfoPlist.xcstrings in Resources */,
+				4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */,
+				4D0A88642C25953900E39E38 /* Localizable.xcstrings in Resources */,
+				4D95FE2C2B7B6BF600C8918D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D95FE332B7B6BF600C8918D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4DBFA7562BAD72AB006232FE /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4D0540042D63A4980098FEC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D0540052D63A4980098FEC7 /* TasksQuery.swift in Sources */,
+				4D0540062D63A4980098FEC7 /* ProjectGroup.swift in Sources */,
+				4D0540072D63A4980098FEC7 /* Project.swift in Sources */,
+				4D0540082D63A4980098FEC7 /* Status.swift in Sources */,
+				4D0540092D63A4980098FEC7 /* Todo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D2867392D61F5BE0064ADF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D2867832D6227A80064ADF3 /* Todo.swift in Sources */,
+				4D2867AC2D6228650064ADF3 /* Previewer.swift in Sources */,
+				4D2867B92D6229F10064ADF3 /* BoardView.swift in Sources */,
+				4D2867AF2D6228830064ADF3 /* SideBarItem.swift in Sources */,
+				4D2867B42D6229D10064ADF3 /* ProjectTaskModifier.swift in Sources */,
+				4D2867B52D6229D10064ADF3 /* ProjectTasksListView.swift in Sources */,
+				4D2867B62D6229D10064ADF3 /* ProjectView.swift in Sources */,
+				4D2867B32D6229800064ADF3 /* SectionsListView.swift in Sources */,
+				4D2867C02D622AA40064ADF3 /* FocusTimer.swift in Sources */,
+				4D2867C12D622AA40064ADF3 /* FocusTasksView.swift in Sources */,
+				4D2867AA2D62284D0064ADF3 /* BadgeManager.swift in Sources */,
+				4D2867B72D6229E20064ADF3 /* ProjectToReviewView.swift in Sources */,
+				4D2867B82D6229E20064ADF3 /* ReviewProjectsView.swift in Sources */,
+				4D2867BA2D622A830064ADF3 /* EditTaskView.swift in Sources */,
+				4D2867BB2D622A830064ADF3 /* TasksListView.swift in Sources */,
+				4D2867BC2D622A830064ADF3 /* TaskSwipeModifier.swift in Sources */,
+				4D2867BD2D622A830064ADF3 /* TaskRowModifier.swift in Sources */,
+				4D2867BE2D622A830064ADF3 /* TaskRowView.swift in Sources */,
+				4D2867BF2D622A830064ADF3 /* TaskCheckBoxView.swift in Sources */,
+				4D2867A92D6228450064ADF3 /* Refresher.swift in Sources */,
+				4D2867AE2D62287B0064ADF3 /* Common.swift in Sources */,
+				4D2867822D62279F0064ADF3 /* Project.swift in Sources */,
+				4D2867842D6227AF0064ADF3 /* Status.swift in Sources */,
+				4D2867AB2D62285C0064ADF3 /* TasksQuery.swift in Sources */,
+				4D2867852D6227B70064ADF3 /* ProjectGroup.swift in Sources */,
+				4D2867AD2D6228730064ADF3 /* NotificationManager.swift in Sources */,
+				4D2867B02D6229680064ADF3 /* Collapsible.swift in Sources */,
+				4D2867B12D6229680064ADF3 /* CheckBoxView.swift in Sources */,
+				4D2867B22D6229680064ADF3 /* CircularProgressView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D2867562D61F5C20064ADF3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D3E50AE2D6382E7008C1FDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D3E50D72D638677008C1FDB /* Previewer.swift in Sources */,
+				4D3E50D92D6386F2008C1FDB /* TaskSwipeModifier.swift in Sources */,
+				4D3E50D32D638661008C1FDB /* Project.swift in Sources */,
+				4D3E50D42D638661008C1FDB /* Status.swift in Sources */,
+				4D3E50DA2D638709008C1FDB /* TaskCheckBoxView.swift in Sources */,
+				4D3E50D52D638661008C1FDB /* ProjectGroup.swift in Sources */,
+				4D3E50D62D638661008C1FDB /* Todo.swift in Sources */,
+				4D3E50D12D638656008C1FDB /* TasksQuery.swift in Sources */,
+				4D3E50D82D638698008C1FDB /* CircularProgressView.swift in Sources */,
+				4D3E50D22D638656008C1FDB /* Refresher.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D71DB5E2D63404900C1FE13 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D71DB812D63417300C1FE13 /* TasksQuery.swift in Sources */,
+				4D71DB842D63419A00C1FE13 /* ProjectGroup.swift in Sources */,
+				4D71DB822D63418800C1FE13 /* Project.swift in Sources */,
+				4D71DB832D63418800C1FE13 /* Status.swift in Sources */,
+				4D71DB802D63416400C1FE13 /* Todo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D7A1FD22C0778E4009052AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D7A1FDB2C0778E4009052AE /* SafariExtensionViewController.swift in Sources */,
+				4D7A1FD92C0778E4009052AE /* SafariExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D95FE1E2B7B6BF300C8918D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D7C13C72B7E0DE70093595D /* TaskRowView.swift in Sources */,
+				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
+				4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */,
+				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
+				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
+				4D3145032CFDEC16005BD65A /* SideBarItem.swift in Sources */,
+				4D4139862BE8DEF700AA840C /* ProjectGroup.swift in Sources */,
+				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
+				4D8800BB2C18B8EF00AB4D78 /* TaskSwipeModifier.swift in Sources */,
+				4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */,
+				4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */,
+				4D2BBCBF2BE4DEAB00E105C1 /* FocusTimer.swift in Sources */,
+				4D15DFE92D60AE15008AFFC0 /* ReviewProjectsView.swift in Sources */,
+				4D15DFEA2D60AE15008AFFC0 /* ProjectToReviewView.swift in Sources */,
+				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
+				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
+				4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */,
+				4D15DFF42D60AF95008AFFC0 /* TaskRowModifier.swift in Sources */,
+				4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */,
+				4D41398B2BE8F31A00AA840C /* ProjectsListView.swift in Sources */,
+				4D821E4E2C11A03A008E79F6 /* Common.swift in Sources */,
+				4D7C13C22B7E03500093595D /* TasksListView.swift in Sources */,
+				4D15DFF82D60B23E008AFFC0 /* SectionsListView.swift in Sources */,
+				4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */,
+				4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */,
+				4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */,
+				4DF91FDF2BCBD460009A6DA8 /* CheckBoxView.swift in Sources */,
+				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
+				4D15DFE02D60ACCC008AFFC0 /* Refresher.swift in Sources */,
+				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
+				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,
+				4D95FE262B7B6BF300C8918D /* PomPadDoMacApp.swift in Sources */,
+				4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */,
+				4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */,
+				4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */,
+				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
+				4D15DFF02D60AEC5008AFFC0 /* ProjectTaskModifier.swift in Sources */,
+				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
+				4D169BCE2C106039001F995F /* SettingsView.swift in Sources */,
+				4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */,
+				4D3939A02C64FF05004B08B9 /* FocusTasksView.swift in Sources */,
+				4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D95FE312B7B6BF600C8918D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D1D9EB82BD1530000CFF31C /* TasksQuery.swift in Sources */,
+				4DEC4BE22BEA240000DC3AAB /* ProjectGroup.swift in Sources */,
+				4D95FE3A2B7B6BF600C8918D /* PomPadDoTests.swift in Sources */,
+				4D1D9EB52BD152F200CFF31C /* Todo.swift in Sources */,
+				4D1D9EB62BD152F700CFF31C /* Project.swift in Sources */,
+				4D1D9EB72BD152FB00CFF31C /* Status.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4D05401A2D63A7F70098FEC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */;
+			targetProxy = 4D0540192D63A7F70098FEC7 /* PBXContainerItemProxy */;
+		};
+		4D28675C2D61F5C20064ADF3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D28673C2D61F5BE0064ADF3 /* PomPadDo.mobile */;
+			targetProxy = 4D28675B2D61F5C20064ADF3 /* PBXContainerItemProxy */;
+		};
+		4D3025592D63AD24000E5C3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */;
+			targetProxy = 4D3025582D63AD24000E5C3D /* PBXContainerItemProxy */;
+		};
+		4D3E50BE2D6382EA008C1FDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */;
+			targetProxy = 4D3E50BD2D6382EA008C1FDB /* PBXContainerItemProxy */;
+		};
+		4D71DB722D63404C00C1FE13 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */;
+			targetProxy = 4D71DB712D63404C00C1FE13 /* PBXContainerItemProxy */;
+		};
+		4D7A1FE72C0778E4009052AE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D7A1FD52C0778E4009052AE /* PomPadDo.safari */;
+			targetProxy = 4D7A1FE62C0778E4009052AE /* PBXContainerItemProxy */;
+		};
+		4D95FE372B7B6BF600C8918D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D95FE212B7B6BF300C8918D /* PomPadDo */;
+			targetProxy = 4D95FE362B7B6BF600C8918D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		4D7A1FE12C0778E4009052AE /* SafariExtensionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D7A1FE22C0778E4009052AE /* Base */,
+				4D0A88622C2594FC00E39E38 /* ru */,
+			);
+			name = SafariExtensionViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4D0540102D63A4980098FEC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		4D0540112D63A4980098FEC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp.widgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchsimulator watchos";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D2867642D61F5C20064ADF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDo.mobile/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4D2867652D61F5C20064ADF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDo.mobile/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D28676A2D61F5C20064ADF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.mobileUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PomPadDo.mobile;
+			};
+			name = Debug;
+		};
+		4D28676B2D61F5C20064ADF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.mobileUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = PomPadDo.mobile;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D3E50C12D6382EA008C1FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PomPadDo-watch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.amikhaylin.PomPadDo;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Debug;
+		};
+		4D3E50C22D6382EA008C1FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PomPadDo-watch-Watch-App-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.amikhaylin.PomPadDo;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		4D71DB752D63404C00C1FE13 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.PomPadDoWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4D71DB762D63404C00C1FE13 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.PomPadDoWidgets;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D7A1FEA2C0778E4009052AE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PomPadDo.safari/PomPadDoExt.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDo.safari/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.safari;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4D7A1FEB2C0778E4009052AE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PomPadDo.safari/PomPadDoExt.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDo.safari/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.safari;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4D95FE472B7B6BF600C8918D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4D95FE482B7B6BF600C8918D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		4D95FE4A2B7B6BF600C8918D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
+				PRODUCT_NAME = PomPadDo;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		4D95FE4B2B7B6BF600C8918D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
+				DEVELOPMENT_TEAM = 9Z68336878;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PomPadDo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
+				PRODUCT_NAME = PomPadDo;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4D95FE4D2B7B6BF600C8918D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomPadDo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomPadDo";
+			};
+			name = Debug;
+		};
+		4D95FE4E2B7B6BF600C8918D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PomPadDo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PomPadDo";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4D05400F2D63A4980098FEC7 /* Build configuration list for PBXNativeTarget "PomPadDo.watch.widgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D0540102D63A4980098FEC7 /* Debug */,
+				4D0540112D63A4980098FEC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D2867632D61F5C20064ADF3 /* Build configuration list for PBXNativeTarget "PomPadDo.mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D2867642D61F5C20064ADF3 /* Debug */,
+				4D2867652D61F5C20064ADF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D2867692D61F5C20064ADF3 /* Build configuration list for PBXNativeTarget "PomPadDo.mobileUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D28676A2D61F5C20064ADF3 /* Debug */,
+				4D28676B2D61F5C20064ADF3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D3E50C32D6382EA008C1FDB /* Build configuration list for PBXNativeTarget "PomPadDo.watch Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D3E50C12D6382EA008C1FDB /* Debug */,
+				4D3E50C22D6382EA008C1FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D71DB742D63404C00C1FE13 /* Build configuration list for PBXNativeTarget "PomPadDoWidgetsExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D71DB752D63404C00C1FE13 /* Debug */,
+				4D71DB762D63404C00C1FE13 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D7A1FEC2C0778E4009052AE /* Build configuration list for PBXNativeTarget "PomPadDo.safari" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D7A1FEA2C0778E4009052AE /* Debug */,
+				4D7A1FEB2C0778E4009052AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D95FE1D2B7B6BF300C8918D /* Build configuration list for PBXProject "PomPadDo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D95FE472B7B6BF600C8918D /* Debug */,
+				4D95FE482B7B6BF600C8918D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D95FE492B7B6BF600C8918D /* Build configuration list for PBXNativeTarget "PomPadDo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D95FE4A2B7B6BF600C8918D /* Debug */,
+				4D95FE4B2B7B6BF600C8918D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D95FE4C2B7B6BF600C8918D /* Build configuration list for PBXNativeTarget "PomPadDoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D95FE4D2B7B6BF600C8918D /* Debug */,
+				4D95FE4E2B7B6BF600C8918D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4D9FFAD22BA9C38300C5F5AE /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Whiffer/swiftdata-transferrable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4D2867802D61FAFE0064ADF3 /* SwiftDataTransferrable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D9FFAD22BA9C38300C5F5AE /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */;
+			productName = SwiftDataTransferrable;
+		};
+		4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4D9FFAD22BA9C38300C5F5AE /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */;
+			productName = SwiftDataTransferrable;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+}

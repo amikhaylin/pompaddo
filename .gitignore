@@ -32,9 +32,14 @@ Package.resolved
 Pods/
 
 # Screenshots
-PomPadDoiOS/screenshots/*.html
-PomPadDoiOS/screenshots/ru/*.png
-PomPadDoiOS/screenshots/en-US/*.png
+screenshots/*.html
+screenshots/ru/*.png
+screenshots/en-US/*.png
+
 screenshots-watchOS/*.html
 screenshots-watchOS/ru/*.png
 screenshots-watchOS/en-US/*.png
+
+screenshots-macOS/*.html
+screenshots-macOS/ru/*.png
+screenshots-macOS/en-US/*.png

@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "421D0097-F71C-4432-B940-903CFC676E53",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "IS_FASTLANE",
+        "value" : "YES"
+      }
+    ],
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PomPadDo.xcodeproj",
+      "identifier" : "4D28673C2D61F5BE0064ADF3",
+      "name" : "PomPadDo.mobile"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PomPadDo.xcodeproj",
+        "identifier" : "4D2867592D61F5C20064ADF3",
+        "name" : "PomPadDo.mobileUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
