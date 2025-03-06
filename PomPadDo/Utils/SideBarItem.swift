@@ -14,8 +14,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case today
     case tomorrow
     case review
-    case projects
     case alltasks
+    case projects
     
     var name: String {
         switch self {

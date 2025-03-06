@@ -214,7 +214,6 @@ struct ProjectsListView: View {
     do {
         let previewer = try Previewer()
         let projects: [Project] = [previewer.project]
-        @State var selectedTasks = Set<Todo>()
         
         @State var selectedProject: Project?
         

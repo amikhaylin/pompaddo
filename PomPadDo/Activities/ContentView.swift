@@ -32,12 +32,15 @@ struct ContentView: View {
                 SectionsListView(tasks: tasks,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: 150)
+                    .frame(height: 170)
+                    .contentMargins(.vertical, 0)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                     .id(refresher.refresh)
+                    .contentMargins(.vertical, 0)
+                    .padding(.leading, 12)
             }
             .toolbar {
                 ToolbarItemGroup {

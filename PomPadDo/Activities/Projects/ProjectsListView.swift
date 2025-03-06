@@ -14,8 +14,6 @@ struct ProjectsListView: View {
     
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @Binding var selectedProject: Project?
-    @State private var newProjectIsShowing = false
-    @State private var newProjectGroupShow = false
     
     @State private var editProjectGroup: ProjectGroup?
     @State private var editProjectName: Project?
@@ -26,8 +24,8 @@ struct ProjectsListView: View {
     @Binding var selectedSideBarItem: SideBarItem?
     
     var body: some View {
-        List(selection: $selectedProject) {
-            DisclosureGroup(isExpanded: $projectsExpanded) {
+        if projectsExpanded {
+            List(selection: $selectedProject) {
                 ForEach(projects.filter({ $0.group == nil })) { project in
                     NavigationLink(value: SideBarItem.projects) {
                         Text(project.name)
@@ -41,7 +39,6 @@ struct ProjectsListView: View {
                             task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
                         }
-                        // FIXME: refresher.refresh.toggle()
                         return true
                     }
                     .contextMenu {
@@ -66,10 +63,7 @@ struct ProjectsListView: View {
                         }
                         
                         Button {
-                            handleProjectSelection(for: project)
-
-                            project.deleteRelatives(context: modelContext)
-                            modelContext.delete(project)
+                            deleteProject(project)
                         } label: {
                             Image(systemName: "trash")
                                 .foregroundStyle(Color.red)
@@ -79,7 +73,7 @@ struct ProjectsListView: View {
                 }
                 
                 ForEach(groups) { group in
-                    @Bindable var group = group
+                    @Bindable var group: ProjectGroup = group
                     DisclosureGroup(isExpanded: $group.expanded) {
                         ForEach(projects.filter({ $0.group == group })) { project in
                             NavigationLink(value: SideBarItem.projects) {
@@ -94,7 +88,6 @@ struct ProjectsListView: View {
                                     task.status = project.getDefaultStatus()
                                     project.tasks?.append(task)
                                 }
-                                // FIXME: refresher.refresh.toggle()
                                 return true
                             }
                             .contextMenu {
@@ -113,10 +106,7 @@ struct ProjectsListView: View {
                                 }
                                 
                                 Button {
-                                    handleProjectSelection(for: project)
-                                    
-                                    project.deleteRelatives(context: modelContext)
-                                    modelContext.delete(project)
+                                    deleteProject(project)
                                 } label: {
                                     Image(systemName: "trash")
                                         .foregroundStyle(Color.red)
@@ -153,62 +143,46 @@ struct ProjectsListView: View {
                         return true
                     }
                 }
-            } label: {
-                HStack {
-                    Image(systemName: "list.bullet")
-                    Text("Projects")
-                    Spacer()
-                    Button {
-                        newProjectIsShowing.toggle()
-                    } label: {
-                        Image(systemName: "plus.circle")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .help("Create project")
-                    
-                    Button {
-                        newProjectGroupShow.toggle()
-                    } label: {
-                        Image(systemName: "folder.circle")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .help("Create group")
-                }
-                .foregroundColor(Color("ProjectsColor"))
-                .dropDestination(for: Project.self) { projects, _ in
-                    for project in projects {
-                        project.group = nil
-                    }
-                    return true
-                }
             }
-        }
-        .listStyle(SidebarListStyle())
-        .sheet(item: $editProjectGroup, onDismiss: {
-            editProjectGroup = nil
-        }, content: { editGroup in
-            EditProjectGroupView(group: editGroup)
-                .presentationDetents([.height(200)])
-        })
-        .sheet(item: $editProjectName, onDismiss: {
-            editProjectName = nil
-        }, content: { editProject in
-            EditProjectNameView(project: editProject)
-                .presentationDetents([.height(200)])
-        })
-        .sheet(isPresented: $newProjectIsShowing) {
-            NewProjectView(isVisible: self.$newProjectIsShowing)
-        }
-        .sheet(isPresented: $newProjectGroupShow) {
-            NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+            .listStyle(SidebarListStyle())
+            #if os(macOS)
+            .sheet(item: $editProjectGroup, onDismiss: {
+                editProjectGroup = nil
+            }, content: { editGroup in
+                EditProjectGroupView(group: editGroup)
+                    .presentationDetents([.height(200)])
+            })
+            .sheet(item: $editProjectName, onDismiss: {
+                editProjectName = nil
+            }, content: { editProject in
+                EditProjectNameView(project: editProject)
+                    .presentationDetents([.height(200)])
+            })
+            #else
+            .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
+                EditProjectGroupView(group: editGroup)
+                    .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                    .presentationCompactAdaptation(.popover)
+            })
+            .popover(item: $editProjectName, attachmentAnchor: .point(.bottomLeading), content: { editProject in
+                EditProjectNameView(project: editProject)
+                    .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                    .presentationCompactAdaptation(.popover)
+            })
+            #endif
+        } else {
+            Spacer()
         }
     }
     
-    private func handleProjectSelection(for project: Project) {
+    private func deleteProject(_ project: Project) {
         if let projectSelected = selectedProject, projectSelected == project {
             selectedProject = nil
             selectedSideBarItem = .today
         }
+        
+        project.deleteRelatives(context: modelContext)
+        modelContext.delete(project)
     }
 }
 
