@@ -28,13 +28,14 @@ struct ContentView: View {
                 SectionsListView(tasks: tasks,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: 260)
+                    .frame(height: 300)
                     .id(refresher.refresh)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                     .id(refresher.refresh)
+                    .contentMargins(.vertical, 4)
             }
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
         } detail: {

@@ -101,10 +101,12 @@ struct SectionsListView: View {
                     } label: {
                         Image(systemName: "list.bullet")
                         Text("Projects")
+                        Spacer()
+                        Image(systemName: projectsExpanded ? "chevron.down" : "chevron.forward")
                     }
                     .buttonStyle(PlainButtonStyle())
                     
-                    Spacer()
+//                    Spacer()
                     Button {
                         newProjectIsShowing.toggle()
                     } label: {
@@ -112,6 +114,13 @@ struct SectionsListView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .help("Create project")
+                    #if os(iOS)
+                    .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
+                        NewProjectView(isVisible: self.$newProjectIsShowing)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 130)
+                            .presentationCompactAdaptation(.popover)
+                    }
+                    #endif
                     
                     Button {
                         newProjectGroupShow.toggle()
@@ -120,6 +129,13 @@ struct SectionsListView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .help("Create group")
+                    #if os(iOS)
+                    .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
+                        NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
+                    }
+                    #endif
                 }
                 .foregroundColor(Color("ProjectsColor"))
                 .dropDestination(for: Project.self) { projects, _ in
@@ -167,12 +183,14 @@ struct SectionsListView: View {
             tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
             WidgetCenter.shared.reloadAllTimelines()
         }
+        #if os(macOS)
         .sheet(isPresented: $newProjectIsShowing) {
             NewProjectView(isVisible: self.$newProjectIsShowing)
         }
         .sheet(isPresented: $newProjectGroupShow) {
             NewProjectGroupView(isVisible: self.$newProjectGroupShow)
         }
+        #endif
     }
 }
 

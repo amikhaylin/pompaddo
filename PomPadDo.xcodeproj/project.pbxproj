@@ -120,6 +120,7 @@
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
 		4DCE05D92BC9284A002C9566 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05D82BC9284A002C9566 /* BoardView.swift */; };
 		4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE05DC2BC940B6002C9566 /* ProjectView.swift */; };
+		4DD1EC532D7A087900F123B1 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */; };
 		4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */; };
 		4DE238572BAC9269009BCCCF /* Collapsible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238562BAC9269009BCCCF /* Collapsible.swift */; };
 		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
@@ -1007,6 +1008,7 @@
 				4D2867AA2D62284D0064ADF3 /* BadgeManager.swift in Sources */,
 				4D2867B72D6229E20064ADF3 /* ProjectToReviewView.swift in Sources */,
 				4D2867B82D6229E20064ADF3 /* ReviewProjectsView.swift in Sources */,
+				4DD1EC532D7A087900F123B1 /* ProjectsListView.swift in Sources */,
 				4D2867BA2D622A830064ADF3 /* EditTaskView.swift in Sources */,
 				4D2867BB2D622A830064ADF3 /* TasksListView.swift in Sources */,
 				4D2867BC2D622A830064ADF3 /* TaskSwipeModifier.swift in Sources */,
