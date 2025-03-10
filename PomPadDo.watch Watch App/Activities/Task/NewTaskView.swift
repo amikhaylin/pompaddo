@@ -26,7 +26,6 @@ struct NewTaskView: View {
                     }
                     
                     modelContext.insert(task)
-                    // FIXME: refresher.refresh.toggle()
                     presentationMode.wrappedValue.dismiss()
                 }
             

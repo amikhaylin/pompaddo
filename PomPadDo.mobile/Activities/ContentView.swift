@@ -99,8 +99,8 @@ struct ContentView: View {
             }
         }
         .onChange(of: selectedSideBarItem) { _, newValue in
-            if showInspector.on {
-                showInspector.on = false
+            if showInspector.show {
+                showInspector.show = false
             }
             
             if selectedTasks.tasks.count > 0 {

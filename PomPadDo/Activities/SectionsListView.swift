@@ -106,7 +106,6 @@ struct SectionsListView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     
-//                    Spacer()
                     Button {
                         newProjectIsShowing.toggle()
                     } label: {

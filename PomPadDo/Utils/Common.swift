@@ -38,7 +38,7 @@ struct Common {
 }
 
 class InspectorToggler: ObservableObject {
-    @Published var on = false
+    @Published var show = false
 }
 
 class SelectedTasks: ObservableObject {

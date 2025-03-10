@@ -96,7 +96,6 @@ struct TaskDetailsView: View {
                     task.reactivate()
                 }
                 WidgetCenter.shared.reloadAllTimelines()
-                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Complete", systemImage: "checkmark.square")
@@ -111,7 +110,6 @@ struct TaskDetailsView: View {
                     }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
-                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Today", systemImage: "calendar")
@@ -126,7 +124,6 @@ struct TaskDetailsView: View {
                     }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
-                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Tomorrow", systemImage: "sunrise")
@@ -140,7 +137,6 @@ struct TaskDetailsView: View {
                     }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
-                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 HStack {
@@ -157,7 +153,6 @@ struct TaskDetailsView: View {
                     }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
-                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Clear due date", systemImage: "clear")
@@ -180,7 +175,6 @@ struct TaskDetailsView: View {
                             }
                         }
                     }
-                    // FIXME: refresher.refresh.toggle()
                     WidgetCenter.shared.reloadAllTimelines()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
@@ -221,7 +215,6 @@ struct TaskDetailsView: View {
                     tasks.remove(at: index)
                     WidgetCenter.shared.reloadAllTimelines()
                 }
-                // FIXME: refresher.refresh.toggle()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Delete task", systemImage: "trash")

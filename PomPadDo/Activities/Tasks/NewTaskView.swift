@@ -66,11 +66,6 @@ struct NewTaskView: View {
                     
                     tasks.append(task)
                     
-                    // FIXME: if list == .inbox {
-//                        refresher.refresh.toggle()
-//                    } else {
-//                        tasks.append(task)
-//                    }
                 }
                 .keyboardShortcut(.defaultAction)
             }

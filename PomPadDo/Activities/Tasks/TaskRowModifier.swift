@@ -6,6 +6,7 @@
 //
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
+// swiftlint:disable type_body_length
 
 import SwiftUI
 import SwiftData
@@ -53,7 +54,6 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 }
-                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "clear")
                 Text("Clear due date")
@@ -77,7 +77,6 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 }
-                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "calendar")
                 Text("Today")
@@ -101,7 +100,6 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 }
-                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "sunrise")
                 Text("Tomorrow")
@@ -125,7 +123,6 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 }
-                // FIXME: refresher.refresh.toggle()
             } label: {
                 HStack {
                     Image(systemName: "calendar.badge.clock")
@@ -150,7 +147,6 @@ struct TaskRowModifier: ViewModifier {
                             }
                         }
                     }
-                    // FIXME: refresher.refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.uturn.forward")
                     Text("Skip")
@@ -168,7 +164,6 @@ struct TaskRowModifier: ViewModifier {
                         } else {
                             task.priority = priority
                         }
-                        // FIXME: refresher.refresh.toggle()
                     } label: {
                         HStack {
                             switch priority {
@@ -265,7 +260,6 @@ struct TaskRowModifier: ViewModifier {
                                 }
                             }
                         }
-                        // FIXME: refresher.refresh.toggle()
                     } label: {
                         Text(project.name)
                     }
@@ -287,7 +281,6 @@ struct TaskRowModifier: ViewModifier {
                                     tasks.remove(at: index)
                                 }
                             }
-                            // FIXME: refresher.refresh.toggle()
                         } label: {
                             Text(status.name)
                         }
@@ -300,14 +293,12 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
-//                selectedTasksSet.removeAll()
                 let newTask = task.copy(modelContext: modelContext)
                 
                 modelContext.insert(newTask)
                 newTask.reconnect()
                 
                 tasks.append(newTask)
-//                selectedTasksSet.insert(newTask)
             } label: {
                 Image(systemName: "doc.on.doc")
                 Text("Dublicate task")
@@ -322,7 +313,7 @@ struct TaskRowModifier: ViewModifier {
                             tasks.remove(at: index)
                         }
                     }
-                    showInspector.on = false
+                    showInspector.show = false
                     selectedTasksSet.removeAll()
                 } else {
                     TasksQuery.deleteTask(context: modelContext,
@@ -331,7 +322,6 @@ struct TaskRowModifier: ViewModifier {
                         tasks.remove(at: index)
                     }
                 }
-                // FIXME: refresher.refresh.toggle()
             } label: {
                 Image(systemName: "trash")
                     .foregroundStyle(Color.red)
@@ -361,3 +351,4 @@ struct TaskRowModifier: ViewModifier {
 }
 // swiftlint:enable function_body_length
 // swiftlint:enable cyclomatic_complexity
+// swiftlint:enable type_body_length

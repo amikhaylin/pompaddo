@@ -4,6 +4,7 @@
 //
 //  Created by Andrey Mikhaylin on 11.06.2024.
 //
+// swiftlint:disable function_body_length
 
 import SwiftUI
 import SwiftData
@@ -29,7 +30,6 @@ struct TaskSwipeModifier: ViewModifier {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
                         }
-                        // FIXME: refresher.refresh.toggle()
                     }
                 } label: {
                     Label("Delete", systemImage: "trash.fill")
@@ -89,3 +89,4 @@ struct TaskSwipeModifier: ViewModifier {
         #endif
     }
 }
+// swiftlint:enable function_body_length
