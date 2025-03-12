@@ -45,6 +45,14 @@ struct TaskRowView: View {
                     }
                 }
                 
+                if let parentTask = task.parentTask {
+                    Text("←\(parentTask.name)")
+                        .foregroundStyle(Color.gray)
+                        .font(.caption)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                }
+                
                 if let subtasksCount = task.subtasks?.count,
                    subtasksCount > 0,
                    let finished = task.subtasks?.filter({ $0.completed }) {
