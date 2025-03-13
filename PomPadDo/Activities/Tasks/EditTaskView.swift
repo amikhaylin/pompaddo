@@ -173,26 +173,7 @@ struct EditTaskView: View {
                         DatePicker("", selection: $eventEndDate)
                         
                         Button {
-                            let store = EKEventStore()
-                            
-                            store.requestWriteOnlyAccessToEvents { allowed, error in
-                                if let error {
-                                    print(error.localizedDescription)
-                                } else if allowed {
-                                    let event = EKEvent(eventStore: store)
-                                    event.calendar = store.defaultCalendarForNewEvents
-                                    event.title = task.name
-                                    event.startDate = eventStartDate
-                                    event.endDate = eventEndDate
-
-                                    // Save the event
-                                    do {
-                                        try store.save(event, span: .thisEvent)
-                                    } catch {
-                                        print(error.localizedDescription)
-                                    }
-                                }
-                            }
+                            CalendarManager.addToCalendar(title: task.name, eventStartDate: eventStartDate, eventEndDate: eventEndDate)
                         } label: {
                             HStack {
                                 Image(systemName: "calendar.badge.plus")

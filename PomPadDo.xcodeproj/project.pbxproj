@@ -75,6 +75,8 @@
 		4D3E50D82D638698008C1FDB /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */; };
 		4D3E50D92D6386F2008C1FDB /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */; };
 		4D3E50DA2D638709008C1FDB /* TaskCheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF91FFD2BCBDC23009A6DA8 /* TaskCheckBoxView.swift */; };
+		4D3E83EC2D82CAE7009135EA /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E83EB2D82CADE009135EA /* CalendarManager.swift */; };
+		4D3E83ED2D82CAE7009135EA /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E83EB2D82CADE009135EA /* CalendarManager.swift */; };
 		4D4139862BE8DEF700AA840C /* ProjectGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4139852BE8DEF700AA840C /* ProjectGroup.swift */; };
 		4D41398B2BE8F31A00AA840C /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */; };
 		4D59C8652BDF8B580026C2EA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8642BDF8B580026C2EA /* NotificationManager.swift */; };
@@ -251,6 +253,7 @@
 		4D3145022CFDEC16005BD65A /* SideBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarItem.swift; sourceTree = "<group>"; };
 		4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTasksView.swift; sourceTree = "<group>"; };
 		4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PomPadDo.watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D3E83EB2D82CADE009135EA /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		4D4139852BE8DEF700AA840C /* ProjectGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectGroup.swift; sourceTree = "<group>"; };
 		4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		4D59C8642BDF8B580026C2EA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -490,6 +493,7 @@
 		4D7C13C32B7E06DE0093595D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				4D3E83EB2D82CADE009135EA /* CalendarManager.swift */,
 				4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */,
 				4D8422B42BA1F437000829E1 /* BadgeManager.swift */,
 				4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */,
@@ -1000,6 +1004,7 @@
 				4D2867B92D6229F10064ADF3 /* BoardView.swift in Sources */,
 				4D2867AF2D6228830064ADF3 /* SideBarItem.swift in Sources */,
 				4D2867B42D6229D10064ADF3 /* ProjectTaskModifier.swift in Sources */,
+				4D3E83EC2D82CAE7009135EA /* CalendarManager.swift in Sources */,
 				4D2867B52D6229D10064ADF3 /* ProjectTasksListView.swift in Sources */,
 				4D2867B62D6229D10064ADF3 /* ProjectView.swift in Sources */,
 				4D2867B32D6229800064ADF3 /* SectionsListView.swift in Sources */,
@@ -1113,6 +1118,7 @@
 				4DF91FFE2BCBDC23009A6DA8 /* TaskCheckBoxView.swift in Sources */,
 				4DCE05DD2BC940B6002C9566 /* ProjectView.swift in Sources */,
 				4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */,
+				4D3E83ED2D82CAE7009135EA /* CalendarManager.swift in Sources */,
 				4D15DFF02D60AEC5008AFFC0 /* ProjectTaskModifier.swift in Sources */,
 				4D95FE542B7B6C3000C8918D /* Project.swift in Sources */,
 				4D169BCE2C106039001F995F /* SettingsView.swift in Sources */,

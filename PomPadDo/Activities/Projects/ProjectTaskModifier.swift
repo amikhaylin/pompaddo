@@ -108,6 +108,14 @@ struct ProjectTaskModifier: ViewModifier {
                 }
                 Divider()
                 
+                Button {
+                    CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now)
+                } label: {
+                    Label("Add to Calendar", systemImage: "calendar.badge.plus")
+                }
+                
+                Divider()
+                
                 Menu {
                     ForEach(0...3, id: \.self) { priority in
                         Button {
