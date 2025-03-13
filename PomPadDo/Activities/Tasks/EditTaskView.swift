@@ -46,39 +46,27 @@ struct EditTaskView: View {
                             let date = Calendar.current.startOfDay(for: Date())
                             task.dueDate = date
                         } label: {
-                            HStack {
-                                Image(systemName: "calendar")
-                                Text("Today")
-                            }
+                            Label("Today", systemImage: "calendar")
                         }
                         
                         Button {
                             let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
                             task.dueDate = date
                         } label: {
-                            HStack {
-                                Image(systemName: "sunrise")
-                                Text("Tomorrow")
-                            }
+                            Label("Tomorrow", systemImage: "sunrise")
                         }
                         
                         Button {
                             task.nextWeek()
                         } label: {
-                            HStack {
-                                Image(systemName: "calendar.badge.clock")
-                                Text("Next week")
-                            }
+                            Label("Next week", systemImage: "calendar.badge.clock")
                         }
                         
                         Button {
                             task.dueDate = nil
                             showingDatePicker = false
                         } label: {
-                            HStack {
-                                Image(systemName: "clear")
-                                Text("Clear due date")
-                            }
+                            Label("Clear due date", systemImage: "clear")
                         }
                     }
                 } else {
@@ -129,10 +117,7 @@ struct EditTaskView: View {
                                 task.alertDate = alertDate
                                 NotificationManager.setTaskNotification(task: task)
                             } label: {
-                                HStack {
-                                    Image(systemName: "checkmark.square")
-                                    Text("Apply reminder")
-                                }
+                                Label("Apply reminder", systemImage: "checkmark.square")
                             }
                         } else {
                             Button {
@@ -140,10 +125,7 @@ struct EditTaskView: View {
                                 NotificationManager.removeRequest(identifier: task.uid)
                                 showingReminderDatePicker = false
                             } label: {
-                                HStack {
-                                    Image(systemName: "clear")
-                                    Text("Clear reminder")
-                                }
+                                Label("Clear reminder", systemImage: "clear")
                             }
                         }
                     }
@@ -175,10 +157,7 @@ struct EditTaskView: View {
                         Button {
                             CalendarManager.addToCalendar(title: task.name, eventStartDate: eventStartDate, eventEndDate: eventEndDate)
                         } label: {
-                            HStack {
-                                Image(systemName: "calendar.badge.plus")
-                                Text("Apply event")
-                            }
+                            Label("Apply event", systemImage: "checkmark.square")
                         }
                     }
                 } else {

@@ -102,7 +102,7 @@ struct ProjectsListView: View {
                                 Button {
                                     project.group = nil
                                 } label: {
-                                    Image(systemName: "clear")
+                                    Image(systemName: "folder")
                                     Text("Remove project from group")
                                 }
                                 
