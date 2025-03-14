@@ -1120,6 +1120,16 @@
         }
       }
     },
+    "List" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List"
+          }
+        }
+      }
+    },
     "long break" : {
       "localizations" : {
         "en" : {
@@ -2064,6 +2074,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Стоп"
+          }
+        }
+      }
+    },
+    "Task" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Task"
           }
         }
       }

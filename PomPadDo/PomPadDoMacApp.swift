@@ -11,6 +11,9 @@ import SwiftData
 @main
 struct PomPadDoMacApp: App {
     @State private var refresher = Refresher()
+    @State var selectedSideBarItem: SideBarItem? = .today
+    @State var newTaskIsShowing = false
+    @StateObject var selectedTasks = SelectedTasks()
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -49,12 +52,79 @@ struct PomPadDoMacApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(selectedSideBarItem: $selectedSideBarItem,
+                        newTaskIsShowing: $newTaskIsShowing)
                 .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
                                         modelContext: sharedModelContainer.mainContext)
                 .environmentObject(refresher)
+                .environmentObject(selectedTasks)
         }
         .modelContainer(sharedModelContainer)
+        .commands {
+            CommandMenu("List") {
+                Button {
+                    selectedSideBarItem = .inbox
+                } label: {
+                    Image(systemName: "tray")
+                    Text("Inbox")
+                }
+                .keyboardShortcut("1", modifiers: [.control, .option])
+                
+                Button {
+                    selectedSideBarItem = .today
+                } label: {
+                    Image(systemName: "calendar")
+                    Text("Today")
+                }
+                .keyboardShortcut("t", modifiers: [.option, .command])
+                
+                Button {
+                    selectedSideBarItem = .tomorrow
+                } label: {
+                    Image(systemName: "sunrise")
+                    Text("Tomorrow")
+                }
+                .keyboardShortcut("t", modifiers: [.control, .command])
+                
+                Button {
+                    selectedSideBarItem = .review
+                } label: {
+                    Image(systemName: "cup.and.saucer")
+                    Text("Review")
+                }
+                .keyboardShortcut("r", modifiers: [.option, .command])
+                
+                Button {
+                    selectedSideBarItem = .alltasks
+                } label: {
+                    Image(systemName: "rectangle.stack")
+                    Text("All")
+                }
+                .keyboardShortcut("a", modifiers: [.option, .command])
+                
+                Divider()
+                
+                Button {
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "arrow.triangle.2.circlepath")
+                    Text("Refresh")
+                }
+                .keyboardShortcut("r", modifiers: [.command])
+            }
+            
+            CommandMenu("Task") {
+                Button {
+                    newTaskIsShowing.toggle()
+                } label: {
+                    Image(systemName: "tray.and.arrow.down.fill")
+                    Text("Add task to Inbox")
+                }
+                .keyboardShortcut("i", modifiers: [.command])
+                
+                
+            }
+        }
         
         FocusTimerScene()
             .modelContainer(sharedModelContainer)
