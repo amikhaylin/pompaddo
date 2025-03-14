@@ -1828,6 +1828,22 @@
         }
       }
     },
+    "Search tasks" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search tasks"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск задач"
+          }
+        }
+      }
+    },
     "Select a project" : {
       "localizations" : {
         "en" : {

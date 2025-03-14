@@ -35,6 +35,16 @@ struct TasksListView: View {
     
     @Query var projects: [Project]
     
+    @State private var searchText = ""
+    
+    var searchResults: [Todo] {
+        if searchText.isEmpty {
+            return tasks
+        } else {
+            return tasks.filter { $0.name.localizedStandardContains(searchText) }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             List(selection: $selectedTasks.tasks) {
@@ -49,7 +59,7 @@ struct TasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? tasks.filter({ $0.completed && ($0.parentTask == nil || mainTask != nil) }) : tasks.filter({ $0.completed == false }),
+                        ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil || mainTask != nil) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
@@ -94,6 +104,7 @@ struct TasksListView: View {
                     }
                 }
             }
+            .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
         }
         .toolbar {
             ToolbarItemGroup {

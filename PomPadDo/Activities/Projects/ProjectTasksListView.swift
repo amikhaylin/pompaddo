@@ -17,12 +17,22 @@ struct ProjectTasksListView: View {
     
     @State private var refresher = Refresher()
     
+    @State private var searchText = ""
+    
+    var searchResults: [Todo] {
+        if searchText.isEmpty {
+            return project.getTasks()
+        } else {
+            return project.getTasks().filter { $0.name.localizedStandardContains(searchText) }
+        }
+    }
+    
     var body: some View {
         List(selection: $selectedTasks.tasks) {
             ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                 @Bindable var status = status
                 DisclosureGroup(status.name, isExpanded: $status.expanded) {
-                    ForEach(project.getTasks()
+                    ForEach(searchResults
                                 .filter({ $0.status == status && $0.parentTask == nil })
                                 .sorted(by: TasksQuery.defaultSorting),
                             id: \.self) { task in
@@ -67,6 +77,7 @@ struct ProjectTasksListView: View {
                 }
             }
         }
+        .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
     }
     
     private func deleteTask(task: Todo) {
@@ -89,7 +100,6 @@ struct ProjectTasksListView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-//        @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
         return ProjectTasksListView(project: previewer.project)
