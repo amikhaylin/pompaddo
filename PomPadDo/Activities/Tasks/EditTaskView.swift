@@ -4,6 +4,7 @@
 //
 //  Created by Andrey Mikhaylin on 18.02.2024.
 //
+// swiftlint:disable type_body_length
 
 import SwiftUI
 import SwiftData
@@ -387,3 +388,4 @@ struct EditTaskView: View {
         return Text("Failed to create preview: \(error.localizedDescription)")
     }
 }
+// swiftlint:enable type_body_length

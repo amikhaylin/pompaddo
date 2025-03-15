@@ -28,7 +28,7 @@ struct ProjectView: View {
                 ProjectTasksListView(project: project)
             }
         }
-        .inspector(isPresented: $showInspector.on) {
+        .inspector(isPresented: $showInspector.show) {
             Group {
                 if let selectedTask = selectedTasks.tasks.first {
                     EditTaskView(task: selectedTask)
@@ -103,7 +103,7 @@ struct ProjectView: View {
                 #endif
                 
                 Button {
-                    showInspector.on.toggle()
+                    showInspector.show.toggle()
                 } label: {
                     Label("Show task details", systemImage: "sidebar.trailing")
                 }
@@ -112,12 +112,12 @@ struct ProjectView: View {
         .navigationTitle(project.name)
         .onChange(of: selectedTasks.tasks) { _, _ in
             if selectedTasks.tasks.count > 0 {
-                showInspector.on = true
+                showInspector.show = true
             }
         }
         .onChange(of: project) { _, _ in
             selectedTasks.tasks.removeAll()
-            showInspector.on = false
+            showInspector.show = false
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
@@ -145,12 +145,9 @@ struct ProjectView: View {
             for task in selectedTasks.tasks {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
-//                if let index = project.tasks?.firstIndex(of: task) {
-//                    project.tasks.remove(at: index)
-//                }
             }
-            if showInspector.on {
-                showInspector.on = false
+            if showInspector.show {
+                showInspector.show = false
             }
             
             if selectedTasks.tasks.count > 0 {

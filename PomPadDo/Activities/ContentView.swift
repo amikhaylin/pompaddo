@@ -32,12 +32,13 @@ struct ContentView: View {
                 SectionsListView(tasks: tasks,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: 150)
+                    .frame(height: 170)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                     .id(refresher.refresh)
+                    .contentMargins(.vertical, 0)
             }
             .toolbar {
                 ToolbarItemGroup {
@@ -120,8 +121,8 @@ struct ContentView: View {
             }
         }
         .onChange(of: selectedSideBarItem, { _, newValue in
-            if showInspector.on {
-                showInspector.on = false
+            if showInspector.show {
+                showInspector.show = false
             }
             
             if selectedTasks.tasks.count > 0 {

@@ -18,6 +18,9 @@ struct SectionsListView: View {
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     @State var badgeManager = BadgeManager()
+    @State private var newProjectIsShowing = false
+    @State private var newProjectGroupShow = false
+    @AppStorage("projectsExpanded") var projectsExpanded = true
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -92,7 +95,57 @@ struct SectionsListView: View {
                     return true
                 }
             case .projects:
-                EmptyView()
+                HStack {
+                    Button {
+                        projectsExpanded.toggle()
+                    } label: {
+                        Image(systemName: "list.bullet")
+                        Text("Projects")
+                        Spacer()
+                        Image(systemName: projectsExpanded ? "chevron.down" : "chevron.forward")
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    Button {
+                        newProjectIsShowing.toggle()
+                    } label: {
+                        Image(systemName: "plus.circle")
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .help("Create project")
+                    #if os(iOS)
+                    .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
+                        NewProjectView(isVisible: self.$newProjectIsShowing)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 130)
+                            .presentationCompactAdaptation(.popover)
+                    }
+                    #endif
+                    
+                    Button {
+                        newProjectGroupShow.toggle()
+                    } label: {
+                        Image(systemName: "folder.circle")
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    .help("Create group")
+                    #if os(iOS)
+                    .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
+                        NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                            .presentationCompactAdaptation(.popover)
+                    }
+                    #endif
+                }
+                .foregroundColor(Color("ProjectsColor"))
+                .dropDestination(for: Project.self) { projects, _ in
+                    for project in projects {
+                        project.group = nil
+                    }
+                    return true
+                }
+                .badge({
+                    return projects.count
+                }())
             case .review:
                 NavigationLink(value: item) {
                     HStack {
@@ -124,12 +177,19 @@ struct SectionsListView: View {
         .onChange(of: tasksTodayActive.count) { _, newValue in
             newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
             WidgetCenter.shared.reloadAllTimelines()
-            // FIXME: refresher.refresh.toggle()
         }
         .onAppear {
             tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
             WidgetCenter.shared.reloadAllTimelines()
         }
+        #if os(macOS)
+        .sheet(isPresented: $newProjectIsShowing) {
+            NewProjectView(isVisible: self.$newProjectIsShowing)
+        }
+        .sheet(isPresented: $newProjectGroupShow) {
+            NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+        }
+        #endif
     }
 }
 

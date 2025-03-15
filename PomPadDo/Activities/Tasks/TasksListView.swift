@@ -26,16 +26,12 @@ struct TasksListView: View {
     @EnvironmentObject var selectedTasks: SelectedTasks
     @State var tasks: [Todo]
 
-//    @State private var selectedTasks = Set<Todo>()
-    
     @State var list: SideBarItem
     @State var title: String
     @State var mainTask: Todo?
     @State private var newTaskIsShowing = false
     
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
-    
-//    @State private var showInspector = false
     
     @Query var projects: [Project]
     
@@ -124,7 +120,7 @@ struct TasksListView: View {
                 #endif
 
                 Button {
-                    showInspector.on.toggle()
+                    showInspector.show.toggle()
                 } label: {
                     Label("Show task details", systemImage: "sidebar.trailing")
                 }
@@ -132,7 +128,7 @@ struct TasksListView: View {
             }
         }
         .navigationTitle(title)
-        .inspector(isPresented: $showInspector.on) {
+        .inspector(isPresented: $showInspector.show) {
             Group {
                 if let selectedTask = selectedTasks.tasks.first {
                     EditTaskView(task: selectedTask)
@@ -143,13 +139,13 @@ struct TasksListView: View {
             .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
         }
         .onChange(of: selectedTasks.tasks) { _, _ in
-            if selectedTasks.tasks.count > 0 && !showInspector.on {
-                showInspector.on = true
+            if selectedTasks.tasks.count > 0 && !showInspector.show {
+                showInspector.show = true
             }
         }
         .onChange(of: list) { _, _ in
-            if showInspector.on {
-                showInspector.on = false
+            if showInspector.show {
+                showInspector.show = false
             }
             
             if selectedTasks.tasks.count > 0 {
@@ -177,14 +173,13 @@ struct TasksListView: View {
                 tasks.remove(at: index)
             }
         }
-        if showInspector.on {
-            showInspector.on = false
+        if showInspector.show {
+            showInspector.show = false
         }
         
         if selectedTasks.tasks.count > 0 {
             selectedTasks.tasks.removeAll()
         }
-        // FIXME: refresher.refresh.toggle()
     }
     
     private func deleteTask(task: Todo) {
@@ -193,7 +188,6 @@ struct TasksListView: View {
         if let index = tasks.firstIndex(of: task) {
             tasks.remove(at: index)
         }
-        // FIXME: refresher.refresh.toggle()
     }
     
     private func setDueDate(task: Todo) {

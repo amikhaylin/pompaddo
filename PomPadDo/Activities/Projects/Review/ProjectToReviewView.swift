@@ -30,8 +30,8 @@ struct ProjectToReviewView: View {
                             project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                             deletionRequested.toggle()
-                            if showInspector.on {
-                                showInspector.on = false
+                            if showInspector.show {
+                                showInspector.show = false
                             }
                             
                             if selectedTasks.tasks.count > 0 {
@@ -49,8 +49,8 @@ struct ProjectToReviewView: View {
                 
                 Button("Mark Reviewed") {
                     project.reviewDate = Date()
-                    if showInspector.on {
-                        showInspector.on = false
+                    if showInspector.show {
+                        showInspector.show = false
                     }
                     
                     if selectedTasks.tasks.count > 0 {

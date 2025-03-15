@@ -6,6 +6,7 @@
 //
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
+// swiftlint:disable type_body_length
 
 import SwiftUI
 import SwiftData
@@ -253,13 +254,11 @@ struct ProjectTaskModifier: ViewModifier {
                 Divider()
                 
                 Button {
-//                    selectedTasks.removeAll()
                     let newTask = task.copy(modelContext: modelContext)
                     modelContext.insert(newTask)
                     newTask.reconnect()
                     
                     tasks.append(newTask)
-//                    selectedTasks.insert(newTask)
                 } label: {
                     Image(systemName: "doc.on.doc")
                     Text("Dublicate task")
@@ -310,3 +309,4 @@ struct ProjectTaskModifier: ViewModifier {
 }
 // swiftlint:enable function_body_length
 // swiftlint:enable cyclomatic_complexity
+// swiftlint:enable type_body_length
