@@ -54,6 +54,7 @@ class FocusTimer: ObservableObject {
     private(set) var secondsPassed: Int = 0
     private(set) var fractionPassed: Double = 0
     private var dateStarted: Date = Date.now
+    private var currentDate: Date = Calendar.current.startOfDay(for: Date.now)
     private var secondsPassedBeforePause: Int = 0
     private(set) var sessionsCounter: Int = 0
     private var currentNotificatioId: String = ""
@@ -106,6 +107,12 @@ class FocusTimer: ObservableObject {
     }
     
     func start() {
+        let today = Calendar.current.startOfDay(for: Date.now)
+        if today > currentDate {
+            currentDate = today
+            sessionsCounter = 0
+        }
+        
         dateStarted = Date.now
         secondsPassed = 0
         fractionPassed = 0
@@ -168,8 +175,6 @@ class FocusTimer: ObservableObject {
     }
     
     private func createTimer() {
-        // schedule notification
-//        setNotification(removeOld: true)
         // create timer
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {[self] _ in
             self.onTick()
@@ -204,7 +209,6 @@ class FocusTimer: ObservableObject {
             secondsPassed = 0
             fractionPassed = 0
             state = .running
-//            setNotification()
         } else if self.secondsLeft == 2 {
             setNotification()
         }

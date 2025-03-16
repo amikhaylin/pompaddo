@@ -66,45 +66,60 @@ struct FocusTimerView: View {
                         
                         Spacer()
                         
-                        if timer.state == .idle && (timer.mode == .pause || timer.mode == .longbreak) {
-                            Button("Skip") {
-                                timer.reset()
-                                timer.skip()
-                            }
-                            .padding()
-                            .accessibility(identifier: "SkipTimerButton")
-                        }
                         // start
                         if timer.state == .idle {
-                            Button("Start") {
+                            Button {
                                 timer.start()
+                            } label: {
+                                Label("Start", systemImage: "play.fill")
                             }
                             .padding()
                             .accessibility(identifier: "StartTimerButton")
                         }
                         // resume
                         if timer.state == .paused {
-                            Button("Resume") {
+                            Button {
                                 timer.resume()
+                            } label: {
+                                Label("Resume", systemImage: "play.fill")
                             }
                             .padding()
                             .accessibility(identifier: "ResumeTimerButton")
                         }
                         // pause
                         if timer.state == .running {
-                            Button("Pause") {
+                            Button {
                                 timer.pause()
+                            } label: {
+                                Label("Pause", systemImage: "pause.fill")
                             }
                             .padding()
                             .accessibility(identifier: "PauseTimerButton")
                         }
-                        // reset
+                        // reset / stop
                         if timer.state == .running || timer.state == .paused {
-                            Button("Stop") {
-                                timer.reset()
+                            if timer.mode == .pause || timer.mode == .longbreak {
+                                Button {
+                                    timer.reset()
+                                    timer.skip()
+                                    timer.start()
+                                } label: {
+                                    Label("Skip", systemImage: "forward.fill")
+                                }
+                                .padding()
+                                .accessibility(identifier: "SkipTimerButton")
+                            } else {
+                                Button {
+                                    timer.reset()
+                                    if timer.mode == .pause || timer.mode == .longbreak {
+                                        timer.skip()
+                                    }
+                                } label: {
+                                    Label("Stop", systemImage: "stop.fill")
+                                }
+                                .padding()
+                                .accessibility(identifier: "StopTimerButton")
                             }
-                            .padding()
-                            .accessibility(identifier: "StopTimerButton")
                         }
                     }
                     
