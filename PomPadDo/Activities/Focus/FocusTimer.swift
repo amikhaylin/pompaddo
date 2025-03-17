@@ -57,7 +57,7 @@ class FocusTimer: ObservableObject {
     private var currentDate: Date = Calendar.current.startOfDay(for: Date.now)
     private var secondsPassedBeforePause: Int = 0
     private(set) var sessionsCounter: Int = 0
-    private var currentNotificatioId: String = ""
+    private var currentNotificationId: String = ""
 
     private var timer: Timer?
   
@@ -108,7 +108,7 @@ class FocusTimer: ObservableObject {
     
     func start() {
         let today = Calendar.current.startOfDay(for: Date.now)
-        if today > currentDate {
+        if !Calendar.current.isDate(today, inSameDayAs: currentDate) {
             currentDate = today
             sessionsCounter = 0
         }
@@ -165,11 +165,11 @@ class FocusTimer: ObservableObject {
             dispMode = self.mode.title
         }
         if removeOld {
-            NotificationManager.removeRequest(identifier: currentNotificatioId)
+            NotificationManager.removeRequest(identifier: currentNotificationId)
         }
-        currentNotificatioId = UUID().uuidString
+        currentNotificationId = UUID().uuidString
         NotificationManager.setNotification(timeInterval: TimeInterval(secondsLeft),
-                                            identifier: currentNotificatioId,
+                                            identifier: currentNotificationId,
                                             title: "PomPadDo Timer",
                                             body: NSLocalizedString("Your \(dispMode) is finished", comment: ""))
     }
@@ -182,7 +182,7 @@ class FocusTimer: ObservableObject {
     }
   
     private func killTimer() {
-        NotificationManager.removeRequest(identifier: currentNotificatioId)
+        NotificationManager.removeRequest(identifier: currentNotificationId)
         timer?.invalidate()
         timer = nil
     }
