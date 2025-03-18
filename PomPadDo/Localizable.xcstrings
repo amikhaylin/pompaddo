@@ -510,7 +510,6 @@
       }
     },
     "Complete" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

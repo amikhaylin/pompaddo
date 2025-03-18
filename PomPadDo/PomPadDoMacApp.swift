@@ -122,7 +122,126 @@ struct PomPadDoMacApp: App {
                 }
                 .keyboardShortcut("i", modifiers: [.command])
                 
+                Divider()
                 
+                Button {
+                    for task in selectedTasks.tasks {
+                        task.complete(modelContext: sharedModelContainer.mainContext)
+                    }
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "checkmark.square")
+                    Text("Complete")
+                }
+                .keyboardShortcut("m", modifiers: [.shift, .command])
+                
+                Divider()
+                
+                Button {
+                    for task in selectedTasks.tasks {
+                        task.dueDate = nil
+                    }
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "clear")
+                    Text("Clear due date")
+                }
+                .keyboardShortcut("0", modifiers: [.command])
+                .disabled(selectedTasks.tasks.count == 0)
+                
+                Button {
+                    for task in selectedTasks.tasks {
+                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                    }
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "calendar")
+                    Text("Today")
+                }
+                .keyboardShortcut("1", modifiers: [.command])
+                .disabled(selectedTasks.tasks.count == 0)
+                
+                Button {
+                    for task in selectedTasks.tasks {
+                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                    }
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "sunrise")
+                    Text("Tomorrow")
+                }
+                .keyboardShortcut("2", modifiers: [.command])
+                .disabled(selectedTasks.tasks.count == 0)
+                
+                Button {
+                    for task in selectedTasks.tasks {
+                        task.nextWeek()
+                    }
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "calendar.badge.clock")
+                    Text("Next week")
+                }
+                .keyboardShortcut("3", modifiers: [.command])
+                .disabled(selectedTasks.tasks.count == 0)
+                
+                Divider()
+                
+                Button {
+                    for task in selectedTasks.tasks {
+                        CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now)
+                    }
+                } label: {
+                    Image(systemName: "calendar.badge.plus")
+                    Text("Add to Calendar")
+                }
+                .keyboardShortcut("c", modifiers: [.command, .option])
+                .disabled(selectedTasks.tasks.count == 0)
+                
+                Divider()
+                
+                Menu {
+                    ForEach(0...3, id: \.self) { priority in
+                        Button {
+                            for task in selectedTasks.tasks {
+                                task.priority = priority
+                            }
+                            refresher.refresh.toggle()
+                        } label: {
+                            HStack {
+                                switch priority {
+                                case 3:
+                                    Text("High")
+                                case 2:
+                                    Text("Medium")
+                                case 1:
+                                    Text("Low")
+                                default:
+                                    Text("None")
+                                }
+                            }
+                        }
+                        .tag(priority as Int)
+                        .disabled(selectedTasks.tasks.count == 0)
+                    }
+                } label: {
+                    Text("Priority")
+                }
+                
+                Divider()
+                
+                Button {
+                    for task in selectedTasks.tasks {
+                        TasksQuery.deleteTask(context: sharedModelContainer.mainContext,
+                                              task: task)
+                    }
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "trash")
+                        .foregroundStyle(Color.red)
+                    Text("Delete task")
+                }
+                .disabled(selectedTasks.tasks.count == 0)
             }
         }
         
