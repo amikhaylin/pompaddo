@@ -86,10 +86,8 @@ struct ProjectTaskModifier: ViewModifier {
                         task.nextWeek()
                     }
                 } label: {
-                    HStack {
-                        Image(systemName: "calendar.badge.clock")
-                        Text("Next week")
-                    }
+                    Image(systemName: "calendar.badge.clock")
+                    Text("Next week")
                 }
                 
                 if task.repeation != .none {
@@ -106,6 +104,15 @@ struct ProjectTaskModifier: ViewModifier {
                         Text("Skip")
                     }
                 }
+                Divider()
+                
+                Button {
+                    CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now)
+                } label: {
+                    Image(systemName: "calendar.badge.plus")
+                    Text("Add to Calendar")
+                }
+                
                 Divider()
                 
                 Menu {
@@ -261,7 +268,7 @@ struct ProjectTaskModifier: ViewModifier {
                     tasks.append(newTask)
                 } label: {
                     Image(systemName: "doc.on.doc")
-                    Text("Dublicate task")
+                    Text("Duplicate task")
                 }
                 
                 Button {

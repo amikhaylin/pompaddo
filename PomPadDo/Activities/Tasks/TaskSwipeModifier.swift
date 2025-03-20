@@ -50,8 +50,7 @@ struct TaskSwipeModifier: ViewModifier {
                         .environmentObject(showInspector)
                         .environmentObject(selectedTasks)
                     } label: {
-                        Image(systemName: "arrow.right")
-                        Text("Open subtasks")
+                        Label("Open subtasks", systemImage: "arrow.right")
                     }
                 } else {
                     let subtasks = [Todo]()
@@ -63,8 +62,7 @@ struct TaskSwipeModifier: ViewModifier {
                                       mainTask: task)
                         .id(refresher.refresh)
                     } label: {
-                        Image(systemName: "arrow.right")
-                        Text("Open subtasks")
+                        Label("Open subtasks", systemImage: "arrow.right")
                     }
                 }
             }
@@ -79,8 +77,7 @@ struct TaskSwipeModifier: ViewModifier {
                                       mainTask: task)
                         .id(refresher.refresh)
                     } label: {
-                        Image(systemName: "arrow.right")
-                        Text("Open subtasks")
+                        Label("Open subtasks", systemImage: "arrow.right")
                     }
                 } else {
                     EmptyView()

@@ -739,6 +739,7 @@
       }
     },
     "Dublicate task" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -798,6 +799,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Запланировать на сегодня"
+          }
+        }
+      }
+    },
+    "Duplicate task" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicate task"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дублировать задачу"
           }
         }
       }
