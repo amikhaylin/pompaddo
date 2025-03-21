@@ -14,7 +14,15 @@ struct BoardView: View {
     @EnvironmentObject var selectedTasks: SelectedTasks
     @Bindable var project: Project
     
-//    @Binding var selectedTasks: Set<Todo>
+    @State private var searchText = ""
+    
+    var searchResults: [Todo] {
+        if searchText.isEmpty {
+            return project.getTasks()
+        } else {
+            return project.getTasks().filter { $0.name.localizedStandardContains(searchText) }
+        }
+    }
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -24,7 +32,7 @@ struct BoardView: View {
                     VStack {
                         Text(status.name)
                         List(selection: $selectedTasks.tasks) {
-                            ForEach(project.getTasks()
+                            ForEach(searchResults
                                         .filter({ $0.status == status && $0.parentTask == nil })
                                         .sorted(by: TasksQuery.defaultSorting),
                                     id: \.self) { task in
@@ -82,6 +90,7 @@ struct BoardView: View {
                     .frame(minWidth: 200, idealWidth: 300)
                 }
             }
+            .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
         }
         .padding()
     }
@@ -106,7 +115,6 @@ struct BoardView: View {
 #Preview {
     do {
         let previewer = try Previewer()
-//        @State var selectedTasks = Set<Todo>()
         @State var project = previewer.project
         
         return BoardView(project: project)

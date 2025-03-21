@@ -19,9 +19,19 @@ struct TasksListView: View {
     @State var mainTask: Todo?
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
+    @State private var searchText = ""
+    
+    var searchResults: [Todo] {
+        if searchText.isEmpty {
+            return tasks
+        } else {
+            return tasks.filter { $0.name.localizedStandardContains(searchText) }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
-            List(tasks) { task in
+            List(searchResults) { task in
                 HStack {
                     TaskCheckBoxView(task: task)
                     
@@ -33,6 +43,7 @@ struct TasksListView: View {
                 }
                 .modifier(TaskSwipeModifier(task: task, list: list, tasks: $tasks))
             }
+            .searchable(text: $searchText, placement: .automatic , prompt: "Search tasks")
         }
         .navigationTitle(title)
         .onChange(of: tasksTodayActive.count) { _, _ in
