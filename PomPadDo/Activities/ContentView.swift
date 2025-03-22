@@ -14,12 +14,13 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var selectedTasks: SelectedTasks
   
     @StateObject private var showInspector = InspectorToggler()
-    @StateObject private var selectedTasks = SelectedTasks()
+//    @StateObject private var selectedTasks = SelectedTasks()
     
-    @State private var newTaskIsShowing = false
-    @State var selectedSideBarItem: SideBarItem? = .today
+    @Binding var selectedSideBarItem: SideBarItem?
+    @Binding var newTaskIsShowing: Bool
     
     @State private var selectedProject: Project?
     
@@ -50,7 +51,6 @@ struct ContentView: View {
                     } label: {
                         Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
                     }
-                    .keyboardShortcut("r", modifiers: [.command])
                     .help("Refresh ⌘R")
                     
                     Button {
@@ -59,7 +59,6 @@ struct ContentView: View {
                         Label("Add task to Inbox", systemImage: "tray.and.arrow.down.fill")
                             .foregroundStyle(Color.orange)
                     }
-                    .keyboardShortcut("i", modifiers: [.command])
                     .help("Add to Inbox ⌘I")
                 }
             }
@@ -198,10 +197,14 @@ struct ContentView: View {
 }
 
 #Preview {
+    @State var selectedSideBarItem: SideBarItem? = .today
+    @State var newTaskIsShowing = false
+    
     do {
         let previewer = try Previewer()
         
-        return ContentView()
+        return ContentView(selectedSideBarItem: $selectedSideBarItem,
+                           newTaskIsShowing: $newTaskIsShowing)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
