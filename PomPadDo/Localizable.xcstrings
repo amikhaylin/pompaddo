@@ -737,23 +737,6 @@
         }
       }
     },
-    "Dublicate task" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dublicate task"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Дублировать задачу"
-          }
-        }
-      }
-    },
     "Due date" : {
       "localizations" : {
         "en" : {
@@ -1002,6 +985,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Сосредоточен на"
+          }
+        }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Общие"
           }
         }
       }
@@ -1929,6 +1928,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Настройки"
+          }
+        }
+      }
+    },
+    "Show count of projects to review on app icon" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show count of projects to review on app icon"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать количество проектов для обзора на значке приложения"
           }
         }
       }

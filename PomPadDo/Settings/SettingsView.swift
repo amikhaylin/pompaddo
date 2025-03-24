@@ -16,13 +16,24 @@ struct SettingsView: View {
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     
     @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
+    
+    @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
 
     private enum Tabs: Hashable {
-        case timer, estimates, advanced
+        case general, timer, estimates, advanced
     }
 
     var body: some View {
         TabView {
+            Form {
+                Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                    .toggleStyle(.checkbox)
+            }
+            .tabItem {
+                Label("General", systemImage: "gear")
+            }
+            .tag(Tabs.general)
+            
             Form {
                 Picker("Work session duration", selection: $timerWorkSession) {
                     ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in

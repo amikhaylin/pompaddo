@@ -21,6 +21,7 @@ struct SectionsListView: View {
     @State private var newProjectIsShowing = false
     @State private var newProjectGroupShow = false
     @AppStorage("projectsExpanded") var projectsExpanded = true
+    @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -174,12 +175,28 @@ struct SectionsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
+        .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, {_ , newValue in
+            if showReviewProjectsBadge {
+                let tasksCount = tasksTodayActive.count
+                (newValue + tasksCount) > 0 ? badgeManager.setBadge(number: (newValue + tasksCount)) : badgeManager.resetBadgeNumber()
+                WidgetCenter.shared.reloadAllTimelines()
+            }
+        })
         .onChange(of: tasksTodayActive.count) { _, newValue in
-            newValue > 0 ? badgeManager.setBadge(number: newValue) : badgeManager.resetBadgeNumber()
+            var projectsCount = 0
+            if showReviewProjectsBadge {
+                projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
+            }
+            
+            (newValue + projectsCount) > 0 ? badgeManager.setBadge(number: (newValue + projectsCount)) : badgeManager.resetBadgeNumber()
             WidgetCenter.shared.reloadAllTimelines()
         }
         .onAppear {
-            tasksTodayActive.count > 0 ? badgeManager.setBadge(number: tasksTodayActive.count) : badgeManager.resetBadgeNumber()
+            var projectsCount = 0
+            if showReviewProjectsBadge {
+                projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
+            }
+            (tasksTodayActive.count + projectsCount) > 0 ? badgeManager.setBadge(number: (tasksTodayActive.count + projectsCount)) : badgeManager.resetBadgeNumber()
             WidgetCenter.shared.reloadAllTimelines()
         }
         #if os(macOS)
