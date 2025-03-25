@@ -139,16 +139,6 @@ struct TasksListView: View {
             }
         }
         .navigationTitle(title)
-        .inspector(isPresented: $showInspector.show) {
-            Group {
-                if let selectedTask = selectedTasks.tasks.first {
-                    EditTaskView(task: selectedTask)
-                } else {
-                    Text("Select a task")
-                }
-            }
-            .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
-        }
         .onChange(of: selectedTasks.tasks) { _, _ in
             if selectedTasks.tasks.count > 0 && !showInspector.show {
                 showInspector.show = true
