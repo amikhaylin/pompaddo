@@ -14,18 +14,21 @@ struct SettingsView: View {
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
     
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     
     @State private var viewMode = 0
     
     var body: some View {
         VStack {
             Picker("", selection: $viewMode) {
-                ForEach(0...1, id: \.self) { mode in
+                ForEach(0...2, id: \.self) { mode in
                     HStack {
                         switch mode {
                         case 0:
-                            Label("Focus timer", systemImage: "timer")
+                            Label("General", systemImage: "gear")
                         case 1:
+                            Label("Focus timer", systemImage: "timer")
+                        case 2:
                             Label("Estimates", systemImage: "hourglass")
                         default:
                             EmptyView()
@@ -37,6 +40,11 @@ struct SettingsView: View {
             
             switch viewMode {
             case 0:
+                Form {
+                    Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                        .toggleStyle(.switch)
+                }
+            case 1:
                 Form {
                     Picker("Work session duration", selection: $timerWorkSession) {
                         ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
@@ -75,7 +83,7 @@ struct SettingsView: View {
                         Label("Restore defaults", systemImage: "arrow.circlepath")
                     }
                 }
-            case 1:
+            case 2:
                 Form {
                     VStack {
                         Text("Estimate factor: \(estimateFactor, specifier: "%.2f")")
