@@ -61,6 +61,8 @@ struct PomPadDoMacApp: App {
         }
         .modelContainer(sharedModelContainer)
         .commands {
+            InspectorCommands()
+            
             CommandMenu("List") {
                 Button {
                     selectedSideBarItem = .inbox

@@ -28,16 +28,6 @@ struct ProjectView: View {
                 ProjectTasksListView(project: project)
             }
         }
-        .inspector(isPresented: $showInspector.show) {
-            Group {
-                if let selectedTask = selectedTasks.tasks.first {
-                    EditTaskView(task: selectedTask)
-                } else {
-                    Text("Select a task")
-                }
-            }
-            .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
-        }
         .toolbar {
             ToolbarItemGroup {
                 if project.hasEstimate {

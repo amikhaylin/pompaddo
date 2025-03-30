@@ -34,5 +34,8 @@ struct PomPadDoiOSApp: App {
                                         modelContext: sharedModelContainer.mainContext)
         }
         .modelContainer(sharedModelContainer)
+        .commands {
+            InspectorCommands()
+        }
     }
 }
