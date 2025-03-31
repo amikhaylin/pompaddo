@@ -17,7 +17,6 @@ struct ContentView: View {
     @EnvironmentObject var selectedTasks: SelectedTasks
   
     @StateObject private var showInspector = InspectorToggler()
-//    @StateObject private var selectedTasks = SelectedTasks()
     
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var newTaskIsShowing: Bool
