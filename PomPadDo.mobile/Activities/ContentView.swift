@@ -24,19 +24,11 @@ struct ContentView: View {
     
     var body: some View {
         NavigationSplitView {
-            VStack {
-                SectionsListView(tasks: tasks,
-                                 projects: projects,
-                                 selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: 300)
-                    .id(refresher.refresh)
-                
-                ProjectsListView(selectedProject: $selectedProject,
-                                 projects: projects,
-                                 selectedSideBarItem: $selectedSideBarItem)
-                    .id(refresher.refresh)
-                    .contentMargins(.vertical, 4)
-            }
+            SectionsListView(tasks: tasks,
+                             projects: projects,
+                             selectedSideBarItem: $selectedSideBarItem,
+                             selectedProject: $selectedProject)
+                .id(refresher.refresh)
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
         } detail: {
             switch selectedSideBarItem {

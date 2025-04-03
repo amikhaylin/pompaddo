@@ -15,6 +15,7 @@ struct SectionsListView: View {
     var projects: [Project]
     
     @Binding var selectedSideBarItem: SideBarItem?
+    @Binding var selectedProject: Project?
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     @State var badgeManager = BadgeManager()
@@ -22,191 +23,210 @@ struct SectionsListView: View {
     @State private var newProjectGroupShow = false
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
+    @State var projectListSize: CGSize = .zero
+    @Query var groups: [ProjectGroup]
     
     var body: some View {
-        List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
-            switch item {
-            case .inbox:
-                NavigationLink(value: item) {
+        GeometryReader { geometry in
+            List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
+                switch item {
+                case .inbox:
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "tray")
+                            Text("Inbox")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
+                        .badge({
+                            do {
+                                return try tasks.filter(TasksQuery.predicateInboxActive()).count
+                            } catch {
+                                print(error.localizedDescription)
+                                return 0
+                            }
+                        }())
+                    }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            if let project = task.project, let index = project.tasks?.firstIndex(of: task) {
+                                task.project?.tasks?.remove(at: index)
+                                task.project = nil
+                                task.status = nil
+                            }
+                            if let parentTask = task.parentTask,
+                               let index = parentTask.subtasks?.firstIndex(of: task) {
+                                task.parentTask = nil
+                                parentTask.subtasks?.remove(at: index)
+                            }
+                        }
+                        return true
+                    }
+                    
+                case .today:
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "calendar")
+                            Text("Today")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.9496305585, green: 0.5398437977, blue: 0.3298020959, alpha: 1)))
+                        .badge(tasksTodayActive.count)
+                    }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.dueDate = Calendar.current.startOfDay(for: Date())
+                        }
+                        return true
+                    }
+                case .tomorrow:
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "sunrise")
+                            Text("Tomorrow")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
+                        .badge({
+                            do {
+                                return try tasks.filter(TasksQuery.predicateTomorrow()).count
+                            } catch {
+                                print(error.localizedDescription)
+                                return 0
+                            }
+                        }())
+                    }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                        }
+                        return true
+                    }
+                case .projects:
                     HStack {
-                        Image(systemName: "tray")
-                        Text("Inbox")
+                        Button {
+                            projectsExpanded.toggle()
+                        } label: {
+                            Image(systemName: "list.bullet")
+                            Text("Projects")
+                            Spacer()
+                            Image(systemName: projectsExpanded ? "chevron.down" : "chevron.forward")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Button {
+                            newProjectIsShowing.toggle()
+                        } label: {
+                            Image(systemName: "plus.circle")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .help("Create project")
+#if os(iOS)
+                        .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
+                            NewProjectView(isVisible: self.$newProjectIsShowing)
+                                .frame(minWidth: 200, maxWidth: 300, maxHeight: 130)
+                                .presentationCompactAdaptation(.popover)
+                        }
+#endif
+                        
+                        Button {
+                            newProjectGroupShow.toggle()
+                        } label: {
+                            Image(systemName: "folder.circle")
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .help("Create group")
+#if os(iOS)
+                        .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
+                            NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+                                .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                                .presentationCompactAdaptation(.popover)
+                        }
+#endif
                     }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
+                    .foregroundColor(Color("ProjectsColor"))
+                    .dropDestination(for: Project.self) { projects, _ in
+                        for project in projects {
+                            project.group = nil
+                        }
+                        return true
+                    }
                     .badge({
-                        do {
-                            return try tasks.filter(TasksQuery.predicateInboxActive()).count
-                        } catch {
-                            print(error.localizedDescription)
-                            return 0
-                        }
+                        return projects.count
                     }())
-                }
-                .dropDestination(for: Todo.self) { tasks, _ in
-                    for task in tasks {
-                        if let project = task.project, let index = project.tasks?.firstIndex(of: task) {
-                            task.project?.tasks?.remove(at: index)
-                            task.project = nil
-                            task.status = nil
-                        }
-                        if let parentTask = task.parentTask,
-                           let index = parentTask.subtasks?.firstIndex(of: task) {
-                            task.parentTask = nil
-                            parentTask.subtasks?.remove(at: index)
-                        }
+                    
+                    if projectsExpanded {
+                        ProjectsListView(selectedProject: $selectedProject,
+                                         projects: projects,
+                                         selectedSideBarItem: $selectedSideBarItem)
+                        .id(refresher.refresh)
+                        #if os(macOS)
+                        .frame(width: geometry.size.width * 0.95,
+                               height: CGFloat((projects.count + groups.count) * 30) > (geometry.size.height - CGFloat(190)) ? geometry.size.height - CGFloat(190) : CGFloat((projects.count + groups.count) * 30))
+                        #else
+                        .frame(width: geometry.size.width,
+                               height: (CGFloat((projects.count + groups.count) * 43) > (geometry.size.height - CGFloat(330)) && geometry.size.width < geometry.size.height) ? geometry.size.height - CGFloat(330) : CGFloat((projects.count + groups.count) * 43))
+                        .contentMargins(.vertical, 0)
+                        #endif
                     }
-                    return true
+                case .review:
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "cup.and.saucer")
+                            Text("Review")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
+                        .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
+                    }
+                case .alltasks:
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "rectangle.stack")
+                            Text("All")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
+                        .badge({
+                            do {
+                                return try tasks.filter(TasksQuery.predicateAllActive()).count
+                            } catch {
+                                print(error.localizedDescription)
+                                return 0
+                            }
+                        }())
+                    }
+                }
+            }
+            .listStyle(SidebarListStyle())
+            .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, {_ , newValue in
+                if showReviewProjectsBadge {
+                    let tasksCount = tasksTodayActive.count
+                    (newValue + tasksCount) > 0 ? badgeManager.setBadge(number: (newValue + tasksCount)) : badgeManager.resetBadgeNumber()
+                    WidgetCenter.shared.reloadAllTimelines()
+                }
+            })
+            .onChange(of: tasksTodayActive.count) { _, newValue in
+                var projectsCount = 0
+                if showReviewProjectsBadge {
+                    projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
                 }
                 
-            case .today:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "calendar")
-                        Text("Today")
-                    }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.9496305585, green: 0.5398437977, blue: 0.3298020959, alpha: 1)))
-                    .badge(tasksTodayActive.count)
-                }
-                .dropDestination(for: Todo.self) { tasks, _ in
-                    for task in tasks {
-                        task.dueDate = Calendar.current.startOfDay(for: Date())
-                    }
-                    return true
-                }
-            case .tomorrow:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "sunrise")
-                        Text("Tomorrow")
-                    }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
-                    .badge({
-                        do {
-                            return try tasks.filter(TasksQuery.predicateTomorrow()).count
-                        } catch {
-                            print(error.localizedDescription)
-                            return 0
-                        }
-                    }())
-                }
-                .dropDestination(for: Todo.self) { tasks, _ in
-                    for task in tasks {
-                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                    }
-                    return true
-                }
-            case .projects:
-                HStack {
-                    Button {
-                        projectsExpanded.toggle()
-                    } label: {
-                        Image(systemName: "list.bullet")
-                        Text("Projects")
-                        Spacer()
-                        Image(systemName: projectsExpanded ? "chevron.down" : "chevron.forward")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    
-                    Button {
-                        newProjectIsShowing.toggle()
-                    } label: {
-                        Image(systemName: "plus.circle")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .help("Create project")
-                    #if os(iOS)
-                    .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
-                        NewProjectView(isVisible: self.$newProjectIsShowing)
-                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 130)
-                            .presentationCompactAdaptation(.popover)
-                    }
-                    #endif
-                    
-                    Button {
-                        newProjectGroupShow.toggle()
-                    } label: {
-                        Image(systemName: "folder.circle")
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .help("Create group")
-                    #if os(iOS)
-                    .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
-                        NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-                            .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
-                            .presentationCompactAdaptation(.popover)
-                    }
-                    #endif
-                }
-                .foregroundColor(Color("ProjectsColor"))
-                .dropDestination(for: Project.self) { projects, _ in
-                    for project in projects {
-                        project.group = nil
-                    }
-                    return true
-                }
-                .badge({
-                    return projects.count
-                }())
-            case .review:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "cup.and.saucer")
-                        Text("Review")
-                    }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
-                    .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
-                }
-            case .alltasks:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "rectangle.stack")
-                        Text("All")
-                    }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
-                    .badge({
-                        do {
-                            return try tasks.filter(TasksQuery.predicateAllActive()).count
-                        } catch {
-                            print(error.localizedDescription)
-                            return 0
-                        }
-                    }())
-                }
-            }
-        }
-        .listStyle(SidebarListStyle())
-        .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, {_ , newValue in
-            if showReviewProjectsBadge {
-                let tasksCount = tasksTodayActive.count
-                (newValue + tasksCount) > 0 ? badgeManager.setBadge(number: (newValue + tasksCount)) : badgeManager.resetBadgeNumber()
+                (newValue + projectsCount) > 0 ? badgeManager.setBadge(number: (newValue + projectsCount)) : badgeManager.resetBadgeNumber()
                 WidgetCenter.shared.reloadAllTimelines()
             }
-        })
-        .onChange(of: tasksTodayActive.count) { _, newValue in
-            var projectsCount = 0
-            if showReviewProjectsBadge {
-                projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
+            .onAppear {
+                var projectsCount = 0
+                if showReviewProjectsBadge {
+                    projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
+                }
+                (tasksTodayActive.count + projectsCount) > 0 ? badgeManager.setBadge(number: (tasksTodayActive.count + projectsCount)) : badgeManager.resetBadgeNumber()
+                WidgetCenter.shared.reloadAllTimelines()
             }
-            
-            (newValue + projectsCount) > 0 ? badgeManager.setBadge(number: (newValue + projectsCount)) : badgeManager.resetBadgeNumber()
-            WidgetCenter.shared.reloadAllTimelines()
-        }
-        .onAppear {
-            var projectsCount = 0
-            if showReviewProjectsBadge {
-                projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
+#if os(macOS)
+            .sheet(isPresented: $newProjectIsShowing) {
+                NewProjectView(isVisible: self.$newProjectIsShowing)
             }
-            (tasksTodayActive.count + projectsCount) > 0 ? badgeManager.setBadge(number: (tasksTodayActive.count + projectsCount)) : badgeManager.resetBadgeNumber()
-            WidgetCenter.shared.reloadAllTimelines()
+            .sheet(isPresented: $newProjectGroupShow) {
+                NewProjectGroupView(isVisible: self.$newProjectGroupShow)
+            }
+#endif
         }
-        #if os(macOS)
-        .sheet(isPresented: $newProjectIsShowing) {
-            NewProjectView(isVisible: self.$newProjectIsShowing)
-        }
-        .sheet(isPresented: $newProjectGroupShow) {
-            NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-        }
-        #endif
     }
 }
 
@@ -214,12 +234,14 @@ struct SectionsListView: View {
     do {
         let previewer = try Previewer()
         @State var selectedSideBarItem: SideBarItem? = .today
+        @State var selectedProject: Project?
         let tasks = [Todo]()
         let projects = [Project]()
         
         return SectionsListView(tasks: tasks,
                                 projects: projects,
-                                selectedSideBarItem: $selectedSideBarItem)
+                                selectedSideBarItem: $selectedSideBarItem,
+                                selectedProject: $selectedProject)
             .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")
