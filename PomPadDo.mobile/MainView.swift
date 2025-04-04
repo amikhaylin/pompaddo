@@ -32,6 +32,7 @@ struct MainView: View {
     @State private var tab: MainViewTabs = .tasks
     
     @State private var focusMode: FocusTimerMode = .work
+    @State var focusTask: Todo?
     
     @State private var refresh = false
     @State private var refresher = Refresher()
@@ -43,7 +44,8 @@ struct MainView: View {
                 ContentView()
                     .environmentObject(refresher)
             case .focus:
-                FocusTimerView(focusMode: $focusMode)
+                FocusTimerView(focusMode: $focusMode,
+                               selectedTask: $focusTask)
                     .id(refresh)
                     .environmentObject(timer)
                     .refreshable {
