@@ -16,6 +16,8 @@ struct ProjectTaskModifier: ViewModifier {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
     @Binding var selectedTasksSet: Set<Todo>
     @Bindable var project: Project
@@ -104,6 +106,19 @@ struct ProjectTaskModifier: ViewModifier {
                         Text("Skip")
                     }
                 }
+                Divider()
+                
+                Button {
+                    focusTask.task = task
+                    if timer.state == .idle {
+                        timer.reset()
+                        timer.start()
+                    }
+                } label: {
+                    Image(systemName: "play.fill")
+                    Text("Start focus")
+                }
+                
                 Divider()
                 
                 Button {

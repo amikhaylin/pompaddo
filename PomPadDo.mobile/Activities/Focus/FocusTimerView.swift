@@ -12,7 +12,6 @@ struct FocusTimerView: View {
     @Binding var focusMode: FocusTimerMode
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
-//    @Binding var selectedTask: Todo?
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
