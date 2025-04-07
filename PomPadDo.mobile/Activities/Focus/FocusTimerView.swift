@@ -16,7 +16,6 @@ struct FocusTimerView: View {
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @AppStorage("focus-timer-tab") private var viewMode = 0
-//    @State private var selectedTask: Todo?
     
     var body: some View {
         VStack {
@@ -146,11 +145,6 @@ struct FocusTimerView: View {
                 }
             }
         }
-        .onChange(of: timer.sessionsCounter, { oldValue, newValue in
-            if let task = selectedTask, newValue > 0 {
-                task.tomatoesCount += 1
-            }
-        })
     }
 }
 

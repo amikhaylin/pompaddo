@@ -134,6 +134,11 @@ struct MainView: View {
         .onChange(of: timer.mode, { _, _ in
             focusMode = timer.mode
         })
+        .onChange(of: timer.sessionsCounter, { oldValue, newValue in
+            if let task = focusTask, newValue > 0 {
+                task.tomatoesCount += 1
+            }
+        })
         .onOpenURL { url in
             if url.absoluteString == "pompaddo://addtoinbox" {
                 newTaskIsShowing.toggle()
