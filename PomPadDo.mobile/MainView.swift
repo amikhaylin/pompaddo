@@ -147,6 +147,9 @@ struct MainView: View {
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
                 refresher.refresh.toggle()
+                timer.removeNotification()
+            } else if newPhase == .background {
+                timer.setNotification()
             }
         }
     }

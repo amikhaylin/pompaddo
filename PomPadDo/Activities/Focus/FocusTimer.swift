@@ -155,8 +155,7 @@ class FocusTimer: ObservableObject {
         }
     }
     
-    // MARK: private methods
-    private func setNotification(removeOld: Bool = false) {
+    func setNotification(removeOld: Bool = false) {
         var dispMode: String = ""
         switch self.mode {
         case .work:
@@ -174,6 +173,12 @@ class FocusTimer: ObservableObject {
                                             body: NSLocalizedString("Your \(dispMode) is finished", comment: ""))
     }
     
+    func removeNotification() {
+        NotificationManager.removeRequest(identifier: self.currentNotificationId)
+    }
+
+    // MARK: private methods
+    
     private func createTimer() {
         DispatchQueue.main.async { [weak self] in
             self?.killTimer()
@@ -181,7 +186,6 @@ class FocusTimer: ObservableObject {
             self?.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
                 self?.onTick()
             }
-//            RunLoop.main.add(self?.timer!, forMode: .common)
         }
     }
   
