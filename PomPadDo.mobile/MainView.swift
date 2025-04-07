@@ -32,7 +32,7 @@ struct MainView: View {
     @State private var tab: MainViewTabs = .tasks
     
     @State private var focusMode: FocusTimerMode = .work
-    @State var focusTask: Todo?
+    @StateObject var focusTask = FocusTask()
     
     @State private var refresh = false
     @State private var refresher = Refresher()
@@ -43,11 +43,13 @@ struct MainView: View {
             case .tasks:
                 ContentView()
                     .environmentObject(refresher)
+                    .environmentObject(timer)
+                    .environmentObject(focusTask)
             case .focus:
-                FocusTimerView(focusMode: $focusMode,
-                               selectedTask: $focusTask)
+                FocusTimerView(focusMode: $focusMode)
                     .id(refresh)
                     .environmentObject(timer)
+                    .environmentObject(focusTask)
                     .refreshable {
                         refresh.toggle()
                     }
@@ -135,7 +137,7 @@ struct MainView: View {
             focusMode = timer.mode
         })
         .onChange(of: timer.sessionsCounter, { oldValue, newValue in
-            if let task = focusTask, newValue > 0 {
+            if let task = focusTask.task, newValue > 0 {
                 task.tomatoesCount += 1
             }
         })

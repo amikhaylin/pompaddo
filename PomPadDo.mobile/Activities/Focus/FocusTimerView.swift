@@ -11,11 +11,12 @@ import SwiftData
 struct FocusTimerView: View {
     @Binding var focusMode: FocusTimerMode
     @EnvironmentObject var timer: FocusTimer
-    @Binding var selectedTask: Todo?
+    @EnvironmentObject var focusTask: FocusTask
+//    @Binding var selectedTask: Todo?
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
-    @AppStorage("focus-timer-tab") private var viewMode = 0
+    @AppStorage("focus-timer-tab") private var viewMode = 1
     
     var body: some View {
         VStack {
@@ -37,13 +38,13 @@ struct FocusTimerView: View {
             
             if viewMode == 0 {
                 // MARK: Task list
-                FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
+                FocusTasksView(selectedTask: $focusTask.task, viewMode: $viewMode)
                     .environmentObject(timer)
             } else {
                 ZStack {
                     VStack {
                         // MARK: Focus timer
-                        if let task = selectedTask {
+                        if let task = focusTask.task {
                             HStack {
                                 Text(task.name)
                                     .padding()
@@ -57,7 +58,7 @@ struct FocusTimerView: View {
                                 }
                                 
                                 Button {
-                                    selectedTask = nil
+                                    focusTask.task = nil
                                 } label: {
                                     Image(systemName: "clear")
                                 }
@@ -154,13 +155,13 @@ struct FocusTimerView: View {
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
-    @State var selectedTask: Todo?
+    @StateObject var focusTask = FocusTask()
     do {
         let previewer = try Previewer()
         
-        return FocusTimerView(focusMode: $focusMode,
-                              selectedTask: $selectedTask)
+        return FocusTimerView(focusMode: $focusMode)
         .environmentObject(timer)
+        .environmentObject(focusTask)
         .modelContainer(previewer.container)
     } catch {
         return Text("Failed to create preview: \(error.localizedDescription)")

@@ -16,6 +16,8 @@ struct TaskRowModifier: ViewModifier {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
     @Binding var selectedTasksSet: Set<Todo>
     var projects: [Project]
@@ -151,6 +153,19 @@ struct TaskRowModifier: ViewModifier {
                 }
             }
 
+            Divider()
+            
+            Button {
+                focusTask.task = task
+                if timer.state == .idle {
+                    timer.reset()
+                    timer.start()
+                }
+            } label: {
+                Image(systemName: "play.fill")
+                Text("Start focus")
+            }
+            
             Divider()
             
             Button {
