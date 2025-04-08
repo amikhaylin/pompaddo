@@ -12,6 +12,7 @@ struct FocusTimerView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
     
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
@@ -21,8 +22,7 @@ struct FocusTimerView: View {
     @Binding var timerCount: String
     @Binding var focusMode: FocusTimerMode
     
-    @State private var viewMode = 0
-    @State private var selectedTask: Todo?
+    @State private var viewMode = 1
     @State private var textToInbox = ""
     
     var body: some View {
@@ -61,14 +61,14 @@ struct FocusTimerView: View {
                 
             if viewMode == 0 {
                 // MARK: Task list
-                FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
+                FocusTasksView(selectedTask: $focusTask.task, viewMode: $viewMode)
                     .id(refresher.refresh)
                     .environmentObject(timer)
             } else {
                 ZStack {
                     VStack {
                         // MARK: Focus timer
-                        if let task = selectedTask {
+                        if let task = focusTask.task {
                             HStack {
                                 Text(task.name)
                                     .padding()
@@ -82,7 +82,7 @@ struct FocusTimerView: View {
                                 }
                                 
                                 Button {
-                                    selectedTask = nil
+                                    focusTask.task = nil
                                 } label: {
                                     Image(systemName: "clear")
                                 }
@@ -163,7 +163,7 @@ struct FocusTimerView: View {
                                workSessionsCount: Int(timerWorkSessionsCount))
         }
         .onChange(of: timer.sessionsCounter, { _, newValue in
-            if let task = selectedTask, newValue > 0 {
+            if let task = focusTask.task, newValue > 0 {
                 task.tomatoesCount += 1
             }
         })

@@ -10,22 +10,17 @@ import SwiftUI
 struct FocusTimerScene: Scene {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var timer: FocusTimer
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusState: FocusTimerState = .idle
     
-    @StateObject var timer = FocusTimer(workInSeconds: 1500,
-                           breakInSeconds: 300,
-                           longBreakInSeconds: 1200,
-                           workSessionsCount: 4)
-
     var body: some Scene {
         MenuBarExtra {
             FocusTimerView(context: modelContext,
                            timerCount: $timerCount,
                            focusMode: $focusMode)
             .environmentObject(refresher)
-            .environmentObject(timer)
             .modelContext(modelContext)
         } label: {
             if focusState == .idle {

@@ -231,10 +231,10 @@ struct SectionsListView: View {
 }
 
 #Preview {
+    @State var selectedSideBarItem: SideBarItem? = .today
+    @State var selectedProject: Project?
     do {
         let previewer = try Previewer()
-        @State var selectedSideBarItem: SideBarItem? = .today
-        @State var selectedProject: Project?
         let tasks = [Todo]()
         let projects = [Project]()
         

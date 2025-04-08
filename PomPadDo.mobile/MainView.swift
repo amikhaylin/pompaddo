@@ -150,7 +150,7 @@ struct MainView: View {
             if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
                 refresher.refresh.toggle()
                 timer.removeNotification()
-            } else if newPhase == .background {
+            } else if newPhase == .background && timer.state == .running {
                 timer.setNotification()
             }
         }
