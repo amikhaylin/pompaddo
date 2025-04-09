@@ -113,7 +113,6 @@ extension Todo {
                         completed: self.completed,
                         status: self.status,
                         note: self.note,
-                        tomatoesCount: self.tomatoesCount,
                         project: self.project,
                         parentTask: self.parentTask,
                         link: self.link,

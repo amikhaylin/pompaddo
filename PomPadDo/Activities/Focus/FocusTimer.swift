@@ -155,8 +155,7 @@ class FocusTimer: ObservableObject {
         }
     }
     
-    // MARK: private methods
-    private func setNotification(removeOld: Bool = false) {
+    func setNotification(removeOld: Bool = false) {
         var dispMode: String = ""
         switch self.mode {
         case .work:
@@ -165,19 +164,28 @@ class FocusTimer: ObservableObject {
             dispMode = self.mode.title
         }
         if removeOld {
-            NotificationManager.removeRequest(identifier: currentNotificationId)
+            NotificationManager.removeRequest(identifier: self.currentNotificationId)
         }
-        currentNotificationId = UUID().uuidString
-        NotificationManager.setNotification(timeInterval: TimeInterval(secondsLeft),
-                                            identifier: currentNotificationId,
+        self.currentNotificationId = UUID().uuidString
+        NotificationManager.setNotification(timeInterval: TimeInterval(self.secondsLeft),
+                                            identifier: self.currentNotificationId,
                                             title: "PomPadDo Timer",
                                             body: NSLocalizedString("Your \(dispMode) is finished", comment: ""))
     }
     
+    func removeNotification() {
+        NotificationManager.removeRequest(identifier: self.currentNotificationId)
+    }
+
+    // MARK: private methods
+    
     private func createTimer() {
-        // create timer
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {[self] _ in
-            self.onTick()
+        DispatchQueue.main.async { [weak self] in
+            self?.killTimer()
+            // create timer
+            self?.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                self?.onTick()
+            }
         }
     }
   
@@ -188,29 +196,31 @@ class FocusTimer: ObservableObject {
     }
   
     private func onTick() {
-        // calculate the seconds since start date
-        let secondsSinceStartDate = Date.now.timeIntervalSince(self.dateStarted)
-        // add the seconds before paused (if any)
-        self.secondsPassed = Int(secondsSinceStartDate) + self.secondsPassedBeforePause
-        // calculate fraction
-        self.fractionPassed = TimeInterval(self.secondsPassed) / self.duration
-        // done? play sound, reset, switch (work->pause->work), reset timer
-        if self.secondsLeft == 0 {
-            #if os(macOS)
-            AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_UserPreferredAlert))
-            #else
-            AudioServicesPlaySystemSound(SystemSoundID(1002))
-            #endif
-            
-            self.fractionPassed = 0
-            self.secondsPassedBeforePause = 0
-            self.skip() // to switch mode
-            dateStarted = Date.now
-            secondsPassed = 0
-            fractionPassed = 0
-            state = .running
-        } else if self.secondsLeft == 2 {
-            setNotification()
+        DispatchQueue.main.async {
+            // calculate the seconds since start date
+            let secondsSinceStartDate = Date.now.timeIntervalSince(self.dateStarted)
+            // add the seconds before paused (if any)
+            self.secondsPassed = Int(secondsSinceStartDate) + self.secondsPassedBeforePause
+            // calculate fraction
+            self.fractionPassed = TimeInterval(self.secondsPassed) / self.duration
+            // done? play sound, reset, switch (work->pause->work), reset timer
+            if self.secondsLeft <= 0 {
+#if os(macOS)
+                AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_UserPreferredAlert))
+#else
+                AudioServicesPlaySystemSound(SystemSoundID(1002))
+#endif
+                
+                self.fractionPassed = 0
+                self.secondsPassedBeforePause = 0
+                self.skip() // to switch mode
+                self.dateStarted = Date.now
+                self.secondsPassed = 0
+                self.fractionPassed = 0
+                self.state = .running
+            } else if self.secondsLeft == 2 {
+                self.setNotification()
+            }
         }
     }
 }
