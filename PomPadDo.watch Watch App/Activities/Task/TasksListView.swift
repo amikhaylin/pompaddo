@@ -43,7 +43,7 @@ struct TasksListView: View {
                 }
                 .modifier(TaskSwipeModifier(task: task, list: list, tasks: $tasks))
             }
-            .searchable(text: $searchText, placement: .automatic , prompt: "Search tasks")
+            .searchable(text: $searchText, placement: .automatic, prompt: "Search tasks")
         }
         .navigationTitle(title)
         .onChange(of: tasksTodayActive.count) { _, _ in
@@ -56,15 +56,13 @@ struct TasksListView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        let tasks: [Todo] = [previewer.task]
-        
-        return TasksListView(tasks: tasks,
-                             list: .inbox,
-                             title: "Some list")
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @State var refresher = Refresher()
+    let previewer = try? Previewer()
+    let tasks: [Todo] = [previewer!.task]
+    
+    TasksListView(tasks: tasks,
+                         list: .inbox,
+                         title: "Some list")
+        .environmentObject(refresher)
+        .modelContainer(previewer!.container)
 }

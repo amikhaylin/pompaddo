@@ -25,7 +25,7 @@ struct CheckBoxView: View {
 }
 
 #Preview {
-    @State var checked: Bool = false
+    @Previewable @State var checked: Bool = false
     
     return CheckBoxView(checked: $checked)
 }

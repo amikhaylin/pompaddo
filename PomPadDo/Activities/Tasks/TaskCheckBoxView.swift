@@ -51,12 +51,8 @@ struct TaskCheckBoxView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        
-        return TaskCheckBoxView(task: previewer.task)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    let previewer = try? Previewer()
+    
+    TaskCheckBoxView(task: previewer!.task)
+        .modelContainer(previewer!.container)
 }

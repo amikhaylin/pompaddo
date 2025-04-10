@@ -340,12 +340,9 @@ struct EditTaskView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        
-        return EditTaskView(task: previewer.task)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    let previewer = try? Previewer()
+    
+    EditTaskView(task: previewer!.task)
+        .modelContainer(previewer!.container)
 }
 // swiftlint:enable type_body_length

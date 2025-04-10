@@ -16,10 +16,17 @@ struct Previewer {
     
     let project: Project
     let projectTask: Todo
+    var projectStatus: Status
     
     init() throws {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        container = try ModelContainer(for: Schema([Todo.self, Project.self]), 
+        let schema = Schema([
+            ProjectGroup.self,
+            Status.self,
+            Todo.self,
+            Project.self
+        ])
+        container = try ModelContainer(for: schema,
                                        configurations: config)
         
         task = Todo(name: "Make soup",
@@ -51,6 +58,12 @@ struct Previewer {
                                 doCompletion: name.competion)
             container.mainContext.insert(status)
             project.statuses?.append(status)
+        }
+        
+        if let firstStatus = project.statuses?.first {
+            projectStatus = firstStatus
+        } else {
+            projectStatus = Status(name: "Status", order: 1)
         }
         
         projectTask = Todo(name: "Draw some sketches", 

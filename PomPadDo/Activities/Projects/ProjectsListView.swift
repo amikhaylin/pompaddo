@@ -183,19 +183,13 @@ struct ProjectsListView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        let projects: [Project] = [previewer.project]
-        
-        @State var selectedProject: Project?
-        
-        @State var selectedSideBarItem: SideBarItem? = .today
-        
-        return ProjectsListView(selectedProject: $selectedProject,
-                                projects: projects,
-                                selectedSideBarItem: $selectedSideBarItem)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @State var selectedSideBarItem: SideBarItem? = .today
+    @Previewable @State var selectedProject: Project?
+    let previewer = try? Previewer()
+    let projects: [Project] = [previewer!.project]
+    
+    ProjectsListView(selectedProject: $selectedProject,
+                            projects: projects,
+                            selectedSideBarItem: $selectedSideBarItem)
+        .modelContainer(previewer!.container)
 }

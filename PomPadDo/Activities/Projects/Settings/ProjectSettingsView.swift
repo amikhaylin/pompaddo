@@ -112,15 +112,10 @@ struct ProjectSettingsView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        @State var project = previewer.project
-        @State var isVisible = true
-  
-        return ProjectSettingsView(isVisible: $isVisible,
-                                   project: previewer.project)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @State var isVisible = true
+    let previewer = try? Previewer()
+    
+    ProjectSettingsView(isVisible: $isVisible,
+                               project: previewer!.project)
+        .modelContainer(previewer!.container)
 }

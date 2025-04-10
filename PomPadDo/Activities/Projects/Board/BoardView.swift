@@ -113,13 +113,22 @@ struct BoardView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        @State var project = previewer.project
-        
-        return BoardView(project: project)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @StateObject var selectedTasks = SelectedTasks()
+    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var refresher = Refresher()
+    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+                                                     breakInSeconds: 300,
+                                                     longBreakInSeconds: 1200,
+                                                     workSessionsCount: 4)
+                              
+    @Previewable @StateObject var focusTask = FocusTask()
+    let previewer = try? Previewer()
     
+    return BoardView(project: previewer!.project)
+        .modelContainer(previewer!.container)
+        .environmentObject(showInspector)
+        .environmentObject(selectedTasks)
+        .environmentObject(refresher)
+        .environmentObject(timer)
+        .environmentObject(focusTask)
 }

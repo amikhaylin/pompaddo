@@ -41,7 +41,7 @@ struct EditProjectGroupView: View {
 }
 
 #Preview {
-    @State var group = ProjectGroup(name: "ZZZZ")
+    @Previewable @State var group = ProjectGroup(name: "ZZZZ")
        
     return EditProjectGroupView(group: group)
 }

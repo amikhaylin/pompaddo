@@ -223,13 +223,10 @@ struct TaskDetailsView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        @State var tasks: [Todo] = [previewer.task]
-        
-        return TaskDetailsView(task: previewer.task, list: .today, tasks: $tasks)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @State var refresher = Refresher()
+    let previewer = try? Previewer()
+    
+    TaskDetailsView(task: previewer!.task, list: .today, tasks: .constant([previewer!.task]))
+        .environmentObject(refresher)
+        .modelContainer(previewer!.container)
 }

@@ -136,7 +136,7 @@ struct MainView: View {
         .onChange(of: timer.mode, { _, _ in
             focusMode = timer.mode
         })
-        .onChange(of: timer.sessionsCounter, { oldValue, newValue in
+        .onChange(of: timer.sessionsCounter, { _, newValue in
             if let task = focusTask.task, newValue > 0 {
                 task.tomatoesCount += 1
             }
@@ -158,5 +158,8 @@ struct MainView: View {
 }
 
 #Preview {
+    let previewer = try? Previewer()
+    
     MainView()
+        .modelContainer(previewer!.container)
 }

@@ -142,10 +142,10 @@ extension Todo {
     }
     
     func disconnectFromAll() {
-        if let status = self.status {
+        if self.status != nil {
             self.status = nil
         }
-        if let project = self.project {
+        if self.project != nil {
             self.project = nil
         }
         if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {

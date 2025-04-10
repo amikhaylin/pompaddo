@@ -194,7 +194,7 @@ struct SectionsListView: View {
                 }
             }
             .listStyle(SidebarListStyle())
-            .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, {_ , newValue in
+            .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, { _, newValue in
                 if showReviewProjectsBadge {
                     let tasksCount = tasksTodayActive.count
                     (newValue + tasksCount) > 0 ? badgeManager.setBadge(number: (newValue + tasksCount)) : badgeManager.resetBadgeNumber()
@@ -231,19 +231,18 @@ struct SectionsListView: View {
 }
 
 #Preview {
-    @State var selectedSideBarItem: SideBarItem? = .today
-    @State var selectedProject: Project?
-    do {
-        let previewer = try Previewer()
-        let tasks = [Todo]()
-        let projects = [Project]()
-        
-        return SectionsListView(tasks: tasks,
-                                projects: projects,
-                                selectedSideBarItem: $selectedSideBarItem,
-                                selectedProject: $selectedProject)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @State var selectedSideBarItem: SideBarItem? = .today
+    @Previewable @State var selectedProject: Project?
+    @Previewable @State var refresher = Refresher()
+    
+    let previewer = try? Previewer()
+    let tasks = [Todo]()
+    let projects = [Project]()
+    
+    SectionsListView(tasks: tasks,
+                            projects: projects,
+                            selectedSideBarItem: $selectedSideBarItem,
+                            selectedProject: $selectedProject)
+        .environmentObject(refresher)
+        .modelContainer(previewer!.container)
 }

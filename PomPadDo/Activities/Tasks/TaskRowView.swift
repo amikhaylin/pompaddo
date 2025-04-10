@@ -143,12 +143,8 @@ struct TaskRowView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        
-        return TaskRowView(task: previewer.task, showingProject: true)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    let previewer = try? Previewer()
+    
+    TaskRowView(task: previewer!.task, showingProject: true)
+        .modelContainer(previewer!.container)
 }

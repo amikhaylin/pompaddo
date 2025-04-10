@@ -148,12 +148,14 @@ struct ProjectView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        @State var project = previewer.project
-        
-        return ProjectView(project: previewer.project)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @StateObject var selectedTasks = SelectedTasks()
+    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var refresher = Refresher()
+    let previewer = try? Previewer()
+    
+    ProjectView(project: previewer!.project)
+        .environmentObject(showInspector)
+        .environmentObject(selectedTasks)
+        .environmentObject(refresher)
+        .modelContainer(previewer!.container)
 }

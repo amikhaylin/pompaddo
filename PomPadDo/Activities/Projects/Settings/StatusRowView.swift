@@ -26,16 +26,9 @@ struct StatusRowView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        guard let firstStatus = previewer.project.statuses?.first else { return EmptyView() }
-            
-        @State var status = firstStatus
-        @State var project = previewer.project
-        
-        return StatusRowView(status: firstStatus,
-                             project: project)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    let previewer = try? Previewer()
+   
+    StatusRowView(status: previewer!.projectStatus,
+                  project: previewer!.project)
+        .modelContainer(previewer!.container)
 }
