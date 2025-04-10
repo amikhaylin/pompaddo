@@ -132,7 +132,7 @@ struct ContentView: View {
             print(url.absoluteString)
             let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
             if let title = components?.queryItems?.first(where: { $0.name == "title" })?.value {
-                var task = Todo(name: title)
+                let task = Todo(name: title)
                 if let link = components?.queryItems?.first(where: { $0.name == "link" })?.value, let linkurl = URL(string: link) {
                     task.link = linkurl.absoluteString
                 }
@@ -216,7 +216,7 @@ struct ContentView: View {
                                                         ]),
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let previewer = Previewer(container!)
+    let _ = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSideBarItem,
                 newTaskIsShowing: $newTaskIsShowing)
