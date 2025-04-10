@@ -10,7 +10,7 @@ import SwiftData
 
 @MainActor
 struct Previewer {
-    let container: ModelContainer
+    var container: ModelContainer
     let task: Todo
     let subtask: Todo
     
@@ -18,16 +18,8 @@ struct Previewer {
     let projectTask: Todo
     var projectStatus: Status
     
-    init() throws {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
-        let schema = Schema([
-            ProjectGroup.self,
-            Status.self,
-            Todo.self,
-            Project.self
-        ])
-        container = try ModelContainer(for: schema,
-                                       configurations: config)
+    init(_ container: ModelContainer) {
+        self.container = container
         
         task = Todo(name: "Make soup",
                     dueDate: Date(),
@@ -66,7 +58,7 @@ struct Previewer {
             projectStatus = Status(name: "Status", order: 1)
         }
         
-        projectTask = Todo(name: "Draw some sketches", 
+        projectTask = Todo(name: "Draw some sketches",
                            status: project.statuses?.first,
                            project: project)
         container.mainContext.insert(projectTask)
@@ -81,5 +73,20 @@ struct Previewer {
         
         let anotherProject = Project(name: "🦔 Another project")
         container.mainContext.insert(anotherProject)
+
+    }
+    
+    init() throws {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let schema = Schema([
+            ProjectGroup.self,
+            Status.self,
+            Todo.self,
+            Project.self
+        ])
+        let container = try ModelContainer(for: schema,
+                                        configurations: config)
+        
+        self.init(container)
     }
 }

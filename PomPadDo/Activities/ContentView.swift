@@ -208,8 +208,15 @@ struct ContentView: View {
     @Previewable @StateObject var focusTask = FocusTask()
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     @Previewable @State var newTaskIsShowing = false
+    @Previewable @State var container = try? ModelContainer(for: Schema([
+                                                            ProjectGroup.self,
+                                                            Status.self,
+                                                            Todo.self,
+                                                            Project.self
+                                                        ]),
+                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let previewer = try? Previewer()
+    let previewer = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSideBarItem,
                 newTaskIsShowing: $newTaskIsShowing)
@@ -217,5 +224,5 @@ struct ContentView: View {
         .environmentObject(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)
-        .modelContainer(previewer!.container)
+        .modelContainer(container!)
 }

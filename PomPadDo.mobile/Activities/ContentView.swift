@@ -168,12 +168,20 @@ struct ContentView: View {
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
-                              
+    
     @Previewable @StateObject var focusTask = FocusTask()
-    let previewer = try? Previewer()
+    @Previewable @State var container = try? ModelContainer(for: Schema([
+        ProjectGroup.self,
+        Status.self,
+        Todo.self,
+        Project.self
+    ]),
+                                                            configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let previewer = Previewer(container!)
     
     ContentView()
         .environmentObject(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)
-        .modelContainer(previewer!.container)}
+        .modelContainer(container!)
+}

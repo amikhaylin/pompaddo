@@ -115,9 +115,16 @@ struct ContentView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    let previewer = try? Previewer()
+    @Previewable @State var container = try? ModelContainer(for: Schema([
+                                                            ProjectGroup.self,
+                                                            Status.self,
+                                                            Todo.self,
+                                                            Project.self
+                                                        ]),
+                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let previewer = Previewer(container!)
     
     ContentView()
         .environmentObject(refresher)
-        .modelContainer(previewer!.container)
+        .modelContainer(container!)
 }
