@@ -12,7 +12,7 @@ import SwiftData
 struct PomPadDoWatchApp: App {
     @State private var refresher = Refresher()
     
-    var sharedModelContainer: ModelContainer = {
+    @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Todo.self,
             Project.self,
