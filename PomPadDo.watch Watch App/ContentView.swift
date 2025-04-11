@@ -122,7 +122,7 @@ struct ContentView: View {
                                                             Project.self
                                                         ]),
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let _ = Previewer(container!)
+    let previewer = Previewer(container!)
     
     ContentView()
         .environmentObject(refresher)

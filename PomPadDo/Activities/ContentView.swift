@@ -216,7 +216,7 @@ struct ContentView: View {
                                                         ]),
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let _ = Previewer(container!)
+    let previewer = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSideBarItem,
                 newTaskIsShowing: $newTaskIsShowing)
