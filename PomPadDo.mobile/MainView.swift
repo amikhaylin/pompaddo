@@ -32,6 +32,7 @@ struct MainView: View {
     @State private var tab: MainViewTabs = .tasks
     
     @State private var focusMode: FocusTimerMode = .work
+    @State var focusTask: Todo?
     
     @State private var refresh = false
     @State private var refresher = Refresher()
@@ -43,7 +44,8 @@ struct MainView: View {
                 ContentView()
                     .environmentObject(refresher)
             case .focus:
-                FocusTimerView(focusMode: $focusMode)
+                FocusTimerView(focusMode: $focusMode,
+                               selectedTask: $focusTask)
                     .id(refresh)
                     .environmentObject(timer)
                     .refreshable {
@@ -132,6 +134,11 @@ struct MainView: View {
         .onChange(of: timer.mode, { _, _ in
             focusMode = timer.mode
         })
+        .onChange(of: timer.sessionsCounter, { oldValue, newValue in
+            if let task = focusTask, newValue > 0 {
+                task.tomatoesCount += 1
+            }
+        })
         .onOpenURL { url in
             if url.absoluteString == "pompaddo://addtoinbox" {
                 newTaskIsShowing.toggle()
@@ -140,6 +147,9 @@ struct MainView: View {
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
                 refresher.refresh.toggle()
+                timer.removeNotification()
+            } else if newPhase == .background {
+                timer.setNotification()
             }
         }
     }

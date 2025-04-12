@@ -11,11 +11,11 @@ import SwiftData
 struct FocusTimerView: View {
     @Binding var focusMode: FocusTimerMode
     @EnvironmentObject var timer: FocusTimer
+    @Binding var selectedTask: Todo?
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @AppStorage("focus-timer-tab") private var viewMode = 0
-    @State private var selectedTask: Todo?
     
     var body: some View {
         VStack {
@@ -145,11 +145,6 @@ struct FocusTimerView: View {
                 }
             }
         }
-        .onChange(of: timer.sessionsCounter, { oldValue, newValue in
-            if let task = selectedTask, newValue > 0 {
-                task.tomatoesCount += 1
-            }
-        })
     }
 }
 
@@ -159,10 +154,12 @@ struct FocusTimerView: View {
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
+    @State var selectedTask: Todo?
     do {
         let previewer = try Previewer()
         
-        return FocusTimerView(focusMode: $focusMode)
+        return FocusTimerView(focusMode: $focusMode,
+                              selectedTask: $selectedTask)
         .environmentObject(timer)
         .modelContainer(previewer.container)
     } catch {
