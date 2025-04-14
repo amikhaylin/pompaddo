@@ -10,18 +10,16 @@ import SwiftUI
 struct FocusTabItemView: View {
     @EnvironmentObject var timer: FocusTimer
     @Binding var tab: MainViewTabs
-    @State private var focusMode: FocusTimerMode = .work
-    @State private var focusState: FocusTimerState = .idle
     @State private var timerCount: String = ""
     
     var body: some View {
         Group {
-            if focusState == .idle {
+            if timer.state == .idle {
                 Image(systemName: "target")
                     .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
             } else {
                 HStack {
-                    if focusMode == .work {
+                    if timer.mode == .work {
                         Image(systemName: "target")
                             .foregroundStyle(tab == .focus ? Color.blue : Color.red)
                     } else {
@@ -30,10 +28,10 @@ struct FocusTabItemView: View {
                     }
                     if timer.state == .running {
                         Text(timerCount)
-                            .foregroundStyle(focusMode == .work ? Color.red : Color.green)
+                            .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
                     } else {
                         Text(timerCount)
-                            .foregroundStyle(focusMode == .work ? Color.red : Color.green)
+                            .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
                     }
                 }
             }
@@ -41,12 +39,6 @@ struct FocusTabItemView: View {
         .onChange(of: timer.secondsPassed, { _, _ in
             timerCount = timer.secondsLeftString
         })
-        .onChange(of: timer.state) { _, _ in
-            focusState = timer.state
-        }
-        .onChange(of: timer.mode) { _, _ in
-            focusMode = timer.mode
-        }
     }
 }
 

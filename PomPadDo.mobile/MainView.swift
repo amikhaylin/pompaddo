@@ -95,6 +95,7 @@ struct MainView: View {
                         Image(systemName: "tray.and.arrow.down.fill")
                             .foregroundStyle(Color.orange)
                     }
+                    .accessibility(identifier: "AddTaskToInboxButton")
                     .keyboardShortcut("i", modifiers: [.command])
                     .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottomTrailing), content: {
                         NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
