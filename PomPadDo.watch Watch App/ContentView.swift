@@ -101,9 +101,8 @@ struct ContentView: View {
             NewTaskView()
         }
         .onOpenURL { url in
-            if url.absoluteString == "pompaddo://addtoinbox" {
-                addToInbox.toggle()
-            }
+            guard url.scheme == "pompaddo", url.host == "addtoinbox" else { return }
+            addToInbox.toggle()
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {

@@ -22,7 +22,7 @@ struct FocusTimerView: View {
     @Binding var timerCount: String
     @Binding var focusMode: FocusTimerMode
     
-    @State private var viewMode = 1
+    @State private var viewMode = 0
     @State private var textToInbox = ""
     
     var body: some View {

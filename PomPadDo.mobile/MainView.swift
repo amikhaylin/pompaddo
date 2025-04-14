@@ -143,9 +143,8 @@ struct MainView: View {
                 }
             })
             .onOpenURL { url in
-                if url.absoluteString == "pompaddo://addtoinbox" {
-                    newTaskIsShowing.toggle()
-                }
+                guard url.scheme == "pompaddo", url.host == "addtoinbox" else { return }
+                newTaskIsShowing.toggle()
             }
             .onChange(of: scenePhase) { oldPhase, newPhase in
                 if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
