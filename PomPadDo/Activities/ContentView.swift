@@ -198,16 +198,24 @@ struct ContentView: View {
 }
 
 #Preview {
-    @State var selectedSideBarItem: SideBarItem? = .today
-    @State var newTaskIsShowing = false
+    @Previewable @StateObject var selectedTasks = SelectedTasks()
+    @Previewable @State var refresher = Refresher()
+    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+                                                     breakInSeconds: 300,
+                                                     longBreakInSeconds: 1200,
+                                                     workSessionsCount: 4)
+                              
+    @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var selectedSideBarItem: SideBarItem? = .today
+    @Previewable @State var newTaskIsShowing = false
     
-    do {
-        let previewer = try Previewer()
-        
-        return ContentView(selectedSideBarItem: $selectedSideBarItem,
-                           newTaskIsShowing: $newTaskIsShowing)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    let previewer = try? Previewer()
+    
+    ContentView(selectedSideBarItem: $selectedSideBarItem,
+                newTaskIsShowing: $newTaskIsShowing)
+        .environmentObject(selectedTasks)
+        .environmentObject(refresher)
+        .environmentObject(timer)
+        .environmentObject(focusTask)
+        .modelContainer(previewer!.container)
 }

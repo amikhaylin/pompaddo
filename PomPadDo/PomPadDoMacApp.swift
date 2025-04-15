@@ -15,6 +15,13 @@ struct PomPadDoMacApp: App {
     @State var newTaskIsShowing = false
     @StateObject var selectedTasks = SelectedTasks()
     
+    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+                           breakInSeconds: 300,
+                           longBreakInSeconds: 1200,
+                           workSessionsCount: 4)
+    
+    @StateObject var focusTask = FocusTask()
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             ProjectGroup.self,
@@ -58,6 +65,8 @@ struct PomPadDoMacApp: App {
                                         modelContext: sharedModelContainer.mainContext)
                 .environmentObject(refresher)
                 .environmentObject(selectedTasks)
+                .environmentObject(timer)
+                .environmentObject(focusTask)
         }
         .modelContainer(sharedModelContainer)
         .commands {
@@ -136,6 +145,7 @@ struct PomPadDoMacApp: App {
                     Text("Complete")
                 }
                 .keyboardShortcut("m", modifiers: [.shift, .command])
+                .disabled(selectedTasks.tasks.count == 0)
                 
                 Divider()
                 
@@ -190,6 +200,23 @@ struct PomPadDoMacApp: App {
                 Divider()
                 
                 Button {
+                    if let task = selectedTasks.tasks.first {
+                        focusTask.task = task
+                        if timer.state == .idle {
+                            timer.reset()
+                            timer.start()
+                        }
+                    }
+                } label: {
+                    Image(systemName: "play.fill")
+                    Text("Start focus")
+                }
+                .keyboardShortcut("f", modifiers: [.command, .option])
+                .disabled(selectedTasks.tasks.count == 0)
+                
+                Divider()
+                
+                Button {
                     for task in selectedTasks.tasks {
                         CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now)
                     }
@@ -234,6 +261,22 @@ struct PomPadDoMacApp: App {
                 
                 Button {
                     for task in selectedTasks.tasks {
+                        let newTask = task.copy(modelContext: sharedModelContainer.mainContext)
+                        
+                        sharedModelContainer.mainContext.insert(newTask)
+                        newTask.reconnect()
+                    }
+                    
+                    refresher.refresh.toggle()
+                } label: {
+                    Image(systemName: "doc.on.doc")
+                    Text("Duplicate task")
+                }
+                .keyboardShortcut("c", modifiers: [.command, .option])
+                .disabled(selectedTasks.tasks.count == 0)
+                
+                Button {
+                    for task in selectedTasks.tasks {
                         TasksQuery.deleteTask(context: sharedModelContainer.mainContext,
                                               task: task)
                     }
@@ -250,6 +293,8 @@ struct PomPadDoMacApp: App {
         FocusTimerScene()
             .modelContainer(sharedModelContainer)
             .environmentObject(refresher)
+            .environmentObject(timer)
+            .environmentObject(focusTask)
         
         Settings {
             SettingsView()

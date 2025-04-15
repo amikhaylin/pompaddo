@@ -55,15 +55,11 @@ struct SectionsListView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
-        @State var selectedSideBarItem: SideBarItem? = .today
-        let tasks = [Todo]()
-        
-        return SectionsListView(tasks: tasks,
-                                selectedSideBarItem: $selectedSideBarItem)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    @Previewable @State var selectedSideBarItem: SideBarItem? = .today
+    let previewer = try? Previewer()
+    let tasks = [Todo]()
+    
+    SectionsListView(tasks: tasks,
+                            selectedSideBarItem: $selectedSideBarItem)
+        .modelContainer(previewer!.container)
 }

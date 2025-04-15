@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 struct Common {
     static func formatSeconds(_ seconds: Int) -> String {
@@ -43,4 +44,8 @@ class InspectorToggler: ObservableObject {
 
 class SelectedTasks: ObservableObject {
     @Published var tasks = Set<Todo>()
+}
+
+class FocusTask: ObservableObject {
+    @Published var task: Todo?
 }

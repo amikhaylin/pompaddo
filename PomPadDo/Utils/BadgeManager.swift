@@ -14,7 +14,9 @@ actor BadgeManager {
         #if os(macOS)
         NotificationManager.checkAuthorization { authorized in
             if authorized {
-                NSApplication.shared.dockTile.badgeLabel = "\(number)"
+                DispatchQueue.main.async {
+                    NSApplication.shared.dockTile.badgeLabel = "\(number)"
+                }
             }
         }
         #else

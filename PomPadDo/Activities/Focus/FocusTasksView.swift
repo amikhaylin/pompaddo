@@ -63,20 +63,16 @@ struct FocusTasksView: View {
 }
 
 #Preview {
-    @State var viewMode = 0
-    @State var selectedTask: Todo?
-    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var viewMode = 0
+    @Previewable @State var selectedTask: Todo?
+    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
     
-    do {
-        let previewer = try Previewer()
-        
-        return FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
-            .modelContainer(previewer.container)
-            .environmentObject(timer)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    let previewer = try? Previewer()
+    
+    return FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
+        .environmentObject(timer)
+        .modelContainer(previewer!.container)
 }

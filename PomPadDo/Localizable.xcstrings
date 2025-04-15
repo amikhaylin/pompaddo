@@ -1125,6 +1125,12 @@
             "state" : "translated",
             "value" : "List"
           }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Список"
+          }
         }
       }
     },
@@ -2060,6 +2066,22 @@
         }
       }
     },
+    "Start focus" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start focus"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Запустить таймер"
+          }
+        }
+      }
+    },
     "Statuses" : {
       "localizations" : {
         "en" : {
@@ -2098,6 +2120,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Task"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Задача"
           }
         }
       }

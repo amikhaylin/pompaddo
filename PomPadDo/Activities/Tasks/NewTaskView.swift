@@ -97,15 +97,10 @@ struct NewTaskView: View {
 }
 
 #Preview {
-    do {
-        let previewer = try Previewer()
+    @Previewable @State var tasks: [Todo] = []
+    @Previewable @State var isVisible = true
+    let previewer = try? Previewer()
         
-        @State var isVisible = true
-        @State var tasks: [Todo] = []
-        
-        return NewTaskView(isVisible: $isVisible, list: .inbox, tasks: $tasks)
-            .modelContainer(previewer.container)
-    } catch {
-        return Text("Failed to create preview: \(error.localizedDescription)")
-    }
+    NewTaskView(isVisible: $isVisible, list: .inbox, tasks: $tasks)
+        .modelContainer(previewer!.container)
 }

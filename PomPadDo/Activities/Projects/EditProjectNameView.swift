@@ -29,7 +29,7 @@ struct EditProjectNameView: View {
 }
 
 #Preview {
-    @State var project = Project(name: "ZZZZ")
+    @Previewable @State var project = Project(name: "ZZZZ")
        
-    return EditProjectNameView(project: project)
+    EditProjectNameView(project: project)
 }
