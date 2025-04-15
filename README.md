@@ -13,9 +13,12 @@ made to myself by myself
 
 [![](https://toolbox.marketingtools.apple.com/api/assets/featured-content/apps/badges/badge-1/en-us.svg)](https://apps.apple.com/app/id6742197499)
 
-Manage projects, stay focused, and sync progress across devices — all in one app designed specifically for freelancers and solo workers.
+
+Manage projects, stay focused, sync progress across devices, GTD, Pomodoro and Kanban — all in one app designed specifically for freelancers and solo workers.
 
 🌟 Key Features: <br>
+✅ Global Inbox<br>
+Add your thoughts to your Inbox from anywhere in the app. <br>
 ✅ Flexible Task Lists<br>
 Prioritize tasks, add subtasks. No detail slips through the cracks. <br>
 ✅ Kanban Boards for Projects<br>
