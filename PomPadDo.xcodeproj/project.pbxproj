@@ -456,6 +456,14 @@
 			path = Focus;
 			sourceTree = "<group>";
 		};
+		4D603F212DAE6C5D00D48338 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 		4D736B132B7D1383000C0BFD /* Activities */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,12 +621,12 @@
 		4DAA67B62BC52CBC0045CE22 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
+				4D603F212DAE6C5D00D48338 /* List */,
 				4D15DFEF2D60AEC5008AFFC0 /* ProjectTaskModifier.swift */,
 				4D4139872BE8E2C200AA840C /* Group */,
 				4D1D9EB22BCD576F00CFF31C /* Review */,
 				4DCE05DE2BCA711B002C9566 /* Settings */,
 				4DCE05D52BC6F1D6002C9566 /* Board */,
-				4DF6D7532BB405FF00941B63 /* ProjectTasksListView.swift */,
 				4DE238582BAC9C01009BCCCF /* NewProjectView.swift */,
 				4DCE05DC2BC940B6002C9566 /* ProjectView.swift */,
 				4D41398A2BE8F31A00AA840C /* ProjectsListView.swift */,
@@ -1203,7 +1211,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1240,7 +1248,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1275,7 +1283,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1313,7 +1321,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1389,7 +1397,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1420,7 +1428,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1453,7 +1461,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1488,7 +1496,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1522,7 +1530,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.safari/Info.plist;
@@ -1555,7 +1563,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.safari/Info.plist;
@@ -1714,7 +1722,7 @@
 				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1746,7 +1754,7 @@
 				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
 				ENABLE_HARDENED_RUNTIME = YES;

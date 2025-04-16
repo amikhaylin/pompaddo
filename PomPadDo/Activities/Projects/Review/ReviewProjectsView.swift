@@ -31,7 +31,14 @@ struct ReviewProjectsView: View {
                         }
                     }
                 } else {
-                    Text("No projects to review")
+                    VStack {
+                        Image(systemName: "checkmark.circle")
+                            .resizable()
+                            .foregroundStyle(Color.gray)
+                            .frame(width: 100, height: 100)
+                        
+                        Text("No projects to review")
+                    }
                 }
             }
         }
