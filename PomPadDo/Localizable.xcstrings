@@ -27,23 +27,6 @@
         }
       }
     },
-    "%@>%@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@>%2$@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@>%@"
-          }
-        }
-      }
-    },
     "%lld" : {
       "localizations" : {
         "ru" : {
@@ -89,59 +72,8 @@
     "0.01" : {
 
     },
-    "1h" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1h"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1ч"
-          }
-        }
-      }
-    },
-    "1m" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1m"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "1м"
-          }
-        }
-      }
-    },
     "3" : {
 
-    },
-    "10m" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "10m"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "10м"
-          }
-        }
-      }
     },
     "Add project to group" : {
       "localizations" : {
@@ -379,23 +311,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Продолжительность перерыва"
-          }
-        }
-      }
-    },
-    "Break duration: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Break duration: %@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Продолжительность перерыва: %@"
           }
         }
       }
@@ -900,34 +815,6 @@
         }
       }
     },
-    "Failed to create preview: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to create preview: %@"
-          }
-        }
-      }
-    },
-    "Fix sync issues" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fix sync issues"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Исправить проблемы синхронизации"
-          }
-        }
-      }
-    },
     "Focus stats" : {
       "localizations" : {
         "en" : {
@@ -1165,23 +1052,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Продолжительность длинного перерыва"
-          }
-        }
-      }
-    },
-    "Long break duration: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Long break duration: %@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Продолжительность длинного перерыва: %@"
           }
         }
       }
@@ -1600,23 +1470,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Проекты"
-          }
-        }
-      }
-    },
-    "Reactivate" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reactivate"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Активировать"
           }
         }
       }
@@ -2376,23 +2229,6 @@
         }
       }
     },
-    "Work session duration: %@" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Work session duration: %@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Продолжительность рабочей сессии: %@"
-          }
-        }
-      }
-    },
     "Work sessions before long break" : {
       "localizations" : {
         "en" : {
@@ -2405,23 +2241,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Кол-во рабочих сессий до длинного перерыва"
-          }
-        }
-      }
-    },
-    "Work sessions before long break: %.0f" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Work sessions before long break: %.0f"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Кол-во рабочих сессий до длинного перерыва: %.0f"
           }
         }
       }
@@ -2472,23 +2291,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Вчера"
-          }
-        }
-      }
-    },
-    "Your (dispMode) is finished" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Your (dispMode) is finished"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "(dispMode) закончен(а)"
           }
         }
       }

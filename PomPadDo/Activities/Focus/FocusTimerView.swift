@@ -162,11 +162,6 @@ struct FocusTimerView: View {
                                longBreakInSeconds: timerLongBreakSession,
                                workSessionsCount: Int(timerWorkSessionsCount))
         }
-        .onChange(of: timer.sessionsCounter, { _, newValue in
-            if let task = focusTask.task, newValue > 0 {
-                task.tomatoesCount += 1
-            }
-        })
         .onChange(of: timerWorkSession, { _, _ in
             timer.setDurations(workInSeconds: timerWorkSession,
                                breakInSeconds: timerBreakSession,

@@ -11,6 +11,7 @@ struct FocusTimerScene: Scene {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusState: FocusTimerState = .idle
@@ -66,5 +67,10 @@ struct FocusTimerScene: Scene {
         .onChange(of: timer.state) { _, _ in
             focusState = timer.state
         }
+        .onChange(of: timer.sessionsCounter, { _, newValue in
+            if let task = focusTask.task, newValue > 0 {
+                task.tomatoesCount += 1
+            }
+        })
     }
 }
