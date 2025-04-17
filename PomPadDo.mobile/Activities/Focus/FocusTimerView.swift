@@ -15,7 +15,7 @@ struct FocusTimerView: View {
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
-    @AppStorage("focus-timer-tab") private var viewMode = 1
+    @AppStorage("focus-timer-tab") private var viewMode = 0
     
     var body: some View {
         VStack {

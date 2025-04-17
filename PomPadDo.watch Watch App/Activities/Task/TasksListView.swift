@@ -57,12 +57,19 @@ struct TasksListView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    let previewer = try? Previewer()
-    let tasks: [Todo] = [previewer!.task]
+    @Previewable @State var container = try? ModelContainer(for: Schema([
+                                                            ProjectGroup.self,
+                                                            Status.self,
+                                                            Todo.self,
+                                                            Project.self
+                                                        ]),
+                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let previewer = Previewer(container!)
+    let tasks: [Todo] = [previewer.task]
     
     TasksListView(tasks: tasks,
                          list: .inbox,
                          title: "Some list")
         .environmentObject(refresher)
-        .modelContainer(previewer!.container)
+        .modelContainer(container!)
 }

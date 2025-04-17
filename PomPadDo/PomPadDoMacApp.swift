@@ -22,7 +22,7 @@ struct PomPadDoMacApp: App {
     
     @StateObject var focusTask = FocusTask()
     
-    var sharedModelContainer: ModelContainer = {
+    @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             ProjectGroup.self,
             Status.self,

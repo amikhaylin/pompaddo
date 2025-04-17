@@ -159,10 +159,18 @@ struct SectionsListView: View {
                         .id(refresher.refresh)
                         #if os(macOS)
                         .frame(width: geometry.size.width * 0.95,
-                               height: CGFloat((projects.count + groups.count) * 30) > (geometry.size.height - CGFloat(190)) ? geometry.size.height - CGFloat(190) : CGFloat((projects.count + groups.count) * 30))
+                               height: {
+                                    let calculatedHeight = CGFloat((projects.count + groups.count) * 30)
+                                    let availableHeight = max(geometry.size.height - 190, 0)
+                                    return calculatedHeight > availableHeight ? availableHeight : calculatedHeight
+                                }())
                         #else
                         .frame(width: geometry.size.width,
-                               height: (CGFloat((projects.count + groups.count) * 43) > (geometry.size.height - CGFloat(330)) && geometry.size.width < geometry.size.height) ? geometry.size.height - CGFloat(330) : CGFloat((projects.count + groups.count) * 43))
+                               height: {
+                                    let calculatedHeight = CGFloat((projects.count + groups.count) * 43)
+                                    let availableHeight = max(geometry.size.height - 330, 0)
+                                    return calculatedHeight > availableHeight ? availableHeight : calculatedHeight
+                                }())
                         .contentMargins(.vertical, 0)
                         #endif
                     }

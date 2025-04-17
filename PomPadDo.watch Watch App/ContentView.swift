@@ -101,9 +101,8 @@ struct ContentView: View {
             NewTaskView()
         }
         .onOpenURL { url in
-            if url.absoluteString == "pompaddo://addtoinbox" {
-                addToInbox.toggle()
-            }
+            guard url.scheme == "pompaddo", url.host == "addtoinbox" else { return }
+            addToInbox.toggle()
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
@@ -115,9 +114,16 @@ struct ContentView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    let previewer = try? Previewer()
+    @Previewable @State var container = try? ModelContainer(for: Schema([
+                                                            ProjectGroup.self,
+                                                            Status.self,
+                                                            Todo.self,
+                                                            Project.self
+                                                        ]),
+                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    let previewer = Previewer(container!)
     
     ContentView()
         .environmentObject(refresher)
-        .modelContainer(previewer!.container)
+        .modelContainer(container!)
 }

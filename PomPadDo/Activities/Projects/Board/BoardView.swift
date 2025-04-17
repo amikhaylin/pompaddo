@@ -122,10 +122,18 @@ struct BoardView: View {
                                                      workSessionsCount: 4)
                               
     @Previewable @StateObject var focusTask = FocusTask()
-    let previewer = try? Previewer()
+    @Previewable @State var container = try? ModelContainer(for: Schema([
+                                                            ProjectGroup.self,
+                                                            Status.self,
+                                                            Todo.self,
+                                                            Project.self
+                                                        ]),
+                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    return BoardView(project: previewer!.project)
-        .modelContainer(previewer!.container)
+    let previewer = Previewer(container!)
+    
+    BoardView(project: previewer.project)
+        .modelContainer(container!)
         .environmentObject(showInspector)
         .environmentObject(selectedTasks)
         .environmentObject(refresher)
