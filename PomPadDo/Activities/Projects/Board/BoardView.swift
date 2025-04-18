@@ -30,7 +30,12 @@ struct BoardView: View {
                 
                 ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                     VStack {
-                        Text(status.name)
+                        HStack {
+                            Text(status.name)
+                            Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
+                        }
                         List(selection: $selectedTasks.tasks) {
                             ForEach(searchResults
                                         .filter({ $0.status == status && $0.parentTask == nil })
