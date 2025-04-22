@@ -161,14 +161,14 @@ struct SectionsListView: View {
                         .frame(width: geometry.size.width * 0.95,
                                height: {
                                     let calculatedHeight = CGFloat((projects.count + groups.count) * 30)
-                                    let availableHeight = max(geometry.size.height - 190, 0)
+                                    let availableHeight = max(geometry.size.height - 190, 30)
                                     return calculatedHeight > availableHeight ? availableHeight : calculatedHeight
                                 }())
                         #else
                         .frame(width: geometry.size.width,
                                height: {
                                     let calculatedHeight = CGFloat((projects.count + groups.count) * 43)
-                                    let availableHeight = max(geometry.size.height - 330, 0)
+                                    let availableHeight = max(geometry.size.height - 330, 268)
                                     return calculatedHeight > availableHeight ? availableHeight : calculatedHeight
                                 }())
                         .contentMargins(.vertical, 0)
@@ -205,7 +205,11 @@ struct SectionsListView: View {
             .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, { _, newValue in
                 if showReviewProjectsBadge {
                     let tasksCount = tasksTodayActive.count
-                    (newValue + tasksCount) > 0 ? badgeManager.setBadge(number: (newValue + tasksCount)) : badgeManager.resetBadgeNumber()
+                    if (newValue + tasksCount) > 0 {
+                        badgeManager.setBadge(number: (newValue + tasksCount))
+                    } else {
+                        badgeManager.resetBadgeNumber()
+                    }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
             })
@@ -215,7 +219,11 @@ struct SectionsListView: View {
                     projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
                 }
                 
-                (newValue + projectsCount) > 0 ? badgeManager.setBadge(number: (newValue + projectsCount)) : badgeManager.resetBadgeNumber()
+                if (newValue + projectsCount) > 0 {
+                    badgeManager.setBadge(number: (newValue + projectsCount))
+                } else {
+                    badgeManager.resetBadgeNumber()
+                }
                 WidgetCenter.shared.reloadAllTimelines()
             }
             .onAppear {
@@ -223,7 +231,10 @@ struct SectionsListView: View {
                 if showReviewProjectsBadge {
                     projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
                 }
-                (tasksTodayActive.count + projectsCount) > 0 ? badgeManager.setBadge(number: (tasksTodayActive.count + projectsCount)) : badgeManager.resetBadgeNumber()
+                if (tasksTodayActive.count + projectsCount) > 0 { badgeManager.setBadge(number: (tasksTodayActive.count + projectsCount))
+                } else {
+                    badgeManager.resetBadgeNumber()
+                }
                 WidgetCenter.shared.reloadAllTimelines()
             }
 #if os(macOS)
