@@ -54,16 +54,16 @@ class Project {
 
 extension Project {
     // TODO: BE REMOVED WHEN `.cascade` is fixed
-    func deleteRelatives(context: ModelContext) {
-        for status in self.getStatuses() {
-            context.delete(status)
-        }
-        
-        for task in self.getTasks() {
-            task.deleteSubtasks(context: context)
-            context.delete(task)
-        }
-    }
+//    func deleteRelatives(context: ModelContext) {
+//        for status in self.getStatuses() {
+//            context.delete(status)
+//        }
+//        
+//        for task in self.getTasks() {
+//            task.deleteSubtasks(context: context)
+//            context.delete(task)
+//        }
+//    }
     
     func sumEstimateByProject(_ factor: Double) -> Int {
         var result = 0

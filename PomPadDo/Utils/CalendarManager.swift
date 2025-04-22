@@ -8,7 +8,7 @@
 import EventKit
 
 struct CalendarManager {
-    static func addToCalendar(title: String, eventStartDate: Date, eventEndDate: Date) {
+    static func addToCalendar(title: String, eventStartDate: Date, eventEndDate: Date, isAllDay: Bool = false) {
         let store = EKEventStore()
         
         store.requestWriteOnlyAccessToEvents { allowed, error in
@@ -20,6 +20,7 @@ struct CalendarManager {
                 event.title = title
                 event.startDate = eventStartDate
                 event.endDate = eventEndDate
+                event.isAllDay = isAllDay
 
                 // Save the event
                 do {

@@ -121,8 +121,24 @@ struct ProjectTaskModifier: ViewModifier {
                 
                 Divider()
                 
-                Button {
-                    CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now)
+                Menu {
+                    Button {
+                        CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now, isAllDay: true)
+                    } label: {
+                        Image(systemName: "calendar.badge.plus")
+                        Text("for Today")
+                    }
+                    
+                    Button {
+                        if let dueDate = task.dueDate {
+                            CalendarManager.addToCalendar(title: task.name, eventStartDate: dueDate, eventEndDate: dueDate, isAllDay: true)
+                        } else {
+                            CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now, isAllDay: true)
+                        }
+                    } label: {
+                        Image(systemName: "calendar.badge.plus")
+                        Text("for Due Date")
+                    }
                 } label: {
                     Image(systemName: "calendar.badge.plus")
                     Text("Add to Calendar")

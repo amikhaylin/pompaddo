@@ -216,16 +216,36 @@ struct PomPadDoMacApp: App {
                 
                 Divider()
                 
-                Button {
-                    for task in selectedTasks.tasks {
-                        CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now)
+                Menu {
+                    Button {
+                        for task in selectedTasks.tasks {
+                            CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now, isAllDay: true)
+                        }
+                    } label: {
+                        Image(systemName: "calendar.badge.plus")
+                        Text("for Today")
                     }
+                    .keyboardShortcut("c", modifiers: [.command, .option, .shift])
+                    .disabled(selectedTasks.tasks.count == 0)
+                    
+                    Button {
+                        for task in selectedTasks.tasks {
+                            if let dueDate = task.dueDate {
+                                CalendarManager.addToCalendar(title: task.name, eventStartDate: dueDate, eventEndDate: dueDate, isAllDay: true)
+                            } else {
+                                CalendarManager.addToCalendar(title: task.name, eventStartDate: Date.now, eventEndDate: Date.now, isAllDay: true)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "calendar.badge.plus")
+                        Text("for Due Date")
+                    }
+                    .keyboardShortcut("c", modifiers: [.command, .option])
+                    .disabled(selectedTasks.tasks.count == 0)
                 } label: {
                     Image(systemName: "calendar.badge.plus")
                     Text("Add to Calendar")
                 }
-                .keyboardShortcut("c", modifiers: [.command, .option])
-                .disabled(selectedTasks.tasks.count == 0)
                 
                 Divider()
                 

@@ -879,6 +879,38 @@
         }
       }
     },
+    "for Due Date" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "for Due Date"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на дату выполнения"
+          }
+        }
+      }
+    },
+    "for Today" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "for Today"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "на сегодня"
+          }
+        }
+      }
+    },
     "General" : {
       "localizations" : {
         "en" : {
