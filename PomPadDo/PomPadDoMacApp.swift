@@ -205,6 +205,8 @@ struct PomPadDoMacApp: App {
                         if timer.state == .idle {
                             timer.reset()
                             timer.start()
+                        } else if timer.state == .paused {
+                            timer.resume()
                         }
                     }
                 } label: {
@@ -307,6 +309,70 @@ struct PomPadDoMacApp: App {
                     Text("Delete task")
                 }
                 .disabled(selectedTasks.tasks.count == 0)
+            }
+            
+            CommandMenu("Timer") {
+                // start
+                if timer.state == .idle {
+                    Button {
+                        timer.start()
+                    } label: {
+                        Image(systemName: "play.fill")
+                        Text("Start")
+                    }
+                    .keyboardShortcut("s", modifiers: [.command])
+                }
+                // resume
+                if timer.state == .paused {
+                    Button {
+                        timer.resume()
+                    } label: {
+                        Image(systemName: "play.fill")
+                        Text("Resume")
+                    }
+                    .keyboardShortcut("p", modifiers: [.command])
+                }
+                // pause
+                if timer.state == .running {
+                    Button {
+                        timer.pause()
+                    } label: {
+                        Image(systemName: "pause.fill")
+                        Text("Pause")
+                    }
+                    .keyboardShortcut("p", modifiers: [.command])
+                }
+                // reset / stop
+                if timer.state == .running || timer.state == .paused {
+                    if timer.mode == .pause || timer.mode == .longbreak {
+                        Button {
+                            timer.reset()
+                            timer.skip()
+                            timer.start()
+                        } label: {
+                            Image(systemName: "forward.fill")
+                            Text("Skip")
+                        }
+                        .keyboardShortcut("s", modifiers: [.command, .shift])
+                    } else {
+                        Button {
+                            timer.reset()
+                        } label: {
+                            Image(systemName: "stop.fill")
+                            Text("Stop")
+                        }
+                        .keyboardShortcut("s", modifiers: [.command])
+                    }
+                }
+                
+                if focusTask.task != nil {
+                    Button {
+                        focusTask.task = nil
+                    } label: {
+                        Image(systemName: "clear")
+                        Text("Clear task")
+                    }
+                }
             }
         }
         
