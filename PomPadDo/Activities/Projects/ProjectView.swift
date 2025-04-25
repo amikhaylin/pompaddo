@@ -35,23 +35,25 @@ struct ProjectView: View {
                         .foregroundStyle(Color.gray)
                 }
 
-                Picker("View Mode", selection: $project.projectViewMode) {
-                    ForEach(0...1, id: \.self) { mode in
-                        HStack {
-                            switch mode {
-                            case 0:
-                                Image(systemName: "list.bullet")
-                            case 1:
-                                Image(systemName: "rectangle.split.3x1")
-                            default:
-                                EmptyView()
+                if let statuses = project.statuses, statuses.count > 0 {
+                    Picker("View Mode", selection: $project.projectViewMode) {
+                        ForEach(0...1, id: \.self) { mode in
+                            HStack {
+                                switch mode {
+                                case 0:
+                                    Image(systemName: "list.bullet")
+                                case 1:
+                                    Image(systemName: "rectangle.split.3x1")
+                                default:
+                                    EmptyView()
+                                }
                             }
+                            .tag(mode as Int)
                         }
-                        .tag(mode as Int)
                     }
+                    .pickerStyle(.segmented)
+                    .accessibility(identifier: "ProjectViewMode")
                 }
-                .pickerStyle(.segmented)
-                .accessibility(identifier: "ProjectViewMode")
 
                 Button {
                     newTaskIsShowing.toggle()

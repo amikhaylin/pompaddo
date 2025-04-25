@@ -18,6 +18,7 @@ struct ProjectTasksListView: View {
     @State private var refresher = Refresher()
     
     @State private var searchText = ""
+    @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
     
     var searchResults: [Todo] {
         if searchText.isEmpty {
@@ -29,51 +30,117 @@ struct ProjectTasksListView: View {
     
     var body: some View {
         List(selection: $selectedTasks.tasks) {
-            ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
-                @Bindable var status = status
-                DisclosureGroup(status.name, isExpanded: $status.expanded) {
-                    ForEach(searchResults
-                                .filter({ $0.status == status && $0.parentTask == nil })
-                                .sorted(by: TasksQuery.defaultSorting),
-                            id: \.self) { task in
-                        if let subtasks = task.subtasks, subtasks.count > 0 {
-                            OutlineGroup([task],
-                                         id: \.self,
-                                         children: \.subtasks) { maintask in
-                                TaskRowView(task: maintask, showingProject: false)
-                                    .modifier(ProjectTaskModifier(task: maintask,
+            if let statuses = project.statuses, statuses.count > 0 {
+                ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
+                    @Bindable var status = status
+                    DisclosureGroup(status.name, isExpanded: $status.expanded) {
+                        ForEach(searchResults
+                            .filter({ $0.status == status && $0.parentTask == nil })
+                            .sorted(by: TasksQuery.defaultSorting),
+                                id: \.self) { task in
+                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                                OutlineGroup([task],
+                                             id: \.self,
+                                             children: \.subtasks) { maintask in
+                                    TaskRowView(task: maintask, showingProject: false)
+                                        .modifier(ProjectTaskModifier(task: maintask,
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      project: project,
+                                                                      tasks: Binding(
+                                                                        get: { project.tasks ?? [] },
+                                                                        set: { project.tasks = $0 })))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: .projects, tasks: Binding(
+                                            get: { project.tasks ?? [] },
+                                            set: { project.tasks = $0 })))
+                                        .tag(maintask)
+                                }
+                            } else {
+                                TaskRowView(task: task, showingProject: false)
+                                    .modifier(ProjectTaskModifier(task: task,
                                                                   selectedTasksSet: $selectedTasks.tasks,
                                                                   project: project,
                                                                   tasks: Binding(
                                                                     get: { project.tasks ?? [] },
                                                                     set: { project.tasks = $0 })))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: .projects, tasks: Binding(
-                                            get: { project.tasks ?? [] },
-                                            set: { project.tasks = $0 })))
-                                    .tag(maintask)
-                            }
-                        } else {
-                            TaskRowView(task: task, showingProject: false)
-                                .modifier(ProjectTaskModifier(task: task,
-                                                              selectedTasksSet: $selectedTasks.tasks,
-                                                              project: project,
-                                                              tasks: Binding(
-                                                                get: { project.tasks ?? [] },
-                                                                set: { project.tasks = $0 })))
                                     .modifier(TaskSwipeModifier(task: task, list: .projects, tasks: Binding(
                                         get: { project.tasks ?? [] },
                                         set: { project.tasks = $0 })))
-                                .tag(task)
+                                    .tag(task)
+                            }
                         }
                     }
-                }
-                .dropDestination(for: Todo.self) { tasks, _ in
-                    for task in tasks {
-                        task.moveToStatus(status: status,
-                                          project: project,
-                                          context: modelContext)
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.moveToStatus(status: status,
+                                              project: project,
+                                              context: modelContext)
+                        }
+                        return true
                     }
-                    return true
+                }
+            } else {
+                // Show tasks without statuses
+                ForEach(CommonTaskListSections.allCases) { section in
+                    DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
+                        get: { groupsExpanded.contains(section.rawValue) },
+                        set: { isExpanding in
+                            if isExpanding {
+                                groupsExpanded.insert(section.rawValue)
+                            } else {
+                                groupsExpanded.remove(section.rawValue)
+                            }
+                        }
+                    )) {
+                        ForEach(section == .completed ? searchResults.filter({ $0.completed && $0.parentTask == nil }) : searchResults.filter({ $0.completed == false })
+                            .sorted(by: TasksQuery.defaultSorting),
+                                id: \.self) { task in
+                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                                OutlineGroup([task],
+                                             id: \.self,
+                                             children: \.subtasks) { maintask in
+                                    TaskRowView(task: maintask, showingProject: false)
+                                        .modifier(ProjectTaskModifier(task: maintask,
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      project: project,
+                                                                      tasks: Binding(
+                                                                        get: { project.tasks ?? [] },
+                                                                        set: { project.tasks = $0 })))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: .projects, tasks: Binding(
+                                            get: { project.tasks ?? [] },
+                                            set: { project.tasks = $0 })))
+                                        .tag(maintask)
+                                }
+                            } else {
+                                TaskRowView(task: task, showingProject: false)
+                                    .modifier(ProjectTaskModifier(task: task,
+                                                                  selectedTasksSet: $selectedTasks.tasks,
+                                                                  project: project,
+                                                                  tasks: Binding(
+                                                                    get: { project.tasks ?? [] },
+                                                                    set: { project.tasks = $0 })))
+                                    .modifier(TaskSwipeModifier(task: task, list: .projects, tasks: Binding(
+                                        get: { project.tasks ?? [] },
+                                        set: { project.tasks = $0 })))
+                                    .tag(task)
+                            }
+                        }
+                    }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.disconnectFromParentTask()
+                            task.parentTask = nil
+                            
+                            if section == CommonTaskListSections.completed {
+                                if !task.completed {
+                                    task.complete(modelContext: modelContext)
+                                }
+                            } else {
+                                task.reactivate()
+                            }
+                        }
+                        return true
+                    }
+                    
                 }
             }
         }
