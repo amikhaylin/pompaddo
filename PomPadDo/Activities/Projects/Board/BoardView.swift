@@ -29,70 +29,84 @@ struct BoardView: View {
             HStack {
                 
                 ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
-                    VStack {
-                        HStack {
-                            Text(status.name)
-                            Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
-                                .foregroundStyle(Color.gray)
-                                .font(.caption)
-                        }
-                        List(selection: $selectedTasks.tasks) {
-                            ForEach(searchResults
-                                        .filter({ $0.status == status && $0.parentTask == nil })
-                                        .sorted(by: TasksQuery.defaultSorting),
-                                    id: \.self) { task in
-                                if let subtasks = task.subtasks, subtasks.count > 0 {
-                                    OutlineGroup([task],
-                                                 id: \.self,
-                                                 children: \.subtasks) { maintask in
-                                        TaskRowView(task: maintask, showingProject: false, nameLineLimit: 5)
-                                            .modifier(ProjectTaskModifier(task: maintask,
+                    HStack {
+                        VStack {
+                            HStack {
+                                Text(status.name)
+                                Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
+                                    .foregroundStyle(Color.gray)
+                                    .font(.caption)
+                            }
+                            List(selection: $selectedTasks.tasks) {
+                                ForEach(searchResults
+                                    .filter({ $0.status == status && $0.parentTask == nil })
+                                    .sorted(by: TasksQuery.defaultSorting),
+                                        id: \.self) { task in
+                                    if let subtasks = task.subtasks, subtasks.count > 0 {
+                                        OutlineGroup([task],
+                                                     id: \.self,
+                                                     children: \.subtasks) { maintask in
+                                            TaskRowView(task: maintask, showingProject: false, nameLineLimit: 5)
+                                                .modifier(ProjectTaskModifier(task: maintask,
+                                                                              selectedTasksSet: $selectedTasks.tasks,
+                                                                              project: project,
+                                                                              tasks: Binding(
+                                                                                get: { project.tasks ?? [] },
+                                                                                set: { project.tasks = $0 })))
+                                                .tag(maintask)
+                                        }
+                                    } else {
+                                        TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
+                                            .modifier(ProjectTaskModifier(task: task,
                                                                           selectedTasksSet: $selectedTasks.tasks,
                                                                           project: project,
                                                                           tasks: Binding(
                                                                             get: { project.tasks ?? [] },
                                                                             set: { project.tasks = $0 })))
-                                            .tag(maintask)
+                                            .tag(task)
+                                    }
+                                }
+                                        .listRowSeparator(.visible)
+                            }
+                            .cornerRadius(5)
+                        }
+                        .dropDestination(for: Todo.self) { tasks, _ in
+                            for task in tasks {
+                                task.disconnectFromParentTask()
+                                task.parentTask = nil
+                                task.project = project
+                                project.tasks?.append(task)
+                                
+                                if status.doCompletion {
+                                    if !task.completed {
+                                        task.complete(modelContext: modelContext)
                                     }
                                 } else {
-                                    TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
-                                        .modifier(ProjectTaskModifier(task: task,
-                                                                      selectedTasksSet: $selectedTasks.tasks,
-                                                                      project: project,
-                                                                      tasks: Binding(
-                                                                        get: { project.tasks ?? [] },
-                                                                        set: { project.tasks = $0 })))
-                                        .tag(task)
+                                    task.reactivate()
                                 }
-                            }
-                            .listRowSeparator(.visible)
-                        }
-                        .cornerRadius(5)
-                    }
-                    .dropDestination(for: Todo.self) { tasks, _ in
-                        for task in tasks {
-                            task.disconnectFromParentTask()
-                            task.parentTask = nil
-                            task.project = project
-                            project.tasks?.append(task)
-                            
-                            if status.doCompletion {
-                                if !task.completed {
-                                    task.complete(modelContext: modelContext)
+                                
+                                if status.clearDueDate {
+                                    task.dueDate = nil
                                 }
-                            } else {
-                                task.reactivate()
+                                
+                                task.status = status
                             }
-                            
-                            if status.clearDueDate {
-                                task.dueDate = nil
-                            }
-                            
-                            task.status = status
+                            return true
                         }
-                        return true
+                        .frame(width: status.width)
+                        
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.1))
+                            .cornerRadius(5)
+                            .frame(width: 5)
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { gesture in
+                                        let newWidth = status.width + gesture.translation.width
+                                        status.width = max(newWidth, 300)
+                                    }
+                            )
                     }
-                    .frame(minWidth: 200, idealWidth: 300)
                 }
             }
             .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")

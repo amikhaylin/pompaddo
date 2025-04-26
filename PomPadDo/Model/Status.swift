@@ -15,6 +15,7 @@ class Status {
     var doCompletion: Bool = false
     var expanded: Bool = true
     var clearDueDate: Bool = false
+    var width: Double = 300.0
     
     @Relationship(inverse: \Project.statuses) var project: Project?
     @Relationship(inverse: \Todo.status) var tasks: [Todo]? = [Todo]()
