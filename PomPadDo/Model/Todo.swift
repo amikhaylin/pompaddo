@@ -223,16 +223,16 @@ extension Todo {
     }
     
     // TODO: BE REMOVED WHEN `.cascade` is fixed
-    func deleteSubtasks(context: ModelContext) {
-        if let subtasks = self.subtasks {
-            for task in subtasks {
-                print("deleting subtask")
-                task.printInfo()
-                task.deleteSubtasks(context: context)
-                context.delete(task)
-            }
-        }
-    }
+//    func deleteSubtasks(context: ModelContext) {
+//        if let subtasks = self.subtasks {
+//            for task in subtasks {
+//                print("deleting subtask")
+//                task.printInfo()
+//                task.deleteSubtasks(context: context)
+//                context.delete(task)
+//            }
+//        }
+//    }
     
     func getTotalFocus() -> Int {
         var result: Int = self.tomatoesCount

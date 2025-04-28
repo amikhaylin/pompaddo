@@ -27,7 +27,7 @@ struct ProjectToReviewView: View {
                     VStack {
                         Text("This project will be permanently deleted")
                         Button(role: .destructive) {
-                            project.deleteRelatives(context: modelContext)
+// TODO: Remove                           project.deleteRelatives(context: modelContext)
                             modelContext.delete(project)
                             deletionRequested.toggle()
                             if showInspector.show {
