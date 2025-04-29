@@ -160,6 +160,8 @@ struct TaskRowModifier: ViewModifier {
                 if timer.state == .idle {
                     timer.reset()
                     timer.start()
+                } else if timer.state == .paused {
+                    timer.resume()
                 }
             } label: {
                 Image(systemName: "play.fill")
