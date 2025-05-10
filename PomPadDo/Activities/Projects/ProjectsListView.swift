@@ -49,7 +49,7 @@ struct ProjectsListView: View {
                     }
                     
                     Menu {
-                        ForEach(groups) { group in
+                        ForEach(groups.sorted(by: { $0.order < $1.order })) { group in
                             Button {
                                 project.group = group
                             } label: {
@@ -114,6 +114,11 @@ struct ProjectsListView: View {
                             
                             Button {
                                 project.group = nil
+                                if let lastProject = projects.filter({ $0.group == nil })
+                                                             .sorted(by: ProjectsQuery.defaultSorting)
+                                                             .last {
+                                    project.order = lastProject.order + 1
+                                }
                             } label: {
                                 Image(systemName: "folder")
                                 Text("Remove project from group")
