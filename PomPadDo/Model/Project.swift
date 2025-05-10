@@ -28,7 +28,7 @@ enum DefaultProjectStatuses: String, CaseIterable {
 }
 
 @Model
-class Project {
+class Project: Hashable {
     var name: String = ""
     var reviewDate: Date = Date()
     var reviewDaysCount: Int = 7
@@ -39,6 +39,8 @@ class Project {
     var completedMoving: Bool = false
     var showStatus: Bool = true
     var showInReview: Bool = true
+    var order: Int = 0
+    var uid: String = UUID().uuidString
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status]? = [Status]()

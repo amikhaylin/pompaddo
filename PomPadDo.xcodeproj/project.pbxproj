@@ -117,6 +117,8 @@
 		4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */; };
 		4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */; };
 		4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */; };
+		4DB6E8712DC14FC000C12DEE /* ProjectsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6E8702DC14FC000C12DEE /* ProjectsQuery.swift */; };
+		4DB6E8722DC14FC000C12DEE /* ProjectsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6E8702DC14FC000C12DEE /* ProjectsQuery.swift */; };
 		4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBAD6152BECBEEF002666BD /* Credits.rtf */; };
 		4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EC2B7CB4EC0063F522 /* Status.swift */; };
 		4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBDC7EE2B7CBE450063F522 /* Todo.swift */; };
@@ -295,6 +297,7 @@
 		4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
 		4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
 		4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
+		4DB6E8702DC14FC000C12DEE /* ProjectsQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsQuery.swift; sourceTree = "<group>"; };
 		4DBAD6152BECBEEF002666BD /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4DBDC7EC2B7CB4EC0063F522 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		4DBDC7EE2B7CBE450063F522 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
@@ -505,6 +508,7 @@
 				4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */,
 				4D8422B42BA1F437000829E1 /* BadgeManager.swift */,
 				4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */,
+				4DB6E8702DC14FC000C12DEE /* ProjectsQuery.swift */,
 				4D7C13C42B7E06F70093595D /* Previewer.swift */,
 				4D59C8642BDF8B580026C2EA /* NotificationManager.swift */,
 				4D821E4D2C11A03A008E79F6 /* Common.swift */,
@@ -1022,6 +1026,7 @@
 				4D2867B72D6229E20064ADF3 /* ProjectToReviewView.swift in Sources */,
 				4D2867B82D6229E20064ADF3 /* ReviewProjectsView.swift in Sources */,
 				4DD1EC532D7A087900F123B1 /* ProjectsListView.swift in Sources */,
+				4DB6E8712DC14FC000C12DEE /* ProjectsQuery.swift in Sources */,
 				4D2867BA2D622A830064ADF3 /* EditTaskView.swift in Sources */,
 				4D2867BB2D622A830064ADF3 /* TasksListView.swift in Sources */,
 				4D2867BC2D622A830064ADF3 /* TaskSwipeModifier.swift in Sources */,
@@ -1096,6 +1101,7 @@
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,
 				4DBDC7ED2B7CB4EC0063F522 /* Status.swift in Sources */,
 				4D3145032CFDEC16005BD65A /* SideBarItem.swift in Sources */,
+				4DB6E8722DC14FC000C12DEE /* ProjectsQuery.swift in Sources */,
 				4D4139862BE8DEF700AA840C /* ProjectGroup.swift in Sources */,
 				4D7C13C52B7E06F70093595D /* Previewer.swift in Sources */,
 				4D8800BB2C18B8EF00AB4D78 /* TaskSwipeModifier.swift in Sources */,

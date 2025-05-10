@@ -24,12 +24,13 @@ struct ProjectsListView: View {
     
     var body: some View {
         List(selection: $selectedProject) {
-            ForEach(projects.filter({ $0.group == nil })) { project in
+            ForEach(projects.filter({ $0.group == nil })
+                            .sorted(by: ProjectsQuery.defaultSorting), id: \.self) { project in
                 NavigationLink(value: SideBarItem.projects) {
                     Text(project.name)
                         .badge(project.getTasks().filter({ $0.completed == false }).count)
                 }
-                .tag(project)
+                .tag(project as Project)
                 .draggable(project)
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
@@ -70,16 +71,30 @@ struct ProjectsListView: View {
                     }
                 }
             }
+            .onMove(perform: { from, toInt in
+                var projectsList = projects.filter({ $0.group == nil })
+                                           .sorted(by: ProjectsQuery.defaultSorting)
+                projectsList.move(fromOffsets: from, toOffset: toInt)
+
+                var order = 0
+                for project in projectsList {
+                    order += 1
+                    project.order = order
+                }
+            })
             
-            ForEach(groups) { group in
-                @Bindable var group: ProjectGroup = group
-                DisclosureGroup(isExpanded: $group.expanded) {
-                    ForEach(projects.filter({ $0.group == group })) { project in
+            ForEach(groups.sorted(by: { $0.order < $1.order })) { group in
+                DisclosureGroup(isExpanded: Binding<Bool>(
+                    get: { group.expanded },
+                    set: { newValue in group.expanded = newValue }
+                )) {
+                    ForEach(projects.filter({ $0.group == group })
+                                    .sorted(by: ProjectsQuery.defaultSorting), id: \.self) { project in
                         NavigationLink(value: SideBarItem.projects) {
                             Text(project.name)
                                 .badge(project.getTasks().filter({ $0.completed == false }).count)
                         }
-                        .tag(project)
+                        .tag(project as Project)
                         .draggable(project)
                         .dropDestination(for: Todo.self) { tasks, _ in
                             for task in tasks {
@@ -113,6 +128,17 @@ struct ProjectsListView: View {
                             }
                         }
                     }
+                    .onMove(perform: { from, toInt in
+                        var projectsList = projects.filter({ $0.group == group })
+                                                   .sorted(by: ProjectsQuery.defaultSorting)
+                        projectsList.move(fromOffsets: from, toOffset: toInt)
+
+                        var order = 0
+                        for project in projectsList {
+                            order += 1
+                            project.order = order
+                        }
+                    })
                 } label: {
                     Text(group.name)
                         .contextMenu {
@@ -142,6 +168,16 @@ struct ProjectsListView: View {
                     return true
                 }
             }
+            .onMove(perform: { from, toInt in
+                var groupsList = groups.sorted(by: { $0.order < $1.order })
+                groupsList.move(fromOffsets: from, toOffset: toInt)
+
+                var order = 0
+                for group in groupsList {
+                    order += 1
+                    group.order = order
+                }
+            })
         }
         .listStyle(SidebarListStyle())
         #if os(macOS)

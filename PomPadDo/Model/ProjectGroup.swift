@@ -9,9 +9,11 @@ import Foundation
 import SwiftData
 
 @Model
-class ProjectGroup {
+class ProjectGroup: Hashable {
     var name: String = ""
     var expanded: Bool = true
+    var order: Int = 0
+    var uid: String = UUID().uuidString
     
     @Relationship(inverse: \Project.group) var projects: [Project]? = [Project]()
     
