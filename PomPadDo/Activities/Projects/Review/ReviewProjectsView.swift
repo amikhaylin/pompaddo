@@ -20,7 +20,7 @@ struct ReviewProjectsView: View {
         NavigationStack {
             Group {
                 if projects.count > 0 {
-                    List(projects) { project in
+                    List(projects.sorted(by: ProjectsQuery.defaultSorting)) { project in
                         NavigationLink {
                             ProjectToReviewView(project: project)
                                 .environmentObject(showInspector)

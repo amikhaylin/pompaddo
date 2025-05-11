@@ -279,8 +279,7 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Menu {
-                ForEach(projects.filter({ $0.group == nil })
-                                .sorted(by: ProjectsQuery.defaultSorting)) { project in
+                ForEach(projects.sorted(by: ProjectsQuery.defaultSorting)) { project in
                     Button {
                         if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                             for task in selectedTasksSet {
@@ -305,37 +304,6 @@ struct TaskRowModifier: ViewModifier {
                         }
                     } label: {
                         Text(project.name)
-                    }
-                }
-                
-                ForEach(groups.sorted(by: { $0.order < $1.order })) { group in
-                    ForEach(projects.filter({ $0.group == group })
-                        .sorted(by: ProjectsQuery.defaultSorting)) { project in
-                        Button {
-                            if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
-                                for task in selectedTasksSet {
-                                    task.project = project
-                                    task.status = project.getDefaultStatus()
-                                    project.tasks?.append(task)
-                                    if list == .inbox {
-                                        if let index = tasks.firstIndex(of: task) {
-                                            tasks.remove(at: index)
-                                        }
-                                    }
-                                }
-                            } else {
-                                task.project = project
-                                task.status = project.getDefaultStatus()
-                                project.tasks?.append(task)
-                                if list == .inbox {
-                                    if let index = tasks.firstIndex(of: task) {
-                                        tasks.remove(at: index)
-                                    }
-                                }
-                            }
-                        } label: {
-                            Text(project.name)
-                        }
                     }
                 }
             } label: {
