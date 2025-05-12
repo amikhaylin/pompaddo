@@ -39,11 +39,11 @@ struct NewProjectView: View {
                     }
                     modelContext.insert(project)
                     
-                    var order = 0
-                    for name in DefaultProjectStatuses.allCases {
-                        order += 1
-                        
-                        if !(createSimpleList && name == .progress) {
+                    if !createSimpleList {
+                        var order = 0
+                        for name in DefaultProjectStatuses.allCases {
+                            order += 1
+                            
                             let status = Status(name: name.localizedString(),
                                                 order: order,
                                                 doCompletion: name.competion)
@@ -51,7 +51,6 @@ struct NewProjectView: View {
                             project.statuses?.append(status)
                         }
                     }
-                    
                 }
                 .keyboardShortcut(.defaultAction)
             }

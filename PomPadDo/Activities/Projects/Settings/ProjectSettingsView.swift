@@ -47,6 +47,10 @@ struct ProjectSettingsView: View {
                                 task.status = nil
                             }
                         }
+                        
+                        if project.statuses?.count == 0 {
+                            project.projectViewMode = 0
+                        }
                     }
                 }, label: {
                     Image(systemName: "trash")
