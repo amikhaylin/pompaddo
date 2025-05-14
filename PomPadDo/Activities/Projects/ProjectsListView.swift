@@ -218,7 +218,7 @@ struct ProjectsListView: View {
             selectedSideBarItem = .today
         }
         
-// TODO: remove       project.deleteRelatives(context: modelContext)
+        project.deleteRelatives(context: modelContext)
         modelContext.delete(project)
     }
 }

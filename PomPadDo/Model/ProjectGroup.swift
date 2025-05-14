@@ -20,4 +20,8 @@ class ProjectGroup: Hashable {
     init(name: String) {
         self.name = name
     }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uid) // UUID
+    }
 }
