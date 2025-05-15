@@ -28,7 +28,7 @@ enum DefaultProjectStatuses: String, CaseIterable {
 }
 
 @Model
-class Project {
+class Project: Hashable {
     var name: String = ""
     var reviewDate: Date = Date()
     var reviewDaysCount: Int = 7
@@ -39,6 +39,8 @@ class Project {
     var completedMoving: Bool = false
     var showStatus: Bool = true
     var showInReview: Bool = true
+    var order: Int = 0
+    var uid: String = UUID().uuidString
     
     @Relationship(deleteRule: .cascade)
     var statuses: [Status]? = [Status]()
@@ -50,20 +52,24 @@ class Project {
         self.name = name
         self.note = note
     }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uid) // UUID
+    }
 }
 
 extension Project {
     // TODO: BE REMOVED WHEN `.cascade` is fixed
-//    func deleteRelatives(context: ModelContext) {
-//        for status in self.getStatuses() {
-//            context.delete(status)
-//        }
-//        
-//        for task in self.getTasks() {
-//            task.deleteSubtasks(context: context)
-//            context.delete(task)
-//        }
-//    }
+    func deleteRelatives(context: ModelContext) {
+        for status in self.getStatuses() {
+            context.delete(status)
+        }
+        
+        for task in self.getTasks() {
+            task.deleteSubtasks(context: context)
+            context.delete(task)
+        }
+    }
     
     func sumEstimateByProject(_ factor: Double) -> Int {
         var result = 0

@@ -24,6 +24,7 @@ struct TaskRowModifier: ViewModifier {
     var list: SideBarItem
     @Binding var tasks: [Todo]
     @State private var showAddSubtask = false
+    @Query var groups: [ProjectGroup]
     
     func body(content: Content) -> some View {
        content
@@ -278,7 +279,7 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Menu {
-                ForEach(projects) { project in
+                ForEach(projects.sorted(by: ProjectsQuery.defaultSorting)) { project in
                     Button {
                         if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                             for task in selectedTasksSet {
