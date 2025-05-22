@@ -25,6 +25,7 @@ struct TaskRowModifier: ViewModifier {
     @Binding var tasks: [Todo]
     @State private var showAddSubtask = false
     @Query var groups: [ProjectGroup]
+    @State private var renameTask: Todo?
     
     func body(content: Content) -> some View {
        content
@@ -335,6 +336,12 @@ struct TaskRowModifier: ViewModifier {
             Divider()
             
             Button {
+                renameTask = task
+            } label: {
+                Text("Rename task")
+            }
+            
+            Button {
                 let newTask = task.copy(modelContext: modelContext)
                 
                 modelContext.insert(newTask)
@@ -378,6 +385,12 @@ struct TaskRowModifier: ViewModifier {
                             set: { task.subtasks = $0 }
                         ))
         }
+        .sheet(item: $renameTask, onDismiss: {
+            renameTask = nil
+        }, content: { editTask in
+            EditTaskNameView(task: editTask)
+                .presentationDetents([.height(200)])
+        })
         #else
         .popover(isPresented: $showAddSubtask, attachmentAnchor: .point(.topLeading), content: {
             NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
@@ -386,6 +399,11 @@ struct TaskRowModifier: ViewModifier {
                             set: { task.subtasks = $0 }
                         ))
                 .frame(minWidth: 200, maxHeight: 180)
+                .presentationCompactAdaptation(.popover)
+        })
+        .popover(item: $renameTask, attachmentAnchor: .point(.topLeading), content: { editTask in
+            EditTaskNameView(task: editTask)
+                .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
                 .presentationCompactAdaptation(.popover)
         })
         #endif

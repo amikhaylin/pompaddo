@@ -1634,6 +1634,22 @@
         }
       }
     },
+    "Rename task" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rename task"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Переименовать задачу"
+          }
+        }
+      }
+    },
     "Repead every" : {
       "localizations" : {
         "en" : {
