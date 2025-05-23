@@ -831,6 +831,22 @@
         }
       }
     },
+    "Extract subtask" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Extract subtask"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Извлечь подзадачу"
+          }
+        }
+      }
+    },
     "Focus stats" : {
       "localizations" : {
         "en" : {

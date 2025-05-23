@@ -265,6 +265,13 @@ struct TaskRowModifier: ViewModifier {
                     Image(systemName: "arrow.left")
                     Text("Open parent task")
                 }
+                
+                Button {
+                    task.disconnectFromParentTask()
+                    task.parentTask = nil
+                } label: {
+                    Text("Extract subtask")
+                }
             }
             
             Divider()
