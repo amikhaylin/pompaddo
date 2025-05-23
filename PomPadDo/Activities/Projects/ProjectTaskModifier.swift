@@ -204,6 +204,17 @@ struct ProjectTaskModifier: ViewModifier {
                     Text("Open subtasks")
                 }
                 
+                if task.parentTask != nil {
+                    Button {
+                        task.disconnectFromParentTask()
+                        task.parentTask = nil
+                    } label: {
+                        Text("Extract subtask")
+                    }
+                }
+                
+                Divider()
+                
                 if let url = URL(string: task.link) {
                     Link(destination: url,
                          label: {
