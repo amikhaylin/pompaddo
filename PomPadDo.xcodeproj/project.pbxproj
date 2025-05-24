@@ -63,6 +63,7 @@
 		4D2BBCBF2BE4DEAB00E105C1 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */; };
 		4D3025572D63AD24000E5C3D /* PomPadDo.watch.widgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D3145032CFDEC16005BD65A /* SideBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3145022CFDEC16005BD65A /* SideBarItem.swift */; };
+		4D351A022DE069D300861B29 /* StatusSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D351A012DE069D300861B29 /* StatusSettingsView.swift */; };
 		4D3939A02C64FF05004B08B9 /* FocusTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */; };
 		4D3C15802DDE1E2B00838BDE /* EditTaskNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3C157F2DDE1E2B00838BDE /* EditTaskNameView.swift */; };
 		4D3E50BF2D6382EA008C1FDB /* PomPadDo.watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -254,6 +255,7 @@
 		4D28675A2D61F5C20064ADF3 /* PomPadDo.mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDo.mobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimer.swift; sourceTree = "<group>"; };
 		4D3145022CFDEC16005BD65A /* SideBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarItem.swift; sourceTree = "<group>"; };
+		4D351A012DE069D300861B29 /* StatusSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSettingsView.swift; sourceTree = "<group>"; };
 		4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTasksView.swift; sourceTree = "<group>"; };
 		4D3C157F2DDE1E2B00838BDE /* EditTaskNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskNameView.swift; sourceTree = "<group>"; };
 		4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PomPadDo.watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -655,6 +657,7 @@
 			children = (
 				4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */,
 				4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */,
+				4D351A012DE069D300861B29 /* StatusSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D7C13C72B7E0DE70093595D /* TaskRowView.swift in Sources */,
+				4D351A022DE069D300861B29 /* StatusSettingsView.swift in Sources */,
 				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
 				4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */,
 				4DBDC7EF2B7CBE450063F522 /* Todo.swift in Sources */,

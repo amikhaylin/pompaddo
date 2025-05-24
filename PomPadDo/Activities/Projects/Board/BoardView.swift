@@ -15,6 +15,7 @@ struct BoardView: View {
     @Bindable var project: Project
     
     @State private var searchText = ""
+    @State private var statusToEdit: Status?
     
     var searchResults: [Todo] {
         if searchText.isEmpty {
@@ -32,7 +33,27 @@ struct BoardView: View {
                     HStack {
                         VStack {
                             HStack {
-                                Text(status.name)
+                                #if os(macOS)
+                                Button {
+                                    statusToEdit = status
+                                } label: {
+                                    Text(status.name)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                .sheet(item: $statusToEdit, content: { status in
+                                    StatusSettingsView(status: status,
+                                                        project: self.project)
+                                })
+                                #else
+                                NavigationLink {
+                                    StatusSettingsView(status: status,
+                                                       project: self.project)
+                                } label: {
+                                    Text(status.name)
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                #endif
+                                
                                 Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
                                     .foregroundStyle(Color.gray)
                                     .font(.caption)

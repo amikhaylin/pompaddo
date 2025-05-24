@@ -19,6 +19,7 @@ struct ProjectTasksListView: View {
     
     @State private var searchText = ""
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
+    @State private var statusToEdit: Status?
     
     var searchResults: [Todo] {
         if searchText.isEmpty {
@@ -32,8 +33,10 @@ struct ProjectTasksListView: View {
         List(selection: $selectedTasks.tasks) {
             if let statuses = project.statuses, statuses.count > 0 {
                 ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
-                    @Bindable var status = status
-                    DisclosureGroup(status.name, isExpanded: $status.expanded) {
+                    DisclosureGroup(isExpanded: Binding<Bool>(
+                        get: { status.expanded },
+                        set: { newValue in status.expanded = newValue }
+                    )) {
                         ForEach(searchResults
                             .filter({ $0.status == status && $0.parentTask == nil })
                             .sorted(by: TasksQuery.defaultSorting),
@@ -67,6 +70,33 @@ struct ProjectTasksListView: View {
                                         set: { project.tasks = $0 })))
                                     .tag(task)
                             }
+                        }
+                    } label: {
+                        HStack {
+                            #if os(macOS)
+                            Button {
+                                statusToEdit = status
+                            } label: {
+                                Text(status.name)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .sheet(item: $statusToEdit, content: { status in
+                                StatusSettingsView(status: status,
+                                                    project: self.project)
+                            })
+                            #else
+                            NavigationLink {
+                                StatusSettingsView(status: status,
+                                                   project: self.project)
+                            } label: {
+                                Text(status.name)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            #endif
+                            
+                            Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
                         }
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in

@@ -92,7 +92,14 @@ struct ContentView: View {
                             .environmentObject(showInspector)
                             .environmentObject(selectedTasks)
                     } else {
-                        Text("Select a project")
+                        VStack {
+                            Image(systemName: "document.badge.clock")
+                                .resizable()
+                                .foregroundStyle(Color.gray)
+                                .frame(width: 100, height: 100)
+                            
+                            Text("Select a project")
+                        }
                     }
                 case .review:
                     ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
