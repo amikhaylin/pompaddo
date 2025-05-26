@@ -31,6 +31,7 @@ struct ProjectTasksListView: View {
     
     var body: some View {
         List(selection: $selectedTasks.tasks) {
+            // MARK:Show tasks with statuses
             if let statuses = project.statuses, statuses.count > 0 {
                 ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                     DisclosureGroup(isExpanded: Binding<Bool>(
@@ -108,8 +109,18 @@ struct ProjectTasksListView: View {
                         return true
                     }
                 }
+                .onMove(perform: { from, toInt in
+                    var statusList = project.getStatuses().sorted(by: { $0.order < $1.order })
+                    statusList.move(fromOffsets: from, toOffset: toInt)
+
+                    var order = 0
+                    for status in statusList {
+                        order += 1
+                        status.order = order
+                    }
+                })
             } else {
-                // Show tasks without statuses
+                // MARK:Show tasks without statuses
                 ForEach(CommonTaskListSections.allCases) { section in
                     DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
                         get: { groupsExpanded.contains(section.rawValue) },
