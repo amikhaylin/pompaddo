@@ -19,6 +19,7 @@ struct ProjectView: View {
     @Bindable var project: Project
     
     @State private var showSettings = false
+    @State private var newStatus: Status?
     
     var body: some View {
         NavigationStack {
@@ -74,6 +75,30 @@ struct ProjectView: View {
 
                 #if os(macOS)
                 Button {
+                    var status = Status(name: "", order: project.getStatuses().count + 1, doCompletion: false)
+                    
+                    project.statuses?.append(status)
+                    modelContext.insert(status)
+                    // if project has tasks and statuses count = 1 then connect all tasks to added status
+                    if project.getStatuses().count == 1 {
+                        for task in project.getTasks() {
+                            task.status = status
+                        }
+                    }
+                    
+                    newStatus = status
+                } label: {
+                    Label("Add new status", systemImage: "plus.rectangle.portrait")
+                }
+                .help("Add new status")
+                .sheet(item: $newStatus,
+                       onDismiss: { newStatus = nil },
+                       content: { status in
+                    StatusSettingsView(status: status,
+                                       project: self.project)
+                })
+                
+                Button {
                     showSettings.toggle()
                 } label: {
                     Label("Settings", systemImage: "gearshape")
@@ -84,12 +109,26 @@ struct ProjectView: View {
                                         project: self.project)
                 })
                 #else
+                Button {
+                    var status = Status(name: "", order: project.getStatuses().count + 1, doCompletion: false)
+                    
+                    project.statuses?.append(status)
+                    modelContext.insert(status)
+                    // if project has tasks and statuses count = 1 then connect all tasks to added status
+                    if project.getStatuses().count == 1 {
+                        for task in project.getTasks() {
+                            task.status = status
+                        }
+                    }
+                } label: {
+                    Label("Add new status", systemImage: "plus.rectangle.portrait")
+                }
+                
                 NavigationLink {
                     ProjectSettingsView(project: self.project)
                 } label: {
                     Label("Settings", systemImage: "gearshape")
                 }
-                .help("Settings")
                 
                 EditButton()
                 #endif
