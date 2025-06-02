@@ -48,9 +48,34 @@ class Project: Hashable {
     @Relationship(deleteRule: .cascade, inverse: \Todo.project)
     var tasks: [Todo]? = [Todo]()
     
-    init(name: String, note: String = "") {
+    init(name: String,
+         reviewDate: Date = Date(),
+         reviewDaysCount: Int = 7,
+         note: String = "",
+         projectViewMode: Int = 0,
+         group: ProjectGroup? = nil,
+         hasEstimate: Bool = false,
+         completedMoving: Bool = false,
+         showStatus: Bool = true,
+         showInReview: Bool = true,
+         order: Int = 0,
+         uid: String = UUID().uuidString,
+         statuses: [Status]? = [Status](),
+         tasks: [Todo]? = [Todo]()) {
         self.name = name
         self.note = note
+        self.reviewDate = reviewDate
+        self.reviewDaysCount = reviewDaysCount
+        self.projectViewMode = projectViewMode
+        self.group = group
+        self.hasEstimate = hasEstimate
+        self.completedMoving = completedMoving
+        self.showStatus = showStatus
+        self.showInReview = showInReview
+        self.order = order
+        self.uid = uid
+        self.statuses = statuses
+        self.tasks = tasks
     }
     
     func hash(into hasher: inout Hasher) {

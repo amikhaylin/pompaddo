@@ -17,8 +17,16 @@ class ProjectGroup: Hashable {
     
     @Relationship(inverse: \Project.group) var projects: [Project]? = [Project]()
     
-    init(name: String) {
+    init(name: String,
+         expanded: Bool = true,
+         order: Int = 0,
+         uid: String = UUID().uuidString,
+         projects: [Project]? = [Project]()) {
         self.name = name
+        self.expanded = expanded
+        self.order = order
+        self.uid = uid
+        self.projects = projects
     }
     
     func hash(into hasher: inout Hasher) {

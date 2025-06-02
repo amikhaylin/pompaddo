@@ -83,8 +83,14 @@ class Todo: Hashable {
          link: String = "",
          repeation: RepeationMode = RepeationMode.none,
          priority: Int = 0,
+         uid: String = UUID().uuidString,
          completionDate: Date? = nil,
-         alertDate: Date? = nil) {
+         alertDate: Date? = nil,
+         hasEstimate: Bool = false,
+         clarity: Int = 0,
+         baseTimeHours: Int = 0,
+         customRepeatValue: Int = 2,
+         customRepeatType: CustomRepeationType? = CustomRepeationType.days) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -99,6 +105,12 @@ class Todo: Hashable {
         self.priority = priority
         self.completionDate = completionDate
         self.alertDate = alertDate
+        self.hasEstimate = hasEstimate
+        self.clarity = clarity
+        self.baseTimeHours = baseTimeHours
+        self.uid = uid
+        self.customRepeatValue = customRepeatValue
+        self.customRepeatType = customRepeatType
     }
     
     func hash(into hasher: inout Hasher) {
@@ -118,7 +130,14 @@ extension Todo {
                         link: self.link,
                         repeation: self.repeation,
                         priority: self.priority,
-                        completionDate: self.completionDate)
+                        completionDate: self.completionDate,
+                        alertDate: self.alertDate,
+                        hasEstimate: self.hasEstimate,
+                        clarity: self.clarity,
+                        baseTimeHours: self.baseTimeHours,
+                        customRepeatValue: self.customRepeatValue,
+                        customRepeatType: self.customRepeatType)
+        
         task.customRepeatType = self.customRepeatType
         task.customRepeatValue = self.customRepeatValue
         if let subtasks = self.subtasks {
