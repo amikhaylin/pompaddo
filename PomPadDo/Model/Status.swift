@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Status {
+class Status: Hashable {
     var name: String = ""
     var order: Int = 0
     var doCompletion: Bool = false
@@ -39,5 +39,9 @@ class Status {
         self.project = project
         self.tasks = tasks
         self.uid = uid
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uid) // UUID
     }
 }
