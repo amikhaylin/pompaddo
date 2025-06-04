@@ -78,7 +78,7 @@ struct ProjectTasksListView: View {
                             Button {
                                 statusToEdit = status
                             } label: {
-                                Text(status.name)
+                                Text(status.name == "" ? "Unnamed" : status.name)
                             }
                             .buttonStyle(PlainButtonStyle())
                             .sheet(item: $statusToEdit, content: { status in
@@ -90,7 +90,7 @@ struct ProjectTasksListView: View {
                                 StatusSettingsView(status: status,
                                                    project: self.project)
                             } label: {
-                                Text(status.name)
+                                Text(status.name == "" ? "Unnamed" : status.name)
                             }
                             .buttonStyle(PlainButtonStyle())
                             #endif

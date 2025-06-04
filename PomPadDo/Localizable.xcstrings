@@ -75,6 +75,22 @@
     "3" : {
 
     },
+    "Add new status" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add new status"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить новый статус"
+          }
+        }
+      }
+    },
     "Add project to group" : {
       "localizations" : {
         "en" : {
