@@ -1,0 +1,54 @@
+{
+  "fill" : {
+    "automatic-gradient" : "extended-srgb:0.00000,0.47843,1.00000,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill" : {
+            "solid" : "srgb:1.00000,1.00000,1.00000,1.00000"
+          },
+          "image-name" : "checkmark.png",
+          "name" : "checkmark",
+          "position" : {
+            "scale" : 0.75,
+            "translation-in-points" : [
+              31.17822265625,
+              -170.1070556640625
+            ]
+          }
+        },
+        {
+          "image-name" : "tomato.png",
+          "name" : "tomato",
+          "position" : {
+            "scale" : 0.55,
+            "translation-in-points" : [
+              -3.042724609375,
+              -180.6705322265625
+            ]
+          }
+        },
+        {
+          "image-name" : "raccoon3.png",
+          "name" : "raccoon3"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}
