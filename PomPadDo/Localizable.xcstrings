@@ -2,10 +2,10 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "shouldTranslate" : false
     },
     " %lld" : {
-
+      "shouldTranslate" : false
     },
     "%@" : {
       "localizations" : {
@@ -15,7 +15,8 @@
             "value" : "%@"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "%@→%@" : {
       "localizations" : {
@@ -25,7 +26,8 @@
             "value" : "%1$@→%2$@"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "%lld" : {
       "localizations" : {
@@ -35,10 +37,11 @@
             "value" : "%lld"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "%lld %%" : {
-
+      "shouldTranslate" : false
     },
     "%lldh" : {
       "localizations" : {
@@ -48,7 +51,8 @@
             "value" : "%lld ч"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "%lldh%lldm " : {
       "localizations" : {
@@ -64,16 +68,17 @@
             "value" : "%1$lld ч %2$lld м"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "←%@" : {
-
+      "shouldTranslate" : false
     },
     "0.01" : {
-
+      "shouldTranslate" : false
     },
     "3" : {
-
+      "shouldTranslate" : false
     },
     "Add new status" : {
       "localizations" : {
