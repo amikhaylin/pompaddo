@@ -107,8 +107,7 @@ struct EditTaskView: View {
             Section("Reminder") {
                 if showingReminderDatePicker {
                     Group {
-                        Text("Remind at")
-                        DatePicker("",
+                        DatePicker("Reminder",
                                    selection: $alertDate)
                         
                         if task.alertDate == nil {

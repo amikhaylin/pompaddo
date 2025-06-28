@@ -119,6 +119,8 @@
 		4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */; };
 		4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */; };
 		4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */; };
+		4DB2AD102E0EA34C00CD105D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
+		4DB2AD112E0EA34C00CD105D /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D0A88632C25953900E39E38 /* Localizable.xcstrings */; };
 		4DB6E8712DC14FC000C12DEE /* ProjectsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6E8702DC14FC000C12DEE /* ProjectsQuery.swift */; };
 		4DB6E8722DC14FC000C12DEE /* ProjectsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6E8702DC14FC000C12DEE /* ProjectsQuery.swift */; };
 		4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBAD6152BECBEEF002666BD /* Credits.rtf */; };
@@ -239,8 +241,8 @@
 
 /* Begin PBXFileReference section */
 		4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.watch.widgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D07D1622E0F19E4006EF60C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
 		4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerScene.swift; sourceTree = "<group>"; };
-		4D0A88622C2594FC00E39E38 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
 		4D0A88632C25953900E39E38 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		4D15DFDF2D60ACCC008AFFC0 /* Refresher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refresher.swift; sourceTree = "<group>"; };
 		4D15DFE72D60AE15008AFFC0 /* ProjectToReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectToReviewView.swift; sourceTree = "<group>"; };
@@ -970,6 +972,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB2AD112E0EA34C00CD105D /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,6 +990,7 @@
 			files = (
 				4D8F04EE2C2964B500B7698B /* InfoPlist.xcstrings in Resources */,
 				4D7A1FEE2C077DFD009052AE /* ToolbarItemIcon.png in Resources */,
+				4DB2AD102E0EA34C00CD105D /* Localizable.xcstrings in Resources */,
 				4D7A1FE32C0778E4009052AE /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1242,7 +1246,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				4D7A1FE22C0778E4009052AE /* Base */,
-				4D0A88622C2594FC00E39E38 /* ru */,
+				4D07D1622E0F19E4006EF60C /* en */,
 			);
 			name = SafariExtensionViewController.xib;
 			sourceTree = "<group>";
