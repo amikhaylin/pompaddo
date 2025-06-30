@@ -39,7 +39,14 @@
     },
     "NSHumanReadableDescription" : {
       "comment" : "Human readable description",
+      "extractionState" : "extracted_with_value",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "This is PomPadDo Extension. With it you can send page links to your PomPadDo Inbox"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "needs_review",

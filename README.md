@@ -85,3 +85,39 @@ Students and anyone craving order in their workflow.
 #### Languages Supported
 - English 🇺🇸
 - Russian 🇷🇺
+
+##### AI-based localizations
+- Arabic
+- Bulgarian 
+- Chinese
+- Croatian
+- Czech
+- Danish
+- Dutch
+- Finnish
+- French
+- German
+- Greek
+- Hebrew
+- Hungarian
+- Indonesian
+- Italian
+- Japanese
+- Korean
+- Latvian
+- Lithuanian
+- Malay
+- Persian
+- Polish
+- Portuguese
+- Romanian
+- Slovak
+- Slovenian
+- Spanish
+- Swedish
+- Tamil
+- Thai
+- Turkish
+- Ukrainian
+- Urdu
+- Vietnamese
