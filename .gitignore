@@ -22,6 +22,7 @@ Package.resolved
 .build/
 
 .vscode/
+.xpolyglot_localizations/
 
 # CocoaPods
 #

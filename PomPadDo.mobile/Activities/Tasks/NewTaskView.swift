@@ -30,12 +30,8 @@ struct NewTaskView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Text("Add task to ")
-                        .font(.headline)
-                    Text("\(getListName())")
-                        .font(.headline)
-                }
+                Text("Add task to \(getListName())")
+                    .font(.headline)
                 
                 TextField("Task name", text: $taskName)
                     .focused($focusField, equals: .taskName)
