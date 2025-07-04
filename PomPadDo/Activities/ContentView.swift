@@ -35,10 +35,9 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItemGroup {
                     Button {
+                        try? modelContext.save()
+                        
                         refresher.refresh.toggle()
-                        if checkSyncIssues() {
-                            fixSyncIssues()
-                        }
                     } label: {
                         Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
                     }
@@ -158,11 +157,9 @@ struct ContentView: View {
             }
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) { 
+            if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) {
+                try? modelContext.save()
                 refresher.refresh.toggle()
-                if checkSyncIssues() {
-                    fixSyncIssues()
-                }
             }
         }
         .inspector(isPresented: $showInspector.show) {
@@ -175,32 +172,6 @@ struct ContentView: View {
             }
             .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
         }
-    }
-    
-    private func fixSyncIssues() {
-        for project in projects {
-            for task in project.tasks ?? [] where task.status == nil {
-                if task.completed {
-                    if let status = project.getStatuses().first(where: { $0.doCompletion }) {
-                        task.status = status
-                    } else {
-                        task.status = project.getDefaultStatus()
-                    }
-                } else {
-                    task.status = project.getDefaultStatus()
-                }
-            }
-        }
-    }
-    
-    private func checkSyncIssues() -> Bool {
-        for project in projects {
-            for task in project.tasks ?? [] where task.status == nil {
-                return true
-            }
-        }
-        
-        return false
     }
 }
 

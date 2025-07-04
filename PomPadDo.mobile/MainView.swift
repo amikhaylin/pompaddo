@@ -18,6 +18,7 @@ enum MainViewTabs {
 
 struct MainView: View {
     @Environment(\.scenePhase) var scenePhase
+    @Environment(\.modelContext) private var modelContext
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
@@ -149,6 +150,7 @@ struct MainView: View {
             }
             .onChange(of: scenePhase) { oldPhase, newPhase in
                 if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
+                    try? modelContext.save()
                     refresher.refresh.toggle()
                     timer.removeNotification()
                 } else if newPhase == .background && timer.state == .running {

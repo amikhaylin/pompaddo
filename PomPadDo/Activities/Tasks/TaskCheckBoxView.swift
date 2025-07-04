@@ -18,7 +18,7 @@ struct TaskCheckBoxView: View {
             if !task.completed {
                 task.complete(modelContext: modelContext)
             } else {
-                task.reactivate()
+                task.reactivate(modelContext: modelContext)
             }
             #if os(watchOS)
             WidgetCenter.shared.reloadAllTimelines()

@@ -56,6 +56,7 @@ struct ProjectToReviewView: View {
                     if selectedTasks.tasks.count > 0 {
                         selectedTasks.tasks.removeAll()
                     }
+                    try? modelContext.save()
                     presentationMode.wrappedValue.dismiss()
                 }
             }

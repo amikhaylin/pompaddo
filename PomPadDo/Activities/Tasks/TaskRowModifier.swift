@@ -33,9 +33,9 @@ struct TaskRowModifier: ViewModifier {
         .dropDestination(for: Todo.self) { tasks, _ in
             // Attach dropped task as subtask
             for dropTask in tasks where dropTask != task {
-                dropTask.disconnectFromAll()
+                dropTask.disconnectFromAll(modelContext: modelContext)
                 dropTask.parentTask = task
-                dropTask.reconnect()
+                dropTask.reconnect(modelContext: modelContext)
             }
             return true
         }
@@ -43,7 +43,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.dueDate = nil
+                        task.setDueDate(modelContext: modelContext, dueDate: nil)
                         if list == .today || list == .tomorrow {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -51,7 +51,6 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 } else {
-                    task.dueDate = nil
                     if list == .today || list == .tomorrow {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
@@ -66,7 +65,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
                         if list == .tomorrow {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -74,7 +73,7 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 } else {
-                    task.dueDate = Calendar.current.startOfDay(for: Date())
+                    task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
                     if list == .tomorrow {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
@@ -89,7 +88,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         if list == .today {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -97,7 +96,7 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 } else {
-                    task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                    task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                     if list == .today {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
@@ -112,7 +111,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.nextWeek()
+                        task.nextWeek(modelContext: modelContext)
                         if list == .today || list == .tomorrow {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -120,7 +119,7 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 } else {
-                    task.nextWeek()
+                    task.nextWeek(modelContext: modelContext)
                     if list == .today || list == .tomorrow {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
@@ -134,7 +133,7 @@ struct TaskRowModifier: ViewModifier {
             
             if task.repeation != .none {
                 Button {
-                    task.skip()
+                    task.skip(modelContext: modelContext)
                     
                     if list == .today || list == .tomorrow {
                         if let date = task.dueDate {
@@ -243,6 +242,7 @@ struct TaskRowModifier: ViewModifier {
                               mainTask: task)
                 .id(refresher.refresh)
                 .refreshable {
+                    try? modelContext.save()
                     refresher.refresh.toggle()
                 }
                 .environmentObject(showInspector)
@@ -267,7 +267,7 @@ struct TaskRowModifier: ViewModifier {
                 }
                 
                 Button {
-                    task.disconnectFromParentTask()
+                    task.disconnectFromParentTask(modelContext: modelContext)
                     task.parentTask = nil
                 } label: {
                     Text("Extract subtask")
@@ -352,7 +352,7 @@ struct TaskRowModifier: ViewModifier {
                 let newTask = task.copy(modelContext: modelContext)
                 
                 modelContext.insert(newTask)
-                newTask.reconnect()
+                newTask.reconnect(modelContext: modelContext)
                 
                 tasks.append(newTask)
             } label: {

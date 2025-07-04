@@ -45,6 +45,7 @@ struct TaskSwipeModifier: ViewModifier {
                                       mainTask: task)
                         .id(refresher.refresh)
                         .refreshable {
+                            try? modelContext.save()
                             refresher.refresh.toggle()
                         }
                         .environmentObject(showInspector)
