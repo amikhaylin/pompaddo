@@ -10,6 +10,7 @@ import SwiftData
 import WidgetKit
 
 struct SectionsListView: View {
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     var tasks: [Todo]
     var projects: [Project]
@@ -58,6 +59,7 @@ struct SectionsListView: View {
                                 task.parentTask = nil
                                 parentTask.subtasks?.remove(at: index)
                             }
+                            try? modelContext.save()
                         }
                         return true
                     }
@@ -73,7 +75,7 @@ struct SectionsListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.dueDate = Calendar.current.startOfDay(for: Date())
+                            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
                         }
                         return true
                     }
@@ -95,7 +97,7 @@ struct SectionsListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+                            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         }
                         return true
                     }
@@ -145,6 +147,7 @@ struct SectionsListView: View {
                     .dropDestination(for: Project.self) { projects, _ in
                         for project in projects {
                             project.group = nil
+                            try? modelContext.save()
                         }
                         return true
                     }

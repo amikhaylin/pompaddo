@@ -93,7 +93,7 @@ struct BoardView: View {
                         }
                         .dropDestination(for: Todo.self) { tasks, _ in
                             for task in tasks {
-                                task.disconnectFromParentTask()
+                                task.disconnectFromParentTask(modelContext: modelContext)
                                 task.parentTask = nil
                                 task.project = project
                                 project.tasks?.append(task)
@@ -103,14 +103,15 @@ struct BoardView: View {
                                         task.complete(modelContext: modelContext)
                                     }
                                 } else {
-                                    task.reactivate()
+                                    task.reactivate(modelContext: modelContext)
                                 }
                                 
                                 if status.clearDueDate {
-                                    task.dueDate = nil
+                                    task.setDueDate(modelContext: modelContext, dueDate: nil)
                                 }
                                 
                                 task.status = status
+                                try? modelContext.save()
                             }
                             return true
                         }

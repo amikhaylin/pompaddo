@@ -31,7 +31,7 @@ struct ProjectTasksListView: View {
     
     var body: some View {
         List(selection: $selectedTasks.tasks) {
-            // MARK:Show tasks with statuses
+            // MARK: Show tasks with statuses
             if let statuses = project.statuses, statuses.count > 0 {
                 ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
                     DisclosureGroup(isExpanded: Binding<Bool>(
@@ -120,7 +120,7 @@ struct ProjectTasksListView: View {
                     }
                 })
             } else {
-                // MARK:Show tasks without statuses
+                // MARK: Show tasks without statuses
                 ForEach(CommonTaskListSections.allCases) { section in
                     DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
                         get: { groupsExpanded.contains(section.rawValue) },
@@ -168,7 +168,7 @@ struct ProjectTasksListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.disconnectFromParentTask()
+                            task.disconnectFromParentTask(modelContext: modelContext)
                             task.parentTask = nil
                             
                             if section == CommonTaskListSections.completed {
@@ -176,8 +176,10 @@ struct ProjectTasksListView: View {
                                     task.complete(modelContext: modelContext)
                                 }
                             } else {
-                                task.reactivate()
+                                task.reactivate(modelContext: modelContext)
                             }
+                            
+                            try? modelContext.save()
                         }
                         return true
                     }

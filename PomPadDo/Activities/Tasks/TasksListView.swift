@@ -88,7 +88,7 @@ struct TasksListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.disconnectFromParentTask()
+                            task.disconnectFromParentTask(modelContext: modelContext)
                             task.parentTask = nil
                             setDueDate(task: task)
                             
@@ -97,8 +97,9 @@ struct TasksListView: View {
                                     task.complete(modelContext: modelContext)
                                 }
                             } else {
-                                task.reactivate()
+                                task.reactivate(modelContext: modelContext)
                             }
+                            try? modelContext.save()
                         }
                         return true
                     }
@@ -196,9 +197,9 @@ struct TasksListView: View {
         case .inbox:
             break
         case .today:
-            task.dueDate = Calendar.current.startOfDay(for: Date())
+            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
         case .tomorrow:
-            task.dueDate = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
+            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
         case .projects:
             break
         case .review:

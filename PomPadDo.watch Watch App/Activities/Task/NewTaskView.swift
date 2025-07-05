@@ -22,7 +22,7 @@ struct NewTaskView: View {
                     let task = Todo(name: taskName)
                     
                     if dueToday {
-                        task.dueDate = Calendar.current.startOfDay(for: Date())
+                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
                     }
                     
                     modelContext.insert(task)

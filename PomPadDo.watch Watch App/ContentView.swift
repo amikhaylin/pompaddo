@@ -32,6 +32,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 }
 
 struct ContentView: View {
+    @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var refresher: Refresher
     
@@ -78,6 +79,7 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
+                        try? modelContext.save()
                         refresher.refresh.toggle()
                     } label: {
                         Image(systemName: "arrow.triangle.2.circlepath")
@@ -106,6 +108,7 @@ struct ContentView: View {
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
+                try? modelContext.save()
                 refresher.refresh.toggle()
             }
         }

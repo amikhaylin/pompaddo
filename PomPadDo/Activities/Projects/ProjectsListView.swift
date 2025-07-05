@@ -37,6 +37,7 @@ struct ProjectsListView: View {
                         task.project = project
                         task.status = project.getDefaultStatus()
                         project.tasks?.append(task)
+                        try? modelContext.save()
                     }
                     return true
                 }
@@ -101,6 +102,7 @@ struct ProjectsListView: View {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
                                 project.tasks?.append(task)
+                                try? modelContext.save()
                             }
                             return true
                         }
@@ -169,6 +171,7 @@ struct ProjectsListView: View {
                 .dropDestination(for: Project.self) { projects, _ in
                     for project in projects where project.group == nil || project.group != group {
                         project.group = group
+                        try? modelContext.save()
                     }
                     return true
                 }

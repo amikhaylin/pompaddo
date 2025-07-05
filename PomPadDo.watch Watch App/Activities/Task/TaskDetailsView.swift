@@ -93,7 +93,7 @@ struct TaskDetailsView: View {
                 if !task.completed {
                     task.complete(modelContext: modelContext)
                 } else {
-                    task.reactivate()
+                    task.reactivate(modelContext: modelContext)
                 }
                 WidgetCenter.shared.reloadAllTimelines()
                 presentationMode.wrappedValue.dismiss()
@@ -102,8 +102,7 @@ struct TaskDetailsView: View {
             }
             
             Button {
-                let date = Calendar.current.startOfDay(for: Date())
-                task.dueDate = date
+                task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
                 if list == .tomorrow {
                     if let index = tasks.firstIndex(of: task) {
                         tasks.remove(at: index)
@@ -116,8 +115,7 @@ struct TaskDetailsView: View {
             }
             
             Button {
-                let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                task.dueDate = date
+                task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                 if list == .today {
                     if let index = tasks.firstIndex(of: task) {
                         tasks.remove(at: index)
@@ -130,7 +128,7 @@ struct TaskDetailsView: View {
             }
         
             Button {
-                task.nextWeek()
+                task.nextWeek(modelContext: modelContext)
                 if list == .today || list == .tomorrow {
                     if let index = tasks.firstIndex(of: task) {
                         tasks.remove(at: index)
@@ -146,7 +144,7 @@ struct TaskDetailsView: View {
             }
             
             Button {
-                task.dueDate = nil
+                task.setDueDate(modelContext: modelContext, dueDate: nil)
                 if list == .today || list == .tomorrow {
                     if let index = tasks.firstIndex(of: task) {
                         tasks.remove(at: index)
@@ -160,7 +158,7 @@ struct TaskDetailsView: View {
             
             if task.repeation != .none {
                 Button {
-                    task.skip()
+                    task.skip(modelContext: modelContext)
                     
                     if list == .today || list == .tomorrow {
                         if let date = task.dueDate {

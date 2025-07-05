@@ -11,6 +11,7 @@ import SwiftData
 import EventKit
 
 struct EditTaskView: View {
+    @Environment(\.modelContext) private var modelContext
     @Bindable var task: Todo
     @State private var dueDate = Date()
     @State private var showingDatePicker = false
@@ -38,32 +39,30 @@ struct EditTaskView: View {
                                    displayedComponents: .date)
                         .onChange(of: dueDate, { _, newValue in
                             if showingDatePicker {
-                                task.dueDate = newValue
+                                task.setDueDate(modelContext: modelContext, dueDate: newValue)
                             }
                         })
                         
                         Button {
-                            let date = Calendar.current.startOfDay(for: Date())
-                            task.dueDate = date
+                            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
                         } label: {
                             Label("Today", systemImage: "calendar")
                         }
                         
                         Button {
-                            let date = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))
-                            task.dueDate = date
+                            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         } label: {
                             Label("Tomorrow", systemImage: "sunrise")
                         }
                         
                         Button {
-                            task.nextWeek()
+                            task.nextWeek(modelContext: modelContext)
                         } label: {
                             Label("Next week", systemImage: "calendar.badge.clock")
                         }
                         
                         Button {
-                            task.dueDate = nil
+                            task.setDueDate(modelContext: modelContext, dueDate: nil)
                             showingDatePicker = false
                         } label: {
                             Label("Clear due date", systemImage: "clear")
@@ -73,7 +72,7 @@ struct EditTaskView: View {
                     Button {
                         withAnimation {
                             showingDatePicker.toggle()
-                            task.dueDate = Calendar.current.startOfDay(for: dueDate)
+                            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: dueDate))
                         }
                     } label: {
                         Label("Set due Date", systemImage: "calendar")
