@@ -55,7 +55,14 @@
       "layers" : [
         {
           "image-name" : "PomPadDo_bkg.png",
-          "name" : "PomPadDo_bkg"
+          "name" : "PomPadDo_bkg",
+          "position" : {
+            "scale" : 1.2,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
         }
       ],
       "shadow" : {
