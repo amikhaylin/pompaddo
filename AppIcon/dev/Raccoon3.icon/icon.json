@@ -31,8 +31,38 @@
           }
         },
         {
-          "image-name" : "raccoon3.png",
-          "name" : "raccoon3"
+          "image-name" : "raccoon3_.png",
+          "name" : "raccoon3_"
+        }
+      ],
+      "position" : {
+        "scale" : 1,
+        "translation-in-points" : [
+          -1.88134765625,
+          38.94171142578125
+        ]
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "image-name" : "PomPadDo_bkg.png",
+          "name" : "PomPadDo_bkg",
+          "position" : {
+            "scale" : 1.2,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
         }
       ],
       "shadow" : {
