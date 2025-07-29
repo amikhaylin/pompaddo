@@ -40,33 +40,37 @@ struct MainView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            Group {
-                switch tab {
-                case .tasks:
-                    ContentView()
-                        .environmentObject(refresher)
-                        .environmentObject(timer)
-                        .environmentObject(focusTask)
-                case .focus:
-                    FocusTimerView(focusMode: $focusMode)
-                        .id(refresh)
-                        .environmentObject(timer)
-                        .environmentObject(focusTask)
-                        .refreshable {
-                            refresh.toggle()
-                        }
-                case.settings:
-                    SettingsView()
+            VStack {
+                Group {
+                    switch tab {
+                    case .tasks:
+                        ContentView()
+                            .environmentObject(refresher)
+                            .environmentObject(timer)
+                            .environmentObject(focusTask)
+                    case .focus:
+                        FocusTimerView(focusMode: $focusMode)
+                            .id(refresh)
+                            .environmentObject(timer)
+                            .environmentObject(focusTask)
+                            .refreshable {
+                                refresh.toggle()
+                            }
+                    case.settings:
+                        SettingsView()
+                    }
                 }
-            }
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
+                
+                HStack {
+                    Spacer()
+                    
                     Button {
                         tab = .tasks
                     } label: {
                         Image(systemName: "checkmark.square")
-                            .foregroundStyle(tab == .tasks ? Color.blue : Color.gray)
                     }
+                    .modifier(ConditionalButtonStyle(condition: tab == .tasks))
+                    .buttonBorderShape(.capsule)
                     .accessibility(identifier: "TasksSection")
                     
                     Spacer()
@@ -77,6 +81,8 @@ struct MainView: View {
                         FocusTabItemView(tab: $tab)
                             .environmentObject(timer)
                     }
+                    .modifier(ConditionalButtonStyle(condition: tab == .focus))
+                    .buttonBorderShape(.capsule)
                     .accessibility(identifier: "FocusSection")
                     
                     Spacer()
@@ -85,8 +91,10 @@ struct MainView: View {
                         tab = .settings
                     } label: {
                         Image(systemName: "gear")
-                            .foregroundStyle(tab == .settings ? Color.blue : Color.gray)
                     }
+                    .modifier(ConditionalButtonStyle(condition: tab == .settings))
+                    .buttonBorderShape(.capsule)
+                    .accessibility(identifier: "SettingsSection")
                     
                     Spacer()
                     
@@ -104,6 +112,10 @@ struct MainView: View {
                             .presentationCompactAdaptation(.popover)
                             .environmentObject(refresher)
                     })
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.capsule)
+                    
+                    Spacer()
                 }
             }
             .onAppear {
