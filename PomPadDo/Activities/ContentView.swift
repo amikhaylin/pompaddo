@@ -28,10 +28,17 @@ struct ContentView: View {
     
     var body: some View {
         NavigationSplitView {
-            SectionsListView(tasks: tasks,
-                             projects: projects,
-                             selectedSideBarItem: $selectedSideBarItem,
-                             selectedProject: $selectedProject)
+            VStack {
+                SectionsListView(tasks: tasks,
+                                 projects: projects,
+                                 selectedSideBarItem: $selectedSideBarItem)
+                .frame(height: 150)
+                
+                ProjectsListView(selectedProject: $selectedProject,
+                                 projects: projects,
+                                 selectedSideBarItem: $selectedSideBarItem)
+                .id(refresher.refresh)
+            }
             .toolbar {
                 ToolbarItemGroup {
                     Button {

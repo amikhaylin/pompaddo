@@ -371,7 +371,7 @@ struct ProjectTaskModifier: ViewModifier {
             })
             .popover(item: $renameTask, attachmentAnchor: .point(.topLeading), content: { editTask in
                 EditTaskNameView(task: editTask)
-                    .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
+                    .frame(minWidth: 200, maxWidth: 300, maxHeight: 140)
                     .presentationCompactAdaptation(.popover)
             })
             #endif
