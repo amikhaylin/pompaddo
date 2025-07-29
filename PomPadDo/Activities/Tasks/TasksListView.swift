@@ -161,7 +161,7 @@ struct TasksListView: View {
         #else
         .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
             NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
-                .frame(minWidth: 200, maxHeight: 180)
+                .frame(minWidth: 200, maxHeight: 220)
                 .presentationCompactAdaptation(.popover)
         })
         #endif

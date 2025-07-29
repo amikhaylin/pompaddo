@@ -366,7 +366,7 @@ struct ProjectTaskModifier: ViewModifier {
                                 get: { task.subtasks ?? [] },
                                 set: { task.subtasks = $0 }
                             ))
-                    .frame(minWidth: 200, maxHeight: 180)
+                    .frame(minWidth: 200, maxHeight: 220)
                     .presentationCompactAdaptation(.popover)
             })
             .popover(item: $renameTask, attachmentAnchor: .point(.topLeading), content: { editTask in
