@@ -108,7 +108,7 @@ struct MainView: View {
                     .keyboardShortcut("i", modifiers: [.command])
                     .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottomTrailing), content: {
                         NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
-                            .frame(width: geometry.size.width * 0.9, height: 180)
+                            .frame(width: geometry.size.width * 0.9, height: 220)
                             .presentationCompactAdaptation(.popover)
                             .environmentObject(refresher)
                     })
@@ -162,7 +162,6 @@ struct MainView: View {
             }
             .onChange(of: scenePhase) { oldPhase, newPhase in
                 if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
-                    try? modelContext.save()
                     refresher.refresh.toggle()
                     timer.removeNotification()
                 } else if newPhase == .background && timer.state == .running {

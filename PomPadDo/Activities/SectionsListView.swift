@@ -162,14 +162,6 @@ struct SectionsListView: View {
                 }
                 WidgetCenter.shared.reloadAllTimelines()
             }
-            #if os(macOS)
-            .sheet(isPresented: $newProjectIsShowing) {
-                NewProjectView(isVisible: self.$newProjectIsShowing)
-            }
-            .sheet(isPresented: $newProjectGroupShow) {
-                NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-            }
-            #endif
         }
     }
 }

@@ -165,7 +165,6 @@ struct ContentView: View {
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) {
-                try? modelContext.save()
                 refresher.refresh.toggle()
             }
         }

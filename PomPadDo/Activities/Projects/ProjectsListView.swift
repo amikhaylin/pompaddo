@@ -11,7 +11,6 @@ import SwiftData
 struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @AppStorage("projectsExpanded") var projectsExpanded = true
     
     @Binding var selectedProject: Project?
     
@@ -19,6 +18,7 @@ struct ProjectsListView: View {
     @State private var editProjectName: Project?
     @State private var newProjectIsShowing = false
     @State private var newProjectGroupShow = false
+    @AppStorage("projectsExpanded") var projectsExpanded = true
     
     var projects: [Project]
     @Query var groups: [ProjectGroup]
@@ -29,64 +29,64 @@ struct ProjectsListView: View {
         List(selection: $selectedProject) {
             DisclosureGroup(isExpanded: $projectsExpanded) {
                 ForEach(projects.filter({ $0.group == nil })
-                                .sorted(by: ProjectsQuery.defaultSorting), id: \.self) { project in
-                    NavigationLink(value: SideBarItem.projects) {
-                        Text(project.name)
-                            .badge(project.getTasks().filter({ $0.completed == false }).count)
-                    }
-                    .tag(project as Project)
-                    .draggable(project)
-                    .dropDestination(for: Todo.self) { tasks, _ in
-                        for task in tasks {
-                            task.project = project
-                            task.status = project.getDefaultStatus()
-                            project.tasks?.append(task)
-                            try? modelContext.save()
+                    .sorted(by: ProjectsQuery.defaultSorting), id: \.self) { project in
+                        NavigationLink(value: SideBarItem.projects) {
+                            Text(project.name)
+                                .badge(project.getTasks().filter({ $0.completed == false }).count)
                         }
-                        return true
-                    }
-                    .contextMenu {
-                        Button {
-                            editProjectName = project
-                        } label: {
-                            Image(systemName: "pencil")
-                            Text("Rename project")
-                        }
-                        
-                        Menu {
-                            ForEach(groups.sorted(by: { $0.order < $1.order })) { group in
-                                Button {
-                                    project.group = group
-                                } label: {
-                                    Text(group.name)
-                                }
-                                .accessibility(identifier: "\(group.name)ContextMenuButton")
+                        .tag(project as Project)
+                        .draggable(project)
+                        .dropDestination(for: Todo.self) { tasks, _ in
+                            for task in tasks {
+                                task.project = project
+                                task.status = project.getDefaultStatus()
+                                project.tasks?.append(task)
+                                try? modelContext.save()
                             }
-                        } label: {
-                            Image(systemName: "folder")
-                            Text("Add project to group")
+                            return true
                         }
+                        .contextMenu {
+                            Button {
+                                editProjectName = project
+                            } label: {
+                                Image(systemName: "pencil")
+                                Text("Rename project")
+                            }
+                            
+                            Menu {
+                                ForEach(groups.sorted(by: { $0.order < $1.order })) { group in
+                                    Button {
+                                        project.group = group
+                                    } label: {
+                                        Text(group.name)
+                                    }
+                                    .accessibility(identifier: "\(group.name)ContextMenuButton")
+                                }
+                            } label: {
+                                Image(systemName: "folder")
+                                Text("Add project to group")
+                            }
+                            
+                            Button {
+                                deleteProject(project)
+                            } label: {
+                                Image(systemName: "trash")
+                                    .foregroundStyle(Color.red)
+                                Text("Delete project")
+                            }
+                        }
+                    }
+                    .onMove(perform: { from, toInt in
+                        var projectsList = projects.filter({ $0.group == nil })
+                            .sorted(by: ProjectsQuery.defaultSorting)
+                        projectsList.move(fromOffsets: from, toOffset: toInt)
                         
-                        Button {
-                            deleteProject(project)
-                        } label: {
-                            Image(systemName: "trash")
-                                .foregroundStyle(Color.red)
-                            Text("Delete project")
+                        var order = 0
+                        for project in projectsList {
+                            order += 1
+                            project.order = order
                         }
-                    }
-                }
-                .onMove(perform: { from, toInt in
-                    var projectsList = projects.filter({ $0.group == nil })
-                                               .sorted(by: ProjectsQuery.defaultSorting)
-                    projectsList.move(fromOffsets: from, toOffset: toInt)
-
-                    var order = 0
-                    for project in projectsList {
-                        order += 1
-                        project.order = order
-                    }
-                })
+                    })
                 
                 ForEach(groups.sorted(by: { $0.order < $1.order })) { group in
                     DisclosureGroup(isExpanded: Binding<Bool>(
@@ -94,62 +94,62 @@ struct ProjectsListView: View {
                         set: { newValue in group.expanded = newValue }
                     )) {
                         ForEach(projects.filter({ $0.group == group })
-                                        .sorted(by: ProjectsQuery.defaultSorting), id: \.self) { project in
-                            NavigationLink(value: SideBarItem.projects) {
-                                Text(project.name)
-                                    .badge(project.getTasks().filter({ $0.completed == false }).count)
-                            }
-                            .tag(project as Project)
-                            .draggable(project)
-                            .dropDestination(for: Todo.self) { tasks, _ in
-                                for task in tasks {
-                                    task.project = project
-                                    task.status = project.getDefaultStatus()
-                                    project.tasks?.append(task)
-                                    try? modelContext.save()
+                            .sorted(by: ProjectsQuery.defaultSorting), id: \.self) { project in
+                                NavigationLink(value: SideBarItem.projects) {
+                                    Text(project.name)
+                                        .badge(project.getTasks().filter({ $0.completed == false }).count)
                                 }
-                                return true
-                            }
-                            .contextMenu {
-                                Button {
-                                    editProjectName = project
-                                } label: {
-                                    Image(systemName: "pencil")
-                                    Text("Rename project")
-                                }
-                                
-                                Button {
-                                    project.group = nil
-                                    if let lastProject = projects.filter({ $0.group == nil })
-                                                                 .sorted(by: ProjectsQuery.defaultSorting)
-                                                                 .last {
-                                        project.order = lastProject.order + 1
+                                .tag(project as Project)
+                                .draggable(project)
+                                .dropDestination(for: Todo.self) { tasks, _ in
+                                    for task in tasks {
+                                        task.project = project
+                                        task.status = project.getDefaultStatus()
+                                        project.tasks?.append(task)
+                                        try? modelContext.save()
                                     }
-                                } label: {
-                                    Image(systemName: "folder")
-                                    Text("Remove project from group")
+                                    return true
                                 }
+                                .contextMenu {
+                                    Button {
+                                        editProjectName = project
+                                    } label: {
+                                        Image(systemName: "pencil")
+                                        Text("Rename project")
+                                    }
+                                    
+                                    Button {
+                                        project.group = nil
+                                        if let lastProject = projects.filter({ $0.group == nil })
+                                            .sorted(by: ProjectsQuery.defaultSorting)
+                                            .last {
+                                            project.order = lastProject.order + 1
+                                        }
+                                    } label: {
+                                        Image(systemName: "folder")
+                                        Text("Remove project from group")
+                                    }
+                                    
+                                    Button {
+                                        deleteProject(project)
+                                    } label: {
+                                        Image(systemName: "trash")
+                                            .foregroundStyle(Color.red)
+                                        Text("Delete project")
+                                    }
+                                }
+                            }
+                            .onMove(perform: { from, toInt in
+                                var projectsList = projects.filter({ $0.group == group })
+                                    .sorted(by: ProjectsQuery.defaultSorting)
+                                projectsList.move(fromOffsets: from, toOffset: toInt)
                                 
-                                Button {
-                                    deleteProject(project)
-                                } label: {
-                                    Image(systemName: "trash")
-                                        .foregroundStyle(Color.red)
-                                    Text("Delete project")
+                                var order = 0
+                                for project in projectsList {
+                                    order += 1
+                                    project.order = order
                                 }
-                            }
-                        }
-                        .onMove(perform: { from, toInt in
-                            var projectsList = projects.filter({ $0.group == group })
-                                                       .sorted(by: ProjectsQuery.defaultSorting)
-                            projectsList.move(fromOffsets: from, toOffset: toInt)
-
-                            var order = 0
-                            for project in projectsList {
-                                order += 1
-                                project.order = order
-                            }
-                        })
+                            })
                     } label: {
                         Text(group.name)
                             .contextMenu {
@@ -183,14 +183,13 @@ struct ProjectsListView: View {
                 .onMove(perform: { from, toInt in
                     var groupsList = groups.sorted(by: { $0.order < $1.order })
                     groupsList.move(fromOffsets: from, toOffset: toInt)
-
+                    
                     var order = 0
                     for group in groupsList {
                         order += 1
                         group.order = order
                     }
                 })
-
             } label: {
                 HStack {
                     Image(systemName: "list.bullet")
@@ -228,16 +227,15 @@ struct ProjectsListView: View {
                     }
                     #endif
                 }
-            }
-            .foregroundColor(Color("ProjectsColor"))
-            .dropDestination(for: Project.self) { projects, _ in
-                for project in projects {
-                    project.group = nil
-                    try? modelContext.save()
+                .dropDestination(for: Project.self) { projects, _ in
+                    for project in projects {
+                        project.group = nil
+                    }
+                    return true
                 }
-                return true
             }
         }
+        .foregroundColor(Color("ProjectsColor"))
         .listStyle(SidebarListStyle())
 
         #if os(macOS)
