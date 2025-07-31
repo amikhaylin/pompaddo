@@ -79,7 +79,6 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        try? modelContext.save()
                         refresher.refresh.toggle()
                     } label: {
                         Image(systemName: "arrow.triangle.2.circlepath")

@@ -63,6 +63,17 @@ struct ProjectView: View {
                 }
                 .help("Add task to current list ⌘⌥I")
                 .keyboardShortcut("i", modifiers: [.command, .option])
+                #if os(iOS)
+                .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.top), content: {
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
+                                tasks: Binding(
+                                    get: { project.tasks ?? [] },
+                                    set: { project.tasks = $0 }
+                                ))
+                        .frame(minWidth: 200, maxHeight: 220)
+                        .presentationCompactAdaptation(.popover)
+                })
+                #endif
                 
                 Button {
                     deleteItems()
@@ -158,16 +169,6 @@ struct ProjectView: View {
                             set: { project.tasks = $0 }
                         ))
         }
-        #else
-        .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
-                        tasks: Binding(
-                            get: { project.tasks ?? [] },
-                            set: { project.tasks = $0 }
-                        ))
-                .frame(minWidth: 200, maxHeight: 220)
-                .presentationCompactAdaptation(.popover)
-        })
         #endif
     }
     

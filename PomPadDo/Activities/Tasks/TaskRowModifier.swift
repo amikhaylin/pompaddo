@@ -7,6 +7,7 @@
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 
 import SwiftUI
 import SwiftData
@@ -33,9 +34,9 @@ struct TaskRowModifier: ViewModifier {
         .dropDestination(for: Todo.self) { tasks, _ in
             // Attach dropped task as subtask
             for dropTask in tasks where dropTask != task {
-                dropTask.disconnectFromAll(modelContext: modelContext)
+                dropTask.disconnectFromAll()
                 dropTask.parentTask = task
-                dropTask.reconnect(modelContext: modelContext)
+                dropTask.reconnect()
             }
             return true
         }
@@ -43,7 +44,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.setDueDate(modelContext: modelContext, dueDate: nil)
+                        task.setDueDate(dueDate: nil)
                         if list == .today || list == .tomorrow {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -65,7 +66,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
+                        task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                         if list == .tomorrow {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -73,7 +74,7 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 } else {
-                    task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
+                    task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                     if list == .tomorrow {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
@@ -88,7 +89,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                        task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         if list == .today {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -96,7 +97,7 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 } else {
-                    task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                    task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                     if list == .today {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
@@ -111,7 +112,7 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
-                        task.nextWeek(modelContext: modelContext)
+                        task.nextWeek()
                         if list == .today || list == .tomorrow {
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
@@ -119,7 +120,7 @@ struct TaskRowModifier: ViewModifier {
                         }
                     }
                 } else {
-                    task.nextWeek(modelContext: modelContext)
+                    task.nextWeek()
                     if list == .today || list == .tomorrow {
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
@@ -133,7 +134,7 @@ struct TaskRowModifier: ViewModifier {
             
             if task.repeation != .none {
                 Button {
-                    task.skip(modelContext: modelContext)
+                    task.skip()
                     
                     if list == .today || list == .tomorrow {
                         if let date = task.dueDate {
@@ -242,7 +243,6 @@ struct TaskRowModifier: ViewModifier {
                               mainTask: task)
                 .id(refresher.refresh)
                 .refreshable {
-                    try? modelContext.save()
                     refresher.refresh.toggle()
                 }
                 .environmentObject(showInspector)
@@ -267,7 +267,7 @@ struct TaskRowModifier: ViewModifier {
                 }
                 
                 Button {
-                    task.disconnectFromParentTask(modelContext: modelContext)
+                    task.disconnectFromParentTask()
                     task.parentTask = nil
                 } label: {
                     Text("Extract subtask")
@@ -352,7 +352,7 @@ struct TaskRowModifier: ViewModifier {
                 let newTask = task.copy(modelContext: modelContext)
                 
                 modelContext.insert(newTask)
-                newTask.reconnect(modelContext: modelContext)
+                newTask.reconnect()
                 
                 tasks.append(newTask)
             } label: {
@@ -419,3 +419,4 @@ struct TaskRowModifier: ViewModifier {
 // swiftlint:enable function_body_length
 // swiftlint:enable cyclomatic_complexity
 // swiftlint:enable type_body_length
+// swiftlint:enable file_length

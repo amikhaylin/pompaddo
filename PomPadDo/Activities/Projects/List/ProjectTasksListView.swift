@@ -168,7 +168,7 @@ struct ProjectTasksListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.disconnectFromParentTask(modelContext: modelContext)
+                            task.disconnectFromParentTask()
                             task.parentTask = nil
                             
                             if section == CommonTaskListSections.completed {
@@ -176,10 +176,8 @@ struct ProjectTasksListView: View {
                                     task.complete(modelContext: modelContext)
                                 }
                             } else {
-                                task.reactivate(modelContext: modelContext)
+                                task.reactivate()
                             }
-                            
-                            try? modelContext.save()
                         }
                         return true
                     }

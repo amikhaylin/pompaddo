@@ -53,7 +53,6 @@ struct FocusTimerView: View {
                 }.pickerStyle(.segmented)
              
                 Button {
-                    try? modelContext.save()
                     refresher.refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath")

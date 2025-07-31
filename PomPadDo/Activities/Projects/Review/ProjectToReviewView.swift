@@ -23,7 +23,7 @@ struct ProjectToReviewView: View {
                 Button("Delete project", role: .destructive) {
                     deletionRequested.toggle()
                 }
-                .popover(isPresented: $deletionRequested, attachmentAnchor: .point(.top)) {
+                .popover(isPresented: $deletionRequested, attachmentAnchor: .point(.bottom)) {
                     VStack {
                         Text("This project will be permanently deleted")
                         Button(role: .destructive) {
@@ -56,7 +56,6 @@ struct ProjectToReviewView: View {
                     if selectedTasks.tasks.count > 0 {
                         selectedTasks.tasks.removeAll()
                     }
-                    try? modelContext.save()
                     presentationMode.wrappedValue.dismiss()
                 }
             }

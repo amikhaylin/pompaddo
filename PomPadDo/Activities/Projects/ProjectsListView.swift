@@ -4,6 +4,7 @@
 //
 //  Created by Andrey Mikhaylin on 06.05.2024.
 //
+// swiftlint:disable type_body_length
 
 import SwiftUI
 import SwiftData
@@ -47,7 +48,7 @@ struct ProjectsListView: View {
                 .accessibility(identifier: "NewProjectButton")
                 .help("Create project")
                 #if os(iOS)
-                .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
+                .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomTrailing)) {
                     NewProjectView(isVisible: self.$newProjectIsShowing)
                         .frame(minWidth: 200, maxWidth: 300, maxHeight: 160)
                         .presentationCompactAdaptation(.popover)
@@ -63,7 +64,7 @@ struct ProjectsListView: View {
                 .accessibility(identifier: "NewProjectGroupButton")
                 .help("Create group")
                 #if os(iOS)
-                .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
+                .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomTrailing)) {
                     NewProjectGroupView(isVisible: self.$newProjectGroupShow)
                         .frame(minWidth: 200, maxWidth: 300, maxHeight: 140)
                         .presentationCompactAdaptation(.popover)
@@ -97,7 +98,6 @@ struct ProjectsListView: View {
                                     task.project = project
                                     task.status = project.getDefaultStatus()
                                     project.tasks?.append(task)
-                                    try? modelContext.save()
                                 }
                                 return true
                             }
@@ -162,7 +162,6 @@ struct ProjectsListView: View {
                                             task.project = project
                                             task.status = project.getDefaultStatus()
                                             project.tasks?.append(task)
-                                            try? modelContext.save()
                                         }
                                         return true
                                     }
@@ -231,7 +230,6 @@ struct ProjectsListView: View {
                         .dropDestination(for: Project.self) { projects, _ in
                             for project in projects where project.group == nil || project.group != group {
                                 project.group = group
-                                try? modelContext.save()
                             }
                             return true
                         }
@@ -308,3 +306,4 @@ struct ProjectsListView: View {
                             selectedSideBarItem: $selectedSideBarItem)
         .modelContainer(previewer!.container)
 }
+// swiftlint:enable type_body_length

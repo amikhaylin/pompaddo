@@ -43,7 +43,7 @@ struct NewTaskView: View {
                     self.isVisible = false
                     let task = Todo(name: taskName, link: link)
                     if dueToday {
-                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
+                        task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                     } else if project == nil && mainTask == nil {
                         setDueDate(task: task)
                     }
@@ -58,7 +58,7 @@ struct NewTaskView: View {
                     }
 
                     modelContext.insert(task)
-                    task.reconnect(modelContext: modelContext)
+                    task.reconnect()
                     
                     tasks.append(task)
                     
@@ -75,9 +75,9 @@ struct NewTaskView: View {
         case .inbox:
             break
         case .today:
-            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
+            task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
         case .tomorrow:
-            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+            task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
         case .projects:
             break
         case .review:

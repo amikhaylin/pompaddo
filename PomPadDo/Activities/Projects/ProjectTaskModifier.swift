@@ -32,11 +32,11 @@ struct ProjectTaskModifier: ViewModifier {
             .dropDestination(for: Todo.self) { tasks, _ in
                 // Attach dropped task as subtask
                 for dropTask in tasks where dropTask != task {
-                    dropTask.disconnectFromAll(modelContext: modelContext)
+                    dropTask.disconnectFromAll()
                     dropTask.project = nil
                     dropTask.status = nil
                     dropTask.parentTask = task
-                    dropTask.reconnect(modelContext: modelContext)
+                    dropTask.reconnect()
                 }
                 return true
             }
@@ -44,10 +44,10 @@ struct ProjectTaskModifier: ViewModifier {
                 Button {
                     if selectedTasksSet.count > 0 {
                         for task in selectedTasksSet {
-                            task.setDueDate(modelContext: modelContext, dueDate: nil)
+                            task.setDueDate(dueDate: nil)
                         }
                     } else {
-                        task.setDueDate(modelContext: modelContext, dueDate: nil)
+                        task.setDueDate(dueDate: nil)
                     }
                 } label: {
                     Image(systemName: "clear")
@@ -57,10 +57,10 @@ struct ProjectTaskModifier: ViewModifier {
                 Button {
                     if selectedTasksSet.count > 0 {
                         for task in selectedTasksSet {
-                            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
+                            task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                         }
                     } else {
-                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
+                        task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                     }
                 } label: {
                     Image(systemName: "calendar")
@@ -70,10 +70,10 @@ struct ProjectTaskModifier: ViewModifier {
                 Button {
                     if selectedTasksSet.count > 0 {
                         for task in selectedTasksSet {
-                            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                            task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         }
                     } else {
-                        task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                        task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                     }
                 } label: {
                     Image(systemName: "sunrise")
@@ -83,10 +83,10 @@ struct ProjectTaskModifier: ViewModifier {
                 Button {
                     if selectedTasksSet.count > 0 {
                         for task in selectedTasksSet {
-                            task.nextWeek(modelContext: modelContext)
+                            task.nextWeek()
                         }
                     } else {
-                        task.nextWeek(modelContext: modelContext)
+                        task.nextWeek()
                     }
                 } label: {
                     Image(systemName: "calendar.badge.clock")
@@ -97,10 +97,10 @@ struct ProjectTaskModifier: ViewModifier {
                     Button {
                         if selectedTasksSet.count > 0 {
                             for task in selectedTasksSet {
-                                task.skip(modelContext: modelContext)
+                                task.skip()
                             }
                         } else {
-                            task.skip(modelContext: modelContext)
+                            task.skip()
                         }
                     } label: {
                         Image(systemName: "arrow.uturn.forward")
@@ -195,7 +195,6 @@ struct ProjectTaskModifier: ViewModifier {
                                   mainTask: task)
                     .id(refresher.refresh)
                     .refreshable {
-                        try? modelContext.save()
                         refresher.refresh.toggle()
                     }
                     .environmentObject(showInspector)
@@ -207,7 +206,7 @@ struct ProjectTaskModifier: ViewModifier {
                 
                 if task.parentTask != nil {
                     Button {
-                        task.disconnectFromParentTask(modelContext: modelContext)
+                        task.disconnectFromParentTask()
                         task.parentTask = nil
                     } label: {
                         Text("Extract subtask")
@@ -229,7 +228,7 @@ struct ProjectTaskModifier: ViewModifier {
                 Button {
                     if selectedTasksSet.count > 0 {
                         for task in selectedTasksSet {
-                            task.disconnectFromAll(modelContext: modelContext)
+                            task.disconnectFromAll()
                             task.project = nil
                             task.status = nil
                             if let index = tasks.firstIndex(of: task) {
@@ -237,7 +236,7 @@ struct ProjectTaskModifier: ViewModifier {
                             }
                         }
                     } else {
-                        task.disconnectFromAll(modelContext: modelContext)
+                        task.disconnectFromAll()
                         task.project = nil
                         task.status = nil
                         if let index = tasks.firstIndex(of: task) {
@@ -315,7 +314,7 @@ struct ProjectTaskModifier: ViewModifier {
                 Button {
                     let newTask = task.copy(modelContext: modelContext)
                     modelContext.insert(newTask)
-                    newTask.reconnect(modelContext: modelContext)
+                    newTask.reconnect()
                     
                     tasks.append(newTask)
                 } label: {
