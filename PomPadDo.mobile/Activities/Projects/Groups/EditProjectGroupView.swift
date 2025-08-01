@@ -10,8 +10,8 @@ import SwiftData
 
 struct EditProjectGroupView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Bindable var group: ProjectGroup
-    @State private var groupName = ""
+    @State private var group: ProjectGroup
+    @State private var name: String
     
     enum FocusField: Hashable {
         case groupName
@@ -22,7 +22,7 @@ struct EditProjectGroupView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Group name", text: $group.name)
+                TextField("Group name", text: $name)
                     .focused($focusField, equals: .groupName)
                     .task {
                         self.focusField = .groupName
@@ -30,13 +30,25 @@ struct EditProjectGroupView: View {
             }
             .padding()
             .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                
                 ToolbarItem(placement: .primaryAction) {
                     Button("OK") {
+                        group.name = name
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
         }
+    }
+    
+    init(group: ProjectGroup) {
+        self.group = group
+        self.name = group.name
     }
 }
 

@@ -10,14 +10,22 @@ import SwiftData
 
 struct EditProjectNameView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Bindable var project: Project
+    @State private var project: Project
+    @State private var name: String
     
     var body: some View {
         VStack {
-            TextField("Project name", text: $project.name)
+            TextField("Project name", text: $name)
             
             HStack {
+                Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .keyboardShortcut(.cancelAction)
+                Spacer()
+                
                 Button("OK") {
+                    project.name = name
                     presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.defaultAction)
@@ -25,6 +33,11 @@ struct EditProjectNameView: View {
         }
         .frame(width: 400, height: 100)
         .padding()
+    }
+    
+    init(project: Project) {
+        self.project = project
+        self.name = project.name
     }
 }
 
