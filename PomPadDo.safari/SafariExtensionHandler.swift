@@ -34,7 +34,7 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
             tab?.getActivePage(completionHandler: { page in
                 page?.getPropertiesWithCompletionHandler({ property in
                     if let prop = property, let title = prop.title, let link = prop.url {
-                        NSWorkspace.shared.open(URL(string: "pompaddo:new?title=\(title)&link=\(link.absoluteString)")!)
+                        NSWorkspace.shared.open(URL(string: "pompaddo://new?title=\(title)&link=\(link.absoluteString)")!)
                     }
                 })
             })

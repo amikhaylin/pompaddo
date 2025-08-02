@@ -102,8 +102,21 @@ struct ContentView: View {
             NewTaskView()
         }
         .onOpenURL { url in
-            guard url.scheme == "pompaddo", url.host == "addtoinbox" else { return }
-            addToInbox.toggle()
+            if url.scheme == "pompaddo" && url.host == "addtoinbox" {
+                addToInbox.toggle()
+            } else if url.scheme == "pompaddo" && url.host == "new" {
+                print(url.absoluteString)
+                let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+                if let title = components?.queryItems?.first(where: { $0.name == "title" })?.value {
+                    let task = Todo(name: title)
+                    if let link = components?.queryItems?.first(where: { $0.name == "link" })?.value, let linkurl = URL(string: link) {
+                        task.link = linkurl.absoluteString
+                    }
+                    modelContext.insert(task)
+                }
+            } else {
+                return
+            }
         }
         .onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
