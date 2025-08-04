@@ -16,15 +16,12 @@ struct FocusTabItemView: View {
         Group {
             if timer.state == .idle {
                 Image(systemName: "target")
-                    .foregroundStyle(tab == .focus ? Color.blue : Color.gray)
             } else {
                 HStack {
                     if timer.mode == .work {
                         Image(systemName: "target")
-                            .foregroundStyle(tab == .focus ? Color.blue : Color.red)
                     } else {
                         Image(systemName: "cup.and.saucer.fill")
-                            .foregroundStyle(tab == .focus ? Color.blue : Color.green)
                     }
                     if timer.state == .running {
                         Text(timerCount)
