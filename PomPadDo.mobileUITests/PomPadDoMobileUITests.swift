@@ -217,13 +217,19 @@ final class PomPadDoMobileUITests: XCTestCase {
         snapshot("01TodayScreen")
         
         app.buttons["AddTaskToInboxButton"].tap()
-        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
-        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Купить кофе" : "Buy coffee")
+        app.popovers.textFields["TaskName"].tap()
+        let exp3 = expectation(description: "Test after 5 seconds")
+        _ = XCTWaiter.wait(for: [exp3], timeout: 2.0)
+
+        app.popovers.textFields["TaskName"].typeText(locale == "ru" ? "Купить кофе" : "Buy coffee")
+
+//        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+//        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Купить кофе" : "Buy coffee")
         snapshot("07InboxTask")
         app/*@START_MENU_TOKEN@*/.buttons["SaveTask"]/*[[".otherElements[\"SaveTask\"].buttons.firstMatch",".otherElements",".buttons[\"OK\"]",".buttons[\"SaveTask\"]"],[[[-1,3],[-1,2],[-1,1,1],[-1,0]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.tap()
         
-        let exp3 = expectation(description: "Test after 5 seconds")
-        _ = XCTWaiter.wait(for: [exp3], timeout: 5.0)
+        let exp4 = expectation(description: "Test after 5 seconds")
+        _ = XCTWaiter.wait(for: [exp4], timeout: 5.0)
     }
 }
 // swiftlint:enable function_body_length

@@ -63,6 +63,8 @@ clean(true)
 # Show simulator window
 headless(false)
 
+concurrent_simulators(false)
+
 stop_after_first_error(false)
 
 testplan("PomPadDo.mobile")
