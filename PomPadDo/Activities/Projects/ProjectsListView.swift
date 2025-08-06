@@ -48,7 +48,7 @@ struct ProjectsListView: View {
                 .accessibility(identifier: "NewProjectButton")
                 .help("Create project")
                 #if os(iOS)
-                .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomTrailing)) {
+                .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.top)) {
                     NewProjectView(isVisible: self.$newProjectIsShowing)
                         .frame(minWidth: 200, maxWidth: 300, maxHeight: 160)
                         .presentationCompactAdaptation(.popover)
@@ -64,7 +64,7 @@ struct ProjectsListView: View {
                 .accessibility(identifier: "NewProjectGroupButton")
                 .help("Create group")
                 #if os(iOS)
-                .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomTrailing)) {
+                .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.top)) {
                     NewProjectGroupView(isVisible: self.$newProjectGroupShow)
                         .frame(minWidth: 200, maxWidth: 300, maxHeight: 140)
                         .presentationCompactAdaptation(.popover)
