@@ -21,14 +21,23 @@ struct ContentView: View {
     
     @Query var tasks: [Todo]
     @Query var projects: [Project]
+    @Query var groups: [ProjectGroup]
     
     var body: some View {
         NavigationSplitView {
-            SectionsListView(tasks: tasks,
-                             projects: projects,
-                             selectedSideBarItem: $selectedSideBarItem,
-                             selectedProject: $selectedProject)
+            VStack {
+                SectionsListView(tasks: tasks,
+                                 projects: projects,
+                                 selectedSideBarItem: $selectedSideBarItem)
                 .id(refresher.refresh)
+                .frame(height: 270)
+                
+                ProjectsListView(selectedProject: $selectedProject,
+                                 projects: projects,
+                                 selectedSideBarItem: $selectedSideBarItem)
+                .id(refresher.refresh)
+                .contentMargins(.vertical, 10)
+            }
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
         } detail: {
             switch selectedSideBarItem {

@@ -16,16 +16,12 @@ struct SectionsListView: View {
     var projects: [Project]
     
     @Binding var selectedSideBarItem: SideBarItem?
-    @Binding var selectedProject: Project?
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     @State var badgeManager = BadgeManager()
-    @State private var newProjectIsShowing = false
-    @State private var newProjectGroupShow = false
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     @State var projectListSize: CGSize = .zero
-    @Query var groups: [ProjectGroup]
     
     var body: some View {
         GeometryReader { geometry in
@@ -102,81 +98,7 @@ struct SectionsListView: View {
                         return true
                     }
                 case .projects:
-                    HStack {
-                        Button {
-                            projectsExpanded.toggle()
-                        } label: {
-                            Image(systemName: "list.bullet")
-                            Text("Projects")
-                            Spacer()
-                            Image(systemName: projectsExpanded ? "chevron.down" : "chevron.forward")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        
-                        Button {
-                            newProjectIsShowing.toggle()
-                        } label: {
-                            Image(systemName: "plus.circle")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .help("Create project")
-#if os(iOS)
-                        .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.bottomLeading)) {
-                            NewProjectView(isVisible: self.$newProjectIsShowing)
-                                .frame(minWidth: 200, maxWidth: 300, maxHeight: 130)
-                                .presentationCompactAdaptation(.popover)
-                        }
-#endif
-                        
-                        Button {
-                            newProjectGroupShow.toggle()
-                        } label: {
-                            Image(systemName: "folder.circle")
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        .help("Create group")
-#if os(iOS)
-                        .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.bottomLeading)) {
-                            NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-                                .frame(minWidth: 200, maxWidth: 300, maxHeight: 100)
-                                .presentationCompactAdaptation(.popover)
-                        }
-#endif
-                    }
-                    .foregroundColor(Color("ProjectsColor"))
-                    .dropDestination(for: Project.self) { projects, _ in
-                        for project in projects {
-                            project.group = nil
-                            try? modelContext.save()
-                        }
-                        return true
-                    }
-                    .badge({
-                        return projects.count
-                    }())
-                    
-                    if projectsExpanded {
-                        ProjectsListView(selectedProject: $selectedProject,
-                                         projects: projects,
-                                         selectedSideBarItem: $selectedSideBarItem)
-                        .id(refresher.refresh)
-                        #if os(macOS)
-                        .frame(width: geometry.size.width * 0.95,
-                               height: {
-                                    let calculatedHeight = CGFloat((projects.count + groups.count) * 30)
-                                    let availableHeight = max(geometry.size.height - 190, 30)
-                                    return calculatedHeight > availableHeight ? availableHeight : calculatedHeight
-                                }())
-                        #else
-                        .frame(width: geometry.size.width,
-                               height: {
-                                    let calculatedHeight = CGFloat((projects.count + groups.count) * 43)
-                                    let availableHeight = max(geometry.size.height - 330, 268)
-                                    return calculatedHeight > availableHeight ? availableHeight : calculatedHeight
-                                }())
-                        .contentMargins(.vertical, 0)
-                        #endif
-                    }
+                    EmptyView()
                 case .review:
                     NavigationLink(value: item) {
                         HStack {
@@ -240,21 +162,12 @@ struct SectionsListView: View {
                 }
                 WidgetCenter.shared.reloadAllTimelines()
             }
-#if os(macOS)
-            .sheet(isPresented: $newProjectIsShowing) {
-                NewProjectView(isVisible: self.$newProjectIsShowing)
-            }
-            .sheet(isPresented: $newProjectGroupShow) {
-                NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-            }
-#endif
         }
     }
 }
 
 #Preview {
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
-    @Previewable @State var selectedProject: Project?
     @Previewable @State var refresher = Refresher()
     
     let previewer = try? Previewer()
@@ -263,8 +176,7 @@ struct SectionsListView: View {
     
     SectionsListView(tasks: tasks,
                             projects: projects,
-                            selectedSideBarItem: $selectedSideBarItem,
-                            selectedProject: $selectedProject)
+                            selectedSideBarItem: $selectedSideBarItem)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)
 }

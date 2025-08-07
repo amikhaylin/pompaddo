@@ -165,7 +165,7 @@ struct ProjectView: View {
                             get: { project.tasks ?? [] },
                             set: { project.tasks = $0 }
                         ))
-                .frame(minWidth: 200, maxHeight: 180)
+                .frame(minWidth: 200, maxHeight: 220)
                 .presentationCompactAdaptation(.popover)
         })
         #endif
