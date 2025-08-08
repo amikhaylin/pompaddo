@@ -4,6 +4,7 @@
 //
 //  Created by Andrey Mikhaylin on 13.02.2024.
 //
+// swiftlint:disable type_body_length
 
 import SwiftUI
 import SwiftData
@@ -116,7 +117,6 @@ struct PomPadDoMacApp: App {
                 Divider()
                 
                 Button {
-                    try? sharedModelContainer.mainContext.save()
                     refresher.refresh.toggle()
                 } label: {
                     Image(systemName: "arrow.triangle.2.circlepath")
@@ -152,7 +152,7 @@ struct PomPadDoMacApp: App {
                 
                 Button {
                     for task in selectedTasks.tasks {
-                        task.setDueDate(modelContext: sharedModelContainer.mainContext, dueDate: nil)
+                        task.setDueDate(dueDate: nil)
                     }
                     refresher.refresh.toggle()
                 } label: {
@@ -164,7 +164,7 @@ struct PomPadDoMacApp: App {
                 
                 Button {
                     for task in selectedTasks.tasks {
-                        task.setDueDate(modelContext: sharedModelContainer.mainContext, dueDate: Calendar.current.startOfDay(for: Date()))
+                        task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                     }
                     refresher.refresh.toggle()
                 } label: {
@@ -176,7 +176,7 @@ struct PomPadDoMacApp: App {
                 
                 Button {
                     for task in selectedTasks.tasks {
-                        task.setDueDate(modelContext: sharedModelContainer.mainContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                        task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                     }
                     refresher.refresh.toggle()
                 } label: {
@@ -188,7 +188,7 @@ struct PomPadDoMacApp: App {
                 
                 Button {
                     for task in selectedTasks.tasks {
-                        task.nextWeek(modelContext: sharedModelContainer.mainContext)
+                        task.nextWeek()
                     }
                     refresher.refresh.toggle()
                 } label: {
@@ -257,7 +257,6 @@ struct PomPadDoMacApp: App {
                         Button {
                             for task in selectedTasks.tasks {
                                 task.priority = priority
-                                try? sharedModelContainer.mainContext.save()
                             }
                             refresher.refresh.toggle()
                         } label: {
@@ -288,7 +287,7 @@ struct PomPadDoMacApp: App {
                         let newTask = task.copy(modelContext: sharedModelContainer.mainContext)
                         
                         sharedModelContainer.mainContext.insert(newTask)
-                        newTask.reconnect(modelContext: sharedModelContainer.mainContext)
+                        newTask.reconnect()
                     }
                     
                     refresher.refresh.toggle()
@@ -389,3 +388,4 @@ struct PomPadDoMacApp: App {
         }
     }
 }
+// swiftlint:enable type_body_length

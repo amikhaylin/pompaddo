@@ -148,26 +148,23 @@ extension Todo {
                 modelContext.insert(newSubtask)
             }
         }
-        try? modelContext.save()
         return task
     }
     
-    func setDueDate(modelContext: ModelContext, dueDate: Date?) {
+    func setDueDate(dueDate: Date?) {
         self.dueDate = dueDate
-        try? modelContext.save()
     }
     
-    func reconnect(modelContext: ModelContext) {
+    func reconnect() {
         if let project = self.project {
             project.tasks?.append(self)
         }
         if let parentTask = self.parentTask {
             parentTask.subtasks?.append(self)
         }
-        try? modelContext.save()
     }
     
-    func disconnectFromAll(modelContext: ModelContext) {
+    func disconnectFromAll() {
         if self.status != nil {
             self.status = nil
         }
@@ -177,24 +174,22 @@ extension Todo {
         if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
             parentTask.subtasks?.remove(at: index)
         }
-        try? modelContext.save()
     }
     
-    func disconnectFromParentTask(modelContext: ModelContext) {
+    func disconnectFromParentTask() {
         if let parentTask = self.parentTask, let index = parentTask.subtasks?.firstIndex(of: self) {
             parentTask.subtasks?.remove(at: index)
         }
-        try? modelContext.save()
     }
     
     func complete(modelContext: ModelContext) {
         if repeation != .none {
             let newTask = self.copy(modelContext: modelContext)
             
-            newTask.skip(modelContext: modelContext)
+            newTask.skip()
 
             modelContext.insert(newTask)
-            newTask.reconnect(modelContext: modelContext)
+            newTask.reconnect()
             
             if let status = self.status {
                 newTask.status = status
@@ -209,11 +204,9 @@ extension Todo {
                 self.status = status
             }
         }
-        
-        try? modelContext.save()
     }
     
-    func skip(modelContext: ModelContext) {
+    func skip() {
         guard let dueDate = self.dueDate else { return }
         guard repeation != .none else { return }
         
@@ -235,11 +228,9 @@ extension Todo {
                                                         to: Calendar.current.startOfDay(for: dueDate))
             }
         }
-        
-        try? modelContext.save()
     }
     
-    func nextWeek(modelContext: ModelContext) {
+    func nextWeek() {
         let dueDate = Date()
         
         let weekday = Calendar.current.component(.weekday, from: dueDate)
@@ -247,14 +238,11 @@ extension Todo {
         self.dueDate = Calendar.current.date(byAdding: .day,
                                              value: (7 - (weekday - startWeek)),
                                              to: Calendar.current.startOfDay(for: dueDate))
-        
-        try? modelContext.save()
     }
     
-    func reactivate(modelContext: ModelContext) {
+    func reactivate() {
         self.completed = false
         self.completionDate = nil
-        try? modelContext.save()
     }
     
     // TODO: BE REMOVED WHEN `.cascade` is fixed
@@ -267,7 +255,6 @@ extension Todo {
                 context.delete(task)
             }
         }
-        try? context.save()
     }
     
     func getTotalFocus() -> Int {
@@ -350,7 +337,7 @@ extension Todo {
                       context: ModelContext) {
         
         if self.parentTask != nil {
-            self.disconnectFromParentTask(modelContext: context)
+            self.disconnectFromParentTask()
             self.parentTask = nil
             self.project = project
         }
@@ -360,7 +347,7 @@ extension Todo {
                 self.complete(modelContext: context)
             }
         } else {
-            self.reactivate(modelContext: context)
+            self.reactivate()
         }
         
         if status.clearDueDate {
@@ -368,6 +355,5 @@ extension Todo {
         }
         
         self.status = status
-        try? context.save()
     }
 }

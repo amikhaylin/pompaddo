@@ -47,7 +47,6 @@ struct ContentView: View {
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
                 .refreshable {
-                    try? modelContext.save()
                     refresher.refresh.toggle()
                 }
                 .environmentObject(showInspector)
@@ -60,7 +59,6 @@ struct ContentView: View {
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
                 .refreshable {
-                    try? modelContext.save()
                     refresher.refresh.toggle()
                 }
                 .environmentObject(showInspector)
@@ -73,7 +71,6 @@ struct ContentView: View {
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
                 .refreshable {
-                    try? modelContext.save()
                     refresher.refresh.toggle()
                 }
                 .environmentObject(showInspector)

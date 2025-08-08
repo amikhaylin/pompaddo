@@ -42,8 +42,6 @@ struct ContentView: View {
             .toolbar {
                 ToolbarItemGroup {
                     Button {
-                        try? modelContext.save()
-                        
                         refresher.refresh.toggle()
                     } label: {
                         Label("Refresh", systemImage: "arrow.triangle.2.circlepath")

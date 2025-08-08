@@ -88,7 +88,7 @@ struct TasksListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.disconnectFromParentTask(modelContext: modelContext)
+                            task.disconnectFromParentTask()
                             task.parentTask = nil
                             setDueDate(task: task)
                             
@@ -97,9 +97,8 @@ struct TasksListView: View {
                                     task.complete(modelContext: modelContext)
                                 }
                             } else {
-                                task.reactivate(modelContext: modelContext)
+                                task.reactivate()
                             }
-                            try? modelContext.save()
                         }
                         return true
                     }
@@ -117,6 +116,13 @@ struct TasksListView: View {
                 .accessibility(identifier: "AddToCurrentList")
                 .help("Add task to current list ⌘⌥I")
                 .keyboardShortcut("i", modifiers: [.command, .option])
+                #if os(iOS)
+                .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
+                        .frame(minWidth: 200, maxHeight: 220)
+                        .presentationCompactAdaptation(.popover)
+                })
+                #endif
 
                 Button {
                     deleteItems()
@@ -158,12 +164,6 @@ struct TasksListView: View {
         .sheet(isPresented: $newTaskIsShowing) {
             NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
         }
-        #else
-        .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
-                .frame(minWidth: 200, maxHeight: 220)
-                .presentationCompactAdaptation(.popover)
-        })
         #endif
     }
     
@@ -197,9 +197,9 @@ struct TasksListView: View {
         case .inbox:
             break
         case .today:
-            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.startOfDay(for: Date()))
+            task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
         case .tomorrow:
-            task.setDueDate(modelContext: modelContext, dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+            task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
         case .projects:
             break
         case .review:
