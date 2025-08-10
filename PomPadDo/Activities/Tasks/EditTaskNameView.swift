@@ -10,14 +10,21 @@ import SwiftData
 
 struct EditTaskNameView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Bindable var task: Todo
+    @State private var task: Todo
+    @State private var name: String
     
     var body: some View {
         VStack {
-            TextField("Task", text: $task.name)
+            TextField("Task", text: $name)
             
             HStack {
+                Button("Cancel") {
+                    presentationMode.wrappedValue.dismiss()
+                }
+                .keyboardShortcut(.cancelAction)
+                Spacer()
                 Button("OK") {
+                    task.name = name
                     presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.defaultAction)
@@ -25,6 +32,11 @@ struct EditTaskNameView: View {
         }
         .frame(width: 400, height: 100)
         .padding()
+    }
+    
+    init(task: Todo) {
+        self.task = task
+        self.name = task.name
     }
 }
 

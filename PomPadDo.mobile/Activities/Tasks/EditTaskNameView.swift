@@ -10,7 +10,8 @@ import SwiftData
 
 struct EditTaskNameView: View {
     @Environment(\.presentationMode) var presentationMode
-    @Bindable var task: Todo
+    @State private var task: Todo
+    @State private var name: String
     
     enum FocusField: Hashable {
         case taskName
@@ -21,7 +22,7 @@ struct EditTaskNameView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Task", text: $task.name)
+                TextField("Task", text: $name)
                     .focused($focusField, equals: .taskName)
                     .task {
                         self.focusField = .taskName
@@ -29,13 +30,25 @@ struct EditTaskNameView: View {
             }
             .padding()
             .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
+                
                 ToolbarItem(placement: .primaryAction) {
                     Button("OK") {
+                        task.name = name
                         presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
         }
+    }
+    
+    init(task: Todo) {
+        self.task = task
+        self.name = task.name
     }
 }
 
