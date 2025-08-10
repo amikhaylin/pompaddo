@@ -18,7 +18,6 @@ struct NewTaskView: View {
     @State private var dueToday = false
     @State var project: Project?
     @State var mainTask: Todo?
-    @Binding var tasks: [Todo]
     
     enum FocusField: Hashable {
         case taskName
@@ -77,8 +76,6 @@ struct NewTaskView: View {
 
                         modelContext.insert(task)
                         task.reconnect()
-
-                        tasks.append(task)
                     }
                     .accessibility(identifier: "SaveTask")
                 }
@@ -122,7 +119,7 @@ struct NewTaskView: View {
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
     
-    return NewTaskView(isVisible: $isVisible, list: .inbox, tasks: $tasks)
+    return NewTaskView(isVisible: $isVisible, list: .inbox)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)
 }

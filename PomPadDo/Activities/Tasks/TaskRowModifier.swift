@@ -23,7 +23,6 @@ struct TaskRowModifier: ViewModifier {
     @Binding var selectedTasksSet: Set<Todo>
     var projects: [Project]
     var list: SideBarItem
-    @Binding var tasks: [Todo]
     @State private var showAddSubtask = false
     @Query var groups: [ProjectGroup]
     @State private var renameTask: Todo?
@@ -45,18 +44,9 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.setDueDate(dueDate: nil)
-                        if list == .today || list == .tomorrow {
-                            if let index = tasks.firstIndex(of: task) {
-                                tasks.remove(at: index)
-                            }
-                        }
                     }
                 } else {
-                    if list == .today || list == .tomorrow {
-                        if let index = tasks.firstIndex(of: task) {
-                            tasks.remove(at: index)
-                        }
-                    }
+                    task.setDueDate(dueDate: nil)
                 }
             } label: {
                 Image(systemName: "clear")
@@ -67,19 +57,9 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
-                        if list == .tomorrow {
-                            if let index = tasks.firstIndex(of: task) {
-                                tasks.remove(at: index)
-                            }
-                        }
                     }
                 } else {
                     task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
-                    if list == .tomorrow {
-                        if let index = tasks.firstIndex(of: task) {
-                            tasks.remove(at: index)
-                        }
-                    }
                 }
             } label: {
                 Image(systemName: "calendar")
@@ -90,19 +70,9 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
-                        if list == .today {
-                            if let index = tasks.firstIndex(of: task) {
-                                tasks.remove(at: index)
-                            }
-                        }
                     }
                 } else {
                     task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
-                    if list == .today {
-                        if let index = tasks.firstIndex(of: task) {
-                            tasks.remove(at: index)
-                        }
-                    }
                 }
             } label: {
                 Image(systemName: "sunrise")
@@ -113,19 +83,9 @@ struct TaskRowModifier: ViewModifier {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
                         task.nextWeek()
-                        if list == .today || list == .tomorrow {
-                            if let index = tasks.firstIndex(of: task) {
-                                tasks.remove(at: index)
-                            }
-                        }
                     }
                 } else {
                     task.nextWeek()
-                    if list == .today || list == .tomorrow {
-                        if let index = tasks.firstIndex(of: task) {
-                            tasks.remove(at: index)
-                        }
-                    }
                 }
             } label: {
                 Image(systemName: "calendar.badge.clock")
@@ -135,20 +95,6 @@ struct TaskRowModifier: ViewModifier {
             if task.repeation != .none {
                 Button {
                     task.skip()
-                    
-                    if list == .today || list == .tomorrow {
-                        if let date = task.dueDate {
-                            let today = Calendar.current.startOfDay(for: Date())
-                            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-                            let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
-
-                            if (list == .today && date >= tomorrow) || (list == .tomorrow && date >= future) {
-                                if let index = tasks.firstIndex(of: task) {
-                                    tasks.remove(at: index)
-                                }
-                            }
-                        }
-                    }
                 } label: {
                     Image(systemName: "arrow.uturn.forward")
                     Text("Skip")
@@ -237,10 +183,9 @@ struct TaskRowModifier: ViewModifier {
             }
             
             NavigationLink {
-                TasksListView(tasks: task.subtasks != nil ? task.subtasks! : [Todo](),
-                              list: list,
-                              title: task.name,
-                              mainTask: task)
+                SubtasksListView(list: list,
+                                      title: task.name,
+                                      mainTask: task)
                 .id(refresher.refresh)
                 .refreshable {
                     refresher.refresh.toggle()
@@ -254,10 +199,9 @@ struct TaskRowModifier: ViewModifier {
             
             if let parentTask = task.parentTask {
                 NavigationLink {
-                    TasksListView(tasks: parentTask.subtasks != nil ? parentTask.subtasks! : [Todo](),
-                                  list: list,
-                                  title: parentTask.name,
-                                  mainTask: parentTask)
+                    SubtasksListView(list: list,
+                                     title: parentTask.name,
+                                     mainTask: parentTask)
                     .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
@@ -294,21 +238,11 @@ struct TaskRowModifier: ViewModifier {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
                                 project.tasks?.append(task)
-                                if list == .inbox {
-                                    if let index = tasks.firstIndex(of: task) {
-                                        tasks.remove(at: index)
-                                    }
-                                }
                             }
                         } else {
                             task.project = project
                             task.status = project.getDefaultStatus()
                             project.tasks?.append(task)
-                            if list == .inbox {
-                                if let index = tasks.firstIndex(of: task) {
-                                    tasks.remove(at: index)
-                                }
-                            }
                         }
                     } label: {
                         Text(project.name)
@@ -325,12 +259,6 @@ struct TaskRowModifier: ViewModifier {
                             task.moveToStatus(status: status,
                                               project: project,
                                               context: modelContext)
-                            
-                            if status.clearDueDate && (list == .today || list == .tomorrow) {
-                                if let index = tasks.firstIndex(of: task) {
-                                    tasks.remove(at: index)
-                                }
-                            }
                         } label: {
                             Text(status.name)
                         }
@@ -353,8 +281,6 @@ struct TaskRowModifier: ViewModifier {
                 
                 modelContext.insert(newTask)
                 newTask.reconnect()
-                
-                tasks.append(newTask)
             } label: {
                 Image(systemName: "doc.on.doc")
                 Text("Duplicate task")
@@ -365,18 +291,12 @@ struct TaskRowModifier: ViewModifier {
                     for task in selectedTasksSet {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
-                        if let index = tasks.firstIndex(of: task) {
-                            tasks.remove(at: index)
-                        }
                     }
                     showInspector.show = false
                     selectedTasksSet.removeAll()
                 } else {
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
-                    }
                 }
             } label: {
                 Image(systemName: "trash")
@@ -386,11 +306,7 @@ struct TaskRowModifier: ViewModifier {
         }
         #if os(macOS)
         .sheet(isPresented: $showAddSubtask) {
-            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
-                        tasks: Binding(
-                            get: { task.subtasks ?? [] },
-                            set: { task.subtasks = $0 }
-                        ))
+            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task)
         }
         .sheet(item: $renameTask, onDismiss: {
             renameTask = nil
@@ -400,11 +316,7 @@ struct TaskRowModifier: ViewModifier {
         })
         #else
         .popover(isPresented: $showAddSubtask, attachmentAnchor: .point(.topLeading), content: {
-            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
-                        tasks: Binding(
-                            get: { task.subtasks ?? [] },
-                            set: { task.subtasks = $0 }
-                        ))
+            NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task)
                 .frame(minWidth: 200, maxHeight: 220)
                 .presentationCompactAdaptation(.popover)
         })

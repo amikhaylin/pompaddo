@@ -11,12 +11,15 @@ import WidgetKit
 
 struct SectionsListView: View {
     @EnvironmentObject var refresher: Refresher
-    var tasks: [Todo]
-    var projects: [Project]
     
     @Binding var selectedSideBarItem: SideBarItem?
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    @Query(filter: TasksQuery.predicateInboxActive()) var tasksInboxActive: [Todo]
+    @Query(filter: TasksQuery.predicateTomorrowActive()) var tasksTomorrowActive: [Todo]
+    @Query(filter: TasksQuery.predicateAllActive()) var tasksAllActive: [Todo]
+    @Query var projects: [Project]
+           
     @State var badgeManager = BadgeManager()
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
@@ -32,14 +35,7 @@ struct SectionsListView: View {
                         Text("Inbox")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
-                    .badge({
-                        do {
-                            return try tasks.filter(TasksQuery.predicateInboxActive()).count
-                        } catch {
-                            print(error.localizedDescription)
-                            return 0
-                        }
-                    }())
+                    .badge(tasksInboxActive.count)
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
@@ -79,14 +75,7 @@ struct SectionsListView: View {
                         Text("Tomorrow")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
-                    .badge({
-                        do {
-                            return try tasks.filter(TasksQuery.predicateTomorrow()).count
-                        } catch {
-                            print(error.localizedDescription)
-                            return 0
-                        }
-                    }())
+                    .badge(tasksTomorrowActive.count)
                 }
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
@@ -112,14 +101,7 @@ struct SectionsListView: View {
                         Text("All")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
-                    .badge({
-                        do {
-                            return try tasks.filter(TasksQuery.predicateAllActive()).count
-                        } catch {
-                            print(error.localizedDescription)
-                            return 0
-                        }
-                    }())
+                    .badge(tasksAllActive.count)
                 }
             }
         }
@@ -167,12 +149,8 @@ struct SectionsListView: View {
     @Previewable @State var refresher = Refresher()
     
     let previewer = try? Previewer()
-    let tasks = [Todo]()
-    let projects = [Project]()
     
-    SectionsListView(tasks: tasks,
-                            projects: projects,
-                            selectedSideBarItem: $selectedSideBarItem)
+    SectionsListView(selectedSideBarItem: $selectedSideBarItem)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)
 }

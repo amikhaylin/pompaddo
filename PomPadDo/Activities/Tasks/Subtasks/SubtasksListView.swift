@@ -1,33 +1,22 @@
 //
-//  TasksListView.swift
-//  PomPadDoMac
+//  SubtasksListView.swift
+//  PomPadDo
 //
-//  Created by Andrey Mikhaylin on 15.02.2024.
+//  Created by Andrey Mikhaylin on 07.08.2025.
 //
 
 import SwiftUI
 import SwiftData
 
-enum CommonTaskListSections: String, Identifiable, CaseIterable {
-    var id: String { rawValue }
-    
-    case todo = "To do"
-    case completed = "Completed"
-    
-    func localizedString() -> String {
-        return NSLocalizedString(self.rawValue, comment: "")
-    }
-}
-
-struct TasksListView: View {
+struct SubtasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @Query var tasks: [Todo]
 
-    @State private var list: SideBarItem
-    @State private var title: String
+    @State var list: SideBarItem
+    @State var title: String
+    @State var mainTask: Todo
     @State private var newTaskIsShowing = false
     
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
@@ -37,24 +26,11 @@ struct TasksListView: View {
     @State private var searchText = ""
     
     var searchResults: [Todo] {
-        let innerTasks: [Todo]
-        switch list {
-        case .inbox:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-        case .today:
-            innerTasks = tasks.filter({ TasksQuery.checkToday(date: $0.completionDate) }).sorted(by: TasksQuery.defaultSorting)
-        case .tomorrow:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-        case .alltasks:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-        default:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-        }
-        
+        let tasks: [Todo] = mainTask.subtasks != nil ? mainTask.subtasks! : [Todo]()
         if searchText.isEmpty {
-            return innerTasks
+            return tasks.sorted(by: TasksQuery.defaultSorting)
         } else {
-            return innerTasks.filter { $0.name.localizedStandardContains(searchText) }
+            return tasks.filter { $0.name.localizedStandardContains(searchText) }.sorted(by: TasksQuery.defaultSorting)
         }
     }
     
@@ -72,7 +48,7 @@ struct TasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil) }) : searchResults.filter({ $0.completed == false }),
+                        ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil || mainTask != nil) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
@@ -128,9 +104,9 @@ struct TasksListView: View {
                 .help("Add task to current list ⌘⌥I")
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 #if os(iOS)
-                .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: nil)
-                        .frame(minWidth: 200, maxHeight: 220)
+                .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask)
+                        .frame(minWidth: 200, maxHeight: 180)
                         .presentationCompactAdaptation(.popover)
                 })
                 #endif
@@ -173,7 +149,7 @@ struct TasksListView: View {
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: nil)
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask)
         }
         #endif
     }
@@ -213,13 +189,6 @@ struct TasksListView: View {
             break
         }
     }
-    
-    init(predicate: Predicate<Todo>, list: SideBarItem, title: String) {
-        self.list = list
-        self.title = title
-        
-        self._tasks = Query(filter: predicate)
-    }
 }
 
 #Preview {
@@ -241,9 +210,9 @@ struct TasksListView: View {
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
     
-    TasksListView(predicate: TasksQuery.predicateToday(),
-                  list: .inbox,
-                  title: "Some list")
+    SubtasksListView(list: .inbox,
+                     title: "Some list",
+                     mainTask: previewer.task)
     .environmentObject(showInspector)
     .environmentObject(selectedTasks)
     .environmentObject(refresher)

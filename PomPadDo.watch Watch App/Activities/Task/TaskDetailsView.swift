@@ -15,7 +15,6 @@ struct TaskDetailsView: View {
     @EnvironmentObject var refresher: Refresher
     @Bindable var task: Todo
     @State var list: SideBarItem
-    @Binding var tasks: [Todo]
     
     var body: some View {
         ScrollView(.vertical) {
@@ -104,9 +103,6 @@ struct TaskDetailsView: View {
             Button {
                 task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                 if list == .tomorrow {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
-                    }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -117,9 +113,6 @@ struct TaskDetailsView: View {
             Button {
                 task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                 if list == .today {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
-                    }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -130,9 +123,6 @@ struct TaskDetailsView: View {
             Button {
                 task.nextWeek()
                 if list == .today || list == .tomorrow {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
-                    }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -146,9 +136,6 @@ struct TaskDetailsView: View {
             Button {
                 task.setDueDate(dueDate: nil)
                 if list == .today || list == .tomorrow {
-                    if let index = tasks.firstIndex(of: task) {
-                        tasks.remove(at: index)
-                    }
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -160,19 +147,6 @@ struct TaskDetailsView: View {
                 Button {
                     task.skip()
                     
-                    if list == .today || list == .tomorrow {
-                        if let date = task.dueDate {
-                            let today = Calendar.current.startOfDay(for: Date())
-                            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-                            let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
-
-                            if (list == .today && date >= tomorrow) || (list == .tomorrow && date >= future) {
-                                if let index = tasks.firstIndex(of: task) {
-                                    tasks.remove(at: index)
-                                }
-                            }
-                        }
-                    }
                     WidgetCenter.shared.reloadAllTimelines()
                     presentationMode.wrappedValue.dismiss()
                 } label: {
@@ -180,22 +154,18 @@ struct TaskDetailsView: View {
                 }
             }
         
-            if let subtasks = task.subtasks {
-                NavigationLink {
-                    TasksListView(tasks: subtasks,
-                                  list: list,
-                                  title: task.name,
-                                  mainTask: task)
-                    .id(refresher.refresh)
-                } label: {
-                    Label("Open subtasks", systemImage: "arrow.right")
-                }
+            NavigationLink {
+                SubtasksListView(list: list,
+                              title: task.name,
+                              mainTask: task)
+                .id(refresher.refresh)
+            } label: {
+                Label("Open subtasks", systemImage: "arrow.right")
             }
         
             if let parentTask = task.parentTask {
                 NavigationLink {
-                    TasksListView(tasks: parentTask.subtasks != nil ? parentTask.subtasks! : [Todo](),
-                                  list: list,
+                    SubtasksListView(list: list,
                                   title: parentTask.name,
                                   mainTask: parentTask)
                     .id(refresher.refresh)
@@ -207,10 +177,7 @@ struct TaskDetailsView: View {
             Button {
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
-                if let index = tasks.firstIndex(of: task) {
-                    tasks.remove(at: index)
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
+                WidgetCenter.shared.reloadAllTimelines()
                 presentationMode.wrappedValue.dismiss()
             } label: {
                 Label("Delete task", systemImage: "trash")
@@ -224,7 +191,7 @@ struct TaskDetailsView: View {
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
     
-    TaskDetailsView(task: previewer!.task, list: .today, tasks: .constant([previewer!.task]))
+    TaskDetailsView(task: previewer!.task, list: .today)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)
 }

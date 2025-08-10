@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct SectionsListView: View {
-    var tasks: [Todo]
-    
     @Binding var selectedSideBarItem: SideBarItem?
     
     var body: some View {
@@ -57,9 +55,7 @@ struct SectionsListView: View {
 #Preview {
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     let previewer = try? Previewer()
-    let tasks = [Todo]()
     
-    SectionsListView(tasks: tasks,
-                            selectedSideBarItem: $selectedSideBarItem)
+    SectionsListView(selectedSideBarItem: $selectedSideBarItem)
         .modelContainer(previewer!.container)
 }

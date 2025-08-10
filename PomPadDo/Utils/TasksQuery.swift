@@ -60,7 +60,19 @@ struct TasksQuery {
         let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
-                return date >= tomorrow && date < future && task.completionDate == nil
+                return date >= tomorrow && date < future
+            } else {
+                return false
+            }
+        }
+    }
+    
+    static func predicateTomorrowActive() -> Predicate<Todo> {
+        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
+        let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
+        return #Predicate<Todo> { task in
+            if let date = task.dueDate {
+                return date >= tomorrow && date < future && !task.completed
             } else {
                 return false
             }
@@ -76,6 +88,12 @@ struct TasksQuery {
     static func predicateInboxActive() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
             task.project == nil && task.parentTask == nil && !task.completed
+        }
+    }
+    
+    static func predicateAllTasks() -> Predicate<Todo> {
+        return #Predicate<Todo> { _ in
+            true
         }
     }
     

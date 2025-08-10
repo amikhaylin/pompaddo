@@ -107,7 +107,7 @@ struct MainView: View {
                     .accessibility(identifier: "AddTaskToInboxButton")
                     .keyboardShortcut("i", modifiers: [.command])
                     .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.top), content: {
-                        NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
+                        NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
                             .frame(width: geometry.size.width * 0.9, height: 220)
                             .presentationCompactAdaptation(.popover)
                             .environmentObject(refresher)

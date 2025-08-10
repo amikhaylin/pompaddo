@@ -1,44 +1,31 @@
 //
-//  TasksListView.swift
-//  PomPadDoWatch Watch App
+//  SubtasksListView.swift
+//  PomPadDo
 //
-//  Created by Andrey Mikhaylin on 25.06.2024.
+//  Created by Andrey Mikhaylin on 07.08.2025.
 //
 
 import SwiftUI
 import SwiftData
 import WidgetKit
 
-struct TasksListView: View {
+struct SubtasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @Query var tasks: [Todo]
     
     @State var list: SideBarItem
     @State var title: String
+    @State var mainTask: Todo
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @State private var searchText = ""
     
     var searchResults: [Todo] {
-        let innerTasks: [Todo]
-        switch list {
-        case .inbox:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-                .sorted(by: TasksQuery.sortCompleted)
-        case .today:
-            innerTasks = tasks.filter({ TasksQuery.checkToday(date: $0.completionDate) && ($0.completed == false || ($0.completed && $0.parentTask == nil)) })
-                .sorted(by: TasksQuery.sortingWithCompleted)
-        case .tomorrow:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-        case .alltasks:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-        }
-        
+        let tasks: [Todo] = mainTask.subtasks != nil ? mainTask.subtasks! : [Todo]()
         if searchText.isEmpty {
-            return innerTasks
+            return tasks.sorted(by: TasksQuery.sortingWithCompleted)
         } else {
-            return innerTasks.filter { $0.name.localizedStandardContains(searchText) }
+            return tasks.filter { $0.name.localizedStandardContains(searchText) }.sorted(by: TasksQuery.sortingWithCompleted)
         }
     }
     
@@ -66,13 +53,6 @@ struct TasksListView: View {
             WidgetCenter.shared.reloadAllTimelines()
         }
     }
-    
-    init(predicate: Predicate<Todo>, list: SideBarItem, title: String) {
-        self.list = list
-        self.title = title
-        
-        self._tasks = Query(filter: predicate)
-    }
 }
 
 #Preview {
@@ -86,9 +66,9 @@ struct TasksListView: View {
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
     
-    TasksListView(predicate: TasksQuery.predicateInbox(),
-                  list: .inbox,
-                  title: "Some list")
+    SubtasksListView(list: .inbox,
+                     title: "Some list",
+                     mainTask: previewer.task)
         .environmentObject(refresher)
         .modelContainer(container!)
 }
