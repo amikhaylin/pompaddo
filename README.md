@@ -12,7 +12,7 @@ made to myself by myself
 [![Releases](https://img.shields.io/github/release/amikhaylin/pompaddo.svg?style=for-the-badge)](https://github.com/amikhaylin/pompaddo/releases)
 
 [![](https://toolbox.marketingtools.apple.com/api/assets/featured-content/apps/badges/badge-1/en-us.svg)](https://apps.apple.com/app/id6742197499)
-
+ 
 
 Manage projects, stay focused, sync progress across devices, GTD, Pomodoro and Kanban — all in one app designed specifically for freelancers and solo workers.
 
@@ -121,3 +121,7 @@ Students and anyone craving order in their workflow.
 - Ukrainian
 - Urdu
 - Vietnamese
+
+## Additional resources
+
+[Shortcuts command](PomPadDo.shortcut)
