@@ -153,11 +153,6 @@ struct ContentView: View {
                 }
             }
         }
-        .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) {
-                refresher.refresh.toggle()
-            }
-        }
         .inspector(isPresented: $showInspector.show) {
             Group {
                 if let selectedTask = selectedTasks.tasks.first {

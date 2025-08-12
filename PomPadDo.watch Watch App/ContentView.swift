@@ -111,11 +111,6 @@ struct ContentView: View {
                 return
             }
         }
-        .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
-                refresher.refresh.toggle()
-            }
-        }
     }
 }
 
