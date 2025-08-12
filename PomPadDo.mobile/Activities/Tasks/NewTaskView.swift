@@ -34,6 +34,7 @@ struct NewTaskView: View {
                     .font(.headline)
                 
                 TextField("Task name", text: $taskName)
+                    .accessibility(identifier: "TaskName")
                     .focused($focusField, equals: .taskName)
                     .task {
                         self.focusField = .taskName

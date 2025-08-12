@@ -65,13 +65,13 @@ final class PomPadDoMobileUITests: XCTestCase {
 
         print(app.debugDescription)
 
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["folder.circle"].tap()
+        app.buttons["NewProjectGroupButton"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].tap()
         
         app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].typeText(locale == "ru" ? "🦝 Личное" : "🦝 Personal")
         app.buttons["SaveGroup"].tap()
         
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["folder.circle"].tap()
+        app.buttons["NewProjectGroupButton"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].tap()
         
         app.popovers.textFields[locale == "ru" ? "Наименование группы" : "Group name"].typeText(locale == "ru" ? "🏢 Работа" : "🏢 Work")
@@ -79,7 +79,7 @@ final class PomPadDoMobileUITests: XCTestCase {
 
         // MARK: Fill projects
         // MARK: Create project **Vacation Planning**
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["plus.circle"].tap()
+        app.buttons["NewProjectButton"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].typeText(locale == "ru" ? "🏖️ Планирование отпуска" : "🏖️ Vacation Planning")
         
@@ -94,7 +94,7 @@ final class PomPadDoMobileUITests: XCTestCase {
         app.collectionViews.buttons["\(locale == "ru" ? "🦝 Личное" : "🦝 Personal")ContextMenuButton"].tap()
         
         // MARK: Create project **App Development**
-        app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").buttons["plus.circle"].tap()
+        app.buttons["NewProjectButton"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].tap()
         app.popovers.textFields[locale == "ru" ? "Наименование проекта" : "Project name"].typeText(locale == "ru" ? "📱Разработка приложения" : "📱App Development")
         
@@ -194,7 +194,7 @@ final class PomPadDoMobileUITests: XCTestCase {
         
         app.collectionViews.matching(identifier: locale == "ru" ? "Боковое меню" : "Sidebar").staticTexts[locale == "ru" ? "Сегодня" : "Today"].tap()
 
-        app.toolbars["Toolbar"].buttons["FocusSection"].forceTap()
+        app.buttons["FocusSection"].tap()
         
         snapshot("05FocusTasksView")
         
@@ -205,7 +205,7 @@ final class PomPadDoMobileUITests: XCTestCase {
 
         snapshot("06FocusTimerView")
         
-        app.toolbars["Toolbar"].buttons["TasksSection"].tap()
+        app.buttons["TasksSection"].tap()
         
         if model.lowercased().contains("iphone") {
             app.collectionViews.containing(.other, identifier: locale == "ru" ? "Вертикальная полоса прокрутки, 1 страница" : "Vertical scroll bar, 1 page").element.swipeDown()
@@ -216,14 +216,20 @@ final class PomPadDoMobileUITests: XCTestCase {
         
         snapshot("01TodayScreen")
         
-        app.toolbars["Toolbar"].buttons["AddTaskToInboxButton"].forceTap()
-        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
-        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Купить кофе" : "Buy coffee")
+        app.buttons["AddTaskToInboxButton"].tap()
+        app.popovers.textFields["TaskName"].tap()
+        let exp3 = expectation(description: "Test after 5 seconds")
+        _ = XCTWaiter.wait(for: [exp3], timeout: 2.0)
+
+        app.popovers.textFields["TaskName"].typeText(locale == "ru" ? "Купить кофе" : "Buy coffee")
+
+//        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].tap()
+//        app.popovers.textFields[locale == "ru" ? "Наименование задачи" : "Task name"].typeText(locale == "ru" ? "Купить кофе" : "Buy coffee")
         snapshot("07InboxTask")
         app/*@START_MENU_TOKEN@*/.buttons["SaveTask"]/*[[".otherElements[\"SaveTask\"].buttons.firstMatch",".otherElements",".buttons[\"OK\"]",".buttons[\"SaveTask\"]"],[[[-1,3],[-1,2],[-1,1,1],[-1,0]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.tap()
         
-        let exp3 = expectation(description: "Test after 5 seconds")
-        _ = XCTWaiter.wait(for: [exp3], timeout: 5.0)
+        let exp4 = expectation(description: "Test after 5 seconds")
+        _ = XCTWaiter.wait(for: [exp4], timeout: 5.0)
     }
 }
 // swiftlint:enable function_body_length
