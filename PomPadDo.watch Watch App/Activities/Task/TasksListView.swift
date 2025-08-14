@@ -12,20 +12,33 @@ import WidgetKit
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @State var tasks: [Todo]
+    @Query var tasks: [Todo]
     
     @State var list: SideBarItem
     @State var title: String
-    @State var mainTask: Todo?
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @State private var searchText = ""
     
     var searchResults: [Todo] {
+        let innerTasks: [Todo]
+        switch list {
+        case .inbox:
+            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+                .sorted(by: TasksQuery.sortCompleted)
+        case .today:
+            innerTasks = tasks.filter({ TasksQuery.checkToday(date: $0.completionDate) && ($0.completed == false || ($0.completed && $0.parentTask == nil)) })
+                .sorted(by: TasksQuery.sortingWithCompleted)
+        case .tomorrow:
+            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+        case .alltasks:
+            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+        }
+        
         if searchText.isEmpty {
-            return tasks
+            return innerTasks
         } else {
-            return tasks.filter { $0.name.localizedStandardContains(searchText) }
+            return innerTasks.filter { $0.name.localizedStandardContains(searchText) }
         }
     }
     
@@ -36,12 +49,12 @@ struct TasksListView: View {
                     TaskCheckBoxView(task: task)
                     
                     NavigationLink {
-                        TaskDetailsView(task: task, list: list, tasks: $tasks)
+                        TaskDetailsView(task: task, list: list)
                     } label: {
                         Text(task.name)
                     }
                 }
-                .modifier(TaskSwipeModifier(task: task, list: list, tasks: $tasks))
+                .modifier(TaskSwipeModifier(task: task, list: list))
             }
             .searchable(text: $searchText, placement: .automatic, prompt: "Search tasks")
         }
@@ -52,6 +65,13 @@ struct TasksListView: View {
         .onAppear {
             WidgetCenter.shared.reloadAllTimelines()
         }
+    }
+    
+    init(predicate: Predicate<Todo>, list: SideBarItem, title: String) {
+        self.list = list
+        self.title = title
+        
+        self._tasks = Query(filter: predicate)
     }
 }
 
@@ -65,11 +85,10 @@ struct TasksListView: View {
                                                         ]),
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
-    let tasks: [Todo] = [previewer.task]
     
-    TasksListView(tasks: tasks,
-                         list: .inbox,
-                         title: "Some list")
+    TasksListView(predicate: TasksQuery.predicateInbox(),
+                  list: .inbox,
+                  title: "Some list")
         .environmentObject(refresher)
         .modelContainer(container!)
 }

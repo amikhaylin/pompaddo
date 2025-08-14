@@ -24,18 +24,14 @@ struct ContentView: View {
     @State private var selectedProject: Project?
     
     @Query var tasks: [Todo]
-    @Query var projects: [Project]
     
     var body: some View {
         NavigationSplitView {
             VStack {
-                SectionsListView(tasks: tasks,
-                                 projects: projects,
-                                 selectedSideBarItem: $selectedSideBarItem)
+                SectionsListView(selectedSideBarItem: $selectedSideBarItem)
                 .frame(height: 150)
                 
                 ProjectsListView(selectedProject: $selectedProject,
-                                 projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                 .id(refresher.refresh)
             }
@@ -58,32 +54,28 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
-                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil, tasks: .constant([]))
+                NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
             }
             .navigationSplitViewColumnWidth(min: 230, ideal: 230, max: 400)
         } detail: {
             HStack {
                 switch selectedSideBarItem {
                 case .inbox:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateInbox()).sorted(by: TasksQuery.defaultSorting),
+                    TasksListView(predicate: TasksQuery.predicateInbox(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 case .today:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
-                        .filter({ TasksQuery.checkToday(date: $0.completionDate) })
-                        .sorted(by: TasksQuery.defaultSorting),
+                    TasksListView(predicate: TasksQuery.predicateToday(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 case .tomorrow:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow())
-                        .filter({ $0.completionDate == nil })
-                        .sorted(by: TasksQuery.defaultSorting),
+                    TasksListView(predicate: TasksQuery.predicateTomorrow(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
@@ -106,11 +98,11 @@ struct ContentView: View {
                         }
                     }
                 case .review:
-                    ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
+                    ReviewProjectsView()
                         .environmentObject(showInspector)
                         .environmentObject(selectedTasks)
                 case .alltasks:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateAll()).sorted(by: TasksQuery.defaultSorting),
+                    TasksListView(predicate: TasksQuery.predicateAll(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
@@ -159,11 +151,6 @@ struct ContentView: View {
                         NotificationManager.setTaskNotification(task: task)
                     }
                 }
-            }
-        }
-        .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && (oldPhase == .inactive || oldPhase == .background) {
-                refresher.refresh.toggle()
             }
         }
         .inspector(isPresented: $showInspector.show) {

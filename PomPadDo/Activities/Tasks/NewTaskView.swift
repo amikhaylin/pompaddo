@@ -18,7 +18,6 @@ struct NewTaskView: View {
     @State private var dueToday = false
     @State var project: Project?
     @State var mainTask: Todo?
-    @Binding var tasks: [Todo]
     
     var body: some View {
         VStack {
@@ -59,9 +58,6 @@ struct NewTaskView: View {
 
                     modelContext.insert(task)
                     task.reconnect()
-                    
-                    tasks.append(task)
-                    
                 }
                 .keyboardShortcut(.defaultAction)
             }
@@ -97,6 +93,6 @@ struct NewTaskView: View {
     @Previewable @State var isVisible = true
     let previewer = try? Previewer()
         
-    NewTaskView(isVisible: $isVisible, list: .inbox, tasks: $tasks)
+    NewTaskView(isVisible: $isVisible, list: .inbox)
         .modelContainer(previewer!.container)
 }

@@ -12,15 +12,13 @@ struct ReviewProjectsView: View {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
     
-    var projects: [Project]
-    
-    @Query var projectsAll: [Project]
+    @Query var projects: [Project]
     
     var body: some View {
         NavigationStack {
             Group {
-                if projects.count > 0 {
-                    List(projects.sorted(by: ProjectsQuery.defaultSorting)) { project in
+                if projects.filter({ TasksQuery.filterProjectToReview($0) }).count > 0 {
+                    List(projects.filter({ TasksQuery.filterProjectToReview($0) }).sorted(by: ProjectsQuery.defaultSorting)) { project in
                         NavigationLink {
                             ProjectToReviewView(project: project)
                                 .environmentObject(showInspector)
@@ -51,9 +49,8 @@ struct ReviewProjectsView: View {
     @Previewable @StateObject var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
-    let projects: [Project] = [previewer!.project]
     
-    ReviewProjectsView(projects: projects)
+    ReviewProjectsView()
         .environmentObject(showInspector)
         .environmentObject(selectedTasks)
         .environmentObject(refresher)

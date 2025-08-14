@@ -24,11 +24,10 @@ struct TasksListView: View {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @State var tasks: [Todo]
+    @Query var tasks: [Todo]
 
-    @State var list: SideBarItem
-    @State var title: String
-    @State var mainTask: Todo?
+    @State private var list: SideBarItem
+    @State private var title: String
     @State private var newTaskIsShowing = false
     
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
@@ -38,10 +37,24 @@ struct TasksListView: View {
     @State private var searchText = ""
     
     var searchResults: [Todo] {
+        let innerTasks: [Todo]
+        switch list {
+        case .inbox:
+            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+        case .today:
+            innerTasks = tasks.filter({ TasksQuery.checkToday(date: $0.completionDate) }).sorted(by: TasksQuery.defaultSorting)
+        case .tomorrow:
+            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+        case .alltasks:
+            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+        default:
+            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+        }
+        
         if searchText.isEmpty {
-            return tasks
+            return innerTasks
         } else {
-            return tasks.filter { $0.name.localizedStandardContains(searchText) }
+            return innerTasks.filter { $0.name.localizedStandardContains(searchText) }
         }
     }
     
@@ -59,7 +72,7 @@ struct TasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil || mainTask != nil) }) : searchResults.filter({ $0.completed == false }),
+                        ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
@@ -69,9 +82,8 @@ struct TasksListView: View {
                                         .modifier(TaskRowModifier(task: maintask,
                                                                   selectedTasksSet: $selectedTasks.tasks,
                                                                   projects: projects,
-                                                                  list: list,
-                                                                  tasks: $tasks))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: list, tasks: $tasks))
+                                                                  list: list))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: list))
                                         .tag(maintask)
                                 }
                             } else {
@@ -79,9 +91,8 @@ struct TasksListView: View {
                                     .modifier(TaskRowModifier(task: task,
                                                               selectedTasksSet: $selectedTasks.tasks,
                                                               projects: projects,
-                                                              list: list,
-                                                              tasks: $tasks))
-                                    .modifier(TaskSwipeModifier(task: task, list: list, tasks: $tasks))
+                                                              list: list))
+                                    .modifier(TaskSwipeModifier(task: task, list: list))
                                     .tag(task)
                             }
                         }
@@ -118,7 +129,7 @@ struct TasksListView: View {
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 #if os(iOS)
                 .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: nil)
                         .frame(minWidth: 200, maxHeight: 220)
                         .presentationCompactAdaptation(.popover)
                 })
@@ -162,7 +173,7 @@ struct TasksListView: View {
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask, tasks: $tasks)
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: nil)
         }
         #endif
     }
@@ -171,9 +182,6 @@ struct TasksListView: View {
         for task in selectedTasks.tasks {
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
-            if let index = tasks.firstIndex(of: task) {
-                tasks.remove(at: index)
-            }
         }
         if showInspector.show {
             showInspector.show = false
@@ -187,9 +195,6 @@ struct TasksListView: View {
     private func deleteTask(task: Todo) {
         TasksQuery.deleteTask(context: modelContext,
                               task: task)
-        if let index = tasks.firstIndex(of: task) {
-            tasks.remove(at: index)
-        }
     }
     
     private func setDueDate(task: Todo) {
@@ -207,6 +212,13 @@ struct TasksListView: View {
         case .alltasks:
             break
         }
+    }
+    
+    init(predicate: Predicate<Todo>, list: SideBarItem, title: String) {
+        self.list = list
+        self.title = title
+        
+        self._tasks = Query(filter: predicate)
     }
 }
 
@@ -228,9 +240,8 @@ struct TasksListView: View {
                                                         ]),
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
-    let tasks: [Todo] = [previewer.task]
     
-    TasksListView(tasks: tasks,
+    TasksListView(predicate: TasksQuery.predicateToday(),
                   list: .inbox,
                   title: "Some list")
     .environmentObject(showInspector)

@@ -20,20 +20,15 @@ struct ContentView: View {
     @State private var selectedProject: Project?
     
     @Query var tasks: [Todo]
-    @Query var projects: [Project]
-    @Query var groups: [ProjectGroup]
     
     var body: some View {
         NavigationSplitView {
             VStack {
-                SectionsListView(tasks: tasks,
-                                 projects: projects,
-                                 selectedSideBarItem: $selectedSideBarItem)
+                SectionsListView(selectedSideBarItem: $selectedSideBarItem)
                 .id(refresher.refresh)
                 .frame(height: 270)
                 
                 ProjectsListView(selectedProject: $selectedProject,
-                                 projects: projects,
                                  selectedSideBarItem: $selectedSideBarItem)
                 .id(refresher.refresh)
                 .contentMargins(.vertical, 10)
@@ -42,7 +37,7 @@ struct ContentView: View {
         } detail: {
             switch selectedSideBarItem {
             case .inbox:
-                try? TasksListView(tasks: tasks.filter(TasksQuery.predicateInbox()).sorted(by: TasksQuery.defaultSorting),
+                TasksListView(predicate: TasksQuery.predicateInbox(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
@@ -52,9 +47,7 @@ struct ContentView: View {
                 .environmentObject(showInspector)
                 .environmentObject(selectedTasks)
             case .today:
-                try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
-                    .filter({ TasksQuery.checkToday(date: $0.completionDate) })
-                    .sorted(by: TasksQuery.defaultSorting),
+                TasksListView(predicate: TasksQuery.predicateToday(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
@@ -64,9 +57,7 @@ struct ContentView: View {
                 .environmentObject(showInspector)
                 .environmentObject(selectedTasks)
             case .tomorrow:
-                try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow())
-                    .filter({ $0.completionDate == nil })
-                    .sorted(by: TasksQuery.defaultSorting),
+                TasksListView(predicate: TasksQuery.predicateTomorrow(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
@@ -76,7 +67,7 @@ struct ContentView: View {
                 .environmentObject(showInspector)
                 .environmentObject(selectedTasks)
             case .review:
-                ReviewProjectsView(projects: projects.filter({ TasksQuery.filterProjectToReview($0) }))
+                ReviewProjectsView()
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
             case .projects:
@@ -96,7 +87,7 @@ struct ContentView: View {
                     }
                 }
             case .alltasks:
-                try? TasksListView(tasks: tasks.filter(TasksQuery.predicateAll()).sorted(by: TasksQuery.defaultSorting),
+                TasksListView(predicate: TasksQuery.predicateAll(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
                 .id(refresher.refresh)
@@ -124,11 +115,6 @@ struct ContentView: View {
                 selectedSideBarItem = .projects
             }
         }
-        .onChange(of: refresher.refresh, { _, _ in
-            if checkSyncIssues() {
-                fixSyncIssues()
-            }
-        })
         .task {
             for task in tasks {
                 if let reminder = task.alertDate, reminder > Date() {
@@ -149,32 +135,6 @@ struct ContentView: View {
             }
             .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
         }
-    }
-    
-    private func fixSyncIssues() {
-        for project in projects {
-            for task in project.tasks ?? [] where task.status == nil {
-                if task.completed {
-                    if let status = project.getStatuses().first(where: { $0.doCompletion }) {
-                        task.status = status
-                    } else {
-                        task.status = project.getDefaultStatus()
-                    }
-                } else {
-                    task.status = project.getDefaultStatus()
-                }
-            }
-        }
-    }
-    
-    private func checkSyncIssues() -> Bool {
-        for project in projects {
-            for task in project.tasks ?? [] where task.status == nil {
-                return true
-            }
-        }
-        
-        return false
     }
 }
 

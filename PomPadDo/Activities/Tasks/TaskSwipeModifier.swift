@@ -18,7 +18,6 @@ struct TaskSwipeModifier: ViewModifier {
     #endif
     @Bindable var task: Todo
     var list: SideBarItem
-    @Binding var tasks: [Todo]
     
     func body(content: Content) -> some View {
         content
@@ -27,9 +26,6 @@ struct TaskSwipeModifier: ViewModifier {
                     withAnimation {
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
-                        if let index = tasks.firstIndex(of: task) {
-                            tasks.remove(at: index)
-                        }
                     }
                 } label: {
                     Label("Delete", systemImage: "trash.fill")
@@ -39,8 +35,7 @@ struct TaskSwipeModifier: ViewModifier {
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 if let subtasks = task.subtasks {
                     NavigationLink {
-                        TasksListView(tasks: subtasks,
-                                      list: list,
+                        SubtasksListView(list: list,
                                       title: task.name,
                                       mainTask: task)
                         .id(refresher.refresh)
@@ -56,8 +51,7 @@ struct TaskSwipeModifier: ViewModifier {
                     let subtasks = [Todo]()
                     
                     NavigationLink {
-                        TasksListView(tasks: subtasks,
-                                      list: list,
+                        SubtasksListView(list: list,
                                       title: task.name,
                                       mainTask: task)
                         .id(refresher.refresh)
@@ -71,8 +65,7 @@ struct TaskSwipeModifier: ViewModifier {
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 if let subtasks = task.subtasks {
                     NavigationLink {
-                        TasksListView(tasks: subtasks,
-                                      list: list,
+                        SubtasksListView(list: list,
                                       title: task.name,
                                       mainTask: task)
                         .id(refresher.refresh)

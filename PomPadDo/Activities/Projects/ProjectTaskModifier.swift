@@ -189,10 +189,9 @@ struct ProjectTaskModifier: ViewModifier {
                 }
                 
                 NavigationLink {
-                    TasksListView(tasks: task.subtasks != nil ? task.subtasks! : [Todo](),
-                                  list: .projects,
-                                  title: task.name,
-                                  mainTask: task)
+                    SubtasksListView(list: .projects,
+                                     title: task.name,
+                                     mainTask: task)
                     .id(refresher.refresh)
                     .refreshable {
                         refresher.refresh.toggle()
@@ -346,11 +345,7 @@ struct ProjectTaskModifier: ViewModifier {
             }
             #if os(macOS)
             .sheet(isPresented: $showAddSubtask) {
-                NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
-                            tasks: Binding(
-                                get: { task.subtasks ?? [] },
-                                set: { task.subtasks = $0 }
-                            ))
+                NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task)
             }
             .sheet(item: $renameTask, onDismiss: {
                 renameTask = nil
@@ -360,11 +355,7 @@ struct ProjectTaskModifier: ViewModifier {
             })
             #else
             .popover(isPresented: $showAddSubtask, attachmentAnchor: .point(.topLeading), content: {
-                NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task,
-                            tasks: Binding(
-                                get: { task.subtasks ?? [] },
-                                set: { task.subtasks = $0 }
-                            ))
+                NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task)
                     .frame(minWidth: 200, maxHeight: 220)
                     .presentationCompactAdaptation(.popover)
             })

@@ -65,11 +65,7 @@ struct ProjectView: View {
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 #if os(iOS)
                 .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.top), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
-                                tasks: Binding(
-                                    get: { project.tasks ?? [] },
-                                    set: { project.tasks = $0 }
-                                ))
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil)
                         .frame(minWidth: 200, maxHeight: 220)
                         .presentationCompactAdaptation(.popover)
                 })
@@ -163,11 +159,7 @@ struct ProjectView: View {
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil,
-                        tasks: Binding(
-                            get: { project.tasks ?? [] },
-                            set: { project.tasks = $0 }
-                        ))
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil)
         }
         #endif
     }

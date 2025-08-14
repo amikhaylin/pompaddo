@@ -21,7 +21,7 @@ struct ProjectsListView: View {
     @State private var newProjectGroupShow = false
     @AppStorage("projectsExpanded") var projectsExpanded = true
     
-    var projects: [Project]
+    @Query var projects: [Project]
     @Query var groups: [ProjectGroup]
     
     @Binding var selectedSideBarItem: SideBarItem?
@@ -299,10 +299,8 @@ struct ProjectsListView: View {
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     @Previewable @State var selectedProject: Project?
     let previewer = try? Previewer()
-    let projects: [Project] = [previewer!.project]
     
     ProjectsListView(selectedProject: $selectedProject,
-                            projects: projects,
                             selectedSideBarItem: $selectedSideBarItem)
         .modelContainer(previewer!.container)
 }

@@ -36,39 +36,32 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var refresher: Refresher
     
-    @Query var tasks: [Todo]
-    
     @State var selectedSideBarItem: SideBarItem? = .today
     @State private var addToInbox = false
     
     var body: some View {
         NavigationSplitView {
-            SectionsListView(tasks: tasks,
-                             selectedSideBarItem: $selectedSideBarItem)
+            SectionsListView(selectedSideBarItem: $selectedSideBarItem)
         } detail: {
             Group {
                 switch selectedSideBarItem {
                 case .inbox:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateInbox())
-                                                   .sorted(by: TasksQuery.defaultSorting)
-                                                   .sorted(by: TasksQuery.sortCompleted),
+                    TasksListView(predicate: TasksQuery.predicateInbox(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
                 case .today:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateToday())
-                        .filter({ TasksQuery.checkToday(date: $0.completionDate) && ($0.completed == false || ($0.completed && $0.parentTask == nil)) })
-                        .sorted(by: TasksQuery.sortingWithCompleted),
+                    TasksListView(predicate: TasksQuery.predicateToday(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
                 case .tomorrow:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateTomorrow()).sorted(by: TasksQuery.defaultSorting),
+                    TasksListView(predicate: TasksQuery.predicateTomorrow(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
                 case .alltasks:
-                    try? TasksListView(tasks: tasks.filter(TasksQuery.predicateAll()).sorted(by: TasksQuery.defaultSorting),
+                    TasksListView(predicate: TasksQuery.predicateAll(),
                                        list: selectedSideBarItem!,
                                        title: selectedSideBarItem!.name)
                     .id(refresher.refresh)
@@ -116,11 +109,6 @@ struct ContentView: View {
                 }
             } else {
                 return
-            }
-        }
-        .onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && (oldPhase == .background || oldPhase == .inactive) {
-                refresher.refresh.toggle()
             }
         }
     }
