@@ -40,7 +40,7 @@
     <resources>
         <image name="PomPadDo" width="1024" height="1024"/>
         <namedColor name="LaunchScreenBkg">
-            <color red="0.082352941176470587" green="0.12549019607843137" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="0.058823529411764705" green="0.082352941176470587" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
