@@ -13,6 +13,7 @@ import SwiftData
 struct PomPadDoMacApp: App {
     @State private var refresher = Refresher()
     @State var selectedSideBarItem: SideBarItem? = .today
+    @State var selectedProject: Project?
     @State var newTaskIsShowing = false
     @StateObject var selectedTasks = SelectedTasks()
     
@@ -61,7 +62,9 @@ struct PomPadDoMacApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(selectedSideBarItem: $selectedSideBarItem,
-                        newTaskIsShowing: $newTaskIsShowing)
+                        newTaskIsShowing: $newTaskIsShowing,
+                        selectedProject: $selectedProject)
+                .id(refresher.refresh)
                 .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
                                         modelContext: sharedModelContainer.mainContext)
                 .environmentObject(refresher)

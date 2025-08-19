@@ -36,7 +36,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var refresher: Refresher
     
-    @State var selectedSideBarItem: SideBarItem? = .today
+    @Binding var selectedSideBarItem: SideBarItem?
     @State private var addToInbox = false
     
     var body: some View {
@@ -49,22 +49,18 @@ struct ContentView: View {
                     TasksListView(predicate: TasksQuery.predicateInbox(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                 case .today:
                     TasksListView(predicate: TasksQuery.predicateToday(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                 case .tomorrow:
                     TasksListView(predicate: TasksQuery.predicateTomorrow(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                 case .alltasks:
                     TasksListView(predicate: TasksQuery.predicateAll(),
                                        list: selectedSideBarItem!,
                                        title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                 case nil:
                     EmptyView()
                 }
@@ -116,6 +112,7 @@ struct ContentView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
+    @Previewable @State var selectedSidebarItem: SideBarItem? = .today
     @Previewable @State var container = try? ModelContainer(for: Schema([
                                                             ProjectGroup.self,
                                                             Status.self,
@@ -125,7 +122,7 @@ struct ContentView: View {
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
     
-    ContentView()
+    ContentView(selectedSideBarItem: $selectedSidebarItem)
         .environmentObject(refresher)
         .modelContainer(container!)
 }

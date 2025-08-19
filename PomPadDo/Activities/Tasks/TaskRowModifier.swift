@@ -186,7 +186,6 @@ struct TaskRowModifier: ViewModifier {
                 SubtasksListView(list: list,
                                       title: task.name,
                                       mainTask: task)
-                .id(refresher.refresh)
                 .refreshable {
                     refresher.refresh.toggle()
                 }
@@ -202,7 +201,6 @@ struct TaskRowModifier: ViewModifier {
                     SubtasksListView(list: list,
                                      title: parentTask.name,
                                      mainTask: parentTask)
-                    .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 } label: {

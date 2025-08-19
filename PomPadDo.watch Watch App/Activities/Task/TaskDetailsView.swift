@@ -158,7 +158,6 @@ struct TaskDetailsView: View {
                 SubtasksListView(list: list,
                               title: task.name,
                               mainTask: task)
-                .id(refresher.refresh)
             } label: {
                 Label("Open subtasks", systemImage: "arrow.right")
             }
@@ -168,7 +167,6 @@ struct TaskDetailsView: View {
                     SubtasksListView(list: list,
                                   title: parentTask.name,
                                   mainTask: parentTask)
-                    .id(refresher.refresh)
                 } label: {
                     Label("Open parent task", systemImage: "arrow.left")
                 }

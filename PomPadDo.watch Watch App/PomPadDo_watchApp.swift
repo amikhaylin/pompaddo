@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct PomPadDoWatchApp: App {
     @State private var refresher = Refresher()
+    @State var selectedSideBarItem: SideBarItem? = .today
     
     @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -31,7 +32,8 @@ struct PomPadDoWatchApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(selectedSideBarItem: $selectedSideBarItem)
+                .id(refresher.refresh)
                 .environmentObject(refresher)
         }
         .modelContainer(sharedModelContainer)

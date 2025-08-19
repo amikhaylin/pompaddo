@@ -20,8 +20,7 @@ struct ContentView: View {
     
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var newTaskIsShowing: Bool
-    
-    @State private var selectedProject: Project?
+    @Binding var selectedProject: Project?
     
     @Query var tasks: [Todo]
     
@@ -33,7 +32,6 @@ struct ContentView: View {
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedSideBarItem: $selectedSideBarItem)
-                .id(refresher.refresh)
             }
             .toolbar {
                 ToolbarItemGroup {
@@ -64,27 +62,23 @@ struct ContentView: View {
                     TasksListView(predicate: TasksQuery.predicateInbox(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 case .today:
                     TasksListView(predicate: TasksQuery.predicateToday(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 case .tomorrow:
                     TasksListView(predicate: TasksQuery.predicateTomorrow(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
-                            .id(refresher.refresh)
                             .environmentObject(showInspector)
                             .environmentObject(selectedTasks)
                     } else {
@@ -105,7 +99,6 @@ struct ContentView: View {
                     TasksListView(predicate: TasksQuery.predicateAll(),
                                   list: selectedSideBarItem!,
                                   title: selectedSideBarItem!.name)
-                    .id(refresher.refresh)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 default:
@@ -177,6 +170,7 @@ struct ContentView: View {
     @Previewable @StateObject var focusTask = FocusTask()
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     @Previewable @State var newTaskIsShowing = false
+    @Previewable @State var selectedProject: Project?
     @Previewable @State var container = try? ModelContainer(for: Schema([
                                                             ProjectGroup.self,
                                                             Status.self,
@@ -188,7 +182,8 @@ struct ContentView: View {
     let previewer = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSideBarItem,
-                newTaskIsShowing: $newTaskIsShowing)
+                newTaskIsShowing: $newTaskIsShowing,
+                selectedProject: $selectedProject)
         .environmentObject(selectedTasks)
         .environmentObject(refresher)
         .environmentObject(timer)
