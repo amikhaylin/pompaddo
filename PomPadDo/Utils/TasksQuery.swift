@@ -164,13 +164,17 @@ struct TasksQuery {
             }
             return (first.dueDate! < second.dueDate!)
         } else {
-            if first.completed == false && second.completed == false { return true }
             if first.completed == false && second.completed { return true }
             if first.completed && second.completed == false { return false }
+            
+            if let firstCompletionDate = first.completionDate, let secondCompletionDate = second.completionDate {
+                return (firstCompletionDate >= secondCompletionDate)
+            }
+            
             return (first.completed && second.completed)
         }
     }
-    
+        
     static func deleteTask(context: ModelContext, task: Todo) {
         task.disconnectFromAll()
         task.deleteSubtasks(context: context)

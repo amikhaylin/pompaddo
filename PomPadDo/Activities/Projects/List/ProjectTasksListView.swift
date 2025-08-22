@@ -23,9 +23,9 @@ struct ProjectTasksListView: View {
     
     var searchResults: [Todo] {
         if searchText.isEmpty {
-            return project.getTasks()
+            return project.getTasks().sorted(by: TasksQuery.sortingWithCompleted)
         } else {
-            return project.getTasks().filter { $0.name.localizedStandardContains(searchText) }
+            return project.getTasks().filter { $0.name.localizedStandardContains(searchText) }.sorted(by: TasksQuery.sortingWithCompleted)
         }
     }
     
@@ -40,7 +40,7 @@ struct ProjectTasksListView: View {
                     )) {
                         ForEach(searchResults
                             .filter({ $0.status == status && $0.parentTask == nil })
-                            .sorted(by: TasksQuery.defaultSorting),
+                            .sorted(by: TasksQuery.sortingWithCompleted),
                                 id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
@@ -128,8 +128,7 @@ struct ProjectTasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? searchResults.filter({ $0.completed && $0.parentTask == nil }) : searchResults.filter({ $0.completed == false })
-                            .sorted(by: TasksQuery.defaultSorting),
+                        ForEach(section == .completed ? searchResults.filter({ $0.completed && $0.parentTask == nil }) : searchResults.filter({ $0.completed == false }),
                                 id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],

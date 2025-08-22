@@ -28,9 +28,9 @@ struct SubtasksListView: View {
     var searchResults: [Todo] {
         let tasks: [Todo] = mainTask.subtasks != nil ? mainTask.subtasks! : [Todo]()
         if searchText.isEmpty {
-            return tasks.sorted(by: TasksQuery.defaultSorting)
+            return tasks.sorted(by: TasksQuery.sortingWithCompleted)
         } else {
-            return tasks.filter { $0.name.localizedStandardContains(searchText) }.sorted(by: TasksQuery.defaultSorting)
+            return tasks.filter { $0.name.localizedStandardContains(searchText) }.sorted(by: TasksQuery.sortingWithCompleted)
         }
     }
     

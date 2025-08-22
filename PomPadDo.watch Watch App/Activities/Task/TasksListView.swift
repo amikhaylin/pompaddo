@@ -24,15 +24,14 @@ struct TasksListView: View {
         let innerTasks: [Todo]
         switch list {
         case .inbox:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
-                .sorted(by: TasksQuery.sortCompleted)
+            innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         case .today:
             innerTasks = tasks.filter({ TasksQuery.checkToday(date: $0.completionDate) && ($0.completed == false || ($0.completed && $0.parentTask == nil)) })
                 .sorted(by: TasksQuery.sortingWithCompleted)
         case .tomorrow:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+            innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         case .alltasks:
-            innerTasks = tasks.sorted(by: TasksQuery.defaultSorting)
+            innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         }
         
         if searchText.isEmpty {
