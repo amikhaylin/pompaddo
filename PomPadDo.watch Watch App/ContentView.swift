@@ -75,11 +75,6 @@ struct ContentView: View {
                     }
                 }
             }
-            .onLongPressGesture(minimumDuration: 1.5) {
-                print("Refresh")
-                WKInterfaceDevice.current().play(.click)
-                refresher.refresh.toggle()
-            }
         }
         .onChange(of: refresher.refresh) { _, _ in
             WidgetCenter.shared.reloadAllTimelines()
