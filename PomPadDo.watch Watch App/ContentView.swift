@@ -66,14 +66,6 @@ struct ContentView: View {
                 }
             }
             .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                        refresher.refresh.toggle()
-                    } label: {
-                        Image(systemName: "arrow.triangle.2.circlepath")
-                    }
-                }
-                
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         addToInbox.toggle()
@@ -82,6 +74,11 @@ struct ContentView: View {
                             .foregroundStyle(Color.orange)
                     }
                 }
+            }
+            .onLongPressGesture(minimumDuration: 1.5) {
+                print("Refresh")
+                WKInterfaceDevice.current().play(.click)
+                refresher.refresh.toggle()
             }
         }
         .onChange(of: refresher.refresh) { _, _ in

@@ -22309,6 +22309,7 @@
       }
     },
     "Refresh ⌘R" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {
