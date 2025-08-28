@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import StoreKit
 
 import SwiftDataTransferrable
 
@@ -19,10 +20,17 @@ enum MainViewTabs {
 struct MainView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.requestReview) var requestReview
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
+    @AppStorage("launchCount") var launchCount = 0
+    @AppStorage("lastVersionPromptedForReview") var lastVersionPromptedForReview: String?
+    
+    var currentVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""
+    }
     
     @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -128,6 +136,9 @@ struct MainView: View {
                                    breakInSeconds: timerBreakSession,
                                    longBreakInSeconds: timerLongBreakSession,
                                    workSessionsCount: Int(timerWorkSessionsCount))
+                
+                launchCount += 1
+                checkForReview()
             }
             .onChange(of: timerWorkSession, { _, _ in
                 timer.setDurations(workInSeconds: timerWorkSession,
@@ -183,6 +194,17 @@ struct MainView: View {
                     timer.setNotification()
                 }
             }
+        }
+    }
+    
+    private func checkForReview() {
+        guard launchCount >= 10,
+              lastVersionPromptedForReview != currentVersion else { return }
+        
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(2))
+            requestReview()
+            lastVersionPromptedForReview = currentVersion
         }
     }
 }
