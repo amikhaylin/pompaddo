@@ -110,6 +110,10 @@
 		4D8422AF2BA1DC8D000829E1 /* CircularProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */; };
 		4D8422B12BA1DCE8000829E1 /* TasksQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */; };
 		4D8422B52BA1F437000829E1 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8422B42BA1F437000829E1 /* BadgeManager.swift */; };
+		4D8614C42E61EC97005B6AF6 /* FocusTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2BBCBE2BE4DEAB00E105C1 /* FocusTimer.swift */; };
+		4D8614C52E61ED02005B6AF6 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D821E4D2C11A03A008E79F6 /* Common.swift */; };
+		4D8614C62E61ED2C005B6AF6 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8642BDF8B580026C2EA /* NotificationManager.swift */; };
+		4D8614C92E61EF96005B6AF6 /* FocusSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8614C72E61EF96005B6AF6 /* FocusSounds.swift */; };
 		4D8800BB2C18B8EF00AB4D78 /* TaskSwipeModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */; };
 		4D8F04EC2C29645300B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */; };
 		4D8F04EE2C2964B500B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */; };
@@ -292,6 +296,7 @@
 		4D8422AE2BA1DC8D000829E1 /* CircularProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgressView.swift; sourceTree = "<group>"; };
 		4D8422B02BA1DCE8000829E1 /* TasksQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksQuery.swift; sourceTree = "<group>"; };
 		4D8422B42BA1F437000829E1 /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeManager.swift; sourceTree = "<group>"; };
+		4D8614C72E61EF96005B6AF6 /* FocusSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSounds.swift; sourceTree = "<group>"; };
 		4D8800BA2C18B8EF00AB4D78 /* TaskSwipeModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskSwipeModifier.swift; sourceTree = "<group>"; };
 		4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
@@ -348,10 +353,17 @@
 			);
 			target = 4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */;
 		};
+		4D8614D52E61F783005B6AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Activities/Focus/FocusTabItemView.swift,
+			);
+			target = 4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D2867622D61F5C20064ADF3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobile; sourceTree = "<group>"; };
+		4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D2867622D61F5C20064ADF3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D8614D52E61F783005B6AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobile; sourceTree = "<group>"; };
 		4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobileUITests; sourceTree = "<group>"; };
 		4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PomPadDo.watch Watch App"; sourceTree = "<group>"; };
 		4D71DB672D63404900C1FE13 /* PomPadDoWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D71DB772D63404C00C1FE13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0540142D63A4980098FEC7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDoWidgets; sourceTree = "<group>"; };
@@ -476,6 +488,7 @@
 				4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */,
 				4D39399F2C64FF05004B08B9 /* FocusTasksView.swift */,
 				4D1F202C2E5C6A5D007E12BB /* FocusTaskRowModifier.swift */,
+				4D8614C72E61EF96005B6AF6 /* FocusSounds.swift */,
 			);
 			path = Focus;
 			sourceTree = "<group>";
@@ -1122,11 +1135,14 @@
 			files = (
 				4D3E50D72D638677008C1FDB /* Previewer.swift in Sources */,
 				4D3E50D92D6386F2008C1FDB /* TaskSwipeModifier.swift in Sources */,
+				4D8614C62E61ED2C005B6AF6 /* NotificationManager.swift in Sources */,
 				4D3E50D32D638661008C1FDB /* Project.swift in Sources */,
+				4D8614C42E61EC97005B6AF6 /* FocusTimer.swift in Sources */,
 				4D3E50D42D638661008C1FDB /* Status.swift in Sources */,
 				4D3E50DA2D638709008C1FDB /* TaskCheckBoxView.swift in Sources */,
 				4D3E50D52D638661008C1FDB /* ProjectGroup.swift in Sources */,
 				4D3E50D62D638661008C1FDB /* Todo.swift in Sources */,
+				4D8614C52E61ED02005B6AF6 /* Common.swift in Sources */,
 				4D3E50D12D638656008C1FDB /* TasksQuery.swift in Sources */,
 				4D3E50D82D638698008C1FDB /* CircularProgressView.swift in Sources */,
 				4D3E50D22D638656008C1FDB /* Refresher.swift in Sources */,
@@ -1188,6 +1204,7 @@
 				4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */,
 				4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */,
 				4DF6D7542BB405FF00941B63 /* ProjectTasksListView.swift in Sources */,
+				4D8614C92E61EF96005B6AF6 /* FocusSounds.swift in Sources */,
 				4DF91FDF2BCBD460009A6DA8 /* CheckBoxView.swift in Sources */,
 				4D5FCF202B82059400FE944E /* EditTaskView.swift in Sources */,
 				4D15DFE02D60ACCC008AFFC0 /* Refresher.swift in Sources */,

@@ -91,7 +91,7 @@ struct MainView: View {
                     Button {
                         tab = .focus
                     } label: {
-                        FocusTabItemView(tab: $tab)
+                        FocusTabItemView()
                             .environmentObject(timer)
                     }
                     .modifier(ConditionalButtonStyle(condition: tab == .focus))

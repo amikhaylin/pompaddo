@@ -16,6 +16,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case today
     case tomorrow
     case alltasks
+    case focus
+    case settings
     
     var name: String {
         switch self {
@@ -27,6 +29,10 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return NSLocalizedString("Tomorrow", comment: "")
         case .alltasks:
             return NSLocalizedString("All", comment: "")
+        case .focus:
+            return NSLocalizedString("Focus", comment: "")
+        case .settings:
+            return NSLocalizedString("Settings", comment: "")
         }
     }
 }
@@ -35,6 +41,8 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
     
     @Binding var selectedSideBarItem: SideBarItem?
     @State private var addToInbox = false
@@ -61,6 +69,12 @@ struct ContentView: View {
                     TasksListView(predicate: TasksQuery.predicateAll(),
                                        list: selectedSideBarItem!,
                                        title: selectedSideBarItem!.name)
+                case .focus:
+                    FocusTimerView()
+                        .environmentObject(timer)
+                        .environmentObject(focusTask)
+                case .settings:
+                    SettingsView()
                 case nil:
                     EmptyView()
                 }

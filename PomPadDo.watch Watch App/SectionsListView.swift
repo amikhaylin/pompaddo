@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SectionsListView: View {
+    @EnvironmentObject var timer: FocusTimer
     @Binding var selectedSideBarItem: SideBarItem?
     
     var body: some View {
@@ -46,6 +47,25 @@ struct SectionsListView: View {
                         Text("All")
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
+                }
+            case .focus:
+                NavigationLink(value: item) {
+                    FocusTabItemView()
+                        .environmentObject(timer)
+                        .foregroundStyle(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
+//                    HStack {
+//                        Image(systemName: "target")
+//                        Text("Focus")
+//                    }
+//                    .foregroundStyle(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
+                }
+            case .settings:
+                NavigationLink(value: item) {
+                    HStack {
+                        Image(systemName: "gear")
+                        Text("Settings")
+                    }
+                    .foregroundStyle(Color(#colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)))
                 }
             }
         }
