@@ -26,7 +26,7 @@ struct TasksListView: View {
     @EnvironmentObject var selectedTasks: SelectedTasks
     @Query var tasks: [Todo]
 
-    @State private var list: SideBarItem
+    @Binding var list: SideBarItem?
     @State private var title: String
     @State private var newTaskIsShowing = false
     
@@ -82,8 +82,8 @@ struct TasksListView: View {
                                         .modifier(TaskRowModifier(task: maintask,
                                                                   selectedTasksSet: $selectedTasks.tasks,
                                                                   projects: projects,
-                                                                  list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: list))
+                                                                  list: $list))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: $list))
                                         .tag(maintask)
                                 }
                             } else {
@@ -91,8 +91,8 @@ struct TasksListView: View {
                                     .modifier(TaskRowModifier(task: task,
                                                               selectedTasksSet: $selectedTasks.tasks,
                                                               projects: projects,
-                                                              list: list))
-                                    .modifier(TaskSwipeModifier(task: task, list: list))
+                                                              list: $list))
+                                    .modifier(TaskSwipeModifier(task: task, list: $list))
                                     .tag(task)
                             }
                         }
@@ -129,7 +129,7 @@ struct TasksListView: View {
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 #if os(iOS)
                 .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: nil)
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: nil)
                         .frame(minWidth: 200, maxHeight: 220)
                         .presentationCompactAdaptation(.popover)
                 })
@@ -173,7 +173,7 @@ struct TasksListView: View {
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: nil)
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: nil)
         }
         #endif
     }
@@ -211,11 +211,13 @@ struct TasksListView: View {
             break
         case .alltasks:
             break
+        default:
+            break
         }
     }
     
-    init(predicate: Predicate<Todo>, list: SideBarItem, title: String) {
-        self.list = list
+    init(predicate: Predicate<Todo>, list: Binding<SideBarItem?>, title: String) {
+        self._list = list
         self.title = title
         
         self._tasks = Query(filter: predicate)
@@ -242,7 +244,7 @@ struct TasksListView: View {
     let previewer = Previewer(container!)
     
     TasksListView(predicate: TasksQuery.predicateToday(),
-                  list: .inbox,
+                  list: .constant(.inbox),
                   title: "Some list")
     .environmentObject(showInspector)
     .environmentObject(selectedTasks)

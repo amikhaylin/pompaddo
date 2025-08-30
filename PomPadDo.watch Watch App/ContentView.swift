@@ -60,22 +60,22 @@ struct ContentView: View {
                 switch selectedSideBarItem {
                 case .inbox:
                     TasksListView(predicate: TasksQuery.predicateInbox(),
-                                  list: selectedSideBarItem!,
+                                  list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
                 case .today:
                     TasksListView(predicate: TasksQuery.predicateToday(),
-                                  list: selectedSideBarItem!,
+                                  list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
                 case .tomorrow:
                     TasksListView(predicate: TasksQuery.predicateTomorrow(),
-                                  list: selectedSideBarItem!,
+                                  list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
                 case .alltasks:
                     TasksListView(predicate: TasksQuery.predicateAll(),
-                                       list: selectedSideBarItem!,
+                                       list: $selectedSideBarItem,
                                        title: selectedSideBarItem!.name)
                 case .focus:
-                    FocusTimerView()
+                    FocusTimerView(list: $selectedSideBarItem)
                         .environmentObject(timer)
                         .environmentObject(focusTask)
                 case .settings:

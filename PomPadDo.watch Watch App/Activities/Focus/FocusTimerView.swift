@@ -10,6 +10,7 @@ import SwiftUI
 struct FocusTimerView: View {
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
+    @Binding var list: SideBarItem?
     
     var body: some View {
         VStack {
@@ -18,7 +19,7 @@ struct FocusTimerView: View {
                 CircularProgressView(progress: CGFloat(timer.fractionPassed),
                                      color: timer.mode == .work ? .red : .green,
                                      lineWidth: 5)
-                .frame(width: 150, height: 150)
+                .frame(width: 140, height: 140)
                 
                 VStack {
                     Text("\(timer.secondsLeftString)")
@@ -67,7 +68,7 @@ struct FocusTimerView: View {
                 //task
                 if let task = focusTask.task {
                     NavigationLink {
-                        TaskDetailsView(task: task, list: .focus)
+                        TaskDetailsView(task: task, list: $list)
                     } label: {
                         Image(systemName: "checkmark.square")
                     }
@@ -112,7 +113,7 @@ struct FocusTimerView: View {
                                                      workSessionsCount: 4)
     @Previewable @StateObject var focusTask = FocusTask()
 
-    FocusTimerView()
+    FocusTimerView(list: .constant(.focus))
         .environmentObject(timer)
         .environmentObject(focusTask)
 }

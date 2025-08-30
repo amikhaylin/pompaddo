@@ -14,7 +14,7 @@ struct SubtasksListView: View {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
 
-    @State var list: SideBarItem
+    @Binding var list: SideBarItem?
     @State var title: String
     @State var mainTask: Todo
     @State private var newTaskIsShowing = false
@@ -58,8 +58,8 @@ struct SubtasksListView: View {
                                         .modifier(TaskRowModifier(task: maintask,
                                                                   selectedTasksSet: $selectedTasks.tasks,
                                                                   projects: projects,
-                                                                  list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: list))
+                                                                  list: $list))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: $list))
                                         .tag(maintask)
                                 }
                             } else {
@@ -67,8 +67,8 @@ struct SubtasksListView: View {
                                     .modifier(TaskRowModifier(task: task,
                                                               selectedTasksSet: $selectedTasks.tasks,
                                                               projects: projects,
-                                                              list: list))
-                                    .modifier(TaskSwipeModifier(task: task, list: list))
+                                                              list: $list))
+                                    .modifier(TaskSwipeModifier(task: task, list: $list))
                                     .tag(task)
                             }
                         }
@@ -105,7 +105,7 @@ struct SubtasksListView: View {
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 #if os(iOS)
                 .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask)
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: mainTask)
                         .frame(minWidth: 200, maxHeight: 180)
                         .presentationCompactAdaptation(.popover)
                 })
@@ -149,7 +149,7 @@ struct SubtasksListView: View {
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask)
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: mainTask)
         }
         #endif
     }
@@ -187,6 +187,8 @@ struct SubtasksListView: View {
             break
         case .alltasks:
             break
+        default:
+            break
         }
     }
 }
@@ -210,7 +212,7 @@ struct SubtasksListView: View {
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
     
-    SubtasksListView(list: .inbox,
+    SubtasksListView(list: .constant(.inbox),
                      title: "Some list",
                      mainTask: previewer.task)
     .environmentObject(showInspector)

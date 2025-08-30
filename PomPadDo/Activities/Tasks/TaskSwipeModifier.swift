@@ -17,7 +17,7 @@ struct TaskSwipeModifier: ViewModifier {
     @EnvironmentObject var selectedTasks: SelectedTasks
     #endif
     @Bindable var task: Todo
-    var list: SideBarItem
+    @Binding var list: SideBarItem?
     
     func body(content: Content) -> some View {
         content
@@ -35,7 +35,7 @@ struct TaskSwipeModifier: ViewModifier {
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 if let subtasks = task.subtasks {
                     NavigationLink {
-                        SubtasksListView(list: list,
+                        SubtasksListView(list: $list,
                                       title: task.name,
                                       mainTask: task)
                         .refreshable {
@@ -50,7 +50,7 @@ struct TaskSwipeModifier: ViewModifier {
                     let subtasks = [Todo]()
                     
                     NavigationLink {
-                        SubtasksListView(list: list,
+                        SubtasksListView(list: $list,
                                       title: task.name,
                                       mainTask: task)
                     } label: {
@@ -63,7 +63,7 @@ struct TaskSwipeModifier: ViewModifier {
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 if let subtasks = task.subtasks {
                     NavigationLink {
-                        SubtasksListView(list: list,
+                        SubtasksListView(list: $list,
                                       title: task.name,
                                       mainTask: task)
                     } label: {

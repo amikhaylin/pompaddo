@@ -13,7 +13,7 @@ struct SubtasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     
-    @State var list: SideBarItem
+    @Binding var list: SideBarItem?
     @State var title: String
     @State var mainTask: Todo
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
@@ -36,12 +36,12 @@ struct SubtasksListView: View {
                     TaskCheckBoxView(task: task)
                     
                     NavigationLink {
-                        TaskDetailsView(task: task, list: list)
+                        TaskDetailsView(task: task, list: $list)
                     } label: {
                         Text(task.name)
                     }
                 }
-                .modifier(TaskSwipeModifier(task: task, list: list))
+                .modifier(TaskSwipeModifier(task: task, list: $list))
             }
             .searchable(text: $searchText, placement: .automatic, prompt: "Search tasks")
         }
@@ -66,7 +66,7 @@ struct SubtasksListView: View {
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
     
-    SubtasksListView(list: .inbox,
+    SubtasksListView(list: .constant(.inbox),
                      title: "Some list",
                      mainTask: previewer.task)
         .environmentObject(refresher)

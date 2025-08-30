@@ -14,7 +14,7 @@ struct TasksListView: View {
     @EnvironmentObject var refresher: Refresher
     @Query var tasks: [Todo]
     
-    @State var list: SideBarItem
+    @Binding var list: SideBarItem?
     @State var title: String
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
@@ -50,12 +50,12 @@ struct TasksListView: View {
                     TaskCheckBoxView(task: task)
                     
                     NavigationLink {
-                        TaskDetailsView(task: task, list: list)
+                        TaskDetailsView(task: task, list: $list)
                     } label: {
                         Text(task.name)
                     }
                 }
-                .modifier(TaskSwipeModifier(task: task, list: list))
+                .modifier(TaskSwipeModifier(task: task, list: $list))
             }
             .searchable(text: $searchText, placement: .automatic, prompt: "Search tasks")
         }
@@ -68,8 +68,8 @@ struct TasksListView: View {
         }
     }
     
-    init(predicate: Predicate<Todo>, list: SideBarItem, title: String) {
-        self.list = list
+    init(predicate: Predicate<Todo>, list: Binding<SideBarItem?>, title: String) {
+        self._list = list
         self.title = title
         
         self._tasks = Query(filter: predicate)
@@ -88,7 +88,7 @@ struct TasksListView: View {
     let previewer = Previewer(container!)
     
     TasksListView(predicate: TasksQuery.predicateInbox(),
-                  list: .inbox,
+                  list: .constant(.inbox),
                   title: "Some list")
         .environmentObject(refresher)
         .modelContainer(container!)
