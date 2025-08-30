@@ -13,6 +13,8 @@ struct TaskDetailsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
     @State var list: SideBarItem
     
@@ -170,6 +172,34 @@ struct TaskDetailsView: View {
                     presentationMode.wrappedValue.dismiss()
                 } label: {
                     Label("Skip", systemImage: "arrow.uturn.forward")
+                }
+            }
+            
+            if let focusedTask = focusTask.task, focusedTask == task {
+                Button {
+                    focusTask.task = nil
+                    timer.reset()
+                    if timer.mode == .pause || timer.mode == .longbreak {
+                        timer.skip()
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Image(systemName: "stop.fill")
+                    Text("Stop focus")
+                }
+            } else {
+                Button {
+                    focusTask.task = task
+                    if timer.state == .idle {
+                        timer.reset()
+                        timer.start()
+                    } else if timer.state == .paused {
+                        timer.resume()
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Image(systemName: "play.fill")
+                    Text("Start focus")
                 }
             }
         

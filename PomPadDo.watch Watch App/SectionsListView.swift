@@ -53,11 +53,6 @@ struct SectionsListView: View {
                     FocusTabItemView()
                         .environmentObject(timer)
                         .foregroundStyle(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
-//                    HStack {
-//                        Image(systemName: "target")
-//                        Text("Focus")
-//                    }
-//                    .foregroundStyle(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
                 }
             case .settings:
                 NavigationLink(value: item) {
