@@ -38,7 +38,6 @@ struct TaskSwipeModifier: ViewModifier {
                         SubtasksListView(list: list,
                                       title: task.name,
                                       mainTask: task)
-                        .id(refresher.refresh)
                         .refreshable {
                             refresher.refresh.toggle()
                         }
@@ -54,7 +53,6 @@ struct TaskSwipeModifier: ViewModifier {
                         SubtasksListView(list: list,
                                       title: task.name,
                                       mainTask: task)
-                        .id(refresher.refresh)
                     } label: {
                         Label("Open subtasks", systemImage: "arrow.right")
                     }
@@ -68,7 +66,6 @@ struct TaskSwipeModifier: ViewModifier {
                         SubtasksListView(list: list,
                                       title: task.name,
                                       mainTask: task)
-                        .id(refresher.refresh)
                     } label: {
                         Label("Open subtasks", systemImage: "arrow.right")
                     }

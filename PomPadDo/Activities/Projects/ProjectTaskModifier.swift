@@ -192,7 +192,6 @@ struct ProjectTaskModifier: ViewModifier {
                     SubtasksListView(list: .projects,
                                      title: task.name,
                                      mainTask: task)
-                    .id(refresher.refresh)
                     .refreshable {
                         refresher.refresh.toggle()
                     }

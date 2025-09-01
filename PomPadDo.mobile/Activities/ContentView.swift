@@ -15,9 +15,8 @@ struct ContentView: View {
     @EnvironmentObject var refresher: Refresher
     @StateObject private var showInspector = InspectorToggler()
     @StateObject private var selectedTasks = SelectedTasks()
-    @State var selectedSideBarItem: SideBarItem? = .today
-    
-    @State private var selectedProject: Project?
+    @Binding var selectedSideBarItem: SideBarItem?
+    @Binding var selectedProject: Project?
     
     @Query var tasks: [Todo]
     
@@ -25,12 +24,10 @@ struct ContentView: View {
         NavigationSplitView {
             VStack {
                 SectionsListView(selectedSideBarItem: $selectedSideBarItem)
-                .id(refresher.refresh)
                 .frame(height: 270)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedSideBarItem: $selectedSideBarItem)
-                .id(refresher.refresh)
                 .contentMargins(.vertical, 10)
             }
             .navigationSplitViewColumnWidth(min: 300, ideal: 300)
@@ -40,7 +37,6 @@ struct ContentView: View {
                 TasksListView(predicate: TasksQuery.predicateInbox(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
-                .id(refresher.refresh)
                 .refreshable {
                     refresher.refresh.toggle()
                 }
@@ -50,7 +46,6 @@ struct ContentView: View {
                 TasksListView(predicate: TasksQuery.predicateToday(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
-                .id(refresher.refresh)
                 .refreshable {
                     refresher.refresh.toggle()
                 }
@@ -60,7 +55,6 @@ struct ContentView: View {
                 TasksListView(predicate: TasksQuery.predicateTomorrow(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
-                .id(refresher.refresh)
                 .refreshable {
                     refresher.refresh.toggle()
                 }
@@ -73,7 +67,6 @@ struct ContentView: View {
             case .projects:
                 if let project = selectedProject {
                     ProjectView(project: project)
-                        .id(refresher.refresh)
                         .environmentObject(showInspector)
                         .environmentObject(selectedTasks)
                 } else {
@@ -90,7 +83,6 @@ struct ContentView: View {
                 TasksListView(predicate: TasksQuery.predicateAll(),
                               list: selectedSideBarItem!,
                               title: selectedSideBarItem!.name)
-                .id(refresher.refresh)
                 .environmentObject(showInspector)
                 .environmentObject(selectedTasks)
             default:
@@ -146,6 +138,8 @@ struct ContentView: View {
                                                      workSessionsCount: 4)
     
     @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var selectedSidebarItem: SideBarItem? = .today
+    @Previewable @State var selectedProject: Project?
     @Previewable @State var container = try? ModelContainer(for: Schema([
         ProjectGroup.self,
         Status.self,
@@ -155,7 +149,8 @@ struct ContentView: View {
                                                             configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
     
-    ContentView()
+    ContentView(selectedSideBarItem: $selectedSidebarItem,
+                selectedProject: $selectedProject)
         .environmentObject(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)

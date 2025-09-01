@@ -38,13 +38,18 @@ struct MainView: View {
     @State private var refresh = false
     @State private var refresher = Refresher()
     
+    @State var selectedSideBarItem: SideBarItem? = .today
+    @State var selectedProject: Project?
+    
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Group {
                     switch tab {
                     case .tasks:
-                        ContentView()
+                        ContentView(selectedSideBarItem: $selectedSideBarItem,
+                                    selectedProject: $selectedProject)
+                            .id(refresher.refresh)
                             .environmentObject(refresher)
                             .environmentObject(timer)
                             .environmentObject(focusTask)
