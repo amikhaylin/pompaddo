@@ -25321,6 +25321,22 @@
         }
       }
     },
+    "Save and Add next" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save and Add next"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить + новая"
+          }
+        }
+      }
+    },
     "Search tasks" : {
       "localizations" : {
         "ar" : {

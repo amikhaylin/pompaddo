@@ -55,32 +55,44 @@ struct NewTaskView: View {
                     }
                 }
                 
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Save and Add next") {
+                        save()
+                        taskName = ""
+                        link = ""
+                    }
+                }
+                
                 ToolbarItem(placement: .primaryAction) {
                     Button("OK") {
+                        save()
                         self.isVisible = false
-                        let task = Todo(name: taskName, link: link)
-                        if dueToday {
-                            task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
-                        } else if project == nil && mainTask == nil {
-                            setDueDate(task: task)
-                        }
-                        
-                        if let mainTask = mainTask {
-                            mainTask.subtasks?.append(task)
-                        }
-                        
-                        if let project = project {
-                            task.status = project.getDefaultStatus()
-                            task.project = project
-                        }
-
-                        modelContext.insert(task)
-                        task.reconnect()
                     }
                     .accessibility(identifier: "SaveTask")
                 }
             }
         }
+    }
+    
+    private func save() {
+        let task = Todo(name: taskName, link: link)
+        if dueToday {
+            task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
+        } else if project == nil && mainTask == nil {
+            setDueDate(task: task)
+        }
+        
+        if let mainTask = mainTask {
+            mainTask.subtasks?.append(task)
+        }
+        
+        if let project = project {
+            task.status = project.getDefaultStatus()
+            task.project = project
+        }
+
+        modelContext.insert(task)
+        task.reconnect()
     }
     
     private func setDueDate(task: Todo) {
