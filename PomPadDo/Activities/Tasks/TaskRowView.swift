@@ -114,11 +114,30 @@ struct TaskRowView: View {
                                 .foregroundStyle(Color.red)
                                 .font(.caption)
                         } else {
-                            Text(dueDate, format: .dateTime.day().month().year())
+                            Text(dueDate, style: .date)
                                 .foregroundStyle(dueDate < Calendar.current.startOfDay(for: Date()) ? Color.red : Color.blue)
                                 .font(.caption)
                         }
                     }
+                }
+                
+                if let completionDate = task.completionDate {
+                    HStack {
+                        Text("/")
+                        if Calendar.current.isDateInToday(completionDate) {
+                            Text("Today")
+                        } else if Calendar.current.isDateInTomorrow(completionDate) {
+                            Text("Tomorrow")
+                        } else if Calendar.current.isDateInYesterday(completionDate) {
+                            Text("Yesterday")
+                        } else {
+                            HStack {
+                                Text(completionDate, style: .date)
+                            }
+                        }
+                    }
+                    .foregroundStyle(Color.gray)
+                    .font(.caption)
                 }
                 
                 if showingAlertSign {
