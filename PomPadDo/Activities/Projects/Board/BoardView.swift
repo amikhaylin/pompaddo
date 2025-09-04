@@ -61,7 +61,7 @@ struct BoardView: View {
                             List(selection: $selectedTasks.tasks) {
                                 ForEach(searchResults
                                     .filter({ $0.status == status && $0.parentTask == nil })
-                                    .sorted(by: TasksQuery.defaultSorting),
+                                    .sorted(by: TasksQuery.sortingWithCompleted),
                                         id: \.self) { task in
                                     if let subtasks = task.subtasks, subtasks.count > 0 {
                                         OutlineGroup([task],
