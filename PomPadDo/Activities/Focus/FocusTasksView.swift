@@ -17,18 +17,39 @@ struct FocusTasksView: View {
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     var body: some View {
-        List(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-             id: \.self) { task in
-            if let subtasks = task.subtasks, subtasks.count > 0 {
-                OutlineGroup([task],
-                             id: \.self,
-                             children: \.subtasks) { maintask in
+        List(selection: $selectedTask) {
+            ForEach(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
+                    id: \.self) { task in
+                if let subtasks = task.subtasks, subtasks.count > 0 {
+                    OutlineGroup([task],
+                                 id: \.self,
+                                 children: \.subtasks) { maintask in
+                        HStack {
+                            TaskRowView(task: maintask)
+                                .modifier(FocusTaskRowModifier(task: maintask, viewMode: $viewMode))
+                                .tag(maintask)
+                            
+                            Button {
+                                selectedTask = maintask
+                                viewMode = 1
+                                if timer.state == .idle {
+                                    timer.reset()
+                                    timer.start()
+                                }
+                            } label: {
+                                Image(systemName: "play.fill")
+                            }
+                            .accessibility(identifier: "\(maintask.name)PlayButton")
+                        }
+                    }
+                } else {
                     HStack {
-                        TaskRowView(task: maintask)
-                            .tag(maintask)
+                        TaskRowView(task: task)
+                            .modifier(FocusTaskRowModifier(task: task, viewMode: $viewMode))
+                            .tag(task)
                         
                         Button {
-                            selectedTask = maintask
+                            selectedTask = task
                             viewMode = 1
                             if timer.state == .idle {
                                 timer.reset()
@@ -37,25 +58,8 @@ struct FocusTasksView: View {
                         } label: {
                             Image(systemName: "play.fill")
                         }
-                        .accessibility(identifier: "\(maintask.name)PlayButton")
+                        .accessibility(identifier: "\(task.name)PlayButton")
                     }
-                }
-            } else {
-                HStack {
-                    TaskRowView(task: task)
-                        .tag(task)
-                    
-                    Button {
-                        selectedTask = task
-                        viewMode = 1
-                        if timer.state == .idle {
-                            timer.reset()
-                            timer.start()
-                        }
-                    } label: {
-                        Image(systemName: "play.fill")
-                    }
-                    .accessibility(identifier: "\(task.name)PlayButton")
                 }
             }
         }
