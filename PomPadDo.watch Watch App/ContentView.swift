@@ -153,6 +153,11 @@ struct ContentView: View {
                 task.tomatoesCount += 1
             }
         })
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .background && timer.state == .running {
+                timer.setNotification()
+            }
+        }
     }
 }
 
