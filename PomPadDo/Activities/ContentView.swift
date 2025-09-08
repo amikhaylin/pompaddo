@@ -34,14 +34,7 @@ struct ContentView: View {
                                  selectedSideBarItem: $selectedSideBarItem)
             }
             .toolbar {
-                ToolbarItemGroup {
-                    Button {
-                        refresher.refresh.toggle()
-                    } label: {
-                        Label("Refresh", systemImage: "arrow.triangle.2.circlepath")
-                    }
-                    .help("Refresh ⌘R")
-                    
+                ToolbarItem {
                     Button {
                         newTaskIsShowing.toggle()
                     } label: {
