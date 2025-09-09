@@ -7,11 +7,12 @@
 
 import SwiftUI
 import SwiftData
-
 import SwiftDataTransferrable
+import StoreKit
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.requestReview) var requestReview
     @EnvironmentObject var refresher: Refresher
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var selectedTasks: SelectedTasks
@@ -23,6 +24,13 @@ struct ContentView: View {
     @Binding var selectedProject: Project?
     
     @Query var tasks: [Todo]
+    
+    @AppStorage("launchCount") var launchCount = 0
+    @AppStorage("lastVersionPromptedForReview") var lastVersionPromptedForReview: String?
+    
+    var currentVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""
+    }
     
     var body: some View {
         NavigationSplitView {
@@ -148,6 +156,21 @@ struct ContentView: View {
                 }
             }
             .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
+        }
+        .onAppear {
+            launchCount += 1
+            checkForReview()
+        }
+    }
+    
+    private func checkForReview() {
+        guard launchCount >= 10,
+              lastVersionPromptedForReview != currentVersion else { return }
+        
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(2))
+            requestReview()
+            lastVersionPromptedForReview = currentVersion
         }
     }
 }
