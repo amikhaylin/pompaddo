@@ -28,7 +28,7 @@ struct ContentView: View {
         NavigationSplitView {
             VStack {
                 SectionsListView(selectedSideBarItem: $selectedSideBarItem)
-                .frame(height: 150)
+                .frame(height: 170)
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedSideBarItem: $selectedSideBarItem)
