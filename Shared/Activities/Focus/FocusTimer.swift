@@ -32,6 +32,7 @@ enum FocusTimerMode: String {
     }
 }
 
+@MainActor
 @Observable
 class FocusTimer: ObservableObject {
     // timer -> tick every second
@@ -57,7 +58,7 @@ class FocusTimer: ObservableObject {
     private(set) var sessionsCounter: Int = 0
     private var currentNotificationId: String = ""
 
-    private var timer: Timer?
+    private var timerTask: Task<Void, Never>?
   
     init(workInSeconds: TimeInterval, 
          breakInSeconds: TimeInterval,
@@ -115,24 +116,24 @@ class FocusTimer: ObservableObject {
         secondsPassed = 0
         fractionPassed = 0
         state = .running
-        createTimer()
+        startTimer()
     }
     
     func resume() {
         dateStarted = Date.now
         state = .running
-        createTimer()
+        startTimer()
     }
     
     func pause() {
         secondsPassedBeforePause = _secondsPassed
         state = .paused
-        killTimer()
+        stopTimer()
     }
     
     func reset() {
         state = .idle
-        killTimer()
+        stopTimer()
         dateStarted = Date.now
         secondsPassed = 0
         fractionPassed = 0
@@ -176,21 +177,24 @@ class FocusTimer: ObservableObject {
     }
 
     // MARK: private methods
-    
-    private func createTimer() {
-        DispatchQueue.main.async { [weak self] in
-            self?.killTimer()
-            // create timer
-            self?.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-                self?.onTick()
+    private func startTimer() {
+        stopTimer()
+        
+        timerTask = Task(priority: .background) { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                
+                await MainActor.run {
+                    self?.onTick()
+                }
             }
         }
     }
-  
-    private func killTimer() {
+    
+    private func stopTimer() {
         NotificationManager.removeRequest(identifier: currentNotificationId)
-        timer?.invalidate()
-        timer = nil
+        timerTask?.cancel()
+        timerTask = nil
     }
   
     private func onTick() {
