@@ -69,6 +69,11 @@ class FocusTimer: ObservableObject {
         self.durationLongBreak = longBreakInSeconds
         self.workSessionsCount = workSessionsCount
     }
+    
+    @MainActor
+    deinit {
+        stopTimer()
+    }
   
     // MARK: Computed Properties
     var secondsPassedString: String {
