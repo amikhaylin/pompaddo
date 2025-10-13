@@ -21,7 +21,7 @@ struct FocusTabItemView: View {
             } else {
                 HStack {
                     if timer.mode == .work {
-                        Image(systemName: "target")
+                        Image(systemName: "brain.head.profile")
                     } else {
                         Image(systemName: "cup.and.saucer.fill")
                     }

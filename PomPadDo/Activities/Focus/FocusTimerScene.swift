@@ -35,16 +35,14 @@ struct FocusTimerScene: Scene {
                 HStack {
                     if focusMode == .work {
                         let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
-                        //                        .applying(.init(hierarchicalColor: .yellow))
                             .applying(.init(hierarchicalColor: .red))
                         
-                        let image = NSImage(systemSymbolName: "target", accessibilityDescription: nil)
+                        let image = NSImage(systemSymbolName: "brain.head.profile", accessibilityDescription: nil)
                         let updateImage = image?.withSymbolConfiguration(configuration)
                         
                         Image(nsImage: updateImage!)
                     } else {
                         let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
-                        //                        .applying(.init(hierarchicalColor: .blue))
                             .applying(.init(hierarchicalColor: .green))
                         
                         let image = NSImage(systemSymbolName: "cup.and.saucer.fill", accessibilityDescription: nil)
