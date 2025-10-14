@@ -12,6 +12,7 @@ struct ProjectTasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
     
     @Bindable var project: Project
     
@@ -55,7 +56,9 @@ struct ProjectTasksListView: View {
                                                                         set: { project.tasks = $0 })))
                                         .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
                                         .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
+                                .listRowSeparator(.hidden)
                             } else {
                                 TaskRowView(task: task, showingProject: false)
                                     .modifier(ProjectTaskModifier(task: task,
@@ -66,6 +69,7 @@ struct ProjectTasksListView: View {
                                                                     set: { project.tasks = $0 })))
                                     .modifier(TaskSwipeModifier(task: task, list: .constant(.projects)))
                                     .tag(task)
+                                    .listRowSeparator(.hidden)
                             }
                         }
                     } label: {
@@ -96,6 +100,7 @@ struct ProjectTasksListView: View {
                                 .font(.caption)
                         }
                     }
+                    .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.moveToStatus(status: status,
@@ -143,7 +148,9 @@ struct ProjectTasksListView: View {
                                                                         set: { project.tasks = $0 })))
                                         .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
                                         .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
+                                .listRowSeparator(.hidden)
                             } else {
                                 TaskRowView(task: task, showingProject: false)
                                     .modifier(ProjectTaskModifier(task: task,
@@ -154,9 +161,11 @@ struct ProjectTasksListView: View {
                                                                     set: { project.tasks = $0 })))
                                     .modifier(TaskSwipeModifier(task: task, list: .constant(.projects)))
                                     .tag(task)
+                                    .listRowSeparator(.hidden)
                             }
                         }
                     }
+                    .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.disconnectFromParentTask()
@@ -181,6 +190,10 @@ struct ProjectTasksListView: View {
     
     private func deleteTask(task: Todo) {
         withAnimation {
+            if let focus = focusTask.task, task == focus {
+                focusTask.task = nil
+            }
+
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
         }
@@ -189,6 +202,10 @@ struct ProjectTasksListView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks.tasks {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }

@@ -37,6 +37,7 @@ struct NewTaskView: View {
                     self.isVisible = false
                 }
                 .keyboardShortcut(.cancelAction)
+                
                 Spacer()
                 
                 Button("Save and Add next") {
@@ -45,7 +46,6 @@ struct NewTaskView: View {
                     link = ""
                 }
                 
-                Spacer()
                 Button("OK") {
                     save()
                     self.isVisible = false
@@ -53,7 +53,7 @@ struct NewTaskView: View {
                 .keyboardShortcut(.defaultAction)
             }
         }
-        .frame(width: 400, height: 120)
+        .frame(width: 400, height: 140)
         .padding()
     }
     

@@ -16,6 +16,7 @@ struct TaskSwipeModifier: ViewModifier {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
     #endif
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
     @Binding var list: SideBarItem?
     
@@ -24,6 +25,10 @@ struct TaskSwipeModifier: ViewModifier {
             .swipeActions {
                 Button(role: .destructive) {
                     withAnimation {
+                        if let focus = focusTask.task, task == focus {
+                            focusTask.task = nil
+                        }
+
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
                     }

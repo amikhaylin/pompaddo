@@ -77,10 +77,10 @@ class FocusTimer: ObservableObject {
   
     // MARK: Computed Properties
     var secondsPassedString: String {
-        return Common.formatSeconds(_secondsPassed)
+        return Common.formatSeconds(secondsPassed)
     }
     var secondsLeft: Int {
-        Int(duration) - _secondsPassed
+        Int(duration) - secondsPassed
     }
     var secondsLeftString: String {
         return Common.formatSeconds(secondsLeft)
@@ -131,9 +131,10 @@ class FocusTimer: ObservableObject {
     }
     
     func pause() {
-        secondsPassedBeforePause = _secondsPassed
-        state = .paused
         stopTimer()
+        secondsPassedBeforePause = secondsPassed
+        dateStarted = Date.now
+        state = .paused
     }
     
     func reset() {

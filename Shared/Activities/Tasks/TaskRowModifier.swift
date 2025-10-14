@@ -287,12 +287,20 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 {
                     for task in selectedTasksSet {
+                        if let focus = focusTask.task, task == focus {
+                            focusTask.task = nil
+                        }
+
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
                     }
                     showInspector.show = false
                     selectedTasksSet.removeAll()
                 } else {
+                    if let focus = focusTask.task, task == focus {
+                        focusTask.task = nil
+                    }
+
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
                 }

@@ -24,6 +24,7 @@ struct TasksListView: View {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
     @Query var tasks: [Todo]
 
     @Binding var list: SideBarItem?
@@ -85,7 +86,9 @@ struct TasksListView: View {
                                                                   list: $list))
                                         .modifier(TaskSwipeModifier(task: maintask, list: $list))
                                         .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
+                                .listRowSeparator(.hidden)
                             } else {
                                 TaskRowView(task: task)
                                     .modifier(TaskRowModifier(task: task,
@@ -94,9 +97,11 @@ struct TasksListView: View {
                                                               list: $list))
                                     .modifier(TaskSwipeModifier(task: task, list: $list))
                                     .tag(task)
+                                    .listRowSeparator(.hidden)
                             }
                         }
                     }
+                    .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.disconnectFromParentTask()
@@ -180,6 +185,10 @@ struct TasksListView: View {
     
     private func deleteItems() {
         for task in selectedTasks.tasks {
+            if let focus = focusTask.task, task == focus {
+                focusTask.task = nil
+            }
+
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
         }
@@ -193,6 +202,10 @@ struct TasksListView: View {
     }
     
     private func deleteTask(task: Todo) {
+        if let focus = focusTask.task, task == focus {
+            focusTask.task = nil
+        }
+
         TasksQuery.deleteTask(context: modelContext,
                               task: task)
     }

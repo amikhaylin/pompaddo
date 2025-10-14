@@ -13,6 +13,7 @@ struct SubtasksListView: View {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
 
     @Binding var list: SideBarItem?
     @State var title: String
@@ -61,6 +62,7 @@ struct SubtasksListView: View {
                                                                   list: $list))
                                         .modifier(TaskSwipeModifier(task: maintask, list: $list))
                                         .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
                             } else {
                                 TaskRowView(task: task)
@@ -70,6 +72,7 @@ struct SubtasksListView: View {
                                                               list: $list))
                                     .modifier(TaskSwipeModifier(task: task, list: $list))
                                     .tag(task)
+                                    .listRowSeparator(.hidden)
                             }
                         }
                     }
@@ -106,7 +109,7 @@ struct SubtasksListView: View {
                 #if os(iOS)
                 .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
                     NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: mainTask)
-                        .frame(minWidth: 200, maxHeight: 180)
+                        .frame(minWidth: 200, maxHeight: 220)
                         .presentationCompactAdaptation(.popover)
                 })
                 #endif
@@ -156,6 +159,10 @@ struct SubtasksListView: View {
     
     private func deleteItems() {
         for task in selectedTasks.tasks {
+            if let focus = focusTask.task, task == focus {
+                focusTask.task = nil
+            }
+
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
         }
@@ -169,6 +176,10 @@ struct SubtasksListView: View {
     }
     
     private func deleteTask(task: Todo) {
+        if let focus = focusTask.task, task == focus {
+            focusTask.task = nil
+        }
+
         TasksQuery.deleteTask(context: modelContext,
                               task: task)
     }

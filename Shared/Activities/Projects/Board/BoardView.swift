@@ -12,6 +12,7 @@ struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var project: Project
     
     @State private var searchText = ""
@@ -75,7 +76,9 @@ struct BoardView: View {
                                                                                 get: { project.tasks ?? [] },
                                                                                 set: { project.tasks = $0 })))
                                                 .tag(maintask)
+                                                .listRowSeparator(.hidden)
                                         }
+                                        .listRowSeparator(.hidden)
                                     } else {
                                         TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
                                             .modifier(ProjectTaskModifier(task: task,
@@ -85,9 +88,9 @@ struct BoardView: View {
                                                                             get: { project.tasks ?? [] },
                                                                             set: { project.tasks = $0 })))
                                             .tag(task)
+                                            .listRowSeparator(.hidden)
                                     }
                                 }
-                                        .listRowSeparator(.visible)
                             }
                             .cornerRadius(5)
                         }
@@ -137,6 +140,10 @@ struct BoardView: View {
     
     private func deleteTask(task: Todo) {
         withAnimation {
+            if let focus = focusTask.task, task == focus {
+                focusTask.task = nil
+            }
+            
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
         }
@@ -145,6 +152,10 @@ struct BoardView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks.tasks {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+                
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }

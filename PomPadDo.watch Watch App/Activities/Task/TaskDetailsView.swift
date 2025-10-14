@@ -111,6 +111,10 @@ struct TaskDetailsView: View {
             
             Button {
                 if !task.completed {
+                    if let focus = focusTask.task, task == focus {
+                        focusTask.task = nil
+                    }
+                    
                     task.complete(modelContext: modelContext)
                 } else {
                     task.reactivate()
@@ -224,6 +228,10 @@ struct TaskDetailsView: View {
             }
             
             Button {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
                 WidgetCenter.shared.reloadAllTimelines()

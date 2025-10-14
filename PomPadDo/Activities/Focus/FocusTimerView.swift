@@ -71,16 +71,8 @@ struct FocusTimerView: View {
                         // MARK: Focus timer
                         if let task = focusTask.task {
                             HStack {
-                                Text(task.name)
-                                    .padding()
-                                
-                                if task.tomatoesCount > 0 {
-                                    Image(systemName: "target")
-                                        .foregroundStyle(Color.gray)
-                                    Text("\(task.tomatoesCount)")
-                                        .foregroundStyle(Color.gray)
-                                        .font(.caption)
-                                }
+                                TaskRowView(task: task)
+                                    .modifier(FocusTaskRowModifier(task: task, viewMode: $viewMode))
                                 
                                 Button {
                                     focusTask.task = nil

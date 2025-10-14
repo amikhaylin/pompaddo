@@ -55,15 +55,13 @@ struct NewTaskView: View {
                     }
                 }
                 
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Save and Add next") {
                         save()
                         taskName = ""
                         link = ""
                     }
-                }
-                
-                ToolbarItem(placement: .primaryAction) {
+                    
                     Button("OK") {
                         save()
                         self.isVisible = false

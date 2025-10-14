@@ -214,6 +214,10 @@ struct FocusTaskRowModifier: ViewModifier {
             }
             
             Button {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+
                 TasksQuery.deleteTask(context: modelContext,
                                           task: task)
             } label: {
