@@ -49,7 +49,7 @@ struct SubtasksListView: View {
                             }
                         }
                     )) {
-                        ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil) }) : searchResults.filter({ $0.completed == false }),
+                        ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil || $0.parentTask == mainTask) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
                             if let subtasks = task.subtasks, subtasks.count > 0 {
                                 OutlineGroup([task],
@@ -64,6 +64,7 @@ struct SubtasksListView: View {
                                         .tag(maintask)
                                         .listRowSeparator(.hidden)
                                 }
+                                .listRowSeparator(.hidden)
                             } else {
                                 TaskRowView(task: task)
                                     .modifier(TaskRowModifier(task: task,
@@ -76,6 +77,7 @@ struct SubtasksListView: View {
                             }
                         }
                     }
+                    .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.disconnectFromParentTask()
