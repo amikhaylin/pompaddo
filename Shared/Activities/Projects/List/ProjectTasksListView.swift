@@ -22,6 +22,8 @@ struct ProjectTasksListView: View {
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
     @State private var statusToEdit: Status?
     
+    @State private var newTaskToStatus: Status?
+    
     var searchResults: [Todo] {
         if searchText.isEmpty {
             return project.getTasks().sorted(by: TasksQuery.sortingWithCompleted)
@@ -98,6 +100,16 @@ struct ProjectTasksListView: View {
                             Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
                                 .foregroundStyle(Color.gray)
                                 .font(.caption)
+                            
+                            Spacer()
+                            
+                            Button {
+                                newTaskToStatus = status
+                            } label: {
+                                Image(systemName: "plus")
+                            }
+                            .buttonStyle(.plain)
+                            .help("Add task to current status")
                         }
                     }
                     .listRowSeparator(.hidden)
@@ -186,6 +198,19 @@ struct ProjectTasksListView: View {
             }
         }
         .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
+        #if os(macOS)
+        .sheet(item: $newTaskToStatus, onDismiss: {
+            newTaskToStatus = nil
+        }, content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+        })
+        #else
+        .popover(item: $newTaskToStatus, attachmentAnchor: .point(.top), content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+                .frame(minWidth: 200, maxHeight: 220)
+                .presentationCompactAdaptation(.popover)
+        })
+        #endif
     }
     
     private func deleteTask(task: Todo) {

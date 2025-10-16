@@ -5,11 +5,12 @@
 //  Created by Andrey Mikhaylin on 14.05.2024.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var refresher: Refresher
     @Binding var isVisible: Bool
     @State var list: SideBarItem
@@ -18,31 +19,32 @@ struct NewTaskView: View {
     @State private var dueToday = false
     @State var project: Project?
     @State var mainTask: Todo?
-    
+    @State var status: Status?
+
     enum FocusField: Hashable {
         case taskName
         case link
     }
-    
+
     @FocusState private var focusField: FocusField?
-    
+
     var body: some View {
         NavigationView {
             VStack {
                 Text("Add task to \(getListName())")
                     .font(.headline)
-                
+
                 TextField("Task name", text: $taskName)
                     .accessibility(identifier: "TaskName")
                     .focused($focusField, equals: .taskName)
                     .task {
                         self.focusField = .taskName
                     }
-                
+
                 TextField("Link", text: $link)
                     .textContentType(.URL)
                     .focused($focusField, equals: .link)
-                
+
                 Toggle("Due today", isOn: $dueToday)
                     .toggleStyle(.switch)
                     .accessibility(identifier: "DueToday")
@@ -52,26 +54,28 @@ struct NewTaskView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Cancel") {
                         self.isVisible = false
+                        presentationMode.wrappedValue.dismiss()
                     }
                 }
-                
+
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Save and Add next") {
                         save()
                         taskName = ""
                         link = ""
                     }
-                    
+
                     Button("OK") {
                         save()
                         self.isVisible = false
+                        presentationMode.wrappedValue.dismiss()
                     }
                     .accessibility(identifier: "SaveTask")
                 }
             }
         }
     }
-    
+
     private func save() {
         let task = Todo(name: taskName, link: link)
         if dueToday {
@@ -79,20 +83,24 @@ struct NewTaskView: View {
         } else if project == nil && mainTask == nil {
             setDueDate(task: task)
         }
-        
+
         if let mainTask = mainTask {
             mainTask.subtasks?.append(task)
         }
-        
+
         if let project = project {
-            task.status = project.getDefaultStatus()
+            if let status = status {
+                task.status = status
+            } else {
+                task.status = project.getDefaultStatus()
+            }
             task.project = project
         }
 
         modelContext.insert(task)
         task.reconnect()
     }
-    
+
     private func setDueDate(task: Todo) {
         switch list {
         case .inbox:
@@ -100,7 +108,9 @@ struct NewTaskView: View {
         case .today:
             task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
         case .tomorrow:
-            task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+            task.setDueDate(
+                dueDate: Calendar.current.date(
+                    byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
         case .projects:
             break
         case .review:
@@ -109,17 +119,9 @@ struct NewTaskView: View {
             break
         }
     }
-    
+
     private func getListName() -> String {
-        if let mainTask = mainTask {
-            return mainTask.name
-        }
-        
-        if let project = project {
-            return project.name
-        }
-        
-        return list.name
+        return mainTask?.name ?? status?.name ?? project?.name ?? list.name
     }
 }
 
@@ -128,7 +130,7 @@ struct NewTaskView: View {
     @Previewable @State var isVisible = true
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
-    
+
     return NewTaskView(isVisible: $isVisible, list: .inbox)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)

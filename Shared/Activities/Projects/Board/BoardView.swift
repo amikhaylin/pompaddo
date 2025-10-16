@@ -18,6 +18,8 @@ struct BoardView: View {
     @State private var searchText = ""
     @State private var statusToEdit: Status?
     
+    @State private var newTaskToStatus: Status?
+    
     var searchResults: [Todo] {
         if searchText.isEmpty {
             return project.getTasks()
@@ -34,6 +36,15 @@ struct BoardView: View {
                     HStack {
                         VStack {
                             HStack {
+                                Button {
+                                    newTaskToStatus = status
+                                } label: {
+                                    Image(systemName: "plus")
+                                }
+                                .buttonStyle(.plain)
+                                .help("Add task to current status")
+
+                                Spacer()
                                 #if os(macOS)
                                 Button {
                                     statusToEdit = status
@@ -58,6 +69,7 @@ struct BoardView: View {
                                 Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
                                     .foregroundStyle(Color.gray)
                                     .font(.caption)
+                                Spacer()
                             }
                             List(selection: $selectedTasks.tasks) {
                                 ForEach(searchResults
@@ -136,6 +148,19 @@ struct BoardView: View {
             .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
         }
         .padding()
+        #if os(macOS)
+        .sheet(item: $newTaskToStatus, onDismiss: {
+            newTaskToStatus = nil
+        }, content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+        })
+        #else
+        .popover(item: $newTaskToStatus, attachmentAnchor: .point(.top), content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+                .frame(minWidth: 200, maxHeight: 220)
+                .presentationCompactAdaptation(.popover)
+        })
+        #endif
     }
     
     private func deleteTask(task: Todo) {
