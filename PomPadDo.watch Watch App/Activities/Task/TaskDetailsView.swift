@@ -127,11 +127,11 @@ struct TaskDetailsView: View {
             
             if let focusedTask = focusTask.task, focusedTask == task {
                 Button {
-                    focusTask.task = nil
                     timer.reset()
                     if timer.mode == .pause || timer.mode == .longbreak {
                         timer.skip()
                     }
+                    focusTask.task = nil
                     presentationMode.wrappedValue.dismiss()
                     list = .focus
                 } label: {

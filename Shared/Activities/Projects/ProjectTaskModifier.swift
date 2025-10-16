@@ -109,17 +109,30 @@ struct ProjectTaskModifier: ViewModifier {
                 }
                 Divider()
                 
-                Button {
-                    focusTask.task = task
-                    if timer.state == .idle {
+                if let focus = focusTask.task, focus == task {
+                    Button {
                         timer.reset()
-                        timer.start()
-                    } else if timer.state == .paused {
-                        timer.resume()
+                        if timer.mode == .pause || timer.mode == .longbreak {
+                            timer.skip()
+                        }
+                        focusTask.task = nil
+                    } label: {
+                        Image(systemName: "stop.fill")
+                        Text("Stop focus")
                     }
-                } label: {
-                    Image(systemName: "play.fill")
-                    Text("Start focus")
+                } else {
+                    Button {
+                        focusTask.task = task
+                        if timer.state == .idle {
+                            timer.reset()
+                            timer.start()
+                        } else if timer.state == .paused {
+                            timer.resume()
+                        }
+                    } label: {
+                        Image(systemName: "play.fill")
+                        Text("Start focus")
+                    }
                 }
                 
                 Divider()
