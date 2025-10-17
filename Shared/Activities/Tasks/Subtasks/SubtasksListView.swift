@@ -39,7 +39,7 @@ struct SubtasksListView: View {
         NavigationStack {
             List(selection: $selectedTasks.tasks) {
                 ForEach(CommonTaskListSections.allCases) { section in
-                    DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
+                    DisclosureGroup(isExpanded: Binding<Bool>(
                         get: { groupsExpanded.contains(section.rawValue) },
                         set: { isExpanding in
                             if isExpanding {
@@ -75,6 +75,14 @@ struct SubtasksListView: View {
                                     .tag(task)
                                     .listRowSeparator(.hidden)
                             }
+                        }
+                    } label: {
+                        HStack {
+                            Text(section.localizedString())
+                            
+                            Text(" \(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil || $0.parentTask == mainTask) }).count : searchResults.filter({ $0.completed == false }).count)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
                         }
                     }
                     .listRowSeparator(.hidden)
