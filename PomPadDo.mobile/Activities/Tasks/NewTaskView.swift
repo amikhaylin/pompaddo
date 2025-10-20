@@ -35,7 +35,7 @@ struct NewTaskView: View {
                     .font(.headline)
 
                 TextField("Task name", text: $taskName)
-                    .accessibility(identifier: "TaskName")
+                    .accessibilityIdentifier("TaskName")
                     .focused($focusField, equals: .taskName)
                     .task {
                         self.focusField = .taskName
@@ -47,7 +47,7 @@ struct NewTaskView: View {
 
                 Toggle("Due today", isOn: $dueToday)
                     .toggleStyle(.switch)
-                    .accessibility(identifier: "DueToday")
+                    .accessibilityIdentifier("DueToday")
             }
             .padding()
             .toolbar {
@@ -59,18 +59,21 @@ struct NewTaskView: View {
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button("Save and Add next") {
+                    Button {
                         save()
                         taskName = ""
                         link = ""
+                    } label: {
+                        Image(systemName: "plus.square.on.square")
                     }
+                    .help("Save and Add next")
 
                     Button("OK") {
                         save()
                         self.isVisible = false
                         presentationMode.wrappedValue.dismiss()
                     }
-                    .accessibility(identifier: "SaveTask")
+                    .accessibilityIdentifier("SaveTask")
                 }
             }
         }

@@ -1,0 +1,154 @@
+[
+    {
+        "locale": "en",
+        "groups": [
+            {
+                "name": "🦝 Personal",
+                "projects": [
+                    {
+                        "name": "🏖️ Vacation Planning",
+                        "isSimpleList": true,
+                        "isBoard": false,
+                        "tasks": [
+                            {
+                                "name": "Book airline tickets",
+                                "dueToday": true,
+                                "focus": false
+                            },
+                            {
+                                "name": "Find and reserve a hotel",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Create a list of places to visit",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Arrange travel insurance",
+                                "dueToday": false,
+                                "focus": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "🏢 Work",
+                "projects": [
+                    {
+                        "name": "📱 App Development",
+                        "isSimpleList": false,
+                        "isBoard": true,
+                        "tasks": [
+                            {
+                                "name": "Define functional requirements",
+                                "status": "Completed",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Create interface design",
+                                "status": "In progress",
+                                "dueToday": true,
+                                "focus": true
+                            },
+                            {
+                                "name": "Test the beta version",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Launch the app in the App Store",
+                                "dueToday": false,
+                                "focus": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "inbox": [
+            {
+                "name": "Buy coffee"
+            }
+        ]
+    },
+    {
+        "locale": "ru",
+        "groups": [
+            {
+                "name": "🦝 Личное",
+                "projects": [
+                    {
+                        "name": "🏖️ Планирование отпуска",
+                        "isSimpleList": true,
+                        "isBoard": false,
+                        "tasks": [
+                            {
+                                "name": "Забронировать авиабилеты",
+                                "dueToday": true,
+                                "focus": false
+                            },
+                            {
+                                "name": "Найти и забронировать отель",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Составить список мест для посещения",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Оформить туристическую страховку",
+                                "dueToday": false,
+                                "focus": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "🏢 Работа",
+                "projects": [
+                    {
+                        "name": "📱 Разработка приложения",
+                        "isSimpleList": false,
+                        "isBoard": true,
+                        "tasks": [
+                            {
+                                "name": "Определить функциональные требования",
+                                "status": "Завершенные",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Создать дизайн интерфейса",
+                                "status": "В процессе",
+                                "dueToday": true,
+                                "focus": true
+                            },
+                            {
+                                "name": "Протестировать бета-версию",
+                                "dueToday": false,
+                                "focus": false
+                            },
+                            {
+                                "name": "Запустить приложение в App Store",
+                                "dueToday": false,
+                                "focus": false
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "inbox": [
+            {
+                "name": "Купить кофе"
+            }
+        ]
+    }
+]

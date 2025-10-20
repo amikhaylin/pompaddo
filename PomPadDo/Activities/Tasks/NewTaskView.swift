@@ -27,12 +27,14 @@ struct NewTaskView: View {
                 .font(.headline)
 
             TextField("Task name", text: $taskName)
+                .accessibilityIdentifier("TaskName")
 
             TextField("Link", text: $link)
                 .textContentType(.URL)
 
             Toggle("Due today", isOn: $dueToday)
                 .toggleStyle(.switch)
+                .accessibilityIdentifier("DueToday")
 
             HStack {
                 Button("Cancel") {
@@ -43,18 +45,22 @@ struct NewTaskView: View {
 
                 Spacer()
 
-                Button("Save and Add next") {
+                Button {
                     save()
                     taskName = ""
                     link = ""
+                } label: {
+                    Image(systemName: "plus.square.on.square")
                 }
-
+                .help("Save and Add next")
+                
                 Button("OK") {
                     save()
                     self.isVisible = false
                     presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.defaultAction)
+                .accessibilityIdentifier("SaveTask")
             }
         }
         .frame(width: 400, height: 140)

@@ -28,12 +28,13 @@ struct NewProjectView: View {
                     .task {
                         self.focusField = .projectName
                     }
+                    .accessibilityIdentifier("ProjectNameField")
                 
                 Toggle(isOn: $createSimpleList) {
                     Text("Create simple list")
                 }
                 .toggleStyle(.switch)
-                .accessibility(identifier: "CreateSimpleList")
+                .accessibilityIdentifier("CreateSimpleList")
             }
             .padding()
             .toolbar {

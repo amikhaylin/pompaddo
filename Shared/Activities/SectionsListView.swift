@@ -34,6 +34,7 @@ struct SectionsListView: View {
                         Image(systemName: "tray")
                         Text("Inbox")
                     }
+                    .accessibilityIdentifier("InboxNavButton")
                     .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
                     .badge(tasksInboxActive.count)
                 }
@@ -62,6 +63,7 @@ struct SectionsListView: View {
                     .foregroundStyle(Color(#colorLiteral(red: 0.9496305585, green: 0.5398437977, blue: 0.3298020959, alpha: 1)))
                     .badge(tasksTodayActive.count)
                 }
+                .accessibilityIdentifier("TodayNavButton")
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
                         task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
