@@ -22,7 +22,7 @@ struct TaskRowModifier: ViewModifier {
     @Bindable var task: Todo
     @Binding var selectedTasksSet: Set<Todo>
     var projects: [Project]
-    var list: SideBarItem
+    @Binding var list: SideBarItem?
     @State private var showAddSubtask = false
     @Query var groups: [ProjectGroup]
     @State private var renameTask: Todo?
@@ -183,7 +183,7 @@ struct TaskRowModifier: ViewModifier {
             }
             
             NavigationLink {
-                SubtasksListView(list: list,
+                SubtasksListView(list: $list,
                                       title: task.name,
                                       mainTask: task)
                 .refreshable {
@@ -198,7 +198,7 @@ struct TaskRowModifier: ViewModifier {
             
             if let parentTask = task.parentTask {
                 NavigationLink {
-                    SubtasksListView(list: list,
+                    SubtasksListView(list: $list,
                                      title: parentTask.name,
                                      mainTask: parentTask)
                     .environmentObject(showInspector)

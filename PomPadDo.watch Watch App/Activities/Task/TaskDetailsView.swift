@@ -13,8 +13,10 @@ struct TaskDetailsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
-    @State var list: SideBarItem
+    @Binding var list: SideBarItem?
     
     var body: some View {
         ScrollView(.vertical) {
@@ -119,9 +121,39 @@ struct TaskDetailsView: View {
                 Label("Complete", systemImage: "checkmark.square")
             }
             
+            if let focusedTask = focusTask.task, focusedTask == task {
+                Button {
+                    focusTask.task = nil
+                    timer.reset()
+                    if timer.mode == .pause || timer.mode == .longbreak {
+                        timer.skip()
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                    list = .focus
+                } label: {
+                    Image(systemName: "stop.fill")
+                    Text("Stop focus")
+                }
+            } else {
+                Button {
+                    focusTask.task = task
+                    if timer.state == .idle {
+                        timer.reset()
+                        timer.start()
+                    } else if timer.state == .paused {
+                        timer.resume()
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                    list = .focus
+                } label: {
+                    Image(systemName: "play.fill")
+                    Text("Start focus")
+                }
+            }
+            
             Button {
                 task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
-                if list == .tomorrow {
+                if let list = list, list == .tomorrow {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -131,7 +163,7 @@ struct TaskDetailsView: View {
             
             Button {
                 task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
-                if list == .today {
+                if let list = list, list == .today {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -141,7 +173,7 @@ struct TaskDetailsView: View {
         
             Button {
                 task.nextWeek()
-                if list == .today || list == .tomorrow {
+                if let list = list, list == .today || list == .tomorrow {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -154,7 +186,7 @@ struct TaskDetailsView: View {
             
             Button {
                 task.setDueDate(dueDate: nil)
-                if list == .today || list == .tomorrow {
+                if let list = list, list == .today || list == .tomorrow {
                     WidgetCenter.shared.reloadAllTimelines()
                 }
                 presentationMode.wrappedValue.dismiss()
@@ -172,9 +204,9 @@ struct TaskDetailsView: View {
                     Label("Skip", systemImage: "arrow.uturn.forward")
                 }
             }
-        
+            
             NavigationLink {
-                SubtasksListView(list: list,
+                SubtasksListView(list: $list,
                               title: task.name,
                               mainTask: task)
             } label: {
@@ -183,7 +215,7 @@ struct TaskDetailsView: View {
         
             if let parentTask = task.parentTask {
                 NavigationLink {
-                    SubtasksListView(list: list,
+                    SubtasksListView(list: $list,
                                   title: parentTask.name,
                                   mainTask: parentTask)
                 } label: {
@@ -208,7 +240,7 @@ struct TaskDetailsView: View {
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
     
-    TaskDetailsView(task: previewer!.task, list: .today)
+    TaskDetailsView(task: previewer!.task, list: .constant(.today))
         .environmentObject(refresher)
         .modelContainer(previewer!.container)
 }

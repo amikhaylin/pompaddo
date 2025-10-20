@@ -189,7 +189,7 @@ struct ProjectTaskModifier: ViewModifier {
                 }
                 
                 NavigationLink {
-                    SubtasksListView(list: .projects,
+                    SubtasksListView(list: .constant(.projects),
                                      title: task.name,
                                      mainTask: task)
                     .refreshable {

@@ -53,7 +53,7 @@ struct ProjectTasksListView: View {
                                                                       tasks: Binding(
                                                                         get: { project.tasks ?? [] },
                                                                         set: { project.tasks = $0 })))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: .projects))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
                                         .tag(maintask)
                                 }
                             } else {
@@ -64,7 +64,7 @@ struct ProjectTasksListView: View {
                                                                   tasks: Binding(
                                                                     get: { project.tasks ?? [] },
                                                                     set: { project.tasks = $0 })))
-                                    .modifier(TaskSwipeModifier(task: task, list: .projects))
+                                    .modifier(TaskSwipeModifier(task: task, list: .constant(.projects)))
                                     .tag(task)
                             }
                         }
@@ -141,7 +141,7 @@ struct ProjectTasksListView: View {
                                                                       tasks: Binding(
                                                                         get: { project.tasks ?? [] },
                                                                         set: { project.tasks = $0 })))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: .projects))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
                                         .tag(maintask)
                                 }
                             } else {
@@ -152,7 +152,7 @@ struct ProjectTasksListView: View {
                                                                   tasks: Binding(
                                                                     get: { project.tasks ?? [] },
                                                                     set: { project.tasks = $0 })))
-                                    .modifier(TaskSwipeModifier(task: task, list: .projects))
+                                    .modifier(TaskSwipeModifier(task: task, list: .constant(.projects)))
                                     .tag(task)
                             }
                         }

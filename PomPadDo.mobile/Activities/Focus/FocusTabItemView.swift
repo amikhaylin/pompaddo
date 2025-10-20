@@ -9,17 +9,19 @@ import SwiftUI
 
 struct FocusTabItemView: View {
     @EnvironmentObject var timer: FocusTimer
-    @Binding var tab: MainViewTabs
     @State private var timerCount: String = ""
     
     var body: some View {
         Group {
             if timer.state == .idle {
                 Image(systemName: "target")
+                #if os(watchOS)
+                Text("Focus")
+                #endif
             } else {
                 HStack {
                     if timer.mode == .work {
-                        Image(systemName: "target")
+                        Image(systemName: "brain.head.profile")
                     } else {
                         Image(systemName: "cup.and.saucer.fill")
                     }
@@ -40,12 +42,11 @@ struct FocusTabItemView: View {
 }
 
 #Preview {
-    @Previewable @State var tab: MainViewTabs = .tasks
     @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
     
-    FocusTabItemView(tab: $tab)
+    FocusTabItemView()
         .environmentObject(timer)
 }

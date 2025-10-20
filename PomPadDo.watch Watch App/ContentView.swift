@@ -11,11 +11,13 @@ import WidgetKit
 
 enum SideBarItem: String, Identifiable, CaseIterable {
     var id: String { rawValue }
-    
+
+    case focus
     case inbox
     case today
     case tomorrow
     case alltasks
+    case settings
     
     var name: String {
         switch self {
@@ -27,6 +29,10 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return NSLocalizedString("Tomorrow", comment: "")
         case .alltasks:
             return NSLocalizedString("All", comment: "")
+        case .focus:
+            return NSLocalizedString("Focus", comment: "")
+        case .settings:
+            return NSLocalizedString("Settings", comment: "")
         }
     }
 }
@@ -35,6 +41,13 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var refresher: Refresher
+    @EnvironmentObject var timer: FocusTimer
+    @EnvironmentObject var focusTask: FocusTask
+    
+    @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
+    @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
+    @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
+    @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
     
     @Binding var selectedSideBarItem: SideBarItem?
     @State private var addToInbox = false
@@ -47,20 +60,26 @@ struct ContentView: View {
                 switch selectedSideBarItem {
                 case .inbox:
                     TasksListView(predicate: TasksQuery.predicateInbox(),
-                                  list: selectedSideBarItem!,
+                                  list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
                 case .today:
                     TasksListView(predicate: TasksQuery.predicateToday(),
-                                  list: selectedSideBarItem!,
+                                  list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
                 case .tomorrow:
                     TasksListView(predicate: TasksQuery.predicateTomorrow(),
-                                  list: selectedSideBarItem!,
+                                  list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
                 case .alltasks:
                     TasksListView(predicate: TasksQuery.predicateAll(),
-                                       list: selectedSideBarItem!,
+                                       list: $selectedSideBarItem,
                                        title: selectedSideBarItem!.name)
+                case .focus:
+                    FocusTimerView(list: $selectedSideBarItem)
+                        .environmentObject(timer)
+                        .environmentObject(focusTask)
+                case .settings:
+                    SettingsView()
                 case nil:
                     EmptyView()
                 }
@@ -97,6 +116,46 @@ struct ContentView: View {
                 }
             } else {
                 return
+            }
+        }
+        .onAppear {
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        }
+        .onChange(of: timerWorkSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerBreakSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerLongBreakSession, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timerWorkSessionsCount, { _, _ in
+            timer.setDurations(workInSeconds: timerWorkSession,
+                               breakInSeconds: timerBreakSession,
+                               longBreakInSeconds: timerLongBreakSession,
+                               workSessionsCount: Int(timerWorkSessionsCount))
+        })
+        .onChange(of: timer.sessionsCounter, { _, newValue in
+            if let task = focusTask.task, newValue > 0 {
+                task.tomatoesCount += 1
+            }
+        })
+        .onChange(of: scenePhase) { oldPhase, newPhase in
+            if newPhase == .background && timer.state == .running {
+                timer.setNotification()
             }
         }
     }

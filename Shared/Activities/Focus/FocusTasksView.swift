@@ -11,7 +11,8 @@ import SwiftData
 struct FocusTasksView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var timer: FocusTimer
-    @Binding var selectedTask: Todo?
+    @EnvironmentObject var focusTask: FocusTask
+    @State private var selectedTask: Todo?
     @Binding var viewMode: Int
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
@@ -30,7 +31,7 @@ struct FocusTasksView: View {
                                 .tag(maintask)
                             
                             Button {
-                                selectedTask = maintask
+                                focusTask.task = maintask
                                 viewMode = 1
                                 if timer.state == .idle {
                                     timer.reset()
@@ -49,7 +50,7 @@ struct FocusTasksView: View {
                             .tag(task)
                         
                         Button {
-                            selectedTask = task
+                            focusTask.task = task
                             viewMode = 1
                             if timer.state == .idle {
                                 timer.reset()
@@ -76,7 +77,7 @@ struct FocusTasksView: View {
     
     let previewer = try? Previewer()
     
-    return FocusTasksView(selectedTask: $selectedTask, viewMode: $viewMode)
+    return FocusTasksView(viewMode: $viewMode)
         .environmentObject(timer)
         .modelContainer(previewer!.container)
 }

@@ -1,22 +1,33 @@
 //
-//  SubtasksListView.swift
-//  PomPadDo
+//  TasksListView.swift
+//  PomPadDoMac
 //
-//  Created by Andrey Mikhaylin on 07.08.2025.
+//  Created by Andrey Mikhaylin on 15.02.2024.
 //
 
 import SwiftUI
 import SwiftData
 
-struct SubtasksListView: View {
+enum CommonTaskListSections: String, Identifiable, CaseIterable {
+    var id: String { rawValue }
+    
+    case todo = "To do"
+    case completed = "Completed"
+    
+    func localizedString() -> String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
+}
+
+struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @Query var tasks: [Todo]
 
-    @State var list: SideBarItem
-    @State var title: String
-    @State var mainTask: Todo
+    @Binding var list: SideBarItem?
+    @State private var title: String
     @State private var newTaskIsShowing = false
     
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
@@ -26,11 +37,24 @@ struct SubtasksListView: View {
     @State private var searchText = ""
     
     var searchResults: [Todo] {
-        let tasks: [Todo] = mainTask.subtasks != nil ? mainTask.subtasks! : [Todo]()
+        let innerTasks: [Todo]
+        switch list {
+        case .inbox:
+            innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
+        case .today:
+            innerTasks = tasks.filter({ TasksQuery.checkToday(date: $0.completionDate) }).sorted(by: TasksQuery.sortingWithCompleted)
+        case .tomorrow:
+            innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
+        case .alltasks:
+            innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
+        default:
+            innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
+        }
+        
         if searchText.isEmpty {
-            return tasks.sorted(by: TasksQuery.sortingWithCompleted)
+            return innerTasks
         } else {
-            return tasks.filter { $0.name.localizedStandardContains(searchText) }.sorted(by: TasksQuery.sortingWithCompleted)
+            return innerTasks.filter { $0.name.localizedStandardContains(searchText) }
         }
     }
     
@@ -58,8 +82,8 @@ struct SubtasksListView: View {
                                         .modifier(TaskRowModifier(task: maintask,
                                                                   selectedTasksSet: $selectedTasks.tasks,
                                                                   projects: projects,
-                                                                  list: list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: list))
+                                                                  list: $list))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: $list))
                                         .tag(maintask)
                                 }
                             } else {
@@ -67,8 +91,8 @@ struct SubtasksListView: View {
                                     .modifier(TaskRowModifier(task: task,
                                                               selectedTasksSet: $selectedTasks.tasks,
                                                               projects: projects,
-                                                              list: list))
-                                    .modifier(TaskSwipeModifier(task: task, list: list))
+                                                              list: $list))
+                                    .modifier(TaskSwipeModifier(task: task, list: $list))
                                     .tag(task)
                             }
                         }
@@ -104,9 +128,9 @@ struct SubtasksListView: View {
                 .help("Add task to current list ⌘⌥I")
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 #if os(iOS)
-                .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.topLeading), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask)
-                        .frame(minWidth: 200, maxHeight: 180)
+                .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: nil)
+                        .frame(minWidth: 200, maxHeight: 220)
                         .presentationCompactAdaptation(.popover)
                 })
                 #endif
@@ -149,7 +173,7 @@ struct SubtasksListView: View {
         }
         #if os(macOS)
         .sheet(isPresented: $newTaskIsShowing) {
-            NewTaskView(isVisible: self.$newTaskIsShowing, list: list, project: nil, mainTask: mainTask)
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: nil)
         }
         #endif
     }
@@ -187,7 +211,16 @@ struct SubtasksListView: View {
             break
         case .alltasks:
             break
+        default:
+            break
         }
+    }
+    
+    init(predicate: Predicate<Todo>, list: Binding<SideBarItem?>, title: String) {
+        self._list = list
+        self.title = title
+        
+        self._tasks = Query(filter: predicate)
     }
 }
 
@@ -210,9 +243,9 @@ struct SubtasksListView: View {
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let previewer = Previewer(container!)
     
-    SubtasksListView(list: .inbox,
-                     title: "Some list",
-                     mainTask: previewer.task)
+    TasksListView(predicate: TasksQuery.predicateToday(),
+                  list: .constant(.inbox),
+                  title: "Some list")
     .environmentObject(showInspector)
     .environmentObject(selectedTasks)
     .environmentObject(refresher)
