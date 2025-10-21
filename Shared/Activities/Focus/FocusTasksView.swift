@@ -40,7 +40,6 @@ struct FocusTasksView: View {
                                     focusTask.task = nil
                                 } label: {
                                     Image(systemName: "stop.fill")
-                                    Text("Stop focus")
                                 }
                             } else {
                                 Button {

@@ -1,6 +1,15 @@
 [
     {
         "locale": "en",
+        "today": "Today",
+        "back": "Back",
+        "addGroup": "Add project to group",
+        "moveToStatus": "Move to status",
+        "hideSidebar": "Hide Sidebar",
+        "showSidebar": "Sidebar",
+        "taskToFocus": "Create interface design",
+        "scroll": "Vertical scroll bar, 1 page",
+        "inboxTask": "Buy coffee",
         "groups": [
             {
                 "name": "🦝 Personal",
@@ -12,23 +21,19 @@
                         "tasks": [
                             {
                                 "name": "Book airline tickets",
-                                "dueToday": true,
-                                "focus": false
+                                "dueToday": true
                             },
                             {
                                 "name": "Find and reserve a hotel",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Create a list of places to visit",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Arrange travel insurance",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             }
                         ]
                     }
@@ -45,38 +50,38 @@
                             {
                                 "name": "Define functional requirements",
                                 "status": "Completed",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Create interface design",
                                 "status": "In progress",
-                                "dueToday": true,
-                                "focus": true
+                                "dueToday": true
                             },
                             {
                                 "name": "Test the beta version",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Launch the app in the App Store",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             }
                         ]
                     }
                 ]
             }
-        ],
-        "inbox": [
-            {
-                "name": "Buy coffee"
-            }
         ]
     },
     {
         "locale": "ru",
+        "today": "Сегодня",
+        "back": "Назад",
+        "addGroup": "Добавить проект в группу",
+        "moveToStatus": "Move to status",
+        "hideSidebar": "Скрыть боковое меню",
+        "showSidebar": "Боковое меню",
+        "taskToFocus": "Создать дизайн интерфейса",
+        "scroll": "Вертикальная полоса прокрутки, 1 страница",
+        "inboxTask": "Купить кофе",
         "groups": [
             {
                 "name": "🦝 Личное",
@@ -88,23 +93,19 @@
                         "tasks": [
                             {
                                 "name": "Забронировать авиабилеты",
-                                "dueToday": true,
-                                "focus": false
+                                "dueToday": true
                             },
                             {
                                 "name": "Найти и забронировать отель",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Составить список мест для посещения",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Оформить туристическую страховку",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             }
                         ]
                     }
@@ -121,33 +122,24 @@
                             {
                                 "name": "Определить функциональные требования",
                                 "status": "Завершенные",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Создать дизайн интерфейса",
                                 "status": "В процессе",
-                                "dueToday": true,
-                                "focus": true
+                                "dueToday": true
                             },
                             {
                                 "name": "Протестировать бета-версию",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             },
                             {
                                 "name": "Запустить приложение в App Store",
-                                "dueToday": false,
-                                "focus": false
+                                "dueToday": false
                             }
                         ]
                     }
                 ]
-            }
-        ],
-        "inbox": [
-            {
-                "name": "Купить кофе"
             }
         ]
     }

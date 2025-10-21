@@ -24,6 +24,8 @@ final class PomPadDoMobileUITests: XCTestCase {
             setupSnapshot(app)
         }
 
+        app.launchEnvironment = ["UITEST_DISABLE_ANIMATIONS" : "YES"]
+        
         app.launch()
 
         addUIInterruptionMonitor(withDescription: "Tracking Usage Permission Alert") {
@@ -62,18 +64,12 @@ final class PomPadDoMobileUITests: XCTestCase {
         } else if app.navigationBars["Сегодня"].exists {
             locale = "ru"
         }
-
+        
         let model = UIDevice.current.model
 
         let exp0 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp0], timeout: 5.0)
-
-        if !model.lowercased().contains("ipad") {
-            app.navigationBars[locale == "ru" ? "Сегодня" : "Today"].buttons[
-                locale == "ru" ? "Назад" : "Back"
-            ].tap()
-        }
-
+        
         // MARK: Load from testData
         let testBundle = Bundle(for: type(of: self))
 
@@ -95,6 +91,10 @@ final class PomPadDoMobileUITests: XCTestCase {
         guard let localeData = decodedData.first(where: { $0.locale == locale }) else {
             XCTFail("No data for current locale")
             return
+        }
+
+        if !model.lowercased().contains("ipad") {
+            app.navigationBars[localeData.today].buttons[localeData.back].tap()
         }
 
         // MARK: Create groups
@@ -121,9 +121,7 @@ final class PomPadDoMobileUITests: XCTestCase {
                 app.buttons[project.name].press(
                         forDuration: 1.6)
                 
-                app.buttons[
-                    locale == "ru" ? "Добавить проект в группу" : "Add project to group"
-                ].tap()
+                app.buttons[localeData.addGroup].tap()
 
                 app.collectionViews.buttons["\(group.name)ContextMenuButton"].tap()
                 
@@ -147,13 +145,10 @@ final class PomPadDoMobileUITests: XCTestCase {
                     if let status = task.status {
                         print(app.debugDescription)
                         
-                        app.collectionViews.staticTexts[
-                            task.name
-                        ].press(forDuration: 1.6)
+                        app.collectionViews.staticTexts[task.name].press(forDuration: 1.6)
 
                         snapshot("03TaskMenu")
-                        app.collectionViews.buttons[locale == "ru" ? "Переместить в состояние" : "Move to status"]
-                            .tap()
+                        app.collectionViews.buttons[localeData.moveToStatus].tap()
                         app.collectionViews.buttons["\(status)ContextMenuButton"].tap()
                     }
                 }
@@ -166,17 +161,17 @@ final class PomPadDoMobileUITests: XCTestCase {
                         .segmentedControls["ProjectViewMode"].buttons["rectangle.split.3x1"].tap()
                     
                     if model.lowercased().contains("ipad") {
-                        app.buttons[locale == "ru" ? "Скрыть боковое меню" : "Hide Sidebar"].firstMatch.tap()
+                        app.buttons[localeData.hideSidebar].firstMatch.tap()
                     }
                     snapshot("04ProjectView")
                     
                     if model.lowercased().contains("ipad") {
-                        app.buttons[locale == "ru" ? "Боковое меню" : "Sidebar"].firstMatch.tap()
+                        app.buttons[localeData.showSidebar].firstMatch.tap()
                     }
                 }
                 
                 if !model.lowercased().contains("ipad") {
-                    app.navigationBars[project.name].buttons[locale == "ru" ? "Назад" : "Back"].tap()
+                    app.navigationBars[project.name].buttons[localeData.back].tap()
                 }
             }
         }
@@ -190,7 +185,7 @@ final class PomPadDoMobileUITests: XCTestCase {
         snapshot("05FocusTasksView")
 
         app.collectionViews.buttons[
-            "\(locale == "ru" ? "Создать дизайн интерфейса" : "Create interface design")PlayButton"
+            "\(localeData.taskToFocus)PlayButton"
         ].tap()
 
         let exp = expectation(description: "Test after 5 seconds")
@@ -203,8 +198,7 @@ final class PomPadDoMobileUITests: XCTestCase {
         if model.lowercased().contains("iphone") {
             app.collectionViews.containing(
                 .other,
-                identifier: locale == "ru"
-                    ? "Вертикальная полоса прокрутки, 1 страница" : "Vertical scroll bar, 1 page"
+                identifier: localeData.scroll
             ).element.swipeDown()
         }
 
@@ -218,7 +212,7 @@ final class PomPadDoMobileUITests: XCTestCase {
         let exp3 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp3], timeout: 2.0)
 
-        app.popovers.textFields["TaskName"].typeText(locale == "ru" ? "Купить кофе" : "Buy coffee")
+        app.popovers.textFields["TaskName"].typeText(localeData.inboxTask)
         snapshot("07InboxTask")
         app.buttons[
             "SaveTask"
@@ -238,8 +232,16 @@ extension XCUIElement {
 
 private struct LocaleData: Codable {
     let locale: String
+    let today: String
+    let back: String
+    let addGroup: String
+    let moveToStatus: String
+    let hideSidebar: String
+    let showSidebar: String
+    let taskToFocus: String
+    let scroll: String
+    let inboxTask: String
     let groups: [GroupData]
-    let inbox: [InboxData]
 }
 
 private struct GroupData: Codable {
@@ -258,9 +260,4 @@ private struct TaskData: Codable {
     let name: String
     let status: String?
     let dueToday: Bool
-    let focus: Bool
-}
-
-private struct InboxData: Codable {
-    let name: String
 }

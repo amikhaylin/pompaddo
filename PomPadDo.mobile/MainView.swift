@@ -132,6 +132,10 @@ struct MainView: View {
                 }
             }
             .onAppear {
+                if ProcessInfo.processInfo.environment["UITEST_DISABLE_ANIMATIONS"] == "YES" {
+                    UIView.setAnimationsEnabled(false)
+                }
+                
                 timer.setDurations(workInSeconds: timerWorkSession,
                                    breakInSeconds: timerBreakSession,
                                    longBreakInSeconds: timerLongBreakSession,

@@ -46,8 +46,14 @@ struct PomPadDoMacApp: App {
         } catch {
             fatalError("Could not find/create Example folder in Application Support")
         }
-        print("\(fileURL.absoluteString)")
-        let modelConfiguration = ModelConfiguration(schema: schema, url: fileURL)
+        
+        let modelConfiguration: ModelConfiguration!
+        if ProcessInfo.processInfo.environment["UITEST_DISABLE_ANIMATIONS"] == "YES" {
+            modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        } else {
+            modelConfiguration = ModelConfiguration(schema: schema, url: fileURL)
+            print("\(fileURL.absoluteString)")
+        }
         #else
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         #endif
