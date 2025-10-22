@@ -101,78 +101,80 @@ final class PomPadDoMobileUITests: XCTestCase {
         for group in localeData.groups {
             app.buttons["NewProjectGroupButton"].tap()
             app.popovers.textFields["GroupNameField"].tap()
-
+            
             app.popovers.textFields["GroupNameField"].typeText(group.name)
             app.buttons["SaveGroup"].tap()
-
-            // MARK: Fill projects
-            for project in group.projects {
-                app.buttons["NewProjectButton"].tap()
-                app.popovers.textFields["ProjectNameField"].tap()
-                app.popovers.textFields["ProjectNameField"].typeText(project.name)
-                
-                if project.isSimpleList {
-                    app.popovers.switches["CreateSimpleList"].children(matching: .switch).element.tap()
-                }
-                
-                app.buttons["SaveProject"].tap()
-                
-                // Add to group
+        }
+            
+        // MARK: Fill projects
+        for project in localeData.projects {
+            app.buttons["NewProjectButton"].tap()
+            app.popovers.textFields["ProjectNameField"].tap()
+            app.popovers.textFields["ProjectNameField"].typeText(project.name)
+            
+            if project.isSimpleList {
+                app.popovers.switches["CreateSimpleList"].children(matching: .switch).element.tap()
+            }
+            
+            app.buttons["SaveProject"].tap()
+            
+            // Add to group
+            if let group = project.group {
                 app.buttons[project.name].press(
                         forDuration: 1.6)
                 
                 app.buttons[localeData.addGroup].tap()
 
-                app.collectionViews.buttons["\(group.name)ContextMenuButton"].tap()
+                app.collectionViews.buttons["\(group)ContextMenuButton"].tap()
+            }
+            
+            // Move to project
+            app.buttons[project.name].tap()
+                            
+            // MARK: Fill tasks
+            for task in project.tasks {
+                app.navigationBars[project.name]
+                    .buttons["AddTaskToCurrentListButton"].tap()
                 
-                // Move to project
-                app.buttons[project.name].tap()
-                                
-                // MARK: Fill tasks
-                for task in project.tasks {
-                    app.navigationBars[project.name]
-                        .buttons["AddTaskToCurrentListButton"].tap()
+                app.popovers.textFields["TaskName"].tap()
+                app.popovers.textFields["TaskName"].typeText(task.name)
+                
+                if task.dueToday {
+                    app.popovers.switches["DueToday"].children(matching: .switch).element.tap()
+                }
+                
+                app.buttons["SaveTask"].tap()
+                
+                if let status = task.status {
+                    print(app.debugDescription)
                     
-                    app.popovers.textFields["TaskName"].tap()
-                    app.popovers.textFields["TaskName"].typeText(task.name)
-                    
-                    if task.dueToday {
-                        app.popovers.switches["DueToday"].children(matching: .switch).element.tap()
-                    }
-                    
-                    app.buttons["SaveTask"].tap()
-                    
-                    if let status = task.status {
-                        print(app.debugDescription)
-                        
-                        app.collectionViews.staticTexts[task.name].press(forDuration: 1.6)
+                    app.collectionViews.staticTexts[task.name].press(forDuration: 1.6)
 
-                        snapshot("03TaskMenu")
-                        app.collectionViews.buttons[localeData.moveToStatus].tap()
-                        app.collectionViews.buttons["\(status)ContextMenuButton"].tap()
-                    }
+                    snapshot("03TaskMenu")
+                    app.collectionViews.buttons[localeData.moveToStatus].tap()
+                    app.collectionViews.buttons["\(status)ContextMenuButton"].tap()
                 }
+            }
+            
+            //Switch to board view
+            if project.isBoard {
+                app.navigationBars[project.name]
+                    .segmentedControls["ProjectViewMode"].tap()
+                app.navigationBars[project.name]
+                    .segmentedControls["ProjectViewMode"].buttons["rectangle.split.3x1"].tap()
                 
-                //Switch to board view
-                if project.isBoard {
-                    app.navigationBars[project.name]
-                        .segmentedControls["ProjectViewMode"].tap()
-                    app.navigationBars[project.name]
-                        .segmentedControls["ProjectViewMode"].buttons["rectangle.split.3x1"].tap()
-                    
-                    if model.lowercased().contains("ipad") {
-                        app.buttons[localeData.hideSidebar].firstMatch.tap()
-                    }
-                    snapshot("04ProjectView")
-                    
-                    if model.lowercased().contains("ipad") {
-                        app.buttons[localeData.showSidebar].firstMatch.tap()
-                    }
+                if model.lowercased().contains("ipad") {
+                    app.buttons[localeData.hideSidebar].firstMatch.tap()
                 }
+                snapshot("04ProjectView")
                 
-                if !model.lowercased().contains("ipad") {
-                    app.navigationBars[project.name].buttons[localeData.back].tap()
+                if model.lowercased().contains("ipad") {
+                    app.buttons[localeData.showSidebar].firstMatch.tap()
                 }
+            }
+            
+            if !model.lowercased().contains("ipad") {
+                app.navigationBars[project.name].buttons[localeData.back].tap()
             }
         }
 
@@ -242,17 +244,18 @@ private struct LocaleData: Codable {
     let scroll: String
     let inboxTask: String
     let groups: [GroupData]
+    let projects: [ProjectData]
 }
 
 private struct GroupData: Codable {
     let name: String
-    let projects: [ProjectData]
 }
 
 private struct ProjectData: Codable {
     let name: String
     let isSimpleList: Bool
     let isBoard: Bool
+    let group: String?
     let tasks: [TaskData]
 }
 
