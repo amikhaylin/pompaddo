@@ -17,6 +17,7 @@ struct NewProjectView: View {
     var body: some View {
         VStack {
             TextField("Project name", text: $projectName)
+                .accessibilityIdentifier("ProjectNameField")
             
             Toggle(isOn: $createSimpleList) {
                 Text("Create simple list")
@@ -53,6 +54,7 @@ struct NewProjectView: View {
                     }
                 }
                 .keyboardShortcut(.defaultAction)
+                .accessibilityIdentifier("SaveProject")
             }
         }
         .frame(width: 400, height: 100)

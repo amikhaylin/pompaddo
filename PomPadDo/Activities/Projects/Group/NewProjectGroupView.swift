@@ -16,6 +16,7 @@ struct NewProjectGroupView: View {
     var body: some View {
         VStack {
             TextField("Group name", text: $groupName)
+                .accessibilityIdentifier("GroupNameField")
             
             HStack {
                 Button("Cancel") {
@@ -29,6 +30,7 @@ struct NewProjectGroupView: View {
                     modelContext.insert(group)
                 }
                 .keyboardShortcut(.defaultAction)
+                .accessibilityIdentifier("SaveGroup")
             }
         }
         .frame(width: 400, height: 100)

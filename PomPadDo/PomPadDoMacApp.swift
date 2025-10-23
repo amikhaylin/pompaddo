@@ -48,8 +48,8 @@ struct PomPadDoMacApp: App {
         }
         
         let modelConfiguration: ModelConfiguration!
-        if ProcessInfo.processInfo.environment["UITEST_DISABLE_ANIMATIONS"] == "YES" {
-            modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        if ProcessInfo.processInfo.environment["IS_TESTING"] == "YES" {
+            modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
         } else {
             modelConfiguration = ModelConfiguration(schema: schema, url: fileURL)
             print("\(fileURL.absoluteString)")

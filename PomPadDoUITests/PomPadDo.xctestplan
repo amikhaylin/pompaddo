@@ -15,6 +15,7 @@
         "value" : "YES"
       }
     ],
+    "language" : "en",
     "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {
       "containerPath" : "container:PomPadDo.xcodeproj",

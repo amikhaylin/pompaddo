@@ -42,6 +42,7 @@ struct ContentView: View {
                             .foregroundStyle(Color.orange)
                     }
                     .help("Add to Inbox ⌘I")
+                    .accessibilityIdentifier("AddTaskToInboxButton")
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
