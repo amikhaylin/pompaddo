@@ -33,6 +33,9 @@
             reference = "container:PomPadDoUITests/PomPadDo.xctestplan"
             default = "YES">
          </TestPlanReference>
+         <TestPlanReference
+            reference = "container:PomPadDoUITests/PomPadDoRU.xctestplan">
+         </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference

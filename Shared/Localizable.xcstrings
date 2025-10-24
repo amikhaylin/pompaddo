@@ -2349,9 +2349,6 @@
         }
       }
     },
-    "Add task to current status" : {
-
-    },
     "Add task to Inbox" : {
       "localizations" : {
         "ar" : {
@@ -2580,6 +2577,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "新增任務到收件箱"
+          }
+        }
+      }
+    },
+    "Add task to status" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add task to status"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Добавить задачу в статус"
           }
         }
       }

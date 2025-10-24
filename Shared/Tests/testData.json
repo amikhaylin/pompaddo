@@ -84,8 +84,7 @@
                 "name": "📖Read, View",
                 "isSimpleList": true,
                 "isBoard": false,
-                "tasks": [
-                ]
+                "tasks": []
             }
         ]
     },
@@ -94,7 +93,7 @@
         "today": "Сегодня",
         "back": "Назад",
         "addGroup": "Добавить проект в группу",
-        "moveToStatus": "Move to status",
+        "moveToStatus": "Переместить в состояние",
         "hideSidebar": "Скрыть боковое меню",
         "showSidebar": "Боковое меню",
         "taskToFocus": "Создать дизайн интерфейса",
@@ -174,8 +173,7 @@
                 "name": "📖Прочитать, посмотреть",
                 "isSimpleList": true,
                 "isBoard": false,
-                "tasks": [
-                ]
+                "tasks": []
             }
         ]
     }

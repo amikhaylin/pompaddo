@@ -42,7 +42,7 @@ struct BoardView: View {
                                     Image(systemName: "plus")
                                 }
                                 .buttonStyle(.plain)
-                                .help("Add task to current status")
+                                .help("Add task to status")
 
                                 Spacer()
                                 #if os(macOS)

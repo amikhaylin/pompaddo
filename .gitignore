@@ -1,5 +1,4 @@
-GoogleService-Info.plist
-Podfile.lock
+TestResults.xcresult
 ## User settings
 xcuserdata/
 
@@ -33,14 +32,14 @@ Package.resolved
 Pods/
 
 # Screenshots
-screenshots/*.html
-screenshots/ru/*.png
-screenshots/en-US/*.png
+screenshots/mobile/*.html
+screenshots/mobile/ru/*.png
+screenshots/mobile/en-US/*.png
 
-screenshots-watchOS/*.html
-screenshots-watchOS/ru/*.png
-screenshots-watchOS/en-US/*.png
+screenshots/watch/*.html
+screenshots/watch/ru/*.png
+screenshots/watch/en-US/*.png
 
-screenshots-macOS/*.html
-screenshots-macOS/ru/*.png
-screenshots-macOS/en-US/*.png
+screenshots/desktop/*.html
+screenshots/desktop/ru/*.png
+screenshots/desktop/en-US/*.png

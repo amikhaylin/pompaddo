@@ -107,7 +107,7 @@ final class PomPadDoUITests: XCTestCase {
                 if let status = task.status {
                     app.staticTexts[task.name].rightClick()
 
-//                    snapshot("03TaskMenu")
+                    snapshot("Apple Macbook Pro 13 Space Gray-03TaskMenu")
                     app.menuItems["\(status)ContextMenuButton"].click()
                 }
             }
@@ -116,43 +116,49 @@ final class PomPadDoUITests: XCTestCase {
             if project.isBoard {
                 app/*@START_MENU_TOKEN@*/.radioButtons["rectangle.split.3x1"]/*[[".radioGroups[\"View Mode\"].radioButtons",".radioGroups",".radioButtons[\"Column View\"]",".radioButtons[\"rectangle.split.3x1\"]"],[[[-1,3],[-1,2],[-1,1,1],[-1,0]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.firstMatch.click()
                 
-//                snapshot("04ProjectView")
+                snapshot("Apple Macbook Pro 13 Space Gray-04ProjectView")
             }
         }
 
-//        snapshot("02SectionsPanel")
+        snapshot("Apple Macbook Pro 13 Space Gray-02SectionsPanel")
 
         app.buttons["TodayNavButton"].tap()
 
         app.statusItems.firstMatch.click()
 
-//        snapshot("05FocusTasksView")
+        snapshot("Apple Macbook Pro 13 Space Gray-05FocusTasksView")
 
         app.buttons["\(localeData.taskToFocus)PlayButton"].firstMatch.click()
 
         let exp = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
 
-//        snapshot("06FocusTimerView")
+        snapshot("Apple Macbook Pro 13 Space Gray-06FocusTimerView")
 
         app.buttons["TodayNavButton"].tap()
 
         let exp2 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp2], timeout: 5.0)
 
-//        snapshot("01TodayScreen")
+        snapshot("Apple Macbook Pro 13 Space Gray-01TodayScreen")
 
         app/*@START_MENU_TOKEN@*/.buttons["Add task to Inbox"].buttons["AddTaskToInboxButton"].firstMatch/*[[".buttons.matching(identifier: \"AddTaskToInboxButton\").element(boundBy: 1)",".buttons[\"Add task to Inbox\"]",".buttons.firstMatch",".buttons[\"Add task to Inbox\"].firstMatch",".buttons[\"AddTaskToInboxButton\"].firstMatch"],[[[-1,1,1],[-1,0]],[[-1,4],[-1,3],[-1,2]]],[0,0]]@END_MENU_TOKEN@*/.click()
         app.sheets.textFields["TaskName"].tap()
-//        let exp3 = expectation(description: "Test after 5 seconds")
-//        _ = XCTWaiter.wait(for: [exp3], timeout: 2.0)
 
         app.sheets.textFields["TaskName"].typeText(localeData.inboxTask)
-//        snapshot("07InboxTask")
+        snapshot("Apple Macbook Pro 13 Space Gray-07InboxTask")
         app.buttons["SaveTask"].tap()
 
         let exp4 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp4], timeout: 5.0)
+    }
+    
+    private func snapshot(_ name: String) {
+        let screenshot = XCUIScreen.main.screenshot()
+        let attachment = XCTAttachment(screenshot: screenshot)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 }
 // swiftlint:enable function_body_length

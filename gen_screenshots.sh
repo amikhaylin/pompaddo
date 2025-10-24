@@ -13,7 +13,7 @@ if ! fastlane snapshot; then
     exit 1
 fi
 
-TARGET_DIR_2="../screenshots"
+TARGET_DIR_2="../screenshots/mobile"
 echo "\n🔄 Change dir to: $TARGET_DIR_2"
 cd "$TARGET_DIR_2" || {
     echo "❌ Error changing directory: $TARGET_DIR_2"

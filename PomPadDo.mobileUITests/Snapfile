@@ -39,7 +39,7 @@ project("../PomPadDo.xcodeproj")
 scheme("PomPadDo.mobile")
 
 # Where should the resulting screenshots be stored?
-output_directory("../screenshots")
+output_directory("../screenshots/mobile")
 
 # remove the '#' to clear all previously generated screenshots before creating new ones
 clear_previous_screenshots(true)
