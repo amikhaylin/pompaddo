@@ -31,6 +31,9 @@ Package.resolved
 #
 Pods/
 
+TestResults/
+TestResults*
+
 # Screenshots
 screenshots/mobile/*.html
 screenshots/mobile/ru/*.png

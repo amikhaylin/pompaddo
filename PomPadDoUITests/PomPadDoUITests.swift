@@ -142,7 +142,7 @@ final class PomPadDoUITests: XCTestCase {
 
         snapshot("Apple Macbook Pro 13 Space Gray-01TodayScreen")
 
-        app/*@START_MENU_TOKEN@*/.buttons["Add task to Inbox"].buttons["AddTaskToInboxButton"].firstMatch/*[[".buttons.matching(identifier: \"AddTaskToInboxButton\").element(boundBy: 1)",".buttons[\"Add task to Inbox\"]",".buttons.firstMatch",".buttons[\"Add task to Inbox\"].firstMatch",".buttons[\"AddTaskToInboxButton\"].firstMatch"],[[[-1,1,1],[-1,0]],[[-1,4],[-1,3],[-1,2]]],[0,0]]@END_MENU_TOKEN@*/.click()
+        app.buttons["AddTaskToInboxButton"].firstMatch.click()
         app.sheets.textFields["TaskName"].tap()
 
         app.sheets.textFields["TaskName"].typeText(localeData.inboxTask)

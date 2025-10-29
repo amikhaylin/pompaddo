@@ -125,7 +125,7 @@ struct MainView: View {
                             .presentationCompactAdaptation(.popover)
                             .environmentObject(refresher)
                     })
-                    .buttonStyle(.bordered)
+                    .modifier(GlassButtonStyle())
                     .buttonBorderShape(.capsule)
                     
                     Spacer()

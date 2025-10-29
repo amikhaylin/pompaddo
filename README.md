@@ -50,7 +50,7 @@ Students and anyone craving order in their workflow.
 
 <img src="page-pix/mac-today.png"/><br>
 <img src="page-pix/mac-project.png"/><br>
-<img src="page-pix/mac-timer.png" height="320" /><br>
+<img src="page-pix/mac-timer.png" /><br>
 
 ## iOS / iPadOS app
 <img src="page-pix/iphone-today.png" height="620" align="left" />
