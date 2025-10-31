@@ -11,6 +11,7 @@ import Charts
 
 struct TaskRowView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
     @State private var showingAlertSign = false
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
@@ -79,7 +80,15 @@ struct TaskRowView: View {
                     }
                 }
                 
-                if task.tomatoesCount > 0 {
+                if let focus = focusTask.task, focus == task {
+                    Image(systemName: "target")
+                        .foregroundStyle(Color.red)
+                    if task.tomatoesCount > 0 {
+                        Text("\(task.tomatoesCount)")
+                            .foregroundStyle(Color.gray)
+                            .font(.caption)
+                    }
+                } else if task.tomatoesCount > 0 {
                     Image(systemName: "target")
                         .foregroundStyle(Color.gray)
                     Text("\(task.tomatoesCount)")

@@ -34,10 +34,10 @@ struct SectionsListView: View {
                         Image(systemName: "tray")
                         Text("Inbox")
                     }
-                    .accessibilityIdentifier("InboxNavButton")
                     .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
                     .badge(tasksInboxActive.count)
                 }
+                .accessibilityIdentifier("InboxNavButton")
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
                         if let project = task.project, let index = project.tasks?.firstIndex(of: task) {

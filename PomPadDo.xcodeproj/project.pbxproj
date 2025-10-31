@@ -29,6 +29,13 @@
 			remoteGlobalIDString = 4D0540032D63A4980098FEC7;
 			remoteInfo = PomPadDo.watch.widgetsExtension;
 		};
+		4D0CECAA2EB2040E004C7365 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D3E50B12D6382E7008C1FDB;
+			remoteInfo = "PomPadDo.watch Watch App";
+		};
 		4D28675B2D61F5C20064ADF3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
@@ -129,6 +136,8 @@
 
 /* Begin PBXFileReference section */
 		4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.watch.widgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0CECA42EB2040E004C7365 /* PomPadDo.watchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDo.watchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0CECB12EB39DC2004C7365 /* PomPadDo.watchApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = PomPadDo.watchApp.xctestplan; path = PomPadDo.watchUITests/PomPadDo.watchApp.xctestplan; sourceTree = "<group>"; };
 		4D1A88FA2D63B84200CEA4C6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4D1A88FB2D63B84200CEA4C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4D28673D2D61F5BE0064ADF3 /* PomPadDo.mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -365,6 +374,7 @@
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		4D0CECA52EB2040E004C7365 /* PomPadDo.watchUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.watchUITests; sourceTree = "<group>"; };
 		4D0DF0C72E9B99A2007DE44C /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D0DF0C92E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CD2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0D92E9BA20E007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CA2E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0DA2E9BA20E007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CE2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CB2E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CF2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4DF1BAC12EA8FF0800B8F211 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
 		4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D2867622D61F5C20064ADF3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D8614D52E61F783005B6AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobile; sourceTree = "<group>"; };
 		4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobileUITests; sourceTree = "<group>"; };
@@ -383,6 +393,13 @@
 			files = (
 				4D05400B2D63A4980098FEC7 /* SwiftUI.framework in Frameworks */,
 				4D05400C2D63A4980098FEC7 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0CECA12EB2040E004C7365 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +470,7 @@
 		4D95FE192B7B6BF300C8918D = {
 			isa = PBXGroup;
 			children = (
+				4D0CECB12EB39DC2004C7365 /* PomPadDo.watchApp.xctestplan */,
 				4DF1BAC22EA9398E00B8F211 /* PomPadDo.xctestplan */,
 				4D5D4C842D6638F60064B27C /* PomPadDo.mobile.xctestplan */,
 				4D1A88FA2D63B84200CEA4C6 /* LICENSE */,
@@ -468,6 +486,7 @@
 				4D71DB672D63404900C1FE13 /* PomPadDoWidgets */,
 				4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */,
 				4DF1BAB52EA8EDFE00B8F211 /* PomPadDoUITests */,
+				4D0CECA52EB2040E004C7365 /* PomPadDo.watchUITests */,
 				4D95FE232B7B6BF300C8918D /* Products */,
 				4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */,
 			);
@@ -485,6 +504,7 @@
 				4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */,
 				4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */,
 				4DF1BAB42EA8EDFE00B8F211 /* PomPadDoUITests.xctest */,
+				4D0CECA42EB2040E004C7365 /* PomPadDo.watchUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -523,6 +543,29 @@
 			productName = PomPadDoWidgetsExtension;
 			productReference = 4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
+		};
+		4D0CECA32EB2040E004C7365 /* PomPadDo.watchUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D0CECAE2EB2040E004C7365 /* Build configuration list for PBXNativeTarget "PomPadDo.watchUITests" */;
+			buildPhases = (
+				4D0CECA02EB2040E004C7365 /* Sources */,
+				4D0CECA12EB2040E004C7365 /* Frameworks */,
+				4D0CECA22EB2040E004C7365 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D0CECAB2EB2040E004C7365 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4D0CECA52EB2040E004C7365 /* PomPadDo.watchUITests */,
+			);
+			name = PomPadDo.watchUITests;
+			packageProductDependencies = (
+			);
+			productName = PomPadDo.watchUITests;
+			productReference = 4D0CECA42EB2040E004C7365 /* PomPadDo.watchUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		4D28673C2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {
 			isa = PBXNativeTarget;
@@ -721,6 +764,10 @@
 				LastSwiftUpdateCheck = 2600;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					4D0CECA32EB2040E004C7365 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 4D3E50B12D6382E7008C1FDB;
+					};
 					4D28673C2D61F5BE0064ADF3 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -812,12 +859,20 @@
 				4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */,
 				4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */,
 				4DF1BAB32EA8EDFE00B8F211 /* PomPadDoUITests */,
+				4D0CECA32EB2040E004C7365 /* PomPadDo.watchUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4D05400D2D63A4980098FEC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0CECA22EB2040E004C7365 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -913,6 +968,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4D0CECA02EB2040E004C7365 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4D2867392D61F5BE0064ADF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -976,6 +1038,11 @@
 			isa = PBXTargetDependency;
 			target = 4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */;
 			targetProxy = 4D0540192D63A7F70098FEC7 /* PBXContainerItemProxy */;
+		};
+		4D0CECAB2EB2040E004C7365 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */;
+			targetProxy = 4D0CECAA2EB2040E004C7365 /* PBXContainerItemProxy */;
 		};
 		4D28675C2D61F5C20064ADF3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1086,6 +1153,51 @@
 				TARGETED_DEVICE_FAMILY = 4;
 				VALIDATE_PRODUCT = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 11.2;
+			};
+			name = Release;
+		};
+		4D0CECAC2EB2040E004C7365 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo-watchUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "PomPadDo.watch Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		4D0CECAD2EB2040E004C7365 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9Z68336878;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo-watchUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "PomPadDo.watch Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};
@@ -1677,6 +1789,15 @@
 			buildConfigurations = (
 				4D0540102D63A4980098FEC7 /* Debug */,
 				4D0540112D63A4980098FEC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D0CECAE2EB2040E004C7365 /* Build configuration list for PBXNativeTarget "PomPadDo.watchUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D0CECAC2EB2040E004C7365 /* Debug */,
+				4D0CECAD2EB2040E004C7365 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

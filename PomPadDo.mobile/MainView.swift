@@ -25,7 +25,7 @@ struct MainView: View {
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
-    @AppStorage("launchCount") var launchCount = 0
+    @AppStorage("firstLaunchDate") var firstLaunchDate: Date?
     @AppStorage("lastVersionPromptedForReview") var lastVersionPromptedForReview: String?
     
     var currentVersion: String {
@@ -141,7 +141,6 @@ struct MainView: View {
                                    longBreakInSeconds: timerLongBreakSession,
                                    workSessionsCount: Int(timerWorkSessionsCount))
                 
-                launchCount += 1
                 checkForReview()
             }
             .onChange(of: timerWorkSession, { _, _ in
@@ -202,7 +201,17 @@ struct MainView: View {
     }
     
     private func checkForReview() {
-        guard launchCount >= 10,
+        guard let launchDate = firstLaunchDate else {
+            firstLaunchDate = Date()
+            return
+        }
+        
+        if lastVersionPromptedForReview == currentVersion {
+            firstLaunchDate = Date()
+            return
+        }
+        
+        guard (NSInteger(Date().timeIntervalSince(launchDate as Date)) / 86400) % 86400 >= 10,
               lastVersionPromptedForReview != currentVersion else { return }
         
         Task { @MainActor in

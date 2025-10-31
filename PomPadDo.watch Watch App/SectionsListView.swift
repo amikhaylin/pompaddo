@@ -23,7 +23,7 @@ struct SectionsListView: View {
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.4890732765, green: 0.530819118, blue: 0.7039532065, alpha: 1)))
                 }
-                
+                .accessibilityIdentifier("InboxNavButton")
             case .today:
                 NavigationLink(value: item) {
                     HStack {
@@ -32,6 +32,7 @@ struct SectionsListView: View {
                     }
                     .foregroundStyle(Color(#colorLiteral(red: 0.9496305585, green: 0.5398437977, blue: 0.3298020959, alpha: 1)))
                 }
+                .accessibilityIdentifier("TodayNavButton")
             case .tomorrow:
                 NavigationLink(value: item) {
                     HStack {
@@ -54,6 +55,7 @@ struct SectionsListView: View {
                         .environmentObject(timer)
                         .foregroundStyle(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
                 }
+                .accessibilityIdentifier("FocusNavButton")
             case .settings:
                 NavigationLink(value: item) {
                     HStack {
