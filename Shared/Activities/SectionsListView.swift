@@ -53,6 +53,7 @@ struct SectionsListView: View {
                     }
                     return true
                 }
+                .listRowSeparator(.hidden)
                 
             case .today:
                 NavigationLink(value: item) {
@@ -70,6 +71,7 @@ struct SectionsListView: View {
                     }
                     return true
                 }
+                .listRowSeparator(.hidden)
             case .tomorrow:
                 NavigationLink(value: item) {
                     HStack {
@@ -85,6 +87,7 @@ struct SectionsListView: View {
                     }
                     return true
                 }
+                .listRowSeparator(.hidden)
             case .projects:
                 EmptyView()
             case .review:
@@ -96,6 +99,7 @@ struct SectionsListView: View {
                     .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
                     .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
                 }
+                .listRowSeparator(.hidden)
             case .alltasks:
                 NavigationLink(value: item) {
                     HStack {
@@ -105,6 +109,7 @@ struct SectionsListView: View {
                     .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
                     .badge(tasksAllActive.count)
                 }
+                .listRowSeparator(.hidden)
             }
         }
         .listStyle(SidebarListStyle())

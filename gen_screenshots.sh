@@ -7,7 +7,7 @@ cd "$TARGET_DIR_1" || {
     exit 1
 }
 
-echo "🚀 Run fastlane snapshot..."
+echo "🚀 Run iOS fastlane snapshot..."
 if ! fastlane snapshot; then
     echo "❌ Error running fastlane snapshot"
     exit 1
@@ -23,6 +23,19 @@ cd "$TARGET_DIR_2" || {
 echo "🎨 Run fastlane frameit..."
 if ! fastlane frameit; then
     echo "❌ Error running fastlane frameit"
+    exit 1
+fi
+
+TARGET_DIR_3="../../PomPadDo.watchUITests"
+echo "🔄 Change dir to: $TARGET_DIR_3"
+cd "$TARGET_DIR_3" || {
+    echo "❌ Error changing directory: $TARGET_DIR_3"
+    exit 1
+}
+
+echo "🚀 Run watchOS fastlane snapshot..."
+if ! fastlane snapshot; then
+    echo "❌ Error running fastlane snapshot"
     exit 1
 fi
 

@@ -9,6 +9,12 @@
     }
   ],
   "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "IS_FASTLANE",
+        "value" : "NO"
+      }
+    ],
     "language" : "en",
     "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {

@@ -19,7 +19,7 @@
 # ])
 
 devices([
-  "Apple Watch Series 11 - 46mm"
+  "Apple Watch Series 11 (46mm)"
 ])
 
 # languages([
