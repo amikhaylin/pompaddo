@@ -135,6 +135,9 @@ struct BoardView: View {
                             .fill(Color.gray.opacity(0.1))
                             .cornerRadius(5)
                             .frame(width: 5)
+                            #if os(macOS)
+                            .cursor(.resizeLeftRight)
+                            #endif
                             .gesture(
                                 DragGesture()
                                     .onChanged { gesture in
