@@ -12,6 +12,7 @@ struct ProjectTasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
     
     @Bindable var project: Project
     
@@ -20,6 +21,8 @@ struct ProjectTasksListView: View {
     @State private var searchText = ""
     @State private var groupsExpanded: Set<String> = ["To do", "Completed"]
     @State private var statusToEdit: Status?
+    
+    @State private var newTaskToStatus: Status?
     
     var searchResults: [Todo] {
         if searchText.isEmpty {
@@ -55,7 +58,9 @@ struct ProjectTasksListView: View {
                                                                         set: { project.tasks = $0 })))
                                         .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
                                         .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
+                                .listRowSeparator(.hidden)
                             } else {
                                 TaskRowView(task: task, showingProject: false)
                                     .modifier(ProjectTaskModifier(task: task,
@@ -66,6 +71,7 @@ struct ProjectTasksListView: View {
                                                                     set: { project.tasks = $0 })))
                                     .modifier(TaskSwipeModifier(task: task, list: .constant(.projects)))
                                     .tag(task)
+                                    .listRowSeparator(.hidden)
                             }
                         }
                     } label: {
@@ -94,8 +100,19 @@ struct ProjectTasksListView: View {
                             Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
                                 .foregroundStyle(Color.gray)
                                 .font(.caption)
+                            
+                            Spacer()
+                            
+                            Button {
+                                newTaskToStatus = status
+                            } label: {
+                                Image(systemName: "plus")
+                            }
+                            .buttonStyle(.plain)
+                            .help("Add task to current status")
                         }
                     }
+                    .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.moveToStatus(status: status,
@@ -118,7 +135,7 @@ struct ProjectTasksListView: View {
             } else {
                 // MARK: Show tasks without statuses
                 ForEach(CommonTaskListSections.allCases) { section in
-                    DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
+                    DisclosureGroup(isExpanded: Binding<Bool>(
                         get: { groupsExpanded.contains(section.rawValue) },
                         set: { isExpanding in
                             if isExpanding {
@@ -143,7 +160,9 @@ struct ProjectTasksListView: View {
                                                                         set: { project.tasks = $0 })))
                                         .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
                                         .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
+                                .listRowSeparator(.hidden)
                             } else {
                                 TaskRowView(task: task, showingProject: false)
                                     .modifier(ProjectTaskModifier(task: task,
@@ -154,9 +173,19 @@ struct ProjectTasksListView: View {
                                                                     set: { project.tasks = $0 })))
                                     .modifier(TaskSwipeModifier(task: task, list: .constant(.projects)))
                                     .tag(task)
+                                    .listRowSeparator(.hidden)
                             }
                         }
+                    } label: {
+                        HStack {
+                            Text(section.localizedString())
+                            
+                            Text(" \(section == .completed ? searchResults.filter({ $0.completed && $0.parentTask == nil }).count : searchResults.filter({ $0.completed == false }).count)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
+                        }
                     }
+                    .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.disconnectFromParentTask()
@@ -177,10 +206,27 @@ struct ProjectTasksListView: View {
             }
         }
         .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
+        #if os(macOS)
+        .sheet(item: $newTaskToStatus, onDismiss: {
+            newTaskToStatus = nil
+        }, content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+        })
+        #else
+        .popover(item: $newTaskToStatus, attachmentAnchor: .point(.top), content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+                .frame(minWidth: 200, maxHeight: 220)
+                .presentationCompactAdaptation(.popover)
+        })
+        #endif
     }
     
     private func deleteTask(task: Todo) {
         withAnimation {
+            if let focus = focusTask.task, task == focus {
+                focusTask.task = nil
+            }
+
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
         }
@@ -189,6 +235,10 @@ struct ProjectTasksListView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks.tasks {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }

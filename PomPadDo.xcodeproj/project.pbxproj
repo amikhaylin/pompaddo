@@ -3,45 +3,21 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 74;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4D05400B2D63A4980098FEC7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB652D63404900C1FE13 /* SwiftUI.framework */; };
 		4D05400C2D63A4980098FEC7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB632D63404900C1FE13 /* WidgetKit.framework */; };
-		4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */; };
-		4D169BCE2C106039001F995F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D169BCD2C106039001F995F /* SettingsView.swift */; };
 		4D2867812D61FAFE0064ADF3 /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D2867802D61FAFE0064ADF3 /* SwiftDataTransferrable */; };
 		4D3025572D63AD24000E5C3D /* PomPadDo.watch.widgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4D351A022DE069D300861B29 /* StatusSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D351A012DE069D300861B29 /* StatusSettingsView.swift */; };
-		4D3C15802DDE1E2B00838BDE /* EditTaskNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3C157F2DDE1E2B00838BDE /* EditTaskNameView.swift */; };
 		4D3E50BF2D6382EA008C1FDB /* PomPadDo.watch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D59C8672BE10A180026C2EA /* FocusTimerView.swift */; };
-		4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */; };
 		4D71DB642D63404900C1FE13 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB632D63404900C1FE13 /* WidgetKit.framework */; };
 		4D71DB662D63404900C1FE13 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB652D63404900C1FE13 /* SwiftUI.framework */; };
 		4D71DB732D63404C00C1FE13 /* PomPadDoWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4D7A1FD92C0778E4009052AE /* SafariExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */; };
-		4D7A1FDB2C0778E4009052AE /* SafariExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */; };
-		4D7A1FE32C0778E4009052AE /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4D7A1FE22C0778E4009052AE /* Base */; };
 		4D7A1FE82C0778E4009052AE /* PomPadDo.safari.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4D7A1FEE2C077DFD009052AE /* ToolbarItemIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */; };
-		4D8614C92E61EF96005B6AF6 /* FocusSounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D8614C72E61EF96005B6AF6 /* FocusSounds.swift */; };
-		4D8F04EC2C29645300B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */; };
-		4D8F04EE2C2964B500B7698B /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */; };
-		4D95FE262B7B6BF300C8918D /* PomPadDoMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE252B7B6BF300C8918D /* PomPadDoMacApp.swift */; };
-		4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE272B7B6BF300C8918D /* ContentView.swift */; };
-		4D95FE2C2B7B6BF600C8918D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */; };
-		4D95FE2F2B7B6BF600C8918D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */; };
-		4D95FE3A2B7B6BF600C8918D /* PomPadDoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D95FE392B7B6BF600C8918D /* PomPadDoTests.swift */; };
 		4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */; };
-		4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */; };
-		4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */; };
-		4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */; };
 		4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBAD6152BECBEEF002666BD /* Credits.rtf */; };
-		4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */; };
-		4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE238582BAC9C01009BCCCF /* NewProjectView.swift */; };
-		4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE796522B8DD450004B7881 /* NewTaskView.swift */; };
 		4DF1E9E42C1B56E7007FC401 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -146,49 +122,20 @@
 
 /* Begin PBXFileReference section */
 		4D0540122D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.watch.widgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerScene.swift; sourceTree = "<group>"; };
-		4D169BCD2C106039001F995F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4D1A88FA2D63B84200CEA4C6 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4D1A88FB2D63B84200CEA4C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4D28673D2D61F5BE0064ADF3 /* PomPadDo.mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.mobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D28675A2D61F5C20064ADF3 /* PomPadDo.mobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDo.mobileUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D351A012DE069D300861B29 /* StatusSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSettingsView.swift; sourceTree = "<group>"; };
-		4D3C157F2DDE1E2B00838BDE /* EditTaskNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskNameView.swift; sourceTree = "<group>"; };
 		4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PomPadDo.watch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D59C8672BE10A180026C2EA /* FocusTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTimerView.swift; sourceTree = "<group>"; };
 		4D5D4C842D6638F60064B27C /* PomPadDo.mobile.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = PomPadDo.mobile.xctestplan; path = PomPadDo.mobileUITests/PomPadDo.mobile.xctestplan; sourceTree = "<group>"; };
-		4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusRowView.swift; sourceTree = "<group>"; };
 		4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDoWidgetsExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D71DB632D63404900C1FE13 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		4D71DB652D63404900C1FE13 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		4D71DB792D6340D200C1FE13 /* PomPadDoWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoWidgetsExtension.entitlements; sourceTree = "<group>"; };
 		4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.safari.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionHandler.swift; sourceTree = "<group>"; };
-		4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariExtensionViewController.swift; sourceTree = "<group>"; };
-		4D7A1FE22C0778E4009052AE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SafariExtensionViewController.xib; sourceTree = "<group>"; };
-		4D7A1FE42C0778E4009052AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D7A1FE52C0778E4009052AE /* PomPadDoExt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoExt.entitlements; sourceTree = "<group>"; };
-		4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolbarItemIcon.png; sourceTree = "<group>"; };
-		4D8614C72E61EF96005B6AF6 /* FocusSounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusSounds.swift; sourceTree = "<group>"; };
-		4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
-		4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		4D95FE222B7B6BF300C8918D /* PomPadDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D95FE252B7B6BF300C8918D /* PomPadDoMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoMacApp.swift; sourceTree = "<group>"; };
-		4D95FE272B7B6BF300C8918D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4D95FE302B7B6BF600C8918D /* PomPadDoMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoMac.entitlements; sourceTree = "<group>"; };
 		4D95FE352B7B6BF600C8918D /* PomPadDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D95FE392B7B6BF600C8918D /* PomPadDoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomPadDoTests.swift; sourceTree = "<group>"; };
-		4D9FFAD32BA9C43600C5F5AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProjectGroupView.swift; sourceTree = "<group>"; };
-		4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectGroupView.swift; sourceTree = "<group>"; };
-		4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
 		4DBAD6152BECBEEF002666BD /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectNameView.swift; sourceTree = "<group>"; };
-		4DDC33972E1C3DB80066B9E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SafariExtensionViewController.strings; sourceTree = "<group>"; };
-		4DE238582BAC9C01009BCCCF /* NewProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewProjectView.swift; sourceTree = "<group>"; };
-		4DE796522B8DD450004B7881 /* NewTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskView.swift; sourceTree = "<group>"; };
 		4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -373,7 +320,32 @@
 			);
 			target = 4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */;
 		};
+		4DFA79F42E9E5D6F0069A476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4D95FE212B7B6BF300C8918D /* PomPadDo */;
+		};
+		4DFA7A0A2E9E5D7D0069A476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				/Localized/SafariExtensionViewController.xib,
+				Info.plist,
+			);
+			target = 4D7A1FD52C0778E4009052AE /* PomPadDo.safari */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		4DFA7A0B2E9E5D7D0069A476 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 4D7A1FD42C0778E4009052AE /* Resources */;
+			membershipExceptions = (
+				Base.lproj/SafariExtensionViewController.xib,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4D0DF0C72E9B99A2007DE44C /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D0DF0C92E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CD2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0D92E9BA20E007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CA2E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0DA2E9BA20E007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CE2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CB2E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CF2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
@@ -381,6 +353,9 @@
 		4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobileUITests; sourceTree = "<group>"; };
 		4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PomPadDo.watch Watch App"; sourceTree = "<group>"; };
 		4D71DB672D63404900C1FE13 /* PomPadDoWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D71DB772D63404C00C1FE13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0540142D63A4980098FEC7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDoWidgets; sourceTree = "<group>"; };
+		4DFA79E02E9E5D6E0069A476 /* PomPadDo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4DFA79F42E9E5D6F0069A476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo; sourceTree = "<group>"; };
+		4DFA79F62E9E5D7A0069A476 /* PomPadDo.Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.Tests; sourceTree = "<group>"; };
+		4DFA7A022E9E5D7D0069A476 /* PomPadDo.safari */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4DFA7A0A2E9E5D7D0069A476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4DFA7A0B2E9E5D7D0069A476 /* PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.safari; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,66 +425,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4D169BCC2C106010001F995F /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				4D169BCD2C106039001F995F /* SettingsView.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
-		4D4139872BE8E2C200AA840C /* Group */ = {
-			isa = PBXGroup;
-			children = (
-				4DA418512BEA79D00029DD74 /* NewProjectGroupView.swift */,
-				4DA418532BEA7A0A0029DD74 /* EditProjectGroupView.swift */,
-			);
-			path = Group;
-			sourceTree = "<group>";
-		};
-		4D59C8662BE109EB0026C2EA /* Focus */ = {
-			isa = PBXGroup;
-			children = (
-				4D59C8672BE10A180026C2EA /* FocusTimerView.swift */,
-				4D0874342C2351CE002CF7E8 /* FocusTimerScene.swift */,
-				4D8614C72E61EF96005B6AF6 /* FocusSounds.swift */,
-			);
-			path = Focus;
-			sourceTree = "<group>";
-		};
-		4D736B132B7D1383000C0BFD /* Activities */ = {
-			isa = PBXGroup;
-			children = (
-				4D59C8662BE109EB0026C2EA /* Focus */,
-				4DAA67B62BC52CBC0045CE22 /* Projects */,
-				4DAA67B52BC52C970045CE22 /* Tasks */,
-				4D95FE272B7B6BF300C8918D /* ContentView.swift */,
-			);
-			path = Activities;
-			sourceTree = "<group>";
-		};
-		4D7A1FD72C0778E4009052AE /* PomPadDo.safari */ = {
-			isa = PBXGroup;
-			children = (
-				4D7A1FD82C0778E4009052AE /* SafariExtensionHandler.swift */,
-				4D7A1FDA2C0778E4009052AE /* SafariExtensionViewController.swift */,
-				4D7A1FE12C0778E4009052AE /* SafariExtensionViewController.xib */,
-				4D7A1FE42C0778E4009052AE /* Info.plist */,
-				4D7A1FE52C0778E4009052AE /* PomPadDoExt.entitlements */,
-				4D7A1FDC2C0778E4009052AE /* Resources */,
-				4D8F04ED2C2964B500B7698B /* InfoPlist.xcstrings */,
-			);
-			path = PomPadDo.safari;
-			sourceTree = "<group>";
-		};
-		4D7A1FDC2C0778E4009052AE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				4D7A1FED2C077DFD009052AE /* ToolbarItemIcon.png */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		4D95FE192B7B6BF300C8918D = {
 			isa = PBXGroup;
 			children = (
@@ -519,9 +434,9 @@
 				4D71DB792D6340D200C1FE13 /* PomPadDoWidgetsExtension.entitlements */,
 				4DBAD6152BECBEEF002666BD /* Credits.rtf */,
 				4D0DF0C72E9B99A2007DE44C /* Shared */,
-				4D95FE242B7B6BF300C8918D /* PomPadDo */,
-				4D95FE382B7B6BF600C8918D /* PomPadDo.Tests */,
-				4D7A1FD72C0778E4009052AE /* PomPadDo.safari */,
+				4DFA79E02E9E5D6E0069A476 /* PomPadDo */,
+				4DFA79F62E9E5D7A0069A476 /* PomPadDo.Tests */,
+				4DFA7A022E9E5D7D0069A476 /* PomPadDo.safari */,
 				4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */,
 				4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */,
 				4D71DB672D63404900C1FE13 /* PomPadDoWidgets */,
@@ -546,45 +461,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4D95FE242B7B6BF300C8918D /* PomPadDo */ = {
-			isa = PBXGroup;
-			children = (
-				4D169BCC2C106010001F995F /* Settings */,
-				4D9FFAD32BA9C43600C5F5AE /* Info.plist */,
-				4D736B132B7D1383000C0BFD /* Activities */,
-				4D95FE522B7B6C1300C8918D /* Model */,
-				4D95FE252B7B6BF300C8918D /* PomPadDoMacApp.swift */,
-				4D95FE2B2B7B6BF600C8918D /* Assets.xcassets */,
-				4D95FE302B7B6BF600C8918D /* PomPadDoMac.entitlements */,
-				4D95FE2D2B7B6BF600C8918D /* Preview Content */,
-				4D8F04EB2C29645300B7698B /* InfoPlist.xcstrings */,
-			);
-			path = PomPadDo;
-			sourceTree = "<group>";
-		};
-		4D95FE2D2B7B6BF600C8918D /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				4D95FE2E2B7B6BF600C8918D /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		4D95FE382B7B6BF600C8918D /* PomPadDo.Tests */ = {
-			isa = PBXGroup;
-			children = (
-				4D95FE392B7B6BF600C8918D /* PomPadDoTests.swift */,
-			);
-			path = PomPadDo.Tests;
-			sourceTree = "<group>";
-		};
-		4D95FE522B7B6C1300C8918D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -593,36 +469,6 @@
 				4D71DB652D63404900C1FE13 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4DAA67B52BC52C970045CE22 /* Tasks */ = {
-			isa = PBXGroup;
-			children = (
-				4DE796522B8DD450004B7881 /* NewTaskView.swift */,
-				4D3C157F2DDE1E2B00838BDE /* EditTaskNameView.swift */,
-			);
-			path = Tasks;
-			sourceTree = "<group>";
-		};
-		4DAA67B62BC52CBC0045CE22 /* Projects */ = {
-			isa = PBXGroup;
-			children = (
-				4D4139872BE8E2C200AA840C /* Group */,
-				4DCE05DE2BCA711B002C9566 /* Settings */,
-				4DE238582BAC9C01009BCCCF /* NewProjectView.swift */,
-				4DD200A22C86F90300AF6122 /* EditProjectNameView.swift */,
-			);
-			path = Projects;
-			sourceTree = "<group>";
-		};
-		4DCE05DE2BCA711B002C9566 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				4DAA67B72BC52D030045CE22 /* ProjectSettingsView.swift */,
-				4D67DDBD2BC537C20037FE64 /* StatusRowView.swift */,
-				4D351A012DE069D300861B29 /* StatusSettingsView.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -759,6 +605,9 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				4DFA7A022E9E5D7D0069A476 /* PomPadDo.safari */,
+			);
 			name = PomPadDo.safari;
 			productName = PomPadDoExt;
 			productReference = 4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */;
@@ -778,6 +627,9 @@
 			);
 			dependencies = (
 				4D7A1FE72C0778E4009052AE /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4DFA79E02E9E5D6E0069A476 /* PomPadDo */,
 			);
 			name = PomPadDo;
 			packageProductDependencies = (
@@ -799,6 +651,9 @@
 			);
 			dependencies = (
 				4D95FE372B7B6BF600C8918D /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				4DFA79F62E9E5D7A0069A476 /* PomPadDo.Tests */,
 			);
 			name = PomPadDoTests;
 			productName = PomPadDoMacTests;
@@ -842,7 +697,6 @@
 				};
 			};
 			buildConfigurationList = 4D95FE1D2B7B6BF300C8918D /* Build configuration list for PBXProject "PomPadDo" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -889,6 +743,7 @@
 			packageReferences = (
 				4D9FFAD22BA9C38300C5F5AE /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */,
 			);
+			preferredProjectObjectVersion = 56;
 			productRefGroup = 4D95FE232B7B6BF300C8918D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -945,9 +800,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D8F04EE2C2964B500B7698B /* InfoPlist.xcstrings in Resources */,
-				4D7A1FEE2C077DFD009052AE /* ToolbarItemIcon.png in Resources */,
-				4D7A1FE32C0778E4009052AE /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,10 +807,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D95FE2F2B7B6BF600C8918D /* Preview Assets.xcassets in Resources */,
-				4D8F04EC2C29645300B7698B /* InfoPlist.xcstrings in Resources */,
 				4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */,
-				4D95FE2C2B7B6BF600C8918D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1033,8 +882,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D7A1FDB2C0778E4009052AE /* SafariExtensionViewController.swift in Sources */,
-				4D7A1FD92C0778E4009052AE /* SafariExtensionHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1042,21 +889,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D351A022DE069D300861B29 /* StatusSettingsView.swift in Sources */,
-				4D95FE282B7B6BF300C8918D /* ContentView.swift in Sources */,
-				4D59C8682BE10A180026C2EA /* FocusTimerView.swift in Sources */,
-				4DAA67B82BC52D030045CE22 /* ProjectSettingsView.swift in Sources */,
-				4D67DDBE2BC537C20037FE64 /* StatusRowView.swift in Sources */,
-				4DD200A32C86F90300AF6122 /* EditProjectNameView.swift in Sources */,
-				4DA418522BEA79D00029DD74 /* NewProjectGroupView.swift in Sources */,
-				4D8614C92E61EF96005B6AF6 /* FocusSounds.swift in Sources */,
-				4DE796532B8DD450004B7881 /* NewTaskView.swift in Sources */,
-				4DE238592BAC9C01009BCCCF /* NewProjectView.swift in Sources */,
-				4D95FE262B7B6BF300C8918D /* PomPadDoMacApp.swift in Sources */,
-				4D169BCE2C106039001F995F /* SettingsView.swift in Sources */,
-				4D3C15802DDE1E2B00838BDE /* EditTaskNameView.swift in Sources */,
-				4D0874352C2351CE002CF7E8 /* FocusTimerScene.swift in Sources */,
-				4DA418542BEA7A0A0029DD74 /* EditProjectGroupView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,7 +896,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D95FE3A2B7B6BF600C8918D /* PomPadDoTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1108,18 +939,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		4D7A1FE12C0778E4009052AE /* SafariExtensionViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4D7A1FE22C0778E4009052AE /* Base */,
-				4DDC33972E1C3DB80066B9E8 /* en */,
-			);
-			name = SafariExtensionViewController.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		4D0540102D63A4980098FEC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1130,7 +949,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1167,7 +986,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1202,7 +1021,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1240,7 +1059,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1276,7 +1095,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MARKETING_VERSION = 1.0;
@@ -1294,7 +1113,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MARKETING_VERSION = 1.0;
@@ -1316,7 +1135,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1347,7 +1166,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1380,7 +1199,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1415,7 +1234,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1449,7 +1268,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.safari/Info.plist;
@@ -1482,7 +1301,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.safari/Info.plist;
@@ -1642,7 +1461,7 @@
 				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1675,7 +1494,7 @@
 				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1704,7 +1523,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -1722,7 +1541,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 74;
+				CURRENT_PROJECT_VERSION = 81;
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;

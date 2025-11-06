@@ -103,17 +103,30 @@ struct TaskRowModifier: ViewModifier {
 
             Divider()
             
-            Button {
-                focusTask.task = task
-                if timer.state == .idle {
+            if let focus = focusTask.task, focus == task {
+                Button {
                     timer.reset()
-                    timer.start()
-                } else if timer.state == .paused {
-                    timer.resume()
+                    if timer.mode == .pause || timer.mode == .longbreak {
+                        timer.skip()
+                    }
+                    focusTask.task = nil
+                } label: {
+                    Image(systemName: "stop.fill")
+                    Text("Stop focus")
                 }
-            } label: {
-                Image(systemName: "play.fill")
-                Text("Start focus")
+            } else {
+                Button {
+                    focusTask.task = task
+                    if timer.state == .idle {
+                        timer.reset()
+                        timer.start()
+                    } else if timer.state == .paused {
+                        timer.resume()
+                    }
+                } label: {
+                    Image(systemName: "play.fill")
+                    Text("Start focus")
+                }
             }
             
             Divider()
@@ -287,12 +300,20 @@ struct TaskRowModifier: ViewModifier {
             Button {
                 if selectedTasksSet.count > 0 {
                     for task in selectedTasksSet {
+                        if let focus = focusTask.task, task == focus {
+                            focusTask.task = nil
+                        }
+
                         TasksQuery.deleteTask(context: modelContext,
                                               task: task)
                     }
                     showInspector.show = false
                     selectedTasksSet.removeAll()
                 } else {
+                    if let focus = focusTask.task, task == focus {
+                        focusTask.task = nil
+                    }
+
                     TasksQuery.deleteTask(context: modelContext,
                                           task: task)
                 }

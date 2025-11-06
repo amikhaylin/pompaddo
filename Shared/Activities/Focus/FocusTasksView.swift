@@ -29,6 +29,7 @@ struct FocusTasksView: View {
                             TaskRowView(task: maintask)
                                 .modifier(FocusTaskRowModifier(task: maintask, viewMode: $viewMode))
                                 .tag(maintask)
+                                .listRowSeparator(.hidden)
                             
                             Button {
                                 focusTask.task = maintask
@@ -48,6 +49,7 @@ struct FocusTasksView: View {
                         TaskRowView(task: task)
                             .modifier(FocusTaskRowModifier(task: task, viewMode: $viewMode))
                             .tag(task)
+                            .listRowSeparator(.hidden)
                         
                         Button {
                             focusTask.task = task

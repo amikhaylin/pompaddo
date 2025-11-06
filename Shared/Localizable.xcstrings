@@ -2349,6 +2349,9 @@
         }
       }
     },
+    "Add task to current status" : {
+
+    },
     "Add task to Inbox" : {
       "localizations" : {
         "ar" : {

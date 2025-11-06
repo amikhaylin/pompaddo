@@ -12,10 +12,13 @@ struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
     @Bindable var project: Project
     
     @State private var searchText = ""
     @State private var statusToEdit: Status?
+    
+    @State private var newTaskToStatus: Status?
     
     var searchResults: [Todo] {
         if searchText.isEmpty {
@@ -33,6 +36,15 @@ struct BoardView: View {
                     HStack {
                         VStack {
                             HStack {
+                                Button {
+                                    newTaskToStatus = status
+                                } label: {
+                                    Image(systemName: "plus")
+                                }
+                                .buttonStyle(.plain)
+                                .help("Add task to current status")
+
+                                Spacer()
                                 #if os(macOS)
                                 Button {
                                     statusToEdit = status
@@ -57,6 +69,7 @@ struct BoardView: View {
                                 Text(" \(project.getTasks().filter({ $0.status == status && $0.parentTask == nil }).count)")
                                     .foregroundStyle(Color.gray)
                                     .font(.caption)
+                                Spacer()
                             }
                             List(selection: $selectedTasks.tasks) {
                                 ForEach(searchResults
@@ -75,7 +88,9 @@ struct BoardView: View {
                                                                                 get: { project.tasks ?? [] },
                                                                                 set: { project.tasks = $0 })))
                                                 .tag(maintask)
+                                                .listRowSeparator(.hidden)
                                         }
+                                        .listRowSeparator(.hidden)
                                     } else {
                                         TaskRowView(task: task, showingProject: false, nameLineLimit: 5)
                                             .modifier(ProjectTaskModifier(task: task,
@@ -85,9 +100,9 @@ struct BoardView: View {
                                                                             get: { project.tasks ?? [] },
                                                                             set: { project.tasks = $0 })))
                                             .tag(task)
+                                            .listRowSeparator(.hidden)
                                     }
                                 }
-                                        .listRowSeparator(.visible)
                             }
                             .cornerRadius(5)
                         }
@@ -133,10 +148,27 @@ struct BoardView: View {
             .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
         }
         .padding()
+        #if os(macOS)
+        .sheet(item: $newTaskToStatus, onDismiss: {
+            newTaskToStatus = nil
+        }, content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+        })
+        #else
+        .popover(item: $newTaskToStatus, attachmentAnchor: .point(.top), content: { toStatus in
+            NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
+                .frame(minWidth: 200, maxHeight: 220)
+                .presentationCompactAdaptation(.popover)
+        })
+        #endif
     }
     
     private func deleteTask(task: Todo) {
         withAnimation {
+            if let focus = focusTask.task, task == focus {
+                focusTask.task = nil
+            }
+            
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
         }
@@ -145,6 +177,10 @@ struct BoardView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks.tasks {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+                
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }

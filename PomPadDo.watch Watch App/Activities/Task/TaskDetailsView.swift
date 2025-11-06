@@ -111,6 +111,10 @@ struct TaskDetailsView: View {
             
             Button {
                 if !task.completed {
+                    if let focus = focusTask.task, task == focus {
+                        focusTask.task = nil
+                    }
+                    
                     task.complete(modelContext: modelContext)
                 } else {
                     task.reactivate()
@@ -123,11 +127,11 @@ struct TaskDetailsView: View {
             
             if let focusedTask = focusTask.task, focusedTask == task {
                 Button {
-                    focusTask.task = nil
                     timer.reset()
                     if timer.mode == .pause || timer.mode == .longbreak {
                         timer.skip()
                     }
+                    focusTask.task = nil
                     presentationMode.wrappedValue.dismiss()
                     list = .focus
                 } label: {
@@ -224,6 +228,10 @@ struct TaskDetailsView: View {
             }
             
             Button {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
                 WidgetCenter.shared.reloadAllTimelines()

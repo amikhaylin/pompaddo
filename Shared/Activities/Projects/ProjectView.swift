@@ -13,6 +13,7 @@ struct ProjectView: View {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     @State private var newTaskIsShowing = false
     
@@ -167,6 +168,10 @@ struct ProjectView: View {
     private func deleteItems() {
         withAnimation {
             for task in selectedTasks.tasks {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+
                 TasksQuery.deleteTask(context: modelContext,
                                       task: task)
             }

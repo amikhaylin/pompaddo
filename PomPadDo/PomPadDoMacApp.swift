@@ -303,6 +303,10 @@ struct PomPadDoMacApp: App {
                 
                 Button {
                     for task in selectedTasks.tasks {
+                        if let focus = focusTask.task, task == focus {
+                            focusTask.task = nil
+                        }
+
                         TasksQuery.deleteTask(context: sharedModelContainer.mainContext,
                                               task: task)
                     }

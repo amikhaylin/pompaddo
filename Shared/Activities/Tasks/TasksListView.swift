@@ -24,6 +24,7 @@ struct TasksListView: View {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
+    @EnvironmentObject var focusTask: FocusTask
     @Query var tasks: [Todo]
 
     @Binding var list: SideBarItem?
@@ -62,7 +63,7 @@ struct TasksListView: View {
         NavigationStack {
             List(selection: $selectedTasks.tasks) {
                 ForEach(CommonTaskListSections.allCases) { section in
-                    DisclosureGroup(section.localizedString(), isExpanded: Binding<Bool>(
+                    DisclosureGroup(isExpanded: Binding<Bool>(
                         get: { groupsExpanded.contains(section.rawValue) },
                         set: { isExpanding in
                             if isExpanding {
@@ -85,7 +86,9 @@ struct TasksListView: View {
                                                                   list: $list))
                                         .modifier(TaskSwipeModifier(task: maintask, list: $list))
                                         .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
+                                .listRowSeparator(.hidden)
                             } else {
                                 TaskRowView(task: task)
                                     .modifier(TaskRowModifier(task: task,
@@ -94,9 +97,19 @@ struct TasksListView: View {
                                                               list: $list))
                                     .modifier(TaskSwipeModifier(task: task, list: $list))
                                     .tag(task)
+                                    .listRowSeparator(.hidden)
                             }
                         }
+                    } label: {
+                        HStack {
+                            Text(section.localizedString())
+                            
+                            Text(" \(section == .completed ? searchResults.filter({ $0.completed && $0.parentTask == nil }).count : searchResults.filter({ $0.completed == false }).count)")
+                                .foregroundStyle(Color.gray)
+                                .font(.caption)
+                        }
                     }
+                    .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
                             task.disconnectFromParentTask()
@@ -180,6 +193,10 @@ struct TasksListView: View {
     
     private func deleteItems() {
         for task in selectedTasks.tasks {
+            if let focus = focusTask.task, task == focus {
+                focusTask.task = nil
+            }
+
             TasksQuery.deleteTask(context: modelContext,
                                   task: task)
         }
@@ -193,6 +210,10 @@ struct TasksListView: View {
     }
     
     private func deleteTask(task: Todo) {
+        if let focus = focusTask.task, task == focus {
+            focusTask.task = nil
+        }
+
         TasksQuery.deleteTask(context: modelContext,
                               task: task)
     }

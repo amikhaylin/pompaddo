@@ -75,18 +75,32 @@ struct FocusTaskRowModifier: ViewModifier {
 
             Divider()
             
-            Button {
-                focusTask.task = task
-                viewMode = 1
-                if timer.state == .idle {
+            if let focus = focusTask.task, focus == task {
+                Button {
                     timer.reset()
-                    timer.start()
-                } else if timer.state == .paused {
-                    timer.resume()
+                    if timer.mode == .pause || timer.mode == .longbreak {
+                        timer.skip()
+                    }
+                    focusTask.task = nil
+                    viewMode = 0
+                } label: {
+                    Image(systemName: "stop.fill")
+                    Text("Stop focus")
                 }
-            } label: {
-                Image(systemName: "play.fill")
-                Text("Start focus")
+            } else {
+                Button {
+                    focusTask.task = task
+                    viewMode = 1
+                    if timer.state == .idle {
+                        timer.reset()
+                        timer.start()
+                    } else if timer.state == .paused {
+                        timer.resume()
+                    }
+                } label: {
+                    Image(systemName: "play.fill")
+                    Text("Start focus")
+                }
             }
             
             Divider()
@@ -214,6 +228,10 @@ struct FocusTaskRowModifier: ViewModifier {
             }
             
             Button {
+                if let focus = focusTask.task, task == focus {
+                    focusTask.task = nil
+                }
+
                 TasksQuery.deleteTask(context: modelContext,
                                           task: task)
             } label: {
