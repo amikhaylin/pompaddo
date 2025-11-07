@@ -165,7 +165,7 @@ struct PomPadDoMacApp: App {
                     }
                     refresher.refresh.toggle()
                 } label: {
-                    Image(systemName: "clear")
+                    Image(systemName: "xmark.square")
                     Text("Clear due date")
                 }
                 .keyboardShortcut("0", modifiers: [.command])
@@ -383,7 +383,7 @@ struct PomPadDoMacApp: App {
                     Button {
                         focusTask.task = nil
                     } label: {
-                        Image(systemName: "clear")
+                        Image(systemName: "xmark.square")
                         Text("Clear task")
                     }
                 }

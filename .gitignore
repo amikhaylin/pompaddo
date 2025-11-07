@@ -38,6 +38,7 @@ TestResults*
 screenshots/mobile/*.html
 screenshots/mobile/ru/*.png
 screenshots/mobile/en-US/*.png
+screenshots/mobile/*.mp4
 
 screenshots/watch/*.html
 screenshots/watch/ru/*.png

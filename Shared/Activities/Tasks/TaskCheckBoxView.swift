@@ -12,12 +12,17 @@ import WidgetKit
 struct TaskCheckBoxView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var focusTask: FocusTask
+    @EnvironmentObject var timer: FocusTimer
     @Bindable var task: Todo
     
     var body: some View {
         Button(action: {
             if !task.completed {
                 if let focus = focusTask.task, task == focus {
+                    timer.reset()
+                    if timer.mode == .pause || timer.mode == .longbreak {
+                        timer.skip()
+                    }
                     focusTask.task = nil
                 }
                 task.complete(modelContext: modelContext)

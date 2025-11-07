@@ -47,7 +47,7 @@ struct Previewer {
             order += 1
             let status = Status(name: name.localizedString(),
                                 order: order,
-                                doCompletion: name.competion)
+                                doCompletion: name.completion)
             container.mainContext.insert(status)
             project.statuses?.append(status)
         }

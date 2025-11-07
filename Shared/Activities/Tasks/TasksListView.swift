@@ -262,7 +262,7 @@ struct TasksListView: View {
                                                             Project.self
                                                         ]),
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let previewer = Previewer(container!)
+    let _ = Previewer(container!)
     
     TasksListView(predicate: TasksQuery.predicateToday(),
                   list: .constant(.inbox),

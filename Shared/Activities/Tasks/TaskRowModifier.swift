@@ -49,7 +49,7 @@ struct TaskRowModifier: ViewModifier {
                     task.setDueDate(dueDate: nil)
                 }
             } label: {
-                Image(systemName: "clear")
+                Image(systemName: "xmark.square")
                 Text("Clear due date")
             }
             

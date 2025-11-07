@@ -47,7 +47,7 @@ struct NewProjectView: View {
                             
                             let status = Status(name: name.localizedString(),
                                                 order: order,
-                                                doCompletion: name.competion)
+                                                doCompletion: name.completion)
                             modelContext.insert(status)
                             project.statuses?.append(status)
                         }
