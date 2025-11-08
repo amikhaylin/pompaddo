@@ -17,6 +17,7 @@ struct ContentView: View {
     @StateObject private var selectedTasks = SelectedTasks()
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var selectedProject: Project?
+    @AppStorage("SectionHeight") var sectionHeight = 300.0
     
     @Query var tasks: [Todo]
     
@@ -24,7 +25,19 @@ struct ContentView: View {
         NavigationSplitView {
             VStack {
                 SectionsListView(selectedSideBarItem: $selectedSideBarItem)
-                .frame(height: 300)
+                    .frame(height: CGFloat(sectionHeight))
+                
+                Rectangle()
+                    .fill(Color.gray.opacity(0.1))
+                    .cornerRadius(5)
+                    .frame(height: 5)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { gesture in
+                                let newHeight = sectionHeight + gesture.translation.height
+                                sectionHeight = min(max(newHeight, 60.0), 300.0)
+                            }
+                    )
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedSideBarItem: $selectedSideBarItem)
@@ -147,7 +160,7 @@ struct ContentView: View {
         Project.self
     ]),
                                                             configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let previewer = Previewer(container!)
+    let _ = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSidebarItem,
                 selectedProject: $selectedProject)

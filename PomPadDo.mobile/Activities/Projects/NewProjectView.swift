@@ -28,12 +28,13 @@ struct NewProjectView: View {
                     .task {
                         self.focusField = .projectName
                     }
+                    .accessibilityIdentifier("ProjectNameField")
                 
                 Toggle(isOn: $createSimpleList) {
                     Text("Create simple list")
                 }
                 .toggleStyle(.switch)
-                .accessibility(identifier: "CreateSimpleList")
+                .accessibilityIdentifier("CreateSimpleList")
             }
             .padding()
             .toolbar {
@@ -60,7 +61,7 @@ struct NewProjectView: View {
                                 
                                 let status = Status(name: name.localizedString(),
                                                     order: order,
-                                                    doCompletion: name.competion)
+                                                    doCompletion: name.completion)
                                 modelContext.insert(status)
                                 project.statuses?.append(status)
                             }

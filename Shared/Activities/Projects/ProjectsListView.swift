@@ -131,6 +131,7 @@ struct ProjectsListView: View {
                                     Text("Delete project")
                                 }
                             }
+                            .listRowSeparator(.hidden)
                         }
                         .onMove(perform: { from, toInt in
                             var projectsList = projects.filter({ $0.group == nil })
@@ -193,6 +194,7 @@ struct ProjectsListView: View {
                                             Text("Delete project")
                                         }
                                     }
+                                    .listRowSeparator(.hidden)
                                 }
                                 .onMove(perform: { from, toInt in
                                     var projectsList = projects.filter({ $0.group == group })
@@ -233,6 +235,7 @@ struct ProjectsListView: View {
                             }
                             return true
                         }
+                        .listRowSeparator(.hidden)
                     }
                     .onMove(perform: { from, toInt in
                         var groupsList = groups.sorted(by: { $0.order < $1.order })

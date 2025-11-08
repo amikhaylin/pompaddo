@@ -62,6 +62,7 @@ struct ProjectView: View {
                 } label: {
                     Label("Add task to current list", systemImage: "plus")
                 }
+                .accessibilityIdentifier("AddTaskToCurrentListButton")
                 .help("Add task to current list ⌘⌥I")
                 .keyboardShortcut("i", modifiers: [.command, .option])
                 #if os(iOS)

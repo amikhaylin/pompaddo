@@ -77,7 +77,7 @@ struct FocusTimerView: View {
                                 Button {
                                     focusTask.task = nil
                                 } label: {
-                                    Image(systemName: "clear")
+                                    Image(systemName: "xmark.square")
                                 }
                             }
                         }

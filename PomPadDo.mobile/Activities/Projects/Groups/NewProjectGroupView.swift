@@ -27,6 +27,7 @@ struct NewProjectGroupView: View {
                     .task {
                         self.focusField = .groupName
                     }
+                    .accessibilityIdentifier("GroupNameField")
             }
             .padding()
             .toolbar {

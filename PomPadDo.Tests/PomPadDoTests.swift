@@ -227,7 +227,7 @@ final class PomPadDoTests: XCTestCase {
             order += 1
             let status = Status(name: name.localizedString(),
                                 order: order,
-                                doCompletion: name.competion)
+                                doCompletion: name.completion)
             dataContainer.mainContext.insert(status)
             project.statuses?.append(status)
         }

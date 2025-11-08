@@ -220,7 +220,7 @@ struct EditTaskView: View {
                         Button {
                             task.hasEstimate = false
                         } label: {
-                            Image(systemName: "clear")
+                            Image(systemName: "xmark.square")
                         }
                     }
                     

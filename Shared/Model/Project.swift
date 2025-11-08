@@ -13,7 +13,7 @@ enum DefaultProjectStatuses: String, CaseIterable {
     case progress = "In progress"
     case completed = "Completed"
     
-    var competion: Bool {
+    var completion: Bool {
         switch self {
         case .completed:
             return true

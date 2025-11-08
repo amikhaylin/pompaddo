@@ -17,6 +17,7 @@ struct NewProjectView: View {
     var body: some View {
         VStack {
             TextField("Project name", text: $projectName)
+                .accessibilityIdentifier("ProjectNameField")
             
             Toggle(isOn: $createSimpleList) {
                 Text("Create simple list")
@@ -46,13 +47,14 @@ struct NewProjectView: View {
                             
                             let status = Status(name: name.localizedString(),
                                                 order: order,
-                                                doCompletion: name.competion)
+                                                doCompletion: name.completion)
                             modelContext.insert(status)
                             project.statuses?.append(status)
                         }
                     }
                 }
                 .keyboardShortcut(.defaultAction)
+                .accessibilityIdentifier("SaveProject")
             }
         }
         .frame(width: 400, height: 100)

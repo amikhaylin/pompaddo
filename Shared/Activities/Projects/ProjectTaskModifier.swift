@@ -50,7 +50,7 @@ struct ProjectTaskModifier: ViewModifier {
                         task.setDueDate(dueDate: nil)
                     }
                 } label: {
-                    Image(systemName: "clear")
+                    Image(systemName: "xmark.square")
                     Text("Clear due date")
                 }
                 
@@ -291,27 +291,29 @@ struct ProjectTaskModifier: ViewModifier {
                     Text("Move task to project")
                 }
                 
-                Menu {
-                    ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
-                        Button {
-                            if selectedTasksSet.count > 0 {
-                                for task in selectedTasksSet {
+                if project.getStatuses().count > 0 {
+                    Menu {
+                        ForEach(project.getStatuses().sorted(by: { $0.order < $1.order })) { status in
+                            Button {
+                                if selectedTasksSet.count > 0 {
+                                    for task in selectedTasksSet {
+                                        task.moveToStatus(status: status,
+                                                          project: project,
+                                                          context: modelContext)
+                                    }
+                                } else {
                                     task.moveToStatus(status: status,
                                                       project: project,
                                                       context: modelContext)
                                 }
-                            } else {
-                                task.moveToStatus(status: status,
-                                                  project: project,
-                                                  context: modelContext)
+                            } label: {
+                                Text(status.name)
                             }
-                        } label: {
-                            Text(status.name)
+                            .accessibility(identifier: "\(status.name)ContextMenuButton")
                         }
-                        .accessibility(identifier: "\(status.name)ContextMenuButton")
+                    } label: {
+                        Text("Move to status")
                     }
-                } label: {
-                    Text("Move to status")
                 }
                 
                 Divider()

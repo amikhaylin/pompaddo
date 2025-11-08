@@ -21,6 +21,7 @@ struct ContentView: View {
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var newTaskIsShowing: Bool
     @Binding var selectedProject: Project?
+    @AppStorage("SectionHeight") var sectionHeight = 170.0
     
     @Query var tasks: [Todo]
     
@@ -28,7 +29,20 @@ struct ContentView: View {
         NavigationSplitView {
             VStack {
                 SectionsListView(selectedSideBarItem: $selectedSideBarItem)
-                .frame(height: 170)
+                    .frame(height: CGFloat(sectionHeight))
+                
+                Rectangle()
+                    .fill(Color.gray.opacity(0.1))
+                    .cornerRadius(5)
+                    .frame(height: 5)
+                    .cursor(.resizeUpDown)
+                    .gesture(
+                        DragGesture()
+                            .onChanged { gesture in
+                                let newHeight = sectionHeight + gesture.translation.height
+                                sectionHeight = min(max(newHeight, 30.0), 170.0)
+                            }
+                    )
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedSideBarItem: $selectedSideBarItem)
@@ -42,6 +56,7 @@ struct ContentView: View {
                             .foregroundStyle(Color.orange)
                     }
                     .help("Add to Inbox ⌘I")
+                    .accessibilityIdentifier("AddTaskToInboxButton")
                 }
             }
             .sheet(isPresented: $newTaskIsShowing) {
@@ -172,7 +187,7 @@ struct ContentView: View {
                                                         ]),
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let previewer = Previewer(container!)
+    let _ = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSideBarItem,
                 newTaskIsShowing: $newTaskIsShowing,

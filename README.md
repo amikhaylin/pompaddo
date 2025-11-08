@@ -7,8 +7,8 @@ made to myself by myself
 ![Swift](https://img.shields.io/badge/swift-5.10-orange.svg?style=for-the-badge)
 ![SwiftUI](https://img.shields.io/badge/use-SwiftUI-orange.svg?style=for-the-badge)
 ![SwiftData](https://img.shields.io/badge/use-SwiftData-orange?style=for-the-badge)
-![Xcode](https://img.shields.io/badge/Xcode-15.3-blue.svg?style=for-the-badge)
-![macOS](https://img.shields.io/badge/macOS-14.0-blue.svg?style=for-the-badge)
+![Xcode](https://img.shields.io/badge/Xcode-26.0-blue.svg?style=for-the-badge)
+![macOS](https://img.shields.io/badge/macOS-26.0-blue.svg?style=for-the-badge)
 [![Releases](https://img.shields.io/github/release/amikhaylin/pompaddo.svg?style=for-the-badge)](https://github.com/amikhaylin/pompaddo/releases)
 
 [![](https://toolbox.marketingtools.apple.com/api/assets/featured-content/apps/badges/badge-1/en-us.svg)](https://apps.apple.com/app/id6742197499)
@@ -50,7 +50,7 @@ Students and anyone craving order in their workflow.
 
 <img src="page-pix/mac-today.png"/><br>
 <img src="page-pix/mac-project.png"/><br>
-<img src="page-pix/mac-timer.png" height="320" /><br>
+<img src="page-pix/mac-timer.png" /><br>
 
 ## iOS / iPadOS app
 <img src="page-pix/iphone-today.png" height="620" align="left" />

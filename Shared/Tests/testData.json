@@ -1,0 +1,180 @@
+[
+    {
+        "locale": "en",
+        "today": "Today",
+        "back": "Back",
+        "addGroup": "Add project to group",
+        "moveToStatus": "Move to status",
+        "hideSidebar": "Hide Sidebar",
+        "showSidebar": "Show Sidebar",
+        "taskToFocus": "Create interface design",
+        "scroll": "Vertical scroll bar, 1 page",
+        "inboxTask": "Buy coffee",
+        "groups": [
+            {
+                "name": "🦝 Personal"
+            },
+            {
+                "name": "🏢 Work"
+            }
+        ],
+        "projects": [
+            {
+                "name": "🏖️ Vacation Planning",
+                "isSimpleList": true,
+                "isBoard": false,
+                "group": "🦝 Personal",
+                "tasks": [
+                    {
+                        "name": "Book airline tickets",
+                        "dueToday": true
+                    },
+                    {
+                        "name": "Find and reserve a hotel",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Create a list of places to visit",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Arrange travel insurance",
+                        "dueToday": false
+                    }
+                ]
+            },
+            {
+                "name": "📱 App Development",
+                "isSimpleList": false,
+                "isBoard": true,
+                "group": "🏢 Work",
+                "tasks": [
+                    {
+                        "name": "Define functional requirements",
+                        "status": "Completed",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Create interface design",
+                        "status": "In progress",
+                        "dueToday": true
+                    },
+                    {
+                        "name": "Test the beta version",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Launch the app in the App Store",
+                        "dueToday": false
+                    }
+                ]
+            },
+            {
+                "name": "Habits",
+                "isSimpleList": true,
+                "isBoard": false,
+                "tasks": [
+                    {
+                        "name": "Workout",
+                        "dueToday": true
+                    }
+                ]
+            },
+            {
+                "name": "📖Read, View",
+                "isSimpleList": true,
+                "isBoard": false,
+                "tasks": []
+            }
+        ]
+    },
+    {
+        "locale": "ru",
+        "today": "Сегодня",
+        "back": "Назад",
+        "addGroup": "Добавить проект в группу",
+        "moveToStatus": "Переместить в состояние",
+        "hideSidebar": "Скрыть боковое меню",
+        "showSidebar": "Показать боковое меню",
+        "taskToFocus": "Создать дизайн интерфейса",
+        "scroll": "Вертикальная полоса прокрутки, 1 страница",
+        "inboxTask": "Купить кофе",
+        "groups": [
+            {
+                "name": "🦝 Личное"
+            },
+            {
+                "name": "🏢 Работа"
+            }
+        ],
+        "projects": [
+            {
+                "name": "🏖️ Планирование отпуска",
+                "isSimpleList": true,
+                "isBoard": false,
+                "group": "🦝 Личное",
+                "tasks": [
+                    {
+                        "name": "Забронировать авиабилеты",
+                        "dueToday": true
+                    },
+                    {
+                        "name": "Найти и забронировать отель",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Составить список мест для посещения",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Оформить туристическую страховку",
+                        "dueToday": false
+                    }
+                ]
+            },
+            {
+                "name": "📱 Разработка приложения",
+                "isSimpleList": false,
+                "isBoard": true,
+                "group": "🏢 Работа",
+                "tasks": [
+                    {
+                        "name": "Определить функциональные требования",
+                        "status": "Завершенные",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Создать дизайн интерфейса",
+                        "status": "В процессе",
+                        "dueToday": true
+                    },
+                    {
+                        "name": "Протестировать бета-версию",
+                        "dueToday": false
+                    },
+                    {
+                        "name": "Запустить приложение в App Store",
+                        "dueToday": false
+                    }
+                ]
+            },
+            {
+                "name": "Привычки",
+                "isSimpleList": true,
+                "isBoard": false,
+                "tasks": [
+                    {
+                        "name": "Тренировка",
+                        "dueToday": true
+                    }
+                ]
+            },
+            {
+                "name": "📖Прочитать, посмотреть",
+                "isSimpleList": true,
+                "isBoard": false,
+                "tasks": []
+            }
+        ]
+    }
+]

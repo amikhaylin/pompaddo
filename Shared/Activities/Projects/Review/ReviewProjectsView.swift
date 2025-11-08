@@ -27,6 +27,7 @@ struct ReviewProjectsView: View {
                             Text(project.name)
                                 .badge(project.getTasks().filter({ $0.completed == false }).count)
                         }
+                        .listRowSeparator(.hidden)
                     }
                 } else {
                     VStack {

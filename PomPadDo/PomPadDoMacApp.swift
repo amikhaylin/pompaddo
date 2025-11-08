@@ -46,8 +46,14 @@ struct PomPadDoMacApp: App {
         } catch {
             fatalError("Could not find/create Example folder in Application Support")
         }
-        print("\(fileURL.absoluteString)")
-        let modelConfiguration = ModelConfiguration(schema: schema, url: fileURL)
+        
+        let modelConfiguration: ModelConfiguration!
+        if ProcessInfo.processInfo.environment["IS_TESTING"] == "YES" {
+            modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
+        } else {
+            modelConfiguration = ModelConfiguration(schema: schema, url: fileURL)
+            print("\(fileURL.absoluteString)")
+        }
         #else
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         #endif
@@ -159,7 +165,7 @@ struct PomPadDoMacApp: App {
                     }
                     refresher.refresh.toggle()
                 } label: {
-                    Image(systemName: "clear")
+                    Image(systemName: "xmark.square")
                     Text("Clear due date")
                 }
                 .keyboardShortcut("0", modifiers: [.command])
@@ -377,7 +383,7 @@ struct PomPadDoMacApp: App {
                     Button {
                         focusTask.task = nil
                     } label: {
-                        Image(systemName: "clear")
+                        Image(systemName: "xmark.square")
                         Text("Clear task")
                     }
                 }

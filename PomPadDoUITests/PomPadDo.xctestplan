@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "B3A3ABA5-97D4-4BE3-9A82-AEC43B2FD21B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "environmentVariableEntries" : [
+      {
+        "key" : "IDEPreferLogStreaming",
+        "value" : "YES"
+      }
+    ],
+    "language" : "en",
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:PomPadDo.xcodeproj",
+      "identifier" : "4D95FE212B7B6BF300C8918D",
+      "name" : "PomPadDo"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PomPadDo.xcodeproj",
+        "identifier" : "4D95FE342B7B6BF600C8918D",
+        "name" : "PomPadDoTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:PomPadDo.xcodeproj",
+        "identifier" : "4DF1BAB32EA8EDFE00B8F211",
+        "name" : "PomPadDoUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -28,9 +28,11 @@ struct NewTaskView: View {
                     modelContext.insert(task)
                     presentationMode.wrappedValue.dismiss()
                 }
+                .accessibilityIdentifier("TaskName")
             
             Toggle("Due today", isOn: $dueToday)
                 .toggleStyle(.switch)
+                .accessibilityIdentifier("DueToday")
         }
     }
 }

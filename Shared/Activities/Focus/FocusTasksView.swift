@@ -31,17 +31,31 @@ struct FocusTasksView: View {
                                 .tag(maintask)
                                 .listRowSeparator(.hidden)
                             
-                            Button {
-                                focusTask.task = maintask
-                                viewMode = 1
-                                if timer.state == .idle {
+                            if let focus = focusTask.task, focus == maintask {
+                                Button {
                                     timer.reset()
-                                    timer.start()
+                                    if timer.mode == .pause || timer.mode == .longbreak {
+                                        timer.skip()
+                                    }
+                                    focusTask.task = nil
+                                } label: {
+                                    Image(systemName: "stop.fill")
                                 }
-                            } label: {
-                                Image(systemName: "play.fill")
+                            } else {
+                                Button {
+                                    focusTask.task = maintask
+                                    viewMode = 1
+                                    if timer.state == .idle {
+                                        timer.reset()
+                                        timer.start()
+                                    } else if timer.state == .paused {
+                                        timer.resume()
+                                    }
+                                } label: {
+                                    Image(systemName: "play.fill")
+                                }
+                                .accessibility(identifier: "\(maintask.name)PlayButton")
                             }
-                            .accessibility(identifier: "\(maintask.name)PlayButton")
                         }
                     }
                 } else {
@@ -51,17 +65,31 @@ struct FocusTasksView: View {
                             .tag(task)
                             .listRowSeparator(.hidden)
                         
-                        Button {
-                            focusTask.task = task
-                            viewMode = 1
-                            if timer.state == .idle {
+                        if let focus = focusTask.task, focus == task {
+                            Button {
                                 timer.reset()
-                                timer.start()
+                                if timer.mode == .pause || timer.mode == .longbreak {
+                                    timer.skip()
+                                }
+                                focusTask.task = nil
+                            } label: {
+                                Image(systemName: "stop.fill")
                             }
-                        } label: {
-                            Image(systemName: "play.fill")
+                        } else {
+                            Button {
+                                focusTask.task = task
+                                viewMode = 1
+                                if timer.state == .idle {
+                                    timer.reset()
+                                    timer.start()
+                                } else if timer.state == .paused {
+                                    timer.resume()
+                                }
+                            } label: {
+                                Image(systemName: "play.fill")
+                            }
+                            .accessibility(identifier: "\(task.name)PlayButton")
                         }
-                        .accessibility(identifier: "\(task.name)PlayButton")
                     }
                 }
             }
