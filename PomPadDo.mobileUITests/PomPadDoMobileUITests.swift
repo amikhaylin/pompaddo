@@ -24,12 +24,11 @@ final class PomPadDoMobileUITests: XCTestCase {
             setupSnapshot(app)
         }
 
-        app.launchEnvironment = ["UITEST_DISABLE_ANIMATIONS" : "YES"]
+        app.launchEnvironment = ["UITEST_DISABLE_ANIMATIONS": "YES"]
         
         app.launch()
 
-        addUIInterruptionMonitor(withDescription: "Tracking Usage Permission Alert") {
-            (alert) -> Bool in
+        addUIInterruptionMonitor(withDescription: "Tracking Usage Permission Alert") { (alert) -> Bool in
             print("Alert appeared: \(alert)")
             if alert.buttons["Allow"].exists {
                 alert.buttons["Allow"].tap()
@@ -39,8 +38,7 @@ final class PomPadDoMobileUITests: XCTestCase {
             return false
         }
         
-        addUIInterruptionMonitor(withDescription: "App Store Review Alert") {
-            (alert) -> Bool in
+        addUIInterruptionMonitor(withDescription: "App Store Review Alert") { (alert) -> Bool in
             print("Alert appeared: \(alert)")
             if alert.buttons["Not Now"].exists {
                 alert.buttons["Not Now"].tap()
@@ -156,7 +154,7 @@ final class PomPadDoMobileUITests: XCTestCase {
                 }
             }
             
-            //Switch to board view
+            // Switch to board view
             if project.isBoard {
                 app.navigationBars[project.name]
                     .segmentedControls["ProjectViewMode"].tap()

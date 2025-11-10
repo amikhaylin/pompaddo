@@ -25,12 +25,6 @@ struct MainView: View {
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
-    @AppStorage("firstLaunchDate") var firstLaunchDate: Date?
-    @AppStorage("lastVersionPromptedForReview") var lastVersionPromptedForReview: String?
-    
-    var currentVersion: String {
-        Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""
-    }
     
     @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -132,16 +126,10 @@ struct MainView: View {
                 }
             }
             .onAppear {
-                if ProcessInfo.processInfo.environment["UITEST_DISABLE_ANIMATIONS"] == "YES" {
-                    UIView.setAnimationsEnabled(false)
-                }
-                
                 timer.setDurations(workInSeconds: timerWorkSession,
                                    breakInSeconds: timerBreakSession,
                                    longBreakInSeconds: timerLongBreakSession,
                                    workSessionsCount: Int(timerWorkSessionsCount))
-                
-                checkForReview()
             }
             .onChange(of: timerWorkSession, { _, _ in
                 timer.setDurations(workInSeconds: timerWorkSession,
@@ -192,32 +180,11 @@ struct MainView: View {
                     return
                 }
             }
-            .onChange(of: scenePhase) { oldPhase, newPhase in
+            .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .background && timer.state == .running {
                     timer.setNotification()
                 }
             }
-        }
-    }
-    
-    private func checkForReview() {
-        guard let launchDate = firstLaunchDate else {
-            firstLaunchDate = Date()
-            return
-        }
-        
-        if lastVersionPromptedForReview == currentVersion {
-            firstLaunchDate = Date()
-            return
-        }
-        
-        guard (NSInteger(Date().timeIntervalSince(launchDate as Date)) / 86400) % 86400 >= 10,
-              lastVersionPromptedForReview != currentVersion else { return }
-        
-        Task { @MainActor in
-            try? await Task.sleep(for: .seconds(2))
-            requestReview()
-            lastVersionPromptedForReview = currentVersion
         }
     }
 }

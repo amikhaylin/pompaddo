@@ -22,6 +22,7 @@ struct ContentView: View {
     @Binding var newTaskIsShowing: Bool
     @Binding var selectedProject: Project?
     @AppStorage("SectionHeight") var sectionHeight = 170.0
+    @State private var currentSectionHeight: CGFloat = 300.0
     
     @Query var tasks: [Todo]
     
@@ -39,9 +40,12 @@ struct ContentView: View {
                     .gesture(
                         DragGesture()
                             .onChanged { gesture in
-                                let newHeight = sectionHeight + gesture.translation.height
-                                sectionHeight = min(max(newHeight, 30.0), 170.0)
+                                let newHeight = currentSectionHeight + gesture.translation.height
+                                currentSectionHeight = min(max(newHeight, 60.0), 300.0)
                             }
+                            .onEnded({ _ in
+                                sectionHeight = currentSectionHeight
+                            })
                     )
                 
                 ProjectsListView(selectedProject: $selectedProject,
@@ -163,6 +167,9 @@ struct ContentView: View {
                 }
             }
             .inspectorColumnWidth(min: 300, ideal: 300, max: 600)
+        }
+        .onAppear {
+            currentSectionHeight = CGFloat(sectionHeight)
         }
     }
 }

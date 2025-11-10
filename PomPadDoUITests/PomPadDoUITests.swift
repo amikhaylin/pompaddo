@@ -112,7 +112,7 @@ final class PomPadDoUITests: XCTestCase {
                 }
             }
             
-            //Switch to board view
+            // Switch to board view
             if project.isBoard {
                 app/*@START_MENU_TOKEN@*/.radioButtons["rectangle.split.3x1"]/*[[".radioGroups[\"View Mode\"].radioButtons",".radioGroups",".radioButtons[\"Column View\"]",".radioButtons[\"rectangle.split.3x1\"]"],[[[-1,3],[-1,2],[-1,1,1],[-1,0]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.firstMatch.click()
                 

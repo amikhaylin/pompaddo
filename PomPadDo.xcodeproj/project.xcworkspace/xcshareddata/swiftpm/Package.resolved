@@ -1,0 +1,15 @@
+{
+  "originHash" : "1dd746256f4cfddc1042ecbc5880b9d0ff5dc0fa2453fa3fc1686cec8bba6fc1",
+  "pins" : [
+    {
+      "identity" : "swiftdata-transferrable",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Whiffer/swiftdata-transferrable",
+      "state" : {
+        "revision" : "6aff9acc43b03e513627d3bd6a9748fb9c15f295",
+        "version" : "2.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

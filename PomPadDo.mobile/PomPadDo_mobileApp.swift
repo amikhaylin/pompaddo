@@ -39,4 +39,10 @@ struct PomPadDoiOSApp: App {
             InspectorCommands()
         }
     }
+    
+    init() {
+        if ProcessInfo.processInfo.environment["UITEST_DISABLE_ANIMATIONS"] == "YES" {
+            UIView.setAnimationsEnabled(false)
+        }
+    }
 }
