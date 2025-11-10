@@ -7,7 +7,6 @@
 
 import SwiftUI
 import SwiftData
-import StoreKit
 
 import SwiftDataTransferrable
 
@@ -20,7 +19,6 @@ enum MainViewTabs {
 struct MainView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.requestReview) var requestReview
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0

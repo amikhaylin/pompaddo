@@ -27,12 +27,18 @@ struct PomPadDoiOSApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+    @StateObject private var reviewManager = ReviewManager()
 
     var body: some Scene {
         WindowGroup {
             MainView()
                 .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
                                         modelContext: sharedModelContainer.mainContext)
+                .environmentObject(reviewManager)
+                .onAppear {
+                    reviewManager.appLaunched()
+                }
         }
         .modelContainer(sharedModelContainer)
         .commands {
