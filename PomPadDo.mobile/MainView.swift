@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import StoreKit
 
 import SwiftDataTransferrable
 
@@ -23,6 +24,9 @@ struct MainView: View {
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
+    
+    @AppStorage("appVersion") private var savedVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+    @AppStorage("firstLaunchDate") private var firstLaunchDate: Date = Date()
     
     @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -128,6 +132,8 @@ struct MainView: View {
                                    breakInSeconds: timerBreakSession,
                                    longBreakInSeconds: timerLongBreakSession,
                                    workSessionsCount: Int(timerWorkSessionsCount))
+                
+                checkForReview()
             }
             .onChange(of: timerWorkSession, { _, _ in
                 timer.setDurations(workInSeconds: timerWorkSession,
@@ -182,6 +188,34 @@ struct MainView: View {
                 if newPhase == .background && timer.state == .running {
                     timer.setNotification()
                 }
+            }
+        }
+    }
+    
+    private func checkForReview() {
+        let daysBeforeRequest = 7
+        let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        
+        print("currentVersion: \(currentVersion)")
+        print("savedVersion: \(savedVersion)")
+
+        if savedVersion != currentVersion {
+            // Новая версия — сохраняем дату первого запуска
+            savedVersion = currentVersion
+            firstLaunchDate = Date()
+        }
+
+        let daysSinceFirstLaunch = Calendar.current.dateComponents([.day], from: firstLaunchDate, to: Date()).day ?? 0
+        
+        print("daysSinceFirstLaunch: \(daysSinceFirstLaunch)")
+        print("firstLaunchDate: \(firstLaunchDate)")
+        
+        if daysSinceFirstLaunch >= daysBeforeRequest {
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                print("Request review")
+                AppStore.requestReview(in: scene)
+                // Чтобы не запрашивать повторно:
+                firstLaunchDate = Date.distantFuture
             }
         }
     }

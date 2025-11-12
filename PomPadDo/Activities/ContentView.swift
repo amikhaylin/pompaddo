@@ -22,7 +22,7 @@ struct ContentView: View {
     @Binding var newTaskIsShowing: Bool
     @Binding var selectedProject: Project?
     @AppStorage("SectionHeight") var sectionHeight = 170.0
-    @State private var currentSectionHeight: CGFloat = 300.0
+    @State private var currentSectionHeight: CGFloat = 170.0
     
     @Query var tasks: [Todo]
     
@@ -30,7 +30,7 @@ struct ContentView: View {
         NavigationSplitView {
             VStack {
                 SectionsListView(selectedSideBarItem: $selectedSideBarItem)
-                    .frame(height: CGFloat(sectionHeight))
+                    .frame(height: currentSectionHeight)
                 
                 Rectangle()
                     .fill(Color.gray.opacity(0.1))
@@ -41,7 +41,7 @@ struct ContentView: View {
                         DragGesture()
                             .onChanged { gesture in
                                 let newHeight = currentSectionHeight + gesture.translation.height
-                                currentSectionHeight = min(max(newHeight, 60.0), 300.0)
+                                currentSectionHeight = min(max(newHeight, 30.0), 170.0)
                             }
                             .onEnded({ _ in
                                 sectionHeight = currentSectionHeight
