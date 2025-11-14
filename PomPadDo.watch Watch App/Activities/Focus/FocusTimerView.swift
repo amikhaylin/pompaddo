@@ -65,7 +65,7 @@ struct FocusTimerView: View {
                     .accessibility(identifier: "PauseTimerButton")
                 }
                 
-                //task
+                // task
                 if let task = focusTask.task {
                     NavigationLink {
                         TaskDetailsView(task: task, list: $list)

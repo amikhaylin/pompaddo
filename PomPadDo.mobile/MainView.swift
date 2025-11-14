@@ -20,17 +20,13 @@ enum MainViewTabs {
 struct MainView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.requestReview) var requestReview
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
     @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
     @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
-    @AppStorage("firstLaunchDate") var firstLaunchDate: Date?
-    @AppStorage("lastVersionPromptedForReview") var lastVersionPromptedForReview: String?
     
-    var currentVersion: String {
-        Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""
-    }
+    @AppStorage("appVersion") private var savedVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+    @AppStorage("firstLaunchDate") private var firstLaunchDate: Date = Date()
     
     @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -132,10 +128,6 @@ struct MainView: View {
                 }
             }
             .onAppear {
-                if ProcessInfo.processInfo.environment["UITEST_DISABLE_ANIMATIONS"] == "YES" {
-                    UIView.setAnimationsEnabled(false)
-                }
-                
                 timer.setDurations(workInSeconds: timerWorkSession,
                                    breakInSeconds: timerBreakSession,
                                    longBreakInSeconds: timerLongBreakSession,
@@ -192,7 +184,7 @@ struct MainView: View {
                     return
                 }
             }
-            .onChange(of: scenePhase) { oldPhase, newPhase in
+            .onChange(of: scenePhase) { _, newPhase in
                 if newPhase == .background && timer.state == .running {
                     timer.setNotification()
                 }
@@ -201,23 +193,30 @@ struct MainView: View {
     }
     
     private func checkForReview() {
-        guard let launchDate = firstLaunchDate else {
+        let daysBeforeRequest = 7
+        let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        
+        print("currentVersion: \(currentVersion)")
+        print("savedVersion: \(savedVersion)")
+
+        if savedVersion != currentVersion {
+            // Новая версия — сохраняем дату первого запуска
+            savedVersion = currentVersion
             firstLaunchDate = Date()
-            return
         }
+
+        let daysSinceFirstLaunch = Calendar.current.dateComponents([.day], from: firstLaunchDate, to: Date()).day ?? 0
         
-        if lastVersionPromptedForReview == currentVersion {
-            firstLaunchDate = Date()
-            return
-        }
+        print("daysSinceFirstLaunch: \(daysSinceFirstLaunch)")
+        print("firstLaunchDate: \(firstLaunchDate)")
         
-        guard (NSInteger(Date().timeIntervalSince(launchDate as Date)) / 86400) % 86400 >= 10,
-              lastVersionPromptedForReview != currentVersion else { return }
-        
-        Task { @MainActor in
-            try? await Task.sleep(for: .seconds(2))
-            requestReview()
-            lastVersionPromptedForReview = currentVersion
+        if daysSinceFirstLaunch >= daysBeforeRequest {
+            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                print("Request review")
+                AppStore.requestReview(in: scene)
+                // Чтобы не запрашивать повторно:
+                firstLaunchDate = Date.distantFuture
+            }
         }
     }
 }
