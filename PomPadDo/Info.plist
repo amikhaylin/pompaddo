@@ -15,8 +15,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
-	<string>Adding events to your calendars</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

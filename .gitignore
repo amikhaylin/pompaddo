@@ -2,13 +2,17 @@
 xcuserdata/
 
 ## Build generated
-/DerivedData/
-/.build/
+DerivedData/
 /build/
 *.xcarchive
 *.ipa
 *.dSYM
 .DS_Store
+.swiftpm/
+*.xccovreport
+*.xccovarchive
+*.profdata
+*.doccarchive
 
 ## Obj-C/Swift specific
 *.hmap
@@ -25,8 +29,8 @@ Package.pins
 .vscode/
 .xpolyglot_localizations/
 
-/TestResults*/
-/*.xcresult
+TestResults*/
+*.xcresult
 
 # Screenshots
 /screenshots/**/*.html
