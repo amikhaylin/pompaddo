@@ -89,6 +89,7 @@ Students and anyone craving order in their workflow.
 ##### AI-based localizations
 - Arabic
 - Bulgarian 
+- Catalan
 - Chinese
 - Croatian
 - Czech
@@ -107,6 +108,7 @@ Students and anyone craving order in their workflow.
 - Latvian
 - Lithuanian
 - Malay
+- Norwegian
 - Persian
 - Polish
 - Portuguese

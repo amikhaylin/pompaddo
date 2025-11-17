@@ -1,15 +1,15 @@
-
 /* Class = "NSTextFieldCell"; title = "PomPadDoExt"; ObjectID = "2Ec-kd-q2K"; */
 "2Ec-kd-q2K.title" = "PomPadDoExt";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "GpX-TG-Jp9"; */
 "GpX-TG-Jp9.title" = "OK";
 
-/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "SL8-VU-Gud"; */
-"SL8-VU-Gud.title" = "Cancel";
-
 /* Class = "NSTextFieldCell"; placeholderString = "Link"; ObjectID = "hor-ce-4Uo"; */
 "hor-ce-4Uo.placeholderString" = "Link";
 
 /* Class = "NSTextFieldCell"; placeholderString = "Name"; ObjectID = "lCO-1s-HBi"; */
 "lCO-1s-HBi.placeholderString" = "Name";
+
+/* Class = "NSButtonCell"; title = "Cancel"; ObjectID = "SL8-VU-Gud"; */
+"SL8-VU-Gud.title" = "Cancel";
+
