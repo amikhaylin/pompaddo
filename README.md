@@ -63,7 +63,9 @@ Students and anyone craving order in their workflow.
 
 <img src="page-pix/watch-today.png" height="200" align="left" />
 <img src="page-pix/watch-section.png" height="200" align="left" />
-<img src="page-pix/watch-menu.png" height="200" />
+<img src="page-pix/watch-menu.png" height="200" align="left"/>
+<img src="page-pix/watch-timer.png" height="200" />
+
 
 
 ### Roadmap
@@ -80,6 +82,10 @@ Students and anyone craving order in their workflow.
 - [x] Localization
 - [x] Safari extension
 - [x] Add event to Calendar from task
+- [ ] Trash view
+- [ ] Tags
+- [ ] Shortcuts
+- [ ] Live activities
 - [ ] Location based contexts
 
 #### Languages Supported

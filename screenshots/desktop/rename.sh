@@ -11,6 +11,9 @@ for file in *.png; do
     mv -v "$file" "$newname"
 done
 
+# Resize
+sips --resampleHeightWidth 1800 2880 *.png  
+
 cd ../ru
 
 for file in *.png; do
@@ -21,3 +24,6 @@ for file in *.png; do
     # Переименовываем файл
     mv -v "$file" "$newname"
 done
+
+# Resize
+sips --resampleHeightWidth 1800 2880 *.png  

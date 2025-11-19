@@ -12,3 +12,4 @@ cp -f ../screenshots/desktop/en-US/"Apple Macbook Pro 13 Space Gray-01TodayScree
 cp -f ../screenshots/watch/en-US/"Apple Watch Series 11 (46mm)-02SectionsPanel.png" watch-section.png
 cp -f ../screenshots/watch/en-US/"Apple Watch Series 11 (46mm)-01TodayScreen.png" watch-today.png
 cp -f ../screenshots/watch/en-US/"Apple Watch Series 11 (46mm)-03TaskDetails.png" watch-menu.png
+cp -f ../screenshots/watch/en-US/"Apple Watch Series 11 (46mm)-04FocusTimer.png" watch-timer.png
