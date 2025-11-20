@@ -26,6 +26,8 @@ struct TasksQuery {
                 return date < tomorrow
             } else if let completeDate = task.completionDate {
                 return (completeDate >= today && completeDate < tomorrow)
+            } else if let deadlineDate = task.deadline {
+                return deadlineDate < tomorrow
             } else {
                 return false
             }
@@ -37,30 +39,42 @@ struct TasksQuery {
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
                 return (date < tomorrow && !task.completed)
+            } else if let deadlineDate = task.deadline {
+                return (deadlineDate < tomorrow && !task.completed)
             } else {
                 return false
             }
         }
     }
-    
-    static func predicateTodayAssign() -> Predicate<Todo> {
-        let today = Calendar.current.startOfDay(for: Date())
-        let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
-        return #Predicate<Todo> { task in
-            if let date = task.dueDate {
-                return date < tomorrow
-            } else {
-                return false
-            }
-        }
-    }
-    
+        
     static func predicateTomorrow() -> Predicate<Todo> {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
                 return date >= tomorrow && date < future
+            } else if let deadlineDate = task.deadline {
+                return deadlineDate >= tomorrow && deadlineDate < future
+            } else {
+                return false
+            }
+        }
+    }
+    
+    static func predicateDeadlines() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            if task.deadline != nil {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
+    static func predicateDeadlinesActive() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            if task.deadline != nil {
+                return !task.completed
             } else {
                 return false
             }
@@ -73,6 +87,8 @@ struct TasksQuery {
         return #Predicate<Todo> { task in
             if let date = task.dueDate {
                 return date >= tomorrow && date < future && !task.completed
+            } else if let deadlineDate = task.deadline {
+                return deadlineDate >= tomorrow && deadlineDate < future && !task.completed
             } else {
                 return false
             }
@@ -155,12 +171,12 @@ struct TasksQuery {
     static func sortingWithCompleted(_ first: Todo, _ second: Todo) -> Bool {
         if first.completed == false && second.completed == false {
             if first.dueDate == nil && second.dueDate == nil {
-                return (first.priority > second.priority)
+                return sortingDeadlines(first, second)
             }
             if first.dueDate == nil && second.dueDate != nil { return false }
             if first.dueDate != nil && second.dueDate == nil { return true }
             if first.dueDate! == second.dueDate! {
-                return (first.priority > second.priority)
+                return sortingDeadlines(first, second)
             }
             return (first.dueDate! < second.dueDate!)
         } else {
@@ -173,6 +189,18 @@ struct TasksQuery {
             
             return (first.completed && second.completed)
         }
+    }
+    
+    static func sortingDeadlines(_ first: Todo, _ second: Todo) -> Bool {
+        if first.deadline == nil && second.deadline == nil {
+            return (first.priority > second.priority)
+        }
+        if first.deadline == nil && second.deadline != nil { return false }
+        if first.deadline != nil && second.deadline == nil { return true }
+        if first.deadline! == second.deadline! {
+            return (first.priority > second.priority)
+        }
+        return (first.deadline! < second.deadline!)
     }
         
     static func deleteTask(context: ModelContext, task: Todo) {

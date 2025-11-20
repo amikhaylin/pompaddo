@@ -120,6 +120,8 @@ struct NewTaskView: View {
             break
         case .alltasks:
             break
+        default:
+            break
         }
     }
 
