@@ -50,6 +50,8 @@ struct StatusSettingsView: View {
                 .toggleStyle(.switch)
             Toggle("Do Completion", isOn: $status.doCompletion)
                 .toggleStyle(.switch)
+            Toggle("Clear Focus", isOn: $status.clearFocus)
+                .toggleStyle(.switch)
             
             HStack {
                 Spacer()

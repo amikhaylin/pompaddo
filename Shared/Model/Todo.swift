@@ -91,7 +91,8 @@ class Todo: Hashable {
          clarity: Int = 0,
          baseTimeHours: Int = 0,
          customRepeatValue: Int = 2,
-         customRepeatType: CustomRepeationType? = CustomRepeationType.days) {
+         customRepeatType: CustomRepeationType? = CustomRepeationType.days,
+         deadline: Date? = nil) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -112,6 +113,7 @@ class Todo: Hashable {
         self.uid = uid
         self.customRepeatValue = customRepeatValue
         self.customRepeatType = customRepeatType
+        self.deadline = deadline
     }
     
     func hash(into hasher: inout Hasher) {
@@ -334,14 +336,26 @@ extension Todo {
         return result
     }
     
-    func moveToStatus(status: Status, 
-                      project: Project,
-                      context: ModelContext) {
+    @MainActor func moveToStatus(status: Status, 
+                                 project: Project,
+                                 context: ModelContext,
+                                 focusTask: FocusTask,
+                                 timer: FocusTimer) {
         
         if self.parentTask != nil {
             self.disconnectFromParentTask()
             self.parentTask = nil
             self.project = project
+        }
+        
+        if status.clearFocus {
+            if let focus = focusTask.task, self == focus {
+                timer.reset()
+                if timer.mode == .pause || timer.mode == .longbreak {
+                    timer.skip()
+                }
+                focusTask.task = nil
+            }
         }
             
         if status.doCompletion {

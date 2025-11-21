@@ -13,6 +13,7 @@ struct ProjectTasksListView: View {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
+    @EnvironmentObject var timer: FocusTimer
     
     @Bindable var project: Project
     
@@ -117,7 +118,9 @@ struct ProjectTasksListView: View {
                         for task in tasks {
                             task.moveToStatus(status: status,
                                               project: project,
-                                              context: modelContext)
+                                              context: modelContext,
+                                              focusTask: focusTask,
+                                              timer: timer)
                         }
                         return true
                     }

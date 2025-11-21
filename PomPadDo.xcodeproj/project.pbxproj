@@ -282,11 +282,14 @@
 		4D0DF0CE2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Activities/Focus/FocusTimer.swift,
 				Localizable.xcstrings,
 				Model/Project.swift,
 				Model/ProjectGroup.swift,
 				Model/Status.swift,
 				Model/Todo.swift,
+				Utils/Common.swift,
+				Utils/NotificationManager.swift,
 				Utils/TasksQuery.swift,
 			);
 			target = 4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */;
@@ -294,11 +297,14 @@
 		4D0DF0CF2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Activities/Focus/FocusTimer.swift,
 				Localizable.xcstrings,
 				Model/Project.swift,
 				Model/ProjectGroup.swift,
 				Model/Status.swift,
 				Model/Todo.swift,
+				Utils/Common.swift,
+				Utils/NotificationManager.swift,
 				Utils/TasksQuery.swift,
 			);
 			target = 4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */;
@@ -339,6 +345,20 @@
 			);
 			target = 4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */;
 		};
+		4DEA3BC02ED070480021983D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Activities/Focus/FocusSounds.swift,
+			);
+			target = 4D0540032D63A4980098FEC7 /* PomPadDo.watch.widgetsExtension */;
+		};
+		4DEA3BC22ED070550021983D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Activities/Focus/FocusSounds.swift,
+			);
+			target = 4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */;
+		};
 		4DF1BAC12EA8FF0800B8F211 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -376,9 +396,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4D0CECA52EB2040E004C7365 /* PomPadDo.watchUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.watchUITests; sourceTree = "<group>"; };
 		4D0DF0C72E9B99A2007DE44C /* Shared */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D0DF0C92E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CD2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0D92E9BA20E007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CA2E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0DA2E9BA20E007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CE2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CB2E9B99E9007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0DF0CF2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4DF1BAC12EA8FF0800B8F211 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = Shared; sourceTree = "<group>"; };
-		4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D2867622D61F5C20064ADF3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D8614D52E61F783005B6AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobile; sourceTree = "<group>"; };
+		4D28673E2D61F5BE0064ADF3 /* PomPadDo.mobile */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D2867622D61F5C20064ADF3 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4DEA3BC22ED070550021983D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D8614D52E61F783005B6AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobile; sourceTree = "<group>"; };
 		4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobileUITests; sourceTree = "<group>"; };
-		4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "PomPadDo.watch Watch App"; sourceTree = "<group>"; };
+		4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4DEA3BC02ED070480021983D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PomPadDo.watch Watch App"; sourceTree = "<group>"; };
 		4D71DB672D63404900C1FE13 /* PomPadDoWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D71DB772D63404C00C1FE13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0540142D63A4980098FEC7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDoWidgets; sourceTree = "<group>"; };
 		4DF1BAB52EA8EDFE00B8F211 /* PomPadDoUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDoUITests; sourceTree = "<group>"; };
 		4DFA79E02E9E5D6E0069A476 /* PomPadDo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4DFA79F42E9E5D6F0069A476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo; sourceTree = "<group>"; };
