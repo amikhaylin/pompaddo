@@ -16,6 +16,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case inbox
     case today
     case tomorrow
+    case deadlines
     case alltasks
     case settings
     
@@ -33,6 +34,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return NSLocalizedString("Focus", comment: "")
         case .settings:
             return NSLocalizedString("Settings", comment: "")
+        case .deadlines:
+            return NSLocalizedString("Deadlines", comment: "")
         }
     }
 }
@@ -78,6 +81,10 @@ struct ContentView: View {
                     FocusTimerView(list: $selectedSideBarItem)
                         .environmentObject(timer)
                         .environmentObject(focusTask)
+                case .deadlines:
+                    TasksListView(predicate: TasksQuery.predicateDeadlines(),
+                                       list: $selectedSideBarItem,
+                                       title: selectedSideBarItem!.name)
                 case .settings:
                     SettingsView()
                 case nil:

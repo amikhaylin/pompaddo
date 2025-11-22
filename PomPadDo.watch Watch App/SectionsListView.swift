@@ -11,6 +11,7 @@ import SwiftData
 struct SectionsListView: View {
     @EnvironmentObject var timer: FocusTimer
     @Binding var selectedSideBarItem: SideBarItem?
+    @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -56,7 +57,18 @@ struct SectionsListView: View {
                         .foregroundStyle(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
                 }
                 .accessibilityIdentifier("FocusNavButton")
-            case .settings:
+            case .deadlines:
+                if showDeadlinesSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "calendar.badge.exclamationmark")
+                            Text("Deadlines")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)))
+                    }
+                } else {
+                    EmptyView()
+                }            case .settings:
                 NavigationLink(value: item) {
                     HStack {
                         Image(systemName: "gear")

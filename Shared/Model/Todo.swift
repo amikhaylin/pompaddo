@@ -67,6 +67,7 @@ class Todo: Hashable {
     var baseTimeHours: Int = 0
     var customRepeatValue: Int = 2
     var customRepeatType: CustomRepeationType? = CustomRepeationType.days
+    var deadline: Date?
     
     @Relationship(deleteRule: .cascade, inverse: \Todo.parentTask)
     var subtasks: [Todo]? = [Todo]()

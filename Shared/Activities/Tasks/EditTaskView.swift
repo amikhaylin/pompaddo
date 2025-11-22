@@ -21,6 +21,8 @@ struct EditTaskView: View {
     @State private var addCalendarEvent = false
     @State private var eventStartDate = Date()
     @State private var eventEndDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())!
+    @State private var showingDeadline = false
+    @State private var deadlineDate = Date()
     
     var body: some View {
         Form {
@@ -75,6 +77,35 @@ struct EditTaskView: View {
                         }
                     } label: {
                         Label("Set due Date", systemImage: "calendar")
+                    }
+                }
+                
+                if showingDeadline {
+                    Group {
+                        DatePicker("Deadline Date",
+                                   selection: $deadlineDate,
+                                   displayedComponents: .date)
+                        .onChange(of: deadlineDate, { _, newValue in
+                            if showingDeadline {
+                                task.deadline = newValue
+                            }
+                        })
+                        
+                        Button {
+                            task.deadline = nil
+                            showingDeadline = false
+                        } label: {
+                            Label("Clear deadline", systemImage: "clear")
+                        }
+                    }
+                } else {
+                    Button {
+                        withAnimation {
+                            showingDeadline.toggle()
+                            task.deadline = Calendar.current.startOfDay(for: deadlineDate)
+                        }
+                    } label: {
+                        Label("Set Deadline", systemImage: "calendar.badge.exclamationmark")
                     }
                 }
                 
@@ -302,6 +333,9 @@ struct EditTaskView: View {
         .onChange(of: task.dueDate) { _, _ in
             setPicker()
         }
+        .onChange(of: task.deadline, { _, _ in
+            setPicker()
+        })
         .onChange(of: task.alertDate, { _, _ in
             setPicker()
         })
@@ -324,6 +358,14 @@ struct EditTaskView: View {
         } else {
             dueDate = Date.now
             showingDatePicker = false
+        }
+        
+        if let date = task.deadline {
+            deadlineDate = date
+            showingDeadline = true
+        } else {
+            deadlineDate = Date.now
+            showingDeadline = false
         }
         
         if let date = task.alertDate {

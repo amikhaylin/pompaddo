@@ -58,12 +58,12 @@ struct FocusTasksView: View {
                             }
                         }
                     }
+                    .listRowSeparator(.hidden)
                 } else {
                     HStack {
                         TaskRowView(task: task)
                             .modifier(FocusTaskRowModifier(task: task, viewMode: $viewMode))
                             .tag(task)
-                            .listRowSeparator(.hidden)
                         
                         if let focus = focusTask.task, focus == task {
                             Button {
@@ -91,6 +91,7 @@ struct FocusTasksView: View {
                             .accessibility(identifier: "\(task.name)PlayButton")
                         }
                     }
+                    .listRowSeparator(.hidden)
                 }
             }
         }

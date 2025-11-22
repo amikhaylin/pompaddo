@@ -18,6 +18,8 @@ struct SettingsView: View {
     @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
     
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
+    
+    @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
 
     private enum Tabs: Hashable {
         case general, timer, estimates, advanced
@@ -27,6 +29,9 @@ struct SettingsView: View {
         TabView {
             Form {
                 Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                    .toggleStyle(.checkbox)
+                
+                Toggle("Show Deadlines section", isOn: $showDeadlinesSection)
                     .toggleStyle(.checkbox)
             }
             .tabItem {

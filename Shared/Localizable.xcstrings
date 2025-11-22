@@ -5867,6 +5867,22 @@
         }
       }
     },
+    "Clear deadline" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear deadline"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить крайний срок"
+          }
+        }
+      }
+    },
     "Clear due date" : {
       "localizations" : {
         "ar" : {
@@ -8795,6 +8811,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "天"
+          }
+        }
+      }
+    },
+    "Deadline Date" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deadline Date"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Крайний срок"
+          }
+        }
+      }
+    },
+    "Deadlines" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Deadlines"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сроки"
           }
         }
       }
@@ -27822,6 +27870,22 @@
         }
       }
     },
+    "Set Deadline" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Deadline"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Установить крайний срок"
+          }
+        }
+      }
+    },
     "Set due Date" : {
       "localizations" : {
         "ar" : {
@@ -28794,6 +28858,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在應用圖標上顯示待審核的項目數量"
+          }
+        }
+      }
+    },
+    "Show Deadlines section" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Deadlines section"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать секцию сроков"
           }
         }
       }
