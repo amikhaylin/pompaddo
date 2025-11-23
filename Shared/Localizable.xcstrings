@@ -6128,7 +6128,20 @@
       }
     },
     "Clear Focus" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Focus"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить фокус"
+          }
+        }
+      }
     },
     "Clear reminder" : {
       "localizations" : {

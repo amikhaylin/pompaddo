@@ -61,7 +61,7 @@ struct StatusSettingsView: View {
                 .keyboardShortcut(.defaultAction)
             }
         }
-        .frame(width: 320, height: 120)
+        .frame(width: 320, height: 170)
         .padding()
     }
 }
