@@ -16,15 +16,13 @@ struct SettingsView: View {
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     
     var body: some View {
-        Section("General") {
-            Form {
+        Form {
+            Section("General") {
                 Toggle("Show Deadlines section", isOn: $showDeadlinesSection)
                     .toggleStyle(.switch)
             }
-        }
-        
-        Section("Focus Timer") {
-            Form {
+            
+            Section("Focus Timer") {
                 Picker("Work session duration", selection: $timerWorkSession) {
                     ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
                         Text(Common.formatSecondsToMinutes(Int(index)))

@@ -38,7 +38,7 @@ struct ContentView: View {
                         DragGesture()
                             .onChanged { gesture in
                                 let newHeight = currentSectionHeight + gesture.translation.height
-                                currentSectionHeight = min(max(newHeight, 50.0), getMaxSectionsHeigth())
+                                currentSectionHeight = min(max(newHeight, 50.0), getMaxSectionsHeight())
                             }
                             .onEnded({ _ in
                                 sectionHeight = currentSectionHeight
@@ -157,7 +157,7 @@ struct ContentView: View {
         }
     }
     
-    private func getMaxSectionsHeigth() -> CGFloat {
+    private func getMaxSectionsHeight() -> CGFloat {
         var maxHeight: CGFloat = 300.0
         
         if showDeadlinesSection {
