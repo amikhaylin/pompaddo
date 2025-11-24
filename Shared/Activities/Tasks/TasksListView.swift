@@ -48,6 +48,8 @@ struct TasksListView: View {
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         case .alltasks:
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
+        case .deadlines:
+            innerTasks = tasks.sorted(by: TasksQuery.sortingDeadlines)
         default:
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         }
@@ -132,22 +134,24 @@ struct TasksListView: View {
         }
         .toolbar {
             ToolbarItemGroup {
-                Button {
-                    newTaskIsShowing.toggle()
-                } label: {
-                    Label("Add task to current list", systemImage: "plus")
+                if list != .deadlines {
+                    Button {
+                        newTaskIsShowing.toggle()
+                    } label: {
+                        Label("Add task to current list", systemImage: "plus")
+                    }
+                    .accessibility(identifier: "AddToCurrentList")
+                    .help("Add task to current list ⌘⌥I")
+                    .keyboardShortcut("i", modifiers: [.command, .option])
+#if os(iOS)
+                    .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
+                        NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: nil)
+                            .frame(minWidth: 200, maxHeight: 220)
+                            .presentationCompactAdaptation(.popover)
+                    })
+#endif
                 }
-                .accessibility(identifier: "AddToCurrentList")
-                .help("Add task to current list ⌘⌥I")
-                .keyboardShortcut("i", modifiers: [.command, .option])
-                #if os(iOS)
-                .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: nil)
-                        .frame(minWidth: 200, maxHeight: 220)
-                        .presentationCompactAdaptation(.popover)
-                })
-                #endif
-
+                    
                 Button {
                     deleteItems()
                 } label: {

@@ -16,6 +16,8 @@ struct SettingsView: View {
     @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     
+    @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
+    
     @State private var viewMode = 0
     
     var body: some View {
@@ -42,6 +44,9 @@ struct SettingsView: View {
             case 0:
                 Form {
                     Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                        .toggleStyle(.switch)
+                    
+                    Toggle("Show Deadlines section", isOn: $showDeadlinesSection)
                         .toggleStyle(.switch)
                 }
             case 1:

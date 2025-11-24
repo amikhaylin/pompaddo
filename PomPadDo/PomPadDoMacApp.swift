@@ -116,6 +116,13 @@ struct PomPadDoMacApp: App {
                 .keyboardShortcut("r", modifiers: [.option, .command])
                 
                 Button {
+                    selectedSideBarItem = .deadlines
+                } label: {
+                    Image(systemName: "calendar.badge.exclamationmark")
+                    Text("Deadlines")
+                }
+                
+                Button {
                     selectedSideBarItem = .alltasks
                 } label: {
                     Image(systemName: "rectangle.stack")

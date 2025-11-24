@@ -34,6 +34,30 @@ struct TaskDetailsView: View {
                 }
             }
             
+            if let deadlineDate = task.deadline {
+                HStack {
+                    Image(systemName: "calendar.badge.exclamationmark")
+                        .foregroundStyle(Color.gray)
+                    if Calendar.current.isDateInToday(deadlineDate) {
+                        Text("Today")
+                            .foregroundStyle(Color.yellow)
+                            .font(.caption)
+                    } else if Calendar.current.isDateInTomorrow(deadlineDate) {
+                        Text("Tomorrow")
+                            .foregroundStyle(Color.yellow)
+                            .font(.caption)
+                    } else if Calendar.current.isDateInYesterday(deadlineDate) {
+                        Text("Yesterday")
+                            .foregroundStyle(Color.red)
+                            .font(.caption)
+                    } else {
+                        Text(deadlineDate, style: .date)
+                            .foregroundStyle(deadlineDate < Calendar.current.startOfDay(for: Date()) ? Color.red : Color.green)
+                            .font(.caption)
+                    }
+                }
+            }
+            
             HStack {
                 if let subtasksCount = task.subtasks?.count,
                    subtasksCount > 0,

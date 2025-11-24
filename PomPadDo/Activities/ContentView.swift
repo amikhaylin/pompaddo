@@ -21,10 +21,12 @@ struct ContentView: View {
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var newTaskIsShowing: Bool
     @Binding var selectedProject: Project?
-    @AppStorage("SectionHeight") var sectionHeight = 170.0
-    @State private var currentSectionHeight: CGFloat = 170.0
+    @AppStorage("SectionHeight") var sectionHeight = 196.0
+    @State private var currentSectionHeight: CGFloat = 196.0
     
     @Query var tasks: [Todo]
+    
+    @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     
     var body: some View {
         NavigationSplitView {
@@ -41,7 +43,7 @@ struct ContentView: View {
                         DragGesture()
                             .onChanged { gesture in
                                 let newHeight = currentSectionHeight + gesture.translation.height
-                                currentSectionHeight = min(max(newHeight, 30.0), 170.0)
+                                currentSectionHeight = min(max(newHeight, 28.0), getMaxSectionsHeigth())
                             }
                             .onEnded({ _ in
                                 sectionHeight = currentSectionHeight
@@ -113,6 +115,12 @@ struct ContentView: View {
                                   title: selectedSideBarItem!.name)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
+                case .deadlines:
+                    TasksListView(predicate: TasksQuery.predicateDeadlines(),
+                                  list: $selectedSideBarItem,
+                                  title: selectedSideBarItem!.name)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 default:
                     EmptyView()
                 }
@@ -171,6 +179,16 @@ struct ContentView: View {
         .onAppear {
             currentSectionHeight = CGFloat(sectionHeight)
         }
+    }
+    
+    private func getMaxSectionsHeigth() -> CGFloat {
+        var maxHeight: CGFloat = 168.0
+        
+        if showDeadlinesSection {
+            maxHeight += 28.0
+        }
+        
+        return maxHeight
     }
 }
 

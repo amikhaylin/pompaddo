@@ -18,12 +18,15 @@ struct SectionsListView: View {
     @Query(filter: TasksQuery.predicateInboxActive()) var tasksInboxActive: [Todo]
     @Query(filter: TasksQuery.predicateTomorrowActive()) var tasksTomorrowActive: [Todo]
     @Query(filter: TasksQuery.predicateAllActive()) var tasksAllActive: [Todo]
+    @Query(filter: TasksQuery.predicateDeadlinesActive()) var tasksDeadlinesActive: [Todo]
     @Query var projects: [Project]
            
     @State var badgeManager = BadgeManager()
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     @State var projectListSize: CGSize = .zero
+    
+    @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -100,6 +103,20 @@ struct SectionsListView: View {
                     .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
                 }
                 .listRowSeparator(.hidden)
+            case .deadlines:
+                if showDeadlinesSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "calendar.badge.exclamationmark")
+                            Text("Deadlines")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1)))
+                        .badge(tasksDeadlinesActive.count)
+                    }
+                    .listRowSeparator(.hidden)
+                } else {
+                    EmptyView()
+                }
             case .alltasks:
                 NavigationLink(value: item) {
                     HStack {
