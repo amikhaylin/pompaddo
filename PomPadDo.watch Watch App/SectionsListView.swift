@@ -68,7 +68,8 @@ struct SectionsListView: View {
                     }
                 } else {
                     EmptyView()
-                }            case .settings:
+                }
+            case .settings:
                 NavigationLink(value: item) {
                     HStack {
                         Image(systemName: "gear")
