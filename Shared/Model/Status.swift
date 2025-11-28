@@ -15,6 +15,7 @@ class Status: Hashable {
     var doCompletion: Bool = false
     var expanded: Bool = true
     var clearDueDate: Bool = false
+    var clearFocus: Bool = false
     var width: Double = 300.0
     var uid: String = UUID().uuidString
     
@@ -29,7 +30,8 @@ class Status: Hashable {
          width: Double = 300.0,
          project: Project? = nil,
          tasks: [Todo]? = [Todo](),
-         uid: String = UUID().uuidString) {
+         uid: String = UUID().uuidString,
+         clearFocus: Bool = false) {
         self.name = name
         self.order = order
         self.doCompletion = doCompletion
@@ -39,6 +41,7 @@ class Status: Hashable {
         self.project = project
         self.tasks = tasks
         self.uid = uid
+        self.clearFocus = clearFocus
     }
     
     func hash(into hasher: inout Hasher) {

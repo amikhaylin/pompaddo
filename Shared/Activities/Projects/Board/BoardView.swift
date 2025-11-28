@@ -13,6 +13,7 @@ struct BoardView: View {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
+    @EnvironmentObject var timer: FocusTimer
     @Bindable var project: Project
     
     @State private var searchText = ""
@@ -108,24 +109,30 @@ struct BoardView: View {
                         }
                         .dropDestination(for: Todo.self) { tasks, _ in
                             for task in tasks {
-                                task.disconnectFromParentTask()
-                                task.parentTask = nil
-                                task.project = project
-                                project.tasks?.append(task)
+                                task.moveToStatus(status: status,
+                                                  project: project,
+                                                  context: modelContext,
+                                                  focusTask: focusTask,
+                                                  timer: timer)
                                 
-                                if status.doCompletion {
-                                    if !task.completed {
-                                        task.complete(modelContext: modelContext)
-                                    }
-                                } else {
-                                    task.reactivate()
-                                }
-                                
-                                if status.clearDueDate {
-                                    task.setDueDate(dueDate: nil)
-                                }
-                                
-                                task.status = status
+//                                task.disconnectFromParentTask()
+//                                task.parentTask = nil
+//                                task.project = project
+//                                project.tasks?.append(task)
+//                                
+//                                if status.doCompletion {
+//                                    if !task.completed {
+//                                        task.complete(modelContext: modelContext)
+//                                    }
+//                                } else {
+//                                    task.reactivate()
+//                                }
+//                                
+//                                if status.clearDueDate {
+//                                    task.setDueDate(dueDate: nil)
+//                                }
+//                                
+//                                task.status = status
                             }
                             return true
                         }

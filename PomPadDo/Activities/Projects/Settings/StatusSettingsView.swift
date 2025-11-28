@@ -50,6 +50,8 @@ struct StatusSettingsView: View {
                 .toggleStyle(.switch)
             Toggle("Do Completion", isOn: $status.doCompletion)
                 .toggleStyle(.switch)
+            Toggle("Clear Focus", isOn: $status.clearFocus)
+                .toggleStyle(.switch)
             
             HStack {
                 Spacer()
@@ -59,7 +61,7 @@ struct StatusSettingsView: View {
                 .keyboardShortcut(.defaultAction)
             }
         }
-        .frame(width: 320, height: 120)
+        .frame(width: 320, height: 170)
         .padding()
     }
 }

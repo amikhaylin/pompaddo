@@ -299,12 +299,16 @@ struct ProjectTaskModifier: ViewModifier {
                                     for task in selectedTasksSet {
                                         task.moveToStatus(status: status,
                                                           project: project,
-                                                          context: modelContext)
+                                                          context: modelContext,
+                                                          focusTask: focusTask,
+                                                          timer: timer)
                                     }
                                 } else {
                                     task.moveToStatus(status: status,
                                                       project: project,
-                                                      context: modelContext)
+                                                      context: modelContext,
+                                                      focusTask: focusTask,
+                                                      timer: timer)
                                 }
                             } label: {
                                 Text(status.name)

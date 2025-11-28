@@ -269,7 +269,9 @@ struct TaskRowModifier: ViewModifier {
                         Button {
                             task.moveToStatus(status: status,
                                               project: project,
-                                              context: modelContext)
+                                              context: modelContext,
+                                              focusTask: focusTask,
+                                              timer: timer)
                         } label: {
                             Text(status.name)
                         }
