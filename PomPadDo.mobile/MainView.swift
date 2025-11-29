@@ -46,7 +46,7 @@ struct MainView: View {
     @State var selectedProject: Project?
     
     var body: some View {
-        GeometryReader { geometry in
+//        GeometryReader { geometry in
             VStack {
                 Group {
                     switch tab {
@@ -115,10 +115,10 @@ struct MainView: View {
                     }
                     .accessibility(identifier: "AddTaskToInboxButton")
                     .keyboardShortcut("i", modifiers: [.command])
-                    .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.top), content: {
+                    .sheet(isPresented: $newTaskIsShowing, content: {
                         NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
-                            .frame(width: geometry.size.width * 0.9, height: 220)
-                            .presentationCompactAdaptation(.popover)
+                            .presentationDetents([.height(220)])
+                            .presentationDragIndicator(.visible)
                             .environmentObject(refresher)
                     })
                     .modifier(GlassButtonStyle())
@@ -189,7 +189,7 @@ struct MainView: View {
                     timer.setNotification()
                 }
             }
-        }
+//        }
     }
     
     private func checkForReview() {

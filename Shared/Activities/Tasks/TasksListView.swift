@@ -144,10 +144,10 @@ struct TasksListView: View {
                     .help("Add task to current list ⌘⌥I")
                     .keyboardShortcut("i", modifiers: [.command, .option])
 #if os(iOS)
-                    .popover(isPresented: $newTaskIsShowing, attachmentAnchor: .point(.bottom), content: {
+                    .sheet(isPresented: $newTaskIsShowing, content: {
                         NewTaskView(isVisible: self.$newTaskIsShowing, list: list!, project: nil, mainTask: nil)
-                            .frame(minWidth: 200, maxHeight: 220)
-                            .presentationCompactAdaptation(.popover)
+                            .presentationDetents([.height(220)])
+                            .presentationDragIndicator(.visible)
                     })
 #endif
                 }

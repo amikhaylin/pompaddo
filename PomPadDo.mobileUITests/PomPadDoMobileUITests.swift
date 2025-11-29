@@ -98,20 +98,20 @@ final class PomPadDoMobileUITests: XCTestCase {
         // MARK: Create groups
         for group in localeData.groups {
             app.buttons["NewProjectGroupButton"].tap()
-            app.popovers.textFields["GroupNameField"].tap()
+            app.textFields["GroupNameField"].tap()
             
-            app.popovers.textFields["GroupNameField"].typeText(group.name)
+            app.textFields["GroupNameField"].typeText(group.name)
             app.buttons["SaveGroup"].tap()
         }
             
         // MARK: Fill projects
         for project in localeData.projects {
             app.buttons["NewProjectButton"].tap()
-            app.popovers.textFields["ProjectNameField"].tap()
-            app.popovers.textFields["ProjectNameField"].typeText(project.name)
+            app.textFields["ProjectNameField"].tap()
+            app.textFields["ProjectNameField"].typeText(project.name)
             
             if project.isSimpleList {
-                app.popovers.switches["CreateSimpleList"].children(matching: .switch).element.tap()
+                app.switches["CreateSimpleList"].children(matching: .switch).element.tap()
             }
             
             app.buttons["SaveProject"].tap()
@@ -134,11 +134,11 @@ final class PomPadDoMobileUITests: XCTestCase {
                 app.navigationBars[project.name]
                     .buttons["AddTaskToCurrentListButton"].tap()
                 
-                app.popovers.textFields["TaskName"].tap()
-                app.popovers.textFields["TaskName"].typeText(task.name)
+                app.textFields["TaskName"].tap()
+                app.textFields["TaskName"].typeText(task.name)
                 
                 if task.dueToday {
-                    app.popovers.switches["DueToday"].children(matching: .switch).element.tap()
+                    app.switches["DueToday"].children(matching: .switch).element.tap()
                 }
                 
                 app.buttons["SaveTask"].tap()
@@ -208,11 +208,11 @@ final class PomPadDoMobileUITests: XCTestCase {
         snapshot("01TodayScreen")
 
         app.buttons["AddTaskToInboxButton"].tap()
-        app.popovers.textFields["TaskName"].tap()
+        app.textFields["TaskName"].tap()
         let exp3 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp3], timeout: 2.0)
 
-        app.popovers.textFields["TaskName"].typeText(localeData.inboxTask)
+        app.textFields["TaskName"].typeText(localeData.inboxTask)
         snapshot("07InboxTask")
         app.buttons[
             "SaveTask"
