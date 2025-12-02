@@ -165,10 +165,10 @@ struct BoardView: View {
             NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
         })
         #else
-        .popover(item: $newTaskToStatus, attachmentAnchor: .point(.top), content: { toStatus in
+        .sheet(item: $newTaskToStatus, content: { toStatus in
             NewTaskView(isVisible: .constant(true), list: .projects, project: project, mainTask: nil, status: toStatus)
-                .frame(minWidth: 200, maxHeight: 220)
-                .presentationCompactAdaptation(.popover)
+                .presentationDetents([.height(220)])
+                .presentationDragIndicator(.visible)
         })
         #endif
     }

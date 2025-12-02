@@ -48,11 +48,11 @@ struct ProjectsListView: View {
                 .accessibility(identifier: "NewProjectButton")
                 .help("Create project")
                 #if os(iOS)
-                .popover(isPresented: $newProjectIsShowing, attachmentAnchor: .point(.top)) {
+                .sheet(isPresented: $newProjectIsShowing, content: {
                     NewProjectView(isVisible: self.$newProjectIsShowing)
-                        .frame(minWidth: 200, maxWidth: 300, maxHeight: 160)
-                        .presentationCompactAdaptation(.popover)
-                }
+                        .presentationDetents([.height(160)])
+                        .presentationDragIndicator(.visible)
+                })
                 #endif
                 
                 Button {
@@ -64,11 +64,11 @@ struct ProjectsListView: View {
                 .accessibility(identifier: "NewProjectGroupButton")
                 .help("Create group")
                 #if os(iOS)
-                .popover(isPresented: $newProjectGroupShow, attachmentAnchor: .point(.top)) {
+                .sheet(isPresented: $newProjectGroupShow, content: {
                     NewProjectGroupView(isVisible: self.$newProjectGroupShow)
-                        .frame(minWidth: 200, maxWidth: 300, maxHeight: 140)
-                        .presentationCompactAdaptation(.popover)
-                }
+                        .presentationDetents([.height(140)])
+                        .presentationDragIndicator(.visible)
+                })
                 #endif
             }
             #if os(iOS)
@@ -274,15 +274,19 @@ struct ProjectsListView: View {
             NewProjectGroupView(isVisible: self.$newProjectGroupShow)
         }
         #else
-        .popover(item: $editProjectGroup, attachmentAnchor: .point(.bottomLeading), content: { editGroup in
+        .sheet(item: $editProjectGroup, onDismiss: {
+            editProjectGroup = nil
+        }, content: { editGroup in
             EditProjectGroupView(group: editGroup)
-                .frame(minWidth: 200, maxWidth: 300, maxHeight: 140)
-                .presentationCompactAdaptation(.popover)
+                .presentationDetents([.height(140)])
+                .presentationDragIndicator(.visible)
         })
-        .popover(item: $editProjectName, attachmentAnchor: .point(.bottomLeading), content: { editProject in
+        .sheet(item: $editProjectName, onDismiss: {
+            editProjectName = nil
+        }, content: { editProject in
             EditProjectNameView(project: editProject)
-                .frame(minWidth: 200, maxWidth: 300, maxHeight: 140)
-                .presentationCompactAdaptation(.popover)
+                .presentationDetents([.height(140)])
+                .presentationDragIndicator(.visible)
         })
         #endif
     }

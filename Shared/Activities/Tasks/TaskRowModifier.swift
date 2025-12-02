@@ -336,15 +336,17 @@ struct TaskRowModifier: ViewModifier {
                 .presentationDetents([.height(200)])
         })
         #else
-        .popover(isPresented: $showAddSubtask, attachmentAnchor: .point(.topLeading), content: {
+        .sheet(isPresented: $showAddSubtask, content: {
             NewTaskView(isVisible: self.$showAddSubtask, list: .inbox, project: nil, mainTask: task)
-                .frame(minWidth: 200, maxHeight: 220)
-                .presentationCompactAdaptation(.popover)
+                .presentationDetents([.height(220)])
+                .presentationDragIndicator(.visible)
         })
-        .popover(item: $renameTask, attachmentAnchor: .point(.topLeading), content: { editTask in
+        .sheet(item: $renameTask, onDismiss: {
+            renameTask = nil
+        }, content: { editTask in
             EditTaskNameView(task: editTask)
-                .frame(minWidth: 200, maxWidth: 300, maxHeight: 140)
-                .presentationCompactAdaptation(.popover)
+                .presentationDetents([.height(140)])
+                .presentationDragIndicator(.visible)
         })
         #endif
     }
