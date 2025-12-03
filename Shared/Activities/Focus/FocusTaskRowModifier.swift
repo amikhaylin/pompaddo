@@ -151,6 +151,7 @@ struct FocusTaskRowModifier: ViewModifier {
                     .tag(priority as Int)
                 }
             } label: {
+                Image(systemName: "flag")
                 Text("Priority")
             }
             
