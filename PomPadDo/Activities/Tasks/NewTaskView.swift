@@ -59,6 +59,7 @@ struct NewTaskView: View {
                                     Text("Custom")
                                 }
                             }
+                            .accessibilityIdentifier("\(dueType.rawValue)Button")
                         }
                     } label: {
                         switch dueDateType {
@@ -79,6 +80,7 @@ struct NewTaskView: View {
                             Text("Custom")
                         }
                     }
+                    .accessibilityIdentifier("DueDate")
                     
                     if dueDateType == .custom {
                         DatePicker("",
