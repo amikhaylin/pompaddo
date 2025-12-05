@@ -20,6 +20,9 @@ struct SettingsView: View {
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
+    @AppStorage("showAllSection") var showAllSection: Bool = true
+    @AppStorage("showReviewSection") var showReviewSection: Bool = true
+    @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
 
     private enum Tabs: Hashable {
         case general, timer, estimates, advanced
@@ -30,9 +33,16 @@ struct SettingsView: View {
             Form {
                 Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
                     .toggleStyle(.checkbox)
-                
-                Toggle("Show Deadlines section", isOn: $showDeadlinesSection)
-                    .toggleStyle(.checkbox)
+                Section("Lists") {
+                    Toggle("Show Deadlines list", isOn: $showDeadlinesSection)
+                        .toggleStyle(.checkbox)
+                    Toggle("Show All list", isOn: $showAllSection)
+                        .toggleStyle(.checkbox)
+                    Toggle("Show Review list", isOn: $showReviewSection)
+                        .toggleStyle(.checkbox)
+                    Toggle("Show Tomorrow list", isOn: $showTomorrowSection)
+                        .toggleStyle(.checkbox)
+                }
             }
             .tabItem {
                 Label("General", systemImage: "gear")

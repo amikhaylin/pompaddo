@@ -27,6 +27,9 @@ struct ContentView: View {
     @Query var tasks: [Todo]
     
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
+    @AppStorage("showAllSection") var showAllSection: Bool = true
+    @AppStorage("showReviewSection") var showReviewSection: Bool = true
+    @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     
     var body: some View {
         NavigationSplitView {
@@ -182,9 +185,21 @@ struct ContentView: View {
     }
     
     private func getMaxSectionsHeigth() -> CGFloat {
-        var maxHeight: CGFloat = 168.0
+        var maxHeight: CGFloat = 84.0
         
         if showDeadlinesSection {
+            maxHeight += 28.0
+        }
+
+        if showAllSection {
+            maxHeight += 28.0
+        }
+        
+        if showReviewSection {
+            maxHeight += 28.0
+        }
+        
+        if showTomorrowSection {
             maxHeight += 28.0
         }
         

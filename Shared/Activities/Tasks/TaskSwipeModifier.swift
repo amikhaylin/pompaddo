@@ -12,17 +12,34 @@ import SwiftData
 struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    #if os(iOS)
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
-    #endif
     @EnvironmentObject var focusTask: FocusTask
+    @EnvironmentObject var timer: FocusTimer
     @Bindable var task: Todo
     @Binding var list: SideBarItem?
     
     func body(content: Content) -> some View {
         content
-            .swipeActions {
+            .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                Button {
+                    if !task.completed {
+                        if let focus = focusTask.task, task == focus {
+                            timer.reset()
+                            if timer.mode == .pause || timer.mode == .longbreak {
+                                timer.skip()
+                            }
+                            focusTask.task = nil
+                        }
+                        task.complete(modelContext: modelContext)
+                    } else {
+                        task.reactivate()
+                    }
+                } label: {
+                    Label(task.completed ? "Uncomplete" : "Complete", systemImage: task.completed ? "square" : "checkmark.square.fill")
+                }
+            }
+            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                 Button(role: .destructive) {
                     withAnimation {
                         if let focus = focusTask.task, task == focus {
@@ -36,7 +53,7 @@ struct TaskSwipeModifier: ViewModifier {
                     Label("Delete", systemImage: "trash.fill")
                 }
             }
-        #if os(iOS)
+        #if !os(watchOS)
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 if let subtasks = task.subtasks {
                     NavigationLink {
@@ -63,8 +80,7 @@ struct TaskSwipeModifier: ViewModifier {
                     }
                 }
             }
-        #endif
-        #if os(watchOS)
+        #else
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
                 if let subtasks = task.subtasks {
                     NavigationLink {

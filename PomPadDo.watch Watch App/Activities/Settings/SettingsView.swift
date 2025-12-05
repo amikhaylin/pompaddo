@@ -14,11 +14,17 @@ struct SettingsView: View {
     @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
     
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
+    @AppStorage("showAllSection") var showAllSection: Bool = true
+    @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     
     var body: some View {
         Form {
             Section("General") {
                 Toggle("Show Deadlines section", isOn: $showDeadlinesSection)
+                    .toggleStyle(.switch)
+                Toggle("Show All list", isOn: $showAllSection)
+                    .toggleStyle(.switch)
+                Toggle("Show Tomorrow list", isOn: $showTomorrowSection)
                     .toggleStyle(.switch)
             }
             

@@ -16910,6 +16910,9 @@
         }
       }
     },
+    "Lists" : {
+
+    },
     "long break" : {
       "localizations" : {
         "ar" : {
@@ -28634,6 +28637,9 @@
         }
       }
     },
+    "Show All list" : {
+
+    },
     "Show count of projects to review on app icon" : {
       "localizations" : {
         "ar" : {
@@ -28877,6 +28883,9 @@
           }
         }
       }
+    },
+    "Show Deadlines list" : {
+
     },
     "Show Deadlines section" : {
       "localizations" : {
@@ -29626,6 +29635,9 @@
         }
       }
     },
+    "Show Review list" : {
+
+    },
     "Show status in tasks's lists" : {
       "localizations" : {
         "ar" : {
@@ -30113,6 +30125,9 @@
           }
         }
       }
+    },
+    "Show Tomorrow list" : {
+
     },
     "Skip" : {
       "localizations" : {
@@ -34745,6 +34760,9 @@
           }
         }
       }
+    },
+    "Uncomplete" : {
+
     },
     "View Mode" : {
       "localizations" : {

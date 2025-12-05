@@ -27,6 +27,9 @@ struct SectionsListView: View {
     @State var projectListSize: CGSize = .zero
     
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
+    @AppStorage("showAllSection") var showAllSection: Bool = true
+    @AppStorage("showReviewSection") var showReviewSection: Bool = true
+    @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -76,33 +79,41 @@ struct SectionsListView: View {
                 }
                 .listRowSeparator(.hidden)
             case .tomorrow:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "sunrise")
-                        Text("Tomorrow")
+                if showTomorrowSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "sunrise")
+                            Text("Tomorrow")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
+                        .badge(tasksTomorrowActive.count)
                     }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
-                    .badge(tasksTomorrowActive.count)
-                }
-                .dropDestination(for: Todo.self) { tasks, _ in
-                    for task in tasks {
-                        task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                        }
+                        return true
                     }
-                    return true
+                    .listRowSeparator(.hidden)
+                } else {
+                    EmptyView()
                 }
-                .listRowSeparator(.hidden)
             case .projects:
                 EmptyView()
             case .review:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "cup.and.saucer")
-                        Text("Review")
+                if showReviewSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "cup.and.saucer")
+                            Text("Review")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
+                        .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
                     }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.480404973, green: 0.507386148, blue: 0.9092046022, alpha: 1)))
-                    .badge(projects.filter({ TasksQuery.filterProjectToReview($0) }).count)
+                    .listRowSeparator(.hidden)
+                } else {
+                    EmptyView()
                 }
-                .listRowSeparator(.hidden)
             case .deadlines:
                 if showDeadlinesSection {
                     NavigationLink(value: item) {
@@ -118,15 +129,19 @@ struct SectionsListView: View {
                     EmptyView()
                 }
             case .alltasks:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "rectangle.stack")
-                        Text("All")
+                if showAllSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "rectangle.stack")
+                            Text("All")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
+                        .badge(tasksAllActive.count)
                     }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
-                    .badge(tasksAllActive.count)
+                    .listRowSeparator(.hidden)
+                } else {
+                    EmptyView()
                 }
-                .listRowSeparator(.hidden)
             }
         }
         .listStyle(SidebarListStyle())
