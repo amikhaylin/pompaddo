@@ -138,7 +138,8 @@ final class PomPadDoMobileUITests: XCTestCase {
                 app.textFields["TaskName"].typeText(task.name)
                 
                 if task.dueToday {
-                    app.switches["DueToday"].children(matching: .switch).element.tap()
+                    app/*@START_MENU_TOKEN@*/.staticTexts["Due Date"]/*[[".buttons[\"DueDate\"].staticTexts",".buttons.staticTexts[\"Due Date\"]",".staticTexts[\"Due Date\"]"],[[[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.firstMatch.tap()
+                    app/*@START_MENU_TOKEN@*/.buttons["todayButton"]/*[[".cells",".buttons[\"Today\"]",".buttons[\"todayButton\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.firstMatch.tap()
                 }
                 
                 app.buttons["SaveTask"].tap()

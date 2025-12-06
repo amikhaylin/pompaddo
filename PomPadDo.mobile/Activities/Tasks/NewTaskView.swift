@@ -16,10 +16,12 @@ struct NewTaskView: View {
     @State var list: SideBarItem
     @State private var taskName = ""
     @State private var link = ""
-    @State private var dueToday = false
     @State var project: Project?
     @State var mainTask: Todo?
     @State var status: Status?
+    @State private var dueDateType: DueDateType = .none
+    @State private var priority: Int = 0
+    @State private var dueDate = Date()
 
     enum FocusField: Hashable {
         case taskName
@@ -33,21 +35,106 @@ struct NewTaskView: View {
             VStack {
                 Text("Add task to \(getListName())")
                     .font(.headline)
-
+                
                 TextField("Task name", text: $taskName)
                     .accessibilityIdentifier("TaskName")
                     .focused($focusField, equals: .taskName)
                     .task {
                         self.focusField = .taskName
                     }
-
+                
                 TextField("Link", text: $link)
                     .textContentType(.URL)
                     .focused($focusField, equals: .link)
-
-                Toggle("Due today", isOn: $dueToday)
-                    .toggleStyle(.switch)
-                    .accessibilityIdentifier("DueToday")
+                
+                HStack {
+                    if list != .today && list != .tomorrow {
+                        Menu {
+                            ForEach(DueDateType.allCases, id: \.self) { dueType in
+                                Button {
+                                    dueDateType = dueType
+                                } label: {
+                                    switch dueType {
+                                    case .none:
+                                        Image(systemName: "xmark.square")
+                                        Text("None")
+                                    case .today:
+                                        Image(systemName: "calendar")
+                                        Text("Today")
+                                    case .tomorrow:
+                                        Image(systemName: "sunrise")
+                                        Text("Tomorrow")
+                                    case .nextweek:
+                                        Image(systemName: "calendar.badge.clock")
+                                        Text("Next week")
+                                    case .custom:
+                                        Image(systemName: "calendar")
+                                        Text("Custom")
+                                    }
+                                }
+                                .accessibilityIdentifier("\(dueType.rawValue)Button")
+                            }
+                        } label: {
+                            switch dueDateType {
+                            case .none:
+                                Image(systemName: "calendar")
+                                Text("Due Date")
+                            case .today:
+                                Image(systemName: "calendar")
+                                Text("Today")
+                            case .tomorrow:
+                                Image(systemName: "sunrise")
+                                Text("Tomorrow")
+                            case .nextweek:
+                                Image(systemName: "calendar.badge.clock")
+                                Text("Next week")
+                            case .custom:
+                                Image(systemName: "calendar")
+                                Text("Custom")
+                            }
+                        }
+                        .accessibilityIdentifier("DueDate")
+                        
+                        if dueDateType == .custom {
+                            DatePicker("",
+                                       selection: $dueDate,
+                                       displayedComponents: .date)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    Menu {
+                        ForEach(0...3, id: \.self) { pri in
+                            Button {
+                                priority = pri
+                            } label: {
+                                switch pri {
+                                case 3:
+                                    Text("High")
+                                case 2:
+                                    Text("Medium")
+                                case 1:
+                                    Text("Low")
+                                default:
+                                    Text("None")
+                                }
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "flag")
+                        switch priority {
+                        case 3:
+                            Text("High")
+                        case 2:
+                            Text("Medium")
+                        case 1:
+                            Text("Low")
+                        default:
+                            Text("Priority")
+                        }
+                    }
+                }
             }
             .padding()
             .toolbar {
@@ -81,11 +168,24 @@ struct NewTaskView: View {
 
     private func save() {
         let task = Todo(name: taskName, link: link)
-        if dueToday {
-            task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
+        if dueDateType != .none {
+            switch dueDateType {
+            case .today:
+                task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
+            case .tomorrow:
+                task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+            case .nextweek:
+                task.nextWeek()
+            case .custom:
+                task.setDueDate(dueDate: dueDate)
+            default:
+                break
+            }
         } else if project == nil && mainTask == nil {
             setDueDate(task: task)
         }
+        
+        task.priority = priority
 
         if let mainTask = mainTask {
             mainTask.subtasks?.append(task)
