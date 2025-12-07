@@ -293,6 +293,7 @@ struct PomPadDoMacApp: App {
                         .disabled(selectedTasks.tasks.count == 0)
                     }
                 } label: {
+                    Image(systemName: "flag")
                     Text("Priority")
                 }
                 

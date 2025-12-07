@@ -99,7 +99,8 @@ final class PomPadDoUITests: XCTestCase {
                 app.sheets.textFields["TaskName"].typeText(task.name)
                 
                 if task.dueToday {
-                    app.sheets.switches["DueToday"].tap()
+                    app/*@START_MENU_TOKEN@*/.menuButtons["DueDate"]/*[[".windows[\"Today\"].menuButtons",".groups",".menuButtons[\"Due Date\"]",".menuButtons[\"DueDate\"]"],[[[-1,3],[-1,2],[-1,1,1],[-1,0]],[[-1,3],[-1,2]]],[0]]@END_MENU_TOKEN@*/.firstMatch.click()
+                    app/*@START_MENU_TOKEN@*/.menuItems["todayButton"]/*[[".menuButtons.menuItems[\"Today\"]",".menus.menuItems[\"todayButton\"]",".menuItems[\"todayButton\"]"],[[[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.firstMatch.click()
                 }
                 
                 app.buttons["SaveTask"].tap()
