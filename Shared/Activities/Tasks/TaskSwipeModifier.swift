@@ -38,8 +38,7 @@ struct TaskSwipeModifier: ViewModifier {
                 } label: {
                     Label(task.completed ? "Uncomplete" : "Complete", systemImage: task.completed ? "square" : "checkmark.square.fill")
                 }
-            }
-            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                
                 Button(role: .destructive) {
                     withAnimation {
                         if let focus = focusTask.task, task == focus {
