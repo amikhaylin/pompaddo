@@ -12,6 +12,8 @@ struct SectionsListView: View {
     @EnvironmentObject var timer: FocusTimer
     @Binding var selectedSideBarItem: SideBarItem?
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
+    @AppStorage("showAllSection") var showAllSection: Bool = true
+    @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -35,20 +37,28 @@ struct SectionsListView: View {
                 }
                 .accessibilityIdentifier("TodayNavButton")
             case .tomorrow:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "sunrise")
-                        Text("Tomorrow")
+                if showTomorrowSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "sunrise")
+                            Text("Tomorrow")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
                     }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.9219498038, green: 0.2769843042, blue: 0.402439177, alpha: 1)))
+                } else {
+                    EmptyView()
                 }
             case .alltasks:
-                NavigationLink(value: item) {
-                    HStack {
-                        Image(systemName: "rectangle.stack")
-                        Text("All")
+                if showAllSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "rectangle.stack")
+                            Text("All")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
                     }
-                    .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
+                } else {
+                    EmptyView()
                 }
             case .focus:
                 NavigationLink(value: item) {

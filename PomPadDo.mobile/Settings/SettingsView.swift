@@ -17,6 +17,9 @@ struct SettingsView: View {
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
+    @AppStorage("showAllSection") var showAllSection: Bool = true
+    @AppStorage("showReviewSection") var showReviewSection: Bool = true
+    @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     
     @State private var viewMode = 0
     
@@ -46,8 +49,16 @@ struct SettingsView: View {
                     Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
                         .toggleStyle(.switch)
                     
-                    Toggle("Show Deadlines section", isOn: $showDeadlinesSection)
-                        .toggleStyle(.switch)
+                    Section("Lists") {
+                        Toggle("Show Deadlines list", isOn: $showDeadlinesSection)
+                            .toggleStyle(.switch)
+                        Toggle("Show All list", isOn: $showAllSection)
+                            .toggleStyle(.switch)
+                        Toggle("Show Review list", isOn: $showReviewSection)
+                            .toggleStyle(.switch)
+                        Toggle("Show Tomorrow list", isOn: $showTomorrowSection)
+                            .toggleStyle(.switch)
+                    }
                 }
             case 1:
                 Form {
