@@ -45,8 +45,7 @@ struct TaskSwipeModifier: ViewModifier {
                             focusTask.task = nil
                         }
 
-                        TasksQuery.deleteTask(context: modelContext,
-                                              task: task)
+                        TasksQuery.deleteTask(task: task)
                     }
                 } label: {
                     Label("Delete", systemImage: "trash.fill")

@@ -50,6 +50,8 @@ struct TasksListView: View {
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         case .deadlines:
             innerTasks = tasks.sorted(by: TasksQuery.sortingDeadlines)
+        case .trash:
+            innerTasks = tasks.sorted(by: TasksQuery.sortDeleted)
         default:
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         }
@@ -201,8 +203,7 @@ struct TasksListView: View {
                 focusTask.task = nil
             }
 
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
+            TasksQuery.deleteTask(task: task)
         }
         if showInspector.show {
             showInspector.show = false
@@ -218,8 +219,7 @@ struct TasksListView: View {
             focusTask.task = nil
         }
 
-        TasksQuery.deleteTask(context: modelContext,
-                              task: task)
+        TasksQuery.deleteTask(task: task)
     }
     
     private func setDueDate(task: Todo) {

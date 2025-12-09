@@ -17,6 +17,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case projects
     case deadlines
     case alltasks
+    case trash
     
     var name: String {
         switch self {
@@ -34,6 +35,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return NSLocalizedString("Deadlines", comment: "")
         case .alltasks:
             return NSLocalizedString("All", comment: "")
+        case .trash:
+            return NSLocalizedString("Trash", comment: "")
         }
     }
 }

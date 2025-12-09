@@ -7,6 +7,9 @@
     " %lld" : {
       "shouldTranslate" : false
     },
+    " days" : {
+
+    },
     "/" : {
       "shouldTranslate" : false
     },
@@ -11302,6 +11305,9 @@
           }
         }
       }
+    },
+    "Empty trash" : {
+
     },
     "Estimate" : {
       "localizations" : {
@@ -30129,6 +30135,9 @@
     "Show Tomorrow list" : {
 
     },
+    "Show Trash list" : {
+
+    },
     "Skip" : {
       "localizations" : {
         "ar" : {
@@ -34760,6 +34769,9 @@
           }
         }
       }
+    },
+    "Trash" : {
+
     },
     "Uncomplete" : {
 

@@ -179,6 +179,18 @@ struct TaskRowView: View {
                     }
                 }
             }
+            
+            if let deletionDate = task.deletionDate {
+                HStack {
+                    if task.deadline == nil {
+                        Spacer()
+                    }
+                    
+                    Image(systemName: "trash")
+                        .foregroundStyle(Color.gray)
+                    Text(deletionDate, style: .date)
+                }
+            }
         }
         .task {
             showingAlertSign = await NotificationManager.checkTaskHasRequest(task: task)

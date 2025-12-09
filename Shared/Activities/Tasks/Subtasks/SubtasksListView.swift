@@ -173,8 +173,7 @@ struct SubtasksListView: View {
                 focusTask.task = nil
             }
 
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
+            TasksQuery.deleteTask(task: task)
         }
         if showInspector.show {
             showInspector.show = false
@@ -190,8 +189,7 @@ struct SubtasksListView: View {
             focusTask.task = nil
         }
 
-        TasksQuery.deleteTask(context: modelContext,
-                              task: task)
+        TasksQuery.deleteTask(task: task)
     }
     
     private func setDueDate(task: Todo) {

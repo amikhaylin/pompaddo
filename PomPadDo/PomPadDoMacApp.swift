@@ -321,8 +321,7 @@ struct PomPadDoMacApp: App {
                             focusTask.task = nil
                         }
 
-                        TasksQuery.deleteTask(context: sharedModelContainer.mainContext,
-                                              task: task)
+                        TasksQuery.deleteTask(task: task)
                     }
                     refresher.refresh.toggle()
                 } label: {

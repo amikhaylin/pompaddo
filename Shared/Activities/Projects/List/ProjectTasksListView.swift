@@ -230,8 +230,7 @@ struct ProjectTasksListView: View {
                 focusTask.task = nil
             }
 
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
+            TasksQuery.deleteTask(task: task)
         }
     }
     
@@ -242,8 +241,7 @@ struct ProjectTasksListView: View {
                     focusTask.task = nil
                 }
 
-                TasksQuery.deleteTask(context: modelContext,
-                                      task: task)
+                TasksQuery.deleteTask(task: task)
             }
         }
     }

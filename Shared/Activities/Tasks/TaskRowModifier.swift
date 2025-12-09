@@ -307,8 +307,7 @@ struct TaskRowModifier: ViewModifier {
                             focusTask.task = nil
                         }
 
-                        TasksQuery.deleteTask(context: modelContext,
-                                              task: task)
+                        TasksQuery.deleteTask(task: task)
                     }
                     showInspector.show = false
                     selectedTasksSet.removeAll()
@@ -317,8 +316,7 @@ struct TaskRowModifier: ViewModifier {
                         focusTask.task = nil
                     }
 
-                    TasksQuery.deleteTask(context: modelContext,
-                                          task: task)
+                    TasksQuery.deleteTask(task: task)
                 }
             } label: {
                 Image(systemName: "trash")

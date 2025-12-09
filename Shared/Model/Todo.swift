@@ -68,6 +68,7 @@ class Todo: Hashable {
     var customRepeatValue: Int = 2
     var customRepeatType: CustomRepeationType? = CustomRepeationType.days
     var deadline: Date?
+    var deletionDate: Date?
     
     @Relationship(deleteRule: .cascade, inverse: \Todo.parentTask)
     var subtasks: [Todo]? = [Todo]()
@@ -92,7 +93,8 @@ class Todo: Hashable {
          baseTimeHours: Int = 0,
          customRepeatValue: Int = 2,
          customRepeatType: CustomRepeationType? = CustomRepeationType.days,
-         deadline: Date? = nil) {
+         deadline: Date? = nil,
+         deletionDate: Date? = nil) {
         self.name = name
         self.dueDate = dueDate
         self.completed = completed
@@ -114,6 +116,7 @@ class Todo: Hashable {
         self.customRepeatValue = customRepeatValue
         self.customRepeatType = customRepeatType
         self.deadline = deadline
+        self.deletionDate = deletionDate
     }
     
     func hash(into hasher: inout Hasher) {
@@ -250,13 +253,22 @@ extension Todo {
     }
     
     // TODO: BE REMOVED WHEN `.cascade` is fixed
-    func deleteSubtasks(context: ModelContext) {
+    func eraseSubtasks(context: ModelContext) {
         if let subtasks = self.subtasks {
             for task in subtasks {
                 print("deleting subtask")
                 task.printInfo()
-                task.deleteSubtasks(context: context)
+                task.eraseSubtasks(context: context)
                 context.delete(task)
+            }
+        }
+    }
+    
+    func deleteSubtasks() {
+        if let subtasks = self.subtasks {
+            for task in subtasks {
+                task.deleteSubtasks()
+                task.deletionDate = Date()
             }
         }
     }

@@ -347,8 +347,7 @@ struct ProjectTaskModifier: ViewModifier {
                                 focusTask.task = nil
                             }
                             
-                            TasksQuery.deleteTask(context: modelContext,
-                                                  task: task)
+                            TasksQuery.deleteTask(task: task)
                             if let index = tasks.firstIndex(of: task) {
                                 tasks.remove(at: index)
                             }
@@ -358,8 +357,7 @@ struct ProjectTaskModifier: ViewModifier {
                             focusTask.task = nil
                         }
 
-                        TasksQuery.deleteTask(context: modelContext,
-                                              task: task)
+                        TasksQuery.deleteTask(task: task)
                         if let index = tasks.firstIndex(of: task) {
                             tasks.remove(at: index)
                         }

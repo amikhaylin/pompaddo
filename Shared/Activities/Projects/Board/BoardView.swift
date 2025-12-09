@@ -179,8 +179,7 @@ struct BoardView: View {
                 focusTask.task = nil
             }
             
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
+            TasksQuery.deleteTask(task: task)
         }
     }
     
@@ -191,8 +190,7 @@ struct BoardView: View {
                     focusTask.task = nil
                 }
                 
-                TasksQuery.deleteTask(context: modelContext,
-                                      task: task)
+                TasksQuery.deleteTask(task: task)
             }
         }
     }

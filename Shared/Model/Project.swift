@@ -91,7 +91,7 @@ extension Project {
         }
         
         for task in self.getTasks() {
-            task.deleteSubtasks(context: context)
+            task.eraseSubtasks(context: context)
             context.delete(task)
         }
     }
