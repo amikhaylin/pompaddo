@@ -118,7 +118,7 @@ extension Project {
     
     func getTasks() -> [Todo] {
         if let tasks = self.tasks {
-            return tasks
+            return tasks.filter({ $0.deletionDate == nil })
         } else {
             return []
         }

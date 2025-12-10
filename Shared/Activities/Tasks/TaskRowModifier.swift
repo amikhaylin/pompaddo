@@ -40,6 +40,21 @@ struct TaskRowModifier: ViewModifier {
             return true
         }
         .contextMenu {
+            if let list = list, list == .trash {
+                Button {
+                    if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                        for task in selectedTasksSet {
+                            task.deletionDate = nil
+                        }
+                    } else {
+                        task.deletionDate = nil
+                    }
+                } label: {
+                    Image(systemName: "arrow.uturn.backward")
+                    Text("Undo delete")
+                }
+            }
+            
             Button {
                 if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                     for task in selectedTasksSet {
@@ -307,7 +322,11 @@ struct TaskRowModifier: ViewModifier {
                             focusTask.task = nil
                         }
 
-                        TasksQuery.deleteTask(task: task)
+                        if let list = list, list == .trash {
+                            TasksQuery.eraseTask(context: modelContext, task: task)
+                        } else {
+                            TasksQuery.deleteTask(task: task)
+                        }
                     }
                     showInspector.show = false
                     selectedTasksSet.removeAll()
@@ -316,7 +335,11 @@ struct TaskRowModifier: ViewModifier {
                         focusTask.task = nil
                     }
 
-                    TasksQuery.deleteTask(task: task)
+                    if let list = list, list == .trash {
+                        TasksQuery.eraseTask(context: modelContext, task: task)
+                    } else {
+                        TasksQuery.deleteTask(task: task)
+                    }
                 }
             } label: {
                 Image(systemName: "trash")

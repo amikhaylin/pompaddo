@@ -223,28 +223,6 @@ struct ProjectTasksListView: View {
         })
         #endif
     }
-    
-    private func deleteTask(task: Todo) {
-        withAnimation {
-            if let focus = focusTask.task, task == focus {
-                focusTask.task = nil
-            }
-
-            TasksQuery.deleteTask(task: task)
-        }
-    }
-    
-    private func deleteItems() {
-        withAnimation {
-            for task in selectedTasks.tasks {
-                if let focus = focusTask.task, task == focus {
-                    focusTask.task = nil
-                }
-
-                TasksQuery.deleteTask(task: task)
-            }
-        }
-    }
 }
 
 #Preview {

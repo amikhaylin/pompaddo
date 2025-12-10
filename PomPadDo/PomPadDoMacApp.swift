@@ -129,6 +129,13 @@ struct PomPadDoMacApp: App {
                     Text("All")
                 }
                 .keyboardShortcut("a", modifiers: [.option, .command])
+
+                Button {
+                    selectedSideBarItem = .trash
+                } label: {
+                    Image(systemName: "trash")
+                    Text("Trash")
+                }
                 
                 Divider()
                 

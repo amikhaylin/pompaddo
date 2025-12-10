@@ -10,6 +10,7 @@ import SwiftData
 import WidgetKit
 
 struct SectionsListView: View {
+    @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
     
     @Binding var selectedSideBarItem: SideBarItem?
@@ -19,6 +20,7 @@ struct SectionsListView: View {
     @Query(filter: TasksQuery.predicateTomorrowActive()) var tasksTomorrowActive: [Todo]
     @Query(filter: TasksQuery.predicateAllActive()) var tasksAllActive: [Todo]
     @Query(filter: TasksQuery.predicateDeadlinesActive()) var tasksDeadlinesActive: [Todo]
+    @Query(filter: TasksQuery.predicateTrash()) var tasksTrash: [Todo]
     @Query var projects: [Project]
            
     @State var badgeManager = BadgeManager()
@@ -47,6 +49,7 @@ struct SectionsListView: View {
                 .accessibilityIdentifier("InboxNavButton")
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
+                        task.deletionDate = nil
                         if let project = task.project, let index = project.tasks?.firstIndex(of: task) {
                             task.project?.tasks?.remove(at: index)
                             task.project = nil
@@ -74,6 +77,7 @@ struct SectionsListView: View {
                 .accessibilityIdentifier("TodayNavButton")
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
+                        task.deletionDate = nil
                         task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                     }
                     return true
@@ -91,6 +95,7 @@ struct SectionsListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
+                            task.deletionDate = nil
                             task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         }
                         return true
@@ -139,6 +144,12 @@ struct SectionsListView: View {
                         .foregroundStyle(Color(#colorLiteral(red: 0.5274487734, green: 0.5852636099, blue: 0.6280642748, alpha: 1)))
                         .badge(tasksAllActive.count)
                     }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            task.deletionDate = nil
+                        }
+                        return true
+                    }
                     .listRowSeparator(.hidden)
                 } else {
                     EmptyView()
@@ -151,6 +162,20 @@ struct SectionsListView: View {
                             Text("Trash")
                         }
                         .foregroundStyle(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                    }
+                    .dropDestination(for: Todo.self) { tasks, _ in
+                        for task in tasks {
+                            TasksQuery.deleteTask(task: task)
+                        }
+                        return true
+                    }
+                    .contextMenu {
+                        Button {
+                            TasksQuery.emptyTrash(context: modelContext, tasks: tasksTrash)
+                        } label: {
+                            Image(systemName: "trash.fill")
+                            Text("Empty trash")
+                        }
                     }
                     .listRowSeparator(.hidden)
                 }

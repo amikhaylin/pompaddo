@@ -256,6 +256,12 @@ struct TasksQuery {
         task.deletionDate = Date()
     }
     
+    static func emptyTrash(context: ModelContext, tasks: [Todo]) {
+        for task in tasks {
+            eraseTask(context: context, task: task)
+        }
+    }
+    
     @MainActor static func fetchData<T: PersistentModel>(context: ModelContext, 
                                                          predicate: Predicate<T>? = nil,
                                                          sort: [SortDescriptor<T>]? = nil) -> [T] {

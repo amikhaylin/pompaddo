@@ -136,7 +136,7 @@ struct TasksListView: View {
         }
         .toolbar {
             ToolbarItemGroup {
-                if list != .deadlines {
+                if list != .deadlines && list != .trash {
                     Button {
                         newTaskIsShowing.toggle()
                     } label: {
@@ -153,7 +153,23 @@ struct TasksListView: View {
                     })
 #endif
                 }
+
+                if list == .trash {
+                    Button {
+                        restoreItems()
+                    } label: {
+                        Label("Undo delete", systemImage: "arrow.uturn.backward")
+                    }
+                    .help("Undo delete")
                     
+                    Button {
+                        TasksQuery.emptyTrash(context: modelContext, tasks: tasks)
+                    } label: {
+                        Label("Empty trash", systemImage: "trash.fill")
+                    }
+                    .help("Empty trash")
+                }
+                
                 Button {
                     deleteItems()
                 } label: {
@@ -203,7 +219,11 @@ struct TasksListView: View {
                 focusTask.task = nil
             }
 
-            TasksQuery.deleteTask(task: task)
+            if let list = list, list == .trash {
+                TasksQuery.eraseTask(context: modelContext, task: task)
+            } else {
+                TasksQuery.deleteTask(task: task)
+            }
         }
         if showInspector.show {
             showInspector.show = false
@@ -214,14 +234,12 @@ struct TasksListView: View {
         }
     }
     
-    private func deleteTask(task: Todo) {
-        if let focus = focusTask.task, task == focus {
-            focusTask.task = nil
+    private func restoreItems() {
+        for task in selectedTasks.tasks {
+            task.deletionDate = nil
         }
-
-        TasksQuery.deleteTask(task: task)
     }
-    
+        
     private func setDueDate(task: Todo) {
         switch list {
         case .inbox:
