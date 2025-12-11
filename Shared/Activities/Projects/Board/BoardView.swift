@@ -77,19 +77,21 @@ struct BoardView: View {
                                     .filter({ $0.status == status && $0.parentTask == nil })
                                     .sorted(by: TasksQuery.sortingWithCompleted),
                                         id: \.self) { task in
-                                    if let subtasks = task.subtasks, subtasks.count > 0 {
+                                    if task.hasSubtasks() {
                                         OutlineGroup([task],
                                                      id: \.self,
                                                      children: \.subtasks) { maintask in
-                                            TaskRowView(task: maintask, showingProject: false, nameLineLimit: 5)
-                                                .modifier(ProjectTaskModifier(task: maintask,
-                                                                              selectedTasksSet: $selectedTasks.tasks,
-                                                                              project: project,
-                                                                              tasks: Binding(
-                                                                                get: { project.tasks ?? [] },
-                                                                                set: { project.tasks = $0 })))
-                                                .tag(maintask)
-                                                .listRowSeparator(.hidden)
+                                            if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
+                                                TaskRowView(task: maintask, showingProject: false, nameLineLimit: 5)
+                                                    .modifier(ProjectTaskModifier(task: maintask,
+                                                                                  selectedTasksSet: $selectedTasks.tasks,
+                                                                                  project: project,
+                                                                                  tasks: Binding(
+                                                                                    get: { project.tasks ?? [] },
+                                                                                    set: { project.tasks = $0 })))
+                                                    .tag(maintask)
+                                                    .listRowSeparator(.hidden)
+                                            }
                                         }
                                         .listRowSeparator(.hidden)
                                     } else {

@@ -79,18 +79,20 @@ struct TasksListView: View {
                     )) {
                         ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
-                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                            if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
                                              children: \.subtasks) { maintask in
-                                    TaskRowView(task: maintask)
-                                        .modifier(TaskRowModifier(task: maintask,
-                                                                  selectedTasksSet: $selectedTasks.tasks,
-                                                                  projects: projects,
-                                                                  list: $list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: $list))
-                                        .tag(maintask)
-                                        .listRowSeparator(.hidden)
+                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
+                                        TaskRowView(task: maintask)
+                                            .modifier(TaskRowModifier(task: maintask,
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      projects: projects,
+                                                                      list: $list))
+                                            .modifier(TaskSwipeModifier(task: maintask, list: $list))
+                                            .tag(maintask)
+                                            .listRowSeparator(.hidden)
+                                    }
                                 }
                                 .listRowSeparator(.hidden)
                             } else {
@@ -236,7 +238,7 @@ struct TasksListView: View {
     
     private func restoreItems() {
         for task in selectedTasks.tasks {
-            task.deletionDate = nil
+            TasksQuery.restoreTask(task: task)
         }
     }
         

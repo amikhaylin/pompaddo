@@ -49,7 +49,7 @@ struct SectionsListView: View {
                 .accessibilityIdentifier("InboxNavButton")
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
-                        task.deletionDate = nil
+                        TasksQuery.restoreTask(task: task)
                         if let project = task.project, let index = project.tasks?.firstIndex(of: task) {
                             task.project?.tasks?.remove(at: index)
                             task.project = nil
@@ -77,7 +77,7 @@ struct SectionsListView: View {
                 .accessibilityIdentifier("TodayNavButton")
                 .dropDestination(for: Todo.self) { tasks, _ in
                     for task in tasks {
-                        task.deletionDate = nil
+                        TasksQuery.restoreTask(task: task)
                         task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
                     }
                     return true
@@ -95,7 +95,7 @@ struct SectionsListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.deletionDate = nil
+                            TasksQuery.restoreTask(task: task)
                             task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         }
                         return true
@@ -146,7 +146,7 @@ struct SectionsListView: View {
                     }
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {
-                            task.deletionDate = nil
+                            TasksQuery.restoreTask(task: task)
                         }
                         return true
                     }

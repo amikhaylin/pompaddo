@@ -273,6 +273,15 @@ extension Todo {
         }
     }
     
+    func restoreSubtasks() {
+        if let subtasks = self.subtasks {
+            for task in subtasks {
+                task.restoreSubtasks()
+                task.deletionDate = nil
+            }
+        }
+    }
+    
     func getTotalFocus() -> Int {
         var result: Int = self.tomatoesCount
         
@@ -283,6 +292,22 @@ extension Todo {
         }
         
         return result
+    }
+    
+    func getSubTasks() -> [Todo] {
+        if let tasks = self.subtasks {
+            return tasks.filter({ $0.deletionDate == nil })
+        } else {
+            return []
+        }
+    }
+    
+    func hasSubtasks() -> Bool {
+        if let subtasks = self.subtasks, subtasks.count > 0 && self.deletionDate == nil {
+            return subtasks.filter({ $0.deletionDate == nil }).count > 0
+        } else {
+            return self.subtasks?.count ?? 0 > 0
+        }
     }
     
     func printInfo() {

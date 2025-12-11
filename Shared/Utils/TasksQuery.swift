@@ -207,6 +207,11 @@ struct TasksQuery {
     }
     
     static func sortDeleted(_ first: Todo, _ second: Todo) -> Bool {
+        if first.deletionDate == nil && second.deletionDate == nil { return false }
+        if first.deletionDate == nil && second.deletionDate != nil { return false }
+        if first.deletionDate != nil && second.deletionDate == nil { return true }
+        if first.deletionDate! == second.deletionDate! { return true }
+        
         return first.deletionDate! > second.deletionDate!
     }
     
@@ -254,6 +259,11 @@ struct TasksQuery {
     static func deleteTask(task: Todo) {
         task.deleteSubtasks()
         task.deletionDate = Date()
+    }
+    
+    static func restoreTask(task: Todo) {
+        task.deletionDate = nil
+        task.restoreSubtasks()
     }
     
     static func emptyTrash(context: ModelContext, tasks: [Todo]) {
