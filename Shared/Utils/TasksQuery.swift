@@ -173,7 +173,7 @@ struct TasksQuery {
     
     static func predicateAll() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            task.parentTask == nil
+            task.parentTask == nil && task.deletionDate == nil
         }
     }
     

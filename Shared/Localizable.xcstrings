@@ -8,7 +8,20 @@
       "shouldTranslate" : false
     },
     " days" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " days"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "дней"
+          }
+        }
+      }
     },
     "/" : {
       "shouldTranslate" : false
@@ -11307,7 +11320,21 @@
       }
     },
     "Empty trash" : {
-
+      "comment" : "Очистить мусорную корзину",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty trash"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить корзину"
+          }
+        }
+      }
     },
     "Estimate" : {
       "localizations" : {
@@ -16917,7 +16944,20 @@
       }
     },
     "Lists" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lists"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Списки"
+          }
+        }
+      }
     },
     "long break" : {
       "localizations" : {
@@ -28644,7 +28684,20 @@
       }
     },
     "Show All list" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show All list"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать список всех задач"
+          }
+        }
+      }
     },
     "Show count of projects to review on app icon" : {
       "localizations" : {
@@ -28891,7 +28944,20 @@
       }
     },
     "Show Deadlines list" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Deadlines list"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать список сроков"
+          }
+        }
+      }
     },
     "Show Deadlines section" : {
       "localizations" : {
@@ -28904,7 +28970,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Показывать секцию сроков"
+            "value" : "Показывать список сроков"
           }
         }
       }
@@ -29642,7 +29708,20 @@
       }
     },
     "Show Review list" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Review list"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать ревью"
+          }
+        }
+      }
     },
     "Show status in tasks's lists" : {
       "localizations" : {
@@ -30133,10 +30212,36 @@
       }
     },
     "Show Tomorrow list" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Tomorrow list"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать список задач на завтра"
+          }
+        }
+      }
     },
     "Show Trash list" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Trash list"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показывать список удаленных"
+          }
+        }
+      }
     },
     "Skip" : {
       "localizations" : {
@@ -34771,13 +34876,53 @@
       }
     },
     "Trash" : {
-
+      "comment" : "Список удаленных",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trash"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Корзина"
+          }
+        }
+      }
     },
     "Uncomplete" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uncomplete"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отменить выполнение"
+          }
+        }
+      }
     },
     "Undo delete" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Undo delete"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отменить удаление"
+          }
+        }
+      }
     },
     "View Mode" : {
       "localizations" : {

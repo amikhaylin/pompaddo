@@ -16,6 +16,7 @@ struct SettingsView: View {
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     @AppStorage("showAllSection") var showAllSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
+    @AppStorage("showTrashSection") var showTrashSection: Bool = true
     
     var body: some View {
         Form {
@@ -25,6 +26,8 @@ struct SettingsView: View {
                 Toggle("Show All list", isOn: $showAllSection)
                     .toggleStyle(.switch)
                 Toggle("Show Tomorrow list", isOn: $showTomorrowSection)
+                    .toggleStyle(.switch)
+                Toggle("Show Trash list", isOn: $showTrashSection)
                     .toggleStyle(.switch)
             }
             

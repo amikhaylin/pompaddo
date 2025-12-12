@@ -20,6 +20,10 @@ struct SettingsView: View {
     @AppStorage("showAllSection") var showAllSection: Bool = true
     @AppStorage("showReviewSection") var showReviewSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
+    @AppStorage("showTrashSection") var showTrashSection: Bool = true
+    
+    @AppStorage("emptyTrash") var emptyTrash: Bool = true
+    @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
     
     @State private var viewMode = 0
     
@@ -46,8 +50,25 @@ struct SettingsView: View {
             switch viewMode {
             case 0:
                 Form {
-                    Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
-                        .toggleStyle(.switch)
+                    Section("General") {
+                        Toggle("Empty trash", isOn: $emptyTrash)
+                            .toggleStyle(.switch)
+                            
+                        if emptyTrash {
+                            HStack {
+                                Picker("", selection: $eraseTasksForDays) {
+                                    ForEach(1..<31) {
+                                        Text("\($0)")
+                                            .tag($0)
+                                    }
+                                }
+                                Text(" days")
+                            }
+                        }
+                        
+                        Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                            .toggleStyle(.switch)
+                    }
                     
                     Section("Lists") {
                         Toggle("Show Deadlines list", isOn: $showDeadlinesSection)
@@ -57,6 +78,8 @@ struct SettingsView: View {
                         Toggle("Show Review list", isOn: $showReviewSection)
                             .toggleStyle(.switch)
                         Toggle("Show Tomorrow list", isOn: $showTomorrowSection)
+                            .toggleStyle(.switch)
+                        Toggle("Show Trash list", isOn: $showTrashSection)
                             .toggleStyle(.switch)
                     }
                 }

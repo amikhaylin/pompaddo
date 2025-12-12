@@ -26,6 +26,9 @@ struct ContentView: View {
     @AppStorage("showAllSection") var showAllSection: Bool = true
     @AppStorage("showReviewSection") var showReviewSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
+    @AppStorage("showTrashSection") var showTrashSection: Bool = true
+    @AppStorage("emptyTrash") var emptyTrash: Bool = true
+    @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
     
     var body: some View {
         NavigationSplitView {
@@ -113,6 +116,12 @@ struct ContentView: View {
                               title: selectedSideBarItem!.name)
                 .environmentObject(showInspector)
                 .environmentObject(selectedTasks)
+            case .trash:
+                TasksListView(predicate: TasksQuery.predicateTrash(),
+                              list: $selectedSideBarItem,
+                              title: selectedSideBarItem!.name)
+                .environmentObject(showInspector)
+                .environmentObject(selectedTasks)
             default:
                 EmptyView()
             }
@@ -162,21 +171,26 @@ struct ContentView: View {
     
     private func getMaxSectionsHeight() -> CGFloat {
         var maxHeight: CGFloat = 150.0
+        let incrementHeight: CGFloat = 50.0
         
         if showDeadlinesSection {
-            maxHeight += 50.0
+            maxHeight += incrementHeight
         }
         
         if showAllSection {
-            maxHeight += 50.0
+            maxHeight += incrementHeight
         }
         
         if showReviewSection {
-            maxHeight += 50.0
+            maxHeight += incrementHeight
         }
         
         if showTomorrowSection {
-            maxHeight += 50.0
+            maxHeight += incrementHeight
+        }
+        
+        if showTrashSection {
+            maxHeight += incrementHeight
         }
         
         return maxHeight

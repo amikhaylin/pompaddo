@@ -14,6 +14,7 @@ struct SectionsListView: View {
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     @AppStorage("showAllSection") var showAllSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
+    @AppStorage("showTrashSection") var showTrashSection: Bool = true
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -78,6 +79,16 @@ struct SectionsListView: View {
                     }
                 } else {
                     EmptyView()
+                }
+            case .trash:
+                if showTrashSection {
+                    NavigationLink(value: item) {
+                        HStack {
+                            Image(systemName: "trash")
+                            Text("Trash")
+                        }
+                        .foregroundStyle(Color(#colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)))
+                    }
                 }
             case .settings:
                 NavigationLink(value: item) {
