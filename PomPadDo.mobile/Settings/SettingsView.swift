@@ -56,7 +56,7 @@ struct SettingsView: View {
                             
                         if emptyTrash {
                             HStack {
-                                Picker("", selection: $eraseTasksForDays) {
+                                Picker("Empty trash after", selection: $eraseTasksForDays) {
                                     ForEach(1..<31) {
                                         Text("\($0)")
                                             .tag($0)

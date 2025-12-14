@@ -11336,6 +11336,22 @@
         }
       }
     },
+    "Empty trash after" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty trash after"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить корзину после"
+          }
+        }
+      }
+    },
     "Estimate" : {
       "localizations" : {
         "ar" : {

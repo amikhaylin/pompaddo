@@ -162,12 +162,14 @@ struct TasksListView: View {
                     } label: {
                         Label("Undo delete", systemImage: "arrow.uturn.backward")
                     }
+                    .disabled(selectedTasks.tasks.count == 0)
                     .help("Undo delete")
                     
                     Button {
                         TasksQuery.emptyTrash(context: modelContext, tasks: tasks)
                     } label: {
                         Label("Empty trash", systemImage: "trash.fill")
+                            .foregroundStyle(Color.red)
                     }
                     .help("Empty trash")
                 }
