@@ -16471,6 +16471,22 @@
         }
       }
     },
+    "Incomplete" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Incomplete"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не выполнено"
+          }
+        }
+      }
+    },
     "Link" : {
       "localizations" : {
         "ar" : {
@@ -34904,22 +34920,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Корзина"
-          }
-        }
-      }
-    },
-    "Uncomplete" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Uncomplete"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Отменить выполнение"
           }
         }
       }

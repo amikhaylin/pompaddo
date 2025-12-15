@@ -36,7 +36,7 @@ struct TaskSwipeModifier: ViewModifier {
                         task.reactivate()
                     }
                 } label: {
-                    Label(task.completed ? "Uncomplete" : "Complete", systemImage: task.completed ? "square" : "checkmark.square.fill")
+                    Label(task.completed ? "Incomplete" : "Complete", systemImage: task.completed ? "square" : "checkmark.square.fill")
                 }
                 
                 Button(role: .destructive) {
