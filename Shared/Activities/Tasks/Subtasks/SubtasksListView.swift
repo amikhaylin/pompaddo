@@ -27,7 +27,7 @@ struct SubtasksListView: View {
     @State private var searchText = ""
     
     var searchResults: [Todo] {
-        let tasks: [Todo] = mainTask.subtasks != nil ? mainTask.subtasks! : [Todo]()
+        let tasks: [Todo] = mainTask.getSubTasks()
         if searchText.isEmpty {
             return tasks.sorted(by: TasksQuery.sortingWithCompleted)
         } else {
@@ -51,18 +51,20 @@ struct SubtasksListView: View {
                     )) {
                         ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil || $0.parentTask == mainTask) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
-                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                            if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
                                              children: \.subtasks) { maintask in
-                                    TaskRowView(task: maintask)
-                                        .modifier(TaskRowModifier(task: maintask,
-                                                                  selectedTasksSet: $selectedTasks.tasks,
-                                                                  projects: projects,
-                                                                  list: $list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: $list))
-                                        .tag(maintask)
-                                        .listRowSeparator(.hidden)
+                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
+                                        TaskRowView(task: maintask)
+                                            .modifier(TaskRowModifier(task: maintask,
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      projects: projects,
+                                                                      list: $list))
+                                            .modifier(TaskSwipeModifier(task: maintask, list: $list))
+                                            .tag(maintask)
+                                            .listRowSeparator(.hidden)
+                                    }
                                 }
                                 .listRowSeparator(.hidden)
                             } else {
@@ -173,8 +175,7 @@ struct SubtasksListView: View {
                 focusTask.task = nil
             }
 
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
+            TasksQuery.deleteTask(task: task)
         }
         if showInspector.show {
             showInspector.show = false
@@ -190,8 +191,7 @@ struct SubtasksListView: View {
             focusTask.task = nil
         }
 
-        TasksQuery.deleteTask(context: modelContext,
-                              task: task)
+        TasksQuery.deleteTask(task: task)
     }
     
     private func setDueDate(task: Todo) {

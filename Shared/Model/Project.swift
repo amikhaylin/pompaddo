@@ -91,7 +91,7 @@ extension Project {
         }
         
         for task in self.getTasks() {
-            task.deleteSubtasks(context: context)
+            task.eraseSubtasks(context: context)
             context.delete(task)
         }
     }
@@ -118,7 +118,7 @@ extension Project {
     
     func getTasks() -> [Todo] {
         if let tasks = self.tasks {
-            return tasks
+            return tasks.filter({ $0.deletionDate == nil })
         } else {
             return []
         }

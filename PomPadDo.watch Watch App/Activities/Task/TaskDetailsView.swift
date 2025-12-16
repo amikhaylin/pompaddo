@@ -58,6 +58,14 @@ struct TaskDetailsView: View {
                 }
             }
             
+            if let deletionDate = task.deletionDate {
+                HStack {
+                    Image(systemName: "trash")
+                        .foregroundStyle(Color.gray)
+                    Text(deletionDate, style: .date)
+                }
+            }
+            
             HStack {
                 if let subtasksCount = task.subtasks?.count,
                    subtasksCount > 0,
@@ -133,131 +141,144 @@ struct TaskDetailsView: View {
                 .font(.caption)
             }
             
-            Button {
-                if !task.completed {
-                    if let focus = focusTask.task, task == focus {
-                        focusTask.task = nil
-                    }
-                    
-                    task.complete(modelContext: modelContext)
-                } else {
-                    task.reactivate()
-                }
-                WidgetCenter.shared.reloadAllTimelines()
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                Label("Complete", systemImage: "checkmark.square")
-            }
-            
-            if let focusedTask = focusTask.task, focusedTask == task {
+            if let list = list, list == .trash {
                 Button {
-                    timer.reset()
-                    if timer.mode == .pause || timer.mode == .longbreak {
-                        timer.skip()
-                    }
-                    focusTask.task = nil
+                    TasksQuery.restoreTask(task: task)
+                    WidgetCenter.shared.reloadAllTimelines()
                     presentationMode.wrappedValue.dismiss()
-                    list = .focus
                 } label: {
-                    Image(systemName: "stop.fill")
-                    Text("Stop focus")
+                    Label("Undo delete", systemImage: "arrow.uturn.backward")
                 }
             } else {
                 Button {
-                    focusTask.task = task
-                    if timer.state == .idle {
+                    if !task.completed {
+                        if let focus = focusTask.task, task == focus {
+                            focusTask.task = nil
+                        }
+                        
+                        task.complete(modelContext: modelContext)
+                    } else {
+                        task.reactivate()
+                    }
+                    WidgetCenter.shared.reloadAllTimelines()
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Label("Complete", systemImage: "checkmark.square")
+                }
+                
+                if let focusedTask = focusTask.task, focusedTask == task {
+                    Button {
                         timer.reset()
-                        timer.start()
-                    } else if timer.state == .paused {
-                        timer.resume()
+                        if timer.mode == .pause || timer.mode == .longbreak {
+                            timer.skip()
+                        }
+                        focusTask.task = nil
+                        presentationMode.wrappedValue.dismiss()
+                        list = .focus
+                    } label: {
+                        Image(systemName: "stop.fill")
+                        Text("Stop focus")
+                    }
+                } else {
+                    Button {
+                        focusTask.task = task
+                        if timer.state == .idle {
+                            timer.reset()
+                            timer.start()
+                        } else if timer.state == .paused {
+                            timer.resume()
+                        }
+                        presentationMode.wrappedValue.dismiss()
+                        list = .focus
+                    } label: {
+                        Image(systemName: "play.fill")
+                        Text("Start focus")
+                    }
+                }
+                
+                Button {
+                    task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
+                    if let list = list, list == .tomorrow {
+                        WidgetCenter.shared.reloadAllTimelines()
                     }
                     presentationMode.wrappedValue.dismiss()
-                    list = .focus
                 } label: {
-                    Image(systemName: "play.fill")
-                    Text("Start focus")
+                    Label("Today", systemImage: "calendar")
                 }
-            }
-            
-            Button {
-                task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
-                if let list = list, list == .tomorrow {
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                Label("Today", systemImage: "calendar")
-            }
-            
-            Button {
-                task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
-                if let list = list, list == .today {
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                Label("Tomorrow", systemImage: "sunrise")
-            }
-        
-            Button {
-                task.nextWeek()
-                if let list = list, list == .today || list == .tomorrow {
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                HStack {
-                    Image(systemName: "calendar.badge.clock")
-                    Text("Next week")
-                }
-            }
-            
-            Button {
-                task.setDueDate(dueDate: nil)
-                if let list = list, list == .today || list == .tomorrow {
-                    WidgetCenter.shared.reloadAllTimelines()
-                }
-                presentationMode.wrappedValue.dismiss()
-            } label: {
-                Label("Clear due date", systemImage: "clear")
-            }
-            
-            if task.repeation != .none {
+                
                 Button {
-                    task.skip()
-                    
-                    WidgetCenter.shared.reloadAllTimelines()
+                    task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
+                    if let list = list, list == .today {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
                     presentationMode.wrappedValue.dismiss()
                 } label: {
-                    Label("Skip", systemImage: "arrow.uturn.forward")
+                    Label("Tomorrow", systemImage: "sunrise")
                 }
-            }
-            
-            NavigationLink {
-                SubtasksListView(list: $list,
-                              title: task.name,
-                              mainTask: task)
-            } label: {
-                Label("Open subtasks", systemImage: "arrow.right")
-            }
-        
-            if let parentTask = task.parentTask {
+                
+                Button {
+                    task.nextWeek()
+                    if let list = list, list == .today || list == .tomorrow {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "calendar.badge.clock")
+                        Text("Next week")
+                    }
+                }
+                
+                Button {
+                    task.setDueDate(dueDate: nil)
+                    if let list = list, list == .today || list == .tomorrow {
+                        WidgetCenter.shared.reloadAllTimelines()
+                    }
+                    presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Label("Clear due date", systemImage: "clear")
+                }
+                
+                if task.repeation != .none {
+                    Button {
+                        task.skip()
+                        
+                        WidgetCenter.shared.reloadAllTimelines()
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Label("Skip", systemImage: "arrow.uturn.forward")
+                    }
+                }
+                
                 NavigationLink {
                     SubtasksListView(list: $list,
-                                  title: parentTask.name,
-                                  mainTask: parentTask)
+                                     title: task.name,
+                                     mainTask: task)
                 } label: {
-                    Label("Open parent task", systemImage: "arrow.left")
+                    Label("Open subtasks", systemImage: "arrow.right")
+                }
+                
+                if let parentTask = task.parentTask {
+                    NavigationLink {
+                        SubtasksListView(list: $list,
+                                         title: parentTask.name,
+                                         mainTask: parentTask)
+                    } label: {
+                        Label("Open parent task", systemImage: "arrow.left")
+                    }
                 }
             }
-            
+                
             Button {
                 if let focus = focusTask.task, task == focus {
                     focusTask.task = nil
                 }
-
-                TasksQuery.deleteTask(context: modelContext,
-                                      task: task)
+                
+                if let list = list, list == .trash {
+                    TasksQuery.eraseTask(context: modelContext, task: task)
+                } else {
+                    TasksQuery.deleteTask(task: task)
+                }
                 WidgetCenter.shared.reloadAllTimelines()
                 presentationMode.wrappedValue.dismiss()
             } label: {

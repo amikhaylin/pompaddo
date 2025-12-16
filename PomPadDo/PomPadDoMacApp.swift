@@ -129,6 +129,13 @@ struct PomPadDoMacApp: App {
                     Text("All")
                 }
                 .keyboardShortcut("a", modifiers: [.option, .command])
+
+                Button {
+                    selectedSideBarItem = .trash
+                } label: {
+                    Image(systemName: "trash")
+                    Text("Trash")
+                }
                 
                 Divider()
                 
@@ -321,8 +328,7 @@ struct PomPadDoMacApp: App {
                             focusTask.task = nil
                         }
 
-                        TasksQuery.deleteTask(context: sharedModelContainer.mainContext,
-                                              task: task)
+                        TasksQuery.deleteTask(task: task)
                     }
                     refresher.refresh.toggle()
                 } label: {

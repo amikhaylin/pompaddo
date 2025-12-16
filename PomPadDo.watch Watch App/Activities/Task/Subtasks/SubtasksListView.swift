@@ -21,7 +21,7 @@ struct SubtasksListView: View {
     @State private var searchText = ""
     
     var searchResults: [Todo] {
-        let tasks: [Todo] = mainTask.subtasks != nil ? mainTask.subtasks! : [Todo]()
+        let tasks: [Todo] = mainTask.getSubTasks()
         if searchText.isEmpty {
             return tasks.sorted(by: TasksQuery.sortingWithCompleted)
         } else {

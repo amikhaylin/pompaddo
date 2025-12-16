@@ -22,12 +22,16 @@ struct TasksQuery {
         let today = Calendar.current.startOfDay(for: Date())
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
         return #Predicate<Todo> { task in
-            if let date = task.dueDate {
-                return date < tomorrow
-            } else if let completeDate = task.completionDate {
-                return (completeDate >= today && completeDate < tomorrow)
-            } else if let deadlineDate = task.deadline {
-                return deadlineDate < tomorrow
+            if task.deletionDate == nil {
+                if let date = task.dueDate {
+                    return date < tomorrow
+                } else if let completeDate = task.completionDate {
+                    return (completeDate >= today && completeDate < tomorrow)
+                } else if let deadlineDate = task.deadline {
+                    return deadlineDate < tomorrow
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
@@ -37,10 +41,14 @@ struct TasksQuery {
     static func predicateTodayActive() -> Predicate<Todo> {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         return #Predicate<Todo> { task in
-            if let date = task.dueDate {
-                return (date < tomorrow && !task.completed)
-            } else if let deadlineDate = task.deadline {
-                return (deadlineDate < tomorrow && !task.completed)
+            if task.deletionDate == nil {
+                if let date = task.dueDate {
+                    return (date < tomorrow && !task.completed)
+                } else if let deadlineDate = task.deadline {
+                    return (deadlineDate < tomorrow && !task.completed)
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
@@ -51,10 +59,14 @@ struct TasksQuery {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
         return #Predicate<Todo> { task in
-            if let date = task.dueDate {
-                return date >= tomorrow && date < future
-            } else if let deadlineDate = task.deadline {
-                return deadlineDate >= tomorrow && deadlineDate < future
+            if task.deletionDate == nil {
+                if let date = task.dueDate {
+                    return date >= tomorrow && date < future
+                } else if let deadlineDate = task.deadline {
+                    return deadlineDate >= tomorrow && deadlineDate < future
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
@@ -63,8 +75,12 @@ struct TasksQuery {
     
     static func predicateDeadlines() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            if task.deadline != nil {
-                return true
+            if task.deletionDate == nil {
+                if task.deadline != nil {
+                    return true
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
@@ -73,8 +89,12 @@ struct TasksQuery {
     
     static func predicateDeadlinesActive() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            if task.deadline != nil {
-                return !task.completed
+            if task.deletionDate == nil {
+                if task.deadline != nil {
+                    return !task.completed
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
@@ -85,10 +105,14 @@ struct TasksQuery {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date()))!
         let future = Calendar.current.date(byAdding: .day, value: 1, to: tomorrow)!
         return #Predicate<Todo> { task in
-            if let date = task.dueDate {
-                return date >= tomorrow && date < future && !task.completed
-            } else if let deadlineDate = task.deadline {
-                return deadlineDate >= tomorrow && deadlineDate < future && !task.completed
+            if task.deletionDate == nil {
+                if let date = task.dueDate {
+                    return date >= tomorrow && date < future && !task.completed
+                } else if let deadlineDate = task.deadline {
+                    return deadlineDate >= tomorrow && deadlineDate < future && !task.completed
+                } else {
+                    return false
+                }
             } else {
                 return false
             }
@@ -97,25 +121,39 @@ struct TasksQuery {
     
     static func predicateInbox() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            task.project == nil && task.parentTask == nil
+            if task.deletionDate == nil {
+                return task.project == nil && task.parentTask == nil
+            } else {
+                return false
+            }
         }
     }
     
     static func predicateInboxActive() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            task.project == nil && task.parentTask == nil && !task.completed
+            if task.deletionDate == nil {
+                return task.project == nil && task.parentTask == nil && !task.completed
+            } else {
+                return false
+            }
         }
     }
     
     static func predicateAllTasks() -> Predicate<Todo> {
-        return #Predicate<Todo> { _ in
-            true
+        return #Predicate<Todo> { task in
+            task.deletionDate == nil
         }
     }
     
     static func predicateActive() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            !task.completed
+            !task.completed && task.deletionDate == nil
+        }
+    }
+    
+    static func predicateTrash() -> Predicate<Todo> {
+        return #Predicate<Todo> { task in
+            return task.deletionDate != nil
         }
     }
     
@@ -135,13 +173,13 @@ struct TasksQuery {
     
     static func predicateAll() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            task.parentTask == nil
+            task.parentTask == nil && task.deletionDate == nil
         }
     }
     
     static func predicateAllActive() -> Predicate<Todo> {
         return #Predicate<Todo> { task in
-            task.parentTask == nil && !task.completed
+            task.parentTask == nil && !task.completed && task.deletionDate == nil
         }
     }
         
@@ -166,6 +204,15 @@ struct TasksQuery {
         if first.completed == false && second.completed { return true }
         if first.completed && second.completed == false { return false }
         return (first.completed && second.completed)
+    }
+    
+    static func sortDeleted(_ first: Todo, _ second: Todo) -> Bool {
+        if first.deletionDate == nil && second.deletionDate == nil { return false }
+        if first.deletionDate == nil && second.deletionDate != nil { return false }
+        if first.deletionDate != nil && second.deletionDate == nil { return true }
+        if first.deletionDate! == second.deletionDate! { return true }
+        
+        return first.deletionDate! > second.deletionDate!
     }
     
     static func sortingWithCompleted(_ first: Todo, _ second: Todo) -> Bool {
@@ -203,10 +250,26 @@ struct TasksQuery {
         return (first.deadline! < second.deadline!)
     }
         
-    static func deleteTask(context: ModelContext, task: Todo) {
+    static func eraseTask(context: ModelContext, task: Todo) {
         task.disconnectFromAll()
-        task.deleteSubtasks(context: context)
+        task.eraseSubtasks(context: context)
         context.delete(task)
+    }
+    
+    static func deleteTask(task: Todo) {
+        task.deleteSubtasks()
+        task.deletionDate = Date()
+    }
+    
+    static func restoreTask(task: Todo) {
+        task.deletionDate = nil
+        task.restoreSubtasks()
+    }
+    
+    static func emptyTrash(context: ModelContext, tasks: [Todo]) {
+        for task in tasks {
+            eraseTask(context: context, task: task)
+        }
     }
     
     @MainActor static func fetchData<T: PersistentModel>(context: ModelContext, 

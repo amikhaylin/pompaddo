@@ -46,20 +46,22 @@ struct ProjectTasksListView: View {
                             .filter({ $0.status == status && $0.parentTask == nil })
                             .sorted(by: TasksQuery.sortingWithCompleted),
                                 id: \.self) { task in
-                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                            if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
                                              children: \.subtasks) { maintask in
-                                    TaskRowView(task: maintask, showingProject: false)
-                                        .modifier(ProjectTaskModifier(task: maintask,
-                                                                      selectedTasksSet: $selectedTasks.tasks,
-                                                                      project: project,
-                                                                      tasks: Binding(
-                                                                        get: { project.tasks ?? [] },
-                                                                        set: { project.tasks = $0 })))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
-                                        .tag(maintask)
-                                        .listRowSeparator(.hidden)
+                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
+                                        TaskRowView(task: maintask, showingProject: false)
+                                            .modifier(ProjectTaskModifier(task: maintask,
+                                                                          selectedTasksSet: $selectedTasks.tasks,
+                                                                          project: project,
+                                                                          tasks: Binding(
+                                                                            get: { project.tasks ?? [] },
+                                                                            set: { project.tasks = $0 })))
+                                            .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
+                                            .tag(maintask)
+                                            .listRowSeparator(.hidden)
+                                    }
                                 }
                                 .listRowSeparator(.hidden)
                             } else {
@@ -150,20 +152,22 @@ struct ProjectTasksListView: View {
                     )) {
                         ForEach(section == .completed ? searchResults.filter({ $0.completed && $0.parentTask == nil }) : searchResults.filter({ $0.completed == false }),
                                 id: \.self) { task in
-                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                            if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
                                              children: \.subtasks) { maintask in
-                                    TaskRowView(task: maintask, showingProject: false)
-                                        .modifier(ProjectTaskModifier(task: maintask,
-                                                                      selectedTasksSet: $selectedTasks.tasks,
-                                                                      project: project,
-                                                                      tasks: Binding(
-                                                                        get: { project.tasks ?? [] },
-                                                                        set: { project.tasks = $0 })))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
-                                        .tag(maintask)
-                                        .listRowSeparator(.hidden)
+                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
+                                        TaskRowView(task: maintask, showingProject: false)
+                                            .modifier(ProjectTaskModifier(task: maintask,
+                                                                          selectedTasksSet: $selectedTasks.tasks,
+                                                                          project: project,
+                                                                          tasks: Binding(
+                                                                            get: { project.tasks ?? [] },
+                                                                            set: { project.tasks = $0 })))
+                                            .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
+                                            .tag(maintask)
+                                            .listRowSeparator(.hidden)
+                                    }
                                 }
                                 .listRowSeparator(.hidden)
                             } else {
@@ -222,30 +226,6 @@ struct ProjectTasksListView: View {
                 .presentationDragIndicator(.visible)
         })
         #endif
-    }
-    
-    private func deleteTask(task: Todo) {
-        withAnimation {
-            if let focus = focusTask.task, task == focus {
-                focusTask.task = nil
-            }
-
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
-        }
-    }
-    
-    private func deleteItems() {
-        withAnimation {
-            for task in selectedTasks.tasks {
-                if let focus = focusTask.task, task == focus {
-                    focusTask.task = nil
-                }
-
-                TasksQuery.deleteTask(context: modelContext,
-                                      task: task)
-            }
-        }
     }
 }
 

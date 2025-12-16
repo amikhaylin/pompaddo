@@ -23,6 +23,10 @@ struct SettingsView: View {
     @AppStorage("showAllSection") var showAllSection: Bool = true
     @AppStorage("showReviewSection") var showReviewSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
+    @AppStorage("showTrashSection") var showTrashSection: Bool = true
+    
+    @AppStorage("emptyTrash") var emptyTrash: Bool = true
+    @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
 
     private enum Tabs: Hashable {
         case general, timer, estimates, advanced
@@ -31,8 +35,24 @@ struct SettingsView: View {
     var body: some View {
         TabView {
             Form {
-                Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
-                    .toggleStyle(.checkbox)
+                Section("General") {
+                    Toggle("Empty trash", isOn: $emptyTrash)
+                        .toggleStyle(.checkbox)
+                        
+                    if emptyTrash {
+                        HStack {
+                            Picker("", selection: $eraseTasksForDays) {
+                                ForEach(1..<31) {
+                                    Text("\($0)")
+                                        .tag($0)
+                                }
+                            }
+                            Text(" days")
+                        }
+                    }
+                    Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                        .toggleStyle(.checkbox)
+                }
                 Section("Lists") {
                     Toggle("Show Deadlines list", isOn: $showDeadlinesSection)
                         .toggleStyle(.checkbox)
@@ -41,6 +61,8 @@ struct SettingsView: View {
                     Toggle("Show Review list", isOn: $showReviewSection)
                         .toggleStyle(.checkbox)
                     Toggle("Show Tomorrow list", isOn: $showTomorrowSection)
+                        .toggleStyle(.checkbox)
+                    Toggle("Show Trash list", isOn: $showTrashSection)
                         .toggleStyle(.checkbox)
                 }
             }
@@ -112,7 +134,7 @@ struct SettingsView: View {
             }
         }
         .padding(20)
-        .frame(width: 575, height: 150)
+        .frame(width: 575, height: 300)
     }
 }
 

@@ -32,6 +32,8 @@ struct TasksListView: View {
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         case .alltasks:
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
+        case .trash:
+            innerTasks = tasks.sorted(by: TasksQuery.sortDeleted)
         default:
             innerTasks = tasks
         }

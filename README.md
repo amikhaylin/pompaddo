@@ -82,7 +82,7 @@ Students and anyone craving order in their workflow.
 - [x] Localization
 - [x] Safari extension
 - [x] Add event to Calendar from task
-- [ ] Trash view
+- [x] Deletion to Trash view
 - [ ] Tags
 - [ ] Shortcuts
 - [ ] Live activities

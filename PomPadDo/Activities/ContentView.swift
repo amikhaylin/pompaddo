@@ -21,8 +21,8 @@ struct ContentView: View {
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var newTaskIsShowing: Bool
     @Binding var selectedProject: Project?
-    @AppStorage("SectionHeight") var sectionHeight = 196.0
-    @State private var currentSectionHeight: CGFloat = 196.0
+    @AppStorage("SectionHeight") var sectionHeight = 330.0
+    @State private var currentSectionHeight: CGFloat = 330.0
     
     @Query var tasks: [Todo]
     
@@ -30,6 +30,9 @@ struct ContentView: View {
     @AppStorage("showAllSection") var showAllSection: Bool = true
     @AppStorage("showReviewSection") var showReviewSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
+    @AppStorage("showTrashSection") var showTrashSection: Bool = true
+    @AppStorage("emptyTrash") var emptyTrash: Bool = true
+    @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
     
     var body: some View {
         NavigationSplitView {
@@ -124,6 +127,12 @@ struct ContentView: View {
                                   title: selectedSideBarItem!.name)
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
+                case .trash:
+                    TasksListView(predicate: TasksQuery.predicateTrash(),
+                                  list: $selectedSideBarItem,
+                                  title: selectedSideBarItem!.name)
+                    .environmentObject(showInspector)
+                    .environmentObject(selectedTasks)
                 default:
                     EmptyView()
                 }
@@ -160,7 +169,15 @@ struct ContentView: View {
             selectedSideBarItem = .inbox
         }
         .task {
+            let deleteTo = Calendar.current.date(byAdding: .day, value: -eraseTasksForDays, to: Date())!
+            
             for task in tasks {
+                if emptyTrash {
+                    if let deletionDate = task.deletionDate, deletionDate < deleteTo {
+                        TasksQuery.eraseTask(context: modelContext, task: task)
+                    }
+                }
+                
                 if let reminder = task.alertDate, reminder > Date() {
                     let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
                     if !hasAlert {
@@ -185,22 +202,27 @@ struct ContentView: View {
     }
     
     private func getMaxSectionsHeigth() -> CGFloat {
-        var maxHeight: CGFloat = 84.0
+        var maxHeight: CGFloat = 90.0
+        let incrementHeight: CGFloat = 30.0
         
         if showDeadlinesSection {
-            maxHeight += 28.0
+            maxHeight += incrementHeight
         }
 
         if showAllSection {
-            maxHeight += 28.0
+            maxHeight += incrementHeight
         }
         
         if showReviewSection {
-            maxHeight += 28.0
+            maxHeight += incrementHeight
         }
         
         if showTomorrowSection {
-            maxHeight += 28.0
+            maxHeight += incrementHeight
+        }
+        
+        if showTrashSection {
+            maxHeight += incrementHeight
         }
         
         return maxHeight

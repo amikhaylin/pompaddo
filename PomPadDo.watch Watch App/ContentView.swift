@@ -18,6 +18,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
     case tomorrow
     case deadlines
     case alltasks
+    case trash
     case settings
     
     var name: String {
@@ -36,6 +37,8 @@ enum SideBarItem: String, Identifiable, CaseIterable {
             return NSLocalizedString("Settings", comment: "")
         case .deadlines:
             return NSLocalizedString("Deadlines", comment: "")
+        case .trash:
+            return NSLocalizedString("Trash", comment: "")
         }
     }
 }
@@ -85,6 +88,10 @@ struct ContentView: View {
                     TasksListView(predicate: TasksQuery.predicateDeadlines(),
                                        list: $selectedSideBarItem,
                                        title: selectedSideBarItem!.name)
+                case .trash:
+                    TasksListView(predicate: TasksQuery.predicateTrash(),
+                                  list: $selectedSideBarItem,
+                                  title: selectedSideBarItem!.name)
                 case .settings:
                     SettingsView()
                 case nil:

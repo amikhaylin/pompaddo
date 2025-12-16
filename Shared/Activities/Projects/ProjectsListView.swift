@@ -95,6 +95,7 @@ struct ProjectsListView: View {
                             .draggable(project)
                             .dropDestination(for: Todo.self) { tasks, _ in
                                 for task in tasks {
+                                    TasksQuery.restoreTask(task: task)
                                     task.project = project
                                     task.status = project.getDefaultStatus()
                                     project.tasks?.append(task)
@@ -160,6 +161,7 @@ struct ProjectsListView: View {
                                     .draggable(project)
                                     .dropDestination(for: Todo.self) { tasks, _ in
                                         for task in tasks {
+                                            TasksQuery.restoreTask(task: task)
                                             task.project = project
                                             task.status = project.getDefaultStatus()
                                             project.tasks?.append(task)

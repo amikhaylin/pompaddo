@@ -50,6 +50,8 @@ struct TasksListView: View {
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         case .deadlines:
             innerTasks = tasks.sorted(by: TasksQuery.sortingDeadlines)
+        case .trash:
+            innerTasks = tasks.sorted(by: TasksQuery.sortDeleted)
         default:
             innerTasks = tasks.sorted(by: TasksQuery.sortingWithCompleted)
         }
@@ -77,18 +79,20 @@ struct TasksListView: View {
                     )) {
                         ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
-                            if let subtasks = task.subtasks, subtasks.count > 0 {
+                            if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
                                              children: \.subtasks) { maintask in
-                                    TaskRowView(task: maintask)
-                                        .modifier(TaskRowModifier(task: maintask,
-                                                                  selectedTasksSet: $selectedTasks.tasks,
-                                                                  projects: projects,
-                                                                  list: $list))
-                                        .modifier(TaskSwipeModifier(task: maintask, list: $list))
-                                        .tag(maintask)
-                                        .listRowSeparator(.hidden)
+                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
+                                        TaskRowView(task: maintask)
+                                            .modifier(TaskRowModifier(task: maintask,
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      projects: projects,
+                                                                      list: $list))
+                                            .modifier(TaskSwipeModifier(task: maintask, list: $list))
+                                            .tag(maintask)
+                                            .listRowSeparator(.hidden)
+                                    }
                                 }
                                 .listRowSeparator(.hidden)
                             } else {
@@ -134,7 +138,7 @@ struct TasksListView: View {
         }
         .toolbar {
             ToolbarItemGroup {
-                if list != .deadlines {
+                if list != .deadlines && list != .trash {
                     Button {
                         newTaskIsShowing.toggle()
                     } label: {
@@ -151,7 +155,25 @@ struct TasksListView: View {
                     })
 #endif
                 }
+
+                if list == .trash {
+                    Button {
+                        restoreItems()
+                    } label: {
+                        Label("Undo delete", systemImage: "arrow.uturn.backward")
+                    }
+                    .disabled(selectedTasks.tasks.count == 0)
+                    .help("Undo delete")
                     
+                    Button {
+                        TasksQuery.emptyTrash(context: modelContext, tasks: tasks)
+                    } label: {
+                        Label("Empty trash", systemImage: "trash.fill")
+                            .foregroundStyle(Color.red)
+                    }
+                    .help("Empty trash")
+                }
+                
                 Button {
                     deleteItems()
                 } label: {
@@ -201,8 +223,11 @@ struct TasksListView: View {
                 focusTask.task = nil
             }
 
-            TasksQuery.deleteTask(context: modelContext,
-                                  task: task)
+            if let list = list, list == .trash {
+                TasksQuery.eraseTask(context: modelContext, task: task)
+            } else {
+                TasksQuery.deleteTask(task: task)
+            }
         }
         if showInspector.show {
             showInspector.show = false
@@ -213,15 +238,12 @@ struct TasksListView: View {
         }
     }
     
-    private func deleteTask(task: Todo) {
-        if let focus = focusTask.task, task == focus {
-            focusTask.task = nil
+    private func restoreItems() {
+        for task in selectedTasks.tasks {
+            TasksQuery.restoreTask(task: task)
         }
-
-        TasksQuery.deleteTask(context: modelContext,
-                              task: task)
     }
-    
+        
     private func setDueDate(task: Todo) {
         switch list {
         case .inbox:
