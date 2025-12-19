@@ -82,8 +82,7 @@ struct TasksListView: View {
                             if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
-                                             children: \.subtasks) { maintask in
-                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
+                                             children: \.visibleSubtasks) { maintask in
                                         TaskRowView(task: maintask)
                                             .modifier(TaskRowModifier(task: maintask,
                                                                       selectedTasksSet: $selectedTasks.tasks,
@@ -92,7 +91,6 @@ struct TasksListView: View {
                                             .modifier(TaskSwipeModifier(task: maintask, list: $list))
                                             .tag(maintask)
                                             .listRowSeparator(.hidden)
-                                    }
                                 }
                                 .listRowSeparator(.hidden)
                             } else {

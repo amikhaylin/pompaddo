@@ -80,7 +80,7 @@ struct BoardView: View {
                                     if task.hasSubtasks() {
                                         OutlineGroup([task],
                                                      id: \.self,
-                                                     children: \.subtasks) { maintask in
+                                                     children: \.visibleSubtasks) { maintask in
                                             if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
                                                 TaskRowView(task: maintask, showingProject: false, nameLineLimit: 5)
                                                     .modifier(ProjectTaskModifier(task: maintask,

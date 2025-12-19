@@ -24,39 +24,37 @@ struct FocusTasksView: View {
                 if task.hasSubtasks() {
                     OutlineGroup([task],
                                  id: \.self,
-                                 children: \.subtasks) { maintask in
-                        if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
-                            HStack {
-                                TaskRowView(task: maintask)
-                                    .modifier(FocusTaskRowModifier(task: maintask, viewMode: $viewMode))
-                                    .tag(maintask)
-                                    .listRowSeparator(.hidden)
-                                
-                                if let focus = focusTask.task, focus == maintask {
-                                    Button {
-                                        timer.reset()
-                                        if timer.mode == .pause || timer.mode == .longbreak {
-                                            timer.skip()
-                                        }
-                                        focusTask.task = nil
-                                    } label: {
-                                        Image(systemName: "stop.fill")
+                                 children: \.visibleSubtasks) { maintask in
+                        HStack {
+                            TaskRowView(task: maintask)
+                                .modifier(FocusTaskRowModifier(task: maintask, viewMode: $viewMode))
+                                .tag(maintask)
+                                .listRowSeparator(.hidden)
+                            
+                            if let focus = focusTask.task, focus == maintask {
+                                Button {
+                                    timer.reset()
+                                    if timer.mode == .pause || timer.mode == .longbreak {
+                                        timer.skip()
                                     }
-                                } else {
-                                    Button {
-                                        focusTask.task = maintask
-                                        viewMode = 1
-                                        if timer.state == .idle {
-                                            timer.reset()
-                                            timer.start()
-                                        } else if timer.state == .paused {
-                                            timer.resume()
-                                        }
-                                    } label: {
-                                        Image(systemName: "play.fill")
-                                    }
-                                    .accessibility(identifier: "\(maintask.name)PlayButton")
+                                    focusTask.task = nil
+                                } label: {
+                                    Image(systemName: "stop.fill")
                                 }
+                            } else {
+                                Button {
+                                    focusTask.task = maintask
+                                    viewMode = 1
+                                    if timer.state == .idle {
+                                        timer.reset()
+                                        timer.start()
+                                    } else if timer.state == .paused {
+                                        timer.resume()
+                                    }
+                                } label: {
+                                    Image(systemName: "play.fill")
+                                }
+                                .accessibility(identifier: "\(maintask.name)PlayButton")
                             }
                         }
                     }

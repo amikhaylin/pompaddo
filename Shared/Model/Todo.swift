@@ -301,6 +301,13 @@ extension Todo {
             return []
         }
     }
+
+    /// Children для `OutlineGroup`: показываем только "живые" (не удалённые) подзадачи.
+    /// Возвращаем `nil`, если детей нет — так `OutlineGroup` не будет считать, что ветка раскрываемая.
+    var visibleSubtasks: [Todo]? {
+        let filtered = (subtasks ?? []).filter { $0.deletionDate == nil }
+        return filtered.isEmpty ? nil : filtered
+    }
     
     func hasSubtasks() -> Bool {
         if let subtasks = self.subtasks, subtasks.count > 0 && self.deletionDate == nil {
