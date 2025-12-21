@@ -49,19 +49,17 @@ struct ProjectTasksListView: View {
                             if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
-                                             children: \.subtasks) { maintask in
-                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
-                                        TaskRowView(task: maintask, showingProject: false)
-                                            .modifier(ProjectTaskModifier(task: maintask,
-                                                                          selectedTasksSet: $selectedTasks.tasks,
-                                                                          project: project,
-                                                                          tasks: Binding(
-                                                                            get: { project.tasks ?? [] },
-                                                                            set: { project.tasks = $0 })))
-                                            .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
-                                            .tag(maintask)
-                                            .listRowSeparator(.hidden)
-                                    }
+                                             children: \.visibleSubtasks) { maintask in
+                                    TaskRowView(task: maintask, showingProject: false)
+                                        .modifier(ProjectTaskModifier(task: maintask,
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      project: project,
+                                                                      tasks: Binding(
+                                                                        get: { project.tasks ?? [] },
+                                                                        set: { project.tasks = $0 })))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
+                                        .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
                                 .listRowSeparator(.hidden)
                             } else {
@@ -155,19 +153,17 @@ struct ProjectTasksListView: View {
                             if task.hasSubtasks() {
                                 OutlineGroup([task],
                                              id: \.self,
-                                             children: \.subtasks) { maintask in
-                                    if maintask.deletionDate == nil || task == maintask || task.deletionDate != nil {
-                                        TaskRowView(task: maintask, showingProject: false)
-                                            .modifier(ProjectTaskModifier(task: maintask,
-                                                                          selectedTasksSet: $selectedTasks.tasks,
-                                                                          project: project,
-                                                                          tasks: Binding(
-                                                                            get: { project.tasks ?? [] },
-                                                                            set: { project.tasks = $0 })))
-                                            .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
-                                            .tag(maintask)
-                                            .listRowSeparator(.hidden)
-                                    }
+                                             children: \.visibleSubtasks) { maintask in
+                                    TaskRowView(task: maintask, showingProject: false)
+                                        .modifier(ProjectTaskModifier(task: maintask,
+                                                                      selectedTasksSet: $selectedTasks.tasks,
+                                                                      project: project,
+                                                                      tasks: Binding(
+                                                                        get: { project.tasks ?? [] },
+                                                                        set: { project.tasks = $0 })))
+                                        .modifier(TaskSwipeModifier(task: maintask, list: .constant(.projects)))
+                                        .tag(maintask)
+                                        .listRowSeparator(.hidden)
                                 }
                                 .listRowSeparator(.hidden)
                             } else {

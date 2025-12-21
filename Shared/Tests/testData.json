@@ -10,6 +10,7 @@
         "taskToFocus": "Create interface design",
         "scroll": "Vertical scroll bar, 1 page",
         "inboxTask": "Buy coffee",
+        "dueDate": "Due Date",
         "groups": [
             {
                 "name": "🦝 Personal"
@@ -99,6 +100,7 @@
         "taskToFocus": "Создать дизайн интерфейса",
         "scroll": "Вертикальная полоса прокрутки, 1 страница",
         "inboxTask": "Купить кофе",
+        "dueDate": "Дата завершения",
         "groups": [
             {
                 "name": "🦝 Личное"
