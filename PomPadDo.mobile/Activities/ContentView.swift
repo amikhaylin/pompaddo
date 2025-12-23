@@ -145,7 +145,15 @@ struct ContentView: View {
             }
         }
         .task {
+            let deleteTo = Calendar.current.date(byAdding: .day, value: -eraseTasksForDays, to: Date())!
+            
             for task in tasks {
+                if emptyTrash {
+                    if let deletionDate = task.deletionDate, deletionDate < deleteTo {
+                        TasksQuery.eraseTask(context: modelContext, task: task)
+                    }
+                }
+                
                 if let reminder = task.alertDate, reminder > Date() {
                     let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
                     if !hasAlert {
