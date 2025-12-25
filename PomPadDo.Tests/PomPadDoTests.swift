@@ -130,9 +130,18 @@ final class PomPadDoTests: XCTestCase {
 
         tasks = fetchData()
 
-        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
+        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.") // main task + subtask
+        XCTAssertTrue(task.visibleSubtasks?.count == 1, "There should be 1 visible subtasks")
         
-        // Delete subtask
+        // Mark subtask as deleted
+        TasksQuery.deleteTask(task: subtask)
+        
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 2, "There should be still 2 tasks.") // main task + subtask
+        XCTAssertTrue(task.subtasks?.count == 1, "There should be 1 subtasks")
+        XCTAssertTrue(task.visibleSubtasks == nil || task.visibleSubtasks?.count == 0, "There should be 0 visible subtasks")
+
+        // Real subtask deletion
         TasksQuery.eraseTask(context: dataContainer.mainContext,
                               task: subtask)
         
@@ -253,6 +262,12 @@ final class PomPadDoTests: XCTestCase {
         XCTAssertEqual(project.getTasks().count, 1, "There should be 1 task")
         
         // Delete task
+        TasksQuery.deleteTask(task: task)
+
+        tasks = fetchData()
+        XCTAssertEqual(tasks.count, 1, "There should be 1 task")
+        XCTAssertEqual(project.getTasks().count, 0, "There should be 0 task")
+        
         TasksQuery.eraseTask(context: dataContainer.mainContext,
                               task: task)
         
