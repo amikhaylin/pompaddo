@@ -222,8 +222,8 @@ struct ProjectsListView: View {
                                     Button {
                                         for project in projects.filter({ $0.group == group }) {
                                             project.group = nil
-                                            modelContext.delete(group)
                                         }
+                                        modelContext.delete(group)
                                     } label: {
                                         Image(systemName: "trash")
                                             .foregroundStyle(Color.red)
