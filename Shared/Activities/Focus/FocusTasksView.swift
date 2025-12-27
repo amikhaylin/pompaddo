@@ -22,7 +22,7 @@ struct FocusTasksView: View {
             List(selection: $selectedTask) {
                 ForEach(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
                         id: \.self) { task in
-                    if task.visibleSubtasks != nil {
+                    if task.visibleSubtasks?.isEmpty == false {
                         OutlineGroup([task],
                                      id: \.self,
                                      children: \.visibleSubtasks) { maintask in
