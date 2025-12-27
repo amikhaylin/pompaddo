@@ -20409,6 +20409,22 @@
         }
       }
     },
+    "No tasks for today" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tasks for today"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет задач на сегодня"
+          }
+        }
+      }
+    },
     "None" : {
       "localizations" : {
         "ar" : {

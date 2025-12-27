@@ -309,14 +309,6 @@ extension Todo {
         return filtered.isEmpty ? nil : filtered
     }
     
-    func hasSubtasks() -> Bool {
-        if let subtasks = self.subtasks, subtasks.count > 0 && self.deletionDate == nil {
-            return subtasks.filter({ $0.deletionDate == nil }).count > 0
-        } else {
-            return self.subtasks?.count ?? 0 > 0
-        }
-    }
-    
     func printInfo() {
         let name = self.name
         let uid = self.uid

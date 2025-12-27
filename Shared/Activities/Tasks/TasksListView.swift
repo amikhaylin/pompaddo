@@ -79,7 +79,7 @@ struct TasksListView: View {
                     )) {
                         ForEach(section == .completed ? searchResults.filter({ $0.completed && ($0.parentTask == nil) }) : searchResults.filter({ $0.completed == false }),
                                      id: \.self) { task in
-                            if task.hasSubtasks() {
+                            if task.visibleSubtasks != nil {
                                 OutlineGroup([task],
                                              id: \.self,
                                              children: \.visibleSubtasks) { maintask in
