@@ -309,7 +309,11 @@ extension Todo {
             let filtered = (subtasks ?? []).filter { $0.deletionDate == nil }
             return filtered.isEmpty ? nil : filtered
         } else {
-            return self.subtasks ?? []
+            if let subtasks = self.subtasks, subtasks.isEmpty == false {
+                return subtasks
+            } else {
+                return nil
+            }
         }
     }
     
