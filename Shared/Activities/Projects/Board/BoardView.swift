@@ -77,7 +77,7 @@ struct BoardView: View {
                                     .filter({ $0.status == status && $0.parentTask == nil })
                                     .sorted(by: TasksQuery.sortingWithCompleted),
                                         id: \.self) { task in
-                                    if task.hasSubtasks() {
+                                    if task.visibleSubtasks?.isEmpty == false {
                                         OutlineGroup([task],
                                                      id: \.self,
                                                      children: \.visibleSubtasks) { maintask in

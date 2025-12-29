@@ -18,20 +18,55 @@ struct FocusTasksView: View {
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     var body: some View {
-        List(selection: $selectedTask) {
-            ForEach(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
-                    id: \.self) { task in
-                if task.hasSubtasks() {
-                    OutlineGroup([task],
-                                 id: \.self,
-                                 children: \.visibleSubtasks) { maintask in
+        if tasksTodayActive.count > 0 {
+            List(selection: $selectedTask) {
+                ForEach(tasksTodayActive.sorted(by: TasksQuery.defaultSorting),
+                        id: \.self) { task in
+                    if task.visibleSubtasks?.isEmpty == false {
+                        OutlineGroup([task],
+                                     id: \.self,
+                                     children: \.visibleSubtasks) { maintask in
+                            HStack {
+                                TaskRowView(task: maintask)
+                                    .modifier(FocusTaskRowModifier(task: maintask, viewMode: $viewMode))
+                                    .tag(maintask)
+                                    .listRowSeparator(.hidden)
+                                
+                                if let focus = focusTask.task, focus == maintask {
+                                    Button {
+                                        timer.reset()
+                                        if timer.mode == .pause || timer.mode == .longbreak {
+                                            timer.skip()
+                                        }
+                                        focusTask.task = nil
+                                    } label: {
+                                        Image(systemName: "stop.fill")
+                                    }
+                                } else {
+                                    Button {
+                                        focusTask.task = maintask
+                                        viewMode = 1
+                                        if timer.state == .idle {
+                                            timer.reset()
+                                            timer.start()
+                                        } else if timer.state == .paused {
+                                            timer.resume()
+                                        }
+                                    } label: {
+                                        Image(systemName: "play.fill")
+                                    }
+                                    .accessibility(identifier: "\(maintask.name)PlayButton")
+                                }
+                            }
+                        }
+                                     .listRowSeparator(.hidden)
+                    } else {
                         HStack {
-                            TaskRowView(task: maintask)
-                                .modifier(FocusTaskRowModifier(task: maintask, viewMode: $viewMode))
-                                .tag(maintask)
-                                .listRowSeparator(.hidden)
+                            TaskRowView(task: task)
+                                .modifier(FocusTaskRowModifier(task: task, viewMode: $viewMode))
+                                .tag(task)
                             
-                            if let focus = focusTask.task, focus == maintask {
+                            if let focus = focusTask.task, focus == task {
                                 Button {
                                     timer.reset()
                                     if timer.mode == .pause || timer.mode == .longbreak {
@@ -43,7 +78,7 @@ struct FocusTasksView: View {
                                 }
                             } else {
                                 Button {
-                                    focusTask.task = maintask
+                                    focusTask.task = task
                                     viewMode = 1
                                     if timer.state == .idle {
                                         timer.reset()
@@ -54,45 +89,23 @@ struct FocusTasksView: View {
                                 } label: {
                                     Image(systemName: "play.fill")
                                 }
-                                .accessibility(identifier: "\(maintask.name)PlayButton")
+                                .accessibility(identifier: "\(task.name)PlayButton")
                             }
                         }
+                        .listRowSeparator(.hidden)
                     }
-                    .listRowSeparator(.hidden)
-                } else {
-                    HStack {
-                        TaskRowView(task: task)
-                            .modifier(FocusTaskRowModifier(task: task, viewMode: $viewMode))
-                            .tag(task)
-                        
-                        if let focus = focusTask.task, focus == task {
-                            Button {
-                                timer.reset()
-                                if timer.mode == .pause || timer.mode == .longbreak {
-                                    timer.skip()
-                                }
-                                focusTask.task = nil
-                            } label: {
-                                Image(systemName: "stop.fill")
-                            }
-                        } else {
-                            Button {
-                                focusTask.task = task
-                                viewMode = 1
-                                if timer.state == .idle {
-                                    timer.reset()
-                                    timer.start()
-                                } else if timer.state == .paused {
-                                    timer.resume()
-                                }
-                            } label: {
-                                Image(systemName: "play.fill")
-                            }
-                            .accessibility(identifier: "\(task.name)PlayButton")
-                        }
-                    }
-                    .listRowSeparator(.hidden)
                 }
+            }
+        } else {
+            VStack {
+                Spacer()
+                Image(systemName: "checkmark.circle")
+                    .resizable()
+                    .foregroundStyle(Color.gray)
+                    .frame(width: 100, height: 100)
+                
+                Text("No tasks for today")
+                Spacer()
             }
         }
     }
