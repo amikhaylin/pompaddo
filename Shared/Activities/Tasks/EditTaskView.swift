@@ -300,7 +300,7 @@ struct EditTaskView: View {
             Section("Focus stats") {
                 HStack {
                     Text("Focused for ")
-                    Image(systemName: "target")
+                    Image("tomato")
                     Text("\(task.tomatoesCount)")
                     Image(systemName: "stopwatch")
                     Text("\(Int((task.tomatoesCount * 25) / 60))h\(Int((task.tomatoesCount * 25) % 60))m ")
@@ -309,7 +309,7 @@ struct EditTaskView: View {
                 HStack {
                     let totalFocused = task.getTotalFocus()
                     Text("Total focused ")
-                    Image(systemName: "target")
+                    Image("tomato")
                     Text("\(totalFocused)")
                     Image(systemName: "stopwatch")
                     Text("\(Int((totalFocused * 25) / 60))h\(Int((totalFocused * 25) % 60))m ")

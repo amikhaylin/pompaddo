@@ -1,6 +1,15 @@
 {
-  "originHash" : "1dd746256f4cfddc1042ecbc5880b9d0ff5dc0fa2453fa3fc1686cec8bba6fc1",
+  "originHash" : "cd6cf1a2259bbcd4af1ca94200db5653b548377388eb17c0a60ef52f729423c7",
   "pins" : [
+    {
+      "identity" : "cloudstorage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tomlokhorst/CloudStorage",
+      "state" : {
+        "revision" : "d94cb14e563c1a20edeba8a861395c60c2b9d064",
+        "version" : "0.7.0"
+      }
+    },
     {
       "identity" : "swiftdata-transferrable",
       "kind" : "remoteSourceControl",

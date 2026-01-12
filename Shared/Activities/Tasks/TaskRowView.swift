@@ -81,7 +81,7 @@ struct TaskRowView: View {
                 }
                 
                 if let focus = focusTask.task, focus == task {
-                    Image(systemName: "target")
+                    Image("tomato")
                         .foregroundStyle(Color.red)
                     if task.tomatoesCount > 0 {
                         Text("\(task.tomatoesCount)")
@@ -89,7 +89,7 @@ struct TaskRowView: View {
                             .font(.caption)
                     }
                 } else if task.tomatoesCount > 0 {
-                    Image(systemName: "target")
+                    Image("tomato")
                         .foregroundStyle(Color.gray)
                     Text("\(task.tomatoesCount)")
                         .foregroundStyle(Color.gray)

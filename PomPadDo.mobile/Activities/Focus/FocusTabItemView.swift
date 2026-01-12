@@ -14,14 +14,15 @@ struct FocusTabItemView: View {
     var body: some View {
         Group {
             if timer.state == .idle {
-                Image(systemName: "target")
+                Image("tomato")
                 #if os(watchOS)
                 Text("Focus")
                 #endif
             } else {
                 HStack {
                     if timer.mode == .work {
-                        Image(systemName: "brain.head.profile")
+                        Image("tomato.fill")
+                            .symbolRenderingMode(.multicolor)
                     } else {
                         Image(systemName: "cup.and.saucer.fill")
                     }

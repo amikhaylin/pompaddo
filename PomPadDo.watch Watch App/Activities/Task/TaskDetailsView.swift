@@ -88,7 +88,7 @@ struct TaskDetailsView: View {
                 }
                 
                 if task.tomatoesCount > 0 {
-                    Image(systemName: "target")
+                    Image("tomato")
                         .foregroundStyle(Color.gray)
                     Text("\(task.tomatoesCount)")
                         .foregroundStyle(Color.gray)
