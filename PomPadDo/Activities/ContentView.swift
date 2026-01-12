@@ -128,7 +128,7 @@ struct ContentView: View {
                     .environmentObject(showInspector)
                     .environmentObject(selectedTasks)
                 case .trash:
-                    TasksListView(predicate: TasksQuery.predicateTrash(),
+                    TrashListView(predicate: TasksQuery.predicateTrash(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
                     .environmentObject(showInspector)
