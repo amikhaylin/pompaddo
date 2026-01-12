@@ -13,7 +13,7 @@ struct TrashListView: View {
     @EnvironmentObject var refresher: Refresher
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @Query var tasks: [Todo]
+    @Query(filter: TasksQuery.predicateTrash()) var tasks: [Todo]
 
     @Binding var list: SideBarItem?
     @State private var title: String
@@ -160,11 +160,9 @@ struct TrashListView: View {
         }
     }
     
-    init(predicate: Predicate<Todo>, list: Binding<SideBarItem?>, title: String) {
+    init(list: Binding<SideBarItem?>, title: String) {
         self._list = list
         self.title = title
-        
-        self._tasks = Query(filter: predicate)
     }
 }
 
@@ -187,8 +185,7 @@ struct TrashListView: View {
                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     let _ = Previewer(container!)
     
-    TrashListView(predicate: TasksQuery.predicateToday(),
-                  list: .constant(.inbox),
+    TrashListView(list: .constant(.inbox),
                   title: "Some list")
     .environmentObject(showInspector)
     .environmentObject(selectedTasks)

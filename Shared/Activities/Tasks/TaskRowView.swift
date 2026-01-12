@@ -182,9 +182,7 @@ struct TaskRowView: View {
             
             if let deletionDate = task.deletionDate {
                 HStack {
-                    if task.deadline == nil {
-                        Spacer()
-                    }
+                    Spacer()
                     
                     Image(systemName: "trash")
                         .foregroundStyle(Color.gray)
