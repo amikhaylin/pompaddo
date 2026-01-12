@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudStorage
 
 struct SettingsView: View {
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
@@ -18,6 +19,8 @@ struct SettingsView: View {
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     @AppStorage("showTrashSection") var showTrashSection: Bool = true
     
+    @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false
+    
     var body: some View {
         Form {
             Section("General") {
@@ -28,6 +31,9 @@ struct SettingsView: View {
                 Toggle("Show Tomorrow list", isOn: $showTomorrowSection)
                     .toggleStyle(.switch)
                 Toggle("Show Trash list", isOn: $showTrashSection)
+                    .toggleStyle(.switch)
+                
+                Toggle("BuJo checkboxes style", isOn: $bujoCheckboxes)
                     .toggleStyle(.switch)
             }
             

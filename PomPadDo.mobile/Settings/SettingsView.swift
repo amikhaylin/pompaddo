@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudStorage
 
 struct SettingsView: View {
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
@@ -26,6 +27,8 @@ struct SettingsView: View {
     @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
     
     @State private var viewMode = 0
+    
+    @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false
     
     var body: some View {
         VStack {
@@ -67,6 +70,9 @@ struct SettingsView: View {
                         }
                         
                         Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                            .toggleStyle(.switch)
+                        
+                        Toggle("BuJo checkboxes style", isOn: $bujoCheckboxes)
                             .toggleStyle(.switch)
                     }
                     

@@ -8,12 +8,15 @@
 import SwiftUI
 import SwiftData
 import WidgetKit
+import CloudStorage
 
 struct TaskCheckBoxView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var focusTask: FocusTask
     @EnvironmentObject var timer: FocusTimer
     @Bindable var task: Todo
+    
+    @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false
     
     var body: some View {
         Button(action: {
@@ -34,11 +37,21 @@ struct TaskCheckBoxView: View {
             #endif
         }, label: {
             if task.completed {
-                Image(systemName: "checkmark.square.fill")
-                    .foregroundStyle(Color.gray)
+                if bujoCheckboxes {
+                    Image(systemName: "xmark")
+                        .foregroundStyle(Color.gray)
+                } else {
+                    Image(systemName: "checkmark.square.fill")
+                        .foregroundStyle(Color.gray)
+                }
             } else {
-                Image(systemName: "square")
-                    .foregroundStyle(getColor())
+                if bujoCheckboxes {
+                    Image("dot")
+                        .foregroundStyle(getColor())
+                } else {
+                    Image(systemName: "square")
+                        .foregroundStyle(getColor())
+                }
             }
         })
         .buttonStyle(PlainButtonStyle())

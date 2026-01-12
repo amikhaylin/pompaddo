@@ -4907,6 +4907,22 @@
         }
       }
     },
+    "BuJo checkboxes style" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BuJo checkboxes style"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BuJo стиль для чекбоксов"
+          }
+        }
+      }
+    },
     "Calendar" : {
       "localizations" : {
         "ar" : {

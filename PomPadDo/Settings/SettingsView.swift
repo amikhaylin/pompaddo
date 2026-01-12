@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CloudStorage
 
 struct SettingsView: View {
     @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
@@ -27,6 +28,8 @@ struct SettingsView: View {
     
     @AppStorage("emptyTrash") var emptyTrash: Bool = true
     @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
+    
+    @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false
 
     private enum Tabs: Hashable {
         case general, timer, estimates, advanced
@@ -51,6 +54,9 @@ struct SettingsView: View {
                         }
                     }
                     Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
+                        .toggleStyle(.checkbox)
+                    
+                    Toggle("BuJo checkboxes style", isOn: $bujoCheckboxes)
                         .toggleStyle(.checkbox)
                 }
                 Section("Lists") {
