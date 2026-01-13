@@ -18,6 +18,9 @@
 		4D7A1FE82C0778E4009052AE /* PomPadDo.safari.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */; };
 		4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBAD6152BECBEEF002666BD /* Credits.rtf */; };
+		4DC43AA22F1502A7009A5C73 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC43AA12F1502A7009A5C73 /* CloudStorage */; };
+		4DC43AA42F1502DA009A5C73 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC43AA32F1502DA009A5C73 /* CloudStorage */; };
+		4DC43AA62F1502F0009A5C73 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC43AA52F1502F0009A5C73 /* CloudStorage */; };
 		4DF1E9E42C1B56E7007FC401 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DF1E9E32C1B56E7007FC401 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -442,6 +445,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DC43AA42F1502DA009A5C73 /* CloudStorage in Frameworks */,
 				4D2867812D61FAFE0064ADF3 /* SwiftDataTransferrable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +461,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DC43AA62F1502F0009A5C73 /* CloudStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */,
+				4DC43AA22F1502A7009A5C73 /* CloudStorage in Frameworks */,
 				4DF1E9E42C1B56E7007FC401 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,6 +630,7 @@
 			name = PomPadDo.mobile;
 			packageProductDependencies = (
 				4D2867802D61FAFE0064ADF3 /* SwiftDataTransferrable */,
+				4DC43AA32F1502DA009A5C73 /* CloudStorage */,
 			);
 			productName = PomPadDo.mobile;
 			productReference = 4D28673D2D61F5BE0064ADF3 /* PomPadDo.mobile.app */;
@@ -672,6 +679,7 @@
 			);
 			name = "PomPadDo.watch Watch App";
 			packageProductDependencies = (
+				4DC43AA52F1502F0009A5C73 /* CloudStorage */,
 			);
 			productName = "PomPadDo.watch Watch App";
 			productReference = 4D3E50B22D6382E7008C1FDB /* PomPadDo.watch Watch App.app */;
@@ -740,6 +748,7 @@
 			name = PomPadDo;
 			packageProductDependencies = (
 				4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */,
+				4DC43AA12F1502A7009A5C73 /* CloudStorage */,
 			);
 			productName = PomPadDoMac;
 			productReference = 4D95FE222B7B6BF300C8918D /* PomPadDo.app */;
@@ -881,6 +890,7 @@
 			mainGroup = 4D95FE192B7B6BF300C8918D;
 			packageReferences = (
 				4D9FFAD22BA9C38300C5F5AE /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */,
+				4DC43AA02F1502A7009A5C73 /* XCRemoteSwiftPackageReference "CloudStorage" */,
 			);
 			preferredProjectObjectVersion = 56;
 			productRefGroup = 4D95FE232B7B6BF300C8918D /* Products */;
@@ -1128,7 +1138,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1165,7 +1175,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "PomPadDoWatchWidgetsExtension Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1197,7 +1207,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -1219,7 +1229,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -1245,7 +1255,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1286,7 +1296,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile/PomPadDo_mobile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.mobile/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1325,7 +1335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MARKETING_VERSION = 1.0;
@@ -1343,7 +1353,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MARKETING_VERSION = 1.0;
@@ -1365,7 +1375,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1396,7 +1406,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PomPadDo.watch Watch App/PomPadDo.watch Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo.watch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1429,7 +1439,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1464,7 +1474,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = PomPadDoWidgetsExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDoWidgets/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDoWidgets;
@@ -1498,7 +1508,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
@@ -1533,7 +1543,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
@@ -1697,7 +1707,7 @@
 				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
@@ -1735,7 +1745,7 @@
 				CODE_SIGN_ENTITLEMENTS = PomPadDo/PomPadDoMac.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"PomPadDo/Preview Content\"";
 				ENABLE_APP_SANDBOX = YES;
@@ -1769,7 +1779,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -1787,7 +1797,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -1804,7 +1814,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
@@ -1824,7 +1834,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 114;
+				CURRENT_PROJECT_VERSION = 116;
 				DEVELOPMENT_TEAM = 9Z68336878;
 				GENERATE_INFOPLIST_FILE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
@@ -1953,6 +1963,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		4DC43AA02F1502A7009A5C73 /* XCRemoteSwiftPackageReference "CloudStorage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tomlokhorst/CloudStorage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1965,6 +1983,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4D9FFAD22BA9C38300C5F5AE /* XCRemoteSwiftPackageReference "swiftdata-transferrable" */;
 			productName = SwiftDataTransferrable;
+		};
+		4DC43AA12F1502A7009A5C73 /* CloudStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DC43AA02F1502A7009A5C73 /* XCRemoteSwiftPackageReference "CloudStorage" */;
+			productName = CloudStorage;
+		};
+		4DC43AA32F1502DA009A5C73 /* CloudStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DC43AA02F1502A7009A5C73 /* XCRemoteSwiftPackageReference "CloudStorage" */;
+			productName = CloudStorage;
+		};
+		4DC43AA52F1502F0009A5C73 /* CloudStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4DC43AA02F1502A7009A5C73 /* XCRemoteSwiftPackageReference "CloudStorage" */;
+			productName = CloudStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

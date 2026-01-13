@@ -116,44 +116,30 @@ struct BoardView: View {
                                                   context: modelContext,
                                                   focusTask: focusTask,
                                                   timer: timer)
-                                
-//                                task.disconnectFromParentTask()
-//                                task.parentTask = nil
-//                                task.project = project
-//                                project.tasks?.append(task)
-//                                
-//                                if status.doCompletion {
-//                                    if !task.completed {
-//                                        task.complete(modelContext: modelContext)
-//                                    }
-//                                } else {
-//                                    task.reactivate()
-//                                }
-//                                
-//                                if status.clearDueDate {
-//                                    task.setDueDate(dueDate: nil)
-//                                }
-//                                
-//                                task.status = status
                             }
                             return true
                         }
                         .frame(width: status.width)
                         
-                        Rectangle()
-                            .fill(Color.gray.opacity(0.1))
-                            .cornerRadius(5)
-                            .frame(width: 5)
-                            #if os(macOS)
-                            .cursor(.resizeLeftRight)
-                            #endif
-                            .gesture(
-                                DragGesture()
-                                    .onChanged { gesture in
-                                        let newWidth = status.width + gesture.translation.width
-                                        status.width = max(newWidth, 300)
-                                    }
-                            )
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.gray.opacity(0.1))
+                                .cornerRadius(5)
+                            
+                            Image(systemName: "ellipsis")
+                                .rotationEffect(.degrees(90))
+                        }
+                        .frame(width: 5)
+                        #if os(macOS)
+                        .cursor(.resizeLeftRight)
+                        #endif
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    let newWidth = status.width + gesture.translation.width
+                                    status.width = max(newWidth, 300)
+                                }
+                        )
                     }
                 }
             }

@@ -4907,6 +4907,22 @@
         }
       }
     },
+    "BuJo style" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BuJo style"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "BuJo стиль"
+          }
+        }
+      }
+    },
     "Calendar" : {
       "localizations" : {
         "ar" : {

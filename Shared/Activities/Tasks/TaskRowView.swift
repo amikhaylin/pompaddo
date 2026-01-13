@@ -8,13 +8,14 @@
 import SwiftUI
 import SwiftData
 import Charts
+import CloudStorage
 
 struct TaskRowView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
     @State private var showingAlertSign = false
-    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7
     var showingProject: Bool
     var nameLineLimit: Int
     
@@ -81,7 +82,7 @@ struct TaskRowView: View {
                 }
                 
                 if let focus = focusTask.task, focus == task {
-                    Image(systemName: "target")
+                    Image("tomato")
                         .foregroundStyle(Color.red)
                     if task.tomatoesCount > 0 {
                         Text("\(task.tomatoesCount)")
@@ -89,7 +90,7 @@ struct TaskRowView: View {
                             .font(.caption)
                     }
                 } else if task.tomatoesCount > 0 {
-                    Image(systemName: "target")
+                    Image("tomato")
                         .foregroundStyle(Color.gray)
                     Text("\(task.tomatoesCount)")
                         .foregroundStyle(Color.gray)
@@ -187,6 +188,8 @@ struct TaskRowView: View {
                     Image(systemName: "trash")
                         .foregroundStyle(Color.gray)
                     Text(deletionDate, style: .date)
+                        .foregroundStyle(Color.gray)
+                        .font(.caption)
                 }
             }
         }

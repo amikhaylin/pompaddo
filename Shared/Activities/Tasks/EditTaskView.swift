@@ -9,12 +9,13 @@
 import SwiftUI
 import SwiftData
 import EventKit
+import CloudStorage
 
 struct EditTaskView: View {
     @Bindable var task: Todo
     @State private var dueDate = Date()
     @State private var showingDatePicker = false
-    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7
     @State private var alertDate = Date()
     @State private var showingReminderDatePicker = false
     @State private var estimateExplanation = false
@@ -300,7 +301,7 @@ struct EditTaskView: View {
             Section("Focus stats") {
                 HStack {
                     Text("Focused for ")
-                    Image(systemName: "target")
+                    Image("tomato")
                     Text("\(task.tomatoesCount)")
                     Image(systemName: "stopwatch")
                     Text("\(Int((task.tomatoesCount * 25) / 60))h\(Int((task.tomatoesCount * 25) % 60))m ")
@@ -309,7 +310,7 @@ struct EditTaskView: View {
                 HStack {
                     let totalFocused = task.getTotalFocus()
                     Text("Total focused ")
-                    Image(systemName: "target")
+                    Image("tomato")
                     Text("\(totalFocused)")
                     Image(systemName: "stopwatch")
                     Text("\(Int((totalFocused * 25) / 60))h\(Int((totalFocused * 25) % 60))m ")

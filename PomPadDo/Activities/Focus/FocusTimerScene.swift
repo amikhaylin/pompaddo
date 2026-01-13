@@ -27,7 +27,8 @@ struct FocusTimerScene: Scene {
             if focusState == .idle {
                 let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
                 
-                let image = NSImage(systemSymbolName: "target", accessibilityDescription: nil)
+                let image = NSImage(named: "tomato")
+                
                 let updateImage = image?.withSymbolConfiguration(configuration)
                 
                 Image(nsImage: updateImage!)
@@ -35,9 +36,10 @@ struct FocusTimerScene: Scene {
                 HStack {
                     if focusMode == .work {
                         let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
-                            .applying(.init(hierarchicalColor: .red))
-                        
-                        let image = NSImage(systemSymbolName: "brain.head.profile", accessibilityDescription: nil)
+                            .applying(.preferringMulticolor())
+  
+                        let image = NSImage(named: "tomato.fill")
+
                         let updateImage = image?.withSymbolConfiguration(configuration)
                         
                         Image(nsImage: updateImage!)

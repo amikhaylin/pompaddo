@@ -42,6 +42,23 @@ struct ProjectTaskModifier: ViewModifier {
             }
             .contextMenu {
                 Button {
+                    if !task.completed {
+                        if let focus = focusTask.task, task == focus {
+                            timer.reset()
+                            if timer.mode == .pause || timer.mode == .longbreak {
+                                timer.skip()
+                            }
+                            focusTask.task = nil
+                        }
+                        task.complete(modelContext: modelContext)
+                    } else {
+                        task.reactivate()
+                    }
+                } label: {
+                    Label(task.completed ? "Incomplete" : "Complete", systemImage: task.completed ? "square" : "checkmark.square.fill")
+                }
+                
+                Button {
                     if selectedTasksSet.count > 0 {
                         for task in selectedTasksSet {
                             task.setDueDate(dueDate: nil)

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CloudStorage
 
 struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
@@ -14,7 +15,7 @@ struct ProjectView: View {
     @EnvironmentObject var showInspector: InspectorToggler
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
-    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7
     @State private var newTaskIsShowing = false
     
     @Bindable var project: Project
