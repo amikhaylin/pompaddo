@@ -37,20 +37,24 @@ struct ContentView: View {
                 SectionsListView(selectedSideBarItem: $selectedSideBarItem)
                     .frame(height: currentSectionHeight)
                 
-                Rectangle()
-                    .fill(Color.gray.opacity(0.1))
-                    .cornerRadius(5)
-                    .frame(height: 5)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { gesture in
-                                let newHeight = currentSectionHeight + gesture.translation.height
-                                currentSectionHeight = min(max(newHeight, 50.0), getMaxSectionsHeight())
-                            }
-                            .onEnded({ _ in
-                                sectionHeight = currentSectionHeight
-                            })
-                    )
+                ZStack {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.1))
+                        .cornerRadius(5)
+                    
+                    Image(systemName: "ellipsis")
+                }
+                .frame(height: 5)
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            let newHeight = currentSectionHeight + gesture.translation.height
+                            currentSectionHeight = min(max(newHeight, 50.0), getMaxSectionsHeight())
+                        }
+                        .onEnded({ _ in
+                            sectionHeight = currentSectionHeight
+                        })
+                )
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedSideBarItem: $selectedSideBarItem)
