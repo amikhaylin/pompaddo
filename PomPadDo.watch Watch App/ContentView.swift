@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import WidgetKit
+import CloudStorage
 
 enum SideBarItem: String, Identifiable, CaseIterable {
     var id: String { rawValue }
@@ -50,10 +51,10 @@ struct ContentView: View {
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
     
-    @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
-    @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
-    @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
-    @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
+    @CloudStorage("timerWorkSession") private var timerWorkSession: Double = UserDefaults.standard.value(forKey: "timerWorkSession") as? Double ?? 1500.0
+    @CloudStorage("timerBreakSession") private var timerBreakSession: Double = UserDefaults.standard.value(forKey: "timerBreakSession") as? Double ?? 300.0
+    @CloudStorage("timerLongBreakSession") private var timerLongBreakSession: Double = UserDefaults.standard.value(forKey: "timerLongBreakSession") as? Double ?? 1200.0
+    @CloudStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = UserDefaults.standard.value(forKey: "timerWorkSessionsCount") as? Double ?? 4.0
     
     @Binding var selectedSideBarItem: SideBarItem?
     @State private var addToInbox = false

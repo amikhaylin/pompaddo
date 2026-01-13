@@ -9,10 +9,10 @@ import SwiftUI
 import CloudStorage
 
 struct SettingsView: View {
-    @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
-    @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
-    @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
-    @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
+    @CloudStorage("timerWorkSession") private var timerWorkSession: Double = UserDefaults.standard.value(forKey: "timerWorkSession") as? Double ?? 1500.0
+    @CloudStorage("timerBreakSession") private var timerBreakSession: Double = UserDefaults.standard.value(forKey: "timerBreakSession") as? Double ?? 300.0
+    @CloudStorage("timerLongBreakSession") private var timerLongBreakSession: Double = UserDefaults.standard.value(forKey: "timerLongBreakSession") as? Double ?? 1200.0
+    @CloudStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = UserDefaults.standard.value(forKey: "timerWorkSessionsCount") as? Double ?? 4.0
     
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     @AppStorage("showAllSection") var showAllSection: Bool = true
@@ -33,7 +33,7 @@ struct SettingsView: View {
                 Toggle("Show Trash list", isOn: $showTrashSection)
                     .toggleStyle(.switch)
                 
-                Toggle("BuJo checkboxes style", isOn: $bujoCheckboxes)
+                Toggle("BuJo style", isOn: $bujoCheckboxes)
                     .toggleStyle(.switch)
             }
             

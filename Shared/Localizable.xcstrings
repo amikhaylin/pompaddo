@@ -4907,18 +4907,18 @@
         }
       }
     },
-    "BuJo checkboxes style" : {
+    "BuJo style" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "BuJo checkboxes style"
+            "value" : "BuJo style"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "BuJo стиль для чекбоксов"
+            "value" : "BuJo стиль"
           }
         }
       }

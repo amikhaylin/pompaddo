@@ -9,12 +9,13 @@
 import SwiftUI
 import SwiftData
 import EventKit
+import CloudStorage
 
 struct EditTaskView: View {
     @Bindable var task: Todo
     @State private var dueDate = Date()
     @State private var showingDatePicker = false
-    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7
     @State private var alertDate = Date()
     @State private var showingReminderDatePicker = false
     @State private var estimateExplanation = false

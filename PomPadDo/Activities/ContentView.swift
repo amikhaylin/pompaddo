@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 import SwiftDataTransferrable
+import CloudStorage
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -31,8 +32,8 @@ struct ContentView: View {
     @AppStorage("showReviewSection") var showReviewSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     @AppStorage("showTrashSection") var showTrashSection: Bool = true
-    @AppStorage("emptyTrash") var emptyTrash: Bool = true
-    @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
+    @CloudStorage("emptyTrash") var emptyTrash: Bool = UserDefaults.standard.value(forKey: "emptyTrash") as? Bool ?? true
+    @CloudStorage("eraseTasksForDays") var eraseTasksForDays: Int = UserDefaults.standard.value(forKey: "eraseTasksForDays") as? Int ?? 7
     
     var body: some View {
         NavigationSplitView {
@@ -40,21 +41,25 @@ struct ContentView: View {
                 SectionsListView(selectedSideBarItem: $selectedSideBarItem)
                     .frame(height: currentSectionHeight)
                 
-                Rectangle()
-                    .fill(Color.gray.opacity(0.1))
-                    .cornerRadius(5)
-                    .frame(height: 5)
-                    .cursor(.resizeUpDown)
-                    .gesture(
-                        DragGesture()
-                            .onChanged { gesture in
-                                let newHeight = currentSectionHeight + gesture.translation.height
-                                currentSectionHeight = min(max(newHeight, 28.0), getMaxSectionsHeigth())
-                            }
-                            .onEnded({ _ in
-                                sectionHeight = currentSectionHeight
-                            })
-                    )
+                ZStack {
+                    Rectangle()
+                        .fill(Color.gray.opacity(0.1))
+                        .cornerRadius(5)
+                    
+                    Image(systemName: "ellipsis")
+                }
+                .frame(height: 5)
+                .cursor(.resizeUpDown)
+                .gesture(
+                    DragGesture()
+                        .onChanged { gesture in
+                            let newHeight = currentSectionHeight + gesture.translation.height
+                            currentSectionHeight = min(max(newHeight, 28.0), getMaxSectionsHeigth())
+                        }
+                        .onEnded({ _ in
+                            sectionHeight = currentSectionHeight
+                        })
+                )
                 
                 ProjectsListView(selectedProject: $selectedProject,
                                  selectedSideBarItem: $selectedSideBarItem)

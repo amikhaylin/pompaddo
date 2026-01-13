@@ -9,12 +9,12 @@ import SwiftUI
 import CloudStorage
 
 struct SettingsView: View {
-    @AppStorage("timerWorkSession") private var timerWorkSession: Double = 1500.0
-    @AppStorage("timerBreakSession") private var timerBreakSession: Double = 300.0
-    @AppStorage("timerLongBreakSession") private var timerLongBreakSession: Double = 1200.0
-    @AppStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = 4.0
+    @CloudStorage("timerWorkSession") private var timerWorkSession: Double = UserDefaults.standard.value(forKey: "timerWorkSession") as? Double ?? 1500.0
+    @CloudStorage("timerBreakSession") private var timerBreakSession: Double = UserDefaults.standard.value(forKey: "timerBreakSession") as? Double ?? 300.0
+    @CloudStorage("timerLongBreakSession") private var timerLongBreakSession: Double = UserDefaults.standard.value(forKey: "timerLongBreakSession") as? Double ?? 1200.0
+    @CloudStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = UserDefaults.standard.value(forKey: "timerWorkSessionsCount") as? Double ?? 4.0
     
-    @AppStorage("estimateFactor") private var estimateFactor: Double = 1.7
+    @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7
     
     @AppStorage("refreshPeriod") private var refreshPeriod: Double = 15.0
     
@@ -26,8 +26,8 @@ struct SettingsView: View {
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     @AppStorage("showTrashSection") var showTrashSection: Bool = true
     
-    @AppStorage("emptyTrash") var emptyTrash: Bool = true
-    @AppStorage("eraseTasksForDays") var eraseTasksForDays: Int = 7
+    @CloudStorage("emptyTrash") var emptyTrash: Bool = UserDefaults.standard.value(forKey: "emptyTrash") as? Bool ?? true
+    @CloudStorage("eraseTasksForDays") var eraseTasksForDays: Int = UserDefaults.standard.value(forKey: "eraseTasksForDays") as? Int ?? 7
     
     @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false
 
@@ -56,7 +56,7 @@ struct SettingsView: View {
                     Toggle("Show count of projects to review on app icon", isOn: $showReviewProjectsBadge)
                         .toggleStyle(.checkbox)
                     
-                    Toggle("BuJo checkboxes style", isOn: $bujoCheckboxes)
+                    Toggle("BuJo style", isOn: $bujoCheckboxes)
                         .toggleStyle(.checkbox)
                 }
                 Section("Lists") {
