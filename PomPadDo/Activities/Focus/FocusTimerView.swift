@@ -25,6 +25,7 @@ struct FocusTimerView: View {
     
     @State private var viewMode = 0
     @State private var textToInbox = ""
+    @State private var showingSaveSessionAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -121,9 +122,35 @@ struct FocusTimerView: View {
                                 }
                             } else {
                                 Button {
-                                    timer.reset()
+                                    if focusTask.task != nil {
+                                        showingSaveSessionAlert.toggle()
+                                    } else {
+                                        timer.reset()
+                                    }
                                 } label: {
                                     Label("Stop", systemImage: "stop.fill")
+                                }
+                                .popover(isPresented: $showingSaveSessionAlert, attachmentAnchor: .point(.top)) {
+                                    VStack {
+                                        Text("Save the current session to a task")
+                                        
+                                        HStack {
+                                            Button("No") {
+                                                showingSaveSessionAlert.toggle()
+                                                timer.reset()
+                                            }
+                                            
+                                            Button("Yes") {
+                                                showingSaveSessionAlert.toggle()
+                                                if let task = focusTask.task {
+                                                    task.tomatoesCount += 1
+                                                }
+                                                timer.reset()
+                                            }
+                                        }
+                                    }
+                                    .padding(10)
+                                    .presentationCompactAdaptation(.popover)
                                 }
                             }
                         }

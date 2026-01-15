@@ -13,6 +13,7 @@ struct SettingsView: View {
     @CloudStorage("timerBreakSession") private var timerBreakSession: Double = UserDefaults.standard.value(forKey: "timerBreakSession") as? Double ?? 300.0
     @CloudStorage("timerLongBreakSession") private var timerLongBreakSession: Double = UserDefaults.standard.value(forKey: "timerLongBreakSession") as? Double ?? 1200.0
     @CloudStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = UserDefaults.standard.value(forKey: "timerWorkSessionsCount") as? Double ?? 4.0
+    @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false
     
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     @AppStorage("showAllSection") var showAllSection: Bool = true
@@ -65,6 +66,9 @@ struct SettingsView: View {
                             .tag(Double($0))
                     }
                 }
+                
+                Toggle("Save unfinished sessions to a task", isOn: $timerSaveUnfinished)
+                    .toggleStyle(.switch)
                 
                 Button {
                     timerWorkSession = 1500.0

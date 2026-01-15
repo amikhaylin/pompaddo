@@ -17,6 +17,7 @@ struct TaskCheckBoxView: View {
     @Bindable var task: Todo
     
     @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false
+    @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false
     
     var body: some View {
         Button(action: {
@@ -25,6 +26,9 @@ struct TaskCheckBoxView: View {
                     timer.reset()
                     if timer.mode == .pause || timer.mode == .longbreak {
                         timer.skip()
+                    }
+                    if timerSaveUnfinished {
+                        focus.tomatoesCount += 1
                     }
                     focusTask.task = nil
                 }

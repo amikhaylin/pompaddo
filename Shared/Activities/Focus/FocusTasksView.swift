@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import CloudStorage
 
 struct FocusTasksView: View {
     @Environment(\.modelContext) private var modelContext
@@ -14,6 +15,7 @@ struct FocusTasksView: View {
     @EnvironmentObject var focusTask: FocusTask
     @State private var selectedTask: Todo?
     @Binding var viewMode: Int
+    @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
@@ -37,6 +39,9 @@ struct FocusTasksView: View {
                                         timer.reset()
                                         if timer.mode == .pause || timer.mode == .longbreak {
                                             timer.skip()
+                                        }
+                                        if timerSaveUnfinished {
+                                            focus.tomatoesCount += 1
                                         }
                                         focusTask.task = nil
                                     } label: {
@@ -71,6 +76,9 @@ struct FocusTasksView: View {
                                     timer.reset()
                                     if timer.mode == .pause || timer.mode == .longbreak {
                                         timer.skip()
+                                    }
+                                    if timerSaveUnfinished {
+                                        focus.tomatoesCount += 1
                                     }
                                     focusTask.task = nil
                                 } label: {

@@ -11,6 +11,7 @@
 
 import SwiftUI
 import SwiftData
+import CloudStorage
 
 struct TaskRowModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
@@ -26,6 +27,7 @@ struct TaskRowModifier: ViewModifier {
     @State private var showAddSubtask = false
     @Query var groups: [ProjectGroup]
     @State private var renameTask: Todo?
+    @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false
     
     func body(content: Content) -> some View {
        content
@@ -60,6 +62,9 @@ struct TaskRowModifier: ViewModifier {
                             timer.reset()
                             if timer.mode == .pause || timer.mode == .longbreak {
                                 timer.skip()
+                            }
+                            if timerSaveUnfinished {
+                                focus.tomatoesCount += 1
                             }
                             focusTask.task = nil
                         }
@@ -139,6 +144,9 @@ struct TaskRowModifier: ViewModifier {
                         timer.reset()
                         if timer.mode == .pause || timer.mode == .longbreak {
                             timer.skip()
+                        }
+                        if timerSaveUnfinished {
+                            focus.tomatoesCount += 1
                         }
                         focusTask.task = nil
                     } label: {

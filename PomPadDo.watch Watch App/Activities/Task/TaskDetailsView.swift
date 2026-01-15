@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import WidgetKit
+import CloudStorage
 
 struct TaskDetailsView: View {
     @Environment(\.modelContext) private var modelContext
@@ -17,6 +18,7 @@ struct TaskDetailsView: View {
     @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
     @Binding var list: SideBarItem?
+    @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false
     
     var body: some View {
         ScrollView(.vertical) {
@@ -171,6 +173,9 @@ struct TaskDetailsView: View {
                         timer.reset()
                         if timer.mode == .pause || timer.mode == .longbreak {
                             timer.skip()
+                        }
+                        if timerSaveUnfinished {
+                            focusedTask.tomatoesCount += 1
                         }
                         focusTask.task = nil
                         presentationMode.wrappedValue.dismiss()
