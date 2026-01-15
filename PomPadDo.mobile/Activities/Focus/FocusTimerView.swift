@@ -16,6 +16,7 @@ struct FocusTimerView: View {
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
     @AppStorage("focus-timer-tab") private var viewMode = 0
+    @State private var showingSaveSessionAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -104,15 +105,46 @@ struct FocusTimerView: View {
                                 .accessibility(identifier: "SkipTimerButton")
                             } else {
                                 Button {
-                                    timer.reset()
-                                    if timer.mode == .pause || timer.mode == .longbreak {
-                                        timer.skip()
+                                    if focusTask.task != nil {
+                                        showingSaveSessionAlert.toggle()
+                                    } else {
+                                        timer.reset()
+                                        if timer.mode == .pause || timer.mode == .longbreak {
+                                            timer.skip()
+                                        }
                                     }
                                 } label: {
                                     Label("Stop", systemImage: "stop.fill")
                                 }
                                 .padding()
                                 .accessibility(identifier: "StopTimerButton")
+                                .popover(isPresented: $showingSaveSessionAlert, attachmentAnchor: .point(.top)) {
+                                    VStack {
+                                        Text("Save the current session to a task")
+                                        
+                                        HStack {
+                                            Button("No") {
+                                                showingSaveSessionAlert.toggle()
+                                                timer.reset()
+                                                if timer.mode == .pause || timer.mode == .longbreak {
+                                                    timer.skip()
+                                                }                                            }
+                                            
+                                            Button("Yes") {
+                                                showingSaveSessionAlert.toggle()
+                                                if let task = focusTask.task {
+                                                    task.tomatoesCount += 1
+                                                }
+                                                timer.reset()
+                                                if timer.mode == .pause || timer.mode == .longbreak {
+                                                    timer.skip()
+                                                }
+                                            }
+                                        }
+                                    }
+                                    .padding(10)
+                                    .presentationCompactAdaptation(.popover)
+                                }
                             }
                         }
                     }

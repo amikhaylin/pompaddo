@@ -8,6 +8,7 @@
 
 import SwiftUI
 import SwiftData
+import CloudStorage
 
 struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
@@ -18,6 +19,7 @@ struct TaskSwipeModifier: ViewModifier {
     @EnvironmentObject var timer: FocusTimer
     @Bindable var task: Todo
     @Binding var list: SideBarItem?
+    @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false
     
     func body(content: Content) -> some View {
         content
@@ -28,6 +30,9 @@ struct TaskSwipeModifier: ViewModifier {
                             timer.reset()
                             if timer.mode == .pause || timer.mode == .longbreak {
                                 timer.skip()
+                            }
+                            if timerSaveUnfinished {
+                                focus.tomatoesCount += 1
                             }
                             focusTask.task = nil
                         }
@@ -75,6 +80,35 @@ struct TaskSwipeModifier: ViewModifier {
                                       mainTask: task)
                     } label: {
                         Label("Open subtasks", systemImage: "arrow.right")
+                    }
+                }
+                
+                if let focus = focusTask.task, focus == task {
+                    Button {
+                        timer.reset()
+                        if timer.mode == .pause || timer.mode == .longbreak {
+                            timer.skip()
+                        }
+                        if timerSaveUnfinished {
+                            focus.tomatoesCount += 1
+                        }
+                        focusTask.task = nil
+                    } label: {
+                        Image(systemName: "stop.fill")
+                        Text("Stop focus")
+                    }
+                } else {
+                    Button {
+                        focusTask.task = task
+                        if timer.state == .idle {
+                            timer.reset()
+                            timer.start()
+                        } else if timer.state == .paused {
+                            timer.resume()
+                        }
+                    } label: {
+                        Image(systemName: "play.fill")
+                        Text("Start focus")
                     }
                 }
             }
