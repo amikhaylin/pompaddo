@@ -14,36 +14,14 @@ made to myself by myself
 [![](https://toolbox.marketingtools.apple.com/api/assets/featured-content/apps/badges/badge-1/en-us.svg)](https://apps.apple.com/app/id6742197499)
  
 
-Manage projects, stay focused, sync progress across devices, GTD, Pomodoro and Kanban — all in one app designed specifically for freelancers and solo workers.
+Sometimes tasks pile up so quickly that it's hard to figure out where to start. PomPadDo combines three proven methodologies - GTD, Pomodoro, and Kanban - in one simple app to help you get it all done.
 
-🌟 Key Features: <br>
-✅ Global Inbox<br>
-Add your thoughts to your Inbox from anywhere in the app. <br>
-✅ Flexible Task Lists<br>
-Prioritize tasks, add subtasks. No detail slips through the cracks. <br>
-✅ Kanban Boards for Projects<br>
-Visualize workflows from idea to completion. Drag and drop cards, customize statuses, and track progress.<br>
-✅ Regular Project Reviews<br>
-Conduct weekly or monthly check-ins. Celebrate wins, adjust plans, and stay on track.<br>
-✅ Built-in Focus Timer<br>
-Work in cycles: 25 minutes of focus + 5 minutes of rest. Beat procrastination and boost efficiency.<br>
-✅ Instant iCloud Sync<br>
-Your tasks and projects stay updated across iPhone, iPad, Mac, and Apple Watch.<br>
-
-💡 Why PomPadDo?<br>
-We’ve combined the best of task management and productivity techniques so you can:
-
-Plan without chaos,<br>
-Track projects visually,<br>
-Focus without distractions,<br>
-Sync seamlessly across devices.<br>
-
-🚀 Perfect for:
-
-Freelancers,<br>
-Designers, developers, writers,<br>
-Students and anyone craving order in their workflow.
-
+Key features:
+- Global Inbox: Add your thoughts to your Inbox from anywhere in the app
+- Projects review: Review your projects periodically
+- Project board view: Show a project as a board (Kanban) or a list
+- Sync: Sync across devices via iCloud
+- Focus timer: Focus on a task for a set amount of time
 
 ## macOS app
 <!--![](mac-main.png) --->

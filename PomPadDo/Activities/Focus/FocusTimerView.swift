@@ -123,6 +123,7 @@ struct FocusTimerView: View {
                             } else {
                                 Button {
                                     if focusTask.task != nil {
+                                        timer.pause()
                                         showingSaveSessionAlert.toggle()
                                     } else {
                                         timer.reset()
