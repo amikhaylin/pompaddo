@@ -39,7 +39,6 @@
     },
     "NSHumanReadableDescription" : {
       "comment" : "Human readable description",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
