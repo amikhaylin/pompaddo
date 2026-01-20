@@ -1,0 +1,30 @@
+{
+  "files" : {
+
+  },
+  "project" : {
+    "customDomains" : [
+
+    ],
+    "customTones" : [
+
+    ],
+    "description" : "PomPadDo combines three proven methods — GTD, Pomodoro, and Kanban — into one simple app to help you get everything done.\n\nKey features:\n- Global Inbox: Add your thoughts to your Inbox from anywhere in the app\n- Projects review: Review your projects periodically\n- Project board view: Show a project as a board (Kanban) or a list\n- Sync: Sync across devices via iCloud\n- Focus timer: Focus on a task for a set amount of time\n",
+    "doNotTranslate" : [
+
+    ],
+    "domain" : "productivity",
+    "name" : "PomPadDo",
+    "terminology" : [
+      {
+        "definition" : "Inbox folder in GTD terminology",
+        "term" : "Inbox",
+        "translations" : {
+
+        }
+      }
+    ],
+    "tone" : "formal"
+  },
+  "version" : "1.0"
+}

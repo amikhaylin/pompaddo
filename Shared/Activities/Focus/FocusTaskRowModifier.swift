@@ -265,7 +265,7 @@ struct FocusTaskRowModifier: ViewModifier {
         })
         .sheet(item: $renameTask, onDismiss: {
             renameTask = nil
-        },content: { editTask in
+        }, content: { editTask in
             EditTaskNameView(task: editTask)
                 .presentationDetents([.height(140)])
                 .presentationDragIndicator(.visible)
