@@ -121,7 +121,7 @@ final class PomPadDoUITests: XCTestCase {
             }
         }
 
-        snapshot("Apple Macbook Pro 13 Space Gray-02SectionsPanel")
+//        snapshot("Apple Macbook Pro 13 Space Gray-02SectionsPanel")
 
         app.buttons["TodayNavButton"].tap()
 
