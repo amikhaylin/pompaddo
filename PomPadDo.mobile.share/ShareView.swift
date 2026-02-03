@@ -14,6 +14,7 @@ import UniformTypeIdentifiers
 struct ShareView: View {
     @State private var text: String = ""
     @State private var previewImage: Image?
+    @State private var link: URL?
 
     let context: NSExtensionContext
 
@@ -92,5 +93,7 @@ struct ShareView: View {
            let linkPreviewImage = try? await imageProvider.loadImage() {
             previewImage = Image(uiImage: linkPreviewImage)
         }
+          
+        link = url
     }
 }
