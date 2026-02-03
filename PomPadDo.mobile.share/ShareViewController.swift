@@ -9,9 +9,25 @@
 import Social
 import SwiftUI
 import UniformTypeIdentifiers
+import SwiftData
 
 // MARK: - UIKit Interface
 class ShareViewController: UIViewController {
+    let modelContainer: ModelContainer = {
+        let schema = Schema([
+            Todo.self
+        ])
+        
+        let modelConfiguration = ModelConfiguration(schema: schema,
+                                                    isStoredInMemoryOnly: false)
+        
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
+    
     // MARK: Lifecycle
 
     override func viewDidLoad() {
@@ -28,6 +44,7 @@ class ShareViewController: UIViewController {
     private func setupShareView(with context: NSExtensionContext) {
         let contentView = UIHostingController(
             rootView: ShareView(context: context)
+                .modelContainer(modelContainer)
         )
         // Add the SwiftUI view as a child of ShareViewController
         addChild(contentView)

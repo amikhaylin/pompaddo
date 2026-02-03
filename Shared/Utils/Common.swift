@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import Combine
 
 struct Common {
     static func formatSeconds(_ seconds: Int) -> String {
