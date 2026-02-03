@@ -8,10 +8,12 @@
 import LinkPresentation
 import SwiftUI
 import UniformTypeIdentifiers
+import SwiftData
 
 // MARK: - SwiftUI Interface
 
 struct ShareView: View {
+    @Environment(\.modelContext) private var modelContext
     @State private var text: String = ""
     @State private var previewImage: Image?
     @State private var link: URL?
@@ -68,6 +70,12 @@ struct ShareView: View {
 
     private func saveAction() {
         // Return an array of results ([NSExtensionItem]) to the host app
+        let task = Todo(name: text)
+        if let link = link {
+            task.link = link.absoluteString
+        }
+        modelContext.insert(task)
+        
         context.completeRequest(returningItems: [])
     }
 

@@ -8,6 +8,7 @@
 
 import Foundation
 import Observation
+import Combine
 
 enum FocusTimerState: String {
     case idle
