@@ -1335,7 +1335,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile.share/PomPadDo.mobile.share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 118;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.mobile.share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo.mobile.share;
@@ -1346,7 +1346,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 26.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo.PomPadDo-mobile-share";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1369,7 +1369,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = PomPadDo.mobile.share/PomPadDo.mobile.share.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 118;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.mobile.share/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo.mobile.share;
@@ -1380,7 +1380,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 26.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo.PomPadDo-mobile-share";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
