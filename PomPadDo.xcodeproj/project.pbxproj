@@ -17,7 +17,6 @@
 		4D71DB662D63404900C1FE13 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D71DB652D63404900C1FE13 /* SwiftUI.framework */; };
 		4D71DB732D63404C00C1FE13 /* PomPadDoWidgetsExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D71DB622D63404900C1FE13 /* PomPadDoWidgetsExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D7A1FE82C0778E4009052AE /* PomPadDo.safari.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4D7AFE4D2F33923700FBFFFA /* PomPadDo.share.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4D7AFE432F33923700FBFFFA /* PomPadDo.share.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4D9FFAD62BA9C5BA00C5F5AE /* SwiftDataTransferrable in Frameworks */ = {isa = PBXBuildFile; productRef = 4D9FFAD52BA9C5BA00C5F5AE /* SwiftDataTransferrable */; };
 		4DBAD6162BECBEEF002666BD /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 4DBAD6152BECBEEF002666BD /* Credits.rtf */; };
 		4DC43AA22F1502A7009A5C73 /* CloudStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4DC43AA12F1502A7009A5C73 /* CloudStorage */; };
@@ -83,13 +82,6 @@
 			remoteGlobalIDString = 4D7A1FD52C0778E4009052AE;
 			remoteInfo = PomPadDoExt;
 		};
-		4D7AFE4B2F33923700FBFFFA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4D7AFE422F33923700FBFFFA;
-			remoteInfo = PomPadDo.share;
-		};
 		4D95FE362B7B6BF600C8918D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4D95FE1A2B7B6BF300C8918D /* Project object */;
@@ -148,7 +140,6 @@
 			dstSubfolderSpec = 13;
 			files = (
 				4D7A1FE82C0778E4009052AE /* PomPadDo.safari.appex in Embed Foundation Extensions */,
-				4D7AFE4D2F33923700FBFFFA /* PomPadDo.share.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +162,6 @@
 		4D71DB652D63404900C1FE13 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		4D71DB792D6340D200C1FE13 /* PomPadDoWidgetsExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PomPadDoWidgetsExtension.entitlements; sourceTree = "<group>"; };
 		4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.safari.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D7AFE432F33923700FBFFFA /* PomPadDo.share.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.share.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D95FE222B7B6BF300C8918D /* PomPadDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D95FE352B7B6BF600C8918D /* PomPadDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DBAD6152BECBEEF002666BD /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
@@ -396,13 +386,6 @@
 			);
 			target = 4D10FF302F2E2C9A00CBA5ED /* PomPadDo.mobile.share */;
 		};
-		4D7AFE512F33923700FBFFFA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 4D7AFE422F33923700FBFFFA /* PomPadDo.share */;
-		};
 		4D8614D52E61F783005B6AF6 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -462,7 +445,6 @@
 		4D28675D2D61F5C20064ADF3 /* PomPadDo.mobileUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.mobileUITests; sourceTree = "<group>"; };
 		4D3E50B32D6382E8008C1FDB /* PomPadDo.watch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4DEA3BC02ED070480021983D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "PomPadDo.watch Watch App"; sourceTree = "<group>"; };
 		4D71DB672D63404900C1FE13 /* PomPadDoWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D71DB772D63404C00C1FE13 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4D0540142D63A4980098FEC7 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDoWidgets; sourceTree = "<group>"; };
-		4D7AFE442F33923700FBFFFA /* PomPadDo.share */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4D7AFE512F33923700FBFFFA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.share; sourceTree = "<group>"; };
 		4DF1BAB52EA8EDFE00B8F211 /* PomPadDoUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDoUITests; sourceTree = "<group>"; };
 		4DFA79E02E9E5D6E0069A476 /* PomPadDo */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (4DFA79F42E9E5D6F0069A476 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 4DD28D812EE07D9F00D3204B /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = PomPadDo; sourceTree = "<group>"; };
 		4DFA79F62E9E5D7A0069A476 /* PomPadDo.Tests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PomPadDo.Tests; sourceTree = "<group>"; };
@@ -533,13 +515,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D7AFE402F33923700FBFFFA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4D95FE1F2B7B6BF300C8918D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -588,7 +563,6 @@
 				4DF1BAB52EA8EDFE00B8F211 /* PomPadDoUITests */,
 				4D0CECA52EB2040E004C7365 /* PomPadDo.watchUITests */,
 				4D10FF322F2E2C9A00CBA5ED /* PomPadDo.mobile.share */,
-				4D7AFE442F33923700FBFFFA /* PomPadDo.share */,
 				4D95FE232B7B6BF300C8918D /* Products */,
 				4D9FFAD42BA9C5BA00C5F5AE /* Frameworks */,
 			);
@@ -608,7 +582,6 @@
 				4DF1BAB42EA8EDFE00B8F211 /* PomPadDoUITests.xctest */,
 				4D0CECA42EB2040E004C7365 /* PomPadDo.watchUITests.xctest */,
 				4D10FF312F2E2C9A00CBA5ED /* PomPadDo.mobile.share.appex */,
-				4D7AFE432F33923700FBFFFA /* PomPadDo.share.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -813,28 +786,6 @@
 			productReference = 4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		4D7AFE422F33923700FBFFFA /* PomPadDo.share */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4D7AFE502F33923700FBFFFA /* Build configuration list for PBXNativeTarget "PomPadDo.share" */;
-			buildPhases = (
-				4D7AFE3F2F33923700FBFFFA /* Sources */,
-				4D7AFE402F33923700FBFFFA /* Frameworks */,
-				4D7AFE412F33923700FBFFFA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				4D7AFE442F33923700FBFFFA /* PomPadDo.share */,
-			);
-			name = PomPadDo.share;
-			packageProductDependencies = (
-			);
-			productName = PomPadDo.share;
-			productReference = 4D7AFE432F33923700FBFFFA /* PomPadDo.share.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		4D95FE212B7B6BF300C8918D /* PomPadDo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D95FE492B7B6BF600C8918D /* Build configuration list for PBXNativeTarget "PomPadDo" */;
@@ -849,7 +800,6 @@
 			);
 			dependencies = (
 				4D7A1FE72C0778E4009052AE /* PBXTargetDependency */,
-				4D7AFE4C2F33923700FBFFFA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				4DFA79E02E9E5D6E0069A476 /* PomPadDo */,
@@ -941,9 +891,6 @@
 					4D7A1FD52C0778E4009052AE = {
 						CreatedOnToolsVersion = 15.4;
 					};
-					4D7AFE422F33923700FBFFFA = {
-						CreatedOnToolsVersion = 26.2;
-					};
 					4D95FE212B7B6BF300C8918D = {
 						CreatedOnToolsVersion = 15.2;
 					};
@@ -1023,7 +970,6 @@
 				4DF1BAB32EA8EDFE00B8F211 /* PomPadDoUITests */,
 				4D0CECA32EB2040E004C7365 /* PomPadDo.watchUITests */,
 				4D10FF302F2E2C9A00CBA5ED /* PomPadDo.mobile.share */,
-				4D7AFE422F33923700FBFFFA /* PomPadDo.share */,
 			);
 		};
 /* End PBXProject section */
@@ -1079,13 +1025,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4D7A1FD42C0778E4009052AE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4D7AFE412F33923700FBFFFA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1195,13 +1134,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D7AFE3F2F33923700FBFFFA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		4D95FE1E2B7B6BF300C8918D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1265,11 +1197,6 @@
 			isa = PBXTargetDependency;
 			target = 4D7A1FD52C0778E4009052AE /* PomPadDo.safari */;
 			targetProxy = 4D7A1FE62C0778E4009052AE /* PBXContainerItemProxy */;
-		};
-		4D7AFE4C2F33923700FBFFFA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4D7AFE422F33923700FBFFFA /* PomPadDo.share */;
-			targetProxy = 4D7AFE4B2F33923700FBFFFA /* PBXContainerItemProxy */;
 		};
 		4D95FE372B7B6BF600C8918D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1411,7 +1338,7 @@
 				CURRENT_PROJECT_VERSION = 118;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.mobile.share/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo.mobile.share;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1445,7 +1372,7 @@
 				CURRENT_PROJECT_VERSION = 118;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PomPadDo.mobile.share/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
+				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo.mobile.share;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1791,72 +1718,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		4D7AFE4E2F33923700FBFFFA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = PomPadDo.share/PomPadDo.share.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 118;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PomPadDo.share/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 26.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo.PomPadDo-share";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		4D7AFE4F2F33923700FBFFFA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = PomPadDo.share/PomPadDo.share.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 118;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PomPadDo.share/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 26.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo.PomPadDo-share";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -2211,15 +2072,6 @@
 			buildConfigurations = (
 				4D7A1FEA2C0778E4009052AE /* Debug */,
 				4D7A1FEB2C0778E4009052AE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4D7AFE502F33923700FBFFFA /* Build configuration list for PBXNativeTarget "PomPadDo.share" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4D7AFE4E2F33923700FBFFFA /* Debug */,
-				4D7AFE4F2F33923700FBFFFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
