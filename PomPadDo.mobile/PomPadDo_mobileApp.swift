@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import SwiftDataTransferrable
 
 @main
 struct PomPadDoiOSApp: App {
@@ -29,14 +30,14 @@ struct PomPadDoiOSApp: App {
     }()
 
     var body: some Scene {
-        WindowGroup {
-            MainView()
-                .swiftDataTransferrable(exportedUTType: "com.amikhaylin.persistentModelID",
-                                        modelContext: sharedModelContainer.mainContext)
-        }
-        .modelContainer(sharedModelContainer)
-        .commands {
-            InspectorCommands()
+        SwiftDataTransferrableScene(modelContainer: sharedModelContainer, exportedUTType: "com.amikhaylin.persistentModelID") {
+            WindowGroup {
+                MainView()
+            }
+//            .modelContainer(sharedModelContainer)
+            .commands {
+                InspectorCommands()
+            }
         }
     }
     
