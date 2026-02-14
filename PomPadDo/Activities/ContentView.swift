@@ -8,7 +8,6 @@
 import SwiftUI
 import SwiftData
 
-import SwiftDataTransferrable
 import CloudStorage
 
 struct ContentView: View {

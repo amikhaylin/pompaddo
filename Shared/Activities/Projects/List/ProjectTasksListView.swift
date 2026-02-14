@@ -113,6 +113,7 @@ struct ProjectTasksListView: View {
                             .help("Add task to status")
                         }
                     }
+                    .draggable(status)
                     .listRowSeparator(.hidden)
                     .dropDestination(for: Todo.self) { tasks, _ in
                         for task in tasks {

@@ -134,7 +134,10 @@ struct ProjectsListView: View {
                             }
                             .listRowSeparator(.hidden)
                         }
+                        #if os(iOS)
                         .onMove(perform: { from, toInt in
+                            print("Move")
+                            
                             var projectsList = projects.filter({ $0.group == nil })
                                 .sorted(by: ProjectsQuery.defaultSorting)
                             projectsList.move(fromOffsets: from, toOffset: toInt)
@@ -145,6 +148,15 @@ struct ProjectsListView: View {
                                 project.order = order
                             }
                         })
+                        #endif
+                        #if os(macOS)
+                        .dropDestination(for: Project.self) { projects, offset in
+                            for project in projects {
+                                project.group = nil
+                                project.order = offset
+                            }
+                        }
+                        #endif
                     
                     ForEach(groups.sorted(by: { $0.order < $1.order })) { group in
                         DisclosureGroup(isExpanded: Binding<Bool>(
@@ -158,7 +170,7 @@ struct ProjectsListView: View {
                                             .badge(project.getTasks().filter({ $0.completed == false }).count)
                                     }
                                     .tag(project as Project)
-                                    .draggable(project)
+                                    .draggable(project as Project)
                                     .dropDestination(for: Todo.self) { tasks, _ in
                                         for task in tasks {
                                             TasksQuery.restoreTask(task: task)
@@ -198,6 +210,7 @@ struct ProjectsListView: View {
                                     }
                                     .listRowSeparator(.hidden)
                                 }
+                            #if os(iOS)
                                 .onMove(perform: { from, toInt in
                                     var projectsList = projects.filter({ $0.group == group })
                                         .sorted(by: ProjectsQuery.defaultSorting)
@@ -209,6 +222,14 @@ struct ProjectsListView: View {
                                         project.order = order
                                     }
                                 })
+                            #endif
+                            #if os(macOS)
+                                .dropDestination(for: Project.self) { projects, offset in
+                                    for project in projects {
+                                        project.order = offset
+                                    }
+                                }
+                            #endif
                         } label: {
                             Text(group.name)
                                 .contextMenu {
@@ -231,14 +252,17 @@ struct ProjectsListView: View {
                                     }
                                 }
                         }
+                        .listRowSeparator(.hidden)
+                        .draggable(group)
                         .dropDestination(for: Project.self) { projects, _ in
-                            for project in projects where project.group == nil || project.group != group {
+                            print("Drop")
+                            for project in projects { // where project.group == nil || project.group != group {
                                 project.group = group
                             }
                             return true
                         }
-                        .listRowSeparator(.hidden)
                     }
+                    #if os(iOS)
                     .onMove(perform: { from, toInt in
                         var groupsList = groups.sorted(by: { $0.order < $1.order })
                         groupsList.move(fromOffsets: from, toOffset: toInt)
@@ -249,6 +273,14 @@ struct ProjectsListView: View {
                             group.order = order
                         }
                     })
+                    #endif
+                    #if os(macOS)
+                    .dropDestination(for: ProjectGroup.self) { groups, offset in
+                        for group in groups {
+                            group.order = offset
+                        }
+                    }
+                    #endif
                 }
                 .listStyle(SidebarListStyle())
             } else {

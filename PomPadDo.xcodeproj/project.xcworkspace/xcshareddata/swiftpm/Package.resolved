@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Whiffer/swiftdata-transferrable",
       "state" : {
-        "revision" : "6aff9acc43b03e513627d3bd6a9748fb9c15f295",
-        "version" : "2.0.0"
+        "revision" : "62bac0433b22372386da07c1355331df2f418314",
+        "version" : "3.0.2"
       }
     }
   ],
