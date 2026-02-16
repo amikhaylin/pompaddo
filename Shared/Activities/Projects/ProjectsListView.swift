@@ -136,8 +136,6 @@ struct ProjectsListView: View {
                         }
                         #if os(iOS)
                         .onMove(perform: { from, toInt in
-                            print("Move")
-                            
                             var projectsList = projects.filter({ $0.group == nil })
                                 .sorted(by: ProjectsQuery.defaultSorting)
                             projectsList.move(fromOffsets: from, toOffset: toInt)
@@ -196,7 +194,7 @@ struct ProjectsListView: View {
                                                 project.order = lastProject.order + 1
                                             }
                                         } label: {
-                                            Image(systemName: "folder")
+                                            Image(systemName: "folder.badge.minus")
                                             Text("Remove project from group")
                                         }
                                         
@@ -226,6 +224,7 @@ struct ProjectsListView: View {
                             #if os(macOS)
                                 .dropDestination(for: Project.self) { projects, offset in
                                     for project in projects {
+                                        project.group = group
                                         project.order = offset
                                     }
                                 }
@@ -255,7 +254,6 @@ struct ProjectsListView: View {
                         .listRowSeparator(.hidden)
                         .draggable(group)
                         .dropDestination(for: Project.self) { projects, _ in
-                            print("Drop")
                             for project in projects { // where project.group == nil || project.group != group {
                                 project.group = group
                             }
