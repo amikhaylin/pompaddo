@@ -24,13 +24,8 @@ struct ReviewProjectsView: View {
                                 .environmentObject(showInspector)
                                 .environmentObject(selectedTasks)
                         } label: {
-                            if let group = project.group {
-                                Text("\(group.name) / \(project.name)")
-                                    .badge(project.getTasks().filter({ $0.completed == false }).count)
-                            } else {
-                                Text(project.name)
-                                    .badge(project.getTasks().filter({ $0.completed == false }).count)
-                            }
+                            Text(project.name)
+                                .badge(project.getTasks().filter({ $0.completed == false }).count)
                         }
                         .listRowSeparator(.hidden)
                     }

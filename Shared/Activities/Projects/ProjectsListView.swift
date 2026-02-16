@@ -231,6 +231,7 @@ struct ProjectsListView: View {
                             #endif
                         } label: {
                             Text(group.name)
+                                .draggable(group)
                                 .contextMenu {
                                     Button {
                                         editProjectGroup = group
@@ -252,7 +253,6 @@ struct ProjectsListView: View {
                                 }
                         }
                         .listRowSeparator(.hidden)
-                        .draggable(group)
                         .dropDestination(for: Project.self) { projects, _ in
                             for project in projects { // where project.group == nil || project.group != group {
                                 project.group = group
