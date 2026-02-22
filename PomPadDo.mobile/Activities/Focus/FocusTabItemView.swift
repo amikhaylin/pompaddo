@@ -14,25 +14,20 @@ struct FocusTabItemView: View {
     var body: some View {
         Group {
             if timer.state == .idle {
-                Image("tomato")
-                #if os(watchOS)
-                Text("Focus")
-                #endif
+                Label("Focus", image: "tomato")
             } else {
-                HStack {
-                    if timer.mode == .work {
-                        Image("tomato.fill")
-                            .symbolRenderingMode(.multicolor)
-                    } else {
-                        Image(systemName: "cup.and.saucer.fill")
-                    }
-                    if timer.state == .running {
-                        Text(timerCount)
-                            .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
-                    } else {
-                        Text(timerCount)
-                            .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
-                    }
+                if timer.mode == .work {
+                    Image("tomato.fill")
+                        .symbolRenderingMode(.multicolor)
+                } else {
+                    Image(systemName: "cup.and.saucer.fill")
+                }
+                if timer.state == .running {
+                    Text(timerCount)
+                        .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
+                } else {
+                    Text(timerCount)
+                        .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
                 }
             }
         }

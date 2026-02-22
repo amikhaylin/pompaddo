@@ -16,6 +16,7 @@ enum MainViewTabs {
     case tasks
     case focus
     case settings
+    case inbox
 }
 
 struct MainView: View {
@@ -47,85 +48,60 @@ struct MainView: View {
     @State var selectedProject: Project?
     
     var body: some View {
-        VStack {
-            Group {
-                switch tab {
-                case .tasks:
-                    ContentView(selectedSideBarItem: $selectedSideBarItem,
-                                selectedProject: $selectedProject)
-                        .id(refresher.refresh)
-                        .environmentObject(refresher)
-                        .environmentObject(timer)
-                        .environmentObject(focusTask)
-                case .focus:
-                    FocusTimerView(focusMode: $focusMode)
-                        .id(refresh)
-                        .environmentObject(timer)
-                        .environmentObject(focusTask)
-                        .refreshable {
-                            refresh.toggle()
-                        }
-                case.settings:
-                    SettingsView()
-                }
+        TabView(selection: $tab) {
+            Tab(value: .tasks) {
+                ContentView(selectedSideBarItem: $selectedSideBarItem,
+                            selectedProject: $selectedProject)
+                    .id(refresher.refresh)
+                    .environmentObject(refresher)
+                    .environmentObject(timer)
+                    .environmentObject(focusTask)
+            } label: {
+                Label("Tasks", systemImage: "checkmark.square")
+                    .accessibility(identifier: "TasksSection")
             }
             
-            HStack {
-                Spacer()
-                
-                Button {
-                    tab = .tasks
-                } label: {
-                    Image(systemName: "checkmark.square")
-                }
-                .modifier(ConditionalButtonStyle(condition: tab == .tasks))
-                .buttonBorderShape(.capsule)
-                .accessibility(identifier: "TasksSection")
-                
-                Spacer()
-                
-                Button {
-                    tab = .focus
-                } label: {
-                    FocusTabItemView()
-                        .environmentObject(timer)
-                }
-                .modifier(ConditionalButtonStyle(condition: tab == .focus))
-                .buttonBorderShape(.capsule)
-                .accessibility(identifier: "FocusSection")
-                
-                Spacer()
-                
-                Button {
-                    tab = .settings
-                } label: {
-                    Image(systemName: "gear")
-                }
-                .modifier(ConditionalButtonStyle(condition: tab == .settings))
-                .buttonBorderShape(.capsule)
-                .accessibility(identifier: "SettingsSection")
-                
-                Spacer()
-                
-                Button {
-                    newTaskIsShowing.toggle()
-                } label: {
-                    Image(systemName: "tray.and.arrow.down.fill")
-                        .foregroundStyle(Color.orange)
-                }
-                .accessibility(identifier: "AddTaskToInboxButton")
-                .keyboardShortcut("i", modifiers: [.command])
-                .sheet(isPresented: $newTaskIsShowing, content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
-                        .presentationDetents([.height(220)])
-                        .presentationDragIndicator(.visible)
-                        .environmentObject(refresher)
-                })
-                .modifier(GlassButtonStyle())
-                .buttonBorderShape(.capsule)
-                
-                Spacer()
+            Tab(value: .focus) {
+                FocusTimerView(focusMode: $focusMode)
+                    .id(refresh)
+                    .environmentObject(timer)
+                    .environmentObject(focusTask)
+                    .refreshable {
+                        refresh.toggle()
+                    }
+            } label: {
+                FocusTabItemView()
+                    .environmentObject(timer)
+                    .accessibility(identifier: "FocusSection")
             }
+            
+            Tab(value: .settings) {
+                SettingsView()
+            } label: {
+                Label("Settings", systemImage: "gear")
+                    .accessibility(identifier: "SettingsSection")
+            }
+
+            Tab(value: .inbox, role: .search) {
+                Color.clear
+            } label: {
+                Label("Add to Inbox", systemImage: "tray.and.arrow.down.fill")
+                    .foregroundStyle(Color.orange)
+                    .accessibility(identifier: "AddTaskToInboxButton")
+                    .keyboardShortcut("i", modifiers: [.command])
+            }
+        }
+        .sheet(isPresented: $newTaskIsShowing, content: {
+            NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
+                .presentationDetents([.height(220)])
+                .presentationDragIndicator(.visible)
+                .environmentObject(refresher)
+        })
+        .onChange(of: tab) { oldValue, newValue in
+            guard newValue == .inbox else { return }
+            
+            self.tab = oldValue
+            self.newTaskIsShowing = true
         }
         .onAppear {
             timer.setDurations(workInSeconds: timerWorkSession,

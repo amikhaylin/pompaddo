@@ -5487,6 +5487,9 @@
         }
       }
     },
+    "Add to Inbox" : {
+
+    },
     "Add to Inbox ⌘I" : {
       "localizations" : {
         "ar" : {
@@ -38338,6 +38341,9 @@
           }
         }
       }
+    },
+    "Tasks" : {
+
     },
     "The estimate is calculated using the formula:\n(base hours * priority factor * clarity factor) * estimate factor\n\nbase hours - estimated number of hours\npriority factor - high (1), medium (1.5), low (2)\nclarity factor - clear (1), half clear (1.5), not clear (2)\nestimate factor - 1.7 by default, can be changed in settings" : {
       "localizations" : {
