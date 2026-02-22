@@ -1231,7 +1231,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp.widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1268,7 +1268,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp.widgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1346,7 +1346,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo.PomPadDo-mobile-share";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1380,7 +1380,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.amikhaylin.PomPadDo.PomPadDo-mobile-share";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1426,7 +1426,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1467,7 +1467,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1538,7 +1538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1569,7 +1569,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1601,7 +1601,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.PomPadDoWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1636,7 +1636,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo.PomPadDoWidgets;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1673,7 +1673,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -1708,7 +1708,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.5;
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				OTHER_LDFLAGS = (
 					"-framework",
 					SafariServices,
@@ -1879,7 +1879,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
 				PRODUCT_NAME = PomPadDo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1917,7 +1917,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 26.1;
+				MARKETING_VERSION = 26.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.amikhaylin.PomPadDo;
 				PRODUCT_NAME = PomPadDo;
 				SWIFT_EMIT_LOC_STRINGS = YES;
