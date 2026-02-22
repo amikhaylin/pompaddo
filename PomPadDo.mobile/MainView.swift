@@ -197,14 +197,18 @@ struct MainView: View {
         
         let savedVersion: String = UserDefaults.standard.string(forKey: "appVersion") ?? ""
         var firstLaunchDate: Double = UserDefaults.standard.double(forKey: "firstLaunchDateInterval")
+        var requestCount: Int = UserDefaults.standard.integer(forKey: "reviewRequestCount")
         
         print("currentVersion: \(currentVersion)")
         print("savedVersion: \(savedVersion)")
+        print("requestCount: \(requestCount)")
 
         if savedVersion != currentVersion {
             UserDefaults.standard.set(currentVersion, forKey: "appVersion")
             firstLaunchDate = Date.now.timeIntervalSince1970
             UserDefaults.standard.set(firstLaunchDate, forKey: "firstLaunchDateInterval")
+            requestCount = 0
+            UserDefaults.standard.set(requestCount, forKey: "reviewRequestCount")
         }
 
         let daysSinceFirstLaunch = Calendar.current.dateComponents([.day], from: Date(timeIntervalSince1970: firstLaunchDate), to: Date()).day ?? 0
@@ -216,7 +220,14 @@ struct MainView: View {
             if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 print("Request review")
                 AppStore.requestReview(in: scene)
-                UserDefaults.standard.set(Date.distantFuture.timeIntervalSince1970, forKey: "firstLaunchDateInterval")
+                requestCount += 1
+                UserDefaults.standard.set(requestCount, forKey: "reviewRequestCount")
+                if requestCount >= 2 {
+                    UserDefaults.standard.set(Date.distantFuture.timeIntervalSince1970, forKey: "firstLaunchDateInterval")
+                } else {
+                    firstLaunchDate = Date.now.timeIntervalSince1970
+                    UserDefaults.standard.set(firstLaunchDate, forKey: "firstLaunchDateInterval")
+                }
             }
         }
     }
