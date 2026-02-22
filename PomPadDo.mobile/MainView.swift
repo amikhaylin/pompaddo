@@ -26,8 +26,8 @@ struct MainView: View {
     @CloudStorage("timerLongBreakSession") private var timerLongBreakSession: Double = UserDefaults.standard.value(forKey: "timerLongBreakSession") as? Double ?? 1200.0
     @CloudStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = UserDefaults.standard.value(forKey: "timerWorkSessionsCount") as? Double ?? 4.0
     
-    @AppStorage("appVersion") private var savedVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-    @AppStorage("firstLaunchDate") private var firstLaunchDate: Date = Date()
+//    @AppStorage("appVersion") private var savedVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+//    @AppStorage("firstLaunchDateInterval") private var firstLaunchDate: Double = Date.now.timeIntervalSince1970
     
     @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -195,26 +195,28 @@ struct MainView: View {
         let daysBeforeRequest = 3
         let currentVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
         
+        let savedVersion: String = UserDefaults.standard.string(forKey: "appVersion") ?? ""
+        var firstLaunchDate: Double = UserDefaults.standard.double(forKey: "firstLaunchDateInterval")
+        
         print("currentVersion: \(currentVersion)")
         print("savedVersion: \(savedVersion)")
 
         if savedVersion != currentVersion {
-            // Новая версия — сохраняем дату первого запуска
-            savedVersion = currentVersion
-            firstLaunchDate = Date()
+            UserDefaults.standard.set(currentVersion, forKey: "appVersion")
+            firstLaunchDate = Date.now.timeIntervalSince1970
+            UserDefaults.standard.set(firstLaunchDate, forKey: "firstLaunchDateInterval")
         }
 
-        let daysSinceFirstLaunch = Calendar.current.dateComponents([.day], from: firstLaunchDate, to: Date()).day ?? 0
+        let daysSinceFirstLaunch = Calendar.current.dateComponents([.day], from: Date(timeIntervalSince1970: firstLaunchDate), to: Date()).day ?? 0
         
         print("daysSinceFirstLaunch: \(daysSinceFirstLaunch)")
-        print("firstLaunchDate: \(firstLaunchDate)")
+        print("firstLaunchDate: \(Date(timeIntervalSince1970: firstLaunchDate))")
         
         if daysSinceFirstLaunch >= daysBeforeRequest {
             if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 print("Request review")
                 AppStore.requestReview(in: scene)
-                // Чтобы не запрашивать повторно:
-                firstLaunchDate = Date.distantFuture
+                UserDefaults.standard.set(Date.distantFuture.timeIntervalSince1970, forKey: "firstLaunchDateInterval")
             }
         }
     }

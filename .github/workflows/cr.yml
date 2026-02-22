@@ -12,11 +12,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: anc95/ChatGPT-CodeReview@v1.0.18
+      - uses: anc95/ChatGPT-CodeReview@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           LANGUAGE: Russian
           OPENAI_API_ENDPOINT: https://api.proxyapi.ru/openai/v1
-          MODEL: gpt-5
-          PROMPT: "Вы опытный разработчик Swift/SwiftUI, и ваша задача — проверять запросы на включение изменений. Пожалуйста, проверьте следующий код на наличие недопониманий или нарушений. Не тратьте время на комментарии того, что и так работает идеально. Я жду конструктивной критики и предложений по улучшению кода, только полезных и содержательных замечаний."
+          MODEL: gpt-5.2-codex
+          PROMPT: "Please check if there are any confusions or irregularities in the following code diff:"
