@@ -132,7 +132,7 @@ struct TasksListView: View {
                     }
                 }
             }
-            .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
+            .searchable(text: $searchText, placement: .automatic, prompt: "Search tasks")
         }
         .toolbar {
             ToolbarItemGroup {
