@@ -11,6 +11,7 @@ import StoreKit
 
 import SwiftDataTransferrable
 import CloudStorage
+import WidgetKit
 
 enum MainViewTabs {
     case tasks
@@ -26,9 +27,6 @@ struct MainView: View {
     @CloudStorage("timerBreakSession") private var timerBreakSession: Double = UserDefaults.standard.value(forKey: "timerBreakSession") as? Double ?? 300.0
     @CloudStorage("timerLongBreakSession") private var timerLongBreakSession: Double = UserDefaults.standard.value(forKey: "timerLongBreakSession") as? Double ?? 1200.0
     @CloudStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = UserDefaults.standard.value(forKey: "timerWorkSessionsCount") as? Double ?? 4.0
-    
-//    @AppStorage("appVersion") private var savedVersion: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-//    @AppStorage("firstLaunchDateInterval") private var firstLaunchDate: Double = Date.now.timeIntervalSince1970
     
     @StateObject var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
@@ -47,6 +45,23 @@ struct MainView: View {
     @State var selectedSideBarItem: SideBarItem? = .today
     @State var selectedProject: Project?
     
+    @Query var projects: [Project]
+    @State var badgeManager = BadgeManager()
+    @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
+    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
+    
+    private var activeTasksCount: Int {
+        var projectsCount = 0
+        if showReviewProjectsBadge {
+            projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
+        }
+        if (tasksTodayActive.count + projectsCount) > 0 {
+            return tasksTodayActive.count + projectsCount
+        } else {
+            return 0
+        }
+    }
+    
     var body: some View {
         TabView(selection: $tab) {
             Tab(value: .tasks) {
@@ -60,6 +75,7 @@ struct MainView: View {
                 Label("Tasks", systemImage: "checkmark.square")
                     .accessibility(identifier: "TasksSection")
             }
+            .badge(activeTasksCount)
             
             Tab(value: .focus) {
                 FocusTimerView(focusMode: $focusMode)
@@ -74,6 +90,7 @@ struct MainView: View {
                     .environmentObject(timer)
                     .accessibility(identifier: "FocusSection")
             }
+            .badge(timer.secondsLeftString)
             
             Tab(value: .settings) {
                 SettingsView()
@@ -83,7 +100,7 @@ struct MainView: View {
             }
 
             Tab(value: .inbox, role: .search) {
-                Color.clear
+                EmptyView()
             } label: {
                 Image(systemName: "tray.and.arrow.down.fill")
                     .foregroundStyle(Color.orange)
@@ -91,6 +108,7 @@ struct MainView: View {
                     .keyboardShortcut("i", modifiers: [.command])
             }
         }
+        .tabViewStyle(.tabBarOnly)
         .sheet(isPresented: $newTaskIsShowing, content: {
             NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
                 .presentationDetents([.height(220)])
@@ -100,8 +118,10 @@ struct MainView: View {
         .onChange(of: tab) { oldValue, newValue in
             guard newValue == .inbox else { return }
             
-            self.tab = oldValue
-            self.newTaskIsShowing = true
+            withAnimation {
+                self.tab = oldValue
+                self.newTaskIsShowing.toggle()
+            }
         }
         .onAppear {
             timer.setDurations(workInSeconds: timerWorkSession,
@@ -165,6 +185,24 @@ struct MainView: View {
                 timer.setNotification()
             }
         }
+        .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, { _, _ in
+            setBadge()
+        })
+        .onChange(of: tasksTodayActive.count) { _, _ in
+            setBadge()
+        }
+        .onAppear {
+            setBadge()
+        }
+    }
+    
+    private func setBadge() {
+        if activeTasksCount > 0 {
+            badgeManager.setBadge(number: activeTasksCount)
+        } else {
+            badgeManager.resetBadgeNumber()
+        }
+        WidgetCenter.shared.reloadAllTimelines()
     }
     
     private func checkForReview() {

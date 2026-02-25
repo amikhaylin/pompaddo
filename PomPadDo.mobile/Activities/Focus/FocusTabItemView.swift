@@ -17,17 +17,9 @@ struct FocusTabItemView: View {
                 Label("Focus", image: "tomato")
             } else {
                 if timer.mode == .work {
-                    Image("tomato.fill")
-                        .symbolRenderingMode(.multicolor)
+                    Label("\(timer.mode.title)", image: "tomato.fill")
                 } else {
-                    Image(systemName: "cup.and.saucer.fill")
-                }
-                if timer.state == .running {
-                    Text(timerCount)
-                        .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
-                } else {
-                    Text(timerCount)
-                        .foregroundStyle(timer.mode == .work ? Color.red : Color.green)
+                    Label("\(timer.mode.title)", systemImage: "cup.and.saucer.fill")
                 }
             }
         }

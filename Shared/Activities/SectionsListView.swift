@@ -23,7 +23,9 @@ struct SectionsListView: View {
     @Query(filter: TasksQuery.predicateTrash()) var tasksTrash: [Todo]
     @Query var projects: [Project]
            
+    #if os(macOS)
     @State var badgeManager = BadgeManager()
+    #endif
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     @State var projectListSize: CGSize = .zero
@@ -182,6 +184,7 @@ struct SectionsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
+        #if os(macOS)
         .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, { _, newValue in
             if showReviewProjectsBadge {
                 let tasksCount = tasksTodayActive.count
@@ -217,6 +220,7 @@ struct SectionsListView: View {
             }
             WidgetCenter.shared.reloadAllTimelines()
         }
+        #endif
     }
 }
 
