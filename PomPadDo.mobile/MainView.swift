@@ -47,53 +47,58 @@ struct MainView: View {
     @State var activeTasksCount: Int = 0
     
     var body: some View {
-        TabView(selection: $tab) {
-            Tab(value: .tasks) {
-                ContentView(selectedSideBarItem: $selectedSideBarItem,
-                            selectedProject: $selectedProject,
-                            activeTasksCount: $activeTasksCount)
+        ZStack {
+            TabView(selection: $tab) {
+                Tab(value: .tasks) {
+                    ContentView(selectedSideBarItem: $selectedSideBarItem,
+                                selectedProject: $selectedProject,
+                                activeTasksCount: $activeTasksCount)
                     .id(refresher.refresh)
                     .environmentObject(refresher)
                     .environmentObject(timer)
                     .environmentObject(focusTask)
-            } label: {
-                Label("Tasks", systemImage: "checkmark.square")
-                    .accessibility(identifier: "TasksSection")
+                    .tag(0)
+                } label: {
+                    Label("Tasks", systemImage: "checkmark.square")
+                        .accessibility(identifier: "TasksSection")
+                }
+                .badge(activeTasksCount)
+                
+                Tab(value: .focus) {
+                    FocusTimerView(focusMode: $focusMode)
+                        .id(refresh)
+                        .environmentObject(timer)
+                        .environmentObject(focusTask)
+                        .refreshable {
+                            refresh.toggle()
+                        }
+                        .tag(1)
+                } label: {
+                    FocusTabItemView()
+                        .environmentObject(timer)
+                        .accessibility(identifier: "FocusSection")
+                }
+                .badge(timer.secondsLeftString)
+                
+                Tab(value: .settings) {
+                    SettingsView()
+                        .tag(2)
+                } label: {
+                    Label("Settings", systemImage: "gear")
+                        .accessibility(identifier: "SettingsSection")
+                }
+                
+                Tab(value: .inbox, role: .search) {
+                    EmptyView()
+                } label: {
+                    Label("Add to Inbox", systemImage: "tray.and.arrow.down.fill")
+                        .foregroundStyle(Color.orange)
+                        .accessibility(identifier: "AddTaskToInboxButton")
+                        .keyboardShortcut("i", modifiers: [.command])
+                }
             }
-            .badge(activeTasksCount)
-            
-            Tab(value: .focus) {
-                FocusTimerView(focusMode: $focusMode)
-                    .id(refresh)
-                    .environmentObject(timer)
-                    .environmentObject(focusTask)
-                    .refreshable {
-                        refresh.toggle()
-                    }
-            } label: {
-                FocusTabItemView()
-                    .environmentObject(timer)
-                    .accessibility(identifier: "FocusSection")
-            }
-            .badge(timer.secondsLeftString)
-            
-            Tab(value: .settings) {
-                SettingsView()
-            } label: {
-                Label("Settings", systemImage: "gear")
-                    .accessibility(identifier: "SettingsSection")
-            }
-
-            Tab(value: .inbox, role: .search) {
-                EmptyView()
-            } label: {
-                Label("Add to Inbox", systemImage: "tray.and.arrow.down.fill")
-                    .foregroundStyle(Color.orange)
-                    .accessibility(identifier: "AddTaskToInboxButton")
-                    .keyboardShortcut("i", modifiers: [.command])
-            }
+            .tabViewStyle(.tabBarOnly)
         }
-        .tabViewStyle(.tabBarOnly)
         .sheet(isPresented: $newTaskIsShowing, content: {
             NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
                 .presentationDetents([.height(220)])
@@ -103,9 +108,11 @@ struct MainView: View {
         .onChange(of: tab) { oldValue, newValue in
             guard newValue == .inbox else { return }
             
-            withAnimation {
-                self.tab = oldValue
-                self.newTaskIsShowing.toggle()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation {
+                    self.tab = oldValue
+                    self.newTaskIsShowing.toggle()
+                }
             }
         }
         .onAppear {
