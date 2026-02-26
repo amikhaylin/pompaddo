@@ -11,7 +11,6 @@ import StoreKit
 
 import SwiftDataTransferrable
 import CloudStorage
-import WidgetKit
 
 enum MainViewTabs {
     case tasks
@@ -45,28 +44,14 @@ struct MainView: View {
     @State var selectedSideBarItem: SideBarItem? = .today
     @State var selectedProject: Project?
     
-    @Query var projects: [Project]
-    @State var badgeManager = BadgeManager()
-    @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
-    @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
-    
-    private var activeTasksCount: Int {
-        var projectsCount = 0
-        if showReviewProjectsBadge {
-            projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
-        }
-        if (tasksTodayActive.count + projectsCount) > 0 {
-            return tasksTodayActive.count + projectsCount
-        } else {
-            return 0
-        }
-    }
+    @State var activeTasksCount: Int = 0
     
     var body: some View {
         TabView(selection: $tab) {
             Tab(value: .tasks) {
                 ContentView(selectedSideBarItem: $selectedSideBarItem,
-                            selectedProject: $selectedProject)
+                            selectedProject: $selectedProject,
+                            activeTasksCount: $activeTasksCount)
                     .id(refresher.refresh)
                     .environmentObject(refresher)
                     .environmentObject(timer)
@@ -102,7 +87,7 @@ struct MainView: View {
             Tab(value: .inbox, role: .search) {
                 EmptyView()
             } label: {
-                Image(systemName: "tray.and.arrow.down.fill")
+                Label("Add to Inbox", systemImage: "tray.and.arrow.down.fill")
                     .foregroundStyle(Color.orange)
                     .accessibility(identifier: "AddTaskToInboxButton")
                     .keyboardShortcut("i", modifiers: [.command])
@@ -185,24 +170,6 @@ struct MainView: View {
                 timer.setNotification()
             }
         }
-        .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, { _, _ in
-            setBadge()
-        })
-        .onChange(of: tasksTodayActive.count) { _, _ in
-            setBadge()
-        }
-        .onAppear {
-            setBadge()
-        }
-    }
-    
-    private func setBadge() {
-        if activeTasksCount > 0 {
-            badgeManager.setBadge(number: activeTasksCount)
-        } else {
-            badgeManager.resetBadgeNumber()
-        }
-        WidgetCenter.shared.reloadAllTimelines()
     }
     
     private func checkForReview() {
