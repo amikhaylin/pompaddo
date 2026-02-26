@@ -108,7 +108,7 @@ struct MainView: View {
         .onChange(of: tab) { oldValue, newValue in
             guard newValue == .inbox else { return }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 withAnimation {
                     self.tab = oldValue
                     self.newTaskIsShowing.toggle()
