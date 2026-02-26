@@ -23,9 +23,7 @@ struct SectionsListView: View {
     @Query(filter: TasksQuery.predicateTrash()) var tasksTrash: [Todo]
     @Query var projects: [Project]
            
-    #if os(macOS)
     @State var badgeManager = BadgeManager()
-    #endif
     @AppStorage("projectsExpanded") var projectsExpanded = true
     @AppStorage("showReviewBadge") private var showReviewProjectsBadge: Bool = false
     @State var projectListSize: CGSize = .zero
@@ -35,6 +33,10 @@ struct SectionsListView: View {
     @AppStorage("showReviewSection") var showReviewSection: Bool = true
     @AppStorage("showTomorrowSection") var showTomorrowSection: Bool = true
     @AppStorage("showTrashSection") var showTrashSection: Bool = true
+    
+    #if os(iOS)
+    @Binding var activeTasksCount: Int
+    #endif
     
     var body: some View {
         List(SideBarItem.allCases, selection: $selectedSideBarItem) { item in
@@ -184,14 +186,19 @@ struct SectionsListView: View {
             }
         }
         .listStyle(SidebarListStyle())
-        #if os(macOS)
         .onChange(of: projects.filter({ TasksQuery.filterProjectToReview($0) }).count, { _, newValue in
             if showReviewProjectsBadge {
                 let tasksCount = tasksTodayActive.count
                 if (newValue + tasksCount) > 0 {
                     badgeManager.setBadge(number: (newValue + tasksCount))
+                    #if os(iOS)
+                    activeTasksCount = newValue + tasksCount
+                    #endif
                 } else {
                     badgeManager.resetBadgeNumber()
+                    #if os(iOS)
+                    activeTasksCount = 0
+                    #endif
                 }
                 WidgetCenter.shared.reloadAllTimelines()
             }
@@ -204,8 +211,15 @@ struct SectionsListView: View {
             
             if (newValue + projectsCount) > 0 {
                 badgeManager.setBadge(number: (newValue + projectsCount))
+                #if os(iOS)
+                activeTasksCount = newValue + projectsCount
+                #endif
             } else {
                 badgeManager.resetBadgeNumber()
+                #if os(iOS)
+                activeTasksCount = 0
+                #endif
+
             }
             WidgetCenter.shared.reloadAllTimelines()
         }
@@ -214,23 +228,37 @@ struct SectionsListView: View {
             if showReviewProjectsBadge {
                 projectsCount = projects.filter({ TasksQuery.filterProjectToReview($0) }).count
             }
-            if (tasksTodayActive.count + projectsCount) > 0 { badgeManager.setBadge(number: (tasksTodayActive.count + projectsCount))
+            if (tasksTodayActive.count + projectsCount) > 0 {
+                badgeManager.setBadge(number: (tasksTodayActive.count + projectsCount))
+                #if os(iOS)
+                activeTasksCount = tasksTodayActive.count + projectsCount
+                #endif
             } else {
                 badgeManager.resetBadgeNumber()
+                #if os(iOS)
+                activeTasksCount = 0
+                #endif
             }
             WidgetCenter.shared.reloadAllTimelines()
         }
-        #endif
     }
 }
 
 #Preview {
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     @Previewable @State var refresher = Refresher()
+    @Previewable @State var activeTasksCount: Int = 10
     
     let previewer = try? Previewer()
     
+    #if os(iOS)
+    SectionsListView(selectedSideBarItem: $selectedSideBarItem, activeTasksCount: $activeTasksCount)
+        .environmentObject(refresher)
+        .modelContainer(previewer!.container)
+    #else
     SectionsListView(selectedSideBarItem: $selectedSideBarItem)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)
+
+    #endif
 }

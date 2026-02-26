@@ -18,6 +18,7 @@ struct ContentView: View {
     @StateObject private var selectedTasks = SelectedTasks()
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var selectedProject: Project?
+    @Binding var activeTasksCount: Int
     @AppStorage("SectionHeight") var sectionHeight = 350.0
     @State private var currentSectionHeight: CGFloat = 350.0
     
@@ -34,7 +35,7 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             VStack {
-                SectionsListView(selectedSideBarItem: $selectedSideBarItem)
+                SectionsListView(selectedSideBarItem: $selectedSideBarItem, activeTasksCount: $activeTasksCount)
                     .frame(height: currentSectionHeight)
                 
                 ZStack {
@@ -226,10 +227,12 @@ struct ContentView: View {
         Project.self
     ]),
                                                             configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    @Previewable @State var activeTasksCount: Int = 10
     let _ = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSidebarItem,
-                selectedProject: $selectedProject)
+                selectedProject: $selectedProject,
+                activeTasksCount: $activeTasksCount)
         .environmentObject(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)
