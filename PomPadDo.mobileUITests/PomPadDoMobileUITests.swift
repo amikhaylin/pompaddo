@@ -181,7 +181,7 @@ final class PomPadDoMobileUITests: XCTestCase {
 
         app.buttons["TodayNavButton"].tap()
 
-        app.buttons["FocusSection"].tap()
+        app.buttons["FocusSection"].firstMatch.tap()
 
         snapshot("05FocusTasksView")
 
@@ -194,7 +194,7 @@ final class PomPadDoMobileUITests: XCTestCase {
 
         snapshot("06FocusTimerView")
 
-        app.buttons["TasksSection"].tap()
+        app.buttons["TasksSection"].firstMatch.tap()
 
         if model.lowercased().contains("iphone") {
             app.collectionViews.containing(
