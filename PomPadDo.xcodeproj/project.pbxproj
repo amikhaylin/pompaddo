@@ -164,6 +164,7 @@
 		4D7A1FD62C0778E4009052AE /* PomPadDo.safari.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PomPadDo.safari.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D95FE222B7B6BF300C8918D /* PomPadDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PomPadDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D95FE352B7B6BF600C8918D /* PomPadDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DB1F2762F584AA700F79490 /* AGENTS.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AGENTS.md; sourceTree = "<group>"; };
 		4DBAD6152BECBEEF002666BD /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		4DF1BAB42EA8EDFE00B8F211 /* PomPadDoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PomPadDoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DF1BAC22EA9398E00B8F211 /* PomPadDo.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = PomPadDo.xctestplan; path = PomPadDoUITests/PomPadDo.xctestplan; sourceTree = "<group>"; };
@@ -545,6 +546,7 @@
 		4D95FE192B7B6BF300C8918D = {
 			isa = PBXGroup;
 			children = (
+				4DB1F2762F584AA700F79490 /* AGENTS.md */,
 				4D0CECB12EB39DC2004C7365 /* PomPadDo.watchApp.xctestplan */,
 				4DF1BAC22EA9398E00B8F211 /* PomPadDo.xctestplan */,
 				4D5D4C842D6638F60064B27C /* PomPadDo.mobile.xctestplan */,
