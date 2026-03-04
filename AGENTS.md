@@ -21,4 +21,8 @@
 
 ## Important files
 - **Focus Timer**: `Shared/Activities/Focus/FocusTimer.swift`
+- **Focus Timer Tests**: `PomPadDo.Tests/FocusTimerTests.swift`
 
+## Testing notes
+- Run FocusTimer tests:
+  - `xcodebuild test -project PomPadDo.xcodeproj -scheme PomPadDo -destination 'platform=macOS' -only-testing:PomPadDoTests/FocusTimerTests CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=''`
