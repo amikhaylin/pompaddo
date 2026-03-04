@@ -53,9 +53,9 @@ class FocusTimer: ObservableObject {
     
     private(set) var secondsPassed: Int = 0
     private(set) var fractionPassed: Double = 0
-    private var dateStarted: Date = Date.now
+    private(set) var dateStarted: Date = Date.now
     private var currentDate: Date = Calendar.current.startOfDay(for: Date.now)
-    private var secondsPassedBeforePause: Int = 0
+    private(set) var secondsPassedBeforePause: Int = 0
     private(set) var sessionsCounter: Int = 0
     private var currentNotificationId: String = ""
 
@@ -109,6 +109,13 @@ class FocusTimer: ObservableObject {
         self.durationBreak = breakInSeconds
         self.durationLongBreak = longBreakInSeconds
         self.workSessionsCount = workSessionsCount
+    }
+    
+    func receiveState(mode: FocusTimerMode, state: FocusTimerState, dateStarted: Date, secondsPassedBeforePause: Int) {
+        self.mode = mode
+        self.state = state
+        self.dateStarted = dateStarted
+        self.secondsPassedBeforePause = secondsPassedBeforePause
     }
     
     func start() {
