@@ -25,7 +25,7 @@ struct FocusTimerScene: Scene {
             .modelContext(modelContext)
         } label: {
             if focusState == .idle {
-                let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
+                let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .light)
                 
                 let image = NSImage(named: "tomato")
                 
@@ -35,7 +35,7 @@ struct FocusTimerScene: Scene {
             } else {
                 HStack {
                     if focusMode == .work {
-                        let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
+                        let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .light)
                             .applying(.preferringMulticolor())
   
                         let image = NSImage(named: "tomato.fill")
@@ -44,7 +44,7 @@ struct FocusTimerScene: Scene {
                         
                         Image(nsImage: updateImage!)
                     } else {
-                        let configuration = NSImage.SymbolConfiguration(pointSize: 16, weight: .light)
+                        let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .light)
                             .applying(.init(hierarchicalColor: .green))
                         
                         let image = NSImage(systemSymbolName: "cup.and.saucer.fill", accessibilityDescription: nil)
