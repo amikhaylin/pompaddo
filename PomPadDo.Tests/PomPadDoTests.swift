@@ -6,21 +6,18 @@
 //
 // swiftlint:disable function_body_length
 
-import XCTest
+import Testing
+import Foundation
 import SwiftData
 @testable import PomPadDo
 
-final class PomPadDoTests: XCTestCase {
-    var dataContainer: ModelContainer!
-    
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-        dataContainer = try ModelContainer(for: Schema([Todo.self, Project.self]),
-                                                        configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    }
+@Suite
+final class PomPadDoTests {
+    let dataContainer: ModelContainer
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    init() throws {
+        dataContainer = try ModelContainer(for: Schema([Todo.self, Project.self]),
+                                           configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     }
     
     @MainActor func fetchData<T: PersistentModel>(sort: [SortDescriptor<T>]? = nil) -> [T] {
@@ -52,10 +49,12 @@ final class PomPadDoTests: XCTestCase {
         try? dataContainer.mainContext.save()
     }
 
-    @MainActor func testAddTaskToInbox() throws {
+    @Test
+    @MainActor
+    func addTaskToInbox() throws {
         clearTasks()
         var tasks: [Todo] = fetchData()
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        #expect(tasks.count == 0)
         
         // Adding task to Inbox
         let task = Todo(name: "Make soup",
@@ -67,62 +66,60 @@ final class PomPadDoTests: XCTestCase {
         
         tasks = fetchData()
         
-        XCTAssertEqual(tasks.count, 1, "There should be 1 task.")
-        
-        if let date = task.dueDate {
-            XCTAssertFalse(Calendar.current.isDateInToday(date), "There shouldn't due date be in today")
-        }
+        #expect(tasks.count == 1)
+
+        let date = try #require(task.dueDate)
+        #expect(!Calendar.current.isDateInToday(date))
         
         // Repeating
-        XCTAssertTrue(task.completionDate == nil, "Task shouldn't have any completion date")
+        #expect(task.completionDate == nil)
         
         task.complete(modelContext: dataContainer.mainContext)
-        XCTAssertTrue(task.completionDate != nil, "Task should have any completion date")
-        if let completionDate = task.completionDate {
-            XCTAssertTrue(Calendar.current.isDateInToday(completionDate), "There should completion date be in today")
-        }
+        let completionDate = try #require(task.completionDate)
+        #expect(Calendar.current.isDateInToday(completionDate))
         
         tasks = fetchData()
         
-        XCTAssertEqual(tasks.count, 2, "There should be 2 task.")
+        #expect(tasks.count == 2)
     }
     
-    @MainActor func testTaskCompletionAndReactivation() throws {
+    @Test
+    @MainActor
+    func taskCompletionAndReactivation() throws {
         clearTasks()
-//        
-//        var tasks: [Todo] = fetchData()
-//        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
         
         // Adding task to Inbox
         let task = Todo(name: "Make soup",
                         dueDate: Calendar.current.date(byAdding: .day, value: -1, to: Date()))
         dataContainer.mainContext.insert(task)
         
-        XCTAssertTrue(!task.completed, "Task is not completed")
-        XCTAssertTrue(task.completionDate == nil, "Task hasn't completion date")
+        #expect(!task.completed)
+        #expect(task.completionDate == nil)
         
         task.complete(modelContext: dataContainer.mainContext)
         
-        XCTAssertTrue(task.completed, "Task is completed")
-        XCTAssertTrue(task.completionDate != nil, "Task has completion date")
+        #expect(task.completed)
+        #expect(task.completionDate != nil)
         
         task.reactivate()
         
-        XCTAssertTrue(!task.completed, "Task is not completed")
-        XCTAssertTrue(task.completionDate == nil, "Task hasn't completion date")
+        #expect(!task.completed)
+        #expect(task.completionDate == nil)
     }
     
-    @MainActor func testAddAndDeleteSubtask() throws {
+    @Test
+    @MainActor
+    func addAndDeleteSubtask() throws {
         clearTasks()
         var tasks: [Todo] = fetchData()
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        #expect(tasks.count == 0)
         
         let task = Todo(name: "Make soup")
         dataContainer.mainContext.insert(task)
         
         tasks = fetchData()
         
-        XCTAssertEqual(tasks.count, 1, "There should be 1 task.")
+        #expect(tasks.count == 1)
         
         var subtask = Todo(name: "Buy potatoes 1", parentTask: task)
         task.subtasks?.append(subtask)
@@ -130,16 +127,16 @@ final class PomPadDoTests: XCTestCase {
 
         tasks = fetchData()
 
-        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.") // main task + subtask
-        XCTAssertTrue(task.visibleSubtasks?.count == 1, "There should be 1 visible subtasks")
+        #expect(tasks.count == 2) // main task + subtask
+        #expect(task.visibleSubtasks?.count == 1)
         
         // Mark subtask as deleted
         TasksQuery.deleteTask(task: subtask)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 2, "There should be still 2 tasks.") // main task + subtask
-        XCTAssertTrue(task.subtasks?.count == 1, "There should be 1 subtasks")
-        XCTAssertTrue(task.visibleSubtasks == nil || task.visibleSubtasks?.count == 0, "There should be 0 visible subtasks")
+        #expect(tasks.count == 2) // main task + subtask
+        #expect(task.subtasks?.count == 1)
+        #expect(task.visibleSubtasks == nil || task.visibleSubtasks?.count == 0)
 
         // Real subtask deletion
         TasksQuery.eraseTask(context: dataContainer.mainContext,
@@ -147,8 +144,8 @@ final class PomPadDoTests: XCTestCase {
         
         tasks = fetchData()
         
-        XCTAssertTrue(task.subtasks?.count == 0, "There should be 0 subtasks")
-        XCTAssertEqual(tasks.count, 1, "There should be 1 task.")
+        #expect(task.subtasks?.count == 0)
+        #expect(tasks.count == 1)
 
         subtask = Todo(name: "Buy potatoes 2", parentTask: task)
         task.subtasks?.append(subtask)
@@ -156,7 +153,7 @@ final class PomPadDoTests: XCTestCase {
 
         tasks = fetchData()
 
-        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
+        #expect(tasks.count == 2)
         
         // Delete parent task
         TasksQuery.eraseTask(context: dataContainer.mainContext,
@@ -168,26 +165,28 @@ final class PomPadDoTests: XCTestCase {
             print("\(tempTask.name)")
         }
         
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        #expect(tasks.count == 0)
     }
     
-    @MainActor func testDublicatingSubtasks() throws {
+    @Test
+    @MainActor
+    func dublicatingSubtasks() throws {
         clearTasks()
         var tasks: [Todo] = fetchData()
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        #expect(tasks.count == 0)
         
         let task = Todo(name: "Make soup")
         dataContainer.mainContext.insert(task)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 1, "There should be 1 task.")
+        #expect(tasks.count == 1)
         
         let subtask = Todo(name: "Buy potatoes 1", parentTask: task)
         task.subtasks?.append(subtask)
         dataContainer.mainContext.insert(subtask)
 
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
+        #expect(tasks.count == 2)
         
         let newTask = task.copy(modelContext: dataContainer.mainContext)
         newTask.name = "Make taco"
@@ -195,7 +194,7 @@ final class PomPadDoTests: XCTestCase {
         dataContainer.mainContext.insert(newTask)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 4, "There should be 4 tasks.")
+        #expect(tasks.count == 4)
         
         print("4 tasks")
         for task in tasks {
@@ -207,26 +206,23 @@ final class PomPadDoTests: XCTestCase {
         
         tasks = fetchData()
         
-//        print("final")
-//        for task in tasks {
-//            task.printInfo()
-//        }
-        
-        XCTAssertEqual(tasks.count, 2, "There should be 2 tasks.")
+        #expect(tasks.count == 2)
     }
     
-    @MainActor func testProjects() throws {
+    @Test
+    @MainActor
+    func projects() throws {
         clearTasks()
         var tasks: [Todo] = fetchData()
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task.")
+        #expect(tasks.count == 0)
         
         clearProjects()
         var projects: [Project] = fetchData()
-        XCTAssertEqual(projects.count, 0, "There should be 0 projects.")
+        #expect(projects.count == 0)
         
         clearStatuses()
         var statuses: [Status] = fetchData()
-        XCTAssertEqual(statuses.count, 0, "There should be 0 statuses.")
+        #expect(statuses.count == 0)
         
         let project = Project(name: "🦫 Some project")
         dataContainer.mainContext.insert(project)
@@ -242,14 +238,14 @@ final class PomPadDoTests: XCTestCase {
         }
         
         projects = fetchData()
-        XCTAssertEqual(projects.count, 1, "There should be 1 project.")
+        #expect(projects.count == 1)
         
         statuses = fetchData()
-        XCTAssertTrue(statuses.count == 3 && project.getStatuses().count == 3, "There should be 3 statuses")
+        #expect(statuses.count == 3 && project.getStatuses().count == 3)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task")
-        XCTAssertEqual(project.getTasks().count, 0, "There should be 0 task")
+        #expect(tasks.count == 0)
+        #expect(project.getTasks().count == 0)
         
         // Add task to project
         var task = Todo(name: "Some project task",
@@ -258,22 +254,22 @@ final class PomPadDoTests: XCTestCase {
         dataContainer.mainContext.insert(task)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 1, "There should be 1 task")
-        XCTAssertEqual(project.getTasks().count, 1, "There should be 1 task")
+        #expect(tasks.count == 1)
+        #expect(project.getTasks().count == 1)
         
         // Delete task
         TasksQuery.deleteTask(task: task)
 
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 1, "There should be 1 task")
-        XCTAssertEqual(project.getTasks().count, 0, "There should be 0 task")
+        #expect(tasks.count == 1)
+        #expect(project.getTasks().count == 0)
         
         TasksQuery.eraseTask(context: dataContainer.mainContext,
                               task: task)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task")
-        XCTAssertEqual(project.getTasks().count, 0, "There should be 0 task")
+        #expect(tasks.count == 0)
+        #expect(project.getTasks().count == 0)
         
         task = Todo(name: "Another project task",
                         status: project.getDefaultStatus(),
@@ -281,24 +277,26 @@ final class PomPadDoTests: XCTestCase {
         dataContainer.mainContext.insert(task)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 1, "There should be 1 task")
-        XCTAssertEqual(project.getTasks().count, 1, "There should be 1 task")
+        #expect(tasks.count == 1)
+        #expect(project.getTasks().count == 1)
         
         // Delete project with task
         project.deleteRelatives(context: dataContainer.mainContext)
         dataContainer.mainContext.delete(project)
         
         projects = fetchData()
-        XCTAssertEqual(projects.count, 0, "There should be 0 project.")
+        #expect(projects.count == 0)
         
         statuses = fetchData()
-        XCTAssertEqual(statuses.count, 0, "There should be 0 statuses")
+        #expect(statuses.count == 0)
         
         tasks = fetchData()
-        XCTAssertEqual(tasks.count, 0, "There should be 0 task")
+        #expect(tasks.count == 0)
     }
     
-    @MainActor func testCalculateEstimate() throws {
+    @Test
+    @MainActor
+    func calculateEstimate() throws {
         clearTasks()
         let task = Todo(name: "Make soup",
                         dueDate: Calendar.current.date(byAdding: .day, value: -1, to: Date()))
@@ -310,7 +308,7 @@ final class PomPadDoTests: XCTestCase {
         
         let estimate = task.calculateEstimate(1.7)
         
-        XCTAssertEqual(estimate, 2, "Estimate value should be 2 hours")
+        #expect(estimate == 2)
     }
 }
 // swiftlint:enable function_body_length
