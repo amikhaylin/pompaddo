@@ -168,6 +168,49 @@ struct FocusTimerTests {
         #expect(timer.secondsPassedString == "00:00")
     }
 
+    @Test("receiveState + start keeps transferred timer in sync")
+    @MainActor
+    func receiveStateThenStartKeepsTimersAligned() async {
+        let timer1 = FocusTimer(workInSeconds: 120,
+                                breakInSeconds: 60,
+                                longBreakInSeconds: 180,
+                                workSessionsCount: 4)
+        let timer2 = FocusTimer(workInSeconds: 120,
+                                breakInSeconds: 60,
+                                longBreakInSeconds: 180,
+                                workSessionsCount: 4)
+        defer {
+            timer1.reset()
+            timer2.reset()
+        }
+
+        timer1.start()
+        try? await Task.sleep(nanoseconds: 150_000_000)
+
+        timer2.receiveState(mode: timer1.mode,
+                            state: timer1.state,
+                            dateStarted: timer1.dateStarted,
+                            secondsPassedBeforePause: timer1.secondsPassedBeforePause)
+
+        #expect(timer2.mode == timer1.mode)
+        #expect(timer2.state == timer1.state)
+        #expect(timer2.dateStarted == timer1.dateStarted)
+        #expect(timer2.secondsPassedBeforePause == timer1.secondsPassedBeforePause)
+
+        timer2.start()
+
+        let bothTicked = await waitUntil {
+            timer1.secondsPassed >= 1 && timer2.secondsPassed >= 1
+        }
+        #expect(bothTicked)
+
+        #expect(timer1.mode == timer2.mode)
+        #expect(timer1.state == timer2.state)
+        #expect(timer1.secondsPassed == timer2.secondsPassed)
+        #expect(timer1.secondsLeft == timer2.secondsLeft)
+        #expect(timer1.secondsLeftString == timer2.secondsLeftString)
+    }
+
     @MainActor
     private func waitUntil(timeoutNanoseconds: UInt64 = 3_000_000_000,
                            pollNanoseconds: UInt64 = 50_000_000,

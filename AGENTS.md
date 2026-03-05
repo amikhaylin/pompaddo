@@ -26,3 +26,5 @@
 ## Testing notes
 - Run FocusTimer tests:
   - `xcodebuild test -project PomPadDo.xcodeproj -scheme PomPadDo -destination 'platform=macOS' -only-testing:PomPadDoTests/FocusTimerTests CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=''`
+- Covered FocusTimer transfer scenario:
+  - Start timer `T1`, wait, create `T2`, call `receiveState(mode:state:dateStarted:secondsPassedBeforePause:)` from `T1`, start `T2`, then assert both timers stay aligned (`mode`, `state`, `secondsPassed`, `secondsLeft`).
