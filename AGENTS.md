@@ -96,3 +96,21 @@ If the Xcode MCP is configured, prefer its tools over generic alternatives when 
 - `ExecuteSnippet` — test a code snippet in the context of a source file
 - `XcodeRead`, `XcodeWrite`, `XcodeUpdate` — prefer these over generic file tools when working with Xcode project files
 
+## Project structure (folders)
+
+- `Shared`: Shared files
+- `PomPadDo`: macOS implementation
+- `PomPadDo.safari`: macOS Safari extension
+- `PomPadDo.mobile`: iOS/iPadOS implementation
+- `PomPadDo.mobileUITests`: iOS/iPadOS UI tests
+- `PomPadDo.Tests`: Unit tests
+- `PomPadDo.watch Watch App`: watchOS implementation
+- `PomPadDoWidgets`: iOS/iPadOS widgets
+- `PomPadDoWatchWidgets`: watchOS widgets
+- `PomPadDo.mobile.share`: iOS/iPadOS share extension
+
+## Important files
+
+- `Shared/Activities/Focus/FocusTimer.swift`: Focus timer implementation for macOS/iOS/watchOS
+- `PomPadDo.Tests/FocusTimerTests.swift`: tests for focus timer
+
