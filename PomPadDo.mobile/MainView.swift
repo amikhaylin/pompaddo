@@ -45,6 +45,9 @@ struct MainView: View {
     @State var selectedProject: Project?
     
     @State var activeTasksCount: Int = 0
+    #if canImport(ActivityKit)
+    @State private var liveActivityManager = FocusLiveActivityManager()
+    #endif
     
     var body: some View {
         TabView(selection: $tab) {
@@ -117,33 +120,42 @@ struct MainView: View {
                                workSessionsCount: Int(timerWorkSessionsCount))
             
             checkForReview()
+            synchronizeLiveActivity()
         }
         .onChange(of: timerWorkSession, { _, _ in
             timer.setDurations(workInSeconds: timerWorkSession,
                                breakInSeconds: timerBreakSession,
                                longBreakInSeconds: timerLongBreakSession,
                                workSessionsCount: Int(timerWorkSessionsCount))
+            synchronizeLiveActivity()
         })
         .onChange(of: timerBreakSession, { _, _ in
             timer.setDurations(workInSeconds: timerWorkSession,
                                breakInSeconds: timerBreakSession,
                                longBreakInSeconds: timerLongBreakSession,
                                workSessionsCount: Int(timerWorkSessionsCount))
+            synchronizeLiveActivity()
         })
         .onChange(of: timerLongBreakSession, { _, _ in
             timer.setDurations(workInSeconds: timerWorkSession,
                                breakInSeconds: timerBreakSession,
                                longBreakInSeconds: timerLongBreakSession,
                                workSessionsCount: Int(timerWorkSessionsCount))
+            synchronizeLiveActivity()
         })
         .onChange(of: timerWorkSessionsCount, { _, _ in
             timer.setDurations(workInSeconds: timerWorkSession,
                                breakInSeconds: timerBreakSession,
                                longBreakInSeconds: timerLongBreakSession,
                                workSessionsCount: Int(timerWorkSessionsCount))
+            synchronizeLiveActivity()
+        })
+        .onChange(of: timer.state, { _, _ in
+            synchronizeLiveActivity()
         })
         .onChange(of: timer.mode, { _, _ in
             focusMode = timer.mode
+            synchronizeLiveActivity()
         })
         .onChange(of: timer.sessionsCounter, { _, newValue in
             if let task = focusTask.task, newValue > 0 {
@@ -171,6 +183,7 @@ struct MainView: View {
             if newPhase == .background && timer.state == .running {
                 timer.setNotification()
             }
+            synchronizeLiveActivity()
         }
     }
     
@@ -213,6 +226,12 @@ struct MainView: View {
                 }
             }
         }
+    }
+    
+    private func synchronizeLiveActivity() {
+        #if canImport(ActivityKit)
+        liveActivityManager.synchronize(with: timer)
+        #endif
     }
 }
 

@@ -89,6 +89,16 @@ class FocusTimer: ObservableObject {
     var fractionLeft: Double {
         1.0 - fractionPassed
     }
+    
+    var currentDurationSeconds: Int {
+        if mode == .work {
+            return Int(durationWork)
+        } else if mode == .longbreak {
+            return Int(durationLongBreak)
+        } else {
+            return Int(durationBreak)
+        }
+    }
   
     private var duration: TimeInterval {
         if mode == .work {

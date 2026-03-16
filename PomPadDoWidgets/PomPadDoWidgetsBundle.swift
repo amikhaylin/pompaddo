@@ -13,6 +13,9 @@ struct PomPadDoWidgetsBundle: WidgetBundle {
     var body: some Widget {
         TodayTasks()
         AddToInbox()
+        #if os(iOS) && canImport(ActivityKit)
+        FocusTimerLiveActivityWidget()
+        #endif
     }
 }
 
