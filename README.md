@@ -61,9 +61,9 @@ Key features:
 - [x] Safari extension
 - [x] Add event to Calendar from task
 - [x] Deletion to Trash view
+- [x] Live activities
 - [ ] Tags
 - [ ] Shortcuts
-- [ ] Live activities
 - [ ] Location based contexts
 
 #### Languages Supported
