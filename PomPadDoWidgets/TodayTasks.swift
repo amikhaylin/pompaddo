@@ -17,7 +17,7 @@ struct TodayTasksAccessory: View {
            AccessoryWidgetBackground()
            // Value: completed tasks, in: 0...X (total today tasks)
            Gauge(value: Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) && $0.completed }).count), in: 0...Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) }).count)) {
-               Text("\(tasksToday.filter({ $0.completed == false }).count)")
+               GaugeLabelView(tasksCount: tasksToday.filter({ $0.completed == false }).count)
             }
             .gaugeStyle(.accessoryCircularCapacity)
             .tint(.green)
@@ -60,9 +60,9 @@ struct TodayTasksHomeScreen: View {
                 
                 Spacer()
             }
-
+            
             Gauge(value: Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) && $0.completed }).count), in: 0...Double(tasksToday.filter({ TasksQuery.checkToday(date: $0.completionDate) }).count)) {
-                Text("\(tasksToday.filter({ $0.completed == false }).count)")
+                    GaugeLabelView(tasksCount: tasksToday.filter({ $0.completed == false }).count)
             }
             .gaugeStyle(.accessoryCircularCapacity)
             .tint(.green)
