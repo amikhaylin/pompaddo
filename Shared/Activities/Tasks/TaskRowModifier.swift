@@ -282,21 +282,47 @@ struct TaskRowModifier: ViewModifier {
                 Divider()
                 
                 Menu {
-                    ForEach(projects.sorted(by: ProjectsQuery.defaultSorting)) { project in
-                        Button {
+                    ForEach(projects.filter({ $0.group == nil }).sorted(by: ProjectsQuery.defaultSorting)) { project in
+                        let assignProject: () -> Void = {
                             if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
-                                for task in selectedTasksSet {
-                                    task.project = project
-                                    task.status = project.getDefaultStatus()
-                                    project.tasks?.append(task)
+                                for tsk in selectedTasksSet {
+                                    tsk.project = project
+                                    tsk.status = project.getDefaultStatus()
+                                    project.tasks?.append(tsk)
                                 }
                             } else {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
                                 project.tasks?.append(task)
                             }
-                        } label: {
+                        }
+                        Button(action: assignProject) {
                             Text(project.name)
+                        }
+                    }
+                    
+                    ForEach(groups.filter({ $0.projects?.count ?? 0 > 0 }).sorted(by: { $0.order < $1.order })) { group in
+                        Menu {
+                            ForEach(projects.filter({ $0.group == group }).sorted(by: ProjectsQuery.defaultSorting)) { project in
+                                let assignProject: () -> Void = {
+                                    if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
+                                        for tsk in selectedTasksSet {
+                                            tsk.project = project
+                                            tsk.status = project.getDefaultStatus()
+                                            project.tasks?.append(tsk)
+                                        }
+                                    } else {
+                                        task.project = project
+                                        task.status = project.getDefaultStatus()
+                                        project.tasks?.append(task)
+                                    }
+                                }
+                                Button(action: assignProject) {
+                                    Text(project.name)
+                                }
+                            }
+                        } label: {
+                            Text(group.name)
                         }
                     }
                 } label: {
@@ -402,3 +428,4 @@ struct TaskRowModifier: ViewModifier {
 // swiftlint:enable cyclomatic_complexity
 // swiftlint:enable type_body_length
 // swiftlint:enable file_length
+
