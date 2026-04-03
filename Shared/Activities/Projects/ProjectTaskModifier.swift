@@ -23,6 +23,7 @@ struct ProjectTaskModifier: ViewModifier {
     @Binding var selectedTasksSet: Set<Todo>
     @Bindable var project: Project
     @Query var projects: [Project]
+    @Query var groups: [ProjectGroup]
     @Binding var tasks: [Todo]
     @State private var showAddSubtask = false
     @State private var renameTask: Todo?
@@ -286,8 +287,8 @@ struct ProjectTaskModifier: ViewModifier {
                 }
                 
                 Menu {
-                    ForEach(projects) { project in
-                        Button {
+                    ForEach(projects.filter({ $0.group == nil }).sorted(by: ProjectsQuery.defaultSorting)) { project in
+                        let assignProject: () -> Void = {
                             if selectedTasksSet.count > 0 {
                                 for task in selectedTasksSet {
                                     task.project = project
@@ -309,8 +310,44 @@ struct ProjectTaskModifier: ViewModifier {
                                     }
                                 }
                             }
-                        } label: {
+                        }
+                        Button(action: assignProject) {
                             Text(project.name)
+                        }
+                    }
+                    
+                    ForEach(groups.filter({ $0.projects?.count ?? 0 > 0 }).sorted(by: { $0.order < $1.order })) { group in
+                        Menu {
+                            ForEach(projects.filter({ $0.group == group }).sorted(by: ProjectsQuery.defaultSorting)) { project in
+                                let assignProject: () -> Void = {
+                                    if selectedTasksSet.count > 0 {
+                                        for task in selectedTasksSet {
+                                            task.project = project
+                                            task.status = project.getDefaultStatus()
+                                            project.tasks?.append(task)
+                                            if project != self.project {
+                                                if let index = tasks.firstIndex(of: task) {
+                                                    tasks.remove(at: index)
+                                                }
+                                            }
+                                        }
+                                    } else {
+                                        task.project = project
+                                        task.status = project.getDefaultStatus()
+                                        project.tasks?.append(task)
+                                        if project != self.project {
+                                            if let index = tasks.firstIndex(of: task) {
+                                                tasks.remove(at: index)
+                                            }
+                                        }
+                                    }
+                                }
+                                Button(action: assignProject) {
+                                    Text(project.name)
+                                }
+                            }
+                        } label: {
+                            Text(group.name)
                         }
                     }
                 } label: {
