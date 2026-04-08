@@ -206,7 +206,7 @@ class FocusTimer {
         
         timerTask = Task(priority: .background) { [weak self] in
             while !Task.isCancelled {
-                try? await Task.sleep(nanoseconds: 1_000_000_000)
+                try? await Task.sleep(for: .seconds(1))
                 
                 await MainActor.run {
                     self?.onTick()
