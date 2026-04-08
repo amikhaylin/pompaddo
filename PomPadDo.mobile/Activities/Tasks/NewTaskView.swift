@@ -31,7 +31,7 @@ struct NewTaskView: View {
     @FocusState private var focusField: FocusField?
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Text("Add task to \(getListName())")
                     .font(.headline)

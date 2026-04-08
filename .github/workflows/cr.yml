@@ -19,4 +19,4 @@ jobs:
           LANGUAGE: Russian
           OPENAI_API_ENDPOINT: https://api.proxyapi.ru/openai/v1
           MODEL: gpt-5.2-codex
-          PROMPT: "Please check if there are any confusions or irregularities in the following code diff:"
+          PROMPT: #"Please check if there are any confusions or irregularities in the following code diff:"

@@ -20,7 +20,7 @@ struct EditProjectGroupView: View {
     @FocusState private var focusField: FocusField?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 TextField("Group name", text: $name)
                     .focused($focusField, equals: .groupName)

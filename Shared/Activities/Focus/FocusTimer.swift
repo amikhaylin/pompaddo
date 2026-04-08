@@ -222,27 +222,25 @@ class FocusTimer: ObservableObject {
     }
   
     private func onTick() {
-        DispatchQueue.main.async {
-            // calculate the seconds since start date
-            let secondsSinceStartDate = Date.now.timeIntervalSince(self.dateStarted)
-            // add the seconds before paused (if any)
-            self.secondsPassed = Int(secondsSinceStartDate) + self.secondsPassedBeforePause
-            // calculate fraction
-            self.fractionPassed = TimeInterval(self.secondsPassed) / self.duration
-            // done? play sound, reset, switch (work->pause->work), reset timer
-            if self.secondsLeft <= 0 {
-                FocusSounds.play()
-                
-                self.fractionPassed = 0
-                self.secondsPassedBeforePause = 0
-                self.skip() // to switch mode
-                self.dateStarted = Date.now
-                self.secondsPassed = 0
-                self.fractionPassed = 0
-                self.state = .running
-            } else if self.secondsLeft == 2 {
-                self.setNotification()
-            }
+        // calculate the seconds since start date
+        let secondsSinceStartDate = Date.now.timeIntervalSince(self.dateStarted)
+        // add the seconds before paused (if any)
+        self.secondsPassed = Int(secondsSinceStartDate) + self.secondsPassedBeforePause
+        // calculate fraction
+        self.fractionPassed = TimeInterval(self.secondsPassed) / self.duration
+        // done? play sound, reset, switch (work->pause->work), reset timer
+        if self.secondsLeft <= 0 {
+            FocusSounds.play()
+            
+            self.fractionPassed = 0
+            self.secondsPassedBeforePause = 0
+            self.skip() // to switch mode
+            self.dateStarted = Date.now
+            self.secondsPassed = 0
+            self.fractionPassed = 0
+            self.state = .running
+        } else if self.secondsLeft == 2 {
+            self.setNotification()
         }
     }
 }

@@ -321,7 +321,7 @@ struct EditTaskView: View {
                 
                 TextEditor(text: $task.note)
                     .background(Color.primary.colorInvert())
-                    .cornerRadius(5)
+                    .clipShape(.rect(cornerRadius: 5))
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(.black, lineWidth: 1 / 3)

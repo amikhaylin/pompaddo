@@ -285,7 +285,7 @@ struct ProjectsListView: View {
                 Spacer()
             }
         }
-        .foregroundColor(Color("ProjectsColor"))
+        .foregroundStyle(Color("ProjectsColor"))
         #if os(macOS)
         .sheet(item: $editProjectGroup, onDismiss: {
             editProjectGroup = nil

@@ -16,7 +16,7 @@ struct NewTaskView: View {
     @State private var dueToday = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             TextField("Add task to Inbox", text: $taskName)
                 .onSubmit {
                     let task = Todo(name: taskName)

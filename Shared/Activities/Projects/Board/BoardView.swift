@@ -107,7 +107,7 @@ struct BoardView: View {
                                     }
                                 }
                             }
-                            .cornerRadius(5)
+                            .clipShape(.rect(cornerRadius: 5))
                         }
                         .dropDestination(for: Todo.self) { tasks, _ in
                             for task in tasks {
@@ -124,7 +124,7 @@ struct BoardView: View {
                         ZStack {
                             Rectangle()
                                 .fill(Color.gray.opacity(0.1))
-                                .cornerRadius(5)
+                                .clipShape(.rect(cornerRadius: 5))
                             
                             Image(systemName: "ellipsis")
                                 .rotationEffect(.degrees(90))

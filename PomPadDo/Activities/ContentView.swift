@@ -43,7 +43,7 @@ struct ContentView: View {
                 ZStack {
                     Rectangle()
                         .fill(Color.gray.opacity(0.1))
-                        .cornerRadius(5)
+                        .clipShape(.rect(cornerRadius: 5))
                     
                     Image(systemName: "ellipsis")
                 }

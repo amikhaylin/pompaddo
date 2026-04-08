@@ -32,7 +32,7 @@ struct ShareView: View {
                         .resizable()
                         .frame(width: 80, height: 50)
                         .aspectRatio(contentMode: .fill)
-                        .cornerRadius(8)
+                        .clipShape(.rect(cornerRadius: 8))
                         .shadow(radius: 10)
                 }
             }
