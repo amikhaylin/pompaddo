@@ -18,7 +18,7 @@ struct PomPadDoMacApp: App {
     @State var newTaskIsShowing = false
     @StateObject var selectedTasks = SelectedTasks()
     
-    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
@@ -75,7 +75,7 @@ struct PomPadDoMacApp: App {
                 .id(refresher.refresh)
                 .environment(refresher)
                 .environmentObject(selectedTasks)
-                .environmentObject(timer)
+                .environment(timer)
                 .environment(focusTask)
             }
 //            .modelContainer(sharedModelContainer)
@@ -408,7 +408,7 @@ struct PomPadDoMacApp: App {
         FocusTimerScene()
             .modelContainer(sharedModelContainer)
             .environment(refresher)
-            .environmentObject(timer)
+            .environment(timer)
             .environment(focusTask)
         
         Settings {

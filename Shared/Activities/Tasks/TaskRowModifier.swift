@@ -18,7 +18,7 @@ struct TaskRowModifier: ViewModifier {
     @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @Binding var selectedTasksSet: Set<Todo>

@@ -170,7 +170,7 @@ struct TrashListView: View {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
     @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
@@ -190,7 +190,7 @@ struct TrashListView: View {
     .environment(showInspector)
     .environmentObject(selectedTasks)
     .environment(refresher)
-    .environmentObject(timer)
+    .environment(timer)
     .environment(focusTask)
     .modelContainer(container!)
 }

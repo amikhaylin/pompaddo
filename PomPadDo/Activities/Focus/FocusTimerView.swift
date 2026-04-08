@@ -12,7 +12,7 @@ import CloudStorage
 struct FocusTimerView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(Refresher.self) var refresher
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Environment(FocusTask.self) var focusTask
     
     @CloudStorage("timerWorkSession") private var timerWorkSession: Double = UserDefaults.standard.value(forKey: "timerWorkSession") as? Double ?? 1500.0
@@ -65,7 +65,7 @@ struct FocusTimerView: View {
                 // MARK: Task list
                 FocusTasksView(viewMode: $viewMode)
                     .id(refresher.refresh)
-                    .environmentObject(timer)
+                    .environment(timer)
                     .environment(focusTask)
             } else {
                 ZStack {
@@ -223,7 +223,7 @@ struct FocusTimerView: View {
 #Preview {
     @Previewable @State var focusMode: FocusTimerMode = .work
     @Previewable @State var timerString: String = "$$$$"
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
@@ -234,7 +234,7 @@ struct FocusTimerView: View {
     FocusTimerView(context: previewer!.container.mainContext,
                           timerCount: $timerString,
                           focusMode: $focusMode)
-        .environmentObject(timer)
+        .environment(timer)
         .environment(focusTask)
         .modelContainer(previewer!.container)
 }

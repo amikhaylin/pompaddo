@@ -35,7 +35,7 @@ enum FocusTimerMode: String {
 
 @MainActor
 @Observable
-class FocusTimer: ObservableObject {
+class FocusTimer {
     // timer -> tick every second
     // properties -> how many seconds left / passed
     //            -> fraction 0-1

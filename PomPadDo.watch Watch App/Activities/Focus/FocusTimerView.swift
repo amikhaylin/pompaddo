@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FocusTimerView: View {
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Environment(FocusTask.self) var focusTask
     @Binding var list: SideBarItem?
     
@@ -107,13 +107,13 @@ struct FocusTimerView: View {
 }
 
 #Preview {
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
     @Previewable @State var focusTask = FocusTask()
 
     FocusTimerView(list: .constant(.focus))
-        .environmentObject(timer)
+        .environment(timer)
         .environment(focusTask)
 }

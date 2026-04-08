@@ -16,7 +16,7 @@ struct TaskSwipeModifier: ViewModifier {
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @Environment(FocusTask.self) var focusTask
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Bindable var task: Todo
     @Binding var list: SideBarItem?
     @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false

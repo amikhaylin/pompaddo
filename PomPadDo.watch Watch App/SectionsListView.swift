@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SectionsListView: View {
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Binding var selectedSideBarItem: SideBarItem?
     @AppStorage("showDeadlinesSection") var showDeadlinesSection: Bool = true
     @AppStorage("showAllSection") var showAllSection: Bool = true
@@ -64,7 +64,7 @@ struct SectionsListView: View {
             case .focus:
                 NavigationLink(value: item) {
                     FocusTabItemView()
-                        .environmentObject(timer)
+                        .environment(timer)
                         .foregroundStyle(Color(#colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)))
                 }
                 .accessibilityIdentifier("FocusNavButton")

@@ -13,7 +13,7 @@ struct ProjectTasksListView: View {
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @Environment(FocusTask.self) var focusTask
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     
     @Bindable var project: Project
     
@@ -230,7 +230,7 @@ struct ProjectTasksListView: View {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
     @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
@@ -250,7 +250,7 @@ struct ProjectTasksListView: View {
         .environment(showInspector)
         .environmentObject(selectedTasks)
         .environment(refresher)
-        .environmentObject(timer)
+        .environment(timer)
         .environment(focusTask)
         .modelContainer(container!)
 }

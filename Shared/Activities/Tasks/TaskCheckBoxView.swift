@@ -13,7 +13,7 @@ import CloudStorage
 struct TaskCheckBoxView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(FocusTask.self) var focusTask
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Bindable var task: Todo
     
     @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false

@@ -30,7 +30,7 @@ struct PomPadDoWatchApp: App {
         }
     }()
     
-    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
@@ -42,7 +42,7 @@ struct PomPadDoWatchApp: App {
             ContentView(selectedSideBarItem: $selectedSideBarItem)
                 .id(refresher.refresh)
                 .environment(refresher)
-                .environmentObject(timer)
+                .environment(timer)
                 .environment(focusTask)
         }
         .modelContainer(sharedModelContainer)

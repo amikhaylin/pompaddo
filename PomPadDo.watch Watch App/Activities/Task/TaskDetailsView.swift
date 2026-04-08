@@ -14,7 +14,7 @@ struct TaskDetailsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @Environment(Refresher.self) var refresher
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @Binding var list: SideBarItem?

@@ -48,7 +48,7 @@ struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) var scenePhase
     @Environment(Refresher.self) var refresher
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTimer.self) var timer
     @Environment(FocusTask.self) var focusTask
     
     @CloudStorage("timerWorkSession") private var timerWorkSession: Double = UserDefaults.standard.value(forKey: "timerWorkSession") as? Double ?? 1500.0
@@ -83,7 +83,7 @@ struct ContentView: View {
                                        title: selectedSideBarItem!.name)
                 case .focus:
                     FocusTimerView(list: $selectedSideBarItem)
-                        .environmentObject(timer)
+                        .environment(timer)
                         .environment(focusTask)
                 case .deadlines:
                     TasksListView(predicate: TasksQuery.predicateDeadlines(),

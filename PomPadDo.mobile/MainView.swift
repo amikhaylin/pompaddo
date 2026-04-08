@@ -27,7 +27,7 @@ struct MainView: View {
     @CloudStorage("timerLongBreakSession") private var timerLongBreakSession: Double = UserDefaults.standard.value(forKey: "timerLongBreakSession") as? Double ?? 1200.0
     @CloudStorage("timerWorkSessionsCount") private var timerWorkSessionsCount: Double = UserDefaults.standard.value(forKey: "timerWorkSessionsCount") as? Double ?? 4.0
     
-    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
@@ -57,7 +57,7 @@ struct MainView: View {
                             activeTasksCount: $activeTasksCount)
                 .id(refresher.refresh)
                 .environment(refresher)
-                .environmentObject(timer)
+                .environment(timer)
                 .environment(focusTask)
             } label: {
                 Label("Tasks", systemImage: "checkmark.square")
@@ -68,14 +68,14 @@ struct MainView: View {
             Tab(value: .focus) {
                 FocusTimerView(focusMode: $focusMode)
                     .id(refresh)
-                    .environmentObject(timer)
+                    .environment(timer)
                     .environment(focusTask)
                     .refreshable {
                         refresh.toggle()
                     }
             } label: {
                 FocusTabItemView()
-                    .environmentObject(timer)
+                    .environment(timer)
                     .accessibility(identifier: "FocusSection")
             }
             .badge(timer.secondsLeftString)
