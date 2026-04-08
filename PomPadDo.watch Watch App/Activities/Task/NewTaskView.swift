@@ -11,7 +11,7 @@ import SwiftData
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @State private var taskName = ""
     @State private var dueToday = false
     

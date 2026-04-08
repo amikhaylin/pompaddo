@@ -21,7 +21,7 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
@@ -275,7 +275,7 @@ struct TasksListView: View {
                   title: "Some list")
     .environment(showInspector)
     .environmentObject(selectedTasks)
-    .environmentObject(refresher)
+    .environment(refresher)
     .environmentObject(timer)
     .environmentObject(focusTask)
     .modelContainer(container!)

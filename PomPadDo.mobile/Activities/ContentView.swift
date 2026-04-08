@@ -13,7 +13,7 @@ import CloudStorage
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @State private var showInspector = InspectorToggler()
     @StateObject private var selectedTasks = SelectedTasks()
     @Binding var selectedSideBarItem: SideBarItem?
@@ -233,7 +233,7 @@ struct ContentView: View {
     ContentView(selectedSideBarItem: $selectedSidebarItem,
                 selectedProject: $selectedProject,
                 activeTasksCount: $activeTasksCount)
-        .environmentObject(refresher)
+        .environment(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)
         .modelContainer(container!)

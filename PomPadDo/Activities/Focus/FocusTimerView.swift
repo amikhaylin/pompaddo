@@ -11,7 +11,7 @@ import CloudStorage
 
 struct FocusTimerView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
     

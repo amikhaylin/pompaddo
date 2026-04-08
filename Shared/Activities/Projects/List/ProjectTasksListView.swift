@@ -249,7 +249,7 @@ struct ProjectTasksListView: View {
     ProjectTasksListView(project: previewer.project)
         .environment(showInspector)
         .environmentObject(selectedTasks)
-        .environmentObject(refresher)
+        .environment(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)
         .modelContainer(container!)

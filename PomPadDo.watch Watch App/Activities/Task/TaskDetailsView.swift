@@ -13,7 +13,7 @@ import CloudStorage
 struct TaskDetailsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
     @Bindable var task: Todo
@@ -299,6 +299,6 @@ struct TaskDetailsView: View {
     let previewer = try? Previewer()
     
     TaskDetailsView(task: previewer!.task, list: .constant(.today))
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(previewer!.container)
 }

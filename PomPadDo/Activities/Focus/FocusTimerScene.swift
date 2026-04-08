@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FocusTimerScene: Scene {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
     @State private var timerCount: String = ""
@@ -21,7 +21,7 @@ struct FocusTimerScene: Scene {
             FocusTimerView(context: modelContext,
                            timerCount: $timerCount,
                            focusMode: $focusMode)
-            .environmentObject(refresher)
+            .environment(refresher)
             .modelContext(modelContext)
         } label: {
             if focusState == .idle {

@@ -52,3 +52,9 @@ class SelectedTasks: ObservableObject {
 class FocusTask: ObservableObject {
     @Published var task: Todo?
 }
+
+@Observable
+@MainActor
+class Refresher {
+    var refresh = false
+}

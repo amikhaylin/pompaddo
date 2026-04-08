@@ -217,7 +217,6 @@
 				Utils/NotificationManager.swift,
 				Utils/Previewer.swift,
 				Utils/ProjectsQuery.swift,
-				Utils/Refresher.swift,
 				Utils/SideBarItem.swift,
 				Utils/TasksQuery.swift,
 			);
@@ -260,7 +259,6 @@
 				Utils/NotificationManager.swift,
 				Utils/Previewer.swift,
 				Utils/ProjectsQuery.swift,
-				Utils/Refresher.swift,
 				Utils/SideBarItem.swift,
 				Utils/TasksQuery.swift,
 			);
@@ -282,7 +280,6 @@
 				Utils/DueDateType.swift,
 				Utils/NotificationManager.swift,
 				Utils/Previewer.swift,
-				Utils/Refresher.swift,
 				Utils/TasksQuery.swift,
 			);
 			target = 4D3E50B12D6382E7008C1FDB /* PomPadDo.watch Watch App */;

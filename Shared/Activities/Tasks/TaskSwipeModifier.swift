@@ -12,7 +12,7 @@ import CloudStorage
 
 struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask

@@ -14,7 +14,7 @@ import CloudStorage
 
 struct ProjectTaskModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var timer: FocusTimer

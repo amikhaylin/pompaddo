@@ -10,7 +10,7 @@ import SwiftData
 
 struct TrashListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @Query(filter: TasksQuery.predicateTrash()) var tasks: [Todo]
@@ -189,7 +189,7 @@ struct TrashListView: View {
                   title: "Some list")
     .environment(showInspector)
     .environmentObject(selectedTasks)
-    .environmentObject(refresher)
+    .environment(refresher)
     .environmentObject(timer)
     .environmentObject(focusTask)
     .modelContainer(container!)

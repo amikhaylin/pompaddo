@@ -47,7 +47,7 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
     
@@ -189,6 +189,6 @@ struct ContentView: View {
     let previewer = Previewer(container!)
     
     ContentView(selectedSideBarItem: $selectedSidebarItem)
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(container!)
 }

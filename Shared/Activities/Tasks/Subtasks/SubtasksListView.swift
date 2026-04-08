@@ -10,7 +10,7 @@ import SwiftData
 
 struct SubtasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
@@ -236,7 +236,7 @@ struct SubtasksListView: View {
                      mainTask: previewer.task)
     .environment(showInspector)
     .environmentObject(selectedTasks)
-    .environmentObject(refresher)
+    .environment(refresher)
     .environmentObject(timer)
     .environmentObject(focusTask)
     .modelContainer(container!)

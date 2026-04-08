@@ -41,7 +41,7 @@ struct PomPadDoWatchApp: App {
         WindowGroup {
             ContentView(selectedSideBarItem: $selectedSideBarItem)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
+                .environment(refresher)
                 .environmentObject(timer)
                 .environmentObject(focusTask)
         }

@@ -12,7 +12,7 @@ import CloudStorage
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var selectedTasks: SelectedTasks
   
@@ -258,7 +258,7 @@ struct ContentView: View {
                 newTaskIsShowing: $newTaskIsShowing,
                 selectedProject: $selectedProject)
         .environmentObject(selectedTasks)
-        .environmentObject(refresher)
+        .environment(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)
         .modelContainer(container!)

@@ -11,7 +11,7 @@ import WidgetKit
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Query var tasks: [Todo]
     
     @Binding var list: SideBarItem?
@@ -92,6 +92,6 @@ struct TasksListView: View {
     TasksListView(predicate: TasksQuery.predicateInbox(),
                   list: .constant(.inbox),
                   title: "Some list")
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(container!)
 }

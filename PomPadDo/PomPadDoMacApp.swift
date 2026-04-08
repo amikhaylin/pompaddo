@@ -73,7 +73,7 @@ struct PomPadDoMacApp: App {
                             newTaskIsShowing: $newTaskIsShowing,
                             selectedProject: $selectedProject)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
+                .environment(refresher)
                 .environmentObject(selectedTasks)
                 .environmentObject(timer)
                 .environmentObject(focusTask)
@@ -407,7 +407,7 @@ struct PomPadDoMacApp: App {
         
         FocusTimerScene()
             .modelContainer(sharedModelContainer)
-            .environmentObject(refresher)
+            .environment(refresher)
             .environmentObject(timer)
             .environmentObject(focusTask)
         

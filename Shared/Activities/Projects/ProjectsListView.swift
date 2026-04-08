@@ -11,7 +11,7 @@ import SwiftData
 
 struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     
     @Binding var selectedProject: Project?
     

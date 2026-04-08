@@ -208,7 +208,7 @@ struct BoardView: View {
         .modelContainer(container!)
         .environment(showInspector)
         .environmentObject(selectedTasks)
-        .environmentObject(refresher)
+        .environment(refresher)
         .environmentObject(timer)
         .environmentObject(focusTask)
 }

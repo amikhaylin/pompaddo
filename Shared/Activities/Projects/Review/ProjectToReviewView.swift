@@ -74,6 +74,6 @@ struct ProjectToReviewView: View {
     ProjectToReviewView(project: previewer!.project)
         .environment(showInspector)
         .environmentObject(selectedTasks)
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(previewer!.container)
 }

@@ -56,7 +56,7 @@ struct MainView: View {
                             selectedProject: $selectedProject,
                             activeTasksCount: $activeTasksCount)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
+                .environment(refresher)
                 .environmentObject(timer)
                 .environmentObject(focusTask)
             } label: {
@@ -101,7 +101,7 @@ struct MainView: View {
             NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
                 .presentationDetents([.height(220)])
                 .presentationDragIndicator(.visible)
-                .environmentObject(refresher)
+                .environment(refresher)
         })
         .onChange(of: tab) { oldValue, newValue in
             guard newValue == .inbox else { return }
