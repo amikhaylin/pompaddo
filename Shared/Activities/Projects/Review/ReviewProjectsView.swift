@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct ReviewProjectsView: View {
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     
     @Query var projects: [Project]
@@ -21,7 +21,7 @@ struct ReviewProjectsView: View {
                     List(projects.filter({ TasksQuery.filterProjectToReview($0) }).sorted(by: ProjectsQuery.defaultSorting)) { project in
                         NavigationLink {
                             ProjectToReviewView(project: project)
-                                .environmentObject(showInspector)
+                                .environment(showInspector)
                                 .environmentObject(selectedTasks)
                         } label: {
                             Text(project.name)
@@ -47,12 +47,12 @@ struct ReviewProjectsView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
     
     ReviewProjectsView()
-        .environmentObject(showInspector)
+        .environment(showInspector)
         .environmentObject(selectedTasks)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)

@@ -16,7 +16,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var selectedTasks: SelectedTasks
   
-    @StateObject private var showInspector = InspectorToggler()
+    @State private var showInspector = InspectorToggler()
     
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var newTaskIsShowing: Bool
@@ -86,24 +86,24 @@ struct ContentView: View {
                     TasksListView(predicate: TasksQuery.predicateInbox(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .today:
                     TasksListView(predicate: TasksQuery.predicateToday(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .tomorrow:
                     TasksListView(predicate: TasksQuery.predicateTomorrow(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
-                            .environmentObject(showInspector)
+                            .environment(showInspector)
                             .environmentObject(selectedTasks)
                     } else {
                         VStack {
@@ -117,24 +117,24 @@ struct ContentView: View {
                     }
                 case .review:
                     ReviewProjectsView()
-                        .environmentObject(showInspector)
+                        .environment(showInspector)
                         .environmentObject(selectedTasks)
                 case .alltasks:
                     TasksListView(predicate: TasksQuery.predicateAll(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .deadlines:
                     TasksListView(predicate: TasksQuery.predicateDeadlines(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .trash:
                     TrashListView(list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 default:
                     EmptyView()

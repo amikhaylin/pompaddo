@@ -12,7 +12,7 @@ import CloudStorage
 struct ProjectView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
     @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7
@@ -189,12 +189,12 @@ struct ProjectView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
     
     ProjectView(project: previewer!.project)
-        .environmentObject(showInspector)
+        .environment(showInspector)
         .environmentObject(selectedTasks)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)

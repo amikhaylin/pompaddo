@@ -10,7 +10,7 @@ import SwiftData
 
 struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
     @EnvironmentObject var timer: FocusTimer
@@ -186,7 +186,7 @@ struct BoardView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
     @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
@@ -206,7 +206,7 @@ struct BoardView: View {
     
     BoardView(project: previewer.project)
         .modelContainer(container!)
-        .environmentObject(showInspector)
+        .environment(showInspector)
         .environmentObject(selectedTasks)
         .environmentObject(refresher)
         .environmentObject(timer)

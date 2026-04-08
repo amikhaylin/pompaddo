@@ -14,7 +14,7 @@ import CloudStorage
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @StateObject private var showInspector = InspectorToggler()
+    @State private var showInspector = InspectorToggler()
     @StateObject private var selectedTasks = SelectedTasks()
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var selectedProject: Project?
@@ -71,7 +71,7 @@ struct ContentView: View {
                 .refreshable {
                     refresher.refresh.toggle()
                 }
-                .environmentObject(showInspector)
+                .environment(showInspector)
                 .environmentObject(selectedTasks)
             case .today:
                 TasksListView(predicate: TasksQuery.predicateToday(),
@@ -80,7 +80,7 @@ struct ContentView: View {
                 .refreshable {
                     refresher.refresh.toggle()
                 }
-                .environmentObject(showInspector)
+                .environment(showInspector)
                 .environmentObject(selectedTasks)
             case .tomorrow:
                 TasksListView(predicate: TasksQuery.predicateTomorrow(),
@@ -89,16 +89,16 @@ struct ContentView: View {
                 .refreshable {
                     refresher.refresh.toggle()
                 }
-                .environmentObject(showInspector)
+                .environment(showInspector)
                 .environmentObject(selectedTasks)
             case .review:
                 ReviewProjectsView()
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
             case .projects:
                 if let project = selectedProject {
                     ProjectView(project: project)
-                        .environmentObject(showInspector)
+                        .environment(showInspector)
                         .environmentObject(selectedTasks)
                 } else {
                     VStack {
@@ -114,18 +114,18 @@ struct ContentView: View {
                 TasksListView(predicate: TasksQuery.predicateAll(),
                               list: $selectedSideBarItem,
                               title: selectedSideBarItem!.name)
-                .environmentObject(showInspector)
+                .environment(showInspector)
                 .environmentObject(selectedTasks)
             case .deadlines:
                 TasksListView(predicate: TasksQuery.predicateDeadlines(),
                               list: $selectedSideBarItem,
                               title: selectedSideBarItem!.name)
-                .environmentObject(showInspector)
+                .environment(showInspector)
                 .environmentObject(selectedTasks)
             case .trash:
                 TrashListView(list: $selectedSideBarItem,
                               title: selectedSideBarItem!.name)
-                .environmentObject(showInspector)
+                .environment(showInspector)
                 .environmentObject(selectedTasks)
             default:
                 EmptyView()

@@ -13,7 +13,7 @@ import CloudStorage
 struct TaskSwipeModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
     @EnvironmentObject var timer: FocusTimer
@@ -66,7 +66,7 @@ struct TaskSwipeModifier: ViewModifier {
                         .refreshable {
                             refresher.refresh.toggle()
                         }
-                        .environmentObject(showInspector)
+                        .environment(showInspector)
                         .environmentObject(selectedTasks)
                     } label: {
                         Label("Open subtasks", systemImage: "arrow.right")

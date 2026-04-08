@@ -15,7 +15,7 @@ import CloudStorage
 struct ProjectTaskModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var timer: FocusTimer
     @EnvironmentObject var focusTask: FocusTask
@@ -235,7 +235,7 @@ struct ProjectTaskModifier: ViewModifier {
                     .refreshable {
                         refresher.refresh.toggle()
                     }
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 } label: {
                     Image(systemName: "arrow.right")

@@ -39,8 +39,10 @@ struct Common {
     }
 }
 
-class InspectorToggler: ObservableObject {
-    @Published var show = false
+@Observable
+@MainActor
+class InspectorToggler {
+    var show = false
 }
 
 class SelectedTasks: ObservableObject {

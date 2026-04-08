@@ -22,7 +22,7 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var focusTask: FocusTask
     @Query var tasks: [Todo]
@@ -253,7 +253,7 @@ struct TasksListView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
     @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
@@ -273,7 +273,7 @@ struct TasksListView: View {
     TasksListView(predicate: TasksQuery.predicateToday(),
                   list: .constant(.inbox),
                   title: "Some list")
-    .environmentObject(showInspector)
+    .environment(showInspector)
     .environmentObject(selectedTasks)
     .environmentObject(refresher)
     .environmentObject(timer)

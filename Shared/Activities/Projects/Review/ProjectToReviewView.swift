@@ -10,7 +10,7 @@ import SwiftUI
 struct ProjectToReviewView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @Bindable var project: Project
     @State private var deletionRequested = false
@@ -67,12 +67,12 @@ struct ProjectToReviewView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
     let previewer = try? Previewer()
     
     ProjectToReviewView(project: previewer!.project)
-        .environmentObject(showInspector)
+        .environment(showInspector)
         .environmentObject(selectedTasks)
         .environmentObject(refresher)
         .modelContainer(previewer!.container)
