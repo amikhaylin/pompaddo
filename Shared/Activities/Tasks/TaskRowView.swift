@@ -12,7 +12,7 @@ import CloudStorage
 
 struct TaskRowView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @State private var showingAlertSign = false
     @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7

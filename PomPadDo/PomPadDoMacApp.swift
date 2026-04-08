@@ -23,7 +23,7 @@ struct PomPadDoMacApp: App {
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
     
-    @StateObject var focusTask = FocusTask()
+    @State var focusTask = FocusTask()
     
     @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -76,7 +76,7 @@ struct PomPadDoMacApp: App {
                 .environment(refresher)
                 .environmentObject(selectedTasks)
                 .environmentObject(timer)
-                .environmentObject(focusTask)
+                .environment(focusTask)
             }
 //            .modelContainer(sharedModelContainer)
             .commands {
@@ -409,7 +409,7 @@ struct PomPadDoMacApp: App {
             .modelContainer(sharedModelContainer)
             .environment(refresher)
             .environmentObject(timer)
-            .environmentObject(focusTask)
+            .environment(focusTask)
         
         Settings {
             SettingsView()

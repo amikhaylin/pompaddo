@@ -36,7 +36,7 @@ struct MainView: View {
     @State private var tab: MainViewTabs = .tasks
     
     @State private var focusMode: FocusTimerMode = .work
-    @StateObject var focusTask = FocusTask()
+    @State var focusTask = FocusTask()
     
     @State private var refresh = false
     @State private var refresher = Refresher()
@@ -58,7 +58,7 @@ struct MainView: View {
                 .id(refresher.refresh)
                 .environment(refresher)
                 .environmentObject(timer)
-                .environmentObject(focusTask)
+                .environment(focusTask)
             } label: {
                 Label("Tasks", systemImage: "checkmark.square")
                     .accessibility(identifier: "TasksSection")
@@ -69,7 +69,7 @@ struct MainView: View {
                 FocusTimerView(focusMode: $focusMode)
                     .id(refresh)
                     .environmentObject(timer)
-                    .environmentObject(focusTask)
+                    .environment(focusTask)
                     .refreshable {
                         refresh.toggle()
                     }

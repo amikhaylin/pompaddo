@@ -175,7 +175,7 @@ struct TrashListView: View {
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
     
-    @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var focusTask = FocusTask()
     @Previewable @State var container = try? ModelContainer(for: Schema([
                                                             ProjectGroup.self,
                                                             Status.self,
@@ -191,6 +191,6 @@ struct TrashListView: View {
     .environmentObject(selectedTasks)
     .environment(refresher)
     .environmentObject(timer)
-    .environmentObject(focusTask)
+    .environment(focusTask)
     .modelContainer(container!)
 }

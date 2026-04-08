@@ -12,7 +12,7 @@ import CloudStorage
 
 struct TaskCheckBoxView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @EnvironmentObject var timer: FocusTimer
     @Bindable var task: Todo
     

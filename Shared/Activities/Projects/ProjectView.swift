@@ -14,7 +14,7 @@ struct ProjectView: View {
     @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @CloudStorage("estimateFactor") private var estimateFactor: Double = UserDefaults.standard.value(forKey: "estimateFactor") as? Double ?? 1.7
     @State private var newTaskIsShowing = false
     

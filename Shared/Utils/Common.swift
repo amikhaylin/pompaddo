@@ -49,8 +49,10 @@ class SelectedTasks: ObservableObject {
     @Published var tasks = Set<Todo>()
 }
 
-class FocusTask: ObservableObject {
-    @Published var task: Todo?
+@Observable
+@MainActor
+class FocusTask {
+    var task: Todo?
 }
 
 @Observable

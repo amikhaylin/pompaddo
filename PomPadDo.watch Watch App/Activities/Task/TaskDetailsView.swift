@@ -15,7 +15,7 @@ struct TaskDetailsView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(Refresher.self) var refresher
     @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @Binding var list: SideBarItem?
     @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false

@@ -12,7 +12,7 @@ import CloudStorage
 struct FocusTasksView: View {
     @Environment(\.modelContext) private var modelContext
     @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @State private var selectedTask: Todo?
     @Binding var viewMode: Int
     @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false

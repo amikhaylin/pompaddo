@@ -240,7 +240,7 @@ struct ContentView: View {
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
                               
-    @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var focusTask = FocusTask()
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     @Previewable @State var newTaskIsShowing = false
     @Previewable @State var selectedProject: Project?
@@ -260,6 +260,6 @@ struct ContentView: View {
         .environmentObject(selectedTasks)
         .environment(refresher)
         .environmentObject(timer)
-        .environmentObject(focusTask)
+        .environment(focusTask)
         .modelContainer(container!)
 }

@@ -18,7 +18,7 @@ struct ProjectTaskModifier: ViewModifier {
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
     @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @Binding var selectedTasksSet: Set<Todo>
     @Bindable var project: Project

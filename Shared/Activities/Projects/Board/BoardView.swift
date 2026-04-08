@@ -12,7 +12,7 @@ struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @EnvironmentObject var timer: FocusTimer
     @Bindable var project: Project
     
@@ -193,7 +193,7 @@ struct BoardView: View {
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
                               
-    @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var focusTask = FocusTask()
     @Previewable @State var container = try? ModelContainer(for: Schema([
                                                             ProjectGroup.self,
                                                             Status.self,
@@ -210,5 +210,5 @@ struct BoardView: View {
         .environmentObject(selectedTasks)
         .environment(refresher)
         .environmentObject(timer)
-        .environmentObject(focusTask)
+        .environment(focusTask)
 }

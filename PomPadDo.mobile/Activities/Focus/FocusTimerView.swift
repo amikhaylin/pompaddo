@@ -11,7 +11,7 @@ import SwiftData
 struct FocusTimerView: View {
     @Binding var focusMode: FocusTimerMode
     @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     
     @Query(filter: TasksQuery.predicateTodayActive()) var tasksTodayActive: [Todo]
     
@@ -40,7 +40,7 @@ struct FocusTimerView: View {
                 // MARK: Task list
                 FocusTasksView(viewMode: $viewMode)
                     .environmentObject(timer)
-                    .environmentObject(focusTask)
+                    .environment(focusTask)
             } else {
                 ZStack {
                     VStack {
@@ -181,11 +181,11 @@ struct FocusTimerView: View {
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
-    @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var focusTask = FocusTask()
     let previewer = try? Previewer()
     
     FocusTimerView(focusMode: $focusMode)
         .environmentObject(timer)
-        .environmentObject(focusTask)
+        .environment(focusTask)
         .modelContainer(previewer!.container)
 }

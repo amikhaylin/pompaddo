@@ -15,7 +15,7 @@ struct TaskSwipeModifier: ViewModifier {
     @Environment(Refresher.self) var refresher
     @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @EnvironmentObject var timer: FocusTimer
     @Bindable var task: Todo
     @Binding var list: SideBarItem?

@@ -35,7 +35,7 @@ struct PomPadDoWatchApp: App {
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
     
-    @StateObject var focusTask = FocusTask()
+    @State var focusTask = FocusTask()
     
     var body: some Scene {
         WindowGroup {
@@ -43,7 +43,7 @@ struct PomPadDoWatchApp: App {
                 .id(refresher.refresh)
                 .environment(refresher)
                 .environmentObject(timer)
-                .environmentObject(focusTask)
+                .environment(focusTask)
         }
         .modelContainer(sharedModelContainer)
     }

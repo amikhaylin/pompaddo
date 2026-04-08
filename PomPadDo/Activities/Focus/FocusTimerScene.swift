@@ -11,7 +11,7 @@ struct FocusTimerScene: Scene {
     @Environment(\.modelContext) private var modelContext
     @Environment(Refresher.self) var refresher
     @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusState: FocusTimerState = .idle
