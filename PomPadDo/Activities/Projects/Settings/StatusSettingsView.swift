@@ -68,9 +68,9 @@ struct StatusSettingsView: View {
 
 #Preview {
     @Previewable @State var isVisible = true
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
-    StatusSettingsView(status: previewer!.projectStatus,
-                       project: previewer!.project)
-        .modelContainer(previewer!.container)
+    StatusSettingsView(status: previewer.projectStatus,
+                       project: previewer.project)
+        .modelContainer(previewer.container)
 }

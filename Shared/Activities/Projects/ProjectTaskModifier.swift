@@ -7,6 +7,7 @@
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable type_body_length
+// swiftlint:disable file_length
 
 import SwiftUI
 import SwiftData
@@ -459,3 +460,4 @@ struct ProjectTaskModifier: ViewModifier {
 // swiftlint:enable function_body_length
 // swiftlint:enable cyclomatic_complexity
 // swiftlint:enable type_body_length
+// swiftlint:enable file_length

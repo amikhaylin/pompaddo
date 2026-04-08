@@ -12,4 +12,3 @@ struct FocusSounds {
         WKInterfaceDevice.current().play(.success)
     }
 }
-

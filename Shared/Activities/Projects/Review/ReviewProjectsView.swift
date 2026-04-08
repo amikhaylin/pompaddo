@@ -49,11 +49,11 @@ struct ReviewProjectsView: View {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
     @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
     ReviewProjectsView()
         .environment(showInspector)
         .environmentObject(selectedTasks)
         .environment(refresher)
-        .modelContainer(previewer!.container)
+        .modelContainer(previewer.container)
 }

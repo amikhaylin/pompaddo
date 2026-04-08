@@ -209,8 +209,8 @@ struct TaskRowView: View {
 }
 
 #Preview {
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
-    TaskRowView(task: previewer!.task, showingProject: true)
-        .modelContainer(previewer!.container)
+    TaskRowView(task: previewer.task, showingProject: true)
+        .modelContainer(previewer.container)
 }

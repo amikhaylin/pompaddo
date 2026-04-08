@@ -261,22 +261,15 @@ struct TasksListView: View {
                                                      workSessionsCount: 4)
     
     @Previewable @State var focusTask = FocusTask()
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let _ = Previewer(container!)
+    let previewer = try! Previewer()
     
     TasksListView(predicate: TasksQuery.predicateToday(),
                   list: .constant(.inbox),
                   title: "Some list")
-    .environment(showInspector)
-    .environmentObject(selectedTasks)
-    .environment(refresher)
-    .environment(timer)
-    .environment(focusTask)
-    .modelContainer(container!)
+        .environment(showInspector)
+        .environmentObject(selectedTasks)
+        .environment(refresher)
+        .environment(timer)
+        .environment(focusTask)
+        .modelContainer(previewer.container)
 }

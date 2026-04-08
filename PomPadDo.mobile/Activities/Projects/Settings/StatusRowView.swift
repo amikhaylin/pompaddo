@@ -26,15 +26,7 @@ struct StatusRowView: View {
 }
 
 #Preview {
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    
-    let previewer = Previewer(container!)
+    let previewer = try! Previewer()
             
     StatusRowView(status: previewer.projectStatus,
                   project: previewer.project)

@@ -337,10 +337,10 @@ struct ProjectsListView: View {
 #Preview {
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     @Previewable @State var selectedProject: Project?
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
     ProjectsListView(selectedProject: $selectedProject,
                             selectedSideBarItem: $selectedSideBarItem)
-        .modelContainer(previewer!.container)
+        .modelContainer(previewer.container)
 }
 // swiftlint:enable type_body_length

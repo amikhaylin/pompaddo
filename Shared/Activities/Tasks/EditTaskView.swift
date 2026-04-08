@@ -380,9 +380,9 @@ struct EditTaskView: View {
 }
 
 #Preview {
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
-    EditTaskView(task: previewer!.task)
-        .modelContainer(previewer!.container)
+    EditTaskView(task: previewer.task)
+        .modelContainer(previewer.container)
 }
 // swiftlint:enable type_body_length

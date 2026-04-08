@@ -104,8 +104,8 @@ struct ProjectSettingsView: View {
 }
 
 #Preview {
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
 
-    ProjectSettingsView(project: previewer!.project)
-        .modelContainer(previewer!.container)
+    ProjectSettingsView(project: previewer.project)
+        .modelContainer(previewer.container)
 }

@@ -249,16 +249,16 @@ struct SectionsListView: View {
     @Previewable @State var refresher = Refresher()
     @Previewable @State var activeTasksCount: Int = 10
     
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
     #if os(iOS)
     SectionsListView(selectedSideBarItem: $selectedSideBarItem, activeTasksCount: $activeTasksCount)
         .environment(refresher)
-        .modelContainer(previewer!.container)
+        .modelContainer(previewer.container)
     #else
     SectionsListView(selectedSideBarItem: $selectedSideBarItem)
         .environment(refresher)
-        .modelContainer(previewer!.container)
+        .modelContainer(previewer.container)
 
     #endif
 }

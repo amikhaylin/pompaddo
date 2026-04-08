@@ -77,8 +77,8 @@ struct TaskCheckBoxView: View {
 }
 
 #Preview {
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
-    TaskCheckBoxView(task: previewer!.task)
-        .modelContainer(previewer!.container)
+    TaskCheckBoxView(task: previewer.task)
+        .modelContainer(previewer.container)
 }

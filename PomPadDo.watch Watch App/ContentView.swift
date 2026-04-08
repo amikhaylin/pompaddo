@@ -168,7 +168,7 @@ struct ContentView: View {
                 task.tomatoesCount += 1
             }
         })
-        .onChange(of: scenePhase) { oldPhase, newPhase in
+        .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background && timer.state == .running {
                 timer.setNotification()
             }
@@ -179,16 +179,9 @@ struct ContentView: View {
 #Preview {
     @Previewable @State var refresher = Refresher()
     @Previewable @State var selectedSidebarItem: SideBarItem? = .today
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let previewer = Previewer(container!)
+    let previewer = try! Previewer()
     
     ContentView(selectedSideBarItem: $selectedSidebarItem)
         .environment(refresher)
-        .modelContainer(container!)
+        .modelContainer(previewer.container)
 }

@@ -5,6 +5,7 @@
 //  Created by Andrey Mikhaylin on 22.10.2025.
 //
 // swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
 
 import XCTest
 
@@ -163,6 +164,7 @@ final class PomPadDoUITests: XCTestCase {
     }
 }
 // swiftlint:enable function_body_length
+// swiftlint:enable cyclomatic_complexity
 
 private struct LocaleData: Codable {
     let locale: String

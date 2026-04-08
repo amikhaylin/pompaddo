@@ -5,7 +5,6 @@
 //  Created by Andrey Mikhaylin on 31.01.2026.
 //
 
-//import UIKit
 import Social
 import SwiftUI
 import UniformTypeIdentifiers
@@ -56,7 +55,7 @@ class ShareViewController: UIViewController {
             contentView.view.topAnchor.constraint(equalTo: view.topAnchor),
             contentView.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             contentView.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            contentView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            contentView.view.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
 }

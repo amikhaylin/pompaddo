@@ -52,8 +52,8 @@ struct NewProjectGroupView: View {
 
 #Preview {
     @Previewable @State var isVisible = true
-    let previewer = try? Previewer()
+    let previewer = try! Previewer()
     
     NewProjectGroupView(isVisible: $isVisible)
-        .modelContainer(previewer!.container)
+        .modelContainer(previewer.container)
 }
