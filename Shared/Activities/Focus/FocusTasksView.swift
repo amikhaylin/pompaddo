@@ -127,9 +127,9 @@ struct FocusTasksView: View {
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
     
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     return FocusTasksView(viewMode: $viewMode)
         .environment(timer)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

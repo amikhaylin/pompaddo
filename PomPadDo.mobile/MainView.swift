@@ -236,8 +236,8 @@ struct MainView: View {
 }
 
 #Preview {
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     MainView()
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

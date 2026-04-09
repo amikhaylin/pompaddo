@@ -176,7 +176,7 @@ struct TrashListView: View {
                                                      workSessionsCount: 4)
     
     @Previewable @State var focusTask = FocusTask()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     TrashListView(list: .constant(.inbox),
                   title: "Some list")
@@ -185,5 +185,5 @@ struct TrashListView: View {
         .environment(refresher)
         .environment(timer)
         .environment(focusTask)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

@@ -237,13 +237,13 @@ struct ProjectTasksListView: View {
                               
     @Previewable @State var focusTask = FocusTask()
     
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
 
-    ProjectTasksListView(project: previewer.project)
+    ProjectTasksListView(project: previewer!.project)
         .environment(showInspector)
         .environmentObject(selectedTasks)
         .environment(refresher)
         .environment(timer)
         .environment(focusTask)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

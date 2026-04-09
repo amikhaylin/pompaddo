@@ -20,3 +20,9 @@ jobs:
           OPENAI_API_ENDPOINT: https://api.proxyapi.ru/openai/v1
           MODEL: gpt-5.2-codex
           PROMPT: #"Please check if there are any confusions or irregularities in the following code diff:"
+  SwiftLint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@main
+    - name: GitHub Action for SwiftLint
+      uses: norio-nomura/action-swiftlint@master

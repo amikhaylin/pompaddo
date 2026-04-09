@@ -179,9 +179,9 @@ struct ContentView: View {
 #Preview {
     @Previewable @State var refresher = Refresher()
     @Previewable @State var selectedSidebarItem: SideBarItem? = .today
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     ContentView(selectedSideBarItem: $selectedSidebarItem)
         .environment(refresher)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

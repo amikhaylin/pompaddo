@@ -245,7 +245,7 @@ struct ContentView: View {
     @Previewable @State var newTaskIsShowing = false
     @Previewable @State var selectedProject: Project?
     
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     ContentView(selectedSideBarItem: $selectedSideBarItem,
                 newTaskIsShowing: $newTaskIsShowing,
@@ -254,5 +254,5 @@ struct ContentView: View {
         .environment(refresher)
         .environment(timer)
         .environment(focusTask)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

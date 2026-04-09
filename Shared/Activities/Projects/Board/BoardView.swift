@@ -195,10 +195,10 @@ struct BoardView: View {
                               
     @Previewable @State var focusTask = FocusTask()
     
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
-    BoardView(project: previewer.project)
-        .modelContainer(previewer.container)
+    BoardView(project: previewer!.project)
+        .modelContainer(previewer!.container)
         .environment(showInspector)
         .environmentObject(selectedTasks)
         .environment(refresher)

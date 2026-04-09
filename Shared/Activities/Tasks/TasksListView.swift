@@ -261,7 +261,7 @@ struct TasksListView: View {
                                                      workSessionsCount: 4)
     
     @Previewable @State var focusTask = FocusTask()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     TasksListView(predicate: TasksQuery.predicateToday(),
                   list: .constant(.inbox),
@@ -271,5 +271,5 @@ struct TasksListView: View {
         .environment(refresher)
         .environment(timer)
         .environment(focusTask)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

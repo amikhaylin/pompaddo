@@ -182,10 +182,10 @@ struct FocusTimerView: View {
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
     @Previewable @State var focusTask = FocusTask()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     FocusTimerView(focusMode: $focusMode)
         .environment(timer)
         .environment(focusTask)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

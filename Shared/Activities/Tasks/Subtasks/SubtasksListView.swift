@@ -222,15 +222,15 @@ struct SubtasksListView: View {
                                                      workSessionsCount: 4)
     
     @Previewable @State var focusTask = FocusTask()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     SubtasksListView(list: .constant(.inbox),
                      title: "Some list",
-                     mainTask: previewer.task)
+                     mainTask: previewer!.task)
     .environment(showInspector)
     .environmentObject(selectedTasks)
     .environment(refresher)
     .environment(timer)
     .environment(focusTask)
-    .modelContainer(previewer.container)
+    .modelContainer(previewer!.container)
 }

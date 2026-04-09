@@ -234,9 +234,9 @@ struct NewTaskView: View {
     @Previewable @State var tasks: [Todo] = []
     @Previewable @State var isVisible = true
     @Previewable @State var refresher = Refresher()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
 
     return NewTaskView(isVisible: $isVisible, list: .inbox)
         .environment(refresher)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

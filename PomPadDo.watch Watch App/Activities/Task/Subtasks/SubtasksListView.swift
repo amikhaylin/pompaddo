@@ -57,11 +57,11 @@ struct SubtasksListView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     SubtasksListView(list: .constant(.inbox),
                      title: "Some list",
-                     mainTask: previewer.task)
+                     mainTask: previewer!.task)
         .environment(refresher)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

@@ -105,8 +105,8 @@ struct SectionsListView: View {
 
 #Preview {
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     SectionsListView(selectedSideBarItem: $selectedSideBarItem)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

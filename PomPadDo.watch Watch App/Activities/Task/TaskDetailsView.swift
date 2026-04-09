@@ -297,10 +297,10 @@ struct TaskDetailsView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
-    TaskDetailsView(task: previewer.task, list: .constant(.today))
+    TaskDetailsView(task: previewer!.task, list: .constant(.today))
         .environment(refresher)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }
 // swiftlint:enable type_body_length

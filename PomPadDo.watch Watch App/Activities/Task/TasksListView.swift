@@ -80,11 +80,11 @@ struct TasksListView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
     
     TasksListView(predicate: TasksQuery.predicateInbox(),
                   list: .constant(.inbox),
                   title: "Some list")
         .environment(refresher)
-        .modelContainer(previewer.container)
+        .modelContainer(previewer!.container)
 }

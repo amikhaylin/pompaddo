@@ -26,8 +26,8 @@ struct StatusRowView: View {
 }
 
 #Preview {
-    let previewer = try! Previewer()
+    let previewer = try? Previewer()
             
-    StatusRowView(status: previewer.projectStatus,
-                  project: previewer.project)
+    StatusRowView(status: previewer!.projectStatus,
+                  project: previewer!.project)
 }
