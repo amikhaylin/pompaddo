@@ -12,7 +12,7 @@
     "environmentVariableEntries" : [
       {
         "key" : "IS_FASTLANE",
-        "value" : "NO"
+        "value" : "YES"
       }
     ],
     "targetForVariableExpansion" : {
