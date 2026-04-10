@@ -29,9 +29,9 @@ struct FocusTimerScene: Scene {
                 
                 let image = NSImage(named: "tomato")
                 
-                let updateImage = image?.withSymbolConfiguration(configuration)
-                
-                Image(nsImage: updateImage!)
+                if let updateImage = image?.withSymbolConfiguration(configuration) {
+                    Image(nsImage: updateImage)
+                }
             } else {
                 HStack {
                     if focusMode == .work {
