@@ -40,17 +40,17 @@ struct FocusTimerScene: Scene {
   
                         let image = NSImage(named: "tomato.fill")
 
-                        let updateImage = image?.withSymbolConfiguration(configuration)
-                        
-                        Image(nsImage: updateImage!)
+                        if let updateImage = image?.withSymbolConfiguration(configuration) {
+                            Image(nsImage: updateImage)
+                        }
                     } else {
                         let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .light)
                             .applying(.init(hierarchicalColor: .green))
                         
                         let image = NSImage(systemSymbolName: "cup.and.saucer.fill", accessibilityDescription: nil)
-                        let updateImage = image?.withSymbolConfiguration(configuration)
-                        
-                        Image(nsImage: updateImage!) // This works.
+                        if let updateImage = image?.withSymbolConfiguration(configuration) {
+                            Image(nsImage: updateImage)
+                        }
                     }
                     
                     Text(timerCount)
