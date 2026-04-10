@@ -182,7 +182,7 @@ struct ContentView: View {
                 }
                 
                 if let reminder = task.alertDate, reminder > Date() {
-                    let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
+                    let hasAlert = await NotificationManager.checkTaskHasRequest(taskId: task.uid, hasAlertDate: task.alertDate != nil)
                     if !hasAlert {
                         NotificationManager.setTaskNotification(task: task)
                     }

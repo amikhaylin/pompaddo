@@ -194,10 +194,10 @@ struct TaskRowView: View {
             }
         }
         .task {
-            showingAlertSign = await NotificationManager.checkTaskHasRequest(task: task)
+            showingAlertSign = await NotificationManager.checkTaskHasRequest(taskId: task.uid, hasAlertDate: task.alertDate != nil)
         }
         .refreshable {
-            showingAlertSign = await NotificationManager.checkTaskHasRequest(task: task)
+            showingAlertSign = await NotificationManager.checkTaskHasRequest(taskId: task.uid, hasAlertDate: task.alertDate != nil)
         }
     }
     

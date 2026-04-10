@@ -344,7 +344,7 @@ struct EditTaskView: View {
             setPicker()
         })
         .task {
-            let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
+            let hasAlert = await NotificationManager.checkTaskHasRequest(taskId: task.uid, hasAlertDate: task.alertDate != nil)
             if let reminder = task.alertDate, reminder < Date() && !hasAlert {
                 task.alertDate = nil
                 showingReminderDatePicker = false
