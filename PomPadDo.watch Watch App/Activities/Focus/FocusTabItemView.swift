@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct FocusTabItemView: View {
     @Environment(FocusTimer.self) var timer
     @State private var timerCount: String = ""
