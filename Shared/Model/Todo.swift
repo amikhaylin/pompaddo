@@ -252,7 +252,7 @@ extension Todo {
         self.completionDate = nil
     }
     
-    // TODO: BE REMOVED WHEN `.cascade` is fixed
+    // Temporary workaround until SwiftData `.cascade` behaves as expected.
     func eraseSubtasks(context: ModelContext) {
         if let subtasks = self.subtasks {
             for task in subtasks {

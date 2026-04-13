@@ -5,18 +5,17 @@
 //  Created by Andrey Mikhaylin on 13.03.2025.
 //
 
-import EventKit
+@preconcurrency import EventKit
 
 struct CalendarManager {
     static func addToCalendar(title: String, eventStartDate: Date, eventEndDate: Date, isAllDay: Bool = false) {
-        let store = EKEventStore()
-        
-        store.requestWriteOnlyAccessToEvents { allowed, error in
+        EKEventStore().requestWriteOnlyAccessToEvents { allowed, error in
             if let error {
                 print(error.localizedDescription)
             } else if allowed {
-                let event = EKEvent(eventStore: store)
-                event.calendar = store.defaultCalendarForNewEvents
+                let eventStore = EKEventStore()
+                let event = EKEvent(eventStore: eventStore)
+                event.calendar = eventStore.defaultCalendarForNewEvents
                 event.title = title
                 event.startDate = eventStartDate
                 event.endDate = eventEndDate
@@ -24,7 +23,7 @@ struct CalendarManager {
 
                 // Save the event
                 do {
-                    try store.save(event, span: .thisEvent)
+                    try eventStore.save(event, span: .thisEvent)
                 } catch {
                     print(error.localizedDescription)
                 }
