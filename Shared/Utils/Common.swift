@@ -39,14 +39,24 @@ struct Common {
     }
 }
 
-class InspectorToggler: ObservableObject {
-    @Published var show = false
+@Observable
+@MainActor
+class InspectorToggler {
+    var show = false
 }
 
 class SelectedTasks: ObservableObject {
     @Published var tasks = Set<Todo>()
 }
 
-class FocusTask: ObservableObject {
-    @Published var task: Todo?
+@Observable
+@MainActor
+class FocusTask {
+    var task: Todo?
+}
+
+@Observable
+@MainActor
+class Refresher {
+    var refresh = false
 }

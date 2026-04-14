@@ -20,7 +20,7 @@ struct EditTaskNameView: View {
     @FocusState private var focusField: FocusField?
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 TextField("Task", text: $name)
                     .focused($focusField, equals: .taskName)

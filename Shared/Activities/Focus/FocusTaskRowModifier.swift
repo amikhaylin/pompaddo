@@ -15,8 +15,8 @@ import CloudStorage
 
 struct FocusTaskRowModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTimer.self) var timer
+    @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @Binding var viewMode: Int
     @State private var showAddSubtask = false

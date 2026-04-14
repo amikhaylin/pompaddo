@@ -4,7 +4,7 @@
 PomPadDo is a personal task manager / planner app <br>
 made to myself by myself
 
-![Swift](https://img.shields.io/badge/swift-5.10-orange.svg?style=for-the-badge)
+![Swift](https://img.shields.io/badge/swift-6.20-orange.svg?style=for-the-badge)
 ![SwiftUI](https://img.shields.io/badge/use-SwiftUI-orange.svg?style=for-the-badge)
 ![SwiftData](https://img.shields.io/badge/use-SwiftData-orange?style=for-the-badge)
 ![Xcode](https://img.shields.io/badge/Xcode-26.0-blue.svg?style=for-the-badge)

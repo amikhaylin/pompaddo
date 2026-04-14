@@ -120,6 +120,6 @@ struct ProjectSettingsView: View {
     let previewer = try? Previewer()
     
     ProjectSettingsView(isVisible: $isVisible,
-                               project: previewer!.project)
+                        project: previewer!.project)
         .modelContainer(previewer!.container)
 }

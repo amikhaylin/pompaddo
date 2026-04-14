@@ -9,9 +9,9 @@ import SwiftUI
 
 struct FocusTimerScene: Scene {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(Refresher.self) var refresher
+    @Environment(FocusTimer.self) var timer
+    @Environment(FocusTask.self) var focusTask
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusState: FocusTimerState = .idle
@@ -21,7 +21,7 @@ struct FocusTimerScene: Scene {
             FocusTimerView(context: modelContext,
                            timerCount: $timerCount,
                            focusMode: $focusMode)
-            .environmentObject(refresher)
+            .environment(refresher)
             .modelContext(modelContext)
         } label: {
             if focusState == .idle {
@@ -29,9 +29,9 @@ struct FocusTimerScene: Scene {
                 
                 let image = NSImage(named: "tomato")
                 
-                let updateImage = image?.withSymbolConfiguration(configuration)
-                
-                Image(nsImage: updateImage!)
+                if let updateImage = image?.withSymbolConfiguration(configuration) {
+                    Image(nsImage: updateImage)
+                }
             } else {
                 HStack {
                     if focusMode == .work {
@@ -40,17 +40,17 @@ struct FocusTimerScene: Scene {
   
                         let image = NSImage(named: "tomato.fill")
 
-                        let updateImage = image?.withSymbolConfiguration(configuration)
-                        
-                        Image(nsImage: updateImage!)
+                        if let updateImage = image?.withSymbolConfiguration(configuration) {
+                            Image(nsImage: updateImage)
+                        }
                     } else {
                         let configuration = NSImage.SymbolConfiguration(pointSize: 14, weight: .light)
                             .applying(.init(hierarchicalColor: .green))
                         
                         let image = NSImage(systemSymbolName: "cup.and.saucer.fill", accessibilityDescription: nil)
-                        let updateImage = image?.withSymbolConfiguration(configuration)
-                        
-                        Image(nsImage: updateImage!) // This works.
+                        if let updateImage = image?.withSymbolConfiguration(configuration) {
+                            Image(nsImage: updateImage)
+                        }
                     }
                     
                     Text(timerCount)

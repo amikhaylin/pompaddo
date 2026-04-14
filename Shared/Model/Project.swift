@@ -84,7 +84,7 @@ class Project: Hashable {
 }
 
 extension Project {
-    // TODO: BE REMOVED WHEN `.cascade` is fixed
+    // Temporary workaround until SwiftData `.cascade` behaves as expected.
     func deleteRelatives(context: ModelContext) {
         for status in self.getStatuses() {
             context.delete(status)

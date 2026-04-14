@@ -11,12 +11,12 @@ import SwiftData
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @State private var taskName = ""
     @State private var dueToday = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             TextField("Add task to Inbox", text: $taskName)
                 .onSubmit {
                     let task = Todo(name: taskName)

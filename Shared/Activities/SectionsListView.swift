@@ -11,7 +11,7 @@ import WidgetKit
 
 struct SectionsListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     
     @Binding var selectedSideBarItem: SideBarItem?
     
@@ -253,11 +253,11 @@ struct SectionsListView: View {
     
     #if os(iOS)
     SectionsListView(selectedSideBarItem: $selectedSideBarItem, activeTasksCount: $activeTasksCount)
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(previewer!.container)
     #else
     SectionsListView(selectedSideBarItem: $selectedSideBarItem)
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(previewer!.container)
 
     #endif

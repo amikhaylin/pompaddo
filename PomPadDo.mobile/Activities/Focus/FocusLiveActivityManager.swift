@@ -17,10 +17,10 @@ struct FocusTimerLiveActivityAttributes: ActivityAttributes {
 
 @MainActor
 final class FocusLiveActivityManager {
-    private var activity: Activity<FocusTimerLiveActivityAttributes>?
+    private var activityId: String?
 
     init() {
-        activity = Activity<FocusTimerLiveActivityAttributes>.activities.first
+        activityId = Activity<FocusTimerLiveActivityAttributes>.activities.first?.id
     }
 
     func synchronize(with timer: FocusTimer) {
@@ -54,17 +54,12 @@ final class FocusLiveActivityManager {
         let staleDate = timer.state == .running ? contentState.endDate : nil
         let content = ActivityContent(state: contentState, staleDate: staleDate)
 
-        if activity == nil {
-            activity = Activity<FocusTimerLiveActivityAttributes>.activities.first
-        }
-
-        if let activity {
-            await activity.update(content)
+        if let updatedActivityId = await Self.updateCurrentActivity(content, matching: activityId) {
+            activityId = updatedActivityId
         } else {
             do {
-                activity = try Activity.request(attributes: .init(title: "PomPadDo Timer"),
-                                                content: content,
-                                                pushType: nil)
+                let requestedActivity = try Self.requestNewActivity(content)
+                activityId = requestedActivity.id
             } catch {
                 return
             }
@@ -72,10 +67,36 @@ final class FocusLiveActivityManager {
     }
 
     private func endActivities() async {
-        for existingActivity in Activity<FocusTimerLiveActivityAttributes>.activities {
-            await existingActivity.end(nil, dismissalPolicy: .immediate)
+        await Self.endAllActivities()
+        activityId = nil
+    }
+
+    private nonisolated static func updateCurrentActivity(
+        _ content: ActivityContent<FocusTimerLiveActivityAttributes.ContentState>,
+        matching activityId: String?
+    ) async -> String? {
+        let activities = Activity<FocusTimerLiveActivityAttributes>.activities
+        let activity = activities.first(where: { $0.id == activityId }) ?? activities.first
+        guard let activity else { return nil }
+
+        await activity.update(content)
+        return activity.id
+    }
+
+    private nonisolated static func requestNewActivity(
+        _ content: ActivityContent<FocusTimerLiveActivityAttributes.ContentState>
+    ) throws -> Activity<FocusTimerLiveActivityAttributes> {
+        try Activity<FocusTimerLiveActivityAttributes>.request(
+            attributes: FocusTimerLiveActivityAttributes(title: "PomPadDo Timer"),
+            content: content,
+            pushType: nil
+        )
+    }
+
+    private nonisolated static func endAllActivities() async {
+        for activity in Activity<FocusTimerLiveActivityAttributes>.activities {
+            await activity.end(nil, dismissalPolicy: .immediate)
         }
-        activity = nil
     }
 
     private func makeContentState(from timer: FocusTimer) -> FocusTimerLiveActivityAttributes.ContentState {

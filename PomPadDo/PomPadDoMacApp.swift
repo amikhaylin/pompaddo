@@ -18,12 +18,12 @@ struct PomPadDoMacApp: App {
     @State var newTaskIsShowing = false
     @StateObject var selectedTasks = SelectedTasks()
     
-    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
     
-    @StateObject var focusTask = FocusTask()
+    @State var focusTask = FocusTask()
     
     @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -73,10 +73,10 @@ struct PomPadDoMacApp: App {
                             newTaskIsShowing: $newTaskIsShowing,
                             selectedProject: $selectedProject)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
+                .environment(refresher)
                 .environmentObject(selectedTasks)
-                .environmentObject(timer)
-                .environmentObject(focusTask)
+                .environment(timer)
+                .environment(focusTask)
             }
 //            .modelContainer(sharedModelContainer)
             .commands {
@@ -407,9 +407,9 @@ struct PomPadDoMacApp: App {
         
         FocusTimerScene()
             .modelContainer(sharedModelContainer)
-            .environmentObject(refresher)
-            .environmentObject(timer)
-            .environmentObject(focusTask)
+            .environment(refresher)
+            .environment(timer)
+            .environment(focusTask)
         
         Settings {
             SettingsView()

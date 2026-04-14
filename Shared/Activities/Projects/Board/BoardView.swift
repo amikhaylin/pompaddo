@@ -10,10 +10,10 @@ import SwiftData
 
 struct BoardView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var focusTask: FocusTask
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTask.self) var focusTask
+    @Environment(FocusTimer.self) var timer
     @Bindable var project: Project
     
     @State private var searchText = ""
@@ -107,7 +107,7 @@ struct BoardView: View {
                                     }
                                 }
                             }
-                            .cornerRadius(5)
+                            .clipShape(.rect(cornerRadius: 5))
                         }
                         .dropDestination(for: Todo.self) { tasks, _ in
                             for task in tasks {
@@ -124,7 +124,7 @@ struct BoardView: View {
                         ZStack {
                             Rectangle()
                                 .fill(Color.gray.opacity(0.1))
-                                .cornerRadius(5)
+                                .clipShape(.rect(cornerRadius: 5))
                             
                             Image(systemName: "ellipsis")
                                 .rotationEffect(.degrees(90))
@@ -186,29 +186,22 @@ struct BoardView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
                               
-    @Previewable @StateObject var focusTask = FocusTask()
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    @Previewable @State var focusTask = FocusTask()
     
-    let previewer = Previewer(container!)
+    let previewer = try? Previewer()
     
-    BoardView(project: previewer.project)
-        .modelContainer(container!)
-        .environmentObject(showInspector)
+    BoardView(project: previewer!.project)
+        .modelContainer(previewer!.container)
+        .environment(showInspector)
         .environmentObject(selectedTasks)
-        .environmentObject(refresher)
-        .environmentObject(timer)
-        .environmentObject(focusTask)
+        .environment(refresher)
+        .environment(timer)
+        .environment(focusTask)
 }

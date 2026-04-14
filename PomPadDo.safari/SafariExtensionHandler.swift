@@ -5,8 +5,16 @@
 //  Created by Andrey Mikhaylin on 29.05.2024.
 //
 
-import SafariServices
+@preconcurrency import SafariServices
 import os.log
+
+private struct ValidationHandlerBox: @unchecked Sendable {
+    let handler: (Bool, String) -> Void
+
+    func call(_ isEnabled: Bool, _ title: String) {
+        handler(isEnabled, title)
+    }
+}
 
 class SafariExtensionHandler: SFSafariExtensionHandler {
 
@@ -24,8 +32,13 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     }
 
     override func messageReceived(withName messageName: String, from page: SFSafariPage, userInfo: [String: Any]?) {
+        let userInfoDescription = String(describing: userInfo ?? [:])
         page.getPropertiesWithCompletionHandler { properties in
-            os_log(.default, "The extension received a message (%@) from a script injected into (%@) with userInfo (%@)", messageName, String(describing: properties?.url), userInfo ?? [:])
+            os_log(.default,
+                   "The extension received a message (%@) from a script injected into (%@) with userInfo (%@)",
+                   messageName,
+                   String(describing: properties?.url),
+                   userInfoDescription)
         }
     }
     
@@ -42,10 +55,11 @@ class SafariExtensionHandler: SFSafariExtensionHandler {
     }
 
     override func validateToolbarItem(in window: SFSafariWindow, validationHandler: @escaping ((Bool, String) -> Void)) {
+        let validationHandlerBox = ValidationHandlerBox(handler: validationHandler)
         window.getActiveTab { (tab) in
              tab?.getActivePage(completionHandler: { (page) in
                  page?.getPropertiesWithCompletionHandler({ (properties) in
-                     validationHandler(properties?.url != nil, "")
+                     validationHandlerBox.call(properties?.url != nil, "")
                  })
              })
          }

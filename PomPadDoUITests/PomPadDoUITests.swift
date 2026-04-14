@@ -5,6 +5,7 @@
 //  Created by Andrey Mikhaylin on 22.10.2025.
 //
 // swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
 
 import XCTest
 
@@ -15,11 +16,13 @@ final class PomPadDoUITests: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false
 
-        app = XCUIApplication()
-
-        app.launchEnvironment = ["IS_TESTING": "YES"]
-        
-        app.launch()
+        let application = MainActor.assumeIsolated { () -> XCUIApplication in
+            let application = XCUIApplication()
+            application.launchEnvironment = ["IS_TESTING": "YES"]
+            application.launch()
+            return application
+        }
+        app = application
     }
 
     override func tearDownWithError() throws {
@@ -154,7 +157,7 @@ final class PomPadDoUITests: XCTestCase {
         _ = XCTWaiter.wait(for: [exp4], timeout: 5.0)
     }
     
-    private func snapshot(_ name: String) {
+    @MainActor private func snapshot(_ name: String) {
         let screenshot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)
         attachment.name = name
@@ -163,6 +166,7 @@ final class PomPadDoUITests: XCTestCase {
     }
 }
 // swiftlint:enable function_body_length
+// swiftlint:enable cyclomatic_complexity
 
 private struct LocaleData: Codable {
     let locale: String

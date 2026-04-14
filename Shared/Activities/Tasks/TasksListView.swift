@@ -21,10 +21,10 @@ enum CommonTaskListSections: String, Identifiable, CaseIterable {
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(Refresher.self) var refresher
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTask.self) var focusTask
     @Query var tasks: [Todo]
 
     @Binding var list: SideBarItem?
@@ -253,30 +253,23 @@ struct TasksListView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
     
-    @Previewable @StateObject var focusTask = FocusTask()
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let _ = Previewer(container!)
+    @Previewable @State var focusTask = FocusTask()
+    let previewer = try? Previewer()
     
     TasksListView(predicate: TasksQuery.predicateToday(),
                   list: .constant(.inbox),
                   title: "Some list")
-    .environmentObject(showInspector)
-    .environmentObject(selectedTasks)
-    .environmentObject(refresher)
-    .environmentObject(timer)
-    .environmentObject(focusTask)
-    .modelContainer(container!)
+        .environment(showInspector)
+        .environmentObject(selectedTasks)
+        .environment(refresher)
+        .environment(timer)
+        .environment(focusTask)
+        .modelContainer(previewer!.container)
 }

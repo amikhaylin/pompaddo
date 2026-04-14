@@ -11,7 +11,7 @@ import SwiftUI
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Binding var isVisible: Bool
     @State var list: SideBarItem
     @State private var taskName = ""
@@ -31,7 +31,7 @@ struct NewTaskView: View {
     @FocusState private var focusField: FocusField?
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Text("Add task to \(getListName())")
                     .font(.headline)
@@ -237,6 +237,6 @@ struct NewTaskView: View {
     let previewer = try? Previewer()
 
     return NewTaskView(isVisible: $isVisible, list: .inbox)
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(previewer!.container)
 }

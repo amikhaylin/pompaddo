@@ -12,6 +12,7 @@ import SwiftData
 struct PomPadDoWatchApp: App {
     @State private var refresher = Refresher()
     @State var selectedSideBarItem: SideBarItem? = .today
+    @State private var showInspector = InspectorToggler()
     
     @State var sharedModelContainer: ModelContainer = {
         let schema = Schema([
@@ -30,20 +31,21 @@ struct PomPadDoWatchApp: App {
         }
     }()
     
-    @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @State var timer = FocusTimer(workInSeconds: 1500,
                            breakInSeconds: 300,
                            longBreakInSeconds: 1200,
                            workSessionsCount: 4)
     
-    @StateObject var focusTask = FocusTask()
+    @State var focusTask = FocusTask()
     
     var body: some Scene {
         WindowGroup {
             ContentView(selectedSideBarItem: $selectedSideBarItem)
                 .id(refresher.refresh)
-                .environmentObject(refresher)
-                .environmentObject(timer)
-                .environmentObject(focusTask)
+                .environment(refresher)
+                .environment(timer)
+                .environment(focusTask)
+                .environment(showInspector)
         }
         .modelContainer(sharedModelContainer)
     }

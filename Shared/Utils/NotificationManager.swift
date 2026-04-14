@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UserNotifications
+@preconcurrency import UserNotifications
 
 extension Date {
     static func - (lhs: Date, rhs: Date) -> TimeInterval {
@@ -15,14 +15,13 @@ extension Date {
 }
 
 struct NotificationManager {
-    static func checkAuthorization(completion: @escaping (Bool) -> Void) {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { settings in
+    static func checkAuthorization(completion: @escaping @Sendable (Bool) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .authorized:
                 completion(true)
             case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { allowed, error in
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { allowed, error in
                     if let error {
                         print(error.localizedDescription)
                     }
@@ -65,14 +64,14 @@ struct NotificationManager {
     }
     
     // check if task in requests
-    static func checkTaskHasRequest(task: Todo) async -> Bool {
-        if task.alertDate != nil {
-            let notificationCenter = UNUserNotificationCenter.current()
-            let requests = await notificationCenter.pendingNotificationRequests()
-            
-            for request in requests where request.identifier == task.uid {
-                return true
-            }
+    static func checkTaskHasRequest(taskId: String, hasAlertDate: Bool) async -> Bool {
+        guard hasAlertDate else { return false }
+
+        let notificationCenter = UNUserNotificationCenter.current()
+        let requests = await notificationCenter.pendingNotificationRequests()
+
+        for request in requests where request.identifier == taskId {
+            return true
         }
         return false
     }

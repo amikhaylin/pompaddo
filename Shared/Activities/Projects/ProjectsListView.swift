@@ -11,7 +11,7 @@ import SwiftData
 
 struct ProjectsListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     
     @Binding var selectedProject: Project?
     
@@ -285,7 +285,7 @@ struct ProjectsListView: View {
                 Spacer()
             }
         }
-        .foregroundColor(Color("ProjectsColor"))
+        .foregroundStyle(Color("ProjectsColor"))
         #if os(macOS)
         .sheet(item: $editProjectGroup, onDismiss: {
             editProjectGroup = nil

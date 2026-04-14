@@ -10,10 +10,10 @@ import SwiftData
 
 struct ProjectTasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var focusTask: FocusTask
-    @EnvironmentObject var timer: FocusTimer
+    @Environment(FocusTask.self) var focusTask
+    @Environment(FocusTimer.self) var timer
     
     @Bindable var project: Project
     
@@ -228,29 +228,22 @@ struct ProjectTasksListView: View {
 
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
-    @Previewable @StateObject var showInspector = InspectorToggler()
+    @Previewable @State var showInspector = InspectorToggler()
     @Previewable @State var refresher = Refresher()
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
                               
-    @Previewable @StateObject var focusTask = FocusTask()
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+    @Previewable @State var focusTask = FocusTask()
     
-    let previewer = Previewer(container!)
+    let previewer = try? Previewer()
 
-    ProjectTasksListView(project: previewer.project)
-        .environmentObject(showInspector)
+    ProjectTasksListView(project: previewer!.project)
+        .environment(showInspector)
         .environmentObject(selectedTasks)
-        .environmentObject(refresher)
-        .environmentObject(timer)
-        .environmentObject(focusTask)
-        .modelContainer(container!)
+        .environment(refresher)
+        .environment(timer)
+        .environment(focusTask)
+        .modelContainer(previewer!.container)
 }

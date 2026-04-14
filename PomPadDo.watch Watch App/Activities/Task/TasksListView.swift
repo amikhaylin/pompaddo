@@ -11,7 +11,7 @@ import WidgetKit
 
 struct TasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Query var tasks: [Todo]
     
     @Binding var list: SideBarItem?
@@ -80,18 +80,11 @@ struct TasksListView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let previewer = Previewer(container!)
+    let previewer = try? Previewer()
     
     TasksListView(predicate: TasksQuery.predicateInbox(),
                   list: .constant(.inbox),
                   title: "Some list")
-        .environmentObject(refresher)
-        .modelContainer(container!)
+        .environment(refresher)
+        .modelContainer(previewer!.container)
 }

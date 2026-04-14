@@ -321,7 +321,7 @@ struct EditTaskView: View {
                 
                 TextEditor(text: $task.note)
                     .background(Color.primary.colorInvert())
-                    .cornerRadius(5)
+                    .clipShape(.rect(cornerRadius: 5))
                     .overlay(
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(.black, lineWidth: 1 / 3)
@@ -344,7 +344,7 @@ struct EditTaskView: View {
             setPicker()
         })
         .task {
-            let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
+            let hasAlert = await NotificationManager.checkTaskHasRequest(taskId: task.uid, hasAlertDate: task.alertDate != nil)
             if let reminder = task.alertDate, reminder < Date() && !hasAlert {
                 task.alertDate = nil
                 showingReminderDatePicker = false

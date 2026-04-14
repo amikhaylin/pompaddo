@@ -12,11 +12,11 @@ import CloudStorage
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var selectedTasks: SelectedTasks
   
-    @StateObject private var showInspector = InspectorToggler()
+    @State private var showInspector = InspectorToggler()
     
     @Binding var selectedSideBarItem: SideBarItem?
     @Binding var newTaskIsShowing: Bool
@@ -43,7 +43,7 @@ struct ContentView: View {
                 ZStack {
                     Rectangle()
                         .fill(Color.gray.opacity(0.1))
-                        .cornerRadius(5)
+                        .clipShape(.rect(cornerRadius: 5))
                     
                     Image(systemName: "ellipsis")
                 }
@@ -86,24 +86,24 @@ struct ContentView: View {
                     TasksListView(predicate: TasksQuery.predicateInbox(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .today:
                     TasksListView(predicate: TasksQuery.predicateToday(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .tomorrow:
                     TasksListView(predicate: TasksQuery.predicateTomorrow(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .projects:
                     if let project = selectedProject {
                         ProjectView(project: project)
-                            .environmentObject(showInspector)
+                            .environment(showInspector)
                             .environmentObject(selectedTasks)
                     } else {
                         VStack {
@@ -117,24 +117,24 @@ struct ContentView: View {
                     }
                 case .review:
                     ReviewProjectsView()
-                        .environmentObject(showInspector)
+                        .environment(showInspector)
                         .environmentObject(selectedTasks)
                 case .alltasks:
                     TasksListView(predicate: TasksQuery.predicateAll(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .deadlines:
                     TasksListView(predicate: TasksQuery.predicateDeadlines(),
                                   list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 case .trash:
                     TrashListView(list: $selectedSideBarItem,
                                   title: selectedSideBarItem!.name)
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 default:
                     EmptyView()
@@ -182,7 +182,7 @@ struct ContentView: View {
                 }
                 
                 if let reminder = task.alertDate, reminder > Date() {
-                    let hasAlert = await NotificationManager.checkTaskHasRequest(task: task)
+                    let hasAlert = await NotificationManager.checkTaskHasRequest(taskId: task.uid, hasAlertDate: task.alertDate != nil)
                     if !hasAlert {
                         NotificationManager.setTaskNotification(task: task)
                     }
@@ -235,31 +235,24 @@ struct ContentView: View {
 #Preview {
     @Previewable @StateObject var selectedTasks = SelectedTasks()
     @Previewable @State var refresher = Refresher()
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
                               
-    @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var focusTask = FocusTask()
     @Previewable @State var selectedSideBarItem: SideBarItem? = .today
     @Previewable @State var newTaskIsShowing = false
     @Previewable @State var selectedProject: Project?
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
     
-    let _ = Previewer(container!)
+    let previewer = try? Previewer()
     
     ContentView(selectedSideBarItem: $selectedSideBarItem,
                 newTaskIsShowing: $newTaskIsShowing,
                 selectedProject: $selectedProject)
         .environmentObject(selectedTasks)
-        .environmentObject(refresher)
-        .environmentObject(timer)
-        .environmentObject(focusTask)
-        .modelContainer(container!)
+        .environment(refresher)
+        .environment(timer)
+        .environment(focusTask)
+        .modelContainer(previewer!.container)
 }

@@ -77,13 +77,15 @@ struct Previewer {
     }
     
     init() throws {
-        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let config: ModelConfiguration
         let schema = Schema([
             ProjectGroup.self,
             Status.self,
             Todo.self,
             Project.self
         ])
+        config = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
+        
         let container = try ModelContainer(for: schema,
                                         configurations: config)
         

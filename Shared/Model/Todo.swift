@@ -185,6 +185,14 @@ extension Todo {
     func disconnectFromParentTask() {
         guard let parent = self.parentTask else { return }
         if let index = parent.subtasks?.firstIndex(of: self) {
+            if let project = parent.project {
+                self.project = project
+                project.tasks?.append(self)
+                
+                if let status = parent.status {
+                    self.status = status
+                }
+            }
             parent.subtasks?.remove(at: index)
         }
     }
@@ -252,7 +260,7 @@ extension Todo {
         self.completionDate = nil
     }
     
-    // TODO: BE REMOVED WHEN `.cascade` is fixed
+    // Temporary workaround until SwiftData `.cascade` behaves as expected.
     func eraseSubtasks(context: ModelContext) {
         if let subtasks = self.subtasks {
             for task in subtasks {

@@ -47,9 +47,9 @@ enum SideBarItem: String, Identifiable, CaseIterable {
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(Refresher.self) var refresher
+    @Environment(FocusTimer.self) var timer
+    @Environment(FocusTask.self) var focusTask
     
     @CloudStorage("timerWorkSession") private var timerWorkSession: Double = UserDefaults.standard.value(forKey: "timerWorkSession") as? Double ?? 1500.0
     @CloudStorage("timerBreakSession") private var timerBreakSession: Double = UserDefaults.standard.value(forKey: "timerBreakSession") as? Double ?? 300.0
@@ -83,8 +83,8 @@ struct ContentView: View {
                                        title: selectedSideBarItem!.name)
                 case .focus:
                     FocusTimerView(list: $selectedSideBarItem)
-                        .environmentObject(timer)
-                        .environmentObject(focusTask)
+                        .environment(timer)
+                        .environment(focusTask)
                 case .deadlines:
                     TasksListView(predicate: TasksQuery.predicateDeadlines(),
                                        list: $selectedSideBarItem,
@@ -168,7 +168,7 @@ struct ContentView: View {
                 task.tomatoesCount += 1
             }
         })
-        .onChange(of: scenePhase) { oldPhase, newPhase in
+        .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background && timer.state == .running {
                 timer.setNotification()
             }
@@ -179,16 +179,9 @@ struct ContentView: View {
 #Preview {
     @Previewable @State var refresher = Refresher()
     @Previewable @State var selectedSidebarItem: SideBarItem? = .today
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let previewer = Previewer(container!)
+    let previewer = try? Previewer()
     
     ContentView(selectedSideBarItem: $selectedSidebarItem)
-        .environmentObject(refresher)
-        .modelContainer(container!)
+        .environment(refresher)
+        .modelContainer(previewer!.container)
 }

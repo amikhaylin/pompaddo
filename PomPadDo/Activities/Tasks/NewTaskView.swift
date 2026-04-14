@@ -11,7 +11,7 @@ import SwiftUI
 struct NewTaskView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     @Binding var isVisible: Bool
     @State var list: SideBarItem
     @State private var taskName = ""

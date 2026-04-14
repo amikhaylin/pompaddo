@@ -5,6 +5,7 @@
 //  Created by Andrey Mikhaylin on 16.02.2025.
 //
 // swiftlint:disable function_body_length
+// swiftlint:disable cyclomatic_complexity
 
 import XCTest
 
@@ -224,6 +225,7 @@ final class PomPadDoMobileUITests: XCTestCase {
     }
 }
 // swiftlint:enable function_body_length
+// swiftlint:enable cyclomatic_complexity
 
 extension XCUIElement {
     func forceTap() {

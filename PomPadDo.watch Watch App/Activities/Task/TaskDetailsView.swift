@@ -4,6 +4,7 @@
 //
 //  Created by Andrey Mikhaylin on 25.06.2024.
 //
+// swiftlint:disable type_body_length
 
 import SwiftUI
 import SwiftData
@@ -13,9 +14,9 @@ import CloudStorage
 struct TaskDetailsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(Refresher.self) var refresher
+    @Environment(FocusTimer.self) var timer
+    @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @Binding var list: SideBarItem?
     @CloudStorage("timerSaveUnifinished") private var timerSaveUnfinished: Bool = false
@@ -299,6 +300,7 @@ struct TaskDetailsView: View {
     let previewer = try? Previewer()
     
     TaskDetailsView(task: previewer!.task, list: .constant(.today))
-        .environmentObject(refresher)
+        .environment(refresher)
         .modelContainer(previewer!.container)
 }
+// swiftlint:enable type_body_length

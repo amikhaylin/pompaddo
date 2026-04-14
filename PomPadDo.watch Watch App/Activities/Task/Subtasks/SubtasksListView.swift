@@ -11,7 +11,7 @@ import WidgetKit
 
 struct SubtasksListView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
+    @Environment(Refresher.self) var refresher
     
     @Binding var list: SideBarItem?
     @State var title: String
@@ -57,18 +57,11 @@ struct SubtasksListView: View {
 
 #Preview {
     @Previewable @State var refresher = Refresher()
-    @Previewable @State var container = try? ModelContainer(for: Schema([
-                                                            ProjectGroup.self,
-                                                            Status.self,
-                                                            Todo.self,
-                                                            Project.self
-                                                        ]),
-                                                       configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-    let previewer = Previewer(container!)
+    let previewer = try? Previewer()
     
     SubtasksListView(list: .constant(.inbox),
                      title: "Some list",
-                     mainTask: previewer.task)
-        .environmentObject(refresher)
-        .modelContainer(container!)
+                     mainTask: previewer!.task)
+        .environment(refresher)
+        .modelContainer(previewer!.container)
 }

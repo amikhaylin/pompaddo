@@ -11,9 +11,9 @@ import CloudStorage
 
 struct FocusTimerView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(Refresher.self) var refresher
+    @Environment(FocusTimer.self) var timer
+    @Environment(FocusTask.self) var focusTask
     
     @CloudStorage("timerWorkSession") private var timerWorkSession: Double = UserDefaults.standard.value(forKey: "timerWorkSession") as? Double ?? 1500.0
     @CloudStorage("timerBreakSession") private var timerBreakSession: Double = UserDefaults.standard.value(forKey: "timerBreakSession") as? Double ?? 300.0
@@ -65,8 +65,8 @@ struct FocusTimerView: View {
                 // MARK: Task list
                 FocusTasksView(viewMode: $viewMode)
                     .id(refresher.refresh)
-                    .environmentObject(timer)
-                    .environmentObject(focusTask)
+                    .environment(timer)
+                    .environment(focusTask)
             } else {
                 ZStack {
                     VStack {
@@ -223,18 +223,18 @@ struct FocusTimerView: View {
 #Preview {
     @Previewable @State var focusMode: FocusTimerMode = .work
     @Previewable @State var timerString: String = "$$$$"
-    @Previewable @StateObject var timer = FocusTimer(workInSeconds: 1500,
+    @Previewable @State var timer = FocusTimer(workInSeconds: 1500,
                                                      breakInSeconds: 300,
                                                      longBreakInSeconds: 1200,
                                                      workSessionsCount: 4)
                               
-    @Previewable @StateObject var focusTask = FocusTask()
+    @Previewable @State var focusTask = FocusTask()
     let previewer = try? Previewer()
     
     FocusTimerView(context: previewer!.container.mainContext,
                           timerCount: $timerString,
                           focusMode: $focusMode)
-        .environmentObject(timer)
-        .environmentObject(focusTask)
+        .environment(timer)
+        .environment(focusTask)
         .modelContainer(previewer!.container)
 }

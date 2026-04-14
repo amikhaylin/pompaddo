@@ -7,7 +7,6 @@
 // swiftlint:disable function_body_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable type_body_length
-// swiftlint:disable file_length
 
 import SwiftUI
 import SwiftData
@@ -15,11 +14,11 @@ import CloudStorage
 
 struct TaskRowModifier: ViewModifier {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject var refresher: Refresher
-    @EnvironmentObject var showInspector: InspectorToggler
+    @Environment(Refresher.self) var refresher
+    @Environment(InspectorToggler.self) var showInspector
     @EnvironmentObject var selectedTasks: SelectedTasks
-    @EnvironmentObject var timer: FocusTimer
-    @EnvironmentObject var focusTask: FocusTask
+    @Environment(FocusTimer.self) var timer
+    @Environment(FocusTask.self) var focusTask
     @Bindable var task: Todo
     @Binding var selectedTasksSet: Set<Todo>
     var projects: [Project]
@@ -242,7 +241,7 @@ struct TaskRowModifier: ViewModifier {
                     .refreshable {
                         refresher.refresh.toggle()
                     }
-                    .environmentObject(showInspector)
+                    .environment(showInspector)
                     .environmentObject(selectedTasks)
                 } label: {
                     Image(systemName: "arrow.right")
@@ -254,7 +253,7 @@ struct TaskRowModifier: ViewModifier {
                         SubtasksListView(list: $list,
                                          title: parentTask.name,
                                          mainTask: parentTask)
-                        .environmentObject(showInspector)
+                        .environment(showInspector)
                         .environmentObject(selectedTasks)
                     } label: {
                         Image(systemName: "arrow.left")
@@ -427,5 +426,3 @@ struct TaskRowModifier: ViewModifier {
 // swiftlint:enable function_body_length
 // swiftlint:enable cyclomatic_complexity
 // swiftlint:enable type_body_length
-// swiftlint:enable file_length
-
