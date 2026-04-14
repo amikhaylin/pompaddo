@@ -38,7 +38,6 @@ struct MainView: View {
     @State private var focusMode: FocusTimerMode = .work
     @State var focusTask = FocusTask()
     
-    @State private var refresh = false
     @State private var refresher = Refresher()
     
     @State var selectedSideBarItem: SideBarItem? = .today
@@ -50,53 +49,14 @@ struct MainView: View {
     #endif
     
     var body: some View {
-        TabView(selection: $tab) {
-            Tab(value: .tasks) {
-                ContentView(selectedSideBarItem: $selectedSideBarItem,
-                            selectedProject: $selectedProject,
-                            activeTasksCount: $activeTasksCount)
-                .id(refresher.refresh)
-                .environment(refresher)
-                .environment(timer)
-                .environment(focusTask)
-            } label: {
-                Label("Tasks", systemImage: "checkmark.square")
-                    .accessibility(identifier: "TasksSection")
-            }
-            .badge(activeTasksCount)
-            
-            Tab(value: .focus) {
-                FocusTimerView(focusMode: $focusMode)
-                    .id(refresh)
-                    .environment(timer)
-                    .environment(focusTask)
-                    .refreshable {
-                        refresh.toggle()
-                    }
-            } label: {
-                FocusTabItemView()
-                    .environment(timer)
-                    .accessibility(identifier: "FocusSection")
-            }
-            .badge(timer.secondsLeftString)
-            
-            Tab(value: .settings) {
-                SettingsView()
-            } label: {
-                Label("Settings", systemImage: "gear")
-                    .accessibility(identifier: "SettingsSection")
-            }
-            
-            Tab(value: .inbox, role: .search) {
-                EmptyView()
-            } label: {
-                Label("Add to Inbox", systemImage: "tray.and.arrow.down.fill")
-                    .foregroundStyle(Color.orange)
-                    .accessibility(identifier: "AddTaskToInboxButton")
-                    .keyboardShortcut("i", modifiers: [.command])
-            }
-        }
-        .tabViewStyle(.tabBarOnly)
+        MainTabsView(tab: $tab,
+                     selectedSideBarItem: $selectedSideBarItem,
+                     selectedProject: $selectedProject,
+                     activeTasksCount: $activeTasksCount,
+                     focusMode: $focusMode,
+                     timer: timer,
+                     focusTask: focusTask,
+                     refresher: refresher)
         .sheet(isPresented: $newTaskIsShowing, content: {
             NewTaskView(isVisible: self.$newTaskIsShowing, list: .inbox, project: nil, mainTask: nil)
                 .presentationDetents([.height(220)])
@@ -104,87 +64,104 @@ struct MainView: View {
                 .environment(refresher)
         })
         .onChange(of: tab) { oldValue, newValue in
-            guard newValue == .inbox else { return }
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                withAnimation {
-                    self.tab = oldValue
-                    self.newTaskIsShowing.toggle()
-                }
-            }
+            handleTabSelectionChange(oldValue: oldValue, newValue: newValue)
         }
         .onAppear {
-            timer.setDurations(workInSeconds: timerWorkSession,
-                               breakInSeconds: timerBreakSession,
-                               longBreakInSeconds: timerLongBreakSession,
-                               workSessionsCount: Int(timerWorkSessionsCount))
-            
+            refreshTimerDurationsAndLiveActivity()
             checkForReview()
             synchronizeLiveActivity()
         }
         .onChange(of: timerWorkSession, { _, _ in
-            timer.setDurations(workInSeconds: timerWorkSession,
-                               breakInSeconds: timerBreakSession,
-                               longBreakInSeconds: timerLongBreakSession,
-                               workSessionsCount: Int(timerWorkSessionsCount))
-            synchronizeLiveActivity()
+            refreshTimerDurationsAndLiveActivity()
         })
         .onChange(of: timerBreakSession, { _, _ in
-            timer.setDurations(workInSeconds: timerWorkSession,
-                               breakInSeconds: timerBreakSession,
-                               longBreakInSeconds: timerLongBreakSession,
-                               workSessionsCount: Int(timerWorkSessionsCount))
-            synchronizeLiveActivity()
+            refreshTimerDurationsAndLiveActivity()
         })
         .onChange(of: timerLongBreakSession, { _, _ in
-            timer.setDurations(workInSeconds: timerWorkSession,
-                               breakInSeconds: timerBreakSession,
-                               longBreakInSeconds: timerLongBreakSession,
-                               workSessionsCount: Int(timerWorkSessionsCount))
-            synchronizeLiveActivity()
+            refreshTimerDurationsAndLiveActivity()
         })
         .onChange(of: timerWorkSessionsCount, { _, _ in
-            timer.setDurations(workInSeconds: timerWorkSession,
-                               breakInSeconds: timerBreakSession,
-                               longBreakInSeconds: timerLongBreakSession,
-                               workSessionsCount: Int(timerWorkSessionsCount))
-            synchronizeLiveActivity()
+            refreshTimerDurationsAndLiveActivity()
         })
         .onChange(of: timer.state, { _, _ in
             synchronizeLiveActivity()
         })
         .onChange(of: timer.mode, { _, _ in
-            focusMode = timer.mode
-            synchronizeLiveActivity()
+            handleTimerModeChange()
         })
         .onChange(of: timer.sessionsCounter, { _, newValue in
-            if let task = focusTask.task, newValue > 0 {
-                task.tomatoesCount += 1
-            }
+            incrementFocusTaskTomatoesIfNeeded(newValue: newValue)
         })
         .onOpenURL { url in
-            if url.scheme == "pompaddo" && url.host == "addtoinbox" {
-                newTaskIsShowing.toggle()
-            } else if url.scheme == "pompaddo" && url.host == "new" {
-                print(url.absoluteString)
-                let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-                if let title = components?.queryItems?.first(where: { $0.name == "title" })?.value {
-                    let task = Todo(name: title)
-                    if let link = components?.queryItems?.first(where: { $0.name == "link" })?.value, let linkurl = URL(string: link) {
-                        task.link = linkurl.absoluteString
-                    }
-                    modelContext.insert(task)
-                }
-            } else {
-                return
-            }
+            handleOpenURL(url)
         }
         .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .background && timer.state == .running {
-                timer.setNotification()
-            }
-            synchronizeLiveActivity()
+            handleScenePhaseChange(newPhase: newPhase)
         }
+    }
+    
+    @MainActor
+    private func handleTabSelectionChange(oldValue: MainViewTabs, newValue: MainViewTabs) {
+        guard newValue == .inbox else { return }
+        
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(10))
+            withAnimation {
+                tab = oldValue
+                newTaskIsShowing.toggle()
+            }
+        }
+    }
+    
+    @MainActor
+    private func refreshTimerDurationsAndLiveActivity() {
+        timer.setDurations(workInSeconds: timerWorkSession,
+                           breakInSeconds: timerBreakSession,
+                           longBreakInSeconds: timerLongBreakSession,
+                           workSessionsCount: Int(timerWorkSessionsCount))
+        synchronizeLiveActivity()
+    }
+    
+    @MainActor
+    private func handleTimerModeChange() {
+        focusMode = timer.mode
+        synchronizeLiveActivity()
+    }
+    
+    @MainActor
+    private func incrementFocusTaskTomatoesIfNeeded(newValue: Int) {
+        guard newValue > 0, let task = focusTask.task else { return }
+        task.tomatoesCount += 1
+    }
+    
+    @MainActor
+    private func handleOpenURL(_ url: URL) {
+        if url.scheme == "pompaddo" && url.host == "addtoinbox" {
+            newTaskIsShowing.toggle()
+            return
+        }
+        
+        guard url.scheme == "pompaddo", url.host == "new" else { return }
+        
+        print(url.absoluteString)
+        let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        guard let title = components?.queryItems?.first(where: { $0.name == "title" })?.value else { return }
+        
+        let task = Todo(name: title)
+        if let link = components?.queryItems?.first(where: { $0.name == "link" })?.value,
+           let linkurl = URL(string: link) {
+            task.link = linkurl.absoluteString
+        }
+        
+        modelContext.insert(task)
+    }
+    
+    @MainActor
+    private func handleScenePhaseChange(newPhase: ScenePhase) {
+        if newPhase == .background, timer.state == .running {
+            timer.setNotification()
+        }
+        synchronizeLiveActivity()
     }
     
     private func checkForReview() {
