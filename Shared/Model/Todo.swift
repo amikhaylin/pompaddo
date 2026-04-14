@@ -185,6 +185,14 @@ extension Todo {
     func disconnectFromParentTask() {
         guard let parent = self.parentTask else { return }
         if let index = parent.subtasks?.firstIndex(of: self) {
+            if let project = parent.project {
+                self.project = project
+                project.tasks?.append(self)
+                
+                if let status = parent.status {
+                    self.status = status
+                }
+            }
             parent.subtasks?.remove(at: index)
         }
     }
