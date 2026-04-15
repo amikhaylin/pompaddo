@@ -70,6 +70,7 @@ struct FocusTimerView: View {
                             }
                             .padding()
                             .accessibility(identifier: "StartTimerButton")
+                            .buttonStyle(.glass)
                         }
                         // resume
                         if timer.state == .paused {
@@ -80,6 +81,7 @@ struct FocusTimerView: View {
                             }
                             .padding()
                             .accessibility(identifier: "ResumeTimerButton")
+                            .buttonStyle(.glass)
                         }
                         // pause
                         if timer.state == .running {
@@ -90,6 +92,7 @@ struct FocusTimerView: View {
                             }
                             .padding()
                             .accessibility(identifier: "PauseTimerButton")
+                            .buttonStyle(.glass)
                         }
                         // reset / stop
                         if timer.state == .running || timer.state == .paused {
@@ -103,6 +106,7 @@ struct FocusTimerView: View {
                                 }
                                 .padding()
                                 .accessibility(identifier: "SkipTimerButton")
+                                .buttonStyle(.glass)
                             } else {
                                 Button {
                                     if focusTask.task != nil {
@@ -119,6 +123,7 @@ struct FocusTimerView: View {
                                 }
                                 .padding()
                                 .accessibility(identifier: "StopTimerButton")
+                                .buttonStyle(.glass)
                                 .popover(isPresented: $showingSaveSessionAlert, attachmentAnchor: .point(.top)) {
                                     VStack {
                                         Text("Save the current session to a task")
@@ -129,7 +134,9 @@ struct FocusTimerView: View {
                                                 timer.reset()
                                                 if timer.mode == .pause || timer.mode == .longbreak {
                                                     timer.skip()
-                                                }                                            }
+                                                }
+                                            }
+                                            .buttonStyle(.glass)
                                             
                                             Button("Yes") {
                                                 showingSaveSessionAlert.toggle()
@@ -141,6 +148,7 @@ struct FocusTimerView: View {
                                                     timer.skip()
                                                 }
                                             }
+                                            .buttonStyle(.glass)
                                         }
                                     }
                                     .padding(10)
