@@ -23,6 +23,7 @@ struct ProjectToReviewView: View {
                 Button("Delete project", role: .destructive) {
                     deletionRequested.toggle()
                 }
+                .buttonStyle(.glass)
                 .popover(isPresented: $deletionRequested, attachmentAnchor: .point(.bottom)) {
                     VStack {
                         Text("This project will be permanently deleted")
@@ -58,6 +59,7 @@ struct ProjectToReviewView: View {
                     }
                     presentationMode.wrappedValue.dismiss()
                 }
+                .buttonStyle(.glass)
             }
             .padding(5)
             ProjectView(project: project)
