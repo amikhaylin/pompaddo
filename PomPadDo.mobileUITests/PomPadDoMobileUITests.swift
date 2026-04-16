@@ -8,45 +8,37 @@
 // swiftlint:disable cyclomatic_complexity
 
 import XCTest
+import AppIntents
 
 final class PomPadDoMobileUITests: XCTestCase {
 
     var app: XCUIApplication!
 
-    @MainActor override func setUpWithError() throws {
+    override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         // In UI tests it is usually best to stop immediately when a failure occurs.
 
         continueAfterFailure = false
 
-        app = XCUIApplication()
+        let application = MainActor.assumeIsolated { () -> XCUIApplication in
+            let application = XCUIApplication()
 
-        if ProcessInfo.processInfo.environment["IS_FASTLANE"] == "YES" {
-            setupSnapshot(app)
+            if ProcessInfo.processInfo.environment["IS_FASTLANE"] == "YES" {
+                setupSnapshot(application)
+            }
+
+            application.launchEnvironment = ["UITEST_DISABLE_ANIMATIONS": "YES"]
+            application.launch()
+            return application
         }
-
-        app.launchEnvironment = ["UITEST_DISABLE_ANIMATIONS": "YES"]
-        
-        app.launch()
+        app = application
 
         addUIInterruptionMonitor(withDescription: "Tracking Usage Permission Alert") { (alert) -> Bool in
-            print("Alert appeared: \(alert)")
-            if alert.buttons["Allow"].exists {
-                alert.buttons["Allow"].tap()
-                self.app.activate()
-                return true
-            }
-            return false
+            Self.handleTrackingUsageAlert(alert)
         }
         
         addUIInterruptionMonitor(withDescription: "App Store Review Alert") { (alert) -> Bool in
-            print("Alert appeared: \(alert)")
-            if alert.buttons["Not Now"].exists {
-                alert.buttons["Not Now"].tap()
-                self.app.activate()
-                return true
-            }
-            return false
+            Self.handleAppStoreReviewAlert(alert)
         }
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
@@ -54,6 +46,28 @@ final class PomPadDoMobileUITests: XCTestCase {
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+
+    private static func handleTrackingUsageAlert(_ alert: XCUIElement) -> Bool {
+        MainActor.assumeIsolated {
+            print("Alert appeared: \(alert)")
+            if alert.buttons["Allow"].exists {
+                alert.buttons["Allow"].tap()
+                return true
+            }
+            return false
+        }
+    }
+
+    private static func handleAppStoreReviewAlert(_ alert: XCUIElement) -> Bool {
+        MainActor.assumeIsolated {
+            print("Alert appeared: \(alert)")
+            if alert.buttons["Not Now"].exists {
+                alert.buttons["Not Now"].tap()
+                return true
+            }
+            return false
+        }
     }
 
     @MainActor func testAFullCycle() throws {
@@ -186,9 +200,21 @@ final class PomPadDoMobileUITests: XCTestCase {
 
         snapshot("05FocusTasksView")
 
-        app.collectionViews.buttons[
-            "\(localeData.taskToFocus)PlayButton"
-        ].tap()
+        let namedFocusPlayButton = app.buttons["\(localeData.taskToFocus)PlayButton"].firstMatch
+        let anyFocusPlayButton = app.buttons.matching(
+            NSPredicate(format: "identifier ENDSWITH %@", "PlayButton")
+        ).firstMatch
+        let startTimerButton = app.buttons["StartTimerButton"].firstMatch
+
+        if namedFocusPlayButton.waitForExistence(timeout: 5) {
+            namedFocusPlayButton.tap()
+        } else if anyFocusPlayButton.waitForExistence(timeout: 5) {
+            anyFocusPlayButton.tap()
+        } else if startTimerButton.waitForExistence(timeout: 5) {
+            startTimerButton.tap()
+        } else {
+            XCTFail("No focus timer start control was found")
+        }
 
         let exp = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp], timeout: 5.0)

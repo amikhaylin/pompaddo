@@ -6,20 +6,25 @@
 //
 
 import XCTest
+import AppIntents
 
 final class PomPadDoWatchUITests: XCTestCase {
     var app: XCUIApplication!
     
-    @MainActor override func setUpWithError() throws {
+    override func setUpWithError() throws {
         continueAfterFailure = false
 
-        app = XCUIApplication()
-        
-        if ProcessInfo.processInfo.environment["IS_FASTLANE"] == "YES" {
-            setupSnapshot(app)
-        }
+        let application = MainActor.assumeIsolated { () -> XCUIApplication in
+            let application = XCUIApplication()
 
-        app.launch()
+            if ProcessInfo.processInfo.environment["IS_FASTLANE"] == "YES" {
+                setupSnapshot(application)
+            }
+
+            application.launch()
+            return application
+        }
+        app = application
     }
 
     override func tearDownWithError() throws {
@@ -70,7 +75,7 @@ final class PomPadDoWatchUITests: XCTestCase {
        
     }
     
-    private func typeText(_ text: String) {
+    @MainActor private func typeText(_ text: String) {
         let chars = Array(text)
         for char in chars {
             if String(char) == " " {
