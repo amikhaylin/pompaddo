@@ -18,24 +18,44 @@ struct FocusTimerLiveActivityAttributes: ActivityAttributes {
 @MainActor
 final class FocusLiveActivityManager {
     private var activityId: String?
+    private var synchronizationTask: Task<Void, Never>?
+    private var synchronizationToken = UUID()
 
     init() {
         activityId = Activity<FocusTimerLiveActivityAttributes>.activities.first?.id
     }
 
     func synchronize(with timer: FocusTimer) {
-        Task {
+        let token = UUID()
+        synchronizationToken = token
+        synchronizationTask?.cancel()
+        synchronizationTask = Task { @MainActor [weak self] in
+            guard let self else { return }
             await synchronizeActivity(with: timer)
+            if self.synchronizationToken == token {
+                self.synchronizationTask = nil
+            }
         }
     }
 
     func end() {
-        Task {
+        let token = UUID()
+        synchronizationToken = token
+        synchronizationTask?.cancel()
+        synchronizationTask = Task { @MainActor [weak self] in
+            guard let self else { return }
             await endActivities()
+            if self.synchronizationToken == token {
+                self.synchronizationTask = nil
+            }
         }
     }
 
     private func synchronizeActivity(with timer: FocusTimer) async {
+        guard !Task.isCancelled else { return }
+
+        timer.synchronizeToCurrentTime()
+
         guard ActivityAuthorizationInfo().areActivitiesEnabled else {
             await endActivities()
             return
@@ -50,6 +70,8 @@ final class FocusLiveActivityManager {
     }
 
     private func startOrUpdateActivity(with timer: FocusTimer) async {
+        guard !Task.isCancelled else { return }
+
         let contentState = makeContentState(from: timer)
         let staleDate = timer.state == .running ? contentState.endDate : nil
         let content = ActivityContent(state: contentState, staleDate: staleDate)

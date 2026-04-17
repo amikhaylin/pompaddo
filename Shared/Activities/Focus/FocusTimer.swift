@@ -165,17 +165,38 @@ class FocusTimer {
     }
     
     func skip() {
-        if self.mode == .work {
-            if sessionsCounter < workSessionsCount {
-                self.mode = .pause
-                sessionsCounter += 1
-            } else {
-                self.mode = .longbreak
-                sessionsCounter = 0
-            }
-        } else {
-            self.mode = .work
+        let nextState = Self.nextModeState(mode: mode,
+                                           sessionsCounter: sessionsCounter,
+                                           workSessionsCount: workSessionsCount)
+        mode = nextState.mode
+        sessionsCounter = nextState.sessionsCounter
+    }
+
+    func synchronizeToCurrentTime() {
+        guard state == .running else { return }
+
+        let now = Date.now
+        var elapsedSeconds = max(0, Int(now.timeIntervalSince(dateStarted))) + secondsPassedBeforePause
+        var resolvedMode = mode
+        var resolvedSessionsCounter = sessionsCounter
+        var currentDurationSeconds = durationSeconds(for: resolvedMode)
+
+        while elapsedSeconds >= currentDurationSeconds {
+            elapsedSeconds -= currentDurationSeconds
+            let nextState = Self.nextModeState(mode: resolvedMode,
+                                               sessionsCounter: resolvedSessionsCounter,
+                                               workSessionsCount: workSessionsCount)
+            resolvedMode = nextState.mode
+            resolvedSessionsCounter = nextState.sessionsCounter
+            currentDurationSeconds = durationSeconds(for: resolvedMode)
         }
+
+        mode = resolvedMode
+        sessionsCounter = resolvedSessionsCounter
+        secondsPassedBeforePause = 0
+        secondsPassed = elapsedSeconds
+        fractionPassed = TimeInterval(elapsedSeconds) / TimeInterval(max(1, currentDurationSeconds))
+        dateStarted = now.addingTimeInterval(-TimeInterval(elapsedSeconds))
     }
     
     func setNotification(removeOld: Bool = false) {
@@ -219,6 +240,33 @@ class FocusTimer {
         NotificationManager.removeRequest(identifier: currentNotificationId)
         timerTask?.cancel()
         timerTask = nil
+    }
+
+    private func durationSeconds(for mode: FocusTimerMode) -> Int {
+        switch mode {
+        case .work:
+            max(1, Int(durationWork))
+        case .pause:
+            max(1, Int(durationBreak))
+        case .longbreak:
+            max(1, Int(durationLongBreak))
+        }
+    }
+
+    private static func nextModeState(
+        mode: FocusTimerMode,
+        sessionsCounter: Int,
+        workSessionsCount: Int
+    ) -> (mode: FocusTimerMode, sessionsCounter: Int) {
+        if mode == .work {
+            if sessionsCounter < workSessionsCount {
+                return (.pause, sessionsCounter + 1)
+            }
+
+            return (.longbreak, 0)
+        }
+
+        return (.work, sessionsCounter)
     }
   
     private func onTick() {

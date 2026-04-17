@@ -161,6 +161,11 @@ struct MainView: View {
         if newPhase == .background, timer.state == .running {
             timer.setNotification()
         }
+
+        if newPhase == .active {
+            timer.synchronizeToCurrentTime()
+        }
+
         synchronizeLiveActivity()
     }
     
