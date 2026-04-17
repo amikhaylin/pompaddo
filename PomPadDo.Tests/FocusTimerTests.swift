@@ -211,6 +211,48 @@ struct FocusTimerTests {
         #expect(timer1.secondsLeftString == timer2.secondsLeftString)
     }
 
+    @Test("synchronizeToCurrentTime advances mode after missed running time")
+    @MainActor
+    func synchronizeToCurrentTimeAdvancesSingleTransition() {
+        let timer = FocusTimer(workInSeconds: 10,
+                               breakInSeconds: 5,
+                               longBreakInSeconds: 20,
+                               workSessionsCount: 2)
+
+        timer.receiveState(mode: .work,
+                           state: .running,
+                           dateStarted: .now.addingTimeInterval(-12),
+                           secondsPassedBeforePause: 0)
+
+        timer.synchronizeToCurrentTime()
+
+        #expect(timer.mode == .pause)
+        #expect(timer.sessionsCounter == 1)
+        #expect(timer.secondsPassed == 2)
+        #expect(timer.secondsLeft == 3)
+    }
+
+    @Test("synchronizeToCurrentTime handles multiple transitions")
+    @MainActor
+    func synchronizeToCurrentTimeAdvancesMultipleTransitions() {
+        let timer = FocusTimer(workInSeconds: 10,
+                               breakInSeconds: 5,
+                               longBreakInSeconds: 20,
+                               workSessionsCount: 2)
+
+        timer.receiveState(mode: .work,
+                           state: .running,
+                           dateStarted: .now.addingTimeInterval(-37),
+                           secondsPassedBeforePause: 0)
+
+        timer.synchronizeToCurrentTime()
+
+        #expect(timer.mode == .work)
+        #expect(timer.sessionsCounter == 2)
+        #expect(timer.secondsPassed == 7)
+        #expect(timer.secondsLeft == 3)
+    }
+
     @MainActor
     private func waitUntil(timeoutNanoseconds: UInt64 = 3_000_000_000,
                            pollNanoseconds: UInt64 = 50_000_000,
