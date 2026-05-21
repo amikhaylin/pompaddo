@@ -42,6 +42,8 @@ struct NewProjectView: View {
                     Button("Cancel") {
                         self.isVisible = false
                     }
+                    .keyboardShortcut(.escape)
+                    .keyboardShortcut(.cancelAction)
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
@@ -68,6 +70,8 @@ struct NewProjectView: View {
                         }
                     }
                     .accessibility(identifier: "SaveProject")
+                    .keyboardShortcut(.defaultAction)
+                    .keyboardShortcut(.return)
                 }
             }
         }

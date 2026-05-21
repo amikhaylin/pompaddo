@@ -29768,240 +29768,240 @@
         }
       }
     },
-    "Save and Add next" : {
+    "Save and Add next (⇧⏎)" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "احفظ و أضف التالي"
+            "value" : "حفظ وإضافة التالي (⇧⏎)"
           }
         },
         "bg" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Запази и добави следващата"
+            "value" : "Запази и добави следващия (⇧⏎)"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desa i afegeix el següent"
+            "value" : "Desa i afegeix el següent (⇧⏎)"
           }
         },
         "cs" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uložit a přidat další"
+            "value" : "Uložit a přidat další (⇧⏎)"
           }
         },
         "da" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gem og tilføj næste"
+            "value" : "Gem og tilføj næste (⇧⏎)"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Speichern + nächste hinzufügen"
+            "value" : "Speichern und Nächstes hinzufügen (⇧⏎)"
           }
         },
         "el" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Αποθήκευση + προσθήκη επόμενου"
+            "value" : "Αποθήκευση και προσθήκη επόμενου (⇧⏎)"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Save and Add next"
+            "value" : "Save and Add next (⇧⏎)"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Guardar + agregar nueva"
+            "value" : "Guardar y añadir siguiente (⇧⏎)"
           }
         },
         "fa" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ذخیره کن + بعدی"
+            "value" : "ذخیره و افزودن مورد بعدی (⇧⏎)"
           }
         },
         "fi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tallenna ja lisää seuraava"
+            "value" : "Tallenna ja lisää seuraava (⇧⏎)"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enregistrer + ajouter suivant"
+            "value" : "Enregistrer et ajouter suivant (⇧⏎)"
           }
         },
         "he" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "שמור והוסף הבא"
+            "value" : "שמור והוסף הבא (⇧⏎)"
           }
         },
         "hr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spremi i dodaj sljedeće"
+            "value" : "Spremi i dodaj sljedeće (⇧⏎)"
           }
         },
         "hu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentés és új hozzáadása"
+            "value" : "Mentés és következő hozzáadása (⇧⏎)"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Simpan + Tambah selanjutnya"
+            "value" : "Simpan dan Tambahkan berikutnya (⇧⏎)"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salva e aggiungi successivo"
+            "value" : "Salva e aggiungi successivo (⇧⏎)"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "保存して次を追加"
+            "value" : "保存して次を追加 (⇧⏎)"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "저장하고 다음 추가"
+            "value" : "저장하고 다음 추가 (⇧⏎)"
           }
         },
         "lt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Išsaugoti + pridėti kitą"
+            "value" : "Išsaugoti ir pridėti kitą (⇧⏎)"
           }
         },
         "lv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Saglabāt un pievienot nākamo"
+            "value" : "Saglabāt un pievienot nākamo (⇧⏎)"
           }
         },
         "ms" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Simpan dan Tambah seterusnya"
+            "value" : "Simpan dan Tambah seterusnya (⇧⏎)"
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lagre og legg til neste"
+            "value" : "Lagre og legg til neste (⇧⏎)"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opslaan en volgende toevoegen"
+            "value" : "Opslaan en volgende toevoegen (⇧⏎)"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zapisz i dodaj następny"
+            "value" : "Zapisz i dodaj następny (⇧⏎)"
           }
         },
         "pt" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salvar e Adicionar próximo"
+            "value" : "Salvar e adicionar próximo (⇧⏎)"
           }
         },
         "ro" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salvează și adaugă următorul"
+            "value" : "Salvează și adaugă următorul (⇧⏎)"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Сохранить + новая"
+            "value" : "Сохранить и добавить следующий (⇧⏎)"
           }
         },
         "sk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uložiť a pridať ďalšie"
+            "value" : "Uložiť a pridať ďalší (⇧⏎)"
           }
         },
         "sl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Shrani in dodaj naslednjo"
+            "value" : "Shrani in dodaj naslednjega (⇧⏎)"
           }
         },
         "sv" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spara och lägg till nästa"
+            "value" : "Spara och lägg till nästa (⇧⏎)"
           }
         },
         "ta" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "சேமிக்கவும் + அடுத்ததாகச் சேர்க்கவும்"
+            "value" : "காப்பு செய்து அடுத்ததைச் சேர் (⇧⏎)"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "บันทึก + ถัดไป"
+            "value" : "บันทึกและเพิ่มถัดไป (⇧⏎)"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kaydet ve Sonrakini Ekle"
+            "value" : "Kaydet ve sonraki ekle (⇧⏎)"
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Зберегти + наступну"
+            "value" : "Зберегти та додати наступне (⇧⏎)"
           }
         },
         "ur" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "محفوظ کریں + اگلا شامل کریں"
+            "value" : "محفوظ کریں اور اگلا شامل کریں (⇧⏎)"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lưu và thêm tiếp"
+            "value" : "Lưu và Thêm tiếp (⇧⏎)"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "保存并添加下一个"
+            "value" : "保存并添加下一个 (⇧⏎)"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "儲存 + 新增"
+            "value" : "儲存並新增下一個 (⇧⏎)"
           }
         }
       }

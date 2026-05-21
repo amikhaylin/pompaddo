@@ -23,6 +23,7 @@ struct NewProjectGroupView: View {
                     self.isVisible = false
                 }
                 .keyboardShortcut(.cancelAction)
+                .keyboardShortcut(.escape)
                 Spacer()
                 Button("OK") {
                     self.isVisible = false
@@ -30,6 +31,7 @@ struct NewProjectGroupView: View {
                     modelContext.insert(group)
                 }
                 .keyboardShortcut(.defaultAction)
+                .keyboardShortcut(.return)
                 .accessibilityIdentifier("SaveGroup")
             }
         }

@@ -129,6 +129,7 @@ struct NewTaskView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.cancelAction)
+                .keyboardShortcut(.escape)
 
                 Spacer()
 
@@ -139,7 +140,8 @@ struct NewTaskView: View {
                 } label: {
                     Image(systemName: "plus.square.on.square")
                 }
-                .help("Save and Add next")
+                .help("Save and Add next (⇧⏎)")
+                .keyboardShortcut(.return, modifiers: [.shift])
                 
                 Button("OK") {
                     save()
@@ -147,6 +149,7 @@ struct NewTaskView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.defaultAction)
+                .keyboardShortcut(.return)
                 .accessibilityIdentifier("SaveTask")
             }
         }
