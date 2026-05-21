@@ -22,6 +22,7 @@ struct EditProjectGroupView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.cancelAction)
+                .keyboardShortcut(.escape)
                 Spacer()
                 
                 Button("OK") {
@@ -29,6 +30,7 @@ struct EditProjectGroupView: View {
                     presentationMode.wrappedValue.dismiss()
                 }
                 .keyboardShortcut(.defaultAction)
+                .keyboardShortcut(.return)
             }
         }
         .frame(width: 400, height: 100)

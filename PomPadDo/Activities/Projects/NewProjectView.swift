@@ -30,6 +30,7 @@ struct NewProjectView: View {
                     self.isVisible = false
                 }
                 .keyboardShortcut(.cancelAction)
+                .keyboardShortcut(.escape)
                 Spacer()
                 Button("OK") {
                     self.isVisible = false
@@ -54,6 +55,7 @@ struct NewProjectView: View {
                     }
                 }
                 .keyboardShortcut(.defaultAction)
+                .keyboardShortcut(.return)
                 .accessibilityIdentifier("SaveProject")
             }
         }

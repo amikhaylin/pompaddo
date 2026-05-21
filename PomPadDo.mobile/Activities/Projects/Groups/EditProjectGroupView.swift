@@ -34,6 +34,8 @@ struct EditProjectGroupView: View {
                     Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .keyboardShortcut(.escape)
+                    .keyboardShortcut(.cancelAction)
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
@@ -41,6 +43,8 @@ struct EditProjectGroupView: View {
                         group.name = name
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .keyboardShortcut(.return)
+                    .keyboardShortcut(.defaultAction)
                 }
             }
         }

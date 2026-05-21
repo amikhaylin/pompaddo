@@ -143,6 +143,8 @@ struct NewTaskView: View {
                         self.isVisible = false
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .keyboardShortcut(.escape)
+                    .keyboardShortcut(.cancelAction)
                 }
 
                 ToolbarItemGroup(placement: .topBarTrailing) {
@@ -153,7 +155,8 @@ struct NewTaskView: View {
                     } label: {
                         Image(systemName: "plus.square.on.square")
                     }
-                    .help("Save and Add next")
+                    .help("Save and Add next (⇧⏎)")
+                    .keyboardShortcut(.return, modifiers: [.shift])
 
                     Button("OK") {
                         save()
@@ -161,6 +164,8 @@ struct NewTaskView: View {
                         presentationMode.wrappedValue.dismiss()
                     }
                     .accessibilityIdentifier("SaveTask")
+                    .keyboardShortcut(.return)
+                    .keyboardShortcut(.defaultAction)
                 }
             }
         }

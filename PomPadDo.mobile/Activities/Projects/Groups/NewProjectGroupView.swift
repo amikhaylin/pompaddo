@@ -35,6 +35,8 @@ struct NewProjectGroupView: View {
                     Button("Cancel") {
                         self.isVisible = false
                     }
+                    .keyboardShortcut(.escape)
+                    .keyboardShortcut(.cancelAction)
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
@@ -44,6 +46,8 @@ struct NewProjectGroupView: View {
                         modelContext.insert(group)
                     }
                     .accessibility(identifier: "SaveGroup")
+                    .keyboardShortcut(.return)
+                    .keyboardShortcut(.defaultAction)
                 }
             }
         }

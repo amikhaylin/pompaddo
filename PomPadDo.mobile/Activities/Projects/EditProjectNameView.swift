@@ -34,6 +34,8 @@ struct EditProjectNameView: View {
                     Button("Cancel") {
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .keyboardShortcut(.escape)
+                    .keyboardShortcut(.cancelAction)
                 }
                 
                 ToolbarItem(placement: .primaryAction) {
@@ -41,6 +43,8 @@ struct EditProjectNameView: View {
                         project.name = name
                         presentationMode.wrappedValue.dismiss()
                     }
+                    .keyboardShortcut(.return)
+                    .keyboardShortcut(.defaultAction)
                 }
             }
         }
