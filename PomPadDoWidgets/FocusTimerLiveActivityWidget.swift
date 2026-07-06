@@ -72,6 +72,7 @@ private struct FocusTimerLiveActivityTimeView: View {
         if timerState == .running {
             Text(timerInterval: state.startDate...state.endDate, countsDown: true)
                 .monospacedDigit()
+                .background(Color.blue)
         } else {
             Text(Duration.seconds(Double(state.remainingSeconds)),
                  format: .time(pattern: state.remainingSeconds >= 3600 ? .hourMinuteSecond : .minuteSecond))
@@ -146,6 +147,7 @@ struct FocusTimerLiveActivityWidget: Widget {
                 if FocusTimerLiveActivityMode(rawValue: context.state.mode) ?? .work == .work {
                     Image((FocusTimerLiveActivityMode(rawValue: context.state.mode) ?? .work).symbolName)
                         .symbolRenderingMode(.multicolor)
+                        .padding(.leading, 4)
                 } else {
                     Image(systemName: (FocusTimerLiveActivityMode(rawValue: context.state.mode) ?? .work).symbolName)
                         .foregroundStyle(Color.green)
@@ -163,6 +165,8 @@ struct FocusTimerLiveActivityWidget: Widget {
                         .foregroundStyle(Color.green)
                 }
             }
+            .contentMargins(.leading, 20, for: .compactLeading)
+
         }
     }
 }
