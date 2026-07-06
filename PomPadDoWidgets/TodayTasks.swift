@@ -90,20 +90,47 @@ struct TodayTasksEntryView: View {
 
 struct TodayTasks: Widget {
     let kind: String = "TodayTasks"
-    let modelContainer: ModelContainer = {
+    let modelContainer: ModelContainer = Self.makeModelContainer()
+
+    private static func makeModelContainer() -> ModelContainer {
         let schema = Schema([
-            Todo.self
+            Todo.self,
+            Project.self,
+            Status.self,
+            ProjectGroup.self
         ])
-        
-        let modelConfiguration = ModelConfiguration(schema: schema,
-                                                    isStoredInMemoryOnly: false)
-        
+
+        let persistentConfiguration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: false
+        )
+
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            return try ModelContainer(
+                for: schema,
+                configurations: [persistentConfiguration]
+            )
+        } catch let persistentStoreError {
+            let fallbackConfiguration = ModelConfiguration(
+                schema: schema,
+                isStoredInMemoryOnly: true,
+                cloudKitDatabase: .none
+            )
+
+            do {
+                return try ModelContainer(
+                    for: schema,
+                    configurations: [fallbackConfiguration]
+                )
+            } catch let fallbackStoreError {
+                fatalError(
+                    "Could not create the widget ModelContainer. "
+                    + "Persistent store error: \(persistentStoreError). "
+                    + "Fallback store error: \(fallbackStoreError)"
+                )
+            }
         }
-    }()
+    }
 
     var body: some WidgetConfiguration {
         #if os(iOS)
