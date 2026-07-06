@@ -72,7 +72,6 @@ private struct FocusTimerLiveActivityTimeView: View {
         if timerState == .running {
             Text(timerInterval: state.startDate...state.endDate, countsDown: true)
                 .monospacedDigit()
-                .background(Color.blue)
         } else {
             Text(Duration.seconds(Double(state.remainingSeconds)),
                  format: .time(pattern: state.remainingSeconds >= 3600 ? .hourMinuteSecond : .minuteSecond))
@@ -165,8 +164,6 @@ struct FocusTimerLiveActivityWidget: Widget {
                         .foregroundStyle(Color.green)
                 }
             }
-            .contentMargins(.leading, 20, for: .compactLeading)
-
         }
     }
 }
