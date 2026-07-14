@@ -274,6 +274,9 @@ struct ProjectTaskModifier: ViewModifier {
                                 tasks.remove(at: index)
                             }
                         }
+                        
+                        showInspector.show = false
+                        selectedTasksSet.removeAll()
                     } else {
                         task.disconnectFromAll()
                         task.project = nil
@@ -301,6 +304,9 @@ struct ProjectTaskModifier: ViewModifier {
                                         }
                                     }
                                 }
+                                
+                                showInspector.show = false
+                                selectedTasksSet.removeAll()
                             } else {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
@@ -332,6 +338,9 @@ struct ProjectTaskModifier: ViewModifier {
                                                 }
                                             }
                                         }
+                                        
+                                        showInspector.show = false
+                                        selectedTasksSet.removeAll()
                                     } else {
                                         task.project = project
                                         task.status = project.getDefaultStatus()
@@ -415,6 +424,9 @@ struct ProjectTaskModifier: ViewModifier {
                                 tasks.remove(at: index)
                             }
                         }
+                        
+                        showInspector.show = false
+                        selectedTasksSet.removeAll()
                     } else {
                         if let focus = focusTask.task, task == focus {
                             focusTask.task = nil
