@@ -47,6 +47,9 @@ struct TaskRowModifier: ViewModifier {
                         for task in selectedTasksSet {
                             TasksQuery.restoreTask(task: task)
                         }
+                        
+                        showInspector.show = false
+                        selectedTasksSet.removeAll()
                     } else {
                         TasksQuery.restoreTask(task: task)
                     }
@@ -80,6 +83,11 @@ struct TaskRowModifier: ViewModifier {
                         for task in selectedTasksSet {
                             task.setDueDate(dueDate: nil)
                         }
+                        
+                        if list != .today && list != .tomorrow {
+                            showInspector.show = false
+                            selectedTasksSet.removeAll()
+                        }
                     } else {
                         task.setDueDate(dueDate: nil)
                     }
@@ -92,6 +100,11 @@ struct TaskRowModifier: ViewModifier {
                     if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                         for task in selectedTasksSet {
                             task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
+                        }
+                        
+                        if list != .today {
+                            showInspector.show = false
+                            selectedTasksSet.removeAll()
                         }
                     } else {
                         task.setDueDate(dueDate: Calendar.current.startOfDay(for: Date()))
@@ -106,6 +119,11 @@ struct TaskRowModifier: ViewModifier {
                         for task in selectedTasksSet {
                             task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                         }
+                        
+                        if list != .tomorrow {
+                            showInspector.show = false
+                            selectedTasksSet.removeAll()
+                        }
                     } else {
                         task.setDueDate(dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Calendar.current.startOfDay(for: Date())))
                     }
@@ -118,6 +136,11 @@ struct TaskRowModifier: ViewModifier {
                     if selectedTasksSet.count > 0 && selectedTasksSet.contains(task) {
                         for task in selectedTasksSet {
                             task.nextWeek()
+                        }
+                        
+                        if list != .today && list != .tomorrow {
+                            showInspector.show = false
+                            selectedTasksSet.removeAll()
                         }
                     } else {
                         task.nextWeek()
@@ -289,6 +312,9 @@ struct TaskRowModifier: ViewModifier {
                                     tsk.status = project.getDefaultStatus()
                                     project.tasks?.append(tsk)
                                 }
+                                
+                                showInspector.show = false
+                                selectedTasksSet.removeAll()
                             } else {
                                 task.project = project
                                 task.status = project.getDefaultStatus()
@@ -310,6 +336,9 @@ struct TaskRowModifier: ViewModifier {
                                             tsk.status = project.getDefaultStatus()
                                             project.tasks?.append(tsk)
                                         }
+                                        
+                                        showInspector.show = false
+                                        selectedTasksSet.removeAll()
                                     } else {
                                         task.project = project
                                         task.status = project.getDefaultStatus()
@@ -378,6 +407,7 @@ struct TaskRowModifier: ViewModifier {
                             TasksQuery.deleteTask(task: task)
                         }
                     }
+                    
                     showInspector.show = false
                     selectedTasksSet.removeAll()
                 } else {
