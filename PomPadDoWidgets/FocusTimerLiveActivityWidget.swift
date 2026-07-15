@@ -155,6 +155,7 @@ struct FocusTimerLiveActivityWidget: Widget {
                 FocusTimerLiveActivityTimeView(state: context.state)
                     .foregroundStyle(FocusTimerLiveActivityMode(rawValue: context.state.mode) ?? .work == .work ? Color.red : Color.green)
                     .lineLimit(1)
+                    .frame(maxWidth: 50)
             } minimal: {
                 if FocusTimerLiveActivityMode(rawValue: context.state.mode) ?? .work == .work {
                     Image((FocusTimerLiveActivityMode(rawValue: context.state.mode) ?? .work).symbolName)
