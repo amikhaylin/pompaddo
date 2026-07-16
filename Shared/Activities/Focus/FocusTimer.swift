@@ -199,7 +199,7 @@ class FocusTimer {
         dateStarted = now.addingTimeInterval(-TimeInterval(elapsedSeconds))
     }
     
-    func setNotification(removeOld: Bool = false) {
+    func setNotification(removeOld: Bool = true) {
         var dispMode: String = ""
         switch self.mode {
         case .work:
@@ -237,7 +237,7 @@ class FocusTimer {
     }
     
     private func stopTimer() {
-        NotificationManager.removeRequest(identifier: currentNotificationId)
+        NotificationManager.removeRequest(identifier: self.currentNotificationId)
         timerTask?.cancel()
         timerTask = nil
     }
