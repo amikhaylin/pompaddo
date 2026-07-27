@@ -327,7 +327,7 @@ struct EditTaskView: View {
                             .stroke(.black, lineWidth: 1 / 3)
                             .opacity(0.3)
                     )
-                    .frame(maxHeight: .infinity)
+                    .frame(minHeight: 200)
                     .padding(.bottom, 10.0)
             }
         }

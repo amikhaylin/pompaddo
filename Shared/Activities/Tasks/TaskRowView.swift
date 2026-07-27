@@ -24,7 +24,7 @@ struct TaskRowView: View {
             HStack {
                 TaskCheckBoxView(task: task)
                 
-                Text(task.name)
+                Text(getMarkdown(task.name))
                     .foregroundStyle(task.completed ? Color.gray : Color.primary)
                     .minimumScaleFactor(0.7)
                     .lineLimit(nameLineLimit)
@@ -205,6 +205,17 @@ struct TaskRowView: View {
         self.task = task
         self.showingProject = showingProject
         self.nameLineLimit = nameLineLimit
+    }
+    
+    private func getMarkdown(_ text: String) -> AttributedString {
+        do {
+            let markdown = try AttributedString(
+                markdown: text
+            )
+            return markdown
+        } catch {
+            return AttributedString(text)
+        }
     }
 }
 
