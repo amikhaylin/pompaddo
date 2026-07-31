@@ -328,7 +328,6 @@ struct EditTaskView: View {
                             .opacity(0.3)
                     )
                     .frame(minHeight: 200)
-                    .padding(.bottom, 10.0)
             }
         }
         .onChange(of: task.dueDate) { _, _ in
