@@ -1,0 +1,294 @@
+//
+//  FocusTimer.swift
+//  PomPadDoMac
+//
+//  Created by Andrey Mikhaylin on 03.05.2024.
+//  based on PomodoroTimer by Martin B.I.
+//
+
+import Foundation
+import Observation
+import Combine
+
+enum FocusTimerState: String {
+    case idle
+    case running
+    case paused
+}
+
+enum FocusTimerMode: String {
+    case work
+    case pause
+    case longbreak
+
+    var title: String {
+        switch self {
+        case .work:
+            return NSLocalizedString("work", comment: "")
+        case .pause:
+            return NSLocalizedString("break", comment: "")
+        case .longbreak:
+            return NSLocalizedString("long break", comment: "")
+        }
+    }
+}
+
+@MainActor
+@Observable
+class FocusTimer {
+    // timer -> tick every second
+    // properties -> how many seconds left / passed
+    //            -> fraction 0-1
+    //            -> String ... 10:42
+    // methods -> play, pause, resume, reset, skip
+    // helper functions
+
+    private(set) var mode: FocusTimerMode = .work
+    private(set) var state: FocusTimerState = .idle
+
+    private var durationWork: TimeInterval
+    private var durationBreak: TimeInterval
+    private var durationLongBreak: TimeInterval
+    private var workSessionsCount: Int
+    
+    private(set) var secondsPassed: Int = 0
+    private(set) var fractionPassed: Double = 0
+    private(set) var dateStarted: Date = Date.now
+    private var currentDate: Date = Calendar.current.startOfDay(for: Date.now)
+    private(set) var secondsPassedBeforePause: Int = 0
+    private(set) var sessionsCounter: Int = 0
+    private var currentNotificationId: String = ""
+
+    private var timerTask: Task<Void, Never>?
+  
+    init(workInSeconds: TimeInterval, 
+         breakInSeconds: TimeInterval,
+         longBreakInSeconds: TimeInterval,
+         workSessionsCount: Int) {
+        self.durationWork = workInSeconds
+        self.durationBreak = breakInSeconds
+        self.durationLongBreak = longBreakInSeconds
+        self.workSessionsCount = workSessionsCount
+    }
+    
+    @MainActor
+    deinit {
+        stopTimer()
+    }
+  
+    // MARK: Computed Properties
+    var secondsPassedString: String {
+        return Common.formatSeconds(secondsPassed)
+    }
+    var secondsLeft: Int {
+        Int(duration) - secondsPassed
+    }
+    var secondsLeftString: String {
+        return Common.formatSeconds(secondsLeft)
+    }
+    var fractionLeft: Double {
+        1.0 - fractionPassed
+    }
+    
+    var currentDurationSeconds: Int {
+        if mode == .work {
+            return Int(durationWork)
+        } else if mode == .longbreak {
+            return Int(durationLongBreak)
+        } else {
+            return Int(durationBreak)
+        }
+    }
+  
+    private var duration: TimeInterval {
+        if mode == .work {
+            return durationWork
+        } else if mode == .longbreak {
+            return durationLongBreak
+        } else {
+            return durationBreak
+        }
+    }
+  
+    // MARK: Public Methods
+    func setDurations(workInSeconds: TimeInterval,
+                      breakInSeconds: TimeInterval,
+                      longBreakInSeconds: TimeInterval,
+                      workSessionsCount: Int) {
+        self.durationWork = workInSeconds
+        self.durationBreak = breakInSeconds
+        self.durationLongBreak = longBreakInSeconds
+        self.workSessionsCount = workSessionsCount
+    }
+    
+    func receiveState(mode: FocusTimerMode, state: FocusTimerState, dateStarted: Date, secondsPassedBeforePause: Int) {
+        self.mode = mode
+        self.state = state
+        self.dateStarted = dateStarted
+        self.secondsPassedBeforePause = secondsPassedBeforePause
+    }
+    
+    func start() {
+        let today = Calendar.current.startOfDay(for: Date.now)
+        if !Calendar.current.isDate(today, inSameDayAs: currentDate) {
+            currentDate = today
+            sessionsCounter = 0
+        }
+        
+        dateStarted = Date.now
+        secondsPassed = 0
+        fractionPassed = 0
+        state = .running
+        startTimer()
+    }
+    
+    func resume() {
+        dateStarted = Date.now
+        state = .running
+        startTimer()
+    }
+    
+    func pause() {
+        stopTimer()
+        secondsPassedBeforePause = secondsPassed
+        dateStarted = Date.now
+        state = .paused
+    }
+    
+    func reset() {
+        state = .idle
+        stopTimer()
+        dateStarted = Date.now
+        secondsPassed = 0
+        fractionPassed = 0
+        secondsPassedBeforePause = 0
+    }
+    
+    func skip() {
+        let nextState = Self.nextModeState(mode: mode,
+                                           sessionsCounter: sessionsCounter,
+                                           workSessionsCount: workSessionsCount)
+        mode = nextState.mode
+        sessionsCounter = nextState.sessionsCounter
+    }
+
+    func synchronizeToCurrentTime() {
+        guard state == .running else { return }
+
+        let now = Date.now
+        var elapsedSeconds = max(0, Int(now.timeIntervalSince(dateStarted))) + secondsPassedBeforePause
+        var resolvedMode = mode
+        var resolvedSessionsCounter = sessionsCounter
+        var currentDurationSeconds = durationSeconds(for: resolvedMode)
+
+        while elapsedSeconds >= currentDurationSeconds {
+            elapsedSeconds -= currentDurationSeconds
+            let nextState = Self.nextModeState(mode: resolvedMode,
+                                               sessionsCounter: resolvedSessionsCounter,
+                                               workSessionsCount: workSessionsCount)
+            resolvedMode = nextState.mode
+            resolvedSessionsCounter = nextState.sessionsCounter
+            currentDurationSeconds = durationSeconds(for: resolvedMode)
+        }
+
+        mode = resolvedMode
+        sessionsCounter = resolvedSessionsCounter
+        secondsPassedBeforePause = 0
+        secondsPassed = elapsedSeconds
+        fractionPassed = TimeInterval(elapsedSeconds) / TimeInterval(max(1, currentDurationSeconds))
+        dateStarted = now.addingTimeInterval(-TimeInterval(elapsedSeconds))
+    }
+    
+    func setNotification(removeOld: Bool = true) {
+        var dispMode: String = ""
+        switch self.mode {
+        case .work:
+            dispMode = "work session"
+        default:
+            dispMode = self.mode.title
+        }
+        if removeOld {
+            NotificationManager.removeRequest(identifier: self.currentNotificationId)
+        }
+        self.currentNotificationId = UUID().uuidString
+        NotificationManager.setNotification(timeInterval: TimeInterval(self.secondsLeft),
+                                            identifier: self.currentNotificationId,
+                                            title: "PomPadDo Timer",
+                                            body: NSLocalizedString("Your \(dispMode) is finished", comment: ""))
+    }
+    
+    func removeNotification() {
+        NotificationManager.removeRequest(identifier: self.currentNotificationId)
+    }
+
+    // MARK: private methods
+    private func startTimer() {
+        stopTimer()
+        
+        timerTask = Task(priority: .background) { [weak self] in
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(1))
+                
+                await MainActor.run {
+                    self?.onTick()
+                }
+            }
+        }
+    }
+    
+    private func stopTimer() {
+        NotificationManager.removeRequest(identifier: self.currentNotificationId)
+        timerTask?.cancel()
+        timerTask = nil
+    }
+
+    private func durationSeconds(for mode: FocusTimerMode) -> Int {
+        switch mode {
+        case .work:
+            max(1, Int(durationWork))
+        case .pause:
+            max(1, Int(durationBreak))
+        case .longbreak:
+            max(1, Int(durationLongBreak))
+        }
+    }
+
+    private static func nextModeState(
+        mode: FocusTimerMode,
+        sessionsCounter: Int,
+        workSessionsCount: Int
+    ) -> (mode: FocusTimerMode, sessionsCounter: Int) {
+        if mode == .work {
+            if sessionsCounter < workSessionsCount {
+                return (.pause, sessionsCounter + 1)
+            }
+
+            return (.longbreak, 0)
+        }
+
+        return (.work, sessionsCounter)
+    }
+  
+    private func onTick() {
+        // calculate the seconds since start date
+        let secondsSinceStartDate = Date.now.timeIntervalSince(self.dateStarted)
+        // add the seconds before paused (if any)
+        self.secondsPassed = Int(secondsSinceStartDate) + self.secondsPassedBeforePause
+        // calculate fraction
+        self.fractionPassed = TimeInterval(self.secondsPassed) / self.duration
+        // done? play sound, reset, switch (work->pause->work), reset timer
+        if self.secondsLeft <= 0 {
+            FocusSounds.play()
+            
+            self.fractionPassed = 0
+            self.secondsPassedBeforePause = 0
+            self.skip() // to switch mode
+            self.dateStarted = Date.now
+            self.secondsPassed = 0
+            self.fractionPassed = 0
+            self.state = .running
+        } else if self.secondsLeft == 2 {
+            self.setNotification()
+        }
+    }
+}

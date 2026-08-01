@@ -227,7 +227,6 @@
 			membershipExceptions = (
 				Activities/Focus/FocusTaskRowModifier.swift,
 				Activities/Focus/FocusTasksView.swift,
-				Activities/Focus/FocusTimer.swift,
 				Activities/Projects/Board/BoardView.swift,
 				Activities/Projects/List/ProjectTasksListView.swift,
 				Activities/Projects/ProjectsListView.swift,
@@ -301,7 +300,6 @@
 		4D0DF0CE2E9B9B3A007DE44C /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Activities/Focus/FocusTimer.swift,
 				Localizable.xcstrings,
 				Model/Project.swift,
 				Model/ProjectGroup.swift,
@@ -367,7 +365,6 @@
 		4D7AF80D2F32413100FBFFFA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Activities/Focus/FocusTimer.swift,
 				Model/Project.swift,
 				Model/ProjectGroup.swift,
 				Model/Status.swift,
@@ -381,6 +378,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Activities/Focus/FocusSounds.swift,
+				Activities/Focus/FocusTimer.swift,
 			);
 			target = 4D10FF302F2E2C9A00CBA5ED /* PomPadDo.mobile.share */;
 		};
@@ -402,6 +400,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Activities/Focus/FocusSounds.swift,
+				Activities/Focus/FocusTimer.swift,
 			);
 			target = 4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */;
 		};
@@ -1386,6 +1385,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Adding events to your calendars";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1428,6 +1428,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = PomPadDo;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsWriteOnlyAccessUsageDescription = "Adding events to your calendars";
+				INFOPLIST_KEY_NSSupportsLiveActivities = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
