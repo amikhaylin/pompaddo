@@ -159,14 +159,15 @@ struct MainView: View {
     @MainActor
     private func handleScenePhaseChange(newPhase: ScenePhase) {
         if newPhase == .background, timer.state == .running {
-            timer.setNotification()
+//            timer.setNotification()
+            
         }
 
         if newPhase == .active {
-            timer.synchronizeToCurrentTime()
+//            timer.synchronizeToCurrentTime()
         }
 
-        synchronizeLiveActivity()
+//        synchronizeLiveActivity()
     }
     
     private func checkForReview() {

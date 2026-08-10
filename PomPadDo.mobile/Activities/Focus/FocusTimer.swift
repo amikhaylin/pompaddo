@@ -58,6 +58,7 @@ class FocusTimer {
     private(set) var secondsPassedBeforePause: Int = 0
     private(set) var sessionsCounter: Int = 0
     private var currentNotificationId: String = ""
+    private var currentAlarmId: String = ""
 
     private var timerTask: Task<Void, Never>?
   
@@ -217,8 +218,36 @@ class FocusTimer {
                                             body: NSLocalizedString("Your \(dispMode) is finished", comment: ""))
     }
     
+    func setAlarm(removeOld: Bool = true) async {
+        var dispMode: String = ""
+        switch self.mode {
+        case .work:
+            dispMode = "work session"
+        default:
+            dispMode = self.mode.title
+        }
+        if removeOld {
+            AlarmHelper.removeAlarm(identifier: self.currentAlarmId)
+        }
+        
+        self.currentAlarmId = UUID().uuidString
+        
+        do {
+            try await AlarmHelper.setAlarm(timeInterval: TimeInterval(self.secondsLeft),
+                                       identifier: self.currentAlarmId,
+                                       title: "PomPadDo Timer",
+                                       body: NSLocalizedString("Your \(dispMode) is finished", comment: ""))
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     func removeNotification() {
         NotificationManager.removeRequest(identifier: self.currentNotificationId)
+    }
+    
+    func removeAlarm() {
+        AlarmHelper.removeAlarm(identifier: self.currentAlarmId)
     }
 
     // MARK: private methods
@@ -238,6 +267,7 @@ class FocusTimer {
     
     private func stopTimer() {
         NotificationManager.removeRequest(identifier: self.currentNotificationId)
+        AlarmHelper.removeAlarm(identifier: self.currentAlarmId)
         timerTask?.cancel()
         timerTask = nil
     }

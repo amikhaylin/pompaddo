@@ -401,6 +401,7 @@
 			membershipExceptions = (
 				Activities/Focus/FocusSounds.swift,
 				Activities/Focus/FocusTimer.swift,
+				Utils/AlarmHelper.swift,
 			);
 			target = 4D71DB612D63404900C1FE13 /* PomPadDoWidgetsExtension */;
 		};
@@ -666,6 +667,7 @@
 				4D28673B2D61F5BE0064ADF3 /* Resources */,
 				4D71DB782D63404C00C1FE13 /* Embed Foundation Extensions */,
 				4D3E50C02D6382EA008C1FDB /* Embed Watch Content */,
+				4DD88752302341BA00DDEFCF /* Todos */,
 			);
 			buildRules = (
 			);
@@ -1044,6 +1046,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4DD88752302341BA00DDEFCF /* Todos */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Todos;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"WARNING:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4D0540042D63A4980098FEC7 /* Sources */ = {
