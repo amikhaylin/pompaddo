@@ -85,11 +85,19 @@ extension NSItemProvider {
     func loadURL() async throws -> URL {
         let uniformType = UTType.url
 
-        let loadedItem = try await loadItem(forTypeIdentifier: uniformType.identifier)
-        guard let url = loadedItem as? URL else {
-            throw ShareExtensionError.itemTypecastFailed(uniformType)
+        return try await withCheckedThrowingContinuation { continuation in
+            _ = loadObject(ofClass: NSURL.self) { object, error in
+                if let error {
+                    continuation.resume(throwing: error)
+                } else if let url = object as? URL {
+                    continuation.resume(returning: url)
+                } else {
+                    continuation.resume(
+                        throwing: ShareExtensionError.itemTypecastFailed(uniformType)
+                    )
+                }
+            }
         }
-        return url
     }
 
     func loadImage() async throws -> UIImage {
