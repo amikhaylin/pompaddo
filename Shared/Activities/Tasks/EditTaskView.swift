@@ -28,7 +28,7 @@ struct EditTaskView: View {
     var body: some View {
         Form {
             Section {
-                TextField("Name", text: $task.name)
+                TextField("Name", text: $task.name, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
                     .accessibility(identifier: "EditTaskName")
             }

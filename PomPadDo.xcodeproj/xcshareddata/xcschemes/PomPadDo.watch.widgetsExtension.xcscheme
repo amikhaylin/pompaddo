@@ -90,7 +90,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D3E50B12D6382E7008C1FDB"
             BuildableName = "PomPadDo.watch Watch App.app"
-            BlueprintName = "PomPadDo.watch Watch App"
             ReferencedContainer = "container:PomPadDo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -124,7 +123,6 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4D0540032D63A4980098FEC7"
             BuildableName = "PomPadDo.watch.widgetsExtension.appex"
-            BlueprintName = "PomPadDo.watch.widgetsExtension"
             ReferencedContainer = "container:PomPadDo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

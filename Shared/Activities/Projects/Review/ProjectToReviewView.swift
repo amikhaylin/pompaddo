@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ProjectToReviewView: View {
     @Environment(\.presentationMode) var presentationMode

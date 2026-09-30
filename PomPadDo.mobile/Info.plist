@@ -22,8 +22,6 @@
 	</array>
 	<key>UILaunchScreen</key>
 	<false/>
-	<key>NSSupportsLiveActivities</key>
-	<true/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

@@ -51,7 +51,7 @@ struct MainTabsView: View {
                     .accessibility(identifier: "SettingsSection")
             }
             
-            Tab(value: .inbox, role: .search) {
+            Tab(value: .inbox, role: .prominent) {
                 EmptyView()
             } label: {
                 Label("Add to Inbox", systemImage: "tray.and.arrow.down.fill")
