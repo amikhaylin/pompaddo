@@ -163,9 +163,13 @@ struct TasksListView: View {
                     .help("Delete task")
                     .keyboardShortcut(.delete)
                 
-                #if os(iOS)
+            }
+            .visibilityPriority(.high)
+            
+                
+            #if os(iOS)
+            ToolbarOverflowMenu {
                 EditButton()
-                #endif
 
                 Button {
                     showInspector.show.toggle()
@@ -174,6 +178,16 @@ struct TasksListView: View {
                 }
                 .accessibility(identifier: "ShowTaskDetails")
             }
+            #else
+            ToolbarItem {
+                Button {
+                    showInspector.show.toggle()
+                } label: {
+                    Label("Show task details", systemImage: "sidebar.trailing")
+                }
+                .accessibility(identifier: "ShowTaskDetails")
+            }
+            #endif
         }
         .navigationTitle(title)
         .onChange(of: selectedTasks.tasks) { _, _ in

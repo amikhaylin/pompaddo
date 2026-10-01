@@ -5488,6 +5488,7 @@
       }
     },
     "Add to Inbox" : {
+      "extractionState" : "stale",
       "localizations" : {
         "ar" : {
           "stringUnit" : {

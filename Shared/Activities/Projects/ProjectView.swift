@@ -25,19 +25,46 @@ struct ProjectView: View {
     
     var body: some View {
         NavigationStack {
-            if project.projectViewMode == 1 {
-                BoardView(project: project)
-            } else {
-                ProjectTasksListView(project: project)
+            VStack {
+                if project.hasEstimate {
+                    Text("Project estimate is \(project.sumEstimateByProject(estimateFactor)) hours")
+                        .font(.footnote)
+                }
+                
+                if project.projectViewMode == 1 {
+                    BoardView(project: project)
+                } else {
+                    ProjectTasksListView(project: project)
+                }
             }
         }
         .toolbar {
             ToolbarItemGroup {
-                if project.hasEstimate {
-                    Text("Project estimate is \(project.sumEstimateByProject(estimateFactor)) hours")
-                        .foregroundStyle(Color.gray)
+                Button {
+                    newTaskIsShowing.toggle()
+                } label: {
+                    Label("Add task to current list", systemImage: "plus")
                 }
-
+                .accessibilityIdentifier("AddTaskToCurrentListButton")
+                .help("Add task to current list ⌘⌥I")
+                .keyboardShortcut("i", modifiers: [.command, .option])
+#if os(iOS)
+                .sheet(isPresented: $newTaskIsShowing, content: {
+                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil)
+                        .presentationDetents([.height(220)])
+                        .presentationDragIndicator(.visible)
+                })
+#endif
+                
+                Button {
+                    deleteItems()
+                } label: {
+                    Label("Delete task", systemImage: "trash")
+                        .foregroundStyle(Color.red)
+                }.disabled(selectedTasks.tasks.count == 0)
+                    .help("Delete task")
+                    .keyboardShortcut(.delete)
+                
                 if let statuses = project.statuses, statuses.count > 0 {
                     Picker("View Mode", selection: $project.projectViewMode) {
                         ForEach(0...1, id: \.self) { mode in
@@ -57,33 +84,11 @@ struct ProjectView: View {
                     .pickerStyle(.segmented)
                     .accessibility(identifier: "ProjectViewMode")
                 }
-
-                Button {
-                    newTaskIsShowing.toggle()
-                } label: {
-                    Label("Add task to current list", systemImage: "plus")
-                }
-                .accessibilityIdentifier("AddTaskToCurrentListButton")
-                .help("Add task to current list ⌘⌥I")
-                .keyboardShortcut("i", modifiers: [.command, .option])
-                #if os(iOS)
-                .sheet(isPresented: $newTaskIsShowing, content: {
-                    NewTaskView(isVisible: self.$newTaskIsShowing, list: .projects, project: project, mainTask: nil)
-                        .presentationDetents([.height(220)])
-                        .presentationDragIndicator(.visible)
-                })
-                #endif
-                
-                Button {
-                    deleteItems()
-                } label: {
-                    Label("Delete task", systemImage: "trash")
-                        .foregroundStyle(Color.red)
-                }.disabled(selectedTasks.tasks.count == 0)
-                    .help("Delete task")
-                    .keyboardShortcut(.delete)
-
-                #if os(macOS)
+            }
+            .visibilityPriority(.high)
+            
+#if os(macOS)
+            ToolbarItemGroup {
                 Button {
                     var status = Status(name: "", order: project.getStatuses().count + 1, doCompletion: false)
                     
@@ -118,7 +123,15 @@ struct ProjectView: View {
                     ProjectSettingsView(isVisible: self.$showSettings,
                                         project: self.project)
                 })
-                #else
+
+                Button {
+                    showInspector.show.toggle()
+                } label: {
+                    Label("Show task details", systemImage: "sidebar.trailing")
+                }
+            }
+#else
+            ToolbarOverflowMenu {
                 Button {
                     var status = Status(name: "", order: project.getStatuses().count + 1, doCompletion: false)
                     
@@ -141,14 +154,15 @@ struct ProjectView: View {
                 }
                 
                 EditButton()
-                #endif
                 
                 Button {
                     showInspector.show.toggle()
                 } label: {
                     Label("Show task details", systemImage: "sidebar.trailing")
                 }
+
             }
+#endif
         }
         .navigationTitle(project.name)
         .onChange(of: selectedTasks.tasks) { _, _ in

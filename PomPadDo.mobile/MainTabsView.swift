@@ -54,7 +54,7 @@ struct MainTabsView: View {
             Tab(value: .inbox, role: .prominent) {
                 EmptyView()
             } label: {
-                Label("Add to Inbox", systemImage: "tray.and.arrow.down.fill")
+                Image(systemName: "tray.and.arrow.down.fill")
                     .foregroundStyle(Color.orange)
                     .accessibility(identifier: "AddTaskToInboxButton")
                     .keyboardShortcut("i", modifiers: [.command])
