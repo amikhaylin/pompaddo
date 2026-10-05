@@ -146,6 +146,10 @@ extension Todo {
         
         task.customRepeatType = self.customRepeatType
         task.customRepeatValue = self.customRepeatValue
+        
+        task.completed = false
+        task.completionDate = nil
+        
         if let subtasks = self.subtasks {
             for subtask in subtasks {
                 let newSubtask = subtask.copy(modelContext: modelContext)
