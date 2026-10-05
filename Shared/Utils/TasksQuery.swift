@@ -257,7 +257,9 @@ struct TasksQuery {
     }
     
     static func deleteTask(task: Todo) {
+        task.disconnectFromParentTask()
         task.deleteSubtasks()
+        
         task.deletionDate = Date()
     }
     
