@@ -32,7 +32,7 @@ final class PomPadDoWatchUITests: XCTestCase {
     }
 
     @MainActor func testAFullCycle() throws {
-        app/*@START_MENU_TOKEN@*/.otherElements["Inbox"].otherElements.firstMatch/*[[".otherElements.element(boundBy: 11)",".otherElements[\"Inbox\"].otherElements.firstMatch"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["Inbox"].firstMatch.tap()
         app.switches["0"].firstMatch.tap()
         app.textFields["TaskName"].firstMatch.tap()
         typeText("Book airline tickets")
