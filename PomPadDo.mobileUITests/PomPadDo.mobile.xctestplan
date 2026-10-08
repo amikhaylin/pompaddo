@@ -23,7 +23,6 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:PomPadDo.xcodeproj",
         "identifier" : "4D2867592D61F5C20064ADF3",

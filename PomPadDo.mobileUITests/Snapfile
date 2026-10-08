@@ -19,8 +19,8 @@
 # ])
 
 devices([
-  "iPhone 14 Pro Max",
-  "iPad Pro (12.9-inch) (4th generation)"
+  "iPhone 18 Pro Max",
+  "iPad Air 13-inch (M4)"
 ])
 
 # languages([

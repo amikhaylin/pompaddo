@@ -129,7 +129,7 @@ final class PomPadDoMobileUITests: XCTestCase {
                 app.switches["CreateSimpleList"].children(matching: .switch).element.tap()
             }
             
-            app.buttons["SaveProject"].tap()
+            app.buttons["SaveProject"].firstMatch.tap()
             
             // Add to group
             if let group = project.group {
@@ -138,7 +138,10 @@ final class PomPadDoMobileUITests: XCTestCase {
                 
                 app.buttons[localeData.addGroup].tap()
 
-                app.collectionViews.buttons["\(group)ContextMenuButton"].tap()
+                print(app.buttons.debugDescription)
+                
+//                app.buttons["\(group)ContextMenuButton"].firstMatch.tap()
+                app.buttons["\(group)"].firstMatch.tap()
             }
             
             // Move to project
@@ -166,7 +169,8 @@ final class PomPadDoMobileUITests: XCTestCase {
 
                     snapshot("03TaskMenu")
                     app.collectionViews.buttons[localeData.moveToStatus].tap()
-                    app.collectionViews.buttons["\(status)ContextMenuButton"].tap()
+//                    app.collectionViews.buttons["\(status)ContextMenuButton"].tap()
+                    app.collectionViews.buttons["\(status)"].firstMatch.tap()
                 }
             }
             
