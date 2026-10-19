@@ -64,20 +64,15 @@ struct NewTaskView: View {
                     } label: {
                         switch dueDateType {
                         case .none:
-                            Image(systemName: "calendar")
-                            Text("Due Date")
+                            Label("Due Date", systemImage: "calendar")
                         case .today:
-                            Image(systemName: "calendar")
-                            Text("Today")
+                            Label("Today", systemImage: "calendar")
                         case .tomorrow:
-                            Image(systemName: "sunrise")
-                            Text("Tomorrow")
+                            Label("Tomorrow", systemImage: "sunrise")
                         case .nextweek:
-                            Image(systemName: "calendar.badge.clock")
-                            Text("Next week")
+                            Label("Next week", systemImage: "calendar.badge.clock")
                         case .custom:
-                            Image(systemName: "calendar")
-                            Text("Custom")
+                            Label("Custom", systemImage: "calendar")
                         }
                     }
                     .accessibilityIdentifier("DueDate")
@@ -109,16 +104,15 @@ struct NewTaskView: View {
                         }
                     }
                 } label: {
-                    Image(systemName: "flag")
                     switch priority {
                     case 3:
-                        Text("High")
+                        Label("High", systemImage: "flag")
                     case 2:
-                        Text("Medium")
+                        Label("Medium", systemImage: "flag")
                     case 1:
-                        Text("Low")
+                        Label("Low", systemImage: "flag")
                     default:
-                        Text("Priority")
+                        Label("Priority", systemImage: "flag")
                     }
                 }
             }
