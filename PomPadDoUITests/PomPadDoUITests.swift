@@ -62,27 +62,27 @@ final class PomPadDoUITests: XCTestCase {
             XCTFail("No data for current locale")
             return
         }
-
+        
         // MARK: Create groups
         for group in localeData.groups {
-            app.buttons["NewProjectGroupButton"].tap()
-            app.sheets.textFields["GroupNameField"].tap()
+            app.buttons["NewProjectGroupButton"].firstMatch.click()
+            app.sheets.textFields["GroupNameField"].firstMatch.click()
             
             app.sheets.textFields["GroupNameField"].typeText(group.name)
-            app.buttons["SaveGroup"].tap()
+            app.buttons["SaveGroup"].firstMatch.click()
         }
             
         // MARK: Fill projects
         for project in localeData.projects {
-            app.buttons["NewProjectButton"].tap()
-            app.sheets.textFields["ProjectNameField"].tap()
+            app.buttons["NewProjectButton"].firstMatch.click()
+            app.sheets.textFields["ProjectNameField"].firstMatch.click()
             app.sheets.textFields["ProjectNameField"].typeText(project.name)
             
             if project.isSimpleList {
-                app.sheets.switches["CreateSimpleList"].tap()
+                app.sheets.switches["CreateSimpleList"].firstMatch.click()
             }
             
-            app.buttons["SaveProject"].tap()
+            app.buttons["SaveProject"].firstMatch.click()
             
             // Add to group
             if let group = project.group {
@@ -92,13 +92,13 @@ final class PomPadDoUITests: XCTestCase {
             }
             
             // Move to project
-            app.buttons[project.name].tap()
+            app.buttons[project.name].firstMatch.click()
                             
             // MARK: Fill tasks
             for task in project.tasks {
                 app.buttons["AddTaskToCurrentListButton"].firstMatch.click()
                 
-                app.sheets.textFields["TaskName"].tap()
+                app.sheets.textFields["TaskName"].firstMatch.click()
                 app.sheets.textFields["TaskName"].typeText(task.name)
                 
                 if task.dueToday {
@@ -106,7 +106,7 @@ final class PomPadDoUITests: XCTestCase {
                     app/*@START_MENU_TOKEN@*/.menuItems["todayButton"]/*[[".menuButtons.menuItems[\"Today\"]",".menus.menuItems[\"todayButton\"]",".menuItems[\"todayButton\"]"],[[[-1,2],[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.firstMatch.click()
                 }
                 
-                app.buttons["SaveTask"].tap()
+                app.buttons["SaveTask"].firstMatch.click()
                 
                 if let status = task.status {
                     app.staticTexts[task.name].rightClick()
@@ -126,7 +126,7 @@ final class PomPadDoUITests: XCTestCase {
 
 //        snapshot("Apple Macbook Pro 13 Space Gray-02SectionsPanel")
 
-        app.buttons["TodayNavButton"].tap()
+        app.buttons["TodayNavButton"].firstMatch.click()
 
         app.statusItems.firstMatch.click()
 
@@ -139,7 +139,7 @@ final class PomPadDoUITests: XCTestCase {
 
         snapshot("Apple Macbook Pro 13 Space Gray-06FocusTimerView")
 
-        app.buttons["TodayNavButton"].tap()
+        app.buttons["TodayNavButton"].firstMatch.click()
 
         let exp2 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp2], timeout: 5.0)
@@ -147,11 +147,11 @@ final class PomPadDoUITests: XCTestCase {
         snapshot("Apple Macbook Pro 13 Space Gray-01TodayScreen")
 
         app.buttons["AddTaskToInboxButton"].firstMatch.click()
-        app.sheets.textFields["TaskName"].tap()
+        app.sheets.textFields["TaskName"].firstMatch.click()
 
         app.sheets.textFields["TaskName"].typeText(localeData.inboxTask)
         snapshot("Apple Macbook Pro 13 Space Gray-07InboxTask")
-        app.buttons["SaveTask"].tap()
+        app.buttons["SaveTask"].firstMatch.click()
 
         let exp4 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp4], timeout: 5.0)
