@@ -59,29 +59,17 @@ struct TaskSwipeModifier: ViewModifier {
             }
         #if !os(watchOS)
             .swipeActions(edge: .leading, allowsFullSwipe: false) {
-                if let subtasks = task.subtasks {
-                    NavigationLink {
-                        SubtasksListView(list: $list,
-                                      title: task.name,
-                                      mainTask: task)
-                        .refreshable {
-                            refresher.refresh.toggle()
-                        }
-                        .environment(showInspector)
-                        .environmentObject(selectedTasks)
-                    } label: {
-                        Label("Open subtasks", systemImage: "arrow.right")
+                NavigationLink {
+                    SubtasksListView(list: $list,
+                                     title: task.name,
+                                     mainTask: task)
+                    .refreshable {
+                        refresher.refresh.toggle()
                     }
-                } else {
-                    let subtasks = [Todo]()
-                    
-                    NavigationLink {
-                        SubtasksListView(list: $list,
-                                      title: task.name,
-                                      mainTask: task)
-                    } label: {
-                        Label("Open subtasks", systemImage: "arrow.right")
-                    }
+                    .environment(showInspector)
+                    .environmentObject(selectedTasks)
+                } label: {
+                    Label("Open subtasks", systemImage: "arrow.right")
                 }
                 
                 if let focus = focusTask.task, focus == task {
