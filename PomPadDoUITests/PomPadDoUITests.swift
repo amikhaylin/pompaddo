@@ -31,6 +31,7 @@ final class PomPadDoUITests: XCTestCase {
 
     @MainActor func testAFullCycle() throws {
         var locale: String!
+
         if app.buttons["Today"].exists {
             locale = "en"
         } else if app.buttons["Сегодня"].exists {
@@ -88,7 +89,9 @@ final class PomPadDoUITests: XCTestCase {
             if let group = project.group {
                 app.buttons[project.name].rightClick()
                 
-                app.menuItems["\(group)ContextMenuButton"].click()
+                app.menuItems[localeData.addGroup].click()
+                
+                app.menuItems["\(group)"].firstMatch.click()
             }
             
             // Move to project
@@ -112,7 +115,8 @@ final class PomPadDoUITests: XCTestCase {
                     app.staticTexts[task.name].rightClick()
 
                     snapshot("Apple Macbook Pro 13 Space Gray-03TaskMenu")
-                    app.menuItems["\(status)ContextMenuButton"].click()
+                    app.menuItems[localeData.moveToStatus].click()
+                    app.menuItems["\(status)"].click()
                 }
             }
             
