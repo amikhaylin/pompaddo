@@ -107,7 +107,11 @@ final class PomPadDoMobileUITests: XCTestCase {
         }
 
         if !model.lowercased().contains("ipad") {
-            app.navigationBars[localeData.today].buttons[localeData.back].tap()
+            if app.buttons["BackButton"].exists {
+                app/*@START_MENU_TOKEN@*/.buttons["BackButton"]/*[[".otherElements.buttons[\"BackButton\"]",".buttons[\"BackButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.firstMatch.tap()
+            } else {
+                app.navigationBars[localeData.today].buttons[localeData.back].tap()
+            }
         }
 
         // MARK: Create groups
@@ -192,7 +196,11 @@ final class PomPadDoMobileUITests: XCTestCase {
             }
             
             if !model.lowercased().contains("ipad") {
-                app.navigationBars[project.name].buttons[localeData.back].tap()
+                if app.buttons["BackButton"].exists {
+                    app/*@START_MENU_TOKEN@*/.buttons["BackButton"]/*[[".otherElements.buttons[\"BackButton\"]",".buttons[\"BackButton\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.firstMatch.tap()
+                } else {
+                    app.navigationBars[project.name].buttons[localeData.back].tap()
+                }
             }
         }
 
@@ -239,16 +247,14 @@ final class PomPadDoMobileUITests: XCTestCase {
 
         snapshot("01TodayScreen")
 
-        app.buttons["AddTaskToInboxButton"].tap()
+        app.buttons["AddTaskToInboxButton"].firstMatch.tap()
         app.textFields["TaskName"].tap()
         let exp3 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp3], timeout: 2.0)
 
         app.textFields["TaskName"].typeText(localeData.inboxTask)
         snapshot("07InboxTask")
-        app.buttons[
-            "SaveTask"
-        ].tap()
+        app.buttons["SaveTask"].tap()
 
         let exp4 = expectation(description: "Test after 5 seconds")
         _ = XCTWaiter.wait(for: [exp4], timeout: 5.0)

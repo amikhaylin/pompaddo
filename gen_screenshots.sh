@@ -13,18 +13,14 @@ if ! fastlane snapshot; then
     exit 1
 fi
 
-TARGET_DIR_2="../screenshots/mobile"
-echo "\n🔄 Change dir to: $TARGET_DIR_2"
-cd "$TARGET_DIR_2" || {
-    echo "❌ Error changing directory: $TARGET_DIR_2"
-    exit 1
-}
+cd ../screenshots/mobile/en-US
+./frameit.sh
 
-echo "🎨 Run fastlane frameit..."
-if ! fastlane frameit; then
-    echo "❌ Error running fastlane frameit"
-    exit 1
-fi
+cd ../ru
+./frameit.sh
+
+cd ..
+
 
 TARGET_DIR_3="../../PomPadDo.watchUITests"
 echo "🔄 Change dir to: $TARGET_DIR_3"
