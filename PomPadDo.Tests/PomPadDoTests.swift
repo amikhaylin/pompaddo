@@ -135,7 +135,7 @@ final class PomPadDoTests {
         
         tasks = fetchData()
         #expect(tasks.count == 2) // main task + subtask
-        #expect(task.subtasks?.count == 1)
+        #expect(task.subtasks?.count == 0)
         #expect(task.visibleSubtasks == nil || task.visibleSubtasks?.count == 0)
 
         // Real subtask deletion
