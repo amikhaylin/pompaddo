@@ -55,18 +55,26 @@ struct FocusTabItemView: View {
                 }
             }
         })
-        .onChange(of: timer.state) { _, newValue in
-            switch newValue {
-            case .running:
-                if scResume {
-                    runShortcut(scResumeName)
+        .onChange(of: timer.state) { oldValue, newValue in
+            // work start
+            if newValue == .running && oldValue == .idle && timer.mode == .work {
+                if scWork {
+                    runShortcut(scWorkName)
                 }
-            case .paused:
+            }
+            
+            // pause
+            if newValue == .paused && oldValue == .running {
                 if scPause {
                     runShortcut(scPauseName)
                 }
-            default:
-                break
+            }
+            
+            // resume
+            if newValue == .running && oldValue == .paused {
+                if scResume {
+                    runShortcut(scResumeName)
+                }
             }
         }
     }

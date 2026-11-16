@@ -11,10 +11,12 @@ import SwiftData
 import CloudStorage
 
 struct ContentView: View {
+//    @Environment(\.openURL) private var openURL
     @Environment(\.modelContext) private var modelContext
     @Environment(Refresher.self) var refresher
     @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var selectedTasks: SelectedTasks
+//    @Environment(FocusTimer.self) var timer
   
     @State private var showInspector = InspectorToggler()
     
@@ -33,6 +35,18 @@ struct ContentView: View {
     @AppStorage("showTrashSection") var showTrashSection: Bool = true
     @CloudStorage("emptyTrash") var emptyTrash: Bool = UserDefaults.standard.value(forKey: "emptyTrash") as? Bool ?? true
     @CloudStorage("eraseTasksForDays") var eraseTasksForDays: Int = UserDefaults.standard.value(forKey: "eraseTasksForDays") as? Int ?? 7
+    
+//    @AppStorage("scWork") var scWork: Bool = false
+//    @AppStorage("scWorkName") var scWorkName: String = ""
+//    
+//    @AppStorage("scBreak") var scBreak: Bool = false
+//    @AppStorage("scBreakName") var scBreakName: String = ""
+//
+//    @AppStorage("scPause") var scPause: Bool = false
+//    @AppStorage("scPauseName") var scPauseName: String = ""
+//
+//    @AppStorage("scResume") var scResume: Bool = false
+//    @AppStorage("scResumeName") var scResumeName: String = ""
     
     var body: some View {
         NavigationSplitView {
@@ -202,6 +216,44 @@ struct ContentView: View {
         .onAppear {
             currentSectionHeight = CGFloat(sectionHeight)
         }
+//        .onChange(of: timer.mode, { _, newValue in
+//            switch newValue {
+//            case .work:
+//                if scWork {
+//                    runShortcut(scWorkName)
+//                }
+//            case .pause:
+//                if scBreak {
+//                    runShortcut(scBreakName)
+//                }
+//            case .longbreak:
+//                if scBreak {
+//                    runShortcut(scBreakName)
+//                }
+//            }
+//        })
+//        .onChange(of: timer.state) { oldValue, newValue in
+//            // work start
+//            if newValue == .running && oldValue == .idle && timer.mode == .work {
+//                if scWork {
+//                    runShortcut(scWorkName)
+//                }
+//            }
+//            
+//            // pause
+//            if newValue == .paused && oldValue == .running {
+//                if scPause {
+//                    runShortcut(scPauseName)
+//                }
+//            }
+//            
+//            // resume
+//            if newValue == .running && oldValue == .paused {
+//                if scResume {
+//                    runShortcut(scResumeName)
+//                }
+//            }
+//        }
     }
     
     private func getMaxSectionsHeigth() -> CGFloat {
@@ -230,6 +282,21 @@ struct ContentView: View {
         
         return maxHeight
     }
+    
+//    private func runShortcut(_ name: String) {
+//        var components = URLComponents()
+//        components.scheme = "shortcuts"
+//        components.host = "run-shortcut"
+//        components.queryItems = [
+//            URLQueryItem(name: "name", value: name)
+//        ]
+//
+//        guard let url = components.url else {
+//            return
+//        }
+//        
+//        openURL(url) 
+//    }
 }
 
 #Preview {

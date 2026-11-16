@@ -93,20 +93,28 @@ struct FocusTimerScene: Scene {
                 }
             }
         })
-        .onChange(of: timer.state) { _, newValue in
+        .onChange(of: timer.state) { oldValue, newValue in
             focusState = timer.state
             
-            switch newValue {
-            case .running:
-                if scResume {
-                    runShortcut(scResumeName)
+            // work start
+            if newValue == .running && oldValue == .idle && timer.mode == .work {
+                if scWork {
+                    runShortcut(scWorkName)
                 }
-            case .paused:
+            }
+            
+            // pause
+            if newValue == .paused && oldValue == .running {
                 if scPause {
                     runShortcut(scPauseName)
                 }
-            default:
-                break
+            }
+            
+            // resume
+            if newValue == .running && oldValue == .paused {
+                if scResume {
+                    runShortcut(scResumeName)
+                }
             }
         }
         .onChange(of: timer.sessionsCounter, { _, newValue in
@@ -128,8 +136,6 @@ struct FocusTimerScene: Scene {
             return
         }
         
-        openURL(url) { accepted in
-            print(accepted ? "Success" : "Failure")
-        }
+        openURL(url)
     }
 }
