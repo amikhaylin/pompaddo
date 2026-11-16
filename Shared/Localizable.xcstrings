@@ -3107,6 +3107,9 @@
       },
       "shouldTranslate" : false
     },
+    "Action" : {
+
+    },
     "Add new status" : {
       "localizations" : {
         "ar" : {
@@ -14773,6 +14776,9 @@
           }
         }
       }
+    },
+    "Durations" : {
+
     },
     "Empty trash" : {
       "comment" : "Очистить мусорную корзину",
@@ -31438,6 +31444,18 @@
         }
       }
     },
+    "Run when the Break session started" : {
+
+    },
+    "Run when the pause button pressed" : {
+
+    },
+    "Run when the resume button pressed" : {
+
+    },
+    "Run when the Work session started" : {
+
+    },
     "Save and Add next (⇧⏎)" : {
       "localizations" : {
         "ar" : {
@@ -33817,6 +33835,9 @@
           }
         }
       }
+    },
+    "Shortcuts" : {
+
     },
     "Show All list" : {
       "localizations" : {
