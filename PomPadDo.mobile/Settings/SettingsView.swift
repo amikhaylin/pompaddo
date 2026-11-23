@@ -31,6 +31,18 @@ struct SettingsView: View {
     
     @CloudStorage("bujoCheckboxes") var bujoCheckboxes: Bool = false
     
+    @AppStorage("scWork") var scWork: Bool = false
+    @AppStorage("scWorkName") var scWorkName: String = ""
+    
+    @AppStorage("scBreak") var scBreak: Bool = false
+    @AppStorage("scBreakName") var scBreakName: String = ""
+
+    @AppStorage("scPause") var scPause: Bool = false
+    @AppStorage("scPauseName") var scPauseName: String = ""
+
+    @AppStorage("scResume") var scResume: Bool = false
+    @AppStorage("scResumeName") var scResumeName: String = ""
+    
     var body: some View {
         VStack {
             Picker("", selection: $viewMode) {
@@ -92,44 +104,72 @@ struct SettingsView: View {
                 }
             case 1:
                 Form {
-                    Picker("Work session duration", selection: $timerWorkSession) {
-                        ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
-                            Text(Common.formatSecondsToMinutes(Int(index)))
-                                .tag(Double(index))
+                    Section("Durations") {
+                        Picker("Work session duration", selection: $timerWorkSession) {
+                            ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                                Text(Common.formatSecondsToMinutes(Int(index)))
+                                    .tag(Double(index))
+                            }
+                        }
+                        
+                        Picker("Break duration", selection: $timerBreakSession) {
+                            ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                                Text(Common.formatSecondsToMinutes(Int(index)))
+                                    .tag(Double(index))
+                            }
+                        }
+                        
+                        Picker("Long break duration", selection: $timerLongBreakSession) {
+                            ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
+                                Text(Common.formatSecondsToMinutes(Int(index)))
+                                    .tag(Double(index))
+                            }
+                        }
+                        
+                        Picker("Work sessions before long break", selection: $timerWorkSessionsCount) {
+                            ForEach(1..<11) {
+                                Text("\($0)")
+                                    .tag(Double($0))
+                            }
+                        }
+                        
+                        Toggle("Save unfinished sessions to a task", isOn: $timerSaveUnfinished)
+                            .toggleStyle(.switch)
+                        
+                        Button {
+                            timerWorkSession = 1500.0
+                            timerBreakSession = 300.0
+                            timerLongBreakSession = 1200.0
+                            timerWorkSessionsCount = 4.0
+                        } label: {
+                            Label("Restore defaults", systemImage: "arrow.circlepath")
                         }
                     }
                     
-                    Picker("Break duration", selection: $timerBreakSession) {
-                        ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
-                            Text(Common.formatSecondsToMinutes(Int(index)))
-                                .tag(Double(index))
+                    Section("Shortcuts") {
+                        Toggle("Run when the Work session started", isOn: $scWork)
+                            .toggleStyle(.switch)
+                        if scWork {
+                            TextField("Action", text: $scWorkName)
                         }
-                    }
 
-                    Picker("Long break duration", selection: $timerLongBreakSession) {
-                        ForEach(Array(stride(from: 60, through: 3600, by: 60)), id: \.self) { index in
-                            Text(Common.formatSecondsToMinutes(Int(index)))
-                                .tag(Double(index))
+                        Toggle("Run when the Break session started", isOn: $scBreak)
+                            .toggleStyle(.switch)
+                        if scBreak {
+                            TextField("Action", text: $scBreakName)
                         }
-                    }
 
-                    Picker("Work sessions before long break", selection: $timerWorkSessionsCount) {
-                        ForEach(1..<11) {
-                            Text("\($0)")
-                                .tag(Double($0))
+                        Toggle("Run when the pause button pressed", isOn: $scPause)
+                            .toggleStyle(.switch)
+                        if scPause {
+                            TextField("Action", text: $scPauseName)
                         }
-                    }
-                    
-                    Toggle("Save unfinished sessions to a task", isOn: $timerSaveUnfinished)
-                        .toggleStyle(.switch)
-                    
-                    Button {
-                        timerWorkSession = 1500.0
-                        timerBreakSession = 300.0
-                        timerLongBreakSession = 1200.0
-                        timerWorkSessionsCount = 4.0
-                    } label: {
-                        Label("Restore defaults", systemImage: "arrow.circlepath")
+
+                        Toggle("Run when the resume button pressed", isOn: $scResume)
+                            .toggleStyle(.switch)
+                        if scResume {
+                            TextField("Action", text: $scResumeName)
+                        }
                     }
                 }
             case 2:

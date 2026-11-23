@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct FocusTimerScene: Scene {
+    @Environment(\.openURL) private var openURL
     @Environment(\.modelContext) private var modelContext
     @Environment(Refresher.self) var refresher
     @Environment(FocusTimer.self) var timer
@@ -16,6 +17,18 @@ struct FocusTimerScene: Scene {
     @State private var timerCount: String = ""
     @State private var focusMode: FocusTimerMode = .work
     @State private var focusState: FocusTimerState = .idle
+    
+    @AppStorage("scWork") var scWork: Bool = false
+    @AppStorage("scWorkName") var scWorkName: String = ""
+    
+    @AppStorage("scBreak") var scBreak: Bool = false
+    @AppStorage("scBreakName") var scBreakName: String = ""
+
+    @AppStorage("scPause") var scPause: Bool = false
+    @AppStorage("scPauseName") var scPauseName: String = ""
+
+    @AppStorage("scResume") var scResume: Bool = false
+    @AppStorage("scResumeName") var scResumeName: String = ""
     
     var body: some Scene {
         MenuBarExtra {
@@ -62,16 +75,67 @@ struct FocusTimerScene: Scene {
         .onChange(of: timer.secondsPassed, { _, _ in
             timerCount = timer.secondsLeftString
         })
-        .onChange(of: timer.mode, { _, _ in
+        .onChange(of: timer.mode, { _, newValue in
             focusMode = timer.mode
+            
+            switch newValue {
+            case .work:
+                if scWork {
+                    runShortcut(scWorkName)
+                }
+            case .pause:
+                if scBreak {
+                    runShortcut(scBreakName)
+                }
+            case .longbreak:
+                if scBreak {
+                    runShortcut(scBreakName)
+                }
+            }
         })
-        .onChange(of: timer.state) { _, _ in
+        .onChange(of: timer.state) { oldValue, newValue in
             focusState = timer.state
+            
+            // work start
+            if newValue == .running && oldValue == .idle && timer.mode == .work {
+                if scWork {
+                    runShortcut(scWorkName)
+                }
+            }
+            
+            // pause
+            if newValue == .paused && oldValue == .running {
+                if scPause {
+                    runShortcut(scPauseName)
+                }
+            }
+            
+            // resume
+            if newValue == .running && oldValue == .paused {
+                if scResume {
+                    runShortcut(scResumeName)
+                }
+            }
         }
         .onChange(of: timer.sessionsCounter, { _, newValue in
             if let task = focusTask.task, newValue > 0 {
                 task.tomatoesCount += 1
             }
         })
+    }
+    
+    private func runShortcut(_ name: String) {
+        var components = URLComponents()
+        components.scheme = "shortcuts"
+        components.host = "run-shortcut"
+        components.queryItems = [
+            URLQueryItem(name: "name", value: name)
+        ]
+
+        guard let url = components.url else {
+            return
+        }
+        
+        openURL(url)
     }
 }
